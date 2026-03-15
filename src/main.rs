@@ -316,13 +316,15 @@ fn inject_cf_html_powershell(html_fragment: &str) -> Result<&'static str, String
 
     let win_path = String::from_utf8_lossy(&wslpath_out.stdout).trim().to_string();
 
-    // PowerShell 脚本：以 UTF-8 读取文件 → 写入 CF_HTML 格式到剪贴板
+    // PowerShell 脚本：用 ReadAllBytes 读取原始 UTF-8 字节 → MemoryStream → CF_HTML
+    // 关键：绕过 .NET String(UTF-16) 转换，避免系统默认编码(GBK)截断多字节中文
     let ps_script = format!(
         concat!(
             "Add-Type -AssemblyName System.Windows.Forms; ",
-            "$cf = [System.IO.File]::ReadAllText('{}', [System.Text.Encoding]::UTF8); ",
+            "$bytes = [System.IO.File]::ReadAllBytes('{}'); ",
+            "$ms = New-Object System.IO.MemoryStream(,$bytes); ",
             "$d = New-Object System.Windows.Forms.DataObject; ",
-            "$d.SetData([System.Windows.Forms.DataFormats]::Html, $cf); ",
+            "$d.SetData([System.Windows.Forms.DataFormats]::Html, $ms); ",
             "[System.Windows.Forms.Clipboard]::SetDataObject($d, $true)"
         ),
         win_path.replace('\'', "''")
