@@ -211,9 +211,12 @@ fn md_to_wechat_html(markdown: &str) -> String {
     let mut raw = String::new();
     html::push_html(&mut raw, parser);
 
+    // 微信编辑器会剥离 <style> 标签，所以直接移除 <hr> 标签
+    let raw = raw.replace("<hr />", "").replace("<hr>", "");
+
     // 极简样式：只保留基本排版和加粗，不加任何装饰性 CSS
     format!(
-        "<style>hr{{display:none;}}</style><section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>"
+        "<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>"
     )
 }
 
