@@ -211,65 +211,9 @@ fn md_to_wechat_html(markdown: &str) -> String {
     let mut raw = String::new();
     html::push_html(&mut raw, parser);
 
-    // 微信编辑器会剥离 <style> 块，所有样式必须内联
-    let styled = raw
-        .replace(
-            "<h1>",
-            "<h1 style=\"font-size:22px;font-weight:bold;color:#1a1a1a;\
-             margin:28px 0 14px;line-height:1.4;\">",
-        )
-        .replace(
-            "<h2>",
-            "<h2 style=\"font-size:18px;font-weight:bold;color:#1a1a1a;\
-             margin:24px 0 12px;line-height:1.4;\
-             border-left:4px solid #07c160;padding-left:10px;\">",
-        )
-        .replace(
-            "<h3>",
-            "<h3 style=\"font-size:16px;font-weight:bold;color:#333;\
-             margin:20px 0 10px;line-height:1.4;\">",
-        )
-        .replace(
-            "<p>",
-            "<p style=\"margin:14px 0;line-height:2;color:#333;font-size:15px;\">",
-        )
-        .replace(
-            "<strong>",
-            "<strong style=\"font-weight:bold;color:#1a1a1a;\">",
-        )
-        .replace(
-            "<em>",
-            "<em style=\"font-style:italic;color:#555;\">",
-        )
-        .replace(
-            "<blockquote>\n",
-            "<blockquote style=\"margin:20px 0;padding:15px 20px;\
-             background:#f7f7f7;border-left:4px solid #07c160;\
-             color:#666;font-size:14px;line-height:1.8;\">\n",
-        )
-        .replace(
-            "<ul>\n",
-            "<ul style=\"margin:14px 0;padding-left:24px;\">\n",
-        )
-        .replace(
-            "<ol>\n",
-            "<ol style=\"margin:14px 0;padding-left:24px;\">\n",
-        )
-        .replace(
-            "<li>",
-            "<li style=\"margin:5px 0;line-height:1.8;color:#333;\">",
-        )
-        .replace(
-            "<hr />",
-            "<hr style=\"border:none;border-top:1px solid #eee;margin:24px 0;\" />",
-        );
-
+    // 极简样式：只保留基本排版和加粗，不加任何装饰性 CSS
     format!(
-        "<section style=\"max-width:677px;margin:0 auto;padding:16px;\
-         font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',\
-         'Hiragino Sans GB','Microsoft YaHei',sans-serif;\
-         font-size:15px;line-height:2;color:#333;\">\
-         {styled}</section>"
+        "<style>hr{{display:none;}}</style><section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>"
     )
 }
 
