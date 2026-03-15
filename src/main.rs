@@ -1,4 +1,3 @@
-use chrono::Local;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use std::fs;
@@ -40,14 +39,62 @@ fn read_file(path: &str) -> Result<String, String> {
     fs::read_to_string(path).map_err(|e| format!("无法读取文件 `{}`: {}", path, e))
 }
 
-fn write_output(content: &str) -> Result<String, String> {
+/// 从输入素材中提取稳定的文件名 slug
+/// 优先取"文章主题："后的内容，其次取第一个 `#` 标题，兜底 "untitled"
+fn extract_idea_slug(idea: &str) -> String {
+    let raw = idea
+        .lines()
+        .find_map(|l| l.strip_prefix("文章主题：").or_else(|| l.strip_prefix("文章主题:")))
+        .or_else(|| {
+            idea.lines()
+                .find(|l| l.starts_with("# "))
+                .map(|l| l.trim_start_matches('#').trim())
+        })
+        .unwrap_or("untitled");
+
+    let slug: String = raw
+        .trim()
+        .chars()
+        .filter(|c| c.is_alphanumeric() || *c == '_' || *c == '-')
+        .collect();
+
+    if slug.is_empty() {
+        "untitled".to_string()
+    } else {
+        slug
+    }
+}
+
+/// 扫描 outputs/ 下同名前缀的文件，返回下一个版本号
+fn next_version(dir: &str, slug: &str) -> u32 {
+    let prefix = format!("{}_v", slug);
+    let mut max: u32 = 0;
+
+    if let Ok(entries) = fs::read_dir(dir) {
+        for entry in entries.flatten() {
+            let name = entry.file_name();
+            let name = name.to_string_lossy();
+            if let Some(rest) = name.strip_prefix(&prefix) {
+                if let Some(num_str) = rest.strip_suffix(".md") {
+                    if let Ok(n) = num_str.parse::<u32>() {
+                        max = max.max(n);
+                    }
+                }
+            }
+        }
+    }
+
+    max + 1
+}
+
+fn write_output(content: &str, slug: &str) -> Result<String, String> {
     let dir = "outputs";
     if !Path::new(dir).exists() {
         fs::create_dir_all(dir).map_err(|e| format!("无法创建目录 `{}`: {}", dir, e))?;
     }
 
-    let ts = Local::now().format("%Y%m%d_%H%M%S");
-    let filename = format!("{}/draft_{}.md", dir, ts);
+    let ver = next_version(dir, slug);
+    let filename = format!("{}/{}_v{}.md", dir, slug, ver);
 
     fs::write(&filename, content).map_err(|e| format!("无法写入文件 `{}`: {}", filename, e))?;
 
@@ -90,21 +137,20 @@ async fn call_llm(
         .map_err(|e| format!("网络请求失败: {}", e))?;
 
     let status = resp.status();
+    let raw_body = resp.text().await.unwrap_or_default();
+
     if !status.is_success() {
-        let text = resp.text().await.unwrap_or_default();
-        return Err(format!("API 返回错误 (HTTP {}): {}", status, text));
+        return Err(format!("API 返回错误 (HTTP {}): {}", status, raw_body));
     }
 
-    let chat_resp: ChatResponse = resp
-        .json()
-        .await
-        .map_err(|e| format!("解析 API 响应失败: {}", e))?;
+    let chat_resp: ChatResponse = serde_json::from_str(&raw_body)
+        .map_err(|e| format!("解析 API 响应失败: {}\n原始响应: {}", e, &raw_body[..raw_body.len().min(500)]))?;
 
     chat_resp
         .choices
         .first()
         .map(|c| c.message.content.clone())
-        .ok_or_else(|| "API 返回了空的 choices 数组".to_string())
+        .ok_or_else(|| format!("API 返回了空的 choices 数组\n原始响应: {}", &raw_body[..raw_body.len().min(500)]))
 }
 
 // ── Env helpers ─────────────────────────────────────────────────────
@@ -178,7 +224,8 @@ async fn main() {
     println!("[info] API 返回 {} 字符", result.len());
 
     // 5. 写入输出文件
-    match write_output(&result) {
+    let slug = extract_idea_slug(&idea);
+    match write_output(&result, &slug) {
         Ok(path) => println!("[done] 已保存到 {}", path),
         Err(e) => {
             eprintln!("[error] {}", e);
