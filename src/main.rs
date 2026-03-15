@@ -275,61 +275,122 @@ fn md_to_wechat_html(markdown: &str) -> String {
 
 // ── Clipboard injection ─────────────────────────────────────────────
 
+/// 构建 Windows CF_HTML 格式：带字节偏移量的标准头部 + HTML 片段
+/// 规范参考: https://learn.microsoft.com/en-us/windows/win32/dataxchg/html-clipboard-format
+fn build_cf_html(fragment: &str) -> String {
+    let pre = "<html>\r\n<head><meta charset=\"utf-8\"></head>\r\n<body>\r\n<!--StartFragment-->";
+    let post = "<!--EndFragment-->\r\n</body>\r\n</html>";
+
+    // 头部模板长度固定（全 ASCII，len() == 字节数）
+    let header_len = "Version:0.9\r\nStartHTML:0000000000\r\nEndHTML:0000000000\r\nStartFragment:0000000000\r\nEndFragment:0000000000\r\n".len();
+
+    let start_html = header_len;
+    let start_frag = start_html + pre.len();
+    let end_frag = start_frag + fragment.len(); // Rust .len() 返回字节数，CF_HTML 要求字节偏移
+    let end_html = end_frag + post.len();
+
+    format!(
+        "Version:0.9\r\nStartHTML:{:010}\r\nEndHTML:{:010}\r\nStartFragment:{:010}\r\nEndFragment:{:010}\r\n{}{}{}",
+        start_html, end_html, start_frag, end_frag, pre, fragment, post
+    )
+}
+
+/// WSL2 → Windows: 通过 PowerShell + .NET System.Windows.Forms 写入 CF_HTML
+fn inject_cf_html_powershell(html_fragment: &str) -> Result<&'static str, String> {
+    let cf_html = build_cf_html(html_fragment);
+
+    // 写入临时文件（UTF-8 无 BOM，Rust 默认行为）
+    let tmp = "/tmp/cw_clipboard.html";
+    fs::write(tmp, &cf_html).map_err(|e| format!("临时文件写入失败: {}", e))?;
+
+    // 转换为 Windows 路径
+    let wslpath_out = Command::new("wslpath")
+        .args(["-w", tmp])
+        .output()
+        .map_err(|e| format!("wslpath 失败: {}", e))?;
+
+    if !wslpath_out.status.success() {
+        let _ = fs::remove_file(tmp);
+        return Err("wslpath 路径转换失败".to_string());
+    }
+
+    let win_path = String::from_utf8_lossy(&wslpath_out.stdout).trim().to_string();
+
+    // PowerShell 脚本：以 UTF-8 读取文件 → 写入 CF_HTML 格式到剪贴板
+    let ps_script = format!(
+        concat!(
+            "Add-Type -AssemblyName System.Windows.Forms; ",
+            "$cf = [System.IO.File]::ReadAllText('{}', [System.Text.Encoding]::UTF8); ",
+            "$d = New-Object System.Windows.Forms.DataObject; ",
+            "$d.SetData([System.Windows.Forms.DataFormats]::Html, $cf); ",
+            "[System.Windows.Forms.Clipboard]::SetDataObject($d, $true)"
+        ),
+        win_path.replace('\'', "''")
+    );
+
+    let out = Command::new("powershell.exe")
+        .args(["-sta", "-NoProfile", "-Command", &ps_script])
+        .output()
+        .map_err(|e| format!("powershell.exe 执行失败: {}", e))?;
+
+    let _ = fs::remove_file(tmp);
+
+    if out.status.success() {
+        Ok("CF_HTML (PowerShell)")
+    } else {
+        Err(format!(
+            "PowerShell 剪贴板设置失败: {}",
+            String::from_utf8_lossy(&out.stderr).trim()
+        ))
+    }
+}
+
+/// 通过 stdin pipe 向 CLI 工具写入数据
+fn pipe_to_cmd(cmd: &str, args: &[&str], data: &[u8]) -> Result<(), ()> {
+    let mut child = Command::new(cmd)
+        .args(args)
+        .stdin(Stdio::piped())
+        .stdout(Stdio::null())
+        .stderr(Stdio::null())
+        .spawn()
+        .map_err(|_| ())?;
+
+    let stdin = child.stdin.as_mut().ok_or(())?;
+    stdin.write_all(data).map_err(|_| ())?;
+    drop(child.stdin.take());
+    child.wait().map_err(|_| ())?;
+    Ok(())
+}
+
 fn inject_clipboard(html_content: &str) -> Result<&'static str, String> {
-    // 1. xclip (X11 / WSLg)
-    if let Ok(mut child) = Command::new("xclip")
-        .args(["-selection", "clipboard", "-t", "text/html"])
-        .stdin(Stdio::piped())
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .spawn()
-    {
-        if let Some(ref mut stdin) = child.stdin {
-            if stdin.write_all(html_content.as_bytes()).is_ok() {
-                drop(child.stdin.take());
-                if child.wait().map_or(false, |s| s.success()) {
-                    return Ok("xclip");
-                }
-            }
-        }
+    // 1. WSL2 / Windows: CF_HTML via PowerShell（真正的富文本，最优路径）
+    if let Ok(tool) = inject_cf_html_powershell(html_content) {
+        return Ok(tool);
     }
 
-    // 2. wl-copy (Wayland)
-    if let Ok(mut child) = Command::new("wl-copy")
-        .args(["--type", "text/html"])
-        .stdin(Stdio::piped())
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .spawn()
+    // 2. Linux X11: xclip -selection clipboard -t text/html
+    if pipe_to_cmd(
+        "xclip",
+        &["-selection", "clipboard", "-t", "text/html"],
+        html_content.as_bytes(),
+    )
+    .is_ok()
     {
-        if let Some(ref mut stdin) = child.stdin {
-            if stdin.write_all(html_content.as_bytes()).is_ok() {
-                drop(child.stdin.take());
-                if child.wait().map_or(false, |s| s.success()) {
-                    return Ok("wl-copy");
-                }
-            }
-        }
+        return Ok("xclip (text/html)");
     }
 
-    // 3. clip.exe (WSL2 → Windows 剪贴板，纯文本回退)
-    if let Ok(mut child) = Command::new("clip.exe")
-        .stdin(Stdio::piped())
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .spawn()
+    // 3. Wayland: wl-copy --type text/html
+    if pipe_to_cmd(
+        "wl-copy",
+        &["--type", "text/html"],
+        html_content.as_bytes(),
+    )
+    .is_ok()
     {
-        if let Some(ref mut stdin) = child.stdin {
-            if stdin.write_all(html_content.as_bytes()).is_ok() {
-                drop(child.stdin.take());
-                if child.wait().map_or(false, |s| s.success()) {
-                    return Ok("clip.exe (纯文本)");
-                }
-            }
-        }
+        return Ok("wl-copy (text/html)");
     }
 
-    Err("未找到剪贴板工具 (xclip / wl-copy / clip.exe)".to_string())
+    Err("未找到可用的剪贴板工具 (powershell.exe / xclip / wl-copy)".to_string())
 }
 
 // ── Env helpers ─────────────────────────────────────────────────────
@@ -382,12 +443,27 @@ async fn main() {
     }
     println!("[info] 素材 {} 字符 | 风格 {} 字符", idea.len(), style.len());
 
-    // 5. 调用 LLM
+    // 5. 调用 LLM (自动重试，最多 3 次)
     let client = Client::new();
     println!("[info] 正在调用 LLM ...");
-    let markdown = call_llm(&client, &base_url, &api_key, &model, &style, &idea)
-        .await
-        .unwrap_or_else(|e| fatal(&e));
+    let mut markdown = String::new();
+    let max_retries = 3;
+    for attempt in 1..=max_retries {
+        match call_llm(&client, &base_url, &api_key, &model, &style, &idea).await {
+            Ok(content) => {
+                markdown = content;
+                break;
+            }
+            Err(e) => {
+                if attempt < max_retries {
+                    eprintln!("[warn] 第 {} 次请求失败: {}，2 秒后重试 ...", attempt, e);
+                    tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                } else {
+                    fatal(&format!("连续 {} 次请求均失败: {}", max_retries, e));
+                }
+            }
+        }
+    }
     println!("[info] LLM 返回 {} 字符", markdown.len());
 
     // 6. 双轨输出
@@ -401,12 +477,16 @@ async fn main() {
     println!("[done] Markdown → {}", md_path);
 
     // 6b. 转换 HTML + 存档
-    let html = md_to_wechat_html(&markdown);
-    write_file(&html_path, &html).unwrap_or_else(|e| fatal(&e));
+    let html_fragment = md_to_wechat_html(&markdown);
+    let html_doc = format!(
+        "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
+        html_fragment
+    );
+    write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
     println!("[done] HTML     → {}", html_path);
 
-    // 6c. 注入剪贴板
-    match inject_clipboard(&html) {
+    // 6c. 注入剪贴板 (CF_HTML 富文本格式)
+    match inject_clipboard(&html_fragment) {
         Ok(tool) => {
             println!("[done] 富文本已注入剪贴板 (via {})", tool);
             println!();
