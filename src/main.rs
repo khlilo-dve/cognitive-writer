@@ -26,6 +26,11 @@ enum Commands {
         /// 目标文章的 URL
         url: String,
     },
+    /// 局部重绘：解析 <AI_EDIT> 标记并调用 LLM 重写
+    Refine {
+        /// 目标 Markdown 文件路径
+        file: String,
+    },
 }
 
 // ── OpenAI-compatible request/response types ────────────────────────
@@ -489,6 +494,7 @@ async fn main() {
     match cli.command.unwrap_or(Commands::Generate) {
         Commands::Generate => run_generate().await,
         Commands::Learn { url } => run_learn(&url).await,
+        Commands::Refine { file } => run_refine(&file).await,
     }
 }
 
@@ -719,4 +725,163 @@ async fn run_learn(url: &str) {
     println!("[done] 风格已保存 → {}", path);
     println!();
     println!("  现在可以用 `cargo run -- generate` 选择该风格来生成文章");
+}
+
+// ── refine 子命令 — 局部重绘 ─────────────────────────────────────
+
+const REFINE_SYSTEM_PROMPT: &str = r#"你是一个严苛的文本重构引擎。
+请根据用户给出的修改指令，重写指定的文本片段。
+
+要求：
+1. 只输出重写后的文本
+2. 不要带有任何解释、问候或 Markdown 代码块包裹
+3. 必须与原有的行文风格无缝衔接
+4. 严格遵循修改指令的要求"#;
+
+struct AiEdit {
+    instruction: String,
+    original: String,
+    full_match: String,
+}
+
+fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
+    let mut edits = Vec::new();
+    let mut pos = 0;
+
+    loop {
+        // 1. 找开标签起始
+        let open_start = match content[pos..].find("<AI_EDIT ") {
+            Some(i) => pos + i,
+            None => break,
+        };
+
+        // 2. 提取 instruction="..."
+        let inst_key = "instruction=\"";
+        let inst_start = match content[open_start..].find(inst_key) {
+            Some(i) => open_start + i + inst_key.len(),
+            None => return Err(format!("AI_EDIT 标签缺少 instruction 属性 (位置 {})", open_start)),
+        };
+        let inst_end = match content[inst_start..].find('"') {
+            Some(i) => inst_start + i,
+            None => return Err(format!("instruction 属性引号未闭合 (位置 {})", inst_start)),
+        };
+        let instruction = content[inst_start..inst_end].to_string();
+
+        // 3. 找开标签结束 '>'
+        let tag_end = match content[inst_end..].find('>') {
+            Some(i) => inst_end + i + 1, // +1 跳过 '>' 本身
+            None => return Err(format!("AI_EDIT 开标签未闭合 (位置 {})", open_start)),
+        };
+
+        // 4. 找闭标签
+        let close_tag = "</AI_EDIT>";
+        let close_start = match content[tag_end..].find(close_tag) {
+            Some(i) => tag_end + i,
+            None => return Err(format!("未找到匹配的 </AI_EDIT> (位置 {})", open_start)),
+        };
+        let close_end = close_start + close_tag.len();
+
+        let original = content[tag_end..close_start].to_string();
+        let full_match = content[open_start..close_end].to_string();
+
+        edits.push(AiEdit {
+            instruction,
+            original,
+            full_match,
+        });
+
+        pos = close_end;
+    }
+
+    if edits.is_empty() {
+        return Err("未找到 AI_EDIT 标记".to_string());
+    }
+    Ok(edits)
+}
+
+async fn run_refine(file: &str) {
+    // 1. 加载环境配置
+    if let Err(e) = dotenvy::dotenv() {
+        eprintln!("[warn] 未加载 .env: {} (将使用系统环境变量)", e);
+    }
+
+    let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
+    let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
+    let model = env_var_or("MODEL", "gpt-4o");
+
+    println!("[info] BASE_URL = {}", base_url);
+    println!("[info] MODEL    = {}", model);
+
+    // 2. 读取目标文件
+    let mut content = read_file(file).unwrap_or_else(|e| fatal(&e));
+    println!("[info] 已读取 {}, {} 字符", file, content.len());
+
+    // 3. 解析 AI_EDIT 标记
+    let edits = parse_ai_edits(&content).unwrap_or_else(|e| fatal(&e));
+    let total = edits.len();
+    println!("[info] 发现 {} 个 AI_EDIT 标记", total);
+
+    // 4. 逐个 LLM 重写
+    let client = Client::new();
+    for (i, edit) in edits.iter().enumerate() {
+        let idx = i + 1;
+        let user_prompt = format!(
+            "修改指令：{}\n\n原文本：\n{}",
+            edit.instruction, edit.original
+        );
+
+        let mut rewritten = Err("未执行".to_string());
+        for attempt in 1..=3 {
+            match call_llm(&client, &base_url, &api_key, &model, REFINE_SYSTEM_PROMPT, &user_prompt).await {
+                Ok(text) => {
+                    rewritten = Ok(text);
+                    break;
+                }
+                Err(e) => {
+                    if attempt < 3 {
+                        eprintln!("[warn] 标记 {}/{} 第 {} 次失败: {}，2 秒后重试 ...", idx, total, attempt, e);
+                        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                    } else {
+                        fatal(&format!("标记 {}/{} 连续 3 次失败: {}", idx, total, e));
+                    }
+                }
+            }
+        }
+        let rewritten = rewritten.unwrap_or_else(|e| fatal(&e));
+        content = content.replacen(&edit.full_match, &rewritten, 1);
+        println!("[info] 标记 {}/{} 替换完成", idx, total);
+    }
+
+    // 5. 版本命名 + 三轨输出
+    let slug = extract_idea_slug(&content);
+    let ver = next_version("outputs", &slug);
+    let md_path = format!("outputs/{}_v{}.md", slug, ver);
+    let html_path = format!("outputs/{}_v{}.html", slug, ver);
+
+    write_file(&md_path, &content).unwrap_or_else(|e| fatal(&e));
+    println!("[done] Markdown → {}", md_path);
+
+    let html_fragment = md_to_wechat_html(&content);
+    let html_doc = format!(
+        "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
+        html_fragment
+    );
+    write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
+    println!("[done] HTML     → {}", html_path);
+
+    match inject_clipboard(&html_fragment) {
+        Ok(tool) => {
+            println!("[done] 富文本已注入剪贴板 (via {})", tool);
+            println!();
+            println!("  局部重绘完成，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
+        }
+        Err(e) => {
+            eprintln!("[warn] {}", e);
+            println!();
+            println!(
+                "  局部重绘完成。剪贴板不可用，请用浏览器打开 {} 后手动复制",
+                html_path
+            );
+        }
+    }
 }
