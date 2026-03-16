@@ -10,7 +10,7 @@
 cognitive-writer/
 ├── Cargo.toml              # 依赖声明
 ├── .env                    # API_KEY / BASE_URL / MODEL
-├── src/main.rs             # 全部业务逻辑（~720 行）
+├── src/main.rs             # 全部业务逻辑（~870 行）
 ├── inputs/
 │   └── idea_01.md          # 用户素材输入（主题+内容）
 ├── styles/
@@ -35,8 +35,9 @@ cognitive-writer/
 ## CLI 子命令
 
 ```
-cognitive-writer generate    # 生成文章（默认，无参数时触发）
-cognitive-writer learn <URL> # 从 URL 逆向分析写作风格
+cognitive-writer generate          # 生成文章（默认，无参数时触发）
+cognitive-writer learn <URL>       # 从 URL 逆向分析写作风格
+cognitive-writer refine <FILE>     # 局部重绘：解析 <AI_EDIT> 标记并 LLM 重写
 ```
 
 ---
@@ -175,6 +176,65 @@ URL ─→ Jina Reader (r.jina.ai) ─→ Markdown 正文 ─→ LLM 风格分�
 
 ---
 
+## 核心流程三：`refine` — 局部重绘
+
+### Pipeline 总览
+
+```
+file ─→ read ─→ parse_ai_edits() ─→ [for each edit] ─→ call_llm() ─→ 内存替换
+                                                                         │
+                                      ┌──────────────────────────────────┘
+                                      ├─→ outputs/{slug}_v{N+1}.md
+                                      ├─→ outputs/{slug}_v{N+1}.html
+                                      └─→ 剪贴板
+```
+
+### 标记语法
+
+在已生成的 Markdown 文件中插入标记：
+
+```markdown
+<AI_EDIT instruction="把这段改成更口语化的表达">
+这里是需要重写的原文本片段。
+</AI_EDIT>
+```
+
+- `instruction` 属性：修改指令，告诉 LLM 如何重写
+- 标签内部：要被替换的原文本
+- 支持同一文件中多个标记，按顺序处理
+
+### 解析器 (`parse_ai_edits`)
+
+纯字符串搜索，无 regex 依赖：
+1. `str::find("<AI_EDIT ")` 定位开标签
+2. 提取 `instruction="..."` 属性值
+3. 找 `>` 确定开标签结束
+4. 找 `</AI_EDIT>` 提取原文本和完整匹配串
+5. 循环直到无更多标记
+
+设计决策：标签格式完全可控（自定义，非任意 HTML），手动切片比 regex 更透明、零额外依赖。
+
+### Step 1: 加载配置
+
+同 `generate`：从 `.env` 读取 `API_KEY` / `BASE_URL` / `MODEL`。
+
+### Step 2: 逐标记 LLM 重写
+
+- 顺序处理（非并行），避免上下文交叉污染
+- 每个标记构建 user prompt：`"修改指令：{instruction}\n\n原文本：\n{original}"`
+- 使用 `REFINE_SYSTEM_PROMPT`（严苛文本重构引擎，只输出重写文本，无解释/代码块包裹）
+- 3 次重试（2s 间隔）
+- `content.replacen(&full_match, &rewritten, 1)` 单次替换，防止重复片段误替换
+
+### Step 3: 三轨输出
+
+复用 `generate` 的完整输出逻辑：
+- Track A — Markdown 归档：`outputs/{slug}_v{N+1}.md`
+- Track B — 微信 HTML：`outputs/{slug}_v{N+1}.html`
+- Track C — 剪贴板注入
+
+---
+
 ## 风格模板系统 (styles/*.md)
 
 每个 `.md` 文件是一个完整的 LLM system prompt，控制文章生成的风格。
@@ -207,6 +267,8 @@ URL ─→ Jina Reader (r.jina.ai) ─→ Markdown 正文 ─→ LLM 风格分�
 | 文件写入失败 | Fatal exit(1) |
 | .env 不存在 | Warning，降级到系统环境变量 |
 | 剪贴板工具不可用 | Warning，提示手动打开 HTML |
+| AI_EDIT 标签格式错误 | Fatal exit(1)，报告具体位置 |
+| 无 AI_EDIT 标记 | Fatal exit(1) |
 
 ---
 
