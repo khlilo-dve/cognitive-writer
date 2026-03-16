@@ -12,4 +12,3 @@ dotenvy = "0.15"
 pulldown-cmark = "0.12"
 dialoguer = "0.11"
 clap = { version = "4", features = ["derive"] }
-scraper = "0.22"

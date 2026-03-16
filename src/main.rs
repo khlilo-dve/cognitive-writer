@@ -2,7 +2,6 @@ use clap::{Parser, Subcommand};
 use dialoguer::{Input, Select, theme::ColorfulTheme};
 use pulldown_cmark::{Options, Parser as MdParser, html};
 use reqwest::Client;
-use scraper::{Html, Selector};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::io::Write;
@@ -374,61 +373,101 @@ fn env_var_or(key: &str, default: &str) -> String {
     std::env::var(key).unwrap_or_else(|_| default.to_string())
 }
 
-// ── Article text extraction ─────────────────────────────────────────
+// ── Jina Reader + fallback strip-tags ────────────────────────────────
 
-fn extract_article_text(html: &str) -> Result<String, String> {
-    let doc = Html::parse_document(html);
-
-    // 1. 优先找 <article> 标签
-    let article_sel = Selector::parse("article")
-        .map_err(|e| format!("CSS selector 解析失败: {:?}", e))?;
-
-    let text = if let Some(article) = doc.select(&article_sel).next() {
-        article
-            .text()
-            .filter(|t| {
-                // 过滤噪声节点内的文本（简化：直接收集所有 text，噪声标签在 article 内概率低）
-                !t.trim().is_empty()
-            })
-            .collect::<Vec<_>>()
-            .join("\n")
-    } else {
-        // 2. fallback: 收集所有 <p> 文本
-        let p_sel = Selector::parse("p")
-            .map_err(|e| format!("CSS selector 解析失败: {:?}", e))?;
-
-        let paragraphs: Vec<String> = doc
-            .select(&p_sel)
-            .filter(|el| {
-                // 排除噪声容器内的 <p>
-                let mut ancestor = el.parent();
-                while let Some(node) = ancestor {
-                    if let Some(element) = node.value().as_element() {
-                        let tag = element.name();
-                        if matches!(tag, "nav" | "header" | "footer" | "script" | "style" | "noscript") {
-                            return false;
-                        }
-                    }
-                    ancestor = node.parent();
-                }
-                true
-            })
-            .map(|el| el.text().collect::<Vec<_>>().join(""))
-            .filter(|t| !t.trim().is_empty())
-            .collect();
-
-        if paragraphs.is_empty() {
-            return Err("无法从页面中提取到正文内容".to_string());
+fn strip_html_tags(html: &str) -> String {
+    let mut result = String::with_capacity(html.len());
+    let mut in_tag = false;
+    for ch in html.chars() {
+        match ch {
+            '<' => in_tag = true,
+            '>' => in_tag = false,
+            _ if !in_tag => result.push(ch),
+            _ => {}
         }
+    }
+    // 压缩连续空行
+    let mut prev_blank = false;
+    result
+        .lines()
+        .filter(|line| {
+            let blank = line.trim().is_empty();
+            if blank && prev_blank {
+                return false;
+            }
+            prev_blank = blank;
+            true
+        })
+        .collect::<Vec<_>>()
+        .join("\n")
+        .trim()
+        .to_string()
+}
 
-        paragraphs.join("\n\n")
-    };
+async fn fetch_readable_text(client: &Client, url: &str) -> Result<String, String> {
+    let jina_url = format!("https://r.jina.ai/{}", url);
+    println!("[info] 正在通过 Jina Reader 抓取 ...");
 
-    let text = text.trim().to_string();
+    let jina_client = reqwest::Client::builder()
+        .timeout(std::time::Duration::from_secs(30))
+        .build()
+        .map_err(|e| format!("创建 HTTP Client 失败: {}", e))?;
+
+    let resp = jina_client
+        .get(&jina_url)
+        .header("Accept", "text/markdown")
+        .header("User-Agent", "cognitive-writer/0.3")
+        .send()
+        .await;
+
+    match resp {
+        Ok(r) if r.status().is_success() => {
+            let text = r
+                .text()
+                .await
+                .map_err(|e| format!("读取 Jina 响应体失败: {}", e))?;
+            if text.trim().is_empty() {
+                return Err("Jina Reader 返回空内容".to_string());
+            }
+            println!("[info] Jina Reader 抓取成功, {} 字符", text.len());
+            Ok(text)
+        }
+        Ok(r) => {
+            eprintln!(
+                "[warn] Jina Reader 返回 HTTP {}, fallback 到直接抓取",
+                r.status()
+            );
+            fetch_fallback_plain(client, url).await
+        }
+        Err(e) => {
+            eprintln!("[warn] Jina Reader 请求失败: {}, fallback 到直接抓取", e);
+            fetch_fallback_plain(client, url).await
+        }
+    }
+}
+
+async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, String> {
+    let resp = client
+        .get(url)
+        .header("User-Agent", "Mozilla/5.0 (compatible; cognitive-writer/0.3)")
+        .send()
+        .await
+        .map_err(|e| format!("HTTP 请求失败: {}", e))?;
+
+    if !resp.status().is_success() {
+        return Err(format!("HTTP 返回错误状态码: {}", resp.status()));
+    }
+
+    let html_body = resp
+        .text()
+        .await
+        .map_err(|e| format!("读取响应体失败: {}", e))?;
+
+    let text = strip_html_tags(&html_body);
     if text.is_empty() {
         return Err("提取的正文内容为空".to_string());
     }
-
+    println!("[info] 降级抓取完成 (strip-tags), {} 字符", text.len());
     Ok(text)
 }
 
@@ -451,6 +490,74 @@ async fn main() {
         Commands::Generate => run_generate().await,
         Commands::Learn { url } => run_learn(&url).await,
     }
+}
+
+// ── 骨架-渲染双通道 ─────────────────────────────────────────────────
+
+async fn generate_with_outline(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    style: &str,
+    idea: &str,
+) -> Result<String, String> {
+    // Pass 1 — 骨架
+    println!("[info] Pass 1: 正在生成大纲骨架 ...");
+    let outline = {
+        let max_retries = 3;
+        let mut result = Err("未执行".to_string());
+        for attempt in 1..=max_retries {
+            match call_llm(client, base_url, api_key, model, OUTLINE_SYSTEM_PROMPT, idea).await {
+                Ok(content) => {
+                    result = Ok(content);
+                    break;
+                }
+                Err(e) => {
+                    if attempt < max_retries {
+                        eprintln!("[warn] 大纲生成第 {} 次失败: {}，2 秒后重试 ...", attempt, e);
+                        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                    } else {
+                        return Err(format!("大纲生成连续 {} 次失败: {}", max_retries, e));
+                    }
+                }
+            }
+        }
+        result?
+    };
+    println!("[info] 大纲生成完成, {} 字符", outline.len());
+
+    // Pass 2 — 渲染
+    println!("[info] Pass 2: 正在按大纲渲染正文 ...");
+    let render_prompt = format!(
+        "以下是文章的逻辑大纲，请严格按此结构展开正文：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n请根据大纲结构和原始素材，输出完整的 Markdown 正文。",
+        outline, idea
+    );
+
+    let markdown = {
+        let max_retries = 3;
+        let mut result = Err("未执行".to_string());
+        for attempt in 1..=max_retries {
+            match call_llm(client, base_url, api_key, model, style, &render_prompt).await {
+                Ok(content) => {
+                    result = Ok(content);
+                    break;
+                }
+                Err(e) => {
+                    if attempt < max_retries {
+                        eprintln!("[warn] 正文渲染第 {} 次失败: {}，2 秒后重试 ...", attempt, e);
+                        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                    } else {
+                        return Err(format!("正文渲染连续 {} 次失败: {}", max_retries, e));
+                    }
+                }
+            }
+        }
+        result?
+    };
+    println!("[info] 正文渲染完成, {} 字符", markdown.len());
+
+    Ok(markdown)
 }
 
 // ── generate 子命令 ─────────────────────────────────────────────────
@@ -481,28 +588,11 @@ async fn run_generate() {
     }
     println!("[info] 素材 {} 字符 | 风格 {} 字符", idea.len(), style.len());
 
-    // 调用 LLM (自动重试，最多 3 次)
+    // 双通道生成：骨架 → 渲染
     let client = Client::new();
-    println!("[info] 正在调用 LLM ...");
-    let mut markdown = String::new();
-    let max_retries = 3;
-    for attempt in 1..=max_retries {
-        match call_llm(&client, &base_url, &api_key, &model, &style, &idea).await {
-            Ok(content) => {
-                markdown = content;
-                break;
-            }
-            Err(e) => {
-                if attempt < max_retries {
-                    eprintln!("[warn] 第 {} 次请求失败: {}，2 秒后重试 ...", attempt, e);
-                    tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-                } else {
-                    fatal(&format!("连续 {} 次请求均失败: {}", max_retries, e));
-                }
-            }
-        }
-    }
-    println!("[info] LLM 返回 {} 字符", markdown.len());
+    let markdown = generate_with_outline(&client, &base_url, &api_key, &model, &style, &idea)
+        .await
+        .unwrap_or_else(|e| fatal(&e));
 
     // 双轨输出
     let slug = extract_idea_slug(&idea);
@@ -541,6 +631,18 @@ async fn run_generate() {
     }
 }
 
+// ── Outline system prompt (Pass 1: 骨架) ────────────────────────────
+
+const OUTLINE_SYSTEM_PROMPT: &str = r#"你是一个写作结构设计专家。
+用户会给你一份创作素材，你需要输出一份文章逻辑大纲。
+
+要求：
+1. 用 Markdown 层级列表（- / 1. 2. 3.）
+2. 每个节点写清该段的【核心论点】和【支撑素材/案例方向】
+3. 标注段落之间的逻辑衔接关系（递进/转折/并列/因果）
+4. 控制在 300-500 字以内
+5. 不要写正文，只输出骨架"#;
+
 // ── learn 子命令 ────────────────────────────────────────────────────
 
 const LEARN_SYSTEM_PROMPT: &str = r#"你是一个写作风格分析专家。用户会给你一篇完整的文章正文，你需要逆向分析该文章的写作风格，并输出一份可以直接作为 system prompt 使用的「风格指令文档」。
@@ -571,31 +673,12 @@ async fn run_learn(url: &str) {
     println!("[info] BASE_URL = {}", base_url);
     println!("[info] MODEL    = {}", model);
 
-    // 1. HTTP GET 抓取网页
-    println!("[info] 正在抓取: {}", url);
+    // 1. 通过 Jina Reader 抓取正文（失败时降级为 strip-tags）
+    println!("[info] 目标 URL: {}", url);
     let client = Client::new();
-    let resp = client
-        .get(url)
-        .header("User-Agent", "Mozilla/5.0 (compatible; cognitive-writer/0.2)")
-        .send()
+    let article_text = fetch_readable_text(&client, url)
         .await
-        .unwrap_or_else(|e| fatal(&format!("HTTP 请求失败: {}", e)));
-
-    let status = resp.status();
-    if !status.is_success() {
-        fatal(&format!("HTTP 返回错误状态码: {}", status));
-    }
-
-    let html_body = resp
-        .text()
-        .await
-        .unwrap_or_else(|e| fatal(&format!("读取响应体失败: {}", e)));
-
-    println!("[info] 页面下载完成, {} 字节", html_body.len());
-
-    // 2. 提取正文
-    let article_text = extract_article_text(&html_body).unwrap_or_else(|e| fatal(&e));
-    println!("[info] 正文提取完成, {} 字符", article_text.len());
+        .unwrap_or_else(|e| fatal(&e));
 
     // 3. 调用 LLM 逆向分析风格
     println!("[info] 正在调用 LLM 分析写作风格 ...");
