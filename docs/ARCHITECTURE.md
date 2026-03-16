@@ -10,7 +10,7 @@
 cognitive-writer/
 ├── Cargo.toml              # 依赖声明
 ├── .env                    # API_KEY / BASE_URL / MODEL
-├── src/main.rs             # 全部业务逻辑（~640 行）
+├── src/main.rs             # 全部业务逻辑（~720 行）
 ├── inputs/
 │   └── idea_01.md          # 用户素材输入（主题+内容）
 ├── styles/
@@ -30,7 +30,6 @@ cognitive-writer/
 | `serde` / `serde_json` | JSON 序列化 |
 | `dotenvy` | 加载 `.env` |
 | `pulldown-cmark` | Markdown → HTML |
-| `scraper` | HTML DOM 解析（learn 子命令） |
 | `dialoguer` | 交互式 CLI 选择 |
 
 ## CLI 子命令
@@ -47,10 +46,11 @@ cognitive-writer learn <URL> # 从 URL 逆向分析写作风格
 ### Pipeline 总览
 
 ```
-inputs/idea_01.md ──┐
-                    ├─→ LLM API ─→ Markdown ─┬─→ outputs/{slug}_v{N}.md
-styles/*.md ────────┘                         ├─→ outputs/{slug}_v{N}.html（微信格式）
-                                              └─→ 系统剪贴板（富文本）
+                         Pass 1 (骨架)              Pass 2 (渲染)
+inputs/idea_01.md ──┬─→ OUTLINE_SYSTEM_PROMPT ─→ outline ──┐
+                    │                                       ├─→ style prompt ─→ Markdown ─┬─→ outputs/{slug}_v{N}.md
+styles/*.md ────────┘───────────────────────────────────────┘                              ├─→ outputs/{slug}_v{N}.html（微信格式）
+                                                                                          └─→ 系统剪贴板（富文本）
 ```
 
 ### Phase 1: 初始化 (run_generate)
@@ -67,24 +67,34 @@ styles/*.md ────────┘                         ├─→ output
 
 3. **读取素材** — 加载 `inputs/idea_01.md`，空文件则 fatal exit
 
-### Phase 2: LLM 调用 (call_llm)
+### Phase 2: 双通道 LLM 调用 (generate_with_outline)
 
-**请求结构**（OpenAI 兼容协议）：
+采用 **骨架-渲染（CoT）** 双通道架构，解决单次长文生成的逻辑坍缩/重复问题。
+
+#### Pass 1 — 骨架生成
 
 ```
 POST {base_url}/chat/completions
-Authorization: Bearer {api_key}
 
-{
-  "model": "anthropic/claude-sonnet-4-6",
-  "messages": [
-    { "role": "system", "content": "<styles/*.md 内容>" },
-    { "role": "user",   "content": "<inputs/idea_01.md 内容>" }
-  ]
-}
+system: OUTLINE_SYSTEM_PROMPT（结构设计专家，要求输出 300-500 字 Markdown 大纲）
+user:   inputs/idea_01.md 原始素材
+→ outline（结构化大纲，含核心论点 + 支撑素材方向 + 段落衔接关系）
 ```
 
-- 最多重试 3 次，每次间隔 2 秒
+- 大纲仅内部流转，不输出文件
+- 独立重试 3 次（2s 间隔）
+
+#### Pass 2 — 正文渲染
+
+```
+POST {base_url}/chat/completions
+
+system: styles/*.md 风格 prompt
+user:   拼接模板（大纲 + 原始素材 + "严格按大纲展开"指令）
+→ markdown（最终完整正文）
+```
+
+- 独立重试 3 次（2s 间隔）
 - 支持任何 OpenAI 兼容端点（OpenRouter / OpenAI / Ollama 等）
 
 ### Phase 3: 版本命名
@@ -126,15 +136,19 @@ Authorization: Bearer {api_key}
 ### Pipeline 总览
 
 ```
-URL ─→ HTTP GET ─→ HTML 解析 ─→ 提取正文 ─→ LLM 风格分析 ─→ styles/{name}.md
+URL ─→ Jina Reader (r.jina.ai) ─→ Markdown 正文 ─→ LLM 风格分析 ─→ styles/{name}.md
+         │ (失败时降级)
+         └→ 直接 GET + strip_html_tags() ─→ 纯文本 ──┘
 ```
 
-### Step 1: 文章抓取 (`extract_article_text`)
+### Step 1: 文章抓取 (`fetch_readable_text`)
 
-- HTTP GET 目标 URL（带 User-Agent）
-- DOM 解析优先级：
-  1. `<article>` 标签内所有非空文本节点
-  2. 回退：所有 `<p>` 标签（过滤 nav/header/footer/script/style/noscript 父节点噪声）
+- **首选路径**：通过 Jina Reader API (`https://r.jina.ai/{url}`)
+  - Header: `Accept: text/markdown`, `User-Agent: cognitive-writer/0.3`
+  - 超时 30s，响应即为清洗后的 Markdown 正文，无需 DOM 解析
+- **降级路径**（Jina 返回非 2xx 或网络错误时）：
+  - 直接 GET 原 URL 获取 HTML
+  - `strip_html_tags()` 移除所有 HTML 标签，压缩连续空行，提取纯文本
 
 ### Step 2: LLM 风格分析
 
