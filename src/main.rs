@@ -1,11 +1,33 @@
-use dialoguer::{Select, theme::ColorfulTheme};
-use pulldown_cmark::{Options, Parser, html};
+use clap::{Parser, Subcommand};
+use dialoguer::{Input, Select, theme::ColorfulTheme};
+use pulldown_cmark::{Options, Parser as MdParser, html};
 use reqwest::Client;
+use scraper::{Html, Selector};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::io::Write;
 use std::path::Path;
 use std::process::{self, Command, Stdio};
+
+// ── CLI routing (clap derive) ───────────────────────────────────────
+
+#[derive(Parser)]
+#[command(name = "cognitive-writer", version, about = "AI 写作 + 风格逆向工具")]
+struct Cli {
+    #[command(subcommand)]
+    command: Option<Commands>,
+}
+
+#[derive(Subcommand)]
+enum Commands {
+    /// 生成文章（默认行为）
+    Generate,
+    /// 从 URL 逆向提取写作风格
+    Learn {
+        /// 目标文章的 URL
+        url: String,
+    },
+}
 
 // ── OpenAI-compatible request/response types ────────────────────────
 
@@ -207,7 +229,7 @@ fn md_to_wechat_html(markdown: &str) -> String {
     opts.insert(Options::ENABLE_STRIKETHROUGH);
     opts.insert(Options::ENABLE_TABLES);
 
-    let parser = Parser::new_ext(markdown, opts);
+    let parser = MdParser::new_ext(markdown, opts);
     let mut raw = String::new();
     html::push_html(&mut raw, parser);
 
@@ -352,6 +374,64 @@ fn env_var_or(key: &str, default: &str) -> String {
     std::env::var(key).unwrap_or_else(|_| default.to_string())
 }
 
+// ── Article text extraction ─────────────────────────────────────────
+
+fn extract_article_text(html: &str) -> Result<String, String> {
+    let doc = Html::parse_document(html);
+
+    // 1. 优先找 <article> 标签
+    let article_sel = Selector::parse("article")
+        .map_err(|e| format!("CSS selector 解析失败: {:?}", e))?;
+
+    let text = if let Some(article) = doc.select(&article_sel).next() {
+        article
+            .text()
+            .filter(|t| {
+                // 过滤噪声节点内的文本（简化：直接收集所有 text，噪声标签在 article 内概率低）
+                !t.trim().is_empty()
+            })
+            .collect::<Vec<_>>()
+            .join("\n")
+    } else {
+        // 2. fallback: 收集所有 <p> 文本
+        let p_sel = Selector::parse("p")
+            .map_err(|e| format!("CSS selector 解析失败: {:?}", e))?;
+
+        let paragraphs: Vec<String> = doc
+            .select(&p_sel)
+            .filter(|el| {
+                // 排除噪声容器内的 <p>
+                let mut ancestor = el.parent();
+                while let Some(node) = ancestor {
+                    if let Some(element) = node.value().as_element() {
+                        let tag = element.name();
+                        if matches!(tag, "nav" | "header" | "footer" | "script" | "style" | "noscript") {
+                            return false;
+                        }
+                    }
+                    ancestor = node.parent();
+                }
+                true
+            })
+            .map(|el| el.text().collect::<Vec<_>>().join(""))
+            .filter(|t| !t.trim().is_empty())
+            .collect();
+
+        if paragraphs.is_empty() {
+            return Err("无法从页面中提取到正文内容".to_string());
+        }
+
+        paragraphs.join("\n\n")
+    };
+
+    let text = text.trim().to_string();
+    if text.is_empty() {
+        return Err("提取的正文内容为空".to_string());
+    }
+
+    Ok(text)
+}
+
 // ── Main ────────────────────────────────────────────────────────────
 
 fn fatal(msg: &str) -> ! {
@@ -361,12 +441,21 @@ fn fatal(msg: &str) -> ! {
 
 #[tokio::main]
 async fn main() {
-    // 1. 加载 .env
+    // 加载 .env
     if let Err(e) = dotenvy::dotenv() {
         eprintln!("[warn] 未加载 .env: {} (将使用系统环境变量)", e);
     }
 
-    // 2. 环境变量
+    let cli = Cli::parse();
+    match cli.command.unwrap_or(Commands::Generate) {
+        Commands::Generate => run_generate().await,
+        Commands::Learn { url } => run_learn(&url).await,
+    }
+}
+
+// ── generate 子命令 ─────────────────────────────────────────────────
+
+async fn run_generate() {
     let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
@@ -374,7 +463,7 @@ async fn main() {
     println!("[info] BASE_URL = {}", base_url);
     println!("[info] MODEL    = {}", model);
 
-    // 3. 风格选择
+    // 风格选择
     let styles = list_styles("styles").unwrap_or_else(|e| fatal(&e));
     let idx = select_style(&styles).unwrap_or_else(|e| fatal(&e));
     let style_path = &styles[idx];
@@ -385,14 +474,14 @@ async fn main() {
         style_path.strip_prefix("styles/").unwrap_or(style_path)
     );
 
-    // 4. 读取素材
+    // 读取素材
     let idea = read_file("inputs/idea_01.md").unwrap_or_else(|e| fatal(&e));
     if idea.trim().is_empty() {
         fatal("inputs/idea_01.md 内容为空，请先写入创作素材");
     }
     println!("[info] 素材 {} 字符 | 风格 {} 字符", idea.len(), style.len());
 
-    // 5. 调用 LLM (自动重试，最多 3 次)
+    // 调用 LLM (自动重试，最多 3 次)
     let client = Client::new();
     println!("[info] 正在调用 LLM ...");
     let mut markdown = String::new();
@@ -415,17 +504,17 @@ async fn main() {
     }
     println!("[info] LLM 返回 {} 字符", markdown.len());
 
-    // 6. 双轨输出
+    // 双轨输出
     let slug = extract_idea_slug(&idea);
     let ver = next_version("outputs", &slug);
     let md_path = format!("outputs/{}_v{}.md", slug, ver);
     let html_path = format!("outputs/{}_v{}.html", slug, ver);
 
-    // 6a. 存档 Markdown
+    // 存档 Markdown
     write_file(&md_path, &markdown).unwrap_or_else(|e| fatal(&e));
     println!("[done] Markdown → {}", md_path);
 
-    // 6b. 转换 HTML + 存档
+    // 转换 HTML + 存档
     let html_fragment = md_to_wechat_html(&markdown);
     let html_doc = format!(
         "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
@@ -434,7 +523,7 @@ async fn main() {
     write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
     println!("[done] HTML     → {}", html_path);
 
-    // 6c. 注入剪贴板 (CF_HTML 富文本格式)
+    // 注入剪贴板 (CF_HTML 富文本格式)
     match inject_clipboard(&html_fragment) {
         Ok(tool) => {
             println!("[done] 富文本已注入剪贴板 (via {})", tool);
@@ -450,4 +539,101 @@ async fn main() {
             );
         }
     }
+}
+
+// ── learn 子命令 ────────────────────────────────────────────────────
+
+const LEARN_SYSTEM_PROMPT: &str = r#"你是一个写作风格分析专家。用户会给你一篇完整的文章正文，你需要逆向分析该文章的写作风格，并输出一份可以直接作为 system prompt 使用的「风格指令文档」。
+
+输出要求：
+1. 用 Markdown 格式
+2. 涵盖以下维度（如果文章中体现了的话）：
+   - 整体风格定位（如"理性 + 隐喻"、"口语化 + 犀利"等）
+   - 标题策略（标题长度、是否用问句/反问/数字等）
+   - 开头模式（故事切入、金句开头、直接观点等）
+   - 段落节奏（长短交替、短段密集等）
+   - 句式特征（长句/短句偏好、排比、设问等）
+   - 论证手法（类比、举例、数据引用、反直觉等）
+   - 情绪基调（冷静、激昂、反讽、温暖等）
+   - 结尾策略（升华、行动号召、开放式提问等）
+   - 用词偏好（口语/书面、中英混用、领域术语等）
+   - 读者互动方式（如果有的话）
+3. 每个维度给出具体的示例句子或段落片段作为佐证
+4. 最后给出一段可直接作为 system prompt 的「风格复刻指令」
+
+注意：不要评价文章质量，只做风格提取和描述。"#;
+
+async fn run_learn(url: &str) {
+    let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
+    let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
+    let model = env_var_or("MODEL", "gpt-4o");
+
+    println!("[info] BASE_URL = {}", base_url);
+    println!("[info] MODEL    = {}", model);
+
+    // 1. HTTP GET 抓取网页
+    println!("[info] 正在抓取: {}", url);
+    let client = Client::new();
+    let resp = client
+        .get(url)
+        .header("User-Agent", "Mozilla/5.0 (compatible; cognitive-writer/0.2)")
+        .send()
+        .await
+        .unwrap_or_else(|e| fatal(&format!("HTTP 请求失败: {}", e)));
+
+    let status = resp.status();
+    if !status.is_success() {
+        fatal(&format!("HTTP 返回错误状态码: {}", status));
+    }
+
+    let html_body = resp
+        .text()
+        .await
+        .unwrap_or_else(|e| fatal(&format!("读取响应体失败: {}", e)));
+
+    println!("[info] 页面下载完成, {} 字节", html_body.len());
+
+    // 2. 提取正文
+    let article_text = extract_article_text(&html_body).unwrap_or_else(|e| fatal(&e));
+    println!("[info] 正文提取完成, {} 字符", article_text.len());
+
+    // 3. 调用 LLM 逆向分析风格
+    println!("[info] 正在调用 LLM 分析写作风格 ...");
+    let style_analysis = call_llm(
+        &client,
+        &base_url,
+        &api_key,
+        &model,
+        LEARN_SYSTEM_PROMPT,
+        &article_text,
+    )
+    .await
+    .unwrap_or_else(|e| fatal(&format!("LLM 调用失败: {}", e)));
+
+    println!("[info] LLM 返回 {} 字符", style_analysis.len());
+
+    // 4. 用户输入文件名
+    let name: String = Input::with_theme(&ColorfulTheme::default())
+        .with_prompt("请为该风格命名（将保存为 styles/<name>.md）")
+        .validate_with(|input: &String| -> Result<(), String> {
+            let s = input.trim();
+            if s.is_empty() {
+                return Err("名称不能为空".to_string());
+            }
+            if s.contains('/') || s.contains('\\') || s.contains('\0') {
+                return Err("名称不能包含路径分隔符".to_string());
+            }
+            Ok(())
+        })
+        .interact_text()
+        .unwrap_or_else(|e| fatal(&format!("输入读取失败: {}", e)));
+
+    let name = name.trim();
+
+    // 5. 保存风格文件
+    let path = format!("styles/{}.md", name);
+    write_file(&path, &style_analysis).unwrap_or_else(|e| fatal(&e));
+    println!("[done] 风格已保存 → {}", path);
+    println!();
+    println!("  现在可以用 `cargo run -- generate` 选择该风格来生成文章");
 }
