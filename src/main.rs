@@ -112,10 +112,15 @@ fn read_file(path: &str) -> Result<String, String> {
 fn extract_idea_slug(idea: &str) -> String {
     let raw = idea
         .lines()
-        .find_map(|l| l.strip_prefix("文章主题：").or_else(|| l.strip_prefix("文章主题:")))
+        .find_map(|l| {
+            let stripped = l.trim_start_matches('#').trim_start();
+            stripped
+                .strip_prefix("文章主题：")
+                .or_else(|| stripped.strip_prefix("文章主题:"))
+        })
         .or_else(|| {
             idea.lines()
-                .find(|l| l.starts_with("# "))
+                .find(|l| l.starts_with('#') && !l.trim_start_matches('#').is_empty())
                 .map(|l| l.trim_start_matches('#').trim())
         })
         .unwrap_or("untitled");
