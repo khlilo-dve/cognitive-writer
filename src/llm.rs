@@ -1,3 +1,4 @@
+use indicatif::{ProgressBar, ProgressStyle};
 use crate::error::AppError;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -91,6 +92,21 @@ pub async fn call_llm(
         .ok_or(AppError::EmptyChoices)
 }
 
+// ── Spinner ─────────────────────────────────────────────────────────
+
+/// 创建一个带转圈动画的进度指示器
+pub fn new_spinner(msg: &str) -> ProgressBar {
+    let pb = ProgressBar::new_spinner();
+    pb.set_style(
+        ProgressStyle::with_template("{spinner:.green} {msg}")
+            .unwrap()
+            .tick_strings(&["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]),
+    );
+    pb.set_message(msg.to_string());
+    pb.enable_steady_tick(std::time::Duration::from_millis(80));
+    pb
+}
+
 // ── 泛型重试函数 ───────────────────────────────────────────────────
 
 pub async fn with_retry<T, F, Fut>(
@@ -115,7 +131,10 @@ where
             }
         }
     }
-    Err(last_err.unwrap_or_else(|| {
-        AppError::Parse("with_retry: max_retries 不能为 0".to_string())
-    }))
+    Err(AppError::Parse(format!(
+        "{} 连续 {} 次失败: {}",
+        label,
+        max_retries,
+        last_err.unwrap_or_else(|| AppError::Parse("with_retry: max_retries 不能为 0".to_string()))
+    )))
 }

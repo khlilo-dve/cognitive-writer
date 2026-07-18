@@ -141,3 +141,107 @@ pub fn inject_clipboard(html_content: &str) -> Result<&'static str, String> {
 
     Err("未找到可用的剪贴板工具 (powershell.exe / xclip / wl-copy)".to_string())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ── build_cf_html ───────────────────────────────────────────
+
+    #[test]
+    fn test_build_cf_html_has_version_header() {
+        let result = build_cf_html("<p>test</p>");
+        assert!(
+            result.starts_with("Version:0.9"),
+            "CF_HTML must start with Version:0.9 header"
+        );
+    }
+
+    #[test]
+    fn test_build_cf_html_offsets_correct() {
+        let fragment = "<p>Hello</p>";
+        let result = build_cf_html(fragment);
+
+        // 头部结束于 <html> 标签起始位置
+        let html_start = result.find("<html>").expect("<html> not found");
+
+        let (start_html, end_html, start_frag, end_frag) =
+            parse_cf_html_offsets(&result[..html_start]);
+
+        // 偏移量符号：全非零 + 递增
+        assert!(start_html > 0, "StartHTML must be > 0");
+        assert!(end_html > 0, "EndHTML must be > 0");
+        assert!(start_frag > 0, "StartFragment must be > 0");
+        assert!(end_frag > 0, "EndFragment must be > 0");
+        assert!(start_html <= start_frag);
+        assert!(start_frag <= end_frag);
+        assert!(end_frag <= end_html);
+
+        // fragment 字节长度
+        assert_eq!(end_frag - start_frag, fragment.len());
+
+        // result 长度 == EndHTML
+        assert_eq!(result.len(), end_html);
+
+        // fragment 内容在位
+        assert_eq!(&result[start_frag..end_frag], fragment);
+    }
+
+    #[test]
+    fn test_build_cf_html_empty_fragment() {
+        let result = build_cf_html("");
+        assert!(result.contains("<!--StartFragment-->"));
+        assert!(result.contains("<!--EndFragment-->"));
+
+        let html_start = result.find("<html>").unwrap();
+        let (_, _, start_frag, end_frag) =
+            parse_cf_html_offsets(&result[..html_start]);
+
+        // 空 fragment: StartFragment == EndFragment
+        assert_eq!(start_frag, end_frag);
+    }
+
+    #[test]
+    fn test_build_cf_html_chinese_byte_offsets() {
+        let fragment = "你好世界"; // 4 个中文字符 = 12 字节 (UTF-8)
+        let result = build_cf_html(fragment);
+
+        let html_start = result.find("<html>").unwrap();
+        let (_, _, start_frag, end_frag) =
+            parse_cf_html_offsets(&result[..html_start]);
+
+        assert_eq!(end_frag - start_frag, 12, "Chinese fragment must be 12 bytes");
+        assert_eq!(&result[start_frag..end_frag], fragment);
+    }
+
+    #[test]
+    fn test_build_cf_html_with_nested_html_tags() {
+        let fragment = "<div><p>text</p></div>";
+        let result = build_cf_html(fragment);
+
+        let html_start = result.find("<html>").unwrap();
+        let (_, _, start_frag, end_frag) =
+            parse_cf_html_offsets(&result[..html_start]);
+
+        assert_eq!(&result[start_frag..end_frag], fragment);
+    }
+
+    /// 从 CF_HTML 头部提取四个偏移量
+    fn parse_cf_html_offsets(header: &str) -> (usize, usize, usize, usize) {
+        fn get(header: &str, key: &str) -> usize {
+            let prefix = format!("{}:", key);
+            for line in header.lines() {
+                if let Some(val) = line.strip_prefix(&prefix) {
+                    return val.trim().parse().unwrap();
+                }
+            }
+            panic!("key {} not found in CF_HTML header", key);
+        }
+        (
+            get(header, "StartHTML"),
+            get(header, "EndHTML"),
+            get(header, "StartFragment"),
+            get(header, "EndFragment"),
+        )
+    }
+}
