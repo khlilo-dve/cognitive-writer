@@ -1,12 +1,20 @@
+mod clipboard;
+mod error;
+mod io;
+mod llm;
+mod refine;
+
 use clap::{Parser, Subcommand};
-use dialoguer::{Input, Select, theme::ColorfulTheme};
+use dialoguer::{Input, theme::ColorfulTheme};
 use pulldown_cmark::{Options, Parser as MdParser, html};
 use reqwest::Client;
-use serde::{Deserialize, Serialize};
-use std::fs;
-use std::io::Write;
-use std::path::Path;
-use std::process::{self, Command, Stdio};
+use std::process;
+
+use crate::clipboard::inject_clipboard;
+use crate::error::AppError;
+use crate::io::{extract_idea_slug, list_styles, next_version, read_file, select_style, write_file};
+use crate::llm::{call_llm, with_retry};
+use crate::refine::{parse_ai_edits, REFINE_SYSTEM_PROMPT};
 
 // ── CLI routing (clap derive) ───────────────────────────────────────
 
@@ -20,7 +28,11 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// 生成文章（默认行为）
-    Generate,
+    Generate {
+        /// 素材文件路径 (默认: inputs/idea_01.md)
+        #[arg(short, long, default_value = "inputs/idea_01.md")]
+        input: String,
+    },
     /// 从 URL 逆向提取写作风格
     Learn {
         /// 目标文章的 URL
@@ -31,204 +43,6 @@ enum Commands {
         /// 目标 Markdown 文件路径
         file: String,
     },
-}
-
-// ── OpenAI-compatible request/response types ────────────────────────
-
-#[derive(Serialize)]
-struct ChatRequest {
-    model: String,
-    messages: Vec<Message>,
-}
-
-#[derive(Serialize)]
-struct Message {
-    role: String,
-    content: String,
-}
-
-#[derive(Deserialize)]
-struct ChatResponse {
-    choices: Vec<Choice>,
-}
-
-#[derive(Deserialize)]
-struct Choice {
-    message: ResponseMessage,
-}
-
-#[derive(Deserialize)]
-struct ResponseMessage {
-    content: String,
-}
-
-// ── Style selection ─────────────────────────────────────────────────
-
-fn list_styles(dir: &str) -> Result<Vec<String>, String> {
-    let mut styles = Vec::new();
-    let entries = fs::read_dir(dir)
-        .map_err(|e| format!("无法读取 {} 目录: {}", dir, e))?;
-
-    for entry in entries.flatten() {
-        let path = entry.path();
-        if path.extension().is_some_and(|ext| ext == "md") {
-            styles.push(path.display().to_string());
-        }
-    }
-
-    styles.sort();
-    if styles.is_empty() {
-        return Err(format!("{} 目录下没有 .md 风格文件", dir));
-    }
-    Ok(styles)
-}
-
-fn select_style(styles: &[String]) -> Result<usize, String> {
-    if styles.len() == 1 {
-        let name = styles[0].strip_prefix("styles/").unwrap_or(&styles[0]);
-        println!("[info] 使用唯一风格: {}", name);
-        return Ok(0);
-    }
-
-    let labels: Vec<&str> = styles
-        .iter()
-        .map(|s| s.strip_prefix("styles/").unwrap_or(s))
-        .collect();
-
-    Select::with_theme(&ColorfulTheme::default())
-        .with_prompt("请选择写作风格")
-        .items(&labels)
-        .default(0)
-        .interact()
-        .map_err(|e| format!("风格选择失败: {}", e))
-}
-
-// ── File I/O ────────────────────────────────────────────────────────
-
-fn read_file(path: &str) -> Result<String, String> {
-    fs::read_to_string(path).map_err(|e| format!("无法读取 `{}`: {}", path, e))
-}
-
-fn extract_idea_slug(idea: &str) -> String {
-    let raw = idea
-        .lines()
-        .find_map(|l| {
-            let stripped = l.trim_start_matches('#').trim_start();
-            stripped
-                .strip_prefix("文章主题：")
-                .or_else(|| stripped.strip_prefix("文章主题:"))
-        })
-        .or_else(|| {
-            idea.lines()
-                .find(|l| l.starts_with('#') && !l.trim_start_matches('#').is_empty())
-                .map(|l| l.trim_start_matches('#').trim())
-        })
-        .unwrap_or("untitled");
-
-    let slug: String = raw
-        .trim()
-        .chars()
-        .filter(|c| c.is_alphanumeric() || *c == '_' || *c == '-')
-        .collect();
-
-    if slug.is_empty() {
-        "untitled".to_string()
-    } else {
-        slug
-    }
-}
-
-fn next_version(dir: &str, slug: &str) -> u32 {
-    let prefix = format!("{}_v", slug);
-    let mut max: u32 = 0;
-
-    if let Ok(entries) = fs::read_dir(dir) {
-        for entry in entries.flatten() {
-            let name = entry.file_name();
-            let name = name.to_string_lossy();
-            if let Some(rest) = name.strip_prefix(&prefix) {
-                // 同时匹配 .md 和 .html 后缀
-                let num_str = rest
-                    .strip_suffix(".md")
-                    .or_else(|| rest.strip_suffix(".html"));
-                if let Some(n) = num_str.and_then(|s| s.parse::<u32>().ok()) {
-                    max = max.max(n);
-                }
-            }
-        }
-    }
-
-    max + 1
-}
-
-fn write_file(path: &str, content: &str) -> Result<(), String> {
-    let dir = Path::new(path).parent().unwrap_or(Path::new("."));
-    if !dir.exists() {
-        fs::create_dir_all(dir).map_err(|e| format!("无法创建目录 `{}`: {}", dir.display(), e))?;
-    }
-    fs::write(path, content).map_err(|e| format!("无法写入 `{}`: {}", path, e))
-}
-
-// ── LLM API call (OpenAI-compatible) ────────────────────────────────
-
-async fn call_llm(
-    client: &Client,
-    base_url: &str,
-    api_key: &str,
-    model: &str,
-    system_prompt: &str,
-    user_content: &str,
-) -> Result<String, String> {
-    let url = format!("{}/chat/completions", base_url.trim_end_matches('/'));
-
-    let body = ChatRequest {
-        model: model.to_string(),
-        messages: vec![
-            Message {
-                role: "system".to_string(),
-                content: system_prompt.to_string(),
-            },
-            Message {
-                role: "user".to_string(),
-                content: user_content.to_string(),
-            },
-        ],
-    };
-
-    let resp = client
-        .post(&url)
-        .header("Authorization", format!("Bearer {}", api_key))
-        .header("Content-Type", "application/json")
-        .json(&body)
-        .send()
-        .await
-        .map_err(|e| format!("网络请求失败: {}", e))?;
-
-    let status = resp.status();
-    let raw_body = resp.text().await.unwrap_or_default();
-
-    if !status.is_success() {
-        return Err(format!("API 返回错误 (HTTP {}): {}", status, raw_body));
-    }
-
-    let chat_resp: ChatResponse = serde_json::from_str(&raw_body).map_err(|e| {
-        format!(
-            "解析 API 响应失败: {}\n原始响应: {}",
-            e,
-            &raw_body[..raw_body.len().min(500)]
-        )
-    })?;
-
-    chat_resp
-        .choices
-        .first()
-        .map(|c| c.message.content.clone())
-        .ok_or_else(|| {
-            format!(
-                "API 返回了空的 choices 数组\n原始响应: {}",
-                &raw_body[..raw_body.len().min(500)]
-            )
-        })
 }
 
 // ── Markdown → WeChat HTML ──────────────────────────────────────────
@@ -249,128 +63,6 @@ fn md_to_wechat_html(markdown: &str) -> String {
     format!(
         "<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>"
     )
-}
-
-// ── Clipboard injection ─────────────────────────────────────────────
-
-/// 构建 Windows CF_HTML 格式：带字节偏移量的标准头部 + HTML 片段
-/// 规范参考: https://learn.microsoft.com/en-us/windows/win32/dataxchg/html-clipboard-format
-fn build_cf_html(fragment: &str) -> String {
-    let pre = "<html>\r\n<head><meta charset=\"utf-8\"></head>\r\n<body>\r\n<!--StartFragment-->";
-    let post = "<!--EndFragment-->\r\n</body>\r\n</html>";
-
-    // 头部模板长度固定（全 ASCII，len() == 字节数）
-    let header_len = "Version:0.9\r\nStartHTML:0000000000\r\nEndHTML:0000000000\r\nStartFragment:0000000000\r\nEndFragment:0000000000\r\n".len();
-
-    let start_html = header_len;
-    let start_frag = start_html + pre.len();
-    let end_frag = start_frag + fragment.len(); // Rust .len() 返回字节数，CF_HTML 要求字节偏移
-    let end_html = end_frag + post.len();
-
-    format!(
-        "Version:0.9\r\nStartHTML:{:010}\r\nEndHTML:{:010}\r\nStartFragment:{:010}\r\nEndFragment:{:010}\r\n{}{}{}",
-        start_html, end_html, start_frag, end_frag, pre, fragment, post
-    )
-}
-
-/// WSL2 → Windows: 通过 PowerShell + .NET System.Windows.Forms 写入 CF_HTML
-fn inject_cf_html_powershell(html_fragment: &str) -> Result<&'static str, String> {
-    let cf_html = build_cf_html(html_fragment);
-
-    // 写入临时文件（UTF-8 无 BOM，Rust 默认行为）
-    let tmp = "/tmp/cw_clipboard.html";
-    fs::write(tmp, &cf_html).map_err(|e| format!("临时文件写入失败: {}", e))?;
-
-    // 转换为 Windows 路径
-    let wslpath_out = Command::new("wslpath")
-        .args(["-w", tmp])
-        .output()
-        .map_err(|e| format!("wslpath 失败: {}", e))?;
-
-    if !wslpath_out.status.success() {
-        let _ = fs::remove_file(tmp);
-        return Err("wslpath 路径转换失败".to_string());
-    }
-
-    let win_path = String::from_utf8_lossy(&wslpath_out.stdout).trim().to_string();
-
-    // PowerShell 脚本：用 ReadAllBytes 读取原始 UTF-8 字节 → MemoryStream → CF_HTML
-    // 关键：绕过 .NET String(UTF-16) 转换，避免系统默认编码(GBK)截断多字节中文
-    let ps_script = format!(
-        concat!(
-            "Add-Type -AssemblyName System.Windows.Forms; ",
-            "$bytes = [System.IO.File]::ReadAllBytes('{}'); ",
-            "$ms = New-Object System.IO.MemoryStream(,$bytes); ",
-            "$d = New-Object System.Windows.Forms.DataObject; ",
-            "$d.SetData([System.Windows.Forms.DataFormats]::Html, $ms); ",
-            "[System.Windows.Forms.Clipboard]::SetDataObject($d, $true)"
-        ),
-        win_path.replace('\'', "''")
-    );
-
-    let out = Command::new("powershell.exe")
-        .args(["-sta", "-NoProfile", "-Command", &ps_script])
-        .output()
-        .map_err(|e| format!("powershell.exe 执行失败: {}", e))?;
-
-    let _ = fs::remove_file(tmp);
-
-    if out.status.success() {
-        Ok("CF_HTML (PowerShell)")
-    } else {
-        Err(format!(
-            "PowerShell 剪贴板设置失败: {}",
-            String::from_utf8_lossy(&out.stderr).trim()
-        ))
-    }
-}
-
-/// 通过 stdin pipe 向 CLI 工具写入数据
-fn pipe_to_cmd(cmd: &str, args: &[&str], data: &[u8]) -> Result<(), ()> {
-    let mut child = Command::new(cmd)
-        .args(args)
-        .stdin(Stdio::piped())
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .spawn()
-        .map_err(|_| ())?;
-
-    let stdin = child.stdin.as_mut().ok_or(())?;
-    stdin.write_all(data).map_err(|_| ())?;
-    drop(child.stdin.take());
-    child.wait().map_err(|_| ())?;
-    Ok(())
-}
-
-fn inject_clipboard(html_content: &str) -> Result<&'static str, String> {
-    // 1. WSL2 / Windows: CF_HTML via PowerShell（真正的富文本，最优路径）
-    if let Ok(tool) = inject_cf_html_powershell(html_content) {
-        return Ok(tool);
-    }
-
-    // 2. Linux X11: xclip -selection clipboard -t text/html
-    if pipe_to_cmd(
-        "xclip",
-        &["-selection", "clipboard", "-t", "text/html"],
-        html_content.as_bytes(),
-    )
-    .is_ok()
-    {
-        return Ok("xclip (text/html)");
-    }
-
-    // 3. Wayland: wl-copy --type text/html
-    if pipe_to_cmd(
-        "wl-copy",
-        &["--type", "text/html"],
-        html_content.as_bytes(),
-    )
-    .is_ok()
-    {
-        return Ok("wl-copy (text/html)");
-    }
-
-    Err("未找到可用的剪贴板工具 (powershell.exe / xclip / wl-copy)".to_string())
 }
 
 // ── Env helpers ─────────────────────────────────────────────────────
@@ -483,7 +175,7 @@ async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, Stri
 
 // ── Main ────────────────────────────────────────────────────────────
 
-fn fatal(msg: &str) -> ! {
+fn fatal(msg: impl std::fmt::Display) -> ! {
     eprintln!("[error] {}", msg);
     process::exit(1);
 }
@@ -496,12 +188,26 @@ async fn main() {
     }
 
     let cli = Cli::parse();
-    match cli.command.unwrap_or(Commands::Generate) {
-        Commands::Generate => run_generate().await,
+    match cli.command.unwrap_or(Commands::Generate {
+        input: "inputs/idea_01.md".to_string(),
+    }) {
+        Commands::Generate { input } => run_generate(&input).await,
         Commands::Learn { url } => run_learn(&url).await,
         Commands::Refine { file } => run_refine(&file).await,
     }
 }
+
+// ── Outer system prompt (Pass 1: 骨架) ────────────────────────────
+
+const OUTLINE_SYSTEM_PROMPT: &str = r#"你是一个写作结构设计专家。
+用户会给你一份创作素材，你需要输出一份文章逻辑大纲。
+
+要求：
+1. 用 Markdown 层级列表（- / 1. 2. 3.）
+2. 每个节点写清该段的【核心论点】和【支撑素材/案例方向】
+3. 标注段落之间的逻辑衔接关系（递进/转折/并列/因果）
+4. 控制在 300-500 字以内
+5. 不要写正文，只输出骨架"#;
 
 // ── 骨架-渲染双通道 ─────────────────────────────────────────────────
 
@@ -512,30 +218,13 @@ async fn generate_with_outline(
     model: &str,
     style: &str,
     idea: &str,
-) -> Result<String, String> {
+) -> Result<String, AppError> {
     // Pass 1 — 骨架
     println!("[info] Pass 1: 正在生成大纲骨架 ...");
-    let outline = {
-        let max_retries = 3;
-        let mut result = Err("未执行".to_string());
-        for attempt in 1..=max_retries {
-            match call_llm(client, base_url, api_key, model, OUTLINE_SYSTEM_PROMPT, idea).await {
-                Ok(content) => {
-                    result = Ok(content);
-                    break;
-                }
-                Err(e) => {
-                    if attempt < max_retries {
-                        eprintln!("[warn] 大纲生成第 {} 次失败: {}，2 秒后重试 ...", attempt, e);
-                        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-                    } else {
-                        return Err(format!("大纲生成连续 {} 次失败: {}", max_retries, e));
-                    }
-                }
-            }
-        }
-        result?
-    };
+    let outline = with_retry(3, "大纲生成", || {
+        call_llm(client, base_url, api_key, model, OUTLINE_SYSTEM_PROMPT, idea)
+    })
+    .await?;
     println!("[info] 大纲生成完成, {} 字符", outline.len());
 
     // Pass 2 — 渲染
@@ -545,27 +234,10 @@ async fn generate_with_outline(
         outline, idea
     );
 
-    let markdown = {
-        let max_retries = 3;
-        let mut result = Err("未执行".to_string());
-        for attempt in 1..=max_retries {
-            match call_llm(client, base_url, api_key, model, style, &render_prompt).await {
-                Ok(content) => {
-                    result = Ok(content);
-                    break;
-                }
-                Err(e) => {
-                    if attempt < max_retries {
-                        eprintln!("[warn] 正文渲染第 {} 次失败: {}，2 秒后重试 ...", attempt, e);
-                        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-                    } else {
-                        return Err(format!("正文渲染连续 {} 次失败: {}", max_retries, e));
-                    }
-                }
-            }
-        }
-        result?
-    };
+    let markdown = with_retry(3, "正文渲染", || {
+        call_llm(client, base_url, api_key, model, style, &render_prompt)
+    })
+    .await?;
     println!("[info] 正文渲染完成, {} 字符", markdown.len());
 
     Ok(markdown)
@@ -573,7 +245,7 @@ async fn generate_with_outline(
 
 // ── generate 子命令 ─────────────────────────────────────────────────
 
-async fn run_generate() {
+async fn run_generate(input: &str) {
     let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
@@ -593,9 +265,9 @@ async fn run_generate() {
     );
 
     // 读取素材
-    let idea = read_file("inputs/idea_01.md").unwrap_or_else(|e| fatal(&e));
+    let idea = read_file(input).unwrap_or_else(|e| fatal(&e));
     if idea.trim().is_empty() {
-        fatal("inputs/idea_01.md 内容为空，请先写入创作素材");
+        fatal(&format!("{} 内容为空，请先写入创作素材", input));
     }
     println!("[info] 素材 {} 字符 | 风格 {} 字符", idea.len(), style.len());
 
@@ -641,18 +313,6 @@ async fn run_generate() {
         }
     }
 }
-
-// ── Outline system prompt (Pass 1: 骨架) ────────────────────────────
-
-const OUTLINE_SYSTEM_PROMPT: &str = r#"你是一个写作结构设计专家。
-用户会给你一份创作素材，你需要输出一份文章逻辑大纲。
-
-要求：
-1. 用 Markdown 层级列表（- / 1. 2. 3.）
-2. 每个节点写清该段的【核心论点】和【支撑素材/案例方向】
-3. 标注段落之间的逻辑衔接关系（递进/转折/并列/因果）
-4. 控制在 300-500 字以内
-5. 不要写正文，只输出骨架"#;
 
 // ── learn 子命令 ────────────────────────────────────────────────────
 
@@ -702,7 +362,7 @@ async fn run_learn(url: &str) {
         &article_text,
     )
     .await
-    .unwrap_or_else(|e| fatal(&format!("LLM 调用失败: {}", e)));
+    .unwrap_or_else(|e| fatal(&e));
 
     println!("[info] LLM 返回 {} 字符", style_analysis.len());
 
@@ -734,81 +394,8 @@ async fn run_learn(url: &str) {
 
 // ── refine 子命令 — 局部重绘 ─────────────────────────────────────
 
-const REFINE_SYSTEM_PROMPT: &str = r#"你是一个严苛的文本重构引擎。
-请根据用户给出的修改指令，重写指定的文本片段。
-
-要求：
-1. 只输出重写后的文本
-2. 不要带有任何解释、问候或 Markdown 代码块包裹
-3. 必须与原有的行文风格无缝衔接
-4. 严格遵循修改指令的要求"#;
-
-struct AiEdit {
-    instruction: String,
-    original: String,
-    full_match: String,
-}
-
-fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
-    let mut edits = Vec::new();
-    let mut pos = 0;
-
-    loop {
-        // 1. 找开标签起始
-        let open_start = match content[pos..].find("<AI_EDIT ") {
-            Some(i) => pos + i,
-            None => break,
-        };
-
-        // 2. 提取 instruction="..."
-        let inst_key = "instruction=\"";
-        let inst_start = match content[open_start..].find(inst_key) {
-            Some(i) => open_start + i + inst_key.len(),
-            None => return Err(format!("AI_EDIT 标签缺少 instruction 属性 (位置 {})", open_start)),
-        };
-        let inst_end = match content[inst_start..].find('"') {
-            Some(i) => inst_start + i,
-            None => return Err(format!("instruction 属性引号未闭合 (位置 {})", inst_start)),
-        };
-        let instruction = content[inst_start..inst_end].to_string();
-
-        // 3. 找开标签结束 '>'
-        let tag_end = match content[inst_end..].find('>') {
-            Some(i) => inst_end + i + 1, // +1 跳过 '>' 本身
-            None => return Err(format!("AI_EDIT 开标签未闭合 (位置 {})", open_start)),
-        };
-
-        // 4. 找闭标签
-        let close_tag = "</AI_EDIT>";
-        let close_start = match content[tag_end..].find(close_tag) {
-            Some(i) => tag_end + i,
-            None => return Err(format!("未找到匹配的 </AI_EDIT> (位置 {})", open_start)),
-        };
-        let close_end = close_start + close_tag.len();
-
-        let original = content[tag_end..close_start].to_string();
-        let full_match = content[open_start..close_end].to_string();
-
-        edits.push(AiEdit {
-            instruction,
-            original,
-            full_match,
-        });
-
-        pos = close_end;
-    }
-
-    if edits.is_empty() {
-        return Err("未找到 AI_EDIT 标记".to_string());
-    }
-    Ok(edits)
-}
-
 async fn run_refine(file: &str) {
-    // 1. 加载环境配置
-    if let Err(e) = dotenvy::dotenv() {
-        eprintln!("[warn] 未加载 .env: {} (将使用系统环境变量)", e);
-    }
+    // 注意：不再调用 dotenvy::dotenv()，main() 已经调用过了
 
     let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
@@ -835,24 +422,20 @@ async fn run_refine(file: &str) {
             edit.instruction, edit.original
         );
 
-        let mut rewritten = Err("未执行".to_string());
-        for attempt in 1..=3 {
-            match call_llm(&client, &base_url, &api_key, &model, REFINE_SYSTEM_PROMPT, &user_prompt).await {
-                Ok(text) => {
-                    rewritten = Ok(text);
-                    break;
-                }
-                Err(e) => {
-                    if attempt < 3 {
-                        eprintln!("[warn] 标记 {}/{} 第 {} 次失败: {}，2 秒后重试 ...", idx, total, attempt, e);
-                        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-                    } else {
-                        fatal(&format!("标记 {}/{} 连续 3 次失败: {}", idx, total, e));
-                    }
-                }
-            }
-        }
-        let rewritten = rewritten.unwrap_or_else(|e| fatal(&e));
+        let label = format!("标记 {}/{}", idx, total);
+        let rewritten = with_retry(3, &label, || {
+            call_llm(
+                &client,
+                &base_url,
+                &api_key,
+                &model,
+                REFINE_SYSTEM_PROMPT,
+                &user_prompt,
+            )
+        })
+        .await
+        .unwrap_or_else(|e| fatal(&e));
+
         content = content.replacen(&edit.full_match, &rewritten, 1);
         println!("[info] 标记 {}/{} 替换完成", idx, total);
     }
