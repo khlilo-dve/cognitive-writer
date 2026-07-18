@@ -13,7 +13,7 @@ use std::process;
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
 use crate::io::{extract_idea_slug, list_styles, next_version, read_file, select_style, write_file};
-use crate::llm::{call_llm, with_retry};
+use crate::llm::{call_llm, new_spinner, with_retry};
 use crate::refine::{parse_ai_edits, REFINE_SYSTEM_PROMPT};
 
 // ── CLI routing (clap derive) ───────────────────────────────────────
@@ -46,6 +46,18 @@ enum Commands {
         /// 目标 Markdown 文件路径
         file: String,
         /// 跳过剪贴板注入，仅输出文件
+        #[arg(long)]
+        no_clipboard: bool,
+    },
+
+    /// 基于修改指令重写已有文章
+    Update {
+        /// 目标 Markdown 文件路径
+        file: String,
+        /// 修改指令（如不提供则交互式输入）
+        #[arg(short, long)]
+        instruction: Option<String>,
+        /// 跳过剪贴板注入
         #[arg(long)]
         no_clipboard: bool,
     },
@@ -201,6 +213,7 @@ async fn main() {
         Commands::Generate { input, no_clipboard } => run_generate(&input, no_clipboard).await,
         Commands::Learn { url } => run_learn(&url).await,
         Commands::Refine { file, no_clipboard } => run_refine(&file, no_clipboard).await,
+        Commands::Update { file, instruction, no_clipboard } => run_update(&file, instruction, no_clipboard).await,
     }
 }
 
@@ -216,6 +229,16 @@ const OUTLINE_SYSTEM_PROMPT: &str = r#"你是一个写作结构设计专家。
 4. 控制在 300-500 字以内
 5. 不要写正文，只输出骨架"#;
 
+// ── Update system prompt ────────────────────────────────────────────
+
+const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给你一篇完整的文章和一条修改指令，你需要根据修改指令重写整篇文章。
+
+要求：
+1. 保持原文的整体结构和段落数量
+2. 只修改与指令相关的部分，其余内容保持不变
+3. 直接输出完整的修改后 Markdown，不要任何解释、说明或代码块包裹
+4. 输出必须是可发布的最终版本"#;
+
 // ── 骨架-渲染双通道 ─────────────────────────────────────────────────
 
 async fn generate_with_outline(
@@ -227,25 +250,27 @@ async fn generate_with_outline(
     idea: &str,
 ) -> Result<String, AppError> {
     // Pass 1 — 骨架
-    println!("[info] Pass 1: 正在生成大纲骨架 ...");
+    let spinner = new_spinner("正在生成大纲骨架...");
     let outline = with_retry(3, "大纲生成", || {
         call_llm(client, base_url, api_key, model, OUTLINE_SYSTEM_PROMPT, idea)
     })
     .await?;
-    println!("[info] 大纲生成完成, {} 字符", outline.len());
+    spinner.finish_with_message("大纲生成完成");
+    println!("[info] 大纲 {} 字符", outline.len());
 
     // Pass 2 — 渲染
-    println!("[info] Pass 2: 正在按大纲渲染正文 ...");
     let render_prompt = format!(
         "以下是文章的逻辑大纲，请严格按此结构展开正文：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n请根据大纲结构和原始素材，输出完整的 Markdown 正文。",
         outline, idea
     );
 
+    let spinner = new_spinner("正在渲染正文...");
     let markdown = with_retry(3, "正文渲染", || {
         call_llm(client, base_url, api_key, model, style, &render_prompt)
     })
     .await?;
-    println!("[info] 正文渲染完成, {} 字符", markdown.len());
+    spinner.finish_with_message("正文渲染完成");
+    println!("[info] 正文 {} 字符", markdown.len());
 
     Ok(markdown)
 }
@@ -363,8 +388,8 @@ async fn run_learn(url: &str) {
         .await
         .unwrap_or_else(|e| fatal(&e));
 
-    // 3. 调用 LLM 逆向分析风格
-    println!("[info] 正在调用 LLM 分析写作风格 ...");
+    // 2. 调用 LLM 逆向分析风格
+    let spinner = new_spinner("正在分析写作风格...");
     let style_analysis = call_llm(
         &client,
         &base_url,
@@ -374,8 +399,11 @@ async fn run_learn(url: &str) {
         &article_text,
     )
     .await
-    .unwrap_or_else(|e| fatal(&e));
-
+    .unwrap_or_else(|e| {
+        spinner.finish_with_message("分析失败");
+        fatal(&e)
+    });
+    spinner.finish_with_message("分析完成");
     println!("[info] LLM 返回 {} 字符", style_analysis.len());
 
     // 4. 用户输入文件名
@@ -435,6 +463,7 @@ async fn run_refine(file: &str, no_clipboard: bool) {
         );
 
         let label = format!("标记 {}/{}", idx, total);
+        let spinner = new_spinner(&format!("正在处理标记 {}/{}...", idx, total));
         let rewritten = with_retry(3, &label, || {
             call_llm(
                 &client,
@@ -446,10 +475,12 @@ async fn run_refine(file: &str, no_clipboard: bool) {
             )
         })
         .await
-        .unwrap_or_else(|e| fatal(&e));
-
+        .unwrap_or_else(|e| {
+            spinner.finish_with_message(format!("标记 {}/{} 失败", idx, total));
+            fatal(&e)
+        });
+        spinner.finish_with_message(format!("标记 {}/{} 完成", idx, total));
         content = content.replacen(&edit.full_match, &rewritten, 1);
-        println!("[info] 标记 {}/{} 替换完成", idx, total);
     }
 
     // 5. 版本命名 + 三轨输出
@@ -487,5 +518,150 @@ async fn run_refine(file: &str, no_clipboard: bool) {
                 );
             }
         }
+    }
+}
+
+// ── update 子命令 ───────────────────────────────────────────────────
+
+async fn run_update(file: &str, instruction: Option<String>, no_clipboard: bool) {
+    let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
+    let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
+    let model = env_var_or("MODEL", "gpt-4o");
+
+    println!("[info] BASE_URL = {}", base_url);
+    println!("[info] MODEL    = {}", model);
+
+    // 1. 读取目标文件
+    let content = read_file(file).unwrap_or_else(|e| fatal(&e));
+    if content.trim().is_empty() {
+        fatal("目标文件内容为空，无法重写");
+    }
+    println!("[info] 已读取 {}, {} 字符", file, content.len());
+
+    // 2. 获取修改指令
+    let instruction = instruction.unwrap_or_else(|| {
+        Input::<String>::with_theme(&ColorfulTheme::default())
+            .with_prompt("请输入修改指令")
+            .interact_text()
+            .unwrap_or_else(|e| fatal(&format!("输入读取失败: {}", e)))
+    });
+    let instruction = instruction.trim();
+    if instruction.is_empty() {
+        fatal("修改指令不能为空");
+    }
+
+    // 3. 拼接 prompt 并调用 LLM 重写
+    let user_prompt = format!(
+        "以下是需要修改的文章全文：\n\n---\n{}\n---\n\n修改指令：{}\n\n请根据修改指令输出修改后的完整 Markdown 正文。",
+        content, instruction
+    );
+
+    let client = Client::new();
+    let spinner = new_spinner("正在重写文章...");
+    let rewritten = with_retry(
+        3,
+        "文章重写",
+        || call_llm(&client, &base_url, &api_key, &model, UPDATE_SYSTEM_PROMPT, &user_prompt),
+    )
+    .await
+    .unwrap_or_else(|e| {
+        spinner.finish_with_message("重写失败");
+        fatal(&e)
+    });
+    spinner.finish_with_message("重写完成");
+    println!("[info] 重写完成, {} 字符", rewritten.len());
+
+    // 4. 版本管理 + 三轨输出
+    let slug = extract_idea_slug(&rewritten);
+    let ver = next_version("outputs", &slug);
+    let md_path = format!("outputs/{}_v{}.md", slug, ver);
+    let html_path = format!("outputs/{}_v{}.html", slug, ver);
+
+    // Markdown 归档
+    write_file(&md_path, &rewritten).unwrap_or_else(|e| fatal(&e));
+    println!("[done] Markdown → {}", md_path);
+
+    // HTML 转换 + 归档
+    let html_fragment = md_to_wechat_html(&rewritten);
+    let html_doc = format!(
+        "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
+        html_fragment
+    );
+    write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
+    println!("[done] HTML     → {}", html_path);
+
+    // 剪贴板注入
+    if no_clipboard {
+        println!("[info] 已跳过剪贴板注入 (--no-clipboard)");
+        println!();
+        println!("  文章已重写并存档，请用浏览器打开 {} 后手动复制", html_path);
+    } else {
+        match inject_clipboard(&html_fragment) {
+            Ok(tool) => {
+                println!("[done] 富文本已注入剪贴板 (via {})", tool);
+                println!();
+                println!("  文章已重写并存档，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
+            }
+            Err(e) => {
+                eprintln!("[warn] {}", e);
+                println!();
+                println!(
+                    "  文章已重写并存档。剪贴板不可用，请用浏览器打开 {} 后手动复制",
+                    html_path
+                );
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ── strip_html_tags ─────────────────────────────────────────
+
+    #[test]
+    fn test_strip_html_simple_tag() {
+        assert_eq!(strip_html_tags("<p>text</p>"), "text");
+    }
+
+    #[test]
+    fn test_strip_html_nested_tags() {
+        assert_eq!(strip_html_tags("<div><p>text</p></div>"), "text");
+    }
+
+    #[test]
+    fn test_strip_html_plain_text_unchanged() {
+        assert_eq!(strip_html_tags("plain text here"), "plain text here");
+    }
+
+    #[test]
+    fn test_strip_html_removes_tag_with_attributes() {
+        assert_eq!(strip_html_tags("<a href=\"url\">link</a>"), "link");
+    }
+
+    #[test]
+    fn test_strip_html_compresses_consecutive_blank_lines() {
+        let input = "line1\n\n\nline2";
+        let result = strip_html_tags(input);
+        // 三个空行被压缩，不应存在三连 \n
+        assert!(!result.contains("\n\n\n"), "blank lines should be compressed");
+    }
+
+    #[test]
+    fn test_strip_html_mixed_content() {
+        let input = "<h1>Title</h1>\n<p>Paragraph with <b>bold</b> text.</p>";
+        let result = strip_html_tags(input);
+        assert!(result.contains("Title"));
+        assert!(result.contains("bold"));
+        assert!(result.contains("text"));
+        assert!(!result.contains('<'));
+        assert!(!result.contains('>'));
+    }
+
+    #[test]
+    fn test_strip_html_empty_input() {
+        let result = strip_html_tags("");
+        assert_eq!(result, "");
     }
 }
