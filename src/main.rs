@@ -32,6 +32,9 @@ enum Commands {
         /// 素材文件路径 (默认: inputs/idea_01.md)
         #[arg(short, long, default_value = "inputs/idea_01.md")]
         input: String,
+        /// 跳过剪贴板注入，仅输出文件
+        #[arg(long)]
+        no_clipboard: bool,
     },
     /// 从 URL 逆向提取写作风格
     Learn {
@@ -42,6 +45,9 @@ enum Commands {
     Refine {
         /// 目标 Markdown 文件路径
         file: String,
+        /// 跳过剪贴板注入，仅输出文件
+        #[arg(long)]
+        no_clipboard: bool,
     },
 }
 
@@ -190,10 +196,11 @@ async fn main() {
     let cli = Cli::parse();
     match cli.command.unwrap_or(Commands::Generate {
         input: "inputs/idea_01.md".to_string(),
+        no_clipboard: false,
     }) {
-        Commands::Generate { input } => run_generate(&input).await,
+        Commands::Generate { input, no_clipboard } => run_generate(&input, no_clipboard).await,
         Commands::Learn { url } => run_learn(&url).await,
-        Commands::Refine { file } => run_refine(&file).await,
+        Commands::Refine { file, no_clipboard } => run_refine(&file, no_clipboard).await,
     }
 }
 
@@ -245,7 +252,7 @@ async fn generate_with_outline(
 
 // ── generate 子命令 ─────────────────────────────────────────────────
 
-async fn run_generate(input: &str) {
+async fn run_generate(input: &str, no_clipboard: bool) {
     let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
@@ -263,6 +270,7 @@ async fn run_generate(input: &str) {
         "[info] 风格: {}",
         style_path.strip_prefix("styles/").unwrap_or(style_path)
     );
+    println!("[info] 素材文件: {}", input);
 
     // 读取素材
     let idea = read_file(input).unwrap_or_else(|e| fatal(&e));
@@ -297,19 +305,23 @@ async fn run_generate(input: &str) {
     println!("[done] HTML     → {}", html_path);
 
     // 注入剪贴板 (CF_HTML 富文本格式)
-    match inject_clipboard(&html_fragment) {
-        Ok(tool) => {
-            println!("[done] 富文本已注入剪贴板 (via {})", tool);
-            println!();
-            println!("  文章已生成并存档，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
-        }
-        Err(e) => {
-            eprintln!("[warn] {}", e);
-            println!();
-            println!(
-                "  文章已生成并存档。剪贴板不可用，请用浏览器打开 {} 后手动复制",
-                html_path
-            );
+    if no_clipboard {
+        println!("[info] 跳过剪贴板注入 (--no-clipboard)");
+    } else {
+        match inject_clipboard(&html_fragment) {
+            Ok(tool) => {
+                println!("[done] 富文本已注入剪贴板 (via {})", tool);
+                println!();
+                println!("  文章已生成并存档，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
+            }
+            Err(e) => {
+                eprintln!("[warn] {}", e);
+                println!();
+                println!(
+                    "  文章已生成并存档。剪贴板不可用，请用浏览器打开 {} 后手动复制",
+                    html_path
+                );
+            }
         }
     }
 }
@@ -394,7 +406,7 @@ async fn run_learn(url: &str) {
 
 // ── refine 子命令 — 局部重绘 ─────────────────────────────────────
 
-async fn run_refine(file: &str) {
+async fn run_refine(file: &str, no_clipboard: bool) {
     // 注意：不再调用 dotenvy::dotenv()，main() 已经调用过了
 
     let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
@@ -457,19 +469,23 @@ async fn run_refine(file: &str) {
     write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
     println!("[done] HTML     → {}", html_path);
 
-    match inject_clipboard(&html_fragment) {
-        Ok(tool) => {
-            println!("[done] 富文本已注入剪贴板 (via {})", tool);
-            println!();
-            println!("  局部重绘完成，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
-        }
-        Err(e) => {
-            eprintln!("[warn] {}", e);
-            println!();
-            println!(
-                "  局部重绘完成。剪贴板不可用，请用浏览器打开 {} 后手动复制",
-                html_path
-            );
+    if no_clipboard {
+        println!("[info] 跳过剪贴板注入 (--no-clipboard)");
+    } else {
+        match inject_clipboard(&html_fragment) {
+            Ok(tool) => {
+                println!("[done] 富文本已注入剪贴板 (via {})", tool);
+                println!();
+                println!("  局部重绘完成，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
+            }
+            Err(e) => {
+                eprintln!("[warn] {}", e);
+                println!();
+                println!(
+                    "  局部重绘完成。剪贴板不可用，请用浏览器打开 {} 后手动复制",
+                    html_path
+                );
+            }
         }
     }
 }
