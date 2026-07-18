@@ -114,30 +114,29 @@ pub fn pipe_to_cmd(cmd: &str, args: &[&str], data: &[u8]) -> Result<(), String> 
 
 pub fn inject_clipboard(html_content: &str) -> Result<&'static str, String> {
     // 1. WSL2 / Windows: CF_HTML via PowerShell（真正的富文本，最优路径）
-    if let Ok(tool) = inject_cf_html_powershell(html_content) {
-        return Ok(tool);
+    match inject_cf_html_powershell(html_content) {
+        Ok(tool) => return Ok(tool),
+        Err(e) => eprintln!("[warn] PowerShell 剪贴板失败: {}", e),
     }
 
     // 2. Linux X11: xclip -selection clipboard -t text/html
-    if pipe_to_cmd(
+    match pipe_to_cmd(
         "xclip",
         &["-selection", "clipboard", "-t", "text/html"],
         html_content.as_bytes(),
-    )
-    .is_ok()
-    {
-        return Ok("xclip (text/html)");
+    ) {
+        Ok(()) => return Ok("xclip (text/html)"),
+        Err(e) => eprintln!("[warn] xclip 失败: {}", e),
     }
 
     // 3. Wayland: wl-copy --type text/html
-    if pipe_to_cmd(
+    match pipe_to_cmd(
         "wl-copy",
         &["--type", "text/html"],
         html_content.as_bytes(),
-    )
-    .is_ok()
-    {
-        return Ok("wl-copy (text/html)");
+    ) {
+        Ok(()) => return Ok("wl-copy (text/html)"),
+        Err(e) => eprintln!("[warn] wl-copy 失败: {}", e),
     }
 
     Err("未找到可用的剪贴板工具 (powershell.exe / xclip / wl-copy)".to_string())
