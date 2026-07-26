@@ -11,7 +11,7 @@ use reqwest::Client;
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
 use crate::generate::{generate_outline, render_fulltext};
-use crate::intent::{parse_intent, Intent, SessionState};
+use crate::intent::{classify_intent, is_confirm, is_cancel, parse_intent, Intent, SessionState};
 use crate::io::extract_idea_slug;
 use crate::llm::{call_llm, with_retry};
 use crate::refine::REFINE_SYSTEM_PROMPT;
@@ -194,8 +194,32 @@ impl Repl {
                 continue;
             }
 
-            // 解析意图
-            let intent = parse_intent(&input, &self.state);
+            // 意图分派：快速预检 → LLM 分类 → 关键词 fallback
+            let intent = if is_confirm(&input) || is_cancel(&input) {
+                // 0 成本快速路径：确认/取消走关键词匹配
+                parse_intent(&input, &self.state)
+            } else {
+                // 主路径：LLM 分类
+                match classify_intent(
+                    &self.client,
+                    &self.base_url,
+                    &self.api_key,
+                    &self.model,
+                    &input,
+                    &self.state,
+                )
+                .await
+                {
+                    Ok(intent) => {
+                        println!("[debug] LLM 分类: {:?}", intent);
+                        intent
+                    }
+                    Err(e) => {
+                        eprintln!("[warn] LLM 分类失败: {}，回退关键词匹配", e);
+                        parse_intent(&input, &self.state)
+                    }
+                }
+            };
 
             // 分发处理
             if let Err(e) = self.dispatch(intent).await {
