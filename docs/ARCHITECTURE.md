@@ -9,7 +9,8 @@
 | 版本 | 形态 | 交互方式 | 状态 |
 |------|------|---------|------|
 | v2.1 | CLI 工具 | `cargo run -- <subcommand>` 4 个子命令 | 稳定 |
-| v3.0 (当前) | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 | 2026-07-26 已实现 |
+| v3.0  | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 | 2026-07-26 已实现 |
+| v3.1 (当前) | 对话式 Agent | REPL + tokio 异步事件循环 + 会话持久化 (current.json) | 2026-07-26 已实现 |
 
 ---
 
@@ -17,7 +18,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                 REPL Loop (repl.rs: 1024 行)               │
+│                 REPL Loop (repl.rs: 1116 行)               │
 │  stdin → Intent Parser → State Machine → Handler dispatch │
 └──────────────────────┬──────────────────────────────────┘
                        │
@@ -33,7 +34,7 @@
       lib.rs
 ```
 
-**核心变更：** `repl.rs` 成为新入口（1024 行），`main.rs` 退化为启动分流器（终端 → REPL，管道/CLI 参数 → 旧 CLI 快捷模式）。
+**核心变更：** `repl.rs` 成为新入口（1116 行），`main.rs` 退化为启动分流器（终端 → REPL，管道/CLI 参数 → 旧 CLI 快捷模式）。
 
 ---
 
@@ -44,15 +45,15 @@ cognitive-writer/
 ├── Cargo.toml
 ├── .env
 ├── src/
-│   ├── main.rs              # 100 行 — REPL/CLI 分流器
-│   ├── repl.rs              # 1024 行 — REPL 循环 + 状态机 + 意图分发
-│   ├── intent.rs            # 706 行 — 意图枚举 + 关键词匹配 (41 tests)
+│   ├── main.rs              # 126 行 — REPL/CLI 分流器
+│   ├── repl.rs              # 1116 行 — REPL 循环 + 状态机 + 意图分发
+│   ├── intent.rs            # 894 行 — 意图枚举 + 关键词匹配 (49 tests)
 │   ├── generate.rs          # 207 行 — 骨架→渲染双通道
 │   ├── learn.rs             # 256 行 — 风格逆向学习 (含 strip_html_tags, 7 tests)
 │   ├── update.rs            # 153 行 — 全文重写
 │   ├── refine.rs            # 275 行 — 局部重绘 + run_refine 公开入口
 │   ├── website.rs           # 386 行 — MDX 生成 + git push (12 tests)
-│   ├── styles.rs            # 416 行 — 风格库管理 (18 tests)
+│   ├── styles.rs            # 416 行 — 风格库管理 (17 tests)
 │   ├── llm.rs               # 140 行 — LLM 客户端
 │   ├── clipboard.rs         # 247 行 — 剪贴板注入
 │   ├── io.rs                # 263 行 — 文件 I/O + delete_file
@@ -70,7 +71,7 @@ cognitive-writer/
     └── ARCHITECTURE.md
 ```
 
-> **测试总计：124 tests, 0 failed**（`cargo test --lib`）
+> **测试总计：132 tests, 0 failed**（`cargo test --lib`）
 
 ---
 
@@ -292,7 +293,7 @@ pub fn delete_style(name: &str) -> Result<(), AppError>
 
 ### `src/lib.rs` — 库入口
 
-提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 124 个单元测试，无需编译二进制。
+提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 132 个单元测试，无需编译二进制。
 
 ---
 
@@ -362,21 +363,15 @@ pub fn delete_style(name: &str) -> Result<(), AppError>
 
 ---
 
-## 三个检查点
+## 两个检查点
 
-### 检查点 1：大纲确认
-- 展示后等待用户响应
-- 通过：「OK / 没问题 / 继续」→ 进入全文渲染
-- 修改：「第N个论点换一下 / 加一个关于XXX的分论点」→ Agent 重新生成大纲
-- 放弃：「算了 / 换一个选题」→ 回到 Idle
-
-### 检查点 2：全文确认
+### 检查点 1：全文确认
 - 展示后等待用户响应
 - 通过：「OK / 没问题 / 发布」→ 剪贴板 + MDX 草稿，进入 WaitingForPublish
 - 局部修改：「第N段加个案例 / 结尾太弱了加强一下」→ 局部重绘（复用 refine 逻辑）
 - 换风格：「整体换成更口语化的感觉」→ 全文重写（复用 update 逻辑）
 
-### 检查点 3：发布确认
+### 检查点 2：发布确认
 - 双平台草稿就绪后
 - 「发布」→ git push → Vercel 自动部署
 - 「等一下 / 我再看看」→ 保持草稿状态，用户可手动去微信后台粘贴
@@ -485,8 +480,253 @@ cog update [OPTIONS] <FILE> # 整文重写
 | Phase 3 | website.rs：MDX 生成 + git push | 新增发布能力 | ✅ 已完成 |
 | Phase 4 | REPL 集成：所有功能挂到 REPL 状态机 | 整合 | ✅ 已完成 |
 | Phase 5 | 清理 + 测试 | 移除死代码 | ✅ 已完成 |
+| v3.1 | 异步 stdin + 会话持久化 + 优雅关闭 | ✅ 已完成 |
 
-**实现总结：** 全部 5 个阶段已完成。总计 124 tests, 0 failed（`cargo test --lib`）。
+**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 132 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
+
+## v3.1 — 异步事件循环 + 会话持久化 ✅ (2026-07-26 已实现)
+
+### 背景
+
+v3.0 的 REPL 循环基于阻塞式 stdin 读取（`std::io::stdin().read_line()`），存在两个问题：
+
+1. **进程状态即内存** — 进程退出 = 大纲、全文、对话阶段全部丢失。无法恢复。
+2. **阻塞读** — stdin 阻塞期间无法处理信号（如 SIGTERM 自动保存），也无法做超时。
+
+### 设计目标
+
+| 目标 | 方案 |
+|------|------|
+| 进程随时重启，工作不丢 | `Repl` 结构体 `Serialize + Deserialize`，每次 dispatch 后自动写入 `~/.cognitive-writer/current.json` |
+| stdin 不阻塞事件循环 | `tokio::io::stdin()` + `BufReader::lines()` 替代 `std::io::stdin().read_line()` |
+| 优雅关闭 | tokio signal 监听 SIGTERM/SIGINT → 自动保存状态 → 退出 |
+| 启动恢复 | `Repl::new()` 检查 `current.json` → 有则提示恢复，无则新建 |
+
+### 架构变化
+
+```
+                  v3.0 (现状)                    v3.1 (目标)
+                  
+   main()                          main()
+     │                               │
+     ▼                               ▼
+   Repl::new() ← env vars         Repl::new() ← env vars
+     │                               │
+     │                          ┌────┴────┐
+     │                          │ current.json │← 检测恢复文件
+     │                          └────┬────┘
+     │                               │
+     ▼                               ▼
+   loop {                        loop {
+     stdin.read_line() ← 阻塞      tokio::io::stdin().lines() ← 异步
+       │                               │
+       ▼                               ▼
+     dispatch() ──→ println        dispatch() ──→ println + save()
+   }                                │
+                                    ▼
+                                  tokio::select! {
+                                    line = stdin.next() → dispatch + save
+                                    _ = sigterm     → save + exit(0)
+                                  }
+                                }
+```
+
+### 实现
+
+#### Step 1: Repl 结构体加 Serialize + Deserialize
+
+```rust
+// Cargo.toml: serde 已有 "derive" feature
+#[derive(Serialize, Deserialize)]
+pub struct Repl {
+    state: SessionState,
+    current_topic: Option<String>,
+    current_outline: Option<String>,
+    current_fulltext: Option<String>,
+    current_style_name: Option<String>,
+    current_style_content: Option<String>,
+    current_slug: Option<String>,
+    // ── 不持久化: Client / api_key / etc. 从 env 恢复 ──
+    #[serde(skip)]
+    api_key: String,
+    #[serde(skip)]
+    base_url: String,
+    #[serde(skip)]
+    model: String,
+    #[serde(skip)]
+    website_path: String,
+    #[serde(skip)]
+    client: Client,
+    // ── 新增：session 目录路径 ──
+    #[serde(skip)]
+    session_dir: Option<std::path::PathBuf>,
+}
+```
+
+#### Step 2: 保存 / 恢复函数
+
+```rust
+// src/repl.rs — Repl 新增方法
+
+const SESSION_FILE: &str = "current.json";
+
+/// 保存当前状态到 session 目录
+pub fn save(&self) -> Result<(), AppError> {
+    let dir = match &self.session_dir {
+        Some(d) => d.clone(),
+        None => return Ok(()), // 没有 session dir → 跳过
+    };
+    std::fs::create_dir_all(&dir)
+        .map_err(|e| AppError::Website(format!("session 目录创建失败: {}", e)))?;
+    let path = dir.join(SESSION_FILE);
+    let json = serde_json::to_string_pretty(self)
+        .map_err(|e| AppError::Parse(format!("序列化失败: {}", e)))?;
+    std::fs::write(&path, json)
+        .map_err(|e| AppError::FileWrite(format!("{}: {}", path.display(), e)))?;
+    Ok(())
+}
+
+/// 尝试从 session 目录恢复状态
+pub fn restore(session_dir: &std::path::Path) -> Option<Self> {
+    let path = session_dir.join(SESSION_FILE);
+    if !path.exists() {
+        return None;
+    }
+    let json = std::fs::read_to_string(&path).ok()?;
+    let mut repl: Repl = serde_json::from_str(&json).ok()?;
+    // 重新初始化 #[serde(skip)] 字段（从 env 恢复）
+    repl.api_key = std::env::var("API_KEY").ok()?;
+    repl.base_url = std::env::var("BASE_URL")
+        .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
+    repl.model = std::env::var("MODEL")
+        .unwrap_or_else(|_| "gpt-4o".to_string());
+    repl.website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
+    repl.client = Client::new();
+    repl.session_dir = Some(session_dir.to_path_buf());
+    Some(repl)
+}
+```
+
+#### Step 3: run() 中 dispatch 后自动保存
+
+```rust
+// 在 dispatch 成功返回后、loop 末尾前插入:
+if let Err(e) = self.save() {
+    eprintln!("[warn] 会话保存失败: {}", e);
+}
+```
+
+#### Step 4: 异步 stdin + 信号监听
+
+```rust
+pub async fn run(&mut self) {
+    // ... banner ...
+    
+    // 异步 stdin 流
+    use tokio::io::{AsyncBufReadExt, BufReader};
+    let stdin = BufReader::new(tokio::io::stdin());
+    let mut lines = stdin.lines();
+    
+    loop {
+        self.print_prompt();
+        
+        tokio::select! {
+            line_result = lines.next_line() => {
+                match line_result {
+                    Ok(Some(input)) => {
+                        // ... 现有 dispatch 逻辑 ...
+                        if let Err(e) = self.dispatch(intent).await {
+                            eprintln!("[error] {}", e);
+                        }
+                        let _ = self.save();
+                    }
+                    Ok(None) => {
+                        // EOF (Ctrl+D)
+                        let _ = self.save();
+                        println!("再见。");
+                        return;
+                    }
+                    Err(e) => {
+                        eprintln!("[error] stdin 读取失败: {}", e);
+                        return;
+                    }
+                }
+            }
+            _ = tokio::signal::ctrl_c() => {
+                println!("\n收到中断信号，保存状态...");
+                let _ = self.save();
+                println!("已保存，再见。");
+                return;
+            }
+        }
+    }
+}
+```
+
+#### Step 5: main.rs 启动时检测恢复
+
+```rust
+fn run_repl_mode() {
+    let rt = tokio::runtime::Runtime::new().expect("无法创建 tokio runtime");
+    rt.block_on(async {
+        let session_dir = dirs::home_dir()
+            .unwrap_or_else(|| std::path::PathBuf::from("."))
+            .join(".cognitive-writer");
+        
+        // 尝试恢复
+        let mut repl = if let Some(r) = Repl::restore(&session_dir) {
+            println!("[info] 检测到未完成的会话");
+            print!("是否恢复上次进度？[Y/n]: ");
+            // ... 简单 stdin 读一行确认 ...
+            let mut answer = String::new();
+            std::io::stdin().read_line(&mut answer).ok();
+            if matches!(answer.trim().to_lowercase().as_str(), "" | "y" | "yes") {
+                r
+            } else {
+                // 删除 session 文件，新建
+                let _ = std::fs::remove_file(session_dir.join("current.json"));
+                Repl::new_with_session_dir(&session_dir).unwrap_or_else(|e| {
+                    eprintln!("[error] {}", e);
+                    std::process::exit(1);
+                })
+            }
+        } else {
+            Repl::new_with_session_dir(&session_dir).unwrap_or_else(|e| {
+                eprintln!("[error] {}", e);
+                std::process::exit(1);
+            })
+        };
+        
+        repl.run().await;
+    });
+}
+```
+
+### 新增依赖
+
+```toml
+# Cargo.toml
+dirs = "5"           # 用户主目录路径 (跨平台)
+tokio = { features = ["full"] }  # 已有 full feature，包含 signal + io-util
+```
+
+### 文件变更清单
+
+| 文件 | 变更类型 | 说明 |
+|------|---------|------|
+| `src/repl.rs` | 重构 | Repl 加 Serialize/Deserialize + save/restore + 异步 stdin |
+| `src/main.rs` | 修改 | run_repl_mode 加恢复检测逻辑 |
+| `src/intent.rs` | 修改 | SessionState 加 Serialize/Deserialize derive |
+| `Cargo.toml` | 新增 | dirs 依赖 |
+
+### 验收
+
+1. `cargo run` → 正常启动，无 `current.json` 时不提示恢复
+2. 开始写一篇文章 → 大纲确认完 → Ctrl+C → 重新 `cargo run` → 提示"检测到未完成的会话" → 恢复 → 继续从大纲确认
+3. 全流程走完 → `current.json` 被重置为 Idle（或删除）
+4. `cargo test` 全部通过
+
+---
 
 ## 已知技术债
 
