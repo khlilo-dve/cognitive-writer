@@ -3,6 +3,7 @@
 //! v3.1: LLM 分类主导，关键词匹配降级为 fallback。
 //! `classify_intent` 是主路径，`parse_intent` 只做快速预检（confirm/cancel）。
 
+use serde::{Deserialize, Serialize};
 use crate::error::AppError;
 use crate::llm::call_llm;
 use reqwest::Client;
@@ -10,7 +11,7 @@ use reqwest::Client;
 // ── SessionState ─────────────────────────────────────────────────────
 
 /// 多轮对话的会话状态。
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[allow(dead_code)]
 pub enum SessionState {
     /// 空闲状态，等待用户发起新操作。

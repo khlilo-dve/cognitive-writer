@@ -27,13 +27,39 @@ fn main() {
 fn run_repl_mode() {
     let rt = tokio::runtime::Runtime::new().expect("无法创建 tokio runtime");
     rt.block_on(async {
-        let mut repl = match crate::repl::Repl::new() {
-            Ok(r) => r,
-            Err(e) => {
-                eprintln!("[error] 初始化失败: {}", e);
-                std::process::exit(1);
+        // Session 目录
+        let session_dir = dirs::home_dir()
+            .unwrap_or_else(|| std::path::PathBuf::from("."))
+            .join(".cognitive-writer");
+
+        // 尝试恢复
+        let mut repl = if let Some(r) = crate::repl::Repl::restore(&session_dir) {
+            println!("[info] 检测到未完成的会话 (状态: {:?})", r.current_state());
+            println!("是否恢复上次进度？按 Enter 恢复，输入 n 放弃: ");
+            
+            let mut answer = String::new();
+            let _ = std::io::stdin().read_line(&mut answer);
+            
+            if matches!(answer.trim().to_lowercase().as_str(), "" | "y" | "yes") {
+                println!("已恢复。");
+                r
+            } else {
+                let _ = std::fs::remove_file(session_dir.join("current.json"));
+                println!("放弃恢复，开始新会话。");
+                crate::repl::Repl::new_with_session_dir(&session_dir)
+                    .unwrap_or_else(|e| {
+                        eprintln!("[error] 初始化失败: {}", e);
+                        std::process::exit(1);
+                    })
             }
+        } else {
+            crate::repl::Repl::new_with_session_dir(&session_dir)
+                .unwrap_or_else(|e| {
+                    eprintln!("[error] 初始化失败: {}", e);
+                    std::process::exit(1);
+                })
         };
+
         repl.run().await;
     });
 }
