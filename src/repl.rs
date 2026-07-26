@@ -52,10 +52,9 @@ Cognitive Writer v3.0 — 对话式写作 Agent
 ─────────────────────────────────────────
 
 核心工作流:
-  写一篇关于<主题>的文章用<风格名>风格    → 生成大纲 → 确认 → 渲染全文 → 发布
+  写一篇关于<主题>的文章用<风格名>风格    → 生成大纲 → 自动渲染全文 → 发布
 
 状态内指令:
-  [大纲确认]  确认/好/没问题 → 渲染全文  |  修改指令 → 调整大纲  |  取消/算了 → 放弃
   [全文确认]  确认/好/没问题 → 注入剪贴板 + 存草稿  |  修改指令 → 局部重绘  |  整体换成<风格名> → 换风格
   [发布确认]  发布/推 → 正式发布  |  只发网站 → 仅网站  |  等一下/先不/看看 → 保留草稿
 
@@ -247,9 +246,9 @@ impl Repl {
         loop {
             let prompt = match self.state {
                 SessionState::Idle => "> ",
-                SessionState::WaitingForOutline => "[大纲确认] > ",
                 SessionState::WaitingForFulltext => "[全文确认] > ",
                 SessionState::WaitingForPublish => "[发布确认] > ",
+                _ => "> ",
             };
             print!("{}", prompt);
             let _ = std::io::stdout().flush();
@@ -457,14 +456,6 @@ impl Repl {
                 );
             }
 
-            // ── WaitingForOutline ──
-            (SessionState::WaitingForOutline, Intent::Confirm) => {
-                self.handle_render_fulltext().await?;
-            }
-            (SessionState::WaitingForOutline, Intent::ModifyOutline { instruction }) => {
-                self.handle_modify_outline(&instruction).await?;
-            }
-
             // ── WaitingForFulltext ──
             (SessionState::WaitingForFulltext, Intent::Confirm) => {
                 self.handle_draft_publish().await?;
@@ -506,8 +497,8 @@ impl Repl {
     /// 1. 模糊匹配风格 → 得到风格名+内容
     /// 2. 存储风格信息
     /// 3. 调用 generate_outline → 骨架
-    /// 4. 打印骨架到终端
-    /// 5. 切换到 WaitingForOutline 状态
+    /// 4. 自动调用 render_fulltext → 全文
+    /// 5. 切换到 WaitingForFulltext 状态
     async fn handle_generate(
         &mut self,
         topic: &str,
@@ -535,15 +526,10 @@ impl Repl {
         .await?;
         spinner.finish_with_message("大纲生成完成");
 
-        println!("{}", sep());
-        println!("{}", outline);
-        println!("{}", sep());
-
         self.current_outline = Some(outline);
-        self.state = SessionState::WaitingForOutline;
 
-        println!();
-        println!("  请确认大纲，或输入修改指令（如「第二部分太长了」），输入「取消」放弃。");
+        // 大纲已生成，自动进入全文渲染（检查点 1 已取消）
+        self.handle_render_fulltext().await?;
 
         Ok(())
     }
@@ -551,6 +537,7 @@ impl Repl {
     // ── handle: Render fulltext ───────────────────────────────────
 
     /// 从骨架 + 风格 + 素材 渲染全文。
+    /// 由 dispatch（旧路径：WaitingForOutline→Confirm）或 handle_generate（新路径：自动）调用。
     async fn handle_render_fulltext(&mut self) -> Result<(), AppError> {
         let style = self
             .current_style_content
@@ -684,6 +671,8 @@ impl Repl {
     // ── handle: Modify outline ────────────────────────────────────
 
     /// 用 LLM 重新生成大纲（携带修改指令）。
+    /// 注意：检查点 1 已取消，此方法当前不再被 dispatch 调用，保留以备后续使用。
+    #[allow(dead_code)]
     async fn handle_modify_outline(
         &mut self,
         instruction: &str,
