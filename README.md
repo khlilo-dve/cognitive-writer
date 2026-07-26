@@ -2,7 +2,7 @@
 
 > AI 写作 + 风格逆向工具 — 面向微信公众号 + 个人网站的 AI 写作 Agent，Rust 实现
 
-**版本**: v3.0.0
+**版本**: v3.1.0
 
 ---
 
@@ -84,9 +84,9 @@ CLI 模式直接从参数执行，跳过 REPL 对话循环。适合脚本集成�
 
 ```
 src/
-├── main.rs         # REPL/CLI 分流器 (100 行)
-├── repl.rs         # REPL 循环 + 状态机 (1024 行)
-├── intent.rs       # 意图解析器 (706 行)
+├── main.rs         # REPL/CLI 分流器 (126 行)
+├── repl.rs         # REPL 循环 + 状态机 (1116 行)
+├── intent.rs       # 意图解析器 (894 行)
 ├── generate.rs     # 骨架→渲染双通道
 ├── learn.rs        # 风格逆向学习
 ├── update.rs       # 全文重写
@@ -120,7 +120,19 @@ src/
 
 ## 更新日志
 
-### v3.0.0 (2026-07-26)
+### v3.1.0 (2026-07-26)
+
+**异步事件循环 + 会话持久化**
+
+- REPL 循环升级为 tokio 异步 stdin + tokio::select! 事件循环
+- 新增会话持久化：每次操作后自动保存到 ~/.cognitive-writer/current.json
+- 新增优雅关闭：Ctrl+C/SIGTERM 自动保存状态后退出
+- 启动时检测未完成会话并提示恢复
+- 新增 dirs 依赖用于跨平台用户目录
+- 新增 Repl::save() / Repl::restore() / Repl::clear_session() 方法
+- 132 个单元测试覆盖全部模块
+
+### v3.0.0
 
 **CLI → 对话式写作 Agent**
 
@@ -133,7 +145,7 @@ src/
 - 新增 `delete_file` 到 io.rs
 - error.rs 新增 4 个变体（Website / Git / Intent / InvalidState）
 - 新增 `chrono` 依赖用于 MDX 日期格式化
-- 124 个单元测试覆盖全部模块（v2.1: 36 tests）
+- 132 个单元测试覆盖全部模块（v2.1: 36 tests）
 - 公众号保持剪贴板注入方案，不做 API 集成（个人订阅号无 API 权限）
 
 ### v2.1.0 (2026-07-18)
