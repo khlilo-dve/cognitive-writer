@@ -25,4 +25,12 @@ pub enum AppError {
     AiEditParse(String),
     #[error("IO 错误: {0}")]
     Io(#[from] std::io::Error),
+    #[error("网站集成失败: {0}")]
+    Website(String),
+    #[error("Git 操作失败: {0}")]
+    Git(String),
+    #[error("意图解析失败: {0}")]
+    Intent(String),
+    #[error("当前状态 ({state}) 不支持操作: {intent}")]
+    InvalidState { state: String, intent: String },
 }

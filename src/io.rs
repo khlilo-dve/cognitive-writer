@@ -109,6 +109,11 @@ pub fn write_file(path: &str, content: &str) -> Result<(), String> {
     fs::write(path, content).map_err(|e| format!("无法写入 `{}`: {}", path, e))
 }
 
+pub fn delete_file(path: &str) -> Result<(), String> {
+    std::fs::remove_file(path)
+        .map_err(|e| format!("无法删除 `{}`: {}", path, e))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -235,5 +240,24 @@ mod tests {
     fn test_next_version_nonexistent_dir_returns_1() {
         // 目录不存在时 fs::read_dir 返回 Err，fallback 到 max=0 → 返回 1
         assert_eq!(next_version("/nonexistent/path/for/testing", "test"), 1);
+    }
+
+    // ── delete_file ────────────────────────────────────────────
+
+    #[test]
+    fn test_delete_file_success() {
+        let dir = tempfile::tempdir().unwrap();
+        let file_path = dir.path().join("test_delete.md");
+        let path_str = file_path.to_str().unwrap();
+        std::fs::write(path_str, "content").unwrap();
+        assert!(file_path.exists());
+        assert!(delete_file(path_str).is_ok());
+        assert!(!file_path.exists());
+    }
+
+    #[test]
+    fn test_delete_file_not_found() {
+        let result = delete_file("/nonexistent/path/for/testing/delete_file_test.md");
+        assert!(result.is_err());
     }
 }
