@@ -7,6 +7,7 @@ use std::io::{self, Write};
 
 use pulldown_cmark::{html, Options, Parser as MdParser};
 use reqwest::Client;
+use serde::{Deserialize, Serialize};
 
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
@@ -114,6 +115,7 @@ fn extract_title(markdown: &str) -> String {
 
 // ── Repl ────────────────────────────────────────────────────────────
 
+#[derive(Serialize, Deserialize)]
 pub struct Repl {
     state: SessionState,
     // 当前文章上下文
@@ -123,31 +125,39 @@ pub struct Repl {
     current_style_name: Option<String>,
     current_style_content: Option<String>,
     current_slug: Option<String>,
-    // 配置
+    // 配置（不持久化，从环境变量恢复）
+    #[serde(skip)]
     api_key: String,
+    #[serde(skip)]
     base_url: String,
+    #[serde(skip)]
     model: String,
+    #[serde(skip)]
     website_path: String,
-    // HTTP 客户端复用
+    // HTTP 客户端复用（不持久化）
+    #[serde(skip)]
     client: Client,
+    // session 持久化目录（不持久化）
+    #[serde(skip)]
+    session_dir: Option<std::path::PathBuf>,
 }
 
 impl Repl {
-    // ── Constructor ───────────────────────────────────────────────
+    // ── Constructors ─────────────────────────────────────────────
 
     pub fn new() -> Result<Self, AppError> {
+        Self::new_with_session_dir(&std::path::PathBuf::from("."))
+    }
 
+    /// 新建实例，关联 session 目录。
+    pub fn new_with_session_dir(session_dir: &std::path::Path) -> Result<Self, AppError> {
         let api_key = std::env::var("API_KEY")
-            .map_err(|_| AppError::EnvVar("API_KEY 未设置，请检查 .env 文件".to_string()))?;
-
+            .map_err(|_| AppError::EnvVar("API_KEY 未设置".to_string()))?;
         let base_url = std::env::var("BASE_URL")
             .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
-
         let model = std::env::var("MODEL")
             .unwrap_or_else(|_| "gpt-4o".to_string());
-
         let website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
-
         let client = Client::new();
 
         Ok(Self {
@@ -163,14 +173,76 @@ impl Repl {
             model,
             website_path,
             client,
+            session_dir: Some(session_dir.to_path_buf()),
         })
+    }
+
+    /// 尝试从 session 目录恢复状态。
+    /// 成功时返回 Some(Repl)，失败或无文件时返回 None。
+    pub fn restore(session_dir: &std::path::Path) -> Option<Self> {
+        let path = session_dir.join("current.json");
+        if !path.exists() {
+            return None;
+        }
+        let json = std::fs::read_to_string(&path).ok()?;
+        let mut repl: Repl = serde_json::from_str(&json).ok()?;
+        // 重新初始化 #[serde(skip)] 字段
+        repl.api_key = std::env::var("API_KEY").ok()?;
+        repl.base_url = std::env::var("BASE_URL")
+            .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
+        repl.model = std::env::var("MODEL")
+            .unwrap_or_else(|_| "gpt-4o".to_string());
+        repl.website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
+        repl.client = Client::new();
+        repl.session_dir = Some(session_dir.to_path_buf());
+        Some(repl)
+    }
+
+    /// 返回当前状态的引用。
+    pub fn current_state(&self) -> &SessionState {
+        &self.state
+    }
+
+    /// 保存当前状态到 session 目录的 current.json。
+    pub fn save(&self) -> Result<(), AppError> {
+        let dir = match &self.session_dir {
+            Some(d) => d.clone(),
+            None => return Ok(()),
+        };
+        std::fs::create_dir_all(&dir)
+            .map_err(|e| AppError::FileWrite(format!("session 目录创建失败 {}: {}", dir.display(), e)))?;
+        let path = dir.join("current.json");
+        let json = serde_json::to_string_pretty(self)
+            .map_err(|e| AppError::Parse(format!("序列化失败: {}", e)))?;
+        std::fs::write(&path, json)
+            .map_err(|e| AppError::FileWrite(format!("{}: {}", path.display(), e)))?;
+        Ok(())
+    }
+
+    /// 清除 session 文件（全流程正常结束时调用）。
+    fn clear_session(&self) -> Result<(), AppError> {
+        let dir = match &self.session_dir {
+            Some(d) => d.clone(),
+            None => return Ok(()),
+        };
+        let path = dir.join("current.json");
+        if path.exists() {
+            std::fs::remove_file(&path)
+                .map_err(|e| AppError::FileWrite(format!("清除 session 失败 {}: {}", path.display(), e)))?;
+        }
+        Ok(())
     }
 
     // ── Main loop ─────────────────────────────────────────────────
 
     pub async fn run(&mut self) {
-        println!("Cognitive Writer v3.0 — 对话式写作 Agent");
+        println!("Cognitive Writer v3.1 — 对话式写作 Agent (会话自动保存)");
         println!("输入你的想法，或输入 /help 查看帮助");
+
+        use tokio::io::{AsyncBufReadExt, BufReader};
+
+        let stdin = BufReader::new(tokio::io::stdin());
+        let mut lines = stdin.lines();
 
         loop {
             let prompt = match self.state {
@@ -179,74 +251,79 @@ impl Repl {
                 SessionState::WaitingForFulltext => "[全文确认] > ",
                 SessionState::WaitingForPublish => "[发布确认] > ",
             };
+            print!("{}", prompt);
+            let _ = std::io::stdout().flush();
 
-            let input = self.read_line(prompt).await;
-            if input.is_empty() {
-                continue;
-            }
+            tokio::select! {
+                line_result = lines.next_line() => {
+                    match line_result {
+                        Ok(Some(input)) => {
+                            if input.is_empty() {
+                                continue;
+                            }
 
-            // 特殊命令
-            if input.starts_with('/') {
-                if self.handle_command(&input) {
-                    // /quit returns true → exit loop
-                    return;
-                }
-                continue;
-            }
+                            // 特殊命令
+                            if input.starts_with('/') {
+                                if self.handle_command(&input) {
+                                    return;
+                                }
+                                continue;
+                            }
 
-            // 意图分派：快速预检 → LLM 分类 → 关键词 fallback
-            let intent = if is_confirm(&input) || is_cancel(&input) {
-                // 0 成本快速路径：确认/取消走关键词匹配
-                parse_intent(&input, &self.state)
-            } else {
-                // 主路径：LLM 分类
-                match classify_intent(
-                    &self.client,
-                    &self.base_url,
-                    &self.api_key,
-                    &self.model,
-                    &input,
-                    &self.state,
-                )
-                .await
-                {
-                    Ok(intent) => {
-                        println!("[debug] LLM 分类: {:?}", intent);
-                        intent
+                            // 意图分派：快速预检 → LLM 分类 → 关键词 fallback
+                            let intent = if is_confirm(&input) || is_cancel(&input) {
+                                parse_intent(&input, &self.state)
+                            } else {
+                                match classify_intent(
+                                    &self.client,
+                                    &self.base_url,
+                                    &self.api_key,
+                                    &self.model,
+                                    &input,
+                                    &self.state,
+                                )
+                                .await
+                                {
+                                    Ok(intent) => {
+                                        println!("[debug] LLM 分类: {:?}", intent);
+                                        intent
+                                    }
+                                    Err(e) => {
+                                        eprintln!("[warn] LLM 分类失败: {}，回退关键词匹配", e);
+                                        parse_intent(&input, &self.state)
+                                    }
+                                }
+                            };
+
+                            if let Err(e) = self.dispatch(intent).await {
+                                eprintln!("[error] {}", e);
+                            }
+
+                            // 每次 dispatch 后自动保存
+                            if let Err(e) = self.save() {
+                                eprintln!("[warn] 会话保存失败: {}", e);
+                            }
+                        }
+                        Ok(None) => {
+                            // EOF (Ctrl+D)
+                            println!("\n再见。");
+                            let _ = self.clear_session();
+                            return;
+                        }
+                        Err(e) => {
+                            eprintln!("[error] stdin 读取失败: {}", e);
+                            return;
+                        }
                     }
-                    Err(e) => {
-                        eprintln!("[warn] LLM 分类失败: {}，回退关键词匹配", e);
-                        parse_intent(&input, &self.state)
-                    }
                 }
-            };
-
-            // 分发处理
-            if let Err(e) = self.dispatch(intent).await {
-                eprintln!("[error] {}", e);
-            }
-        }
-    }
-
-    // ── Line reader ────────────────────────────────────────────────
-
-    async fn read_line(&self, prompt: &str) -> String {
-        print!("{}", prompt);
-        if let Err(e) = io::stdout().flush() {
-            eprintln!("[warn] stdout flush 失败: {}", e);
-        }
-
-        let mut input = String::new();
-        match io::stdin().read_line(&mut input) {
-            Ok(0) => {
-                // EOF (Ctrl+D) → graceful exit
-                println!();
-                std::process::exit(0);
-            }
-            Ok(_) => input.trim().to_string(),
-            Err(e) => {
-                eprintln!("[warn] stdin read 失败: {}", e);
-                String::new()
+                _ = tokio::signal::ctrl_c() => {
+                    println!("\n收到中断信号，正在保存会话...");
+                    if let Err(e) = self.save() {
+                        eprintln!("[warn] 保存失败: {}", e);
+                    }
+                    println!("会话已保存。下次启动 `cog` 可恢复。再见。");
+                    std::process::exit(0);
+                }
             }
         }
     }
@@ -293,6 +370,8 @@ impl Repl {
         self.current_style_name = None;
         self.current_style_content = None;
         self.current_slug = None;
+        // 全流程完成，清除 session 文件（下次启动不提示恢复）
+        let _ = self.clear_session();
     }
 
     // ── Debug ─────────────────────────────────────────────────────
