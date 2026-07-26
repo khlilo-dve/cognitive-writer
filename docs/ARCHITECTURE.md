@@ -1,361 +1,503 @@
 # Cognitive Writer — 系统架构文档
 
-> 面向微信公众号的 AI 文章生成 CLI 工具，Rust 实现。
+> 面向微信公众号 + 个人网站的 AI 文章生成 Agent，Rust 实现。
 
 ---
 
-## 项目结构
+## 版本演进
+
+| 版本 | 形态 | 交互方式 |
+|------|------|---------|
+| v2.1 (当前) | CLI 工具 | `cargo run -- <subcommand>` 4 个子命令 |
+| v3.0 (目标) | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 |
+
+---
+
+## v3.0 架构总览
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    REPL Loop (repl.rs)                    │
+│  stdin → Intent Parser → State Machine → Handler dispatch │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+         ┌─────────────┼─────────────┬──────────────┐
+         ▼             ▼             ▼              ▼
+     generate.rs   learn.rs     refine.rs     update.rs
+         │             │             │              │
+         ▼             ▼             ▼              ▼
+      llm.rs ◄────── 共用 ──────► clipboard.rs
+      io.rs                        website.rs (NEW)
+      styles.rs (NEW)              intent.rs (NEW)
+      error.rs
+```
+
+**核心变更：** `repl.rs` 成为新入口，`main.rs` 退化为启动分流器（终端 → REPL，管道/CLI 参数 → 旧 CLI 快捷模式）。
+
+---
+
+## 项目结构（v3.0 目标）
 
 ```
 cognitive-writer/
-├── Cargo.toml                  # 依赖声明
-├── .env                        # API_KEY / BASE_URL / MODEL
+├── Cargo.toml
+├── .env
 ├── src/
-│   ├── main.rs                 # CLI 路由 + 5 个子命令入口 (667 行)
-│   ├── error.rs                # AppError 枚举 (thiserror)
-│   ├── llm.rs                  # LLM 调用 + spinner + with_retry
-│   ├── clipboard.rs            # CF_HTML 构建 + 多平台剪贴板注入
-│   ├── io.rs                   # 文件 I/O + 风格选择 + 版本管理
-│   └── refine.rs               # AI_EDIT 标记解析器
+│   ├── main.rs              # ~30 行：启动 + REPL/CLI 分流
+│   ├── repl.rs              # ~300 行：REPL 循环 + 意图解析器 + 状态机
+│   ├── intent.rs            # ~100 行：Intent 枚举 + 关键词匹配规则表
+│   ├── generate.rs          # ~120 行：骨架→渲染→双轨输出（从 main.rs 迁出）
+│   ├── learn.rs             # ~80 行：风格逆向学习（从 main.rs 迁出）
+│   ├── refine.rs            # 局部重绘（无改动）
+│   ├── update.rs            # ~100 行：全文重写（从 main.rs 迁出）
+│   ├── website.rs           # NEW：MDX 生成 + git 推送
+│   ├── styles.rs            # NEW：风格库管理（模糊匹配、列表、摘要、删除）
+│   ├── llm.rs               # LLM 客户端（无改动）
+│   ├── clipboard.rs         # 剪贴板注入（无改动）
+│   ├── io.rs                # 文件 I/O + 版本管理（新增 delete_file）
+│   └── error.rs             # AppError 枚举（新增 Website/Git/Intent 变体）
 ├── inputs/
-│   └── idea_01.md              # 用户素材输入（默认）
+│   └── idea_01.md
 ├── styles/
-│   ├── wechat_base.md          # 基础微信风格模板
-│   └── qingbian.md             # 轻辩风格（learn 产出）
+│   ├── wechat_base.md
+│   └── qingbian.md
 ├── outputs/
-│   ├── {slug}_v{N}.md          # Markdown 归档
-│   └── {slug}_v{N}.html        # 微信兼容 HTML
-├── docs/
-│   └── ARCHITECTURE.md          # 本文档
-└── feedback.md                  # 用户反馈记录
+│   ├── {slug}_v{N}.md
+│   └── {slug}_v{N}.html
+└── docs/
+    └── ARCHITECTURE.md
 ```
-
-## 依赖栈
-
-| Crate | 用途 |
-|-------|------|
-| `clap` (derive) | 子命令路由 + CLI 参数 |
-| `tokio` | 异步运行时 |
-| `reqwest` | HTTP 客户端（LLM API + URL 抓取） |
-| `serde` / `serde_json` | JSON 序列化 |
-| `dotenvy` | 加载 `.env` |
-| `pulldown-cmark` | Markdown → HTML |
-| `dialoguer` | 交互式 CLI 选择 / 输入 |
-| `thiserror` | 强类型错误枚举 |
-| `indicatif` | LLM 调用进度指示器 (spinner) |
-
-**Dev dependencies:**
-
-| Crate | 用途 |
-|-------|------|
-| `tempfile` | 测试用临时目录 |
-
-## CLI 子命令
-
-```
-cognitive-writer generate [OPTIONS]     # 生成文章（默认行为）
-cognitive-writer learn <URL>            # 从 URL 逆向分析写作风格
-cognitive-writer refine [OPTIONS] <FILE> # 局部重绘：解析 <AI_EDIT> 标记
-cognitive-writer update [OPTIONS] <FILE> # 基于修改指令 LLM 重写已有文章
-```
-
-### 通用选项
-
-| 子命令 | 选项 | 说明 |
-|--------|------|------|
-| `generate` | `-i, --input <PATH>` | 素材文件路径（默认 `inputs/idea_01.md`） |
-| `generate` | `--no-clipboard` | 跳过剪贴板注入，仅输出文件 |
-| `refine` | `--no-clipboard` | 同上 |
-| `update` | `-i, --instruction <TEXT>` | 修改指令（不提供则交互式输入） |
-| `update` | `--no-clipboard` | 同上 |
 
 ---
 
-## 模块职责
+## 模块职责（v3.0）
 
-### `src/error.rs` — 错误类型
+### `src/main.rs` — 启动分流器
+
+- 检测 stdin 是否为终端 → 是 → 启动 REPL
+- 检测是否有 CLI 参数 → 是 → 走旧 CLI 子命令路径（generate/learn/refine/update）
+- 管道输入 → 走旧 CLI 路径
+
+### `src/repl.rs` — REPL 循环 + 状态机
+
+**REPL 循环：**
+```
+loop {
+    print prompt → read stdin → IntentParser::parse(line, &state)
+    → match (intent, state):
+        (Intent::Generate, Idle) → generate::run()
+        (Intent::Confirm, WaitingForOutline) → generate::render_fulltext()
+        (Intent::Confirm, WaitingForFulltext) → clipboard + website::write_mdx_draft()
+        (Intent::Confirm, WaitingForPublish) → website::publish()
+        ...
+    → update state → loop
+}
+```
+
+**状态机（SessionState）：**
+
+```
+                 ┌──────────┐
+        ┌───────►   Idle   ◄───────────────┐
+        │        └────┬─────┘               │
+        │             │                     │
+        │    「写一篇XX，用YY风格」           │ 「取消/算了」
+        │             ▼                     │
+        │   ┌──────────────────┐            │
+        │   │ WaitingForOutline │───────────┘
+        │   └────────┬─────────┘
+        │            │
+        │    「OK/继续」│「第二段改XX」
+        │            │
+        │            ▼
+        │   ┌───────────────────┐
+        │   │ WaitingForFulltext │◄────「整体改成XX风格」
+        │   └────────┬──────────┘      (触发全文重写，回到本状态)
+        │            │
+        │    「OK/发布」  │「第三段加案例」
+        │            │   (触发局部重绘，回到本状态)
+        │            ▼
+        │   ┌────────────────────┐
+        │   │ WaitingForPublish  │──「只发网站」(单平台发布)
+        │   └────────┬───────────┘──「等一下」(保留草稿，回 Idle)
+        │            │
+        │    「发布」
+        │            │
+        │            ▼
+        │        发布完成 → Idle
+        │
+        └── 从任意状态「取消」→ Idle
+```
+
+四个状态，状态间转换由 `intent.rs` 的解析结果 + 当前状态联合决定。
+
+### `src/intent.rs` — 意图解析器
+
+**Intent 枚举：**
+
+```rust
+pub enum Intent {
+    // ── 状态无关 ──
+    Generate { topic: String, style_name: String },
+    Learn { url: String },
+    ListStyles,
+    ShowStyle { name: String },
+    DeleteStyle { name: String },
+    RefineFile { path: String, instruction: String },
+    UpdateFile { path: String, instruction: String },
+
+    // ── 状态相关（仅在特定状态下有效）──
+    Confirm,                              // OK/没问题/继续/就这样
+    Cancel,                               // 算了/取消/不写了
+    ModifyOutline { instruction: String }, // 仅在 WaitingForOutline 下
+    ModifySection { instruction: String }, // 仅在 WaitingForFulltext 下
+    ChangeStyle { style_name: String },    // 仅在 WaitingForFulltext 下
+    Publish,                              // 仅在 WaitingForPublish 下
+    PublishWebsiteOnly,                   // 仅在 WaitingForPublish 下
+    Hold,                                 // 仅在 WaitingForPublish 下
+    Unknown,                              // 无法识别
+}
+```
+
+**匹配策略：** 纯关键词 + 规则优先级，不用 NLP 库。
+
+```rust
+fn parse_intent(input: &str, state: &SessionState) -> Intent {
+    // 1. 先匹配状态无关的高置信度模式
+    //   → 包含 URL → Learn
+    //   → "写一篇" + "风格" → Generate
+    //   → "风格库有什么" → ListStyles
+    //   → "看看" + "风格" → ShowStyle
+    //   → "删掉" + "风格" → DeleteStyle
+    //   → "重写" + ".md" → UpdateFile
+    //   → ".md" + "改成" → RefineFile
+
+    // 2. 根据当前状态匹配
+    //   match state {
+    //     WaitingForOutline => is_confirm / is_cancel / ModifyOutline
+    //     WaitingForFulltext => is_confirm / is_cancel / ModifySection / ChangeStyle
+    //     WaitingForPublish => Publish / PublishWebsiteOnly / Hold / Cancel
+    //     Idle => /* fall through */
+    //   }
+
+    // 3. 回退 → Unknown
+}
+```
+
+### `src/generate.rs` — 骨架→渲染双通道
+
+**从 main.rs 迁移，行为不变：**
+
+```
+素材 + 风格 → Pass 1 (OUTLINE_SYSTEM_PROMPT) → 骨架(300-500字)
+           → Pass 2 (style system prompt + 大纲 + 素材) → 全文 Markdown
+           → 版本管理 → outputs/{slug}_v{N}.md + .html + 剪贴板
+```
+
+**REPL 集成适配：**
+- `generate_outline()` — 只做 Pass 1，返回骨架文本
+- `render_fulltext(outline, style, idea)` — 做 Pass 2，返回全文
+- REPL 在两个 pass 之间插入检查点等待用户确认
+
+### `src/learn.rs` — 风格逆向学习
+
+**从 main.rs 迁移，行为不变：**
+
+```
+URL → Jina Reader (降级: strip-tags) → MD 正文
+    → LLM 分析 (LEARN_SYSTEM_PROMPT) → 风格分析报告
+    → 用户命名 → styles/{name}.md
+```
+
+**REPL 集成适配：**
+- `fetch_and_analyze(url)` → 返回风格分析文本
+- 展示摘要（前 500 字符）
+- 用户在 REPL 中输入名称 → 保存
+
+### `src/refine.rs` — 局部重绘
+
+**无改动。** REPL 集成时，不再依赖文件中的 AI_EDIT 标记，而是在 SessionState 中持有当前全文，直接构造 prompt 调用 LLM。
+
+### `src/update.rs` — 全文重写
+
+**从 main.rs 迁移，行为不变：**
+
+```
+原文 + 修改指令 → UPDATE_SYSTEM_PROMPT → LLM → 新全文
+→ 版本管理 → outputs/{slug}_v{N}.md + .html + 剪贴板
+```
+
+### `src/website.rs` — 个人网站发布（NEW）
+
+**核心函数：**
+
+```rust
+/// 写入 MDX 草稿（检查点 2 通过后调用）
+pub fn write_mdx_draft(
+    website_path: &str,
+    taxonomy: &str,  // "signal" / "node" / "pow"，默认 "signal"
+    slug: &str,
+    title: &str,
+    markdown_body: &str,
+) -> Result<String, AppError> {
+    // 1. 构造 MDX frontmatter
+    //    ---
+    //    title: "标题"
+    //    date: "2026-07-26"
+    //    summary: "前 100 字摘要"
+    //    ---
+    // 2. 写入 {website_path}/content/{taxonomy}/{slug}.mdx
+    // 3. 返回写入路径
+}
+
+/// 发布到网站（检查点 3「发布」后调用）
+pub fn publish_to_website(
+    website_path: &str,
+    slug: &str,
+) -> Result<String, AppError> {
+    // 1. git add content/signal/{slug}.mdx
+    // 2. git commit -m "post: {title}"
+    // 3. git push origin main
+    // 4. 返回：部署已触发 → https://khlilo.xyz/signal/{slug}
+}
+```
+
+**不依赖 Vercel Deploy Hook。** Vercel 的 Git 集成在 push 后自动触发 build + deploy。
+
+### `src/styles.rs` — 风格库管理（NEW）
+
+```rust
+/// 模糊匹配风格文件名
+/// 用户说"轻辩" → 扫描 styles/*.md → 匹配 styles/qingbian.md
+pub fn fuzzy_match_style(name: &str) -> Result<(String, String), AppError> {
+    // 1. 精确匹配文件名（去掉 .md）
+    // 2. 包含匹配（name 是文件名的子串）
+    // 3. 读文件内容标题行匹配
+    // 4. 最近修改的（用户说"刚学的风格"）
+}
+
+/// 列出所有风格 + 一句话描述
+pub fn list_styles_with_desc() -> Vec<StyleSummary>
+
+/// 读取并摘要展示某个风格
+pub fn show_style_detail(name: &str) -> Result<String, AppError>
+
+/// 删除风格文件
+pub fn delete_style(name: &str) -> Result<(), AppError>
+```
+
+---
+
+## 功能对话触发表（完整版）
+
+### 功能 1：风格逆向学习
+
+| 用户输入 | Agent 行为 |
+|---------|-----------|
+| 「学一下这篇文章的风格：https://...」 | 抓取 → LLM 分析 → 展示摘要 → 问命名 → 保存 styles/{name}.md |
+| 「分析这篇的文风 https://...」 | 同上 |
+
+### 功能 2：文章生成 + 双平台草稿
+
+| 用户输入 | Agent 行为 |
+|---------|-----------|
+| 「写一篇关于 XXX 的文章，用轻辩风格」 | 查风格库 → Pass 1: 大纲 → 展示 |
+| 「OK」 | Pass 2: 全文 → 展示 |
+| 「OK」 | 剪贴板 + MDX 草稿 → 「确认后说『发布』」 |
+| 「发布」 | git push → Vercel 部署 |
+
+### 功能 3：局部重绘（检查点 2 阶段）
+
+| 用户输入 | Agent 行为 |
+|---------|-----------|
+| 「第三段加一个具体案例」 | 全文上下文 + 指令 → LLM 重写 → 展示 → 回 WaitingForFulltext |
+| 「结尾太弱了，加强一下」 | 同上 |
+
+### 功能 4：整文重写（检查点 2 阶段）
+
+| 用户输入 | Agent 行为 |
+|---------|-----------|
+| 「整体语气太严肃了，放松一点」 | 全文上下文 + 指令 → UPDATE_SYSTEM_PROMPT → 展示 → 回 WaitingForFulltext |
+
+### 功能 5：风格库管理
+
+| 用户输入 | Agent 行为 |
+|---------|-----------|
+| 「我的风格库有哪些？」 | 列出 styles/*.md + 一句话描述 |
+| 「看看轻辩风格的摘要」 | 读取并展示 |
+| 「删掉 XXX 这个风格」 | 确认 → 删除 |
+
+---
+
+## 对话状态机完整意图表
+
+| 用户输入 | 当前状态 | 解析结果 |
+|---------|---------|---------|
+| 「写一篇关于 XXX 的文章，用 YYY 风格」 | Idle | Generate |
+| 「学一下这个风格 https://...」 | Idle | Learn |
+| 「分析这篇的文风 https://...」 | Idle | Learn |
+| 「我的风格库有什么」 | Idle | ListStyles |
+| 「看看 YYY 风格的详情」 | Idle | ShowStyle |
+| 「删掉 YYY 风格」 | Idle | DeleteStyle |
+| 「重写 outputs/xxx.md，改成更犀利的风格」 | Idle | UpdateFile |
+| 「把 outputs/xxx.md 第三段改短」 | Idle | RefineFile |
+| 「OK / 没问题 / 继续 / 就这样」 | WaitingForOutline | Confirm |
+| 「第N个论点换一下 / 加一个关于XXX的分论点」 | WaitingForOutline | ModifyOutline |
+| 「算了 / 取消 / 不写了」 | 任意 | Cancel |
+| 「OK / 没问题 / 发布 / 就这样」 | WaitingForFulltext | Confirm |
+| 「第二段逻辑有问题，重写」 | WaitingForFulltext | ModifySection |
+| 「结尾加个案例」 | WaitingForFulltext | ModifySection |
+| 「整体语气太严肃了，放松一点」 | WaitingForFulltext | ChangeStyle |
+| 「发布」 | WaitingForPublish | Publish |
+| 「只发网站」 | WaitingForPublish | PublishWebsiteOnly |
+| 「等一下 / 我再看看」 | WaitingForPublish | Hold |
+
+---
+
+## 三个检查点
+
+### 检查点 1：大纲确认
+- 展示后等待用户响应
+- 通过：「OK / 没问题 / 继续」→ 进入全文渲染
+- 修改：「第N个论点换一下 / 加一个关于XXX的分论点」→ Agent 重新生成大纲
+- 放弃：「算了 / 换一个选题」→ 回到 Idle
+
+### 检查点 2：全文确认
+- 展示后等待用户响应
+- 通过：「OK / 没问题 / 发布」→ 剪贴板 + MDX 草稿，进入 WaitingForPublish
+- 局部修改：「第N段加个案例 / 结尾太弱了加强一下」→ 局部重绘（复用 refine 逻辑）
+- 换风格：「整体换成更口语化的感觉」→ 全文重写（复用 update 逻辑）
+
+### 检查点 3：发布确认
+- 双平台草稿就绪后
+- 「发布」→ git push → Vercel 自动部署
+- 「等一下 / 我再看看」→ 保持草稿状态，用户可手动去微信后台粘贴
+- 「只发网站」→ git push，公众号草稿保留但不额外操作（已在剪贴板）
+
+---
+
+## 双平台输出
+
+### 目标 1：微信公众号
+- 保持现有方案：CF_HTML 注入系统剪贴板
+- 用户手动到微信后台粘贴
+- 不使用微信公众号 API（个人订阅号不支持）
+
+### 目标 2：个人网站（khlilo.xyz）
+- 草稿：写入 `content/signal/{slug}.mdx`（带 frontmatter）
+- 发布：`git add + commit + push` → Vercel Git 集成自动部署
+- 不生成英文版本 .en.mdx
+- 默认分类：signal
+
+---
+
+## 环境变量（.env）
+
+```env
+# 现有（不变）
+API_KEY=sk-...
+BASE_URL=https://api.deepseek.com
+MODEL=deepseek-v4-pro
+
+# v3.0 新增
+WEBSITE_PATH=/home/khlilo/Genesis_Workspace/04_Arena_Output/Portfolio_Website/my-website
+```
+
+不需要的（已移除设计）：
+- ~~WECHAT_APPID / WECHAT_APPSECRET~~ → 个人订阅号无 API 权限
+- ~~WEBSITE_DEPLOY_HOOK~~ → Vercel Git 自动部署
+
+---
+
+## 依赖栈（v3.0 目标）
+
+| Crate | 用途 | 变更 |
+|-------|------|------|
+| `tokio` | 异步运行时 | 不变 |
+| `reqwest` | HTTP 客户端 | 不变 |
+| `serde` / `serde_json` | JSON 序列化 | 不变 |
+| `dotenvy` | 加载 `.env` | 不变 |
+| `pulldown-cmark` | Markdown → HTML | 不变 |
+| `thiserror` | 强类型错误枚举 | 不变 |
+| `indicatif` | LLM 调用进度指示器 (spinner) | 不变 |
+| `chrono` | MDX frontmatter 日期格式化 | 新增 |
+| `clap` | CLI 参数解析 | 保留（可选快捷模式） |
+| `dialoguer` | 交互式 CLI 输入 | 保留（可选快捷模式） |
+
+**Dev dependencies:** `tempfile` 不变。
+
+---
+
+## 错误处理扩展（v3.0）
+
+新增 `AppError` 变体：
 
 ```rust
 #[derive(Error, Debug)]
 pub enum AppError {
-    EnvVar(String),          // 环境变量缺失
-    FileRead(String),        // 文件读取失败
-    FileWrite(String),       // 文件写入失败
-    ApiError { status, body }, // LLM API HTTP 错误
-    Network(String),         // 网络请求失败
-    Parse(String),           // API 响应解析失败
-    EmptyChoices,            // API 返回空 choices
-    Clipboard(String),       // 剪贴板工具不可用
-    NoStyles(String),        // 风格目录为空
-    AiEditParse(String),     // AI_EDIT 标签语法错误
-    Io(std::io::Error),      // 标准 I/O 错误
+    // ... 现有变体不变 ...
+
+    #[error("网站集成失败: {0}")]
+    Website(String),
+
+    #[error("Git 操作失败: {0}")]
+    Git(String),
+
+    #[error("无法理解输入: {0}")]
+    Intent(String),
+
+    #[error("当前状态下不支持此操作: {state:?} ← {intent:?}")]
+    InvalidState { state: SessionState, intent: Intent },
 }
 ```
 
-所有模块使用 `Result<T, AppError>` 而非原始的 `Result<T, String>`。
+---
 
-### `src/llm.rs` — LLM 客户端
+## v2.1 旧版模块参考（CLI 模式保留）
 
-- `call_llm()`: OpenAI 兼容 API 调用（单次，无重试）
-- `with_retry()`: 泛型重试包装器，统一所有 LLM 调用点的重试逻辑（3 次 / 2s 间隔）
-- `new_spinner()`: 创建 indicatif 转圈动画，用于 LLM 调用的进度反馈
+v3.0 REPL 模式下保留 CLI 快捷模式，以下 v2.1 子命令继续可用：
 
-### `src/clipboard.rs` — 剪贴板注入
-
-跨平台 CF_HTML 富文本注入：
-
-| 优先级 | 环境 | 方法 | 关键细节 |
-|--------|------|------|----------|
-| 1 | WSL2 | PowerShell CF_HTML | 构建 CF_HTML 字节偏移格式 → PowerShell ReadAllBytes → MemoryStream 绕过 .NET UTF-16 编码 |
-| 2 | Linux X11 | `xclip -selection clipboard -t text/html` | 管道传入 HTML |
-| 3 | Linux Wayland | `wl-copy --type text/html` | 管道传入 HTML |
-
-每个工具失败时打印 `[warn] <tool> 失败: <detail>`，然后尝试下一个。
-
-### `src/io.rs` — 文件 I/O + 版本管理
-
-- `list_styles()` / `select_style()`: 扫描 `styles/` 并进行交互选择
-- `read_file()` / `write_file()`: 通用文件读写
-- `extract_idea_slug()`: 从素材中提取文章标题 slug（支持 `# 文章主题：` 和 `# ` 格式）
-- `next_version()`: 扫描 `outputs/` 获取同名 slug 最大版本号 +1
-
-### `src/refine.rs` — AI_EDIT 解析器
-
-纯字符串搜索的状态机，解析 `<AI_EDIT instruction="...">...</AI_EDIT>` 标记：
-
-- `parse_ai_edits()`: 返回 `Vec<AiEdit>`，包含 instruction / original / full_match
-- `AiEdit` 结构体: instruction（修改指令）、original（原文本）、full_match（完整匹配串，用于替换）
-
-### `src/main.rs` — CLI 路由 + 子命令
-
-- Clap derive 定义 `Cli` 和 `Commands` enum
-- 5 个子命令入口函数: `run_generate()`, `run_learn()`, `run_refine()`, `run_update()`
-- 核心常量: `OUTLINE_SYSTEM_PROMPT`, `LEARN_SYSTEM_PROMPT`, `REFINE_SYSTEM_PROMPT`, `UPDATE_SYSTEM_PROMPT`
-- `generate_with_outline()`: 骨架-渲染双通道 LLM 调用
-- `md_to_wechat_html()`: Markdown → 微信兼容 HTML
-- `strip_html_tags()` / `fetch_readable_text()`: URL 内容抓取（Jina Reader + 降级方案）
-- `fatal()`, `env_var()`, `env_var_or()`: 通用辅助函数
+```
+cog generate [OPTIONS]      # 快捷生成
+cog learn <URL>             # 快捷学习
+cog refine [OPTIONS] <FILE> # 局部重绘
+cog update [OPTIONS] <FILE> # 整文重写
+```
 
 ---
 
-## 核心流程
+## 实现阶段
 
-### 一、`generate` — 文章生成
+| 阶段 | 内容 | 预计改动 | 状态 |
+|------|------|---------|------|
+| Phase 1 | 模块搬迁：main.rs → generate/learn/update/styles | 重构，不改变行为 | 待开始 |
+| Phase 2 | intent.rs + repl.rs：意图解析 + 状态机 + REPL 循环 | 新增核心能力 | 待开始 |
+| Phase 3 | website.rs：MDX 生成 + git push | 新增发布能力 | 待开始 |
+| Phase 4 | REPL 集成：所有功能挂到 REPL 状态机 | 整合 | 待开始 |
+| Phase 5 | 清理 + 测试 | 移除死代码 | 待开始 |
 
-```
-                         Pass 1 (骨架)              Pass 2 (渲染)
-inputs/{file}.md ──┬─→ OUTLINE_SYSTEM_PROMPT ─→ outline ──┐
-                   │                                       ├─→ style prompt ─→ Markdown ─┬─→ outputs/{slug}_v{N}.md
-styles/*.md ───────┘───────────────────────────────────────┘                              ├─→ outputs/{slug}_v{N}.html
-                                                                                          └─→ 系统剪贴板 (除非 --no-clipboard)
-```
-
-#### Phase 1: 初始化
-
-1. 加载 `.env` 配置（API_KEY / BASE_URL / MODEL）
-2. 扫描 `styles/` 并交互选择风格（单个时自动选用）
-3. 读取素材文件（默认 `inputs/idea_01.md`，可通过 `--input` 指定）
-
-#### Phase 2: 骨架-渲染双通道 (generate_with_outline)
-
-采用 **CoT（Chain of Thought）** 双通道架构，先规划结构再填充正文，解决单次长文生成的逻辑坍缩/重复问题。
-
-- **Pass 1 — 骨架**: `OUTLINE_SYSTEM_PROMPT` + 原始素材 → 300-500 字 Markdown 大纲（内部流转，不输出文件）
-- **Pass 2 — 渲染**: 风格 system prompt + `大纲 + 原始素材 + "严格按大纲展开"` → 完整 Markdown 正文
-
-两轮 LLM 调用均通过 `with_retry(3, ...)` 自动重试。调用期间显示 indicatif spinner。
-
-#### Phase 3: 版本命名
-
-- Slug 提取: 素材中 `文章主题：` 或第一个 `# ` 后的文字，过滤为合法文件名字符
-- 版本号: 扫描 `outputs/` 同名 slug 最大版本号 +1
-
-#### Phase 4: 四轨输出
-
-- Track A — Markdown 归档: `outputs/{slug}_v{N}.md`
-- Track B — 微信 HTML: `outputs/{slug}_v{N}.html`（pulldown-cmark → 剥离 `<hr>` → 内联样式包裹）
-- Track C — 剪贴板注入: 跨平台 CF_HTML（可 `--no-clipboard` 跳过）
-- Track D — 终端日志: spinner 进度 + [done] 输出路径
+每阶段结束验证：`cargo test && cargo build`
 
 ---
 
-### 二、`learn` — 风格逆向分析
+## 不做
 
-```
-URL ─→ Jina Reader (r.jina.ai) ─→ Markdown 正文 ─→ LLM 风格分析 ─→ styles/{name}.md
-         │ (失败时降级)
-         └→ 直接 GET + strip_html_tags() ─→ 纯文本 ──┘
-```
-
-#### Step 1: 文章抓取 (fetch_readable_text)
-
-- **首选**: Jina Reader API (`https://r.jina.ai/{url}`), Accept: text/markdown, 超时 30s
-- **降级**: 直接 GET → `strip_html_tags()` 移除所有 HTML 标签 + 压缩连续空行
-
-#### Step 2: LLM 风格分析
-
-使用 `LEARN_SYSTEM_PROMPT`，从 10 个维度分析写作风格（见风格模板系统章节），最终输出可直接作为 system prompt 的「风格复刻指令」。
-
-#### Step 3: 保存
-
-交互式输入风格名称 → 保存至 `styles/{name}.md` → 后续 `generate` 可选用。
+- 不做选题推荐/自动选题
+- 不做多轮闲聊
+- 不做数据统计（阅读量等）
+- 不做定时发布
+- 不做 Web UI
+- 不做多平台分发（只做公众号剪贴板 + 个人网站 git push）
+- 不做英文版本 .en.mdx 同步生成
+- 不做微信公众号 API 集成（个人订阅号无权限）
 
 ---
 
-### 三、`refine` — 局部重绘
+## 验收标准
 
-```
-file ─→ read ─→ parse_ai_edits() ─→ [for each edit] ─→ call_llm() ─→ 内存替换
-                                                                        │
-                                     ┌──────────────────────────────────┘
-                                     ├─→ outputs/{slug}_v{N+1}.md
-                                     ├─→ outputs/{slug}_v{N+1}.html
-                                     └─→ 剪贴板 (除非 --no-clipboard)
-```
-
-#### 标记语法
-
-```markdown
-<AI_EDIT instruction="把这段改成更口语化的表达">
-这里是需要重写的原文本片段。
-</AI_EDIT>
-```
-
-- `instruction` 属性：修改指令
-- 标签内部：要被替换的原文本
-- 支持同一文件中多个标记，按顺序处理
-
-#### 解析器 (parse_ai_edits)
-
-纯字符串搜索，无 regex 依赖：
-1. `str::find("<AI_EDIT ")` 定位开标签
-2. 提取 `instruction="..."` 属性值
-3. 找 `>` 确定开标签结束
-4. 找 `</AI_EDIT>` 提取原文本和完整匹配串
-
-设计决策：标签格式完全可控，手动切片比 regex 更透明、零额外依赖。
-
-#### 执行流程
-
-- 顺序处理（非并行），避免上下文交叉污染
-- 每个标记: `REFINE_SYSTEM_PROMPT` + `"修改指令：{instruction}\n\n原文本：\n{original}"` → LLM 重写
-- `content.replacen(&full_match, &rewritten, 1)` 单次替换，防止重复片段误替换
-- `with_retry(3, ...)` 自动重试，spinner 显示进度
-
----
-
-### 四、`update` — 整文重写
-
-```
-file ─→ read ─→ instruction (CLI 或交互输入) ─→ LLM 重写 ─┬─→ outputs/{slug}_v{N}.md
-                                                              ├─→ outputs/{slug}_v{N}.html
-                                                              └─→ 剪贴板 (除非 --no-clipboard)
-```
-
-#### 与 refine 的区别
-
-| 维度 | refine | update |
-|------|--------|--------|
-| 粒度 | 局部（AI_EDIT 标记） | 全文 |
-| 交互方式 | 预埋标记 | CLI 参数或交互输入指令 |
-| 风格 | 不改变（原风格保留） | 不改变（复用原文风格） |
-| 适用场景 | 微调某段落表述 | 整体方向调整、补充/删减内容 |
-
-#### 执行流程
-
-1. 读取目标 Markdown 文件
-2. 获取修改指令（CLI `-i` 参数 > 交互式 `dialoguer::Input`）
-3. `UPDATE_SYSTEM_PROMPT` + `"原文 + 修改指令"` → LLM 重写全文
-4. `with_retry(3, ...)` + spinner → 版本管理 → 四轨输出
-
----
-
-## 风格模板系统 (styles/*.md)
-
-每个 `.md` 文件是一个完整的 LLM system prompt，控制文章生成的风格。
-
-**`wechat_base.md` 要点**：
-
-- **格式**: H1/H2 层级、段间空行、`**加粗**`、`> 引用`、1500-3000 字
-- **人称**: 第一人称"我"为主，"我们"≤1-2 次
-- **反 AI 清单**: 禁用套话（"众所周知"等）、禁止"三段并列+升华"、禁止每段末尾金句、短句为主（10-20 字）
-- **风格标杆**: 李笑来（概念先行）、万维钢（工程思维）、王小波（真诚幽默）
-- **结构**: 开头直给洞察 → 核心概念一句话定义 → 2-3 论点+具体案例 → 最小可行动作
-
-**`qingbian.md`** (learn 产出):
-
-- 来源: 蔡垒磊《从第一个100万，到第一个1亿》
-- 特征: 理性分析 + 反直觉论证 + 通俗白话、设问自答、数字密集、冷静现实主义
-- 含 11 个维度的完整风格分析报告 + 可用的 system prompt
-
----
-
-## 错误处理
-
-| 类型 | 行为 |
-|------|------|
-| API_KEY 缺失 | Fatal exit(1) |
-| 素材文件空 | Fatal exit(1) |
-| 无风格文件 | Fatal exit(1) |
-| 修改指令为空 (update) | Fatal exit(1) |
-| LLM 调用失败 | with_retry 重试 3 次（2s 间隔），全部失败后 fatal |
-| 文件写入失败 | Fatal exit(1) |
-| .env 不存在 | Warning，降级到系统环境变量 |
-| 剪贴板工具不可用 | 逐工具打印 warn + 详情，全部失败后提示手动打开 HTML |
-| AI_EDIT 标签格式错误 | Fatal exit(1)，报告具体位置 |
-| 目标文件不存在 (refine/update) | Fatal exit(1) |
-| 无 AI_EDIT 标记 | Fatal exit(1) |
-
----
-
-## 重试 & 进度策略
-
-### 泛型重试 (with_retry)
-
-```rust
-pub async fn with_retry<F, Fut>(
-    max_retries: u32,
-    f: F,
-    label: &str,
-) -> Result<T, AppError>
-```
-
-- 所有 LLM 调用点统一使用，消除重复代码
-- 3 次重试、2 秒间隔、每次失败打印 `[warn] {label} 第 {n} 次失败`
-- 最终失败返回含上下文的 `AppError`
-
-### 进度指示器 (new_spinner)
-
-```rust
-pub fn new_spinner(msg: &str) -> ProgressBar
-```
-
-- 基于 `indicatif` 的 Braille spinner（⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏）
-- 80ms tick、绿色动画、消息文本动态更新
-- 覆盖所有 LLM 调用点: generate (Pass 1 + 2)、learn、refine (逐标记)、update
-
----
-
-## 测试
-
-36 个单元测试，分布如下：
-
-| 模块 | 测试数 | 覆盖函数 |
-|------|--------|----------|
-| `src/io.rs` | 16 | `extract_idea_slug` (10) + `next_version` (6) |
-| `src/refine.rs` | 8 | `parse_ai_edits` (8) |
-| `src/clipboard.rs` | 5 | `build_cf_html` (5) |
-| `src/main.rs` | 7 | `strip_html_tags` (7) |
-
-运行: `cargo test`
-
----
-
-## 扩展点
-
-- **新增风格**: 在 `styles/` 下添加 `.md` 文件，或使用 `learn` 子命令从 URL 自动生成
-- **切换模型**: 修改 `.env` 中 `MODEL`
-- **切换 API**: 修改 `.env` 中 `BASE_URL`（任何 OpenAI 兼容端点）
-- **多素材**: 使用 `generate --input` 指定不同素材文件
-- **批量 update**: 结合 shell 脚本对多个文件执行 update
-- **CI 测试**: `cargo test` 已就绪，可直接接入 GitHub Actions
+1. 「学一下这个风格 https://...」→ 风格文件出现在 styles/ 目录
+2. 「写一篇关于 XXX 的文章，用刚学的风格」→ 大纲 → 确认 → 全文 → 确认 → 剪贴板就绪 + 网站 MDX 草稿写入
+3. 「第三段加个案例」→ 文章只改第三段，其余不变
+4. 「发布」→ git push 已执行 + Vercel 自动部署，Agent 返回网站链接
+5. 「我的风格库有什么」→ 列出所有可用风格 + 一句话描述
+6. 「只发网站」→ git push 执行，公众号草稿保留在剪贴板不额外处理
