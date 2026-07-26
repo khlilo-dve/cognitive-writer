@@ -56,7 +56,7 @@ WEBSITE_PATH=/path/to/your/nextjs/website   # 新增：个人网站项目路径
 cargo run
 
 # 进入对话后：
-> 写一篇关于 AI Agent 的文章，用轻辩风格
+> 写一篇关于 AI Agent 的文章，用请辩风格
 [大纲展示...]
 [大纲确认] > OK
 [全文展示...]
