@@ -245,27 +245,46 @@ fn is_cancel(input: &str) -> bool {
 /// - 包含"用"
 /// - 包含"风格"
 /// - topic 在关键词和"用"之间，style_name 在"用"和"风格"之间
+///
+/// 使用两阶段匹配以避免多段落素材中的误匹配：
+/// 1. 仅在第一段（指令行）中尝试匹配
+/// 2. 回退到全文匹配（保底）
 fn extract_generate(input: &str) -> Option<(String, String)> {
-    let keyword = if input.contains("写一篇") {
+    // 阶段 1：仅匹配第一段（指令行）
+    let first_para = input.split("\n\n").next().unwrap_or(input);
+    if let Some(result) = try_extract(first_para) {
+        return Some(result);
+    }
+
+    // 阶段 2：回退到全文匹配（保底）
+    try_extract(input)
+}
+
+/// 尝试从给定文本中提取 generate 的 (topic, style_name)。
+///
+/// 使用 find（首次匹配）而非 rfind（末次匹配）定位"风格"，
+/// 因为指令行中风格关键词只出现一次。
+fn try_extract(text: &str) -> Option<(String, String)> {
+    let keyword = if text.contains("写一篇") {
         "写一篇"
-    } else if input.contains("选题") {
+    } else if text.contains("选题") {
         "选题"
     } else {
         return None;
     };
 
-    if !input.contains('用') || !input.contains("风格") {
+    if !text.contains('用') || !text.contains("风格") {
         return None;
     }
 
-    let kw_pos = input.find(keyword)?;
-    let after_kw = &input[kw_pos + keyword.len()..];
+    let kw_pos = text.find(keyword)?;
+    let after_kw = &text[kw_pos + keyword.len()..];
 
-    // 找到最后一个"风格"
-    let fengge_pos = after_kw.rfind("风格")?;
+    // find（首次匹配）：指令行中风格关键词只出现一次
+    let fengge_pos = after_kw.find("风格")?;
     let before_fengge = &after_kw[..fengge_pos];
 
-    // 找到"风格"之前的最后一个"用"
+    // rfind 保留：topic 中可能含"用"字（如"如何用AI写作"）
     let yong_pos = before_fengge.rfind('用')?;
 
     let topic = after_kw[..yong_pos].trim().to_string();
@@ -512,6 +531,35 @@ mod tests {
     fn test_extract_generate_no_match() {
         assert!(extract_generate("写一篇文章").is_none());
         assert!(extract_generate("用鲁迅风格写一篇").is_none());
+    }
+    #[test]
+    fn test_extract_generate_with_multi_paragraph_material() {
+        // 多段落素材不应污染指令行的 topic/style 提取
+        let input = "写一篇关于AI Agent的文章，用轻辩风格\n\n以下是参考素材：\n第一段：某个用强化学习训练Agent的实验表明...\n第二段：关于写作风格的讨论可以参考...";
+        let (topic, style) = extract_generate(input).unwrap();
+        assert_eq!(topic, "关于AI Agent的文章，");
+        assert_eq!(style, "轻辩");
+    }
+
+    #[test]
+    fn test_extract_generate_with_material_containing_style_keyword() {
+        // 素材中包含“风格”字眼，不应误导解析
+        let input = "写一篇关于编程的文章用张三风格\\n\\n参考：你的写作风格应该注意...";
+        let (topic, style) = extract_generate(input).unwrap();
+        assert_eq!(topic, "关于编程的文章");
+        assert_eq!(style, "张三");
+    }
+
+    #[test]
+    fn test_extract_generate_single_line_still_works() {
+        // 单行输入回归测试
+        let (topic, style) = extract_generate("写一篇关于AI的文章用鲁迅风格").unwrap();
+        assert_eq!(topic, "关于AI的文章");
+        assert_eq!(style, "鲁迅");
+        // 选题模式单行回归
+        let (topic, style) = extract_generate("选题关于Rust用张三风格").unwrap();
+        assert_eq!(topic, "关于Rust");
+        assert_eq!(style, "张三");
     }
 
     // ── extract_update ─────────────────────────────────────────
