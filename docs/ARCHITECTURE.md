@@ -6,10 +6,10 @@
 
 ## 版本演进
 
-| 版本 | 形态 | 交互方式 |
-|------|------|---------|
-| v2.1 (当前) | CLI 工具 | `cargo run -- <subcommand>` 4 个子命令 |
-| v3.0 (目标) | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 |
+| 版本 | 形态 | 交互方式 | 状态 |
+|------|------|---------|------|
+| v2.1 | CLI 工具 | `cargo run -- <subcommand>` 4 个子命令 | 稳定 |
+| v3.0 (当前) | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 | 2026-07-26 已实现 |
 
 ---
 
@@ -17,7 +17,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    REPL Loop (repl.rs)                    │
+│                 REPL Loop (repl.rs: 1024 行)               │
 │  stdin → Intent Parser → State Machine → Handler dispatch │
 └──────────────────────┬──────────────────────────────────┘
                        │
@@ -27,35 +27,37 @@
          │             │             │              │
          ▼             ▼             ▼              ▼
       llm.rs ◄────── 共用 ──────► clipboard.rs
-      io.rs                        website.rs (NEW)
-      styles.rs (NEW)              intent.rs (NEW)
+      io.rs                        website.rs
+      styles.rs                    intent.rs
       error.rs
+      lib.rs
 ```
 
-**核心变更：** `repl.rs` 成为新入口，`main.rs` 退化为启动分流器（终端 → REPL，管道/CLI 参数 → 旧 CLI 快捷模式）。
+**核心变更：** `repl.rs` 成为新入口（1024 行），`main.rs` 退化为启动分流器（终端 → REPL，管道/CLI 参数 → 旧 CLI 快捷模式）。
 
 ---
 
-## 项目结构（v3.0 目标）
+## 项目结构（v3.0 已实现）
 
 ```
 cognitive-writer/
 ├── Cargo.toml
 ├── .env
 ├── src/
-│   ├── main.rs              # ~30 行：启动 + REPL/CLI 分流
-│   ├── repl.rs              # ~300 行：REPL 循环 + 意图解析器 + 状态机
-│   ├── intent.rs            # ~100 行：Intent 枚举 + 关键词匹配规则表
-│   ├── generate.rs          # ~120 行：骨架→渲染→双轨输出（从 main.rs 迁出）
-│   ├── learn.rs             # ~80 行：风格逆向学习（从 main.rs 迁出）
-│   ├── refine.rs            # 局部重绘（无改动）
-│   ├── update.rs            # ~100 行：全文重写（从 main.rs 迁出）
-│   ├── website.rs           # NEW：MDX 生成 + git 推送
-│   ├── styles.rs            # NEW：风格库管理（模糊匹配、列表、摘要、删除）
-│   ├── llm.rs               # LLM 客户端（无改动）
-│   ├── clipboard.rs         # 剪贴板注入（无改动）
-│   ├── io.rs                # 文件 I/O + 版本管理（新增 delete_file）
-│   └── error.rs             # AppError 枚举（新增 Website/Git/Intent 变体）
+│   ├── main.rs              # 100 行 — REPL/CLI 分流器
+│   ├── repl.rs              # 1024 行 — REPL 循环 + 状态机 + 意图分发
+│   ├── intent.rs            # 706 行 — 意图枚举 + 关键词匹配 (41 tests)
+│   ├── generate.rs          # 207 行 — 骨架→渲染双通道
+│   ├── learn.rs             # 256 行 — 风格逆向学习 (含 strip_html_tags, 7 tests)
+│   ├── update.rs            # 153 行 — 全文重写
+│   ├── refine.rs            # 275 行 — 局部重绘 + run_refine 公开入口
+│   ├── website.rs           # 386 行 — MDX 生成 + git push (12 tests)
+│   ├── styles.rs            # 416 行 — 风格库管理 (18 tests)
+│   ├── llm.rs               # 140 行 — LLM 客户端
+│   ├── clipboard.rs         # 247 行 — 剪贴板注入
+│   ├── io.rs                # 263 行 — 文件 I/O + delete_file
+│   ├── error.rs             # 36 行 — AppError (新增 4 变体)
+│   └── lib.rs               # 15 行 — 库入口 (支持 cargo test --lib)
 ├── inputs/
 │   └── idea_01.md
 ├── styles/
@@ -67,6 +69,8 @@ cognitive-writer/
 └── docs/
     └── ARCHITECTURE.md
 ```
+
+> **测试总计：124 tests, 0 failed**（`cargo test --lib`）
 
 ---
 
@@ -227,7 +231,7 @@ URL → Jina Reader (降级: strip-tags) → MD 正文
 → 版本管理 → outputs/{slug}_v{N}.md + .html + 剪贴板
 ```
 
-### `src/website.rs` — 个人网站发布（NEW）
+### `src/website.rs` — 个人网站发布
 
 **核心函数：**
 
@@ -264,7 +268,7 @@ pub fn publish_to_website(
 
 **不依赖 Vercel Deploy Hook。** Vercel 的 Git 集成在 push 后自动触发 build + deploy。
 
-### `src/styles.rs` — 风格库管理（NEW）
+### `src/styles.rs` — 风格库管理
 
 ```rust
 /// 模糊匹配风格文件名
@@ -285,6 +289,10 @@ pub fn show_style_detail(name: &str) -> Result<String, AppError>
 /// 删除风格文件
 pub fn delete_style(name: &str) -> Result<(), AppError>
 ```
+
+### `src/lib.rs` — 库入口
+
+提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 124 个单元测试，无需编译二进制。
 
 ---
 
@@ -420,7 +428,7 @@ WEBSITE_PATH=/home/khlilo/Genesis_Workspace/04_Arena_Output/Portfolio_Website/my
 | `pulldown-cmark` | Markdown → HTML | 不变 |
 | `thiserror` | 强类型错误枚举 | 不变 |
 | `indicatif` | LLM 调用进度指示器 (spinner) | 不变 |
-| `chrono` | MDX frontmatter 日期格式化 | 新增 |
+| `chrono` | MDX frontmatter 日期格式化 | 已添加 |
 | `clap` | CLI 参数解析 | 保留（可选快捷模式） |
 | `dialoguer` | 交互式 CLI 输入 | 保留（可选快捷模式） |
 
@@ -464,19 +472,29 @@ cog refine [OPTIONS] <FILE> # 局部重绘
 cog update [OPTIONS] <FILE> # 整文重写
 ```
 
+> **CLI 参数解析：** 使用手工参数解析（`std::env::args`），不依赖 clap derive。`clap` 和 `dialoguer` 依赖保留在 `Cargo.toml` 中但实际未使用。
+
 ---
 
 ## 实现阶段
 
 | 阶段 | 内容 | 预计改动 | 状态 |
 |------|------|---------|------|
-| Phase 1 | 模块搬迁：main.rs → generate/learn/update/styles | 重构，不改变行为 | 待开始 |
-| Phase 2 | intent.rs + repl.rs：意图解析 + 状态机 + REPL 循环 | 新增核心能力 | 待开始 |
-| Phase 3 | website.rs：MDX 生成 + git push | 新增发布能力 | 待开始 |
-| Phase 4 | REPL 集成：所有功能挂到 REPL 状态机 | 整合 | 待开始 |
-| Phase 5 | 清理 + 测试 | 移除死代码 | 待开始 |
+| Phase 1 | 模块搬迁：main.rs → generate/learn/update/styles | 重构，不改变行为 | ✅ 已完成 |
+| Phase 2 | intent.rs + repl.rs：意图解析 + 状态机 + REPL 循环 | 新增核心能力 | ✅ 已完成 |
+| Phase 3 | website.rs：MDX 生成 + git push | 新增发布能力 | ✅ 已完成 |
+| Phase 4 | REPL 集成：所有功能挂到 REPL 状态机 | 整合 | ✅ 已完成 |
+| Phase 5 | 清理 + 测试 | 移除死代码 | ✅ 已完成 |
 
-每阶段结束验证：`cargo test && cargo build`
+**实现总结：** 全部 5 个阶段已完成。总计 124 tests, 0 failed（`cargo test --lib`）。
+
+## 已知技术债
+
+以下问题在 v3.0 实现中确认存在，记录以供后续版本处理：
+
+1. **`run_learn` / `run_update` 内部调用 `process::exit(1)`** — 错误路径会直接杀死 REPL 进程而非返回错误让 REPL 循环继续。应改为返回 `Result` 让调用方决定如何处理。
+2. **私有函数副本** — 多个模块中存在私有的 `env_var`、`md_to_wechat_html` 等函数副本。应提取到共享模块（如 `utils.rs`）避免代码重复。
+3. **Dead code warnings** — `delete_file`（`io.rs`）和 `StyleSummary.filename` 字段存在 `#[allow(dead_code)]` 或编译器 warning。需评估是移除死代码还是暴露为公开 API。
 
 ---
 
