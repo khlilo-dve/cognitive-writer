@@ -1,4 +1,12 @@
 // ── refine 子命令 — 局部重绘 ─────────────────────────────────────
+use pulldown_cmark::{html, Options, Parser as MdParser};
+use reqwest::Client;
+use std::process;
+
+use crate::clipboard::inject_clipboard;
+use crate::io::{extract_idea_slug, next_version, read_file, write_file};
+use crate::llm::{call_llm, new_spinner, with_retry};
+
 
 pub const REFINE_SYSTEM_PROMPT: &str = r#"你是一个严苛的文本重构引擎。
 请根据用户给出的修改指令，重写指定的文本片段。
@@ -68,6 +76,124 @@ pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
         return Err("未找到 AI_EDIT 标记".to_string());
     }
     Ok(edits)
+}
+
+// ── 辅助函数 ─────────────────────────────────────────────────────────
+
+fn md_to_wechat_html(markdown: &str) -> String {
+    let mut opts = Options::empty();
+    opts.insert(Options::ENABLE_STRIKETHROUGH);
+    opts.insert(Options::ENABLE_TABLES);
+
+    let parser = MdParser::new_ext(markdown, opts);
+    let mut raw = String::new();
+    html::push_html(&mut raw, parser);
+
+    let raw = raw.replace("<hr />", "").replace("<hr>", "");
+
+    format!("<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>")
+}
+
+fn env_var(key: &str) -> Result<String, String> {
+    std::env::var(key).map_err(|_| format!("环境变量 `{}` 未设置，请检查 .env 文件", key))
+}
+
+fn env_var_or(key: &str, default: &str) -> String {
+    std::env::var(key).unwrap_or_else(|_| default.to_string())
+}
+
+fn fatal(msg: impl std::fmt::Display) -> ! {
+    eprintln!("[error] {}", msg);
+    process::exit(1);
+}
+
+// ── run_refine (CLI 模式入口) ──────────────────────────────────────
+
+pub async fn run_refine(file: &str, no_clipboard: bool) {
+    // 注意：不再调用 dotenvy::dotenv()，main() 已经调用过了
+
+    let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
+    let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
+    let model = env_var_or("MODEL", "gpt-4o");
+
+    println!("[info] BASE_URL = {}", base_url);
+    println!("[info] MODEL    = {}", model);
+
+    // 2. 读取目标文件
+    let mut content = read_file(file).unwrap_or_else(|e| fatal(&e));
+    println!("[info] 已读取 {}, {} 字符", file, content.len());
+
+    // 3. 解析 AI_EDIT 标记
+    let edits = parse_ai_edits(&content).unwrap_or_else(|e| fatal(&e));
+    let total = edits.len();
+    println!("[info] 发现 {} 个 AI_EDIT 标记", total);
+
+    // 4. 逐个 LLM 重写
+    let client = Client::new();
+    for (i, edit) in edits.iter().enumerate() {
+        let idx = i + 1;
+        let user_prompt = format!(
+            "修改指令：{}\n\n原文本：\n{}",
+            edit.instruction, edit.original
+        );
+
+        let label = format!("标记 {}/{}", idx, total);
+        let spinner = new_spinner(&format!("正在处理标记 {}/{}...", idx, total));
+        let rewritten = with_retry(3, &label, || {
+            call_llm(
+                &client,
+                &base_url,
+                &api_key,
+                &model,
+                REFINE_SYSTEM_PROMPT,
+                &user_prompt,
+            )
+        })
+        .await
+        .unwrap_or_else(|e| {
+            spinner.finish_with_message(format!("标记 {}/{} 失败", idx, total));
+            fatal(&e)
+        });
+        spinner.finish_with_message(format!("标记 {}/{} 完成", idx, total));
+        content = content.replacen(&edit.full_match, &rewritten, 1);
+    }
+
+    // 5. 版本命名 + 三轨输出
+    let slug = extract_idea_slug(&content);
+    let ver = next_version("outputs", &slug);
+    let md_path = format!("outputs/{}_v{}.md", slug, ver);
+    let html_path = format!("outputs/{}_v{}.html", slug, ver);
+
+    write_file(&md_path, &content).unwrap_or_else(|e| fatal(&e));
+    println!("[done] Markdown → {}", md_path);
+
+    let html_fragment = md_to_wechat_html(&content);
+    let html_doc = format!(
+        "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
+        html_fragment
+    );
+    write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
+    println!("[done] HTML     → {}", html_path);
+
+    if no_clipboard {
+        println!("[info] 跳过剪贴板注入 (--no-clipboard)");
+    } else {
+        match inject_clipboard(&html_fragment) {
+            Ok(tool) => {
+                println!("[done] 富文本已注入剪贴板 (via {})", tool);
+                println!();
+                println!("  局部重绘完成，富文本已注入剪贴板，请直接前往微信粘贴 (Ctrl+V)");
+            }
+            Err(e) => {
+                eprintln!("[warn] {}", e);
+                println!();
+                println!(
+                    "  局部重绘完成。剪贴板不可用，请用浏览器打开 {} 后手动复制",
+                    html_path
+                );
+            }
+        }
+    }
 }
 
 #[cfg(test)]
