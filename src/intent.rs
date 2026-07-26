@@ -41,7 +41,6 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是意图分类器。分析用户输�
 - DeleteStyle: 用户想删除某个风格。提取 name
 - RefineFile: 用户想局部修改某个文件。提取 path（.md 文件路径）和 instruction（修改指令）
 - UpdateFile: 用户想重写某个文件。提取 path（.md 文件路径）和 instruction（修改指令）
-- ModifyOutline: 用户想修改大纲。提取 instruction
 - ModifySection: 用户想修改文章的某部分。提取 instruction
 - ChangeStyle: 用户想换一种风格重写。提取 style_name
 - Publish: 用户确认发布
