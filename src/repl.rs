@@ -236,12 +236,7 @@ impl Repl {
 
     pub async fn run(&mut self) {
         println!("Cognitive Writer v3.1 — 对话式写作 Agent (会话自动保存)");
-        println!("输入你的想法，或输入 /help 查看帮助");
-
-        use tokio::io::{AsyncBufReadExt, BufReader};
-
-        let stdin = BufReader::new(tokio::io::stdin());
-        let mut lines = stdin.lines();
+        println!("输入内容后按 Enter 发送。输入 /help 查看帮助，/quit 退出。");
 
         loop {
             let prompt = match self.state {
@@ -254,55 +249,16 @@ impl Repl {
             let _ = std::io::stdout().flush();
 
             tokio::select! {
-                line_result = lines.next_line() => {
-                    match line_result {
-                        Ok(Some(input)) => {
-                            if input.is_empty() {
-                                continue;
-                            }
-
-                            // 特殊命令
-                            if input.starts_with('/') {
-                                if self.handle_command(&input) {
-                                    return;
-                                }
-                                continue;
-                            }
-
-                            // 意图分派：快速预检 → LLM 分类 → 关键词 fallback
-                            let intent = if is_confirm(&input) || is_cancel(&input) {
-                                parse_intent(&input, &self.state)
-                            } else {
-                                match classify_intent(
-                                    &self.client,
-                                    &self.base_url,
-                                    &self.api_key,
-                                    &self.model,
-                                    &input,
-                                    &self.state,
-                                )
-                                .await
-                                {
-                                    Ok(intent) => {
-                                        println!("[debug] LLM 分类: {:?}", intent);
-                                        intent
-                                    }
-                                    Err(e) => {
-                                        eprintln!("[warn] LLM 分类失败: {}，回退关键词匹配", e);
-                                        parse_intent(&input, &self.state)
-                                    }
-                                }
-                            };
-
-                            if let Err(e) = self.dispatch(intent).await {
-                                eprintln!("[error] {}", e);
-                            }
-
-                            // 每次 dispatch 后自动保存
-                            if let Err(e) = self.save() {
-                                eprintln!("[warn] 会话保存失败: {}", e);
-                            }
-                        }
+                read_result = tokio::task::spawn_blocking(|| {
+                    let mut line = String::new();
+                    match std::io::stdin().read_line(&mut line) {
+                        Ok(0) => None,  // EOF (Ctrl+D)
+                        Ok(_) => Some(line.trim().to_string()),
+                        Err(_) => None,
+                    }
+                }) => {
+                    let input = match read_result {
+                        Ok(Some(s)) => s,
                         Ok(None) => {
                             // EOF (Ctrl+D)
                             println!("\n再见。");
@@ -313,6 +269,52 @@ impl Repl {
                             eprintln!("[error] stdin 读取失败: {}", e);
                             return;
                         }
+                    };
+
+                    if input.is_empty() {
+                        continue;
+                    }
+
+                    // 特殊命令
+                    if input.starts_with('/') {
+                        if self.handle_command(&input) {
+                            return;
+                        }
+                        continue;
+                    }
+
+                    // 意图分派：快速预检 → LLM 分类 → 关键词 fallback
+                    let intent = if is_confirm(&input) || is_cancel(&input) {
+                        parse_intent(&input, &self.state)
+                    } else {
+                        match classify_intent(
+                            &self.client,
+                            &self.base_url,
+                            &self.api_key,
+                            &self.model,
+                            &input,
+                            &self.state,
+                        )
+                        .await
+                        {
+                            Ok(intent) => {
+                                println!("[debug] LLM 分类: {:?}", intent);
+                                intent
+                            }
+                            Err(e) => {
+                                eprintln!("[warn] LLM 分类失败: {}，回退关键词匹配", e);
+                                parse_intent(&input, &self.state)
+                            }
+                        }
+                    };
+
+                    if let Err(e) = self.dispatch(intent).await {
+                        eprintln!("[error] {}", e);
+                    }
+
+                    // 每次 dispatch 后自动保存
+                    if let Err(e) = self.save() {
+                        eprintln!("[warn] 会话保存失败: {}", e);
                     }
                 }
                 _ = tokio::signal::ctrl_c() => {
@@ -339,6 +341,7 @@ impl Repl {
             }
             "/quit" => {
                 println!("再见。");
+                let _ = self.clear_session();
                 true
             }
             "/styles" => {
@@ -447,7 +450,7 @@ impl Repl {
 
             // ── 任意状态 ──
             (_, Intent::Cancel) => {
-                println!("已取消。");
+                println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
                 self.reset_state();
             }
             (_, Intent::Unknown) => {
@@ -920,13 +923,13 @@ impl Repl {
 
         let mut confirm = String::new();
         if io::stdin().read_line(&mut confirm).is_err() {
-            println!("已取消。");
+            println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
             return Ok(());
         }
 
         let confirm = confirm.trim().to_lowercase();
         if confirm != "y" && confirm != "yes" {
-            println!("已取消。");
+            println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
             return Ok(());
         }
 
