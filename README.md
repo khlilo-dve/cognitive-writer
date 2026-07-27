@@ -120,13 +120,9 @@ src/
 
 ## 📮 Hosted Version — Coming Soon
 
-在做一个托管版：不用装 Rust、不用配环境、不用管 API key。浏览器打开，输入选题，点发布。
+在做一个托管版：不用装 Rust、不用配环境、不用管 API key。浏览器打开，输入选题，点发布。预计 2026 年 Q3 内测。
 
-**有興趣的話在這裏留個郵箱：**
-
-> 👉 **[Notify Me](https://github.com/khlilo/cognitive-writer/issues/1)** ← 在 Issue #1 留个 👍 或评论 "interested"
-
-预计 2026 年 Q3 内测。开源版永远免费，托管版解决"不想碰终端"的问题。
+开源版永远免费。托管版感兴趣的话直接联系我：**ferkasybilla312@gmail.com**
 
 ---
 
