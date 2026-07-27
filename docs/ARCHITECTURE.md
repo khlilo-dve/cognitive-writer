@@ -618,39 +618,64 @@ if let Err(e) = self.save() {
 
 #### Step 4: 异步 stdin + 信号监听
 
+> **实现注：** 初始设计使用 `tokio::io::stdin()` + `BufReader::lines()`，但发现该方案会禁用终端行编辑（退格、方向键等失效）。实际实现改用 `spawn_blocking` + `std::io::stdin().read_line()`，在独立线程中运行标准阻塞读取，同时支持续行符（行末 `\`）实现多行输入。
+
 ```rust
 pub async fn run(&mut self) {
     // ... banner ...
-    
-    // 异步 stdin 流
-    use tokio::io::{AsyncBufReadExt, BufReader};
-    let stdin = BufReader::new(tokio::io::stdin());
-    let mut lines = stdin.lines();
-    
+
     loop {
         self.print_prompt();
-        
+
         tokio::select! {
-            line_result = lines.next_line() => {
-                match line_result {
-                    Ok(Some(input)) => {
-                        // ... 现有 dispatch 逻辑 ...
-                        if let Err(e) = self.dispatch(intent).await {
-                            eprintln!("[error] {}", e);
+            read_result = tokio::task::spawn_blocking(|| {
+                let mut collected = Vec::new();
+                loop {
+                    let mut line = String::new();
+                    match std::io::stdin().read_line(&mut line) {
+                        Ok(0) => {
+                            // EOF (Ctrl+D) — submit what we have, or None if empty
+                            return if collected.is_empty() {
+                                None
+                            } else {
+                                Some(collected.join("\n"))
+                            };
                         }
-                        let _ = self.save();
+                        Ok(_) => {
+                            let trimmed = line.trim_end_matches('\n').trim_end_matches('\r');
+                            if trimmed.ends_with('\\') {
+                                // 续行：去掉末尾 \，保留此行内容，继续读下一行
+                                collected.push(trimmed[..trimmed.len()-1].to_string());
+                            } else {
+                                collected.push(trimmed.to_string());
+                                break;
+                            }
+                        }
+                        Err(_) => return None,
                     }
+                }
+                Some(collected.join("\n"))
+            }) => {
+                let input = match read_result {
+                    Ok(Some(s)) => s,
                     Ok(None) => {
-                        // EOF (Ctrl+D)
-                        let _ = self.save();
-                        println!("再见。");
+                        println!("\n再见。");
+                        let _ = self.clear_session();
                         return;
                     }
                     Err(e) => {
                         eprintln!("[error] stdin 读取失败: {}", e);
                         return;
                     }
+                };
+
+                if input.is_empty() { continue; }
+                if input.starts_with('/') {
+                    if self.handle_command(&input) { return; }
+                    continue;
                 }
+
+                // ... 意图分派 + dispatch + save ...
             }
             _ = tokio::signal::ctrl_c() => {
                 println!("\n收到中断信号，保存状态...");
@@ -662,6 +687,7 @@ pub async fn run(&mut self) {
     }
 }
 ```
+
 
 #### Step 5: main.rs 启动时检测恢复
 
@@ -726,6 +752,18 @@ tokio = { features = ["full"] }  # 已有 full feature，包含 signal + io-util
 3. 全流程走完 → `current.json` 被重置为 Idle（或删除）
 4. `cargo test` 全部通过
 
+### v3.1 后修复 (2026-07-26) — stdin 行编辑恢复 + 多行输入
+
+`tokio::io::stdin()` 虽然提供了异步读取，但在终端中**禁用了行编辑能力**（退格、方向键、Ctrl+W、Ctrl+U 无法正常工作）。实际实现中改用 `spawn_blocking` + `std::io::stdin().read_line()` 方案：
+
+| 改进 | 说明 |
+|------|------|
+| **行编辑恢复** | `spawn_blocking` 中运行标准阻塞 `read_line()`，终端驱动重新获得行编辑控制权 |
+| **多行输入** | 循环读取行，行末 `\` 为续行符，所有行用 `\n` 连接后一次性提交 |
+| **取消反馈改进** | 取消操作后显示 "已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。" |
+| **`/quit` 清除 session** | 正常退出时调用 `clear_session()` 删除 `current.json`，避免下次误提示"未完成会话" |
+| **Banner 增强** | 启动时显示 "输入内容后按 Enter 发送。行末加 \ 可以换行继续输入。" |
+
 ---
 
 ## 已知技术债
@@ -735,6 +773,7 @@ tokio = { features = ["full"] }  # 已有 full feature，包含 signal + io-util
 1. **`run_learn` / `run_update` 内部调用 `process::exit(1)`** — 错误路径会直接杀死 REPL 进程而非返回错误让 REPL 循环继续。应改为返回 `Result` 让调用方决定如何处理。
 2. **私有函数副本** — 多个模块中存在私有的 `env_var`、`md_to_wechat_html` 等函数副本。应提取到共享模块（如 `utils.rs`）避免代码重复。
 3. **Dead code warnings** — `delete_file`（`io.rs`）和 `StyleSummary.filename` 字段存在 `#[allow(dead_code)]` 或编译器 warning。需评估是移除死代码还是暴露为公开 API。
+4. **`handle_delete_style` 中阻塞 `std::io::stdin().read_line()`** — 删除风格前的二次确认直接调用阻塞 stdin 读取，在异步上下文中运行。虽然当前单线程 tokio 下可用，但应改为通过 channel 或 `spawn_blocking` 统一输入获取方式。
 
 ---
 
