@@ -236,7 +236,8 @@ impl Repl {
 
     pub async fn run(&mut self) {
         println!("Cognitive Writer v3.1 — 对话式写作 Agent (会话自动保存)");
-        println!("输入内容后按 Enter 发送。输入 /help 查看帮助，/quit 退出。");
+        println!("输入内容后按 Enter 发送。行末加 \\ 可以换行继续输入。");
+        println!("输入 /help 查看帮助，/quit 退出。");
 
         loop {
             let prompt = match self.state {
@@ -250,12 +251,32 @@ impl Repl {
 
             tokio::select! {
                 read_result = tokio::task::spawn_blocking(|| {
-                    let mut line = String::new();
-                    match std::io::stdin().read_line(&mut line) {
-                        Ok(0) => None,  // EOF (Ctrl+D)
-                        Ok(_) => Some(line.trim().to_string()),
-                        Err(_) => None,
+                    let mut collected = Vec::new();
+                    loop {
+                        let mut line = String::new();
+                        match std::io::stdin().read_line(&mut line) {
+                            Ok(0) => {
+                                // EOF — submit whatever we have, or None if empty
+                                return if collected.is_empty() {
+                                    None
+                                } else {
+                                    Some(collected.join("\n"))
+                                };
+                            }
+                            Ok(_) => {
+                                let trimmed = line.trim_end_matches('\n').trim_end_matches('\r');
+                                if trimmed.ends_with('\\') {
+                                    // 续行：去掉末尾 \，保留此行内容
+                                    collected.push(trimmed[..trimmed.len()-1].to_string());
+                                } else {
+                                    collected.push(trimmed.to_string());
+                                    break;
+                                }
+                            }
+                            Err(_) => return None,
+                        }
                     }
+                    Some(collected.join("\n"))
                 }) => {
                     let input = match read_result {
                         Ok(Some(s)) => s,
