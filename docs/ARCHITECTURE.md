@@ -210,9 +210,15 @@ fn parse_intent(input: &str, state: &SessionState) -> Intent {
 
 ```
 URL → Jina Reader (降级: strip-tags) → MD 正文
-    → LLM 分析 (LEARN_SYSTEM_PROMPT) → 风格分析报告
+    → 读取 prompts/learn_style.md
+    → LLM 分析 → 风格分析报告
     → 用户命名 → styles/{name}.md
 ```
+
+**提示词来源：**
+- `prompts/learn_style.md` 是逆向风格提取的唯一运行时 system prompt
+- `src/learn.rs` 不再内置提示词副本，执行 `learn` 时从该文件读取
+- 文件不存在、无法读取或内容为空时直接返回明确错误，不回退到硬编码提示词
 
 **REPL 集成适配：**
 - `fetch_and_analyze(url)` → 返回风格分析文本
