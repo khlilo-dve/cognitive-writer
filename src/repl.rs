@@ -144,6 +144,7 @@ pub struct Repl {
 impl Repl {
     // ── Constructors ─────────────────────────────────────────────
 
+    #[allow(dead_code)]
     pub fn new() -> Result<Self, AppError> {
         Self::new_with_session_dir(&std::path::PathBuf::from("."))
     }

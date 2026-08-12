@@ -6,7 +6,8 @@ use crate::error::AppError;
 
 /// 风格摘要
 pub struct StyleSummary {
-    pub filename: String,     // e.g. "qingbian.md"
+    #[allow(dead_code)]
+    pub filename: String,     // e.g. "qingbian.md"; retained for library callers
     pub display_name: String, // e.g. "qingbian" (without extension)
     pub description: String,  // first non-empty non-heading paragraph
 }

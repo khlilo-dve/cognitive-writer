@@ -229,6 +229,10 @@ pub fn parse_intent(input: &str, _state: &SessionState) -> Intent {
 
 // ── Layer 1 模式检测辅助 ────────────────────────────────────────────
 
+// Legacy keyword fallback helpers are retained for unit-test coverage and
+// compatibility reference; production parsing now delegates to the LLM.
+#[cfg(test)]
+#[allow(dead_code)]
 /// 判断输入是否包含"学习风格"语义关键词。
 fn has_learn_keywords(input: &str) -> bool {
     input.contains("学一下")
@@ -236,6 +240,8 @@ fn has_learn_keywords(input: &str) -> bool {
         || (input.contains("逆向") && input.contains("文风"))
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 判断输入是否匹配"列出风格"模式。
 fn matches_list_styles(input: &str) -> bool {
     (input.contains("风格库") && input.contains("有什么"))
@@ -243,6 +249,8 @@ fn matches_list_styles(input: &str) -> bool {
         || (input.contains("列出") && input.contains("风格"))
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 判断输入是否匹配"查看风格"模式。
 fn matches_show_style(input: &str) -> bool {
     (input.contains("看看") && input.contains("风格"))
@@ -250,6 +258,8 @@ fn matches_show_style(input: &str) -> bool {
         || (input.contains("风格") && input.contains("摘要"))
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 判断输入是否匹配"删除风格"模式。
 fn matches_delete_style(input: &str) -> bool {
     (input.contains("删掉") && input.contains("风格"))
@@ -258,6 +268,8 @@ fn matches_delete_style(input: &str) -> bool {
 
 // ── Layer 1 提取辅助 ────────────────────────────────────────────────
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 从输入中提取首个 URL（https?:// 开头的 token）。
 ///
 /// 先尝试以空白分隔的 token，再尝试嵌入式 URL（无前置空白）。
@@ -309,6 +321,8 @@ pub fn is_cancel(input: &str) -> bool {
     CANCEL_EN.contains(&lower.as_str())
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 尝试提取"写一篇/选题 + 用 + 风格"模式，返回 `(topic, style_name)`。
 ///
 /// 匹配规则：
@@ -331,6 +345,8 @@ fn extract_generate(input: &str) -> Option<(String, String)> {
     try_extract(input)
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 尝试从给定文本中提取 generate 的 (topic, style_name)。
 ///
 /// 使用 find（首次匹配）而非 rfind（末次匹配）定位"风格"，
@@ -368,6 +384,8 @@ fn try_extract(text: &str) -> Option<(String, String)> {
     Some((topic, style_name))
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 尝试提取"重写 path.md 改成 instruction"模式，返回 `(path, instruction)`。
 fn extract_update(input: &str) -> Option<(String, String)> {
     if !input.contains("重写") || !input.contains(".md") || !input.contains("改成") {
@@ -385,6 +403,8 @@ fn extract_update(input: &str) -> Option<(String, String)> {
     Some((path, instruction))
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 尝试提取"path.md 改"模式（非"重写...改成"路径），返回 `(path, instruction)`。
 fn extract_refine(input: &str) -> Option<(String, String)> {
     if !input.contains(".md") || !input.contains('改') {
@@ -410,6 +430,8 @@ fn extract_refine(input: &str) -> Option<(String, String)> {
     Some((path, instruction))
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 从输入中提取风格名称。
 ///
 /// 按以下顺序尝试：
@@ -448,6 +470,8 @@ fn extract_style_name(input: &str) -> Option<String> {
     None
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 从输入中提取 .md 文件路径（空白分隔的 token）。
 fn extract_md_path(input: &str) -> Option<String> {
     for token in input.split_whitespace() {
@@ -460,6 +484,8 @@ fn extract_md_path(input: &str) -> Option<String> {
 
 // ── Layer 2: 状态相关的意图匹配 ─────────────────────────────────────
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 在 WaitingForPublish 状态下匹配发布相关意图。
 fn match_publish_intent(input: &str) -> Intent {
     if input.contains("只发网站") || input.contains("只部署网站") || input.contains("网站发布") {
@@ -480,6 +506,8 @@ fn match_publish_intent(input: &str) -> Intent {
     Intent::Unknown
 }
 
+#[cfg(test)]
+#[allow(dead_code)]
 /// 在 WaitingForFulltext 状态下匹配正文修改相关意图。
 fn match_fulltext_intent(input: &str) -> Intent {
     // 更换风格
