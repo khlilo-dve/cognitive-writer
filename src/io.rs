@@ -109,6 +109,7 @@ pub fn write_file(path: &str, content: &str) -> Result<(), String> {
     fs::write(path, content).map_err(|e| format!("无法写入 `{}`: {}", path, e))
 }
 
+#[cfg(test)]
 pub fn delete_file(path: &str) -> Result<(), String> {
     std::fs::remove_file(path)
         .map_err(|e| format!("无法删除 `{}`: {}", path, e))
