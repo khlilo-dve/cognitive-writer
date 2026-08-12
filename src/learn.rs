@@ -123,25 +123,19 @@ async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, Stri
 
 // ── Learn system prompt ─────────────────────────────────────────────
 
-const LEARN_SYSTEM_PROMPT: &str = r#"你是一个写作风格分析专家。用户会给你一篇完整的文章正文，你需要逆向分析该文章的写作风格，并输出一份可以直接作为 system prompt 使用的「风格指令文档」。
+const LEARN_PROMPT_PATH: &str = "prompts/learn_style.md";
 
-输出要求：
-1. 用 Markdown 格式
-2. 涵盖以下维度（如果文章中体现了的话）：
-   - 整体风格定位（如"理性 + 隐喻"、"口语化 + 犀利"等）
-   - 标题策略（标题长度、是否用问句/反问/数字等）
-   - 开头模式（故事切入、金句开头、直接观点等）
-   - 段落节奏（长短交替、短段密集等）
-   - 句式特征（长句/短句偏好、排比、设问等）
-   - 论证手法（类比、举例、数据引用、反直觉等）
-   - 情绪基调（冷静、激昂、反讽、温暖等）
-   - 结尾策略（升华、行动号召、开放式提问等）
-   - 用词偏好（口语/书面、中英混用、领域术语等）
-   - 读者互动方式（如果有的话）
-3. 每个维度给出具体的示例句子或段落片段作为佐证
-4. 最后给出一段可直接作为 system prompt 的「风格复刻指令」
+fn load_learn_prompt() -> Result<String, String> {
+    let prompt = std::fs::read_to_string(LEARN_PROMPT_PATH).map_err(|e| {
+        format!("无法读取逆向风格提取提示词 `{LEARN_PROMPT_PATH}`: {e}")
+    })?;
 
-注意：不要评价文章质量，只做风格提取和描述。"#;
+    if prompt.trim().is_empty() {
+        return Err(format!("逆向风格提取提示词 `{LEARN_PROMPT_PATH}` 为空"));
+    }
+
+    Ok(prompt)
+}
 
 // ── learn 子命令入口 ───────────────────────────────────────────────
 
@@ -160,14 +154,15 @@ pub async fn run_learn(url: &str) {
         .await
         .unwrap_or_else(|e| fatal(&e));
 
-    // 2. 调用 LLM 逆向分析风格
+    // 2. 读取提示词并调用 LLM 逆向分析风格
+    let system_prompt = load_learn_prompt().unwrap_or_else(|e| fatal(&e));
     let spinner = new_spinner("正在分析写作风格...");
     let style_analysis = call_llm(
         &client,
         &base_url,
         &api_key,
         &model,
-        LEARN_SYSTEM_PROMPT,
+        &system_prompt,
         &article_text,
     )
     .await
@@ -208,6 +203,14 @@ mod tests {
     use super::*;
 
     // ── strip_html_tags ─────────────────────────────────────────
+
+    #[test]
+    fn test_load_learn_prompt_from_external_file() {
+        let prompt = load_learn_prompt().expect("external learn prompt should be readable");
+        assert!(!prompt.trim().is_empty());
+        assert!(prompt.contains("写作风格分析专家"));
+        assert!(prompt.contains("不要评价文章质量"));
+    }
 
     #[test]
     fn test_strip_html_simple_tag() {
