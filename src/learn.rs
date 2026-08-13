@@ -262,27 +262,4 @@ mod tests {
         assert_eq!(result, "");
     }
 
-    /// 评测：真实 LLM 调用，验证新提取提示词是否产出精简执行 spec（非分析报告）。
-    /// 手动运行：`cargo test --lib -- --ignored eval_style_extraction --nocapture`
-    #[test]
-    #[ignore = "真实 LLM 调用，需 API_KEY + 网络"]
-    fn eval_style_extraction() {
-        let rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async {
-            dotenvy::dotenv().ok();
-            let key = std::env::var("API_KEY").expect("API_KEY 未设置");
-            let base = std::env::var("BASE_URL")
-                .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
-            let model = std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".to_string());
-            let client = Client::new();
-            let system = load_learn_prompt().expect("读取提取提示词失败");
-            let article = "很多人把自律当成意志力的比赛，错了。自律的本质是什么？是你根本不需要去忍。想想看，天天靠意志力撑着的人，最后怎么样了？都崩了。真正的高手从来不硬扛。他们改变环境，而不是改变自己。你在沙发上刷手机，怪自己没自控力？废话。把手机放另一个房间，问题就没了。自律不是品格问题，是设计问题。";
-
-            let spec = call_llm(&client, &base, &key, &model, &system, article)
-                .await
-                .expect("风格提取失败");
-            println!("\n===== 提取的风格 spec =====\n{}", spec);
-            println!("\n[info] spec 字符数: {}", spec.chars().count());
-        });
-    }
 }

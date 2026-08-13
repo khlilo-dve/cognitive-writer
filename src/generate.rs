@@ -262,31 +262,4 @@ mod tests {
         assert!(p.contains("不要输出核对过程"));
     }
 
-    /// 端到端评测：真实 LLM 调用，验证风格是否注入大纲与正文。
-    /// 手动运行：`cargo test --lib -- --ignored eval_style_generation_end_to_end --nocapture`
-    #[test]
-    #[ignore = "真实 LLM 调用，需 API_KEY + 网络"]
-    fn eval_style_generation_end_to_end() {
-        let rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async {
-            dotenvy::dotenv().ok();
-            let key = std::env::var("API_KEY").expect("API_KEY 未设置");
-            let base = std::env::var("BASE_URL")
-                .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
-            let model = std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".to_string());
-            let client = Client::new();
-            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
-            let idea = "文章主题：普通人为什么很难靠打工实现财富跃迁\n基本内容：工资有天花板，资产能复利。多数人停在第一桶金之前。";
-
-            let outline = generate_outline(&client, &base, &key, &model, &style, idea)
-                .await
-                .expect("大纲生成失败");
-            println!("\n===== 风格化大纲 =====\n{}", outline);
-
-            let fulltext = render_fulltext(&client, &base, &key, &model, &style, &outline, idea)
-                .await
-                .expect("正文渲染失败");
-            println!("\n===== 风格化正文 =====\n{}", fulltext);
-        });
-    }
 }
