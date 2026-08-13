@@ -10,7 +10,8 @@
 |------|------|---------|------|
 | v2.1 | CLI 工具 | `cargo run -- <subcommand>` 4 个子命令 | 稳定 |
 | v3.0  | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 | 2026-07-26 已实现 |
-| v3.1 (当前) | 对话式 Agent | REPL + tokio 异步事件循环 + 会话持久化 (current.json) | 2026-07-26 已实现 |
+| v3.1 | 对话式 Agent | REPL + tokio 异步事件循环 + 会话持久化 (current.json) | 2026-07-26 已实现 |
+| v3.2 (当前) | 对话式 Agent | 风格精简为执行 spec，同时注入大纲与正文 | 2026-08-13 已实现 |
 
 ---
 
@@ -71,7 +72,7 @@ cognitive-writer/
     └── ARCHITECTURE.md
 ```
 
-> **测试总计：132 tests, 0 failed**（`cargo test --lib`）
+> **测试总计：136 tests, 0 failed**（`cargo test --lib`）
 
 ---
 
@@ -189,35 +190,36 @@ fn parse_intent(input: &str, state: &SessionState) -> Intent {
 }
 ```
 
-### `src/generate.rs` — 骨架→渲染双通道
+### `src/generate.rs` — 骨架→渲染双通道（风格注入）
 
-**从 main.rs 迁移，行为不变：**
+**三个 prompt builder（`fn`，含单元测试）：**
+- `outline_system_prompt(style)` — Pass 1 system prompt，注入风格 spec，让结构贴合风格
+- `style_system_prompt(style)` — Pass 2 system prompt，风格 spec 外包"只输出正文 / 事实边界 / 禁止优先"
+- `render_prompt(outline, idea)` — Pass 2 user prompt，大纲 + 素材 + 输出前自检
 
 ```
-素材 + 风格 → Pass 1 (OUTLINE_SYSTEM_PROMPT) → 骨架(300-500字)
-           → Pass 2 (style system prompt + 大纲 + 素材) → 全文 Markdown
+素材 + 风格 → Pass 1 (outline_system_prompt) → 风格化骨架(300-500字)
+           → Pass 2 (style_system_prompt + render_prompt) → 全文 Markdown
            → 版本管理 → outputs/{slug}_v{N}.md + .html + 剪贴板
 ```
 
 **REPL 集成适配：**
-- `generate_outline()` — 只做 Pass 1，返回骨架文本
-- `render_fulltext(outline, style, idea)` — 做 Pass 2，返回全文
+- `generate_outline(style, idea)` — 只做 Pass 1，返回骨架文本
+- `render_fulltext(style, outline, idea)` — 做 Pass 2，返回全文
 - REPL 在两个 pass 之间插入检查点等待用户确认
 
 ### `src/learn.rs` — 风格逆向学习
 
-**从 main.rs 迁移，行为不变：**
-
 ```
 URL → Jina Reader (降级: strip-tags) → MD 正文
     → 读取 prompts/learn_style.md
-    → LLM 分析 → 风格分析报告
+    → LLM 逆向提取 → 精简风格执行 spec（10 段，≤600 字）
     → 用户命名 → styles/{name}.md
 ```
 
 **提示词来源：**
 - `prompts/learn_style.md` 是逆向风格提取的唯一运行时 system prompt
-- `src/learn.rs` 不再内置提示词副本，执行 `learn` 时从该文件读取
+- 输出不再是"分析报告 + 原文示例"，而是可直接注入的 10 段执行指令
 - 文件不存在、无法读取或内容为空时直接返回明确错误，不回退到硬编码提示词
 
 **REPL 集成适配：**
@@ -299,7 +301,7 @@ pub fn delete_style(name: &str) -> Result<(), AppError>
 
 ### `src/lib.rs` — 库入口
 
-提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 132 个单元测试，无需编译二进制。
+提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 136 个单元测试，无需编译二进制。
 
 ---
 
@@ -488,7 +490,7 @@ cog update [OPTIONS] <FILE> # 整文重写
 | Phase 5 | 清理 + 测试 | 移除死代码 | ✅ 已完成 |
 | v3.1 | 异步 stdin + 会话持久化 + 优雅关闭 | ✅ 已完成 |
 
-**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 132 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
+**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 136 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
 
 ## v3.1 — 异步事件循环 + 会话持久化 ✅ (2026-07-26 已实现)
 
