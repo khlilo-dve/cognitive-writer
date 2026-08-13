@@ -45,6 +45,38 @@ const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给
 3. 直接输出完整的修改后 Markdown，不要任何解释、说明或代码块包裹
 4. 输出必须是可发布的最终版本"#;
 
+/// 状态的中文标签，用于「状态不对」时准确报错。
+fn state_label(state: &SessionState) -> &'static str {
+    match state {
+        SessionState::Idle => "空闲",
+        SessionState::WaitingForOutline => "等待确认大纲",
+        SessionState::WaitingForFulltext => "等待确认全文",
+        SessionState::WaitingForPublish => "等待确认发布",
+    }
+}
+
+/// 意图的中文标签，用于「状态不对」时准确报错。
+fn intent_label(intent: &Intent) -> &'static str {
+    match intent {
+        Intent::Generate { .. } => "写文章",
+        Intent::Learn { .. } => "学风格",
+        Intent::ListStyles => "列出风格",
+        Intent::ShowStyle { .. } => "查看风格",
+        Intent::DeleteStyle { .. } => "删除风格",
+        Intent::RefineFile { .. } => "局部修改文件",
+        Intent::UpdateFile { .. } => "重写文件",
+        Intent::Confirm => "确认",
+        Intent::Cancel => "取消",
+        Intent::ModifyOutline { .. } => "修改大纲",
+        Intent::ModifySection { .. } => "修改段落",
+        Intent::ChangeStyle { .. } => "换风格",
+        Intent::Publish => "发布",
+        Intent::PublishWebsiteOnly => "只发网站",
+        Intent::Hold => "暂缓",
+        Intent::Unknown { .. } => "无法识别",
+    }
+}
+
 // ── Help text ─────────────────────────────────────────────────────────
 
 const HELP_TEXT: &str = r#"
@@ -330,7 +362,7 @@ impl Repl {
                         }
                     };
 
-                    if let Err(e) = self.dispatch(intent).await {
+                    if let Err(e) = self.dispatch(intent, &input).await {
                         eprintln!("[error] {}", e);
                     }
 
@@ -441,9 +473,19 @@ impl Repl {
         println!("{}", sep());
     }
 
+    /// 当前状态下的可用操作提示，用于「没理解」或「状态不对」时给用户指路。
+    fn state_hint(&self) -> &'static str {
+        match self.state {
+            SessionState::Idle => "可以：「写一篇关于XX的文章，用YY风格」「列出风格」「学一下这个风格 <链接>」，或 /help 看全部用法。",
+            SessionState::WaitingForOutline => "可以：「OK」确认大纲、「第X点改成…」修改大纲、「算了」取消。",
+            SessionState::WaitingForFulltext => "可以：「OK」确认全文、「第X段加案例」修改、「换成XX风格」换风格、「算了」取消。",
+            SessionState::WaitingForPublish => "可以：「发布」「只发网站」「等一下」暂缓、「算了」取消。",
+        }
+    }
+
     // ── Intent dispatch ───────────────────────────────────────────
 
-    async fn dispatch(&mut self, intent: Intent) -> Result<(), AppError> {
+    async fn dispatch(&mut self, intent: Intent, input: &str) -> Result<(), AppError> {
         match (&self.state, intent) {
             // ── Idle 状态 ──
             (SessionState::Idle, Intent::Generate { topic, style_name }) => {
@@ -475,10 +517,10 @@ impl Repl {
                 println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
                 self.reset_state();
             }
-            (_, Intent::Unknown) => {
-                println!(
-                    "没理解你的意思。试试说「写一篇关于XXX的文章，用YYY风格」或「学一下这个风格 https://...」"
-                );
+            (_, Intent::Unknown { reason }) => {
+                println!("[!] 没处理这条输入，原因：{reason}");
+                println!("    你刚才说的是：{input}");
+                println!("    {}", self.state_hint());
             }
 
             // ── WaitingForFulltext ──
@@ -508,10 +550,12 @@ impl Repl {
 
             // ── 状态不匹配 ──
             (state, intent) => {
-                return Err(AppError::InvalidState {
-                    state: format!("{:?}", state),
-                    intent: format!("{:?}", intent),
-                });
+                println!(
+                    "[!] 当前状态「{}」做不了「{}」。",
+                    state_label(state),
+                    intent_label(&intent)
+                );
+                println!("    {}", self.state_hint());
             }
         }
         Ok(())
@@ -974,6 +1018,23 @@ impl Repl {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    // ── state_label / intent_label ────────────────────────────────
+
+    #[test]
+    fn test_state_label_covers_all_states() {
+        assert_eq!(state_label(&SessionState::Idle), "空闲");
+        assert_eq!(state_label(&SessionState::WaitingForFulltext), "等待确认全文");
+        assert_eq!(state_label(&SessionState::WaitingForPublish), "等待确认发布");
+        assert_eq!(state_label(&SessionState::WaitingForOutline), "等待确认大纲");
+    }
+
+    #[test]
+    fn test_intent_label_known_and_unknown() {
+        assert_eq!(intent_label(&Intent::Generate { topic: "t".into(), style_name: "s".into() }), "写文章");
+        assert_eq!(intent_label(&Intent::Confirm), "确认");
+        assert_eq!(intent_label(&Intent::Unknown { reason: "x".into() }), "无法识别");
+    }
 
     // ── md_to_wechat_html ──────────────────────────────────────────
 

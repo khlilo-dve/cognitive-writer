@@ -28,32 +28,46 @@ pub enum SessionState {
 // ── LLM 意图分类 ────────────────────────────────────────────────────────
 
 /// LLM 意图分类的 system prompt。
-/// `{state}` 占位符会被当前 SessionState 的中文描述替换。
-const INTENT_CLASSIFY_PROMPT: &str = r#"你是意图分类器。分析用户输入，输出 JSON。
+/// `{state}` 与 `{valid_intents}` 占位符在运行时注入。
+const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意图分类器。把用户输入映射到一个意图，只输出 JSON。
 
-当前对话状态: {state}
+当前对话状态：{state}
+{valid_intents}
 
-分类选项（只选一个 intent_type）：
-- Generate: 用户想写文章。提取 topic（主题）和 style_name（风格名）
-- Learn: 用户想从 URL 学习风格。提取 url
-- ListStyles: 用户想列出所有风格
-- ShowStyle: 用户想看某个风格详情。提取 name
-- DeleteStyle: 用户想删除某个风格。提取 name
-- RefineFile: 用户想局部修改某个文件。提取 path（.md 文件路径）和 instruction（修改指令）
-- UpdateFile: 用户想重写某个文件。提取 path（.md 文件路径）和 instruction（修改指令）
-- ModifySection: 用户想修改文章的某部分。提取 instruction
-- ChangeStyle: 用户想换一种风格重写。提取 style_name
-- Publish: 用户确认发布
-- PublishWebsiteOnly: 用户只想发布到网站
-- Hold: 用户想暂缓发布
-- Confirm: 用户确认当前操作（OK/没问题/继续）
-- Cancel: 用户取消当前操作（算了/不写了）
-- Unknown: 以上都不是
+## 全部意图及字段
+- Generate：想写/生成文章。字段 topic（主题）、style_name（风格名，省略则留空）
+- Learn：想从某个链接学写作风格。字段 url（http/https 链接）
+- ListStyles：想看有哪些风格
+- ShowStyle：想看某风格详情/摘要。字段 name
+- DeleteStyle：想删除某风格。字段 name
+- RefineFile：想局部修改某个 .md 文件。字段 path、instruction
+- UpdateFile：想整体重写某个 .md 文件。字段 path、instruction
+- ModifyOutline：想修改当前大纲。字段 instruction
+- ModifySection：想修改当前文章某部分。字段 instruction
+- ChangeStyle：想换成另一风格重写。字段 style_name
+- Publish：确认发布
+- PublishWebsiteOnly：只想发布到网站
+- Hold：暂缓/先不发布
+- Confirm：确认当前操作
+- Cancel：取消当前操作
+- Unknown：与写作无关、或无法理解的输入。字段 reason（一句话说明原因）
 
-输出格式（只输出 JSON，不要任何其他文字）：
-{"intent_type": "Generate", "topic": "文章主题", "style_name": "风格名"}
-{"intent_type": "Confirm"}
-{"intent_type": "Unknown"}"#;
+## 识别要点
+- 识别口语、同义、省略表达："整一篇/来一篇/帮我写/写个"=Generate；"拉倒/算了算了/不搞了"=Cancel；"行/好/OK/对"=Confirm
+- 输入与写作完全无关（闲聊、查天气等）→ Unknown，reason 写「与写作无关」
+- 输入像指令但含糊不清 → Unknown，reason 写「无法理解意图」
+- 只输出一行 JSON，不要解释、不要 Markdown 代码块
+- 示例：{"intent_type": "Generate", "topic": "...", "style_name": "..."}；{"intent_type": "Unknown", "reason": "..."}"#;
+
+/// 每个状态下的有效意图，注入分类提示词，帮助模型在状态机下正确分类。
+fn state_valid_intents(state: &SessionState) -> &'static str {
+    match state {
+        SessionState::Idle => "有效意图：Generate（写文章）、Learn（学风格）、ListStyles、ShowStyle、DeleteStyle、RefineFile、UpdateFile、Cancel。",
+        SessionState::WaitingForOutline => "有效意图：Confirm（确认大纲）、ModifyOutline（改大纲）、Cancel。",
+        SessionState::WaitingForFulltext => "有效意图：Confirm（确认全文）、ModifySection（改某段）、ChangeStyle（换风格）、Cancel。",
+        SessionState::WaitingForPublish => "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。",
+    }
+}
 
 /// 使用 LLM 将自然语言输入分类为 Intent。
 ///
@@ -74,7 +88,9 @@ pub async fn classify_intent(
         SessionState::WaitingForPublish => "等待用户确认发布",
     };
 
-    let system_prompt = INTENT_CLASSIFY_PROMPT.replace("{state}", state_str);
+    let system_prompt = INTENT_CLASSIFY_PROMPT
+        .replace("{state}", state_str)
+        .replace("{valid_intents}", state_valid_intents(state));
     let user_prompt = format!("用户输入：{}", input);
 
     let raw = call_llm(client, base_url, api_key, model, &system_prompt, &user_prompt).await?;
@@ -156,8 +172,9 @@ fn parse_classify_response(raw: &str, _original_input: &str) -> Result<Intent, A
         "Confirm" => Ok(Intent::Confirm),
         "Cancel" => Ok(Intent::Cancel),
         _ => {
-            // LLM 无法分类 → 不是错误，返回 Unknown 即可
-            Ok(Intent::Unknown)
+            // LLM 无法分类 → 携带原因，供上层准确报错
+            let reason = v["reason"].as_str().unwrap_or("无法理解意图").to_string();
+            Ok(Intent::Unknown { reason })
         }
     }
 }
@@ -198,8 +215,8 @@ pub enum Intent {
     PublishWebsiteOnly,
     /// 暂缓/搁置当前操作。
     Hold,
-    /// 无法识别的意图。
-    Unknown,
+    /// 无法识别的意图（附带原因，用于准确报错）。
+    Unknown { reason: String },
 }
 
 // ── Public API ───────────────────────────────────────────────────────
@@ -212,7 +229,7 @@ pub enum Intent {
 pub fn parse_intent(input: &str, _state: &SessionState) -> Intent {
     let input = input.trim();
     if input.is_empty() {
-        return Intent::Unknown;
+        return Intent::Unknown { reason: "输入为空".to_string() };
     }
 
     // ── 0 成本快速预检：确认 / 取消 ──
@@ -224,7 +241,7 @@ pub fn parse_intent(input: &str, _state: &SessionState) -> Intent {
     }
 
     // ── 其余返回 Unknown，由调用方走 LLM 分类 ──
-    Intent::Unknown
+    Intent::Unknown { reason: "无法理解意图".to_string() }
 }
 
 // ── Layer 1 模式检测辅助 ────────────────────────────────────────────
@@ -503,7 +520,7 @@ fn match_publish_intent(input: &str) -> Intent {
     {
         return Intent::Hold;
     }
-    Intent::Unknown
+    Intent::Unknown { reason: "无法理解意图".to_string() }
 }
 
 #[cfg(test)]
@@ -723,35 +740,35 @@ mod tests {
     fn test_parse_url_is_learn() {
         // v3.1: parse_intent 已裁剪，URL 检测由 LLM 分类处理
         let result = parse_intent("https://example.com", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_parse_list_styles() {
         // v3.1: parse_intent 已裁剪，风格查询由 LLM 分类处理
         let result = parse_intent("风格库里有什么", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_parse_show_style() {
         // v3.1: parse_intent 已裁剪，风格详情由 LLM 分类处理
         let result = parse_intent("看看鲁迅风格", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_parse_delete_style() {
         // v3.1: parse_intent 已裁剪，删除风格由 LLM 分类处理
         let result = parse_intent("删掉测试风格", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_parse_generate() {
         // v3.1: parse_intent 已裁剪，生成由 LLM 分类处理
         let result = parse_intent("写一篇关于AI的文章用鲁迅风格", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
@@ -759,14 +776,14 @@ mod tests {
         // v3.1: parse_intent 已裁剪，重写由 LLM 分类处理
         let result =
             parse_intent("重写 outputs/test.md 改成更正式", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_parse_refine() {
         // v3.1: parse_intent 已裁剪，局部修改由 LLM 分类处理
         let result = parse_intent("outputs/test.md 改一下第二段", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     // ── parse_intent: Layer 2 ──────────────────────────────────
@@ -774,7 +791,7 @@ mod tests {
     #[test]
     fn test_idle_unknown_on_unmatched() {
         let result = parse_intent("随便说点什么", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
@@ -793,48 +810,48 @@ mod tests {
     fn test_waiting_for_publish_website_only() {
         // v3.1: parse_intent 已裁剪，发布选项由 LLM 分类处理
         let result = parse_intent("只发网站", &SessionState::WaitingForPublish);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_waiting_for_publish_publish() {
         // v3.1: parse_intent 已裁剪，发布由 LLM 分类处理
         let result = parse_intent("发布吧", &SessionState::WaitingForPublish);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_waiting_for_publish_hold() {
         // v3.1: parse_intent 已裁剪，暂缓由 LLM 分类处理
         let result = parse_intent("等一下", &SessionState::WaitingForPublish);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_waiting_for_outline_modify() {
         // v3.1: parse_intent 已裁剪，大纲修改由 LLM 分类处理
         let result = parse_intent("第二部分太长了", &SessionState::WaitingForOutline);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_waiting_for_fulltext_change_style() {
         // v3.1: parse_intent 已裁剪，换风格由 LLM 分类处理
         let result = parse_intent("换成鲁迅风格", &SessionState::WaitingForFulltext);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_waiting_for_fulltext_modify_section() {
         // v3.1: parse_intent 已裁剪，段落修改由 LLM 分类处理
         let result = parse_intent("第三段需要更多案例", &SessionState::WaitingForFulltext);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     #[test]
     fn test_empty_input_is_unknown() {
         let result = parse_intent("   ", &SessionState::WaitingForOutline);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     // ── Priority: URL beats other patterns ─────────────────────
@@ -846,7 +863,7 @@ mod tests {
             "写一篇用鲁迅风格 https://example.com",
             &SessionState::Idle,
         );
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     // ── Priority: ShowStyle before DeleteStyle ──────────────────
@@ -855,7 +872,7 @@ mod tests {
     fn test_show_style_before_delete() {
         // v3.1: parse_intent 已裁剪，风格查询由 LLM 分类处理
         let result = parse_intent("删掉看看的风格", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     // ── Priority: UpdateFile before RefineFile ──────────────────
@@ -864,7 +881,7 @@ mod tests {
     fn test_update_before_refine() {
         // v3.1: parse_intent 已裁剪，重写由 LLM 分类处理
         let result = parse_intent("重写 a.md 改成更正式", &SessionState::Idle);
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
     // ── parse_classify_response ──────────────────────────────────
@@ -893,7 +910,29 @@ mod tests {
     fn test_parse_classify_response_unknown() {
         let raw = r#"{"intent_type": "Unknown"}"#;
         let result = parse_classify_response(raw, "test input").unwrap();
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
+    }
+
+    #[test]
+    fn test_parse_classify_response_unknown_with_reason() {
+        let raw = r#"{"intent_type": "Unknown", "reason": "与写作无关"}"#;
+        let result = parse_classify_response(raw, "test input").unwrap();
+        match result {
+            Intent::Unknown { reason } => assert_eq!(reason, "与写作无关"),
+            other => panic!("Expected Unknown, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn test_state_valid_intents_covers_all_states() {
+        for state in [
+            SessionState::Idle,
+            SessionState::WaitingForOutline,
+            SessionState::WaitingForFulltext,
+            SessionState::WaitingForPublish,
+        ] {
+            assert!(!state_valid_intents(&state).is_empty());
+        }
     }
 
     #[test]
@@ -916,7 +955,7 @@ mod tests {
             "帮我整一篇关于认知偏差的，要那种犀利点的感觉",
             &SessionState::Idle,
         );
-        assert!(matches!(result, Intent::Unknown));
+        assert!(matches!(result, Intent::Unknown { .. }));
     }
 
 }
