@@ -72,7 +72,7 @@ cognitive-writer/
     └── ARCHITECTURE.md
 ```
 
-> **测试总计：136 tests, 0 failed**（`cargo test --lib`）
+> **测试总计：140 tests, 0 failed**（`cargo test --lib`）
 
 ---
 
@@ -165,30 +165,11 @@ pub enum Intent {
 }
 ```
 
-**匹配策略：** 纯关键词 + 规则优先级，不用 NLP 库。
+**匹配策略：** LLM 分类主导（`classify_intent`），关键词匹配降级为 fallback（`parse_intent` 只做 confirm/cancel 快速预检）。
 
-```rust
-fn parse_intent(input: &str, state: &SessionState) -> Intent {
-    // 1. 先匹配状态无关的高置信度模式
-    //   → 包含 URL → Learn
-    //   → "写一篇" + "风格" → Generate
-    //   → "风格库有什么" → ListStyles
-    //   → "看看" + "风格" → ShowStyle
-    //   → "删掉" + "风格" → DeleteStyle
-    //   → "重写" + ".md" → UpdateFile
-    //   → ".md" + "改成" → RefineFile
-
-    // 2. 根据当前状态匹配
-    //   match state {
-    //     WaitingForOutline => is_confirm / is_cancel / ModifyOutline
-    //     WaitingForFulltext => is_confirm / is_cancel / ModifySection / ChangeStyle
-    //     WaitingForPublish => Publish / PublishWebsiteOnly / Hold / Cancel
-    //     Idle => /* fall through */
-    //   }
-
-    // 3. 回退 → Unknown
-}
-```
+- `classify_intent` 用极小 prompt 分类，并注入「当前状态 + 该状态的有效意图」，让模型在状态机下正确理解自然语言（口语、同义、省略表达都能识别）。
+- 无法分类时返回 `Unknown { reason }`，`reason` 说明是「与写作无关」还是「无法理解意图」。
+- 状态不匹配或 Unknown 时，REPL 用 `state_label` / `intent_label` / `state_hint` 输出准确的中文报错与可用操作提示。
 
 ### `src/generate.rs` — 骨架→渲染双通道（风格注入）
 
@@ -301,7 +282,7 @@ pub fn delete_style(name: &str) -> Result<(), AppError>
 
 ### `src/lib.rs` — 库入口
 
-提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 136 个单元测试，无需编译二进制。
+提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 140 个单元测试，无需编译二进制。
 
 ---
 
@@ -490,7 +471,7 @@ cog update [OPTIONS] <FILE> # 整文重写
 | Phase 5 | 清理 + 测试 | 移除死代码 | ✅ 已完成 |
 | v3.1 | 异步 stdin + 会话持久化 + 优雅关闭 | ✅ 已完成 |
 
-**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 136 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
+**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 140 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
 
 ## v3.1 — 异步事件循环 + 会话持久化 ✅ (2026-07-26 已实现)
 
