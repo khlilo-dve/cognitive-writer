@@ -280,6 +280,8 @@ pub fn show_style_detail(name: &str) -> Result<String, AppError>
 pub fn delete_style(name: &str) -> Result<(), AppError>
 ```
 
+**精确匹配语义：** 风格名匹配不是「包含/相似」，而是归一化后做**字符串精确相等**。`match_key()` 把中文转无声调拼音、英文转小写，因此 `轻辩` 与 `qingbian` 得到同一个键 `qingbian`，双向可匹配；而 `qingbain`（错一个字母）键不同，绝不误配。这是刻意保持的硬约束——风格库增长后，打错一个字母不能串到别的风格。
+
 ### `src/lib.rs` — 库入口
 
 提供 `pub mod` 声明，将所有模块暴露为库 crate。支持 `cargo test --lib` 运行全部 140 个单元测试，无需编译二进制。
