@@ -1,4 +1,4 @@
-# Cognitive Writer
+# Cognitive Writer v3.2
 
 > 一个想法进去，两边文章出来。用 Rust 写的 AI 写作 Agent。
 
