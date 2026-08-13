@@ -1018,6 +1018,11 @@ impl Repl {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::sync::Mutex;
+
+    /// 改动进程级环境变量（API_KEY 等）的测试必须持有此锁，
+    /// 避免并行测试互相 set_var/remove_var 造成竞态。
+    static ENV_MUTEX: Mutex<()> = Mutex::new(());
 
     // ── state_label / intent_label ────────────────────────────────
 
@@ -1098,6 +1103,7 @@ mod tests {
 
     #[test]
     fn test_repl_new_requires_api_key() {
+        let _g = ENV_MUTEX.lock().unwrap();
         // Without API_KEY set, should return Err
         // (This test relies on API_KEY not being set in the environment)
         unsafe { std::env::remove_var("API_KEY") };
@@ -1111,6 +1117,7 @@ mod tests {
 
     #[test]
     fn test_repl_new_uses_defaults() {
+        let _g = ENV_MUTEX.lock().unwrap();
         unsafe { std::env::set_var("API_KEY", "test-key") };
         // Remove any overrides so we test defaults
         unsafe { std::env::remove_var("BASE_URL") };
@@ -1131,6 +1138,7 @@ mod tests {
 
     #[test]
     fn test_reset_state_clears_all() {
+        let _g = ENV_MUTEX.lock().unwrap();
         unsafe { std::env::set_var("API_KEY", "test-key") };
         let mut repl = Repl::new().unwrap();
         repl.state = SessionState::WaitingForPublish;
@@ -1158,6 +1166,7 @@ mod tests {
 
     #[test]
     fn test_handle_command_help() {
+        let _g = ENV_MUTEX.lock().unwrap();
         unsafe { std::env::set_var("API_KEY", "test-key") };
         let mut repl = Repl::new().unwrap();
         let should_exit = repl.handle_command("/help");
@@ -1167,6 +1176,7 @@ mod tests {
 
     #[test]
     fn test_handle_command_quit() {
+        let _g = ENV_MUTEX.lock().unwrap();
         unsafe { std::env::set_var("API_KEY", "test-key") };
         let mut repl = Repl::new().unwrap();
         let should_exit = repl.handle_command("/quit");
@@ -1176,6 +1186,7 @@ mod tests {
 
     #[test]
     fn test_handle_command_unknown() {
+        let _g = ENV_MUTEX.lock().unwrap();
         unsafe { std::env::set_var("API_KEY", "test-key") };
         let mut repl = Repl::new().unwrap();
         let should_exit = repl.handle_command("/unknown");
@@ -1187,6 +1198,7 @@ mod tests {
 
     #[test]
     fn test_handle_list_styles_empty_dir_ok() {
+        let _g = ENV_MUTEX.lock().unwrap();
         unsafe { std::env::set_var("API_KEY", "test-key") };
         let repl = Repl::new().unwrap();
 

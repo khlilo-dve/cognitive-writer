@@ -16,6 +16,7 @@ clap = { version = "4", features = ["derive"] }
 thiserror = "2"
 indicatif = "0.17"
 dirs = "5"
+pinyin = "0.10"
 
 [dev-dependencies]
 tempfile = "3"

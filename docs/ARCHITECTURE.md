@@ -72,7 +72,7 @@ cognitive-writer/
     └── ARCHITECTURE.md
 ```
 
-> **测试总计：140 tests, 0 failed**（`cargo test --lib`）
+> **测试总计：145 tests, 0 failed**（`cargo test --lib`）
 
 ---
 
@@ -261,13 +261,13 @@ pub fn publish_to_website(
 ### `src/styles.rs` — 风格库管理
 
 ```rust
-/// 模糊匹配风格文件名
-/// 用户说"轻辩" → 扫描 styles/*.md → 匹配 styles/qingbian.md
+/// 模糊匹配风格文件名（拼音归一化）
+/// 用户说"轻辩" → 转拼音 "qingbian" → 匹配 styles/qingbian.md
 pub fn fuzzy_match_style(name: &str) -> Result<(String, String), AppError> {
     // 1. 精确匹配文件名（去掉 .md）
-    // 2. 包含匹配（name 是文件名的子串）
-    // 3. 读文件内容标题行匹配
-    // 4. 最近修改的（用户说"刚学的风格"）
+    // 2. 拼音归一化精确匹配（中文名 ↔ 拼音文件名，错一个字母不匹配）
+    // 3. 最近修改的（用户说"刚学的风格"）
+    // 4. 内容关键词匹配（前 200 字）
 }
 
 /// 列出所有风格 + 一句话描述
@@ -471,7 +471,7 @@ cog update [OPTIONS] <FILE> # 整文重写
 | Phase 5 | 清理 + 测试 | 移除死代码 | ✅ 已完成 |
 | v3.1 | 异步 stdin + 会话持久化 + 优雅关闭 | ✅ 已完成 |
 
-**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 140 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
+**实现总结：** 全部 5 个阶段 + v3.1 已完成。总计 145 tests, 0 failed（`cargo test --lib`）。v3.1 已完成，支持异步事件循环 + 会话持久化。
 
 ## v3.1 — 异步事件循环 + 会话持久化 ✅ (2026-07-26 已实现)
 
