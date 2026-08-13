@@ -45,29 +45,59 @@ fn fatal(msg: impl std::fmt::Display) -> ! {
     process::exit(1);
 }
 
-// ── Outer system prompt (Pass 1: 骨架) ────────────────────────────
+// ── Prompt builders ──────────────────────────────────────────────────
 
-const OUTLINE_SYSTEM_PROMPT: &str = r#"你是一个写作结构设计专家。
-用户会给你一份创作素材，你需要输出一份文章逻辑大纲。
+/// 大纲生成 system prompt：注入风格执行指令，让大纲在结构层就贴合风格。
+fn outline_system_prompt(style: &str) -> String {
+    format!(
+        "你是一个写作结构设计专家。\n\n\
+         以下是本次文章必须遵循的写作风格（逐条执行，硬约束）：\n\n---\n{style}\n---\n\n\
+         用户会给你一份创作素材，请输出一份【符合上述风格】的文章逻辑大纲。\n\n\
+         要求：\n\
+         1. 用 Markdown 层级列表（- / 1. 2. 3.）\n\
+         2. 开头节点体现风格的破题方式，结尾节点体现风格的收束方式\n\
+         3. 每个节点写清该段的【核心判断】和【支撑素材方向】，核心判断要符合风格的论证方式\n\
+         4. 标注段落之间的逻辑衔接关系（递进/转折/并列/因果）\n\
+         5. 控制在 300-500 字以内\n\
+         6. 不要写正文，只输出大纲骨架"
+    )
+}
 
-要求：
-1. 用 Markdown 层级列表（- / 1. 2. 3.）
-2. 每个节点写清该段的【核心论点】和【支撑素材/案例方向】
-3. 标注段落之间的逻辑衔接关系（递进/转折/并列/因果）
-4. 控制在 300-500 字以内
-5. 不要写正文，只输出骨架"#;
+/// 正文渲染 system prompt：风格 spec 外包一层硬约束与事实边界。
+/// 通用约束（只输出正文 / 不伪造事实 / 冲突时禁止优先）放在代码里，
+/// 不写进每个风格文件，避免重复与漂移。
+fn style_system_prompt(style: &str) -> String {
+    format!(
+        "你是一名中文写作者。以下是必须严格遵循的写作风格，逐条执行，这是硬约束：\n\n---\n{style}\n---\n\n\
+         通用约束：\n\
+         - 只输出 Markdown 正文，不复述风格规则，不输出思考、自检或写作过程\n\
+         - 不添加素材中没有依据的事实、数据、实验结论或名人观点\n\
+         - 风格规则若冲突，以「禁止」一节为准"
+    )
+}
 
-// ── REPL 模式：Pass 1 only — 生成骨架 ────────────────────────────
+/// 正文渲染 user prompt：大纲 + 素材 + 输出前自检要求。
+fn render_prompt(outline: &str, idea: &str) -> String {
+    format!(
+        "以下是符合风格的逻辑大纲，请严格按此结构展开正文：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n\
+         请按大纲结构展开，输出完整的 Markdown 正文。输出前核对：开头破题、核心论证、段落节奏、句式人称、结尾收束是否符合给定风格，是否出现 AI 套话或素材外事实；核对后直接输出正文，不要输出核对过程。",
+        outline, idea
+    )
+}
+
+// ── REPL 模式：Pass 1 only — 生成风格化骨架 ─────────────────────────
 
 pub async fn generate_outline(
     client: &Client,
     base_url: &str,
     api_key: &str,
     model: &str,
+    style: &str,
     idea: &str,
 ) -> Result<String, AppError> {
+    let system = outline_system_prompt(style);
     with_retry(3, "大纲生成", || {
-        call_llm(client, base_url, api_key, model, OUTLINE_SYSTEM_PROMPT, idea)
+        call_llm(client, base_url, api_key, model, &system, idea)
     })
     .await
 }
@@ -83,13 +113,10 @@ pub async fn render_fulltext(
     outline: &str,
     idea: &str,
 ) -> Result<String, AppError> {
-    let render_prompt = format!(
-        "以下是文章的逻辑大纲，请严格按此结构展开正文：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n请根据大纲结构和原始素材，输出完整的 Markdown 正文。",
-        outline, idea
-    );
-
+    let system = style_system_prompt(style);
+    let user = render_prompt(outline, idea);
     with_retry(3, "正文渲染", || {
-        call_llm(client, base_url, api_key, model, style, &render_prompt)
+        call_llm(client, base_url, api_key, model, &system, &user)
     })
     .await
 }
@@ -104,24 +131,22 @@ async fn generate_with_outline(
     style: &str,
     idea: &str,
 ) -> Result<String, AppError> {
-    // Pass 1 — 骨架
+    // Pass 1 — 风格化骨架
+    let outline_system = outline_system_prompt(style);
     let spinner = new_spinner("正在生成大纲骨架...");
     let outline = with_retry(3, "大纲生成", || {
-        call_llm(client, base_url, api_key, model, OUTLINE_SYSTEM_PROMPT, idea)
+        call_llm(client, base_url, api_key, model, &outline_system, idea)
     })
     .await?;
     spinner.finish_with_message("大纲生成完成");
     println!("[info] 大纲 {} 字符", outline.len());
 
     // Pass 2 — 渲染
-    let render_prompt = format!(
-        "以下是文章的逻辑大纲，请严格按此结构展开正文：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n请根据大纲结构和原始素材，输出完整的 Markdown 正文。",
-        outline, idea
-    );
-
+    let render_system = style_system_prompt(style);
+    let render_user = render_prompt(&outline, idea);
     let spinner = new_spinner("正在渲染正文...");
     let markdown = with_retry(3, "正文渲染", || {
-        call_llm(client, base_url, api_key, model, style, &render_prompt)
+        call_llm(client, base_url, api_key, model, &render_system, &render_user)
     })
     .await?;
     spinner.finish_with_message("正文渲染完成");
@@ -203,5 +228,65 @@ pub async fn run_generate(input: &str, no_clipboard: bool) {
                 );
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_outline_system_prompt_includes_style_and_structure() {
+        let p = outline_system_prompt("## 定位\n理性分析");
+        assert!(p.contains("写作结构设计专家"));
+        assert!(p.contains("## 定位"));
+        assert!(p.contains("理性分析"));
+        assert!(p.contains("破题"));
+        assert!(p.contains("收束"));
+    }
+
+    #[test]
+    fn test_style_system_prompt_wraps_style_with_constraints() {
+        let p = style_system_prompt("## 定位\n理性分析");
+        assert!(p.contains("## 定位"));
+        assert!(p.contains("只输出 Markdown 正文"));
+        assert!(p.contains("禁止"));
+        assert!(p.contains("硬约束"));
+    }
+
+    #[test]
+    fn test_render_prompt_contains_outline_and_idea() {
+        let p = render_prompt("## 大纲标题", "这是素材");
+        assert!(p.contains("## 大纲标题"));
+        assert!(p.contains("这是素材"));
+        assert!(p.contains("不要输出核对过程"));
+    }
+
+    /// 端到端评测：真实 LLM 调用，验证风格是否注入大纲与正文。
+    /// 手动运行：`cargo test --lib -- --ignored eval_style_generation_end_to_end --nocapture`
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络"]
+    fn eval_style_generation_end_to_end() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            dotenvy::dotenv().ok();
+            let key = std::env::var("API_KEY").expect("API_KEY 未设置");
+            let base = std::env::var("BASE_URL")
+                .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
+            let model = std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".to_string());
+            let client = Client::new();
+            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
+            let idea = "文章主题：普通人为什么很难靠打工实现财富跃迁\n基本内容：工资有天花板，资产能复利。多数人停在第一桶金之前。";
+
+            let outline = generate_outline(&client, &base, &key, &model, &style, idea)
+                .await
+                .expect("大纲生成失败");
+            println!("\n===== 风格化大纲 =====\n{}", outline);
+
+            let fulltext = render_fulltext(&client, &base, &key, &model, &style, &outline, idea)
+                .await
+                .expect("正文渲染失败");
+            println!("\n===== 风格化正文 =====\n{}", fulltext);
+        });
     }
 }

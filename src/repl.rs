@@ -536,16 +536,17 @@ impl Repl {
         println!("[info] 匹配风格: {} ({} 字符)", disp_name, style_content.len());
 
         self.current_style_name = Some(disp_name);
-        self.current_style_content = Some(style_content);
+        self.current_style_content = Some(style_content.clone());
         self.current_topic = Some(topic.to_string());
 
-        // 生成大纲
+        // 生成风格化大纲（风格也注入 Pass 1，让结构贴合风格）
         let spinner = crate::llm::new_spinner("正在生成大纲骨架...");
         let outline = generate_outline(
             &self.client,
             &self.base_url,
             &self.api_key,
             &self.model,
+            &style_content,
             topic,
         )
         .await?;
