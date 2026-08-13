@@ -2,6 +2,8 @@ use std::fs;
 use std::path::Path;
 use std::time::SystemTime;
 
+use pinyin::ToPinyin;
+
 use crate::error::AppError;
 
 /// 风格摘要
@@ -48,6 +50,22 @@ fn extract_description(content: &str) -> String {
 fn is_recent_query(query: &str) -> bool {
     let keywords = ["刚学", "最近", "上次"];
     keywords.iter().any(|kw| query.contains(kw))
+}
+
+/// 把名称归一化为可用于精确比对的键：中文转无声调拼音，ASCII 转小写，其余原样。
+///
+/// 这样「轻辩」与「qingbian」得到同一个键，而「qingbain」保持不同，实现
+/// 中文名 ↔ 拼音文件名的精确跨编码匹配，同时不引入模糊匹配。
+fn match_key(name: &str) -> String {
+    let mut out = String::with_capacity(name.len());
+    for c in name.trim().chars() {
+        if let Some(py) = c.to_pinyin() {
+            out.push_str(py.plain());
+        } else {
+            out.extend(c.to_lowercase());
+        }
+    }
+    out
 }
 
 /// Find the most recently modified .md file in the given directory.
@@ -127,12 +145,25 @@ pub fn fuzzy_match_style(
         return Ok((query.to_string(), content));
     }
 
-    // Priority 3 (checked before 2 as it can short-circuit): recent query
+    // Priority 2: pinyin 归一化精确匹配（中文名 ↔ 拼音文件名）
+    let query_key = match_key(query);
+    if !query_key.is_empty() {
+        for (display, path_str) in &md_files {
+            if match_key(display) == query_key {
+                let content = fs::read_to_string(path_str).map_err(|e| {
+                    AppError::FileRead(format!("无法读取 `{path_str}`: {e}"))
+                })?;
+                return Ok((display.clone(), content));
+            }
+        }
+    }
+
+    // Priority 3: recent query（刚学/最近/上次）
     if is_recent_query(query) {
         return find_most_recent(styles_dir);
     }
 
-    // Priority 2: content keyword match (first 200 chars)
+    // Priority 4: content keyword match (first 200 chars)
     for (display, path_str) in &md_files {
         let content = fs::read_to_string(path_str).map_err(|e| {
             AppError::FileRead(format!("无法读取 `{path_str}`: {e}"))
@@ -280,6 +311,44 @@ mod tests {
         // Either file could be "more recent" depending on filesystem timing;
         // we just verify it returns Ok (finds something).
         assert!(result.is_ok());
+    }
+
+    // ── match_key（拼音归一化）──────────────────────────────────
+
+    #[test]
+    fn test_match_key_chinese_to_pinyin() {
+        assert_eq!(match_key("轻辩"), "qingbian");
+    }
+
+    #[test]
+    fn test_match_key_ascii_lowercased() {
+        assert_eq!(match_key("QingBian"), "qingbian");
+    }
+
+    #[test]
+    fn test_match_key_mixed_chinese_and_ascii() {
+        // 中文转拼音、英文小写，用于混合名
+        assert_eq!(match_key("轻bian"), "qingbian");
+    }
+
+    #[test]
+    fn test_fuzzy_match_chinese_name_resolves_to_pinyin_file() {
+        let (_dir, dir_str) = setup_temp_styles(&[
+            ("qingbian.md", "# 轻辩\n理性分析。"),
+            ("other.md", "# Other\n无关。"),
+        ]);
+        let (name, content) = fuzzy_match_style(&dir_str, "轻辩").unwrap();
+        assert_eq!(name, "qingbian");
+        assert!(content.contains("理性分析"));
+    }
+
+    #[test]
+    fn test_fuzzy_match_wrong_pinyin_letter_does_not_match() {
+        let (_dir, dir_str) = setup_temp_styles(&[
+            ("qingbian.md", "# 轻辩\n理性分析。"),
+        ]);
+        // 错一个字母（qingbain ≠ qingbian）绝不能匹配上
+        assert!(fuzzy_match_style(&dir_str, "qingbain").is_err());
     }
 
     #[test]
