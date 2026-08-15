@@ -93,6 +93,61 @@ pub async fn eval_learn_prompt(
     Ok(())
 }
 
+// ── 冻结测试集 + 批量生成（baseline）─────────────────────────────────
+
+/// 冻结测试集：5 个跨领域主题（来源：Obsidian 2-notes）。
+/// 改 prompt 时**不动这里**——测试集冻结，变量只有被评测的 prompt。
+pub const TEST_SET: [&str; 5] = [
+    "文章主题：复利的真相——早期靠本金，后期靠复利\n基本内容：复利公式三个变量（本金、收益率、期数）各有认知谬误；「每天进步1%」是用次方算加法的事；大部分收益来自本金而非利滚利；巴菲特百万赌局证明长期稳定高收益罕见。",
+    "文章主题：幸存者偏差——你只看到活下来的，看不到死掉的\n基本内容：看到的成功样本是残酷淘汰后的幸存者；一万名基金经理里会有313人靠运气连续5年盈利；失败者也有和成功者同样的特质，真正区别只有运气；我们在签约那只打出伊利亚特的猴子。",
+    "文章主题：刚需是自学的结果，不是自学的原因\n基本内容：你不会的东西对你感觉上就不是刚需；人脑用已有信息拼出自洽图像，把缺的技能排除在必要性之外；一旦学会就发现离不开它。",
+    "文章主题：AI是效率倍增器，不是躺平工具\n基本内容：AI压扁中间层脑力工作、放大头部生产力；「AI会做所以我不学」等于把市场定价权交给别人的模型；正确姿势是让AI成为倍增器，拉高单位小时产出。",
+    "文章主题：从消费者转向生产者\n基本内容：消费是被动接收价值，生产是主动创造价值；生产者思维带来复利（作品、资产、能力），消费者思维只消耗；离生产越近的人赚钱越多。",
+];
+
+/// 跑整批测试集，生成每篇的大纲+正文，存到 eval/baseline/ 作为 baseline。
+///
+/// TODO(rubric)：打分逻辑待 rubric 与 judge 校准后接入——届时在这里对每篇打分，
+/// 并与旧 baseline 对比输出 delta / win-rate，那才是「改好还是改坏」的答案。
+pub async fn eval_style_batch(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    style: &str,
+) -> Result<(), AppError> {
+    std::fs::create_dir_all("eval/baseline")
+        .map_err(|e| AppError::Intent(format!("创建 baseline 目录失败: {}", e)))?;
+
+    for (i, idea) in TEST_SET.iter().enumerate() {
+        let n = i + 1;
+        let outline = generate_outline(client, base_url, api_key, model, style, idea).await?;
+        let fulltext = render_fulltext(client, base_url, api_key, model, style, &outline, idea).await?;
+
+        let quoted_idea: String = idea.split('\n').map(|l| format!("> {}", l)).collect::<Vec<_>>().join("\n");
+        let content = format!(
+            "# 主题 {}：{}\n\n{}\n\n## 大纲\n\n{}\n\n## 正文\n\n{}",
+            n,
+            idea.lines().next().unwrap_or("").trim_start_matches("文章主题："),
+            quoted_idea,
+            outline,
+            fulltext,
+        );
+        let path = format!("eval/baseline/topic_{:02}.md", n);
+        std::fs::write(&path, content)
+            .map_err(|e| AppError::Intent(format!("写 baseline 失败: {}", e)))?;
+        println!(
+            "[baseline] 主题 {} 已保存 → {} (正文 {} 字符)",
+            n,
+            path,
+            fulltext.chars().count()
+        );
+    }
+
+    println!("\n[baseline] 完成。改 prompt 后重跑本命令，对比新旧 eval/baseline/ 即可（打分待 rubric 接入）。");
+    Ok(())
+}
+
 // ── 手动评测入口（#[ignore] 测试）──────────────────────────────────────
 
 #[cfg(test)]
@@ -133,6 +188,19 @@ mod tests {
             eval_learn_prompt(&client, &base, &key, &model, ARTICLE)
                 .await
                 .expect("eval 2 失败");
+        });
+    }
+
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络，跑整批冻结测试集生成 baseline"]
+    fn eval_style_batch_suite() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let (base, key, model, client) = env();
+            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
+            eval_style_batch(&client, &base, &key, &model, &style)
+                .await
+                .expect("批量评测失败");
         });
     }
 }
