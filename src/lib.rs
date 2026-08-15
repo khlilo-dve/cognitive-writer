@@ -3,6 +3,7 @@
 
 pub mod clipboard;
 pub mod error;
+pub mod eval;
 pub mod generate;
 pub mod intent;
 pub mod io;
@@ -12,4 +13,5 @@ pub mod refine;
 pub mod repl;
 pub mod styles;
 pub mod update;
+pub mod utils;
 pub mod website;

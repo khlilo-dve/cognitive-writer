@@ -1,11 +1,10 @@
 // ── refine 子命令 — 局部重绘 ─────────────────────────────────────
-use pulldown_cmark::{html, Options, Parser as MdParser};
 use reqwest::Client;
-use std::process;
 
 use crate::clipboard::inject_clipboard;
 use crate::io::{extract_idea_slug, next_version, read_file, write_file};
 use crate::llm::{call_llm, new_spinner, with_retry};
+use crate::utils::{env_var, env_var_or, fatal, md_to_wechat_html};
 
 
 pub const REFINE_SYSTEM_PROMPT: &str = r#"你是一个严苛的文本重构引擎。
@@ -76,35 +75,6 @@ pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
         return Err("未找到 AI_EDIT 标记".to_string());
     }
     Ok(edits)
-}
-
-// ── 辅助函数 ─────────────────────────────────────────────────────────
-
-fn md_to_wechat_html(markdown: &str) -> String {
-    let mut opts = Options::empty();
-    opts.insert(Options::ENABLE_STRIKETHROUGH);
-    opts.insert(Options::ENABLE_TABLES);
-
-    let parser = MdParser::new_ext(markdown, opts);
-    let mut raw = String::new();
-    html::push_html(&mut raw, parser);
-
-    let raw = raw.replace("<hr />", "").replace("<hr>", "");
-
-    format!("<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>")
-}
-
-fn env_var(key: &str) -> Result<String, String> {
-    std::env::var(key).map_err(|_| format!("环境变量 `{}` 未设置，请检查 .env 文件", key))
-}
-
-fn env_var_or(key: &str, default: &str) -> String {
-    std::env::var(key).unwrap_or_else(|_| default.to_string())
-}
-
-fn fatal(msg: impl std::fmt::Display) -> ! {
-    eprintln!("[error] {}", msg);
-    process::exit(1);
 }
 
 // ── run_refine (CLI 模式入口) ──────────────────────────────────────

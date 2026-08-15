@@ -5,7 +5,6 @@
 
 use std::io::{self, Write};
 
-use pulldown_cmark::{html, Options, Parser as MdParser};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
@@ -19,21 +18,10 @@ use crate::refine::REFINE_SYSTEM_PROMPT;
 use crate::styles::{
     delete_style, fuzzy_match_style, list_styles_with_desc, show_style_detail,
 };
+use crate::utils::md_to_wechat_html;
 use crate::website::{publish_to_website, write_mdx_draft};
 
-// ── Local constants (duplicated from CLI modules to avoid cross-module
-//    coupling; editable independently) ──────────────────────────────────
-
-/// System prompt for outline generation (Pass 1 of generate flow).
-const OUTLINE_SYSTEM_PROMPT: &str = r#"你是一个写作结构设计专家。
-用户会给你一份创作素材，你需要输出一份文章逻辑大纲。
-
-要求：
-1. 用 Markdown 层级列表（- / 1. 2. 3.）
-2. 每个节点写清该段的【核心论点】和【支撑素材/案例方向】
-3. 标注段落之间的逻辑衔接关系（递进/转折/并列/因果）
-4. 控制在 300-500 字以内
-5. 不要写正文，只输出骨架"#;
+// ── Local constants ─────────────────────────────────────────────────
 
 /// System prompt for update / change-style — rewrites the whole article
 /// according to an instruction while preserving structure.
@@ -67,7 +55,6 @@ fn intent_label(intent: &Intent) -> &'static str {
         Intent::UpdateFile { .. } => "重写文件",
         Intent::Confirm => "确认",
         Intent::Cancel => "取消",
-        Intent::ModifyOutline { .. } => "修改大纲",
         Intent::ModifySection { .. } => "修改段落",
         Intent::ChangeStyle { .. } => "换风格",
         Intent::Publish => "发布",
@@ -104,27 +91,6 @@ Cognitive Writer v3.0 — 对话式写作 Agent
   重写 <路径> 改成 <指令>  → 根据指令重写文章
   <路径> 改 <指令>          → 局部重绘文件
 "#;
-
-// ── Markdown → WeChat HTML ──────────────────────────────────────────
-
-/// Convert Markdown to a WeChat-compatible HTML fragment.
-fn md_to_wechat_html(markdown: &str) -> String {
-    let mut opts = Options::empty();
-    opts.insert(Options::ENABLE_STRIKETHROUGH);
-    opts.insert(Options::ENABLE_TABLES);
-
-    let parser = MdParser::new_ext(markdown, opts);
-    let mut raw = String::new();
-    html::push_html(&mut raw, parser);
-
-    // 微信编辑器会剥离 <style> 标签，所以直接移除 <hr> 标签
-    let raw = raw.replace("<hr />", "").replace("<hr>", "");
-
-    // 极简样式：只保留基本排版和加粗，不加任何装饰性 CSS
-    format!(
-        "<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>"
-    )
-}
 
 // ── Helpers ─────────────────────────────────────────────────────────
 
@@ -493,7 +459,9 @@ impl Repl {
             }
             (SessionState::Idle, Intent::Learn { url }) => {
                 println!("[info] 开始学习风格: {}", url);
-                crate::learn::run_learn(&url).await;
+                if let Err(e) = crate::learn::run_learn(&url).await {
+                    eprintln!("[error] 学习风格失败: {}", e);
+                }
             }
             (SessionState::Idle, Intent::ListStyles) => {
                 self.handle_list_styles()?;
@@ -506,7 +474,9 @@ impl Repl {
             }
             (SessionState::Idle, Intent::UpdateFile { path, instruction }) => {
                 println!("[info] 重写文件: {} 指令: {}", path, instruction);
-                crate::update::run_update(&path, Some(instruction), false).await;
+                if let Err(e) = crate::update::run_update(&path, Some(instruction), false).await {
+                    eprintln!("[error] 重写文件失败: {}", e);
+                }
             }
             (SessionState::Idle, Intent::RefineFile { path, instruction }) => {
                 self.handle_refine_file(&path, &instruction).await?;
@@ -671,6 +641,23 @@ impl Repl {
             Err(e) => eprintln!("[warn] 剪贴板注入失败: {}", e),
         }
 
+        // 本地归档：写 outputs/{slug}_v{N}.md 和 .html，公众号文章有本地原件
+        let ver = crate::io::next_version("outputs", slug);
+        let md_path = format!("outputs/{}_v{}.md", slug, ver);
+        let html_path = format!("outputs/{}_v{}.html", slug, ver);
+        let html_doc = format!(
+            "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
+            html_fragment
+        );
+        match crate::io::write_file(&md_path, fulltext) {
+            Ok(()) => println!("[done] Markdown → {}", md_path),
+            Err(e) => eprintln!("[warn] 本地归档失败: {}", e),
+        }
+        match crate::io::write_file(&html_path, &html_doc) {
+            Ok(()) => println!("[done] HTML     → {}", html_path),
+            Err(e) => eprintln!("[warn] 本地 HTML 归档失败: {}", e),
+        }
+
         // 网站草稿
         if !self.website_path.is_empty() {
             let title = extract_title(fulltext);
@@ -713,7 +700,6 @@ impl Repl {
         }
 
         println!("[info] 公众号请手动到微信后台粘贴发布 (Ctrl+V)");
-        println!("[done] 版本管理已完成");
 
         Ok(())
     }
@@ -735,55 +721,6 @@ impl Repl {
             Err(e) => eprintln!("[warn] 网站发布失败: {}", e),
         }
 
-        Ok(())
-    }
-
-    // ── handle: Modify outline ────────────────────────────────────
-
-    /// 用 LLM 重新生成大纲（携带修改指令）。
-    /// 注意：检查点 1 已取消，此方法当前不再被 dispatch 调用，保留以备后续使用。
-    #[allow(dead_code)]
-    async fn handle_modify_outline(
-        &mut self,
-        instruction: &str,
-    ) -> Result<(), AppError> {
-        let outline = self
-            .current_outline
-            .as_deref()
-            .ok_or_else(|| AppError::Intent("大纲内容丢失".to_string()))?;
-        let topic = self
-            .current_topic
-            .as_deref()
-            .ok_or_else(|| AppError::Intent("创作主题丢失".to_string()))?;
-
-        let prompt = format!(
-            "以下是一篇文章的逻辑大纲：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n请根据以下修改指令调整大纲：\n{}\n\n请输出修改后的完整大纲。",
-            outline, topic, instruction
-        );
-
-        let spinner = crate::llm::new_spinner("正在修改大纲...");
-        let new_outline = with_retry(3, "大纲修改", || {
-            call_llm(
-                &self.client,
-                &self.base_url,
-                &self.api_key,
-                &self.model,
-                OUTLINE_SYSTEM_PROMPT,
-                &prompt,
-            )
-        })
-        .await?;
-        spinner.finish_with_message("大纲修改完成");
-
-        self.current_outline = Some(new_outline.clone());
-
-        println!("{}", sep());
-        println!("{}", new_outline);
-        println!("{}", sep());
-        println!();
-        println!("  请确认大纲，或继续输入修改指令。");
-
-        // 保持 WaitingForOutline 状态
         Ok(())
     }
 

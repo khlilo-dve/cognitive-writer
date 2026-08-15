@@ -1,27 +1,10 @@
-use std::process;
-
 use reqwest::Client;
 use dialoguer::{Input, theme::ColorfulTheme};
 
+use crate::error::AppError;
 use crate::io::write_file;
 use crate::llm::{call_llm, new_spinner};
-
-// ── Env helpers ─────────────────────────────────────────────────────
-
-fn env_var(key: &str) -> Result<String, String> {
-    std::env::var(key).map_err(|_| format!("环境变量 `{}` 未设置，请检查 .env 文件", key))
-}
-
-fn env_var_or(key: &str, default: &str) -> String {
-    std::env::var(key).unwrap_or_else(|_| default.to_string())
-}
-
-// ── Fatal ───────────────────────────────────────────────────────────
-
-fn fatal(msg: impl std::fmt::Display) -> ! {
-    eprintln!("[error] {}", msg);
-    process::exit(1);
-}
+use crate::utils::{env_var, env_var_or, to_app_error};
 
 // ── Jina Reader + fallback strip-tags ───────────────────────────────
 
@@ -139,8 +122,8 @@ fn load_learn_prompt() -> Result<String, String> {
 
 // ── learn 子命令入口 ───────────────────────────────────────────────
 
-pub async fn run_learn(url: &str) {
-    let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
+pub async fn run_learn(url: &str) -> Result<(), AppError> {
+    let api_key = env_var("API_KEY").map_err(to_app_error)?;
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
 
@@ -152,10 +135,10 @@ pub async fn run_learn(url: &str) {
     let client = Client::new();
     let article_text = fetch_readable_text(&client, url)
         .await
-        .unwrap_or_else(|e| fatal(&e));
+        .map_err(to_app_error)?;
 
     // 2. 读取提示词并调用 LLM 逆向分析风格
-    let system_prompt = load_learn_prompt().unwrap_or_else(|e| fatal(&e));
+    let system_prompt = load_learn_prompt().map_err(to_app_error)?;
     let spinner = new_spinner("正在分析写作风格...");
     let style_analysis = call_llm(
         &client,
@@ -166,10 +149,10 @@ pub async fn run_learn(url: &str) {
         &article_text,
     )
     .await
-    .unwrap_or_else(|e| {
+    .map_err(|e| {
         spinner.finish_with_message("分析失败");
-        fatal(&e)
-    });
+        to_app_error(e)
+    })?;
     spinner.finish_with_message("分析完成");
     println!("[info] LLM 返回 {} 字符", style_analysis.len());
 
@@ -187,16 +170,18 @@ pub async fn run_learn(url: &str) {
             Ok(())
         })
         .interact_text()
-        .unwrap_or_else(|e| fatal(&format!("输入读取失败: {}", e)));
+        .map_err(|e| to_app_error(format!("输入读取失败: {}", e)))?;
 
     let name = name.trim();
 
     // 5. 保存风格文件
     let path = format!("styles/{}.md", name);
-    write_file(&path, &style_analysis).unwrap_or_else(|e| fatal(&e));
+    write_file(&path, &style_analysis).map_err(to_app_error)?;
     println!("[done] 风格已保存 → {}", path);
     println!();
     println!("  现在可以用 `cargo run -- generate` 选择该风格来生成文章");
+
+    Ok(())
 }
 #[cfg(test)]
 mod tests {

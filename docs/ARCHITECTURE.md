@@ -11,7 +11,8 @@
 | v2.1 | CLI 工具 | `cargo run -- <subcommand>` 4 个子命令 | 稳定 |
 | v3.0  | 对话式 Agent | REPL 自然语言 + 状态机，可选 CLI 快捷模式 | 2026-07-26 已实现 |
 | v3.1 | 对话式 Agent | REPL + tokio 异步事件循环 + 会话持久化 (current.json) | 2026-07-26 已实现 |
-| v3.2 (当前) | 对话式 Agent | 风格精简为执行 spec，同时注入大纲与正文 | 2026-08-13 已实现 |
+| v3.2 | 对话式 Agent | 风格精简为执行 spec，同时注入大纲与正文 | 2026-08-13 已实现 |
+| v3.3.2 (当前) | 对话式 Agent | 稳定性 + 交付完整性 + 两套 eval | 2026-08-15 已实现 |
 
 ---
 
@@ -72,7 +73,7 @@ cognitive-writer/
     └── ARCHITECTURE.md
 ```
 
-> **测试总计：145 tests, 0 failed**（`cargo test --lib`）
+> **测试总计：145 tests, 0 failed + 2 ignored 评测**（`cargo test --lib`）
 
 ---
 
@@ -759,12 +760,12 @@ tokio = { features = ["full"] }  # 已有 full feature，包含 signal + io-util
 
 ## 已知技术债
 
-以下问题在 v3.0 实现中确认存在，记录以供后续版本处理：
+以下问题记录以供后续版本处理（v3.3.2 已解决 `process::exit`、私有函数副本、`clap` 三项）：
 
-1. **`run_learn` / `run_update` 内部调用 `process::exit(1)`** — 错误路径会直接杀死 REPL 进程而非返回错误让 REPL 循环继续。应改为返回 `Result` 让调用方决定如何处理。
-2. **私有函数副本** — 多个模块中存在私有的 `env_var`、`md_to_wechat_html` 等函数副本。应提取到共享模块（如 `utils.rs`）避免代码重复。
-3. **Dead code warnings** — `delete_file`（`io.rs`）和 `StyleSummary.filename` 字段存在 `#[allow(dead_code)]` 或编译器 warning。需评估是移除死代码还是暴露为公开 API。
-4. **`handle_delete_style` 中阻塞 `std::io::stdin().read_line()`** — 删除风格前的二次确认直接调用阻塞 stdin 读取，在异步上下文中运行。虽然当前单线程 tokio 下可用，但应改为通过 channel 或 `spawn_blocking` 统一输入获取方式。
+1. **`run_learn` 在 REPL 下用 `dialoguer` 阻塞读 stdin 命名** — 与 REPL 的 `spawn_blocking` 读 stdin 是两套输入系统，异步上下文下会卡住或乱序。应改成两阶段对话（展示摘要 → 等 REPL 输入名称 → 保存）。
+2. **Dead code warnings** — `delete_file`（`io.rs`）和 `StyleSummary.filename` 字段存在 `#[allow(dead_code)]`。需评估是移除死代码还是暴露为公开 API。
+3. **`handle_delete_style` 中阻塞 `std::io::stdin().read_line()`** — 删除风格前的二次确认直接调用阻塞 stdin 读取，应改为通过 `spawn_blocking` 统一输入获取方式。
+4. **CLI/REPL 双通道重复** — `generate.rs` 的 `generate_with_outline`（CLI）与 `generate_outline`/`render_fulltext`（REPL）编排逻辑重复，待合并。
 
 ---
 

@@ -9,6 +9,7 @@ mod refine;
 mod repl;
 mod styles;
 mod update;
+mod utils;
 mod website;
 
 fn main() {
@@ -79,7 +80,10 @@ fn run_cli_mode(args: Vec<String>) {
             }
             Some("learn") => {
                 if let Some(url) = remaining.first().copied() {
-                    crate::learn::run_learn(url).await;
+                    if let Err(e) = crate::learn::run_learn(url).await {
+                        eprintln!("[error] {}", e);
+                        std::process::exit(1);
+                    }
                 } else {
                     eprintln!("用法: cog learn <URL>");
                     std::process::exit(1);
@@ -99,7 +103,10 @@ fn run_cli_mode(args: Vec<String>) {
                 let instruction = extract_arg(&remaining, "-i", "--instruction")
                     .map(|s| s.to_string());
                 if let Some(file) = remaining.iter().find(|&a| a.ends_with(".md")) {
-                    crate::update::run_update(file, instruction, no_clipboard).await;
+                    if let Err(e) = crate::update::run_update(file, instruction, no_clipboard).await {
+                        eprintln!("[error] {}", e);
+                        std::process::exit(1);
+                    }
                 } else {
                     eprintln!("用法: cog update <file.md> [-i <指令>] [--no-clipboard]");
                     std::process::exit(1);

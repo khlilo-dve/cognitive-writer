@@ -31,6 +31,4 @@ pub enum AppError {
     Git(String),
     #[error("意图解析失败: {0}")]
     Intent(String),
-    #[error("当前状态 ({state}) 不支持操作: {intent}")]
-    InvalidState { state: String, intent: String },
 }

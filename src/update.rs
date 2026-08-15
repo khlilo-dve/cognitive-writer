@@ -2,13 +2,13 @@
 
 use dialoguer::Input;
 use dialoguer::theme::ColorfulTheme;
-use pulldown_cmark::{Options, Parser as MdParser, html};
 use reqwest::Client;
-use std::process;
 
 use crate::clipboard::inject_clipboard;
+use crate::error::AppError;
 use crate::io::{extract_idea_slug, next_version, read_file, write_file};
 use crate::llm::{call_llm, new_spinner, with_retry};
+use crate::utils::{env_var, env_var_or, md_to_wechat_html, to_app_error};
 
 // ── Update system prompt ────────────────────────────────────────────
 
@@ -20,41 +20,14 @@ const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给
 3. 直接输出完整的修改后 Markdown，不要任何解释、说明或代码块包裹
 4. 输出必须是可发布的最终版本"#;
 
-// ── 辅助函数 ──────────────────────────────────────────────────────
-
-fn md_to_wechat_html(markdown: &str) -> String {
-    let mut opts = Options::empty();
-    opts.insert(Options::ENABLE_STRIKETHROUGH);
-    opts.insert(Options::ENABLE_TABLES);
-
-    let parser = MdParser::new_ext(markdown, opts);
-    let mut raw = String::new();
-    html::push_html(&mut raw, parser);
-
-    // 微信编辑器会剥离 <style> 标签，所以直接移除 <hr> 标签
-    let raw = raw.replace("<hr />", "").replace("<hr>", "");
-
-    // 极简样式：只保留基本排版和加粗，不加任何装饰性 CSS
-    format!("<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>")
-}
-
-fn env_var(key: &str) -> Result<String, String> {
-    std::env::var(key).map_err(|_| format!("环境变量 `{}` 未设置，请检查 .env 文件", key))
-}
-
-fn env_var_or(key: &str, default: &str) -> String {
-    std::env::var(key).unwrap_or_else(|_| default.to_string())
-}
-
-fn fatal(msg: impl std::fmt::Display) -> ! {
-    eprintln!("[error] {}", msg);
-    process::exit(1);
-}
-
 // ── update 子命令入口 ─────────────────────────────────────────────
 
-pub async fn run_update(file: &str, instruction: Option<String>, no_clipboard: bool) {
-    let api_key = env_var("API_KEY").unwrap_or_else(|e| fatal(&e));
+pub async fn run_update(
+    file: &str,
+    instruction: Option<String>,
+    no_clipboard: bool,
+) -> Result<(), AppError> {
+    let api_key = env_var("API_KEY").map_err(to_app_error)?;
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
 
@@ -62,22 +35,23 @@ pub async fn run_update(file: &str, instruction: Option<String>, no_clipboard: b
     println!("[info] MODEL    = {}", model);
 
     // 1. 读取目标文件
-    let content = read_file(file).unwrap_or_else(|e| fatal(&e));
+    let content = read_file(file).map_err(to_app_error)?;
     if content.trim().is_empty() {
-        fatal("目标文件内容为空，无法重写");
+        return Err(to_app_error("目标文件内容为空，无法重写"));
     }
     println!("[info] 已读取 {}, {} 字符", file, content.len());
 
     // 2. 获取修改指令
-    let instruction = instruction.unwrap_or_else(|| {
-        Input::<String>::with_theme(&ColorfulTheme::default())
+    let instruction = match instruction {
+        Some(i) => i,
+        None => Input::<String>::with_theme(&ColorfulTheme::default())
             .with_prompt("请输入修改指令")
             .interact_text()
-            .unwrap_or_else(|e| fatal(&format!("输入读取失败: {}", e)))
-    });
+            .map_err(|e| to_app_error(format!("输入读取失败: {}", e)))?,
+    };
     let instruction = instruction.trim();
     if instruction.is_empty() {
-        fatal("修改指令不能为空");
+        return Err(to_app_error("修改指令不能为空"));
     }
 
     // 3. 拼接 prompt 并调用 LLM 重写
@@ -99,10 +73,10 @@ pub async fn run_update(file: &str, instruction: Option<String>, no_clipboard: b
         )
     })
     .await
-    .unwrap_or_else(|e| {
+    .map_err(|e| {
         spinner.finish_with_message("重写失败");
-        fatal(&e)
-    });
+        to_app_error(e)
+    })?;
     spinner.finish_with_message("重写完成");
     println!("[info] 重写完成, {} 字符", rewritten.len());
 
@@ -113,7 +87,7 @@ pub async fn run_update(file: &str, instruction: Option<String>, no_clipboard: b
     let html_path = format!("outputs/{}_v{}.html", slug, ver);
 
     // Markdown 归档
-    write_file(&md_path, &rewritten).unwrap_or_else(|e| fatal(&e));
+    write_file(&md_path, &rewritten).map_err(to_app_error)?;
     println!("[done] Markdown → {}", md_path);
 
     // HTML 转换 + 归档
@@ -122,7 +96,7 @@ pub async fn run_update(file: &str, instruction: Option<String>, no_clipboard: b
         "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
         html_fragment
     );
-    write_file(&html_path, &html_doc).unwrap_or_else(|e| fatal(&e));
+    write_file(&html_path, &html_doc).map_err(to_app_error)?;
     println!("[done] HTML     → {}", html_path);
 
     // 剪贴板注入
@@ -150,4 +124,6 @@ pub async fn run_update(file: &str, instruction: Option<String>, no_clipboard: b
             }
         }
     }
+
+    Ok(())
 }

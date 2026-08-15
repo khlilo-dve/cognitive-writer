@@ -1,49 +1,10 @@
 use reqwest::Client;
-use std::process;
-
-use pulldown_cmark::{Options, Parser as MdParser, html};
 
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
 use crate::io::{extract_idea_slug, list_styles, next_version, read_file, select_style, write_file};
 use crate::llm::{call_llm, new_spinner, with_retry};
-
-// ── Env helpers ─────────────────────────────────────────────────────
-
-fn env_var(key: &str) -> Result<String, String> {
-    std::env::var(key).map_err(|_| format!("环境变量 `{}` 未设置，请检查 .env 文件", key))
-}
-
-fn env_var_or(key: &str, default: &str) -> String {
-    std::env::var(key).unwrap_or_else(|_| default.to_string())
-}
-
-// ── Markdown → WeChat HTML ──────────────────────────────────────────
-
-fn md_to_wechat_html(markdown: &str) -> String {
-    let mut opts = Options::empty();
-    opts.insert(Options::ENABLE_STRIKETHROUGH);
-    opts.insert(Options::ENABLE_TABLES);
-
-    let parser = MdParser::new_ext(markdown, opts);
-    let mut raw = String::new();
-    html::push_html(&mut raw, parser);
-
-    // 微信编辑器会剥离 <style> 标签，所以直接移除 <hr> 标签
-    let raw = raw.replace("<hr />", "").replace("<hr>", "");
-
-    // 极简样式：只保留基本排版和加粗，不加任何装饰性 CSS
-    format!(
-        "<section style=\"font-size:15px;line-height:2;color:#333;\">{raw}</section>"
-    )
-}
-
-// ── Fatal ──────────────────────────────────────────────────────────
-
-fn fatal(msg: impl std::fmt::Display) -> ! {
-    eprintln!("[error] {}", msg);
-    process::exit(1);
-}
+use crate::utils::{env_var, env_var_or, fatal, md_to_wechat_html};
 
 // ── Prompt builders ──────────────────────────────────────────────────
 
@@ -71,7 +32,7 @@ fn style_system_prompt(style: &str) -> String {
         "你是一名中文写作者。以下是必须严格遵循的写作风格，逐条执行，这是硬约束：\n\n---\n{style}\n---\n\n\
          通用约束：\n\
          - 只输出 Markdown 正文，不复述风格规则，不输出思考、自检或写作过程\n\
-         - 不添加素材中没有依据的事实、数据、实验结论或名人观点\n\
+         - 可适当补充有深度的案例、数据、反例，保持自洽、合理、不矛盾\n\
          - 风格规则若冲突，以「禁止」一节为准"
     )
 }

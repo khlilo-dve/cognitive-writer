@@ -42,7 +42,6 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 - DeleteStyle：想删除某风格。字段 name
 - RefineFile：想局部修改某个 .md 文件。字段 path、instruction
 - UpdateFile：想整体重写某个 .md 文件。字段 path、instruction
-- ModifyOutline：想修改当前大纲。字段 instruction
 - ModifySection：想修改当前文章某部分。字段 instruction
 - ChangeStyle：想换成另一风格重写。字段 style_name
 - Publish：确认发布
@@ -57,13 +56,21 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 - 输入与写作完全无关（闲聊、查天气等）→ Unknown，reason 写「与写作无关」
 - 输入像指令但含糊不清 → Unknown，reason 写「无法理解意图」
 - 只输出一行 JSON，不要解释、不要 Markdown 代码块
-- 示例：{"intent_type": "Generate", "topic": "...", "style_name": "..."}；{"intent_type": "Unknown", "reason": "..."}"#;
+
+## few-shot 示例（输入 → 输出）
+"写一篇关于 AI 的文章，用轻辩风格" → {"intent_type":"Generate","topic":"关于 AI 的文章","style_name":"轻辩"}
+"帮我整一篇认知偏差的，犀利点" → {"intent_type":"Generate","topic":"认知偏差","style_name":""}
+"学一下这个风格 https://example.com/a" → {"intent_type":"Learn","url":"https://example.com/a"}
+"风格库里有什么" → {"intent_type":"ListStyles"}
+"今天天气怎么样" → {"intent_type":"Unknown","reason":"与写作无关"}
+"行" → {"intent_type":"Confirm"}
+"拉倒吧" → {"intent_type":"Cancel"}"#;
 
 /// 每个状态下的有效意图，注入分类提示词，帮助模型在状态机下正确分类。
 fn state_valid_intents(state: &SessionState) -> &'static str {
     match state {
         SessionState::Idle => "有效意图：Generate（写文章）、Learn（学风格）、ListStyles、ShowStyle、DeleteStyle、RefineFile、UpdateFile、Cancel。",
-        SessionState::WaitingForOutline => "有效意图：Confirm（确认大纲）、ModifyOutline（改大纲）、Cancel。",
+        SessionState::WaitingForOutline => "有效意图：Confirm（确认大纲）、Cancel。",
         SessionState::WaitingForFulltext => "有效意图：Confirm（确认全文）、ModifySection（改某段）、ChangeStyle（换风格）、Cancel。",
         SessionState::WaitingForPublish => "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。",
     }
@@ -154,10 +161,6 @@ fn parse_classify_response(raw: &str, _original_input: &str) -> Result<Intent, A
             let instruction = v["instruction"].as_str().unwrap_or("").to_string();
             Ok(Intent::UpdateFile { path, instruction })
         }
-        "ModifyOutline" => {
-            let instruction = v["instruction"].as_str().unwrap_or("").to_string();
-            Ok(Intent::ModifyOutline { instruction })
-        }
         "ModifySection" => {
             let instruction = v["instruction"].as_str().unwrap_or("").to_string();
             Ok(Intent::ModifySection { instruction })
@@ -203,8 +206,6 @@ pub enum Intent {
     Confirm,
     /// 取消当前待处理操作。
     Cancel,
-    /// 修改大纲：携带修改指令。
-    ModifyOutline { instruction: String },
     /// 修改特定段落：携带修改指令。
     ModifySection { instruction: String },
     /// 更换写作风格。
