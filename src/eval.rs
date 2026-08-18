@@ -32,7 +32,25 @@ pub struct JudgeResult {
     pub style_fidelity_analysis: String,
     pub humanness_quality_analysis: String,
     pub negative_hits: Vec<String>,
+    #[serde(deserialize_with = "deserialize_string_or_vec")]
     pub improvement_suggestions: String,
+}
+
+fn deserialize_string_or_vec<'de, D>(deserializer: D) -> Result<String, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum StringOrVec {
+        String(String),
+        Vec(Vec<String>),
+    }
+
+    match StringOrVec::deserialize(deserializer)? {
+        StringOrVec::String(s) => Ok(s),
+        StringOrVec::Vec(v) => Ok(v.join("\n")),
+    }
 }
 
 /// 调用通用 LLM-Judge 评测一篇文章（双核等权：风格贴合度 + 文章质量/活人感）
