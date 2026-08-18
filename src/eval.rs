@@ -5,11 +5,73 @@
 
 use reqwest::Client;
 
+use serde::{Deserialize, Serialize};
+
 use crate::error::AppError;
 use crate::generate::{generate_outline, render_fulltext};
 use crate::llm::call_llm;
 
 // ── eval 1：风格提示词（生成端）───────────────────────────────────────
+
+/// LLM-Judge 对单篇文章的 6 维度评分
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct JudgeScores {
+    pub introduction: f64,
+    pub argumentation: f64,
+    pub rhythm: f64,
+    pub persona: f64,
+    pub vocabulary: f64,
+    pub conclusion: f64,
+}
+
+/// LLM-Judge 的完整评审结果
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JudgeResult {
+    pub scores: JudgeScores,
+    pub overall_score: f64,
+    pub style_fidelity_analysis: String,
+    pub humanness_quality_analysis: String,
+    pub negative_hits: Vec<String>,
+    pub improvement_suggestions: String,
+}
+
+/// 调用通用 LLM-Judge 评测一篇文章（双核等权：风格贴合度 + 文章质量/活人感）
+pub async fn judge_article(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    style_spec: &str,
+    idea: &str,
+    article_content: &str,
+) -> Result<JudgeResult, AppError> {
+    let judge_prompt = std::fs::read_to_string("prompts/eval_judge_style.md")
+        .map_err(|e| AppError::Intent(format!("读取 Judge 提示词失败: {}", e)))?;
+
+    let user_input = format!(
+        "### 1. 输入主题与素材\n{}\n\n### 2. 输入的风格规范 (Style Spec)\n{}\n\n### 3. 待评测文章\n{}",
+        idea, style_spec, article_content
+    );
+
+    let raw_resp = call_llm(client, base_url, api_key, model, &judge_prompt, &user_input).await?;
+
+    // 解析 JSON（容忍 markdown code block 包裹）
+    let json_str = if let Some(start) = raw_resp.find('{') {
+        if let Some(end) = raw_resp.rfind('}') {
+            &raw_resp[start..=end]
+        } else {
+            &raw_resp
+        }
+    } else {
+        &raw_resp
+    };
+
+    let result: JudgeResult = serde_json::from_str(json_str).map_err(|e| {
+        AppError::Parse(format!("Judge 响应 JSON 解析失败: {}\n原始返回:\n{}", e, raw_resp))
+    })?;
+
+    Ok(result)
+}
 
 /// 评测风格提示词：同一主题 + 同一风格 → 生成大纲 + 正文，输出风格贴合度指标。
 pub async fn eval_style_prompt(
@@ -201,6 +263,45 @@ mod tests {
             eval_style_batch(&client, &base, &key, &model, &style)
                 .await
                 .expect("批量评测失败");
+        });
+    }
+
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络，用 LLM-Judge 评测已落盘的 baseline 文章"]
+    fn eval_judge_baseline_suite() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let (base, key, model, client) = env();
+            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
+
+            println!("\n===== 开始运行 LLM-Judge Baseline 校准评测 =====");
+            for (i, idea) in TEST_SET.iter().enumerate() {
+                let n = i + 1;
+                let path = format!("eval/baseline/topic_{:02}.md", n);
+                let content = std::fs::read_to_string(&path)
+                    .unwrap_or_else(|_| panic!("读取 baseline 文件失败: {}", path));
+
+                println!("\n>>> 评测 主题 {} (来源: {}) ...", n, path);
+                let result = judge_article(&client, &base, &key, &model, &style, idea, &content)
+                    .await
+                    .expect("Judge 评测失败");
+
+                println!("得分: 破题={:.1}, 论证={:.1}, 节奏={:.1}, 人称={:.1}, 用词={:.1}, 结尾={:.1} | 均分={:.2}",
+                    result.scores.introduction,
+                    result.scores.argumentation,
+                    result.scores.rhythm,
+                    result.scores.persona,
+                    result.scores.vocabulary,
+                    result.scores.conclusion,
+                    result.overall_score
+                );
+                println!("[风格贴合分析] {}", result.style_fidelity_analysis);
+                println!("[活人感/质量分析] {}", result.humanness_quality_analysis);
+                if !result.negative_hits.is_empty() {
+                    println!("[命中禁令] {:?}", result.negative_hits);
+                }
+                println!("[改进建议] {}", result.improvement_suggestions);
+            }
         });
     }
 }
