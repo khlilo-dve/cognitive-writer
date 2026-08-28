@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::error::AppError;
 use crate::generate::{generate_outline, render_fulltext};
-use crate::llm::call_llm;
+use crate::llm::{call_llm, with_retry};
 
 // ── eval 1：风格提示词（生成端）───────────────────────────────────────
 
@@ -76,7 +76,9 @@ pub async fn judge_article(
         idea, style_spec, article_content
     );
 
-    let raw_resp = call_llm(client, base_url, api_key, model, &judge_prompt, &user_input).await?;
+    let raw_resp: String = with_retry(3, "Judge LLM", || {
+        call_llm(client, base_url, api_key, model, &judge_prompt, &user_input)
+    }).await?;
 
     // 解析 JSON（容忍 markdown code block 包裹）
     let json_str = if let Some(start) = raw_resp.find('{') {
@@ -180,7 +182,9 @@ pub async fn judge_learn_spec(
         sample_article, extracted_spec
     );
 
-    let raw_resp = call_llm(client, base_url, api_key, model, &judge_prompt, &user_input).await?;
+    let raw_resp: String = with_retry(3, "Learn Judge LLM", || {
+        call_llm(client, base_url, api_key, model, &judge_prompt, &user_input)
+    }).await?;
 
     let json_str = if let Some(start) = raw_resp.find('{') {
         if let Some(end) = raw_resp.rfind('}') {
@@ -314,7 +318,9 @@ pub async fn eval_learn_batch(
         let sample_text = std::fs::read_to_string(&sample_path)
             .map_err(|e| AppError::Intent(format!("读取样文失败: {}", e)))?;
 
-        let spec = call_llm(client, base_url, api_key, model, &prompt, &sample_text).await?;
+        let spec: String = with_retry(3, "Learn Spec LLM", || {
+            call_llm(client, base_url, api_key, model, &prompt, &sample_text)
+        }).await?;
         let out_path = format!("{}/spec_{:02}.md", target_dir, n);
         std::fs::write(&out_path, &spec)
             .map_err(|e| AppError::Intent(format!("写 Spec 失败: {}", e)))?;
@@ -527,6 +533,7 @@ mod tests {
         rt.block_on(async {
             let (base, key, model, client) = env();
             println!("\n===== 开始运行 LLM-Judge B (Rubric B) Spec 评测 =====");
+            let mut total_score = 0.0;
 
             for n in 1..=5 {
                 let sample_path = format!("eval/samples/sample_{:02}.md", n);
@@ -542,13 +549,15 @@ mod tests {
                     .await
                     .expect("Judge B 评测失败");
 
+                let mean = result.scores.mean();
+                total_score += mean;
                 println!("得分: 结构覆盖={:.1}, 可执行性={:.1}, 精简度={:.1}, 特征捕捉={:.1}, 去样文污染={:.1} | 均分={:.2}",
                     result.scores.coverage,
                     result.scores.actionability,
                     result.scores.conciseness,
                     result.scores.distinctiveness,
                     result.scores.cleanliness,
-                    result.scores.mean()
+                    mean
                 );
                 println!("[结构分析] {}", result.structure_analysis);
                 println!("[特征分析] {}", result.fidelity_analysis);
@@ -557,6 +566,10 @@ mod tests {
                 }
                 println!("[改进建议] {}", result.improvement_suggestions);
             }
+
+            println!("\n================ 5 篇 Spec 评测总结 ================");
+            println!("平均质量分: {:.2} / 5.0", total_score / 5.0);
+            println!("====================================================");
         });
     }
 

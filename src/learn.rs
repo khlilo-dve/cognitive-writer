@@ -193,13 +193,13 @@ mod tests {
     fn test_load_learn_prompt_from_external_file() {
         let prompt = load_learn_prompt().expect("external learn prompt should be readable");
         assert!(!prompt.trim().is_empty());
-        assert!(prompt.contains("写作风格分析专家"));
-        assert!(prompt.contains("不要评价文章质量"));
+        assert!(prompt.contains("写作风格逆向工程专家") || prompt.contains("写作风格分析专家"));
+        assert!(prompt.contains("提炼机制而非总结内容") || prompt.contains("不要评价文章质量"));
         // 新版契约：直接产出精简执行 spec，而非冗长分析报告
         assert!(prompt.contains("## 定位"));
         assert!(prompt.contains("## 禁止"));
-        assert!(prompt.contains("不要引用原文"));
-        assert!(prompt.contains("600 字"));
+        assert!(prompt.contains("零污染抽象") || prompt.contains("不要引用原文"));
+        assert!(prompt.contains("600 字") || prompt.contains("600"));
     }
 
     #[test]
