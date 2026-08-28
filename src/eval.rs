@@ -4,7 +4,6 @@
 //!   cargo test --lib -- --ignored eval --nocapture
 
 use reqwest::Client;
-
 use serde::{Deserialize, Serialize};
 
 use crate::error::AppError;
@@ -22,6 +21,12 @@ pub struct JudgeScores {
     pub persona: f64,
     pub vocabulary: f64,
     pub conclusion: f64,
+}
+
+impl JudgeScores {
+    pub fn mean(&self) -> f64 {
+        (self.introduction + self.argumentation + self.rhythm + self.persona + self.vocabulary + self.conclusion) / 6.0
+    }
 }
 
 /// LLM-Judge 的完整评审结果
@@ -53,7 +58,7 @@ where
     }
 }
 
-/// 调用通用 LLM-Judge 评测一篇文章（双核等权：风格贴合度 + 文章质量/活人感）
+/// 调用 LLM-Judge 评测一篇文章（以 Style Spec 风格匹配度为核心准绳）
 pub async fn judge_article(
     client: &Client,
     base_url: &str,
@@ -130,6 +135,70 @@ pub async fn eval_style_prompt(
 
 // ── eval 2：learn 提取提示词（提取端）─────────────────────────────────
 
+/// LLM-Judge B 对提取出的风格 Spec 的 5 维度评分
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct LearnJudgeScores {
+    pub coverage: f64,
+    pub actionability: f64,
+    pub conciseness: f64,
+    pub distinctiveness: f64,
+    pub cleanliness: f64,
+}
+
+impl LearnJudgeScores {
+    pub fn mean(&self) -> f64 {
+        (self.coverage + self.actionability + self.conciseness + self.distinctiveness + self.cleanliness) / 5.0
+    }
+}
+
+/// LLM-Judge B 的完整评审结果
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LearnJudgeResult {
+    pub scores: LearnJudgeScores,
+    pub overall_score: f64,
+    pub structure_analysis: String,
+    pub fidelity_analysis: String,
+    pub negative_hits: Vec<String>,
+    #[serde(deserialize_with = "deserialize_string_or_vec")]
+    pub improvement_suggestions: String,
+}
+
+/// 调用 LLM-Judge B 评测提取出的 Spec 质量（Rubric B 5 维度）
+pub async fn judge_learn_spec(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    sample_article: &str,
+    extracted_spec: &str,
+) -> Result<LearnJudgeResult, AppError> {
+    let judge_prompt = std::fs::read_to_string("prompts/eval_judge_learn.md")
+        .map_err(|e| AppError::Intent(format!("读取 Learn Judge 提示词失败: {}", e)))?;
+
+    let user_input = format!(
+        "### 1. 输入原始样文\n{}\n\n### 2. 提取出的风格规范 (Spec)\n{}",
+        sample_article, extracted_spec
+    );
+
+    let raw_resp = call_llm(client, base_url, api_key, model, &judge_prompt, &user_input).await?;
+
+    let json_str = if let Some(start) = raw_resp.find('{') {
+        if let Some(end) = raw_resp.rfind('}') {
+            &raw_resp[start..=end]
+        } else {
+            &raw_resp
+        }
+    } else {
+        &raw_resp
+    };
+
+    let result: LearnJudgeResult = serde_json::from_str(json_str).map_err(|e| {
+        AppError::Parse(format!("Learn Judge 响应 JSON 解析失败: {}\n原始返回:\n{}", e, raw_resp))
+    })?;
+
+    Ok(result)
+}
+
 /// 评测提取提示词：喂一篇风格鲜明的文章 → 提取 spec，输出 spec 精简度指标。
 pub async fn eval_learn_prompt(
     client: &Client,
@@ -173,7 +242,7 @@ pub async fn eval_learn_prompt(
     Ok(())
 }
 
-// ── 冻结测试集 + 批量生成（baseline）─────────────────────────────────
+// ── 冻结测试集 + 批量生成与提取 ────────────────────────────────────────
 
 /// 冻结测试集：5 个跨领域主题（来源：Obsidian 2-notes）。
 /// 改 prompt 时**不动这里**——测试集冻结，变量只有被评测的 prompt。
@@ -185,19 +254,17 @@ pub const TEST_SET: [&str; 5] = [
     "文章主题：从消费者转向生产者\n基本内容：消费是被动接收价值，生产是主动创造价值；生产者思维带来复利（作品、资产、能力），消费者思维只消耗；离生产越近的人赚钱越多。",
 ];
 
-/// 跑整批测试集，生成每篇的大纲+正文，存到 eval/baseline/ 作为 baseline。
-///
-/// TODO(rubric)：打分逻辑待 rubric 与 judge 校准后接入——届时在这里对每篇打分，
-/// 并与旧 baseline 对比输出 delta / win-rate，那才是「改好还是改坏」的答案。
+/// 跑整批测试集，生成每篇的大纲+正文，存到 target_dir 作为基准或候选文章。
 pub async fn eval_style_batch(
     client: &Client,
     base_url: &str,
     api_key: &str,
     model: &str,
     style: &str,
+    target_dir: &str,
 ) -> Result<(), AppError> {
-    std::fs::create_dir_all("eval/baseline")
-        .map_err(|e| AppError::Intent(format!("创建 baseline 目录失败: {}", e)))?;
+    std::fs::create_dir_all(target_dir)
+        .map_err(|e| AppError::Intent(format!("创建目录失败: {}", e)))?;
 
     for (i, idea) in TEST_SET.iter().enumerate() {
         let n = i + 1;
@@ -213,18 +280,54 @@ pub async fn eval_style_batch(
             outline,
             fulltext,
         );
-        let path = format!("eval/baseline/topic_{:02}.md", n);
+        let path = format!("{}/topic_{:02}.md", target_dir, n);
         std::fs::write(&path, content)
-            .map_err(|e| AppError::Intent(format!("写 baseline 失败: {}", e)))?;
+            .map_err(|e| AppError::Intent(format!("写文件失败: {}", e)))?;
         println!(
-            "[baseline] 主题 {} 已保存 → {} (正文 {} 字符)",
+            "[{}] 主题 {} 已保存 → {} (正文 {} 字符)",
+            target_dir,
             n,
             path,
             fulltext.chars().count()
         );
     }
 
-    println!("\n[baseline] 完成。改 prompt 后重跑本命令，对比新旧 eval/baseline/ 即可（打分待 rubric 接入）。");
+    Ok(())
+}
+
+/// 跑整批样文测试集，提取 10 段式 Spec 并存到 target_dir。
+pub async fn eval_learn_batch(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    target_dir: &str,
+) -> Result<(), AppError> {
+    std::fs::create_dir_all(target_dir)
+        .map_err(|e| AppError::Intent(format!("创建目录失败: {}", e)))?;
+
+    let prompt = std::fs::read_to_string("prompts/learn_style.md")
+        .map_err(|e| AppError::Intent(format!("读取提取提示词失败: {}", e)))?;
+
+    for n in 1..=5 {
+        let sample_path = format!("eval/samples/sample_{:02}.md", n);
+        let sample_text = std::fs::read_to_string(&sample_path)
+            .map_err(|e| AppError::Intent(format!("读取样文失败: {}", e)))?;
+
+        let spec = call_llm(client, base_url, api_key, model, &prompt, &sample_text).await?;
+        let out_path = format!("{}/spec_{:02}.md", target_dir, n);
+        std::fs::write(&out_path, &spec)
+            .map_err(|e| AppError::Intent(format!("写 Spec 失败: {}", e)))?;
+
+        println!(
+            "[{}] 样文 {} 已提取 → {} ({} 字符)",
+            target_dir,
+            n,
+            out_path,
+            spec.chars().count()
+        );
+    }
+
     Ok(())
 }
 
@@ -252,7 +355,7 @@ mod tests {
         let rt = tokio::runtime::Runtime::new().unwrap();
         rt.block_on(async {
             let (base, key, model, client) = env();
-            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
+            let style = std::fs::read_to_string("styles/蔡叔.md").expect("读取风格失败");
             eval_style_prompt(&client, &base, &key, &model, &style, IDEA)
                 .await
                 .expect("eval 1 失败");
@@ -277,10 +380,10 @@ mod tests {
         let rt = tokio::runtime::Runtime::new().unwrap();
         rt.block_on(async {
             let (base, key, model, client) = env();
-            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
-            eval_style_batch(&client, &base, &key, &model, &style)
+            let style = std::fs::read_to_string("styles/蔡叔.md").expect("读取风格失败");
+            eval_style_batch(&client, &base, &key, &model, &style, "eval/baseline")
                 .await
-                .expect("批量评测失败");
+                .expect("批量生成 baseline 失败");
         });
     }
 
@@ -290,7 +393,7 @@ mod tests {
         let rt = tokio::runtime::Runtime::new().unwrap();
         rt.block_on(async {
             let (base, key, model, client) = env();
-            let style = std::fs::read_to_string("styles/qingbian.md").expect("读取风格失败");
+            let style = std::fs::read_to_string("styles/蔡叔.md").expect("读取风格失败");
 
             println!("\n===== 开始运行 LLM-Judge Baseline 校准评测 =====");
             for (i, idea) in TEST_SET.iter().enumerate() {
@@ -320,6 +423,199 @@ mod tests {
                 }
                 println!("[改进建议] {}", result.improvement_suggestions);
             }
+        });
+    }
+
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络，生成新候选文章并与 Baseline 进行自动对比与胜率分析"]
+    fn eval_style_compare_suite() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let (base, key, model, client) = env();
+            let style = std::fs::read_to_string("styles/蔡叔.md").expect("读取风格失败");
+
+            println!("\n===== 开始批量生成新版本候选文章 (eval/candidate/) =====");
+            eval_style_batch(&client, &base, &key, &model, &style, "eval/candidate")
+                .await
+                .expect("生成候选文章失败");
+
+            println!("\n===== 开始运行 LLM-Judge 对比评测 (Candidate vs Baseline) =====");
+            let mut wins = 0;
+            let mut ties = 0;
+            let mut losses = 0;
+            let mut total_delta = 0.0;
+
+            for (i, idea) in TEST_SET.iter().enumerate() {
+                let n = i + 1;
+                let base_path = format!("eval/baseline/topic_{:02}.md", n);
+                let cand_path = format!("eval/candidate/topic_{:02}.md", n);
+
+                let base_content = std::fs::read_to_string(&base_path).expect("读取 baseline 失败");
+                let cand_content = std::fs::read_to_string(&cand_path).expect("读取 candidate 失败");
+
+                let base_judge = judge_article(&client, &base, &key, &model, &style, idea, &base_content)
+                    .await
+                    .expect("评测 baseline 失败");
+                let cand_judge = judge_article(&client, &base, &key, &model, &style, idea, &cand_content)
+                    .await
+                    .expect("评测 candidate 失败");
+
+                let delta = cand_judge.scores.mean() - base_judge.scores.mean();
+                total_delta += delta;
+
+                let verdict = if delta > 0.05 {
+                    wins += 1;
+                    "WIN 🟢"
+                } else if delta < -0.05 {
+                    losses += 1;
+                    "LOSS 🔴"
+                } else {
+                    ties += 1;
+                    "TIE ⚪"
+                };
+
+                println!("\n┌─────────────────────────────────────────────────────────────┐");
+                println!("│ 主题 {:02} 对比: {:<40} [{}] │", n, idea.lines().next().unwrap_or("").trim_start_matches("文章主题："), verdict);
+                println!("├──────────────┬────────────┬────────────┬────────────────────┤");
+                println!("│ 评测维度     │ Baseline   │ Candidate  │ 差值 (Delta)       │");
+                println!("├──────────────┼────────────┼────────────┼────────────────────┤");
+                println!("│ 破题与切入   │ {:<10.1} │ {:<10.1} │ {:+<18.1} │", base_judge.scores.introduction, cand_judge.scores.introduction, cand_judge.scores.introduction - base_judge.scores.introduction);
+                println!("│ 论证与洞察   │ {:<10.1} │ {:<10.1} │ {:+<18.1} │", base_judge.scores.argumentation, cand_judge.scores.argumentation, cand_judge.scores.argumentation - base_judge.scores.argumentation);
+                println!("│ 节奏与句式   │ {:<10.1} │ {:<10.1} │ {:+<18.1} │", base_judge.scores.rhythm, cand_judge.scores.rhythm, cand_judge.scores.rhythm - base_judge.scores.rhythm);
+                println!("│ 人称与视角   │ {:<10.1} │ {:<10.1} │ {:+<18.1} │", base_judge.scores.persona, cand_judge.scores.persona, cand_judge.scores.persona - base_judge.scores.persona);
+                println!("│ 用词与去AI味 │ {:<10.1} │ {:<10.1} │ {:+<18.1} │", base_judge.scores.vocabulary, cand_judge.scores.vocabulary, cand_judge.scores.vocabulary - base_judge.scores.vocabulary);
+                println!("│ 结尾收束     │ {:<10.1} │ {:<10.1} │ {:+<18.1} │", base_judge.scores.conclusion, cand_judge.scores.conclusion, cand_judge.scores.conclusion - base_judge.scores.conclusion);
+                println!("├──────────────┼────────────┼────────────┼────────────────────┤");
+                println!("│ 综合均分     │ {:<10.2} │ {:<10.2} │ {:+<18.2} │", base_judge.scores.mean(), cand_judge.scores.mean(), delta);
+                println!("└──────────────┴────────────┴────────────┴────────────────────┘");
+                println!("[Candidate 分析] 风格贴合: {}", cand_judge.style_fidelity_analysis);
+                println!("[Candidate 分析] 活人质感: {}", cand_judge.humanness_quality_analysis);
+                if !cand_judge.negative_hits.is_empty() {
+                    println!("[Candidate 禁令] {:?}", cand_judge.negative_hits);
+                }
+            }
+
+            let avg_delta = total_delta / TEST_SET.len() as f64;
+            let win_rate = (wins as f64 / TEST_SET.len() as f64) * 100.0;
+            println!("\n=================== 对比与胜率总结 ===================");
+            println!("测试主题总数: {}", TEST_SET.len());
+            println!("胜场 (Win):   {} ({:.1}%)", wins, win_rate);
+            println!("平局 (Tie):   {}", ties);
+            println!("败场 (Loss):  {}", losses);
+            println!("平均分差 (Avg Δ): {:+.2}", avg_delta);
+            println!("======================================================");
+        });
+    }
+
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络，批量提取 sample 样文的 Baseline Spec"]
+    fn eval_learn_batch_suite() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let (base, key, model, client) = env();
+            println!("\n===== 开始批量提取样文 Baseline Spec (eval/baseline_specs/) =====");
+            eval_learn_batch(&client, &base, &key, &model, "eval/baseline_specs")
+                .await
+                .expect("批量提取 Baseline Spec 失败");
+        });
+    }
+
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络，使用 LLM-Judge B (Rubric B) 评测提取出的 Baseline Spec"]
+    fn eval_judge_learn_baseline_suite() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let (base, key, model, client) = env();
+            println!("\n===== 开始运行 LLM-Judge B (Rubric B) Spec 评测 =====");
+
+            for n in 1..=5 {
+                let sample_path = format!("eval/samples/sample_{:02}.md", n);
+                let spec_path = format!("eval/baseline_specs/spec_{:02}.md", n);
+
+                let sample_text = std::fs::read_to_string(&sample_path)
+                    .unwrap_or_else(|_| panic!("读取样文失败: {}", sample_path));
+                let spec_text = std::fs::read_to_string(&spec_path)
+                    .unwrap_or_else(|_| panic!("读取 Spec 失败: {}", spec_path));
+
+                println!("\n>>> 评测 Spec {:02} (来源样文: {}) ...", n, sample_path);
+                let result = judge_learn_spec(&client, &base, &key, &model, &sample_text, &spec_text)
+                    .await
+                    .expect("Judge B 评测失败");
+
+                println!("得分: 结构覆盖={:.1}, 可执行性={:.1}, 精简度={:.1}, 特征捕捉={:.1}, 去样文污染={:.1} | 均分={:.2}",
+                    result.scores.coverage,
+                    result.scores.actionability,
+                    result.scores.conciseness,
+                    result.scores.distinctiveness,
+                    result.scores.cleanliness,
+                    result.scores.mean()
+                );
+                println!("[结构分析] {}", result.structure_analysis);
+                println!("[特征分析] {}", result.fidelity_analysis);
+                if !result.negative_hits.is_empty() {
+                    println!("[命中问题] {:?}", result.negative_hits);
+                }
+                println!("[改进建议] {}", result.improvement_suggestions);
+            }
+        });
+    }
+
+    #[test]
+    #[ignore = "真实 LLM 调用，需 API_KEY + 网络，对 5 个 Baseline Spec 分别生成 5 个主题文章并运行 Eval 1 评测"]
+    fn eval_all_specs_on_eval1_suite() {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let (base, key, model, client) = env();
+            println!("\n===== 开始对 5 个 Baseline Spec 进行全量 Eval 1 (生成 + Rubric A 评测) =====");
+
+            for spec_idx in 1..=5 {
+                let spec_path = format!("eval/baseline_specs/spec_{:02}.md", spec_idx);
+                let spec_content = match std::fs::read_to_string(&spec_path) {
+                    Ok(c) => c,
+                    Err(e) => {
+                        println!("跳过 Spec {:02}: 读取失败 ({})", spec_idx, e);
+                        continue;
+                    }
+                };
+
+                let target_dir = format!("eval/spec_runs/spec_{:02}", spec_idx);
+                println!("\n-------------------------------------------------------------");
+                println!(">>> 正在生成 Spec {:02} 的 5 篇主题文章 (目标目录: {}) ...", spec_idx, target_dir);
+                eval_style_batch(&client, &base, &key, &model, &spec_content, &target_dir)
+                    .await
+                    .expect("生成文章批次失败");
+
+                println!(">>> 正在评测 Spec {:02} 生成的文章 (Rubric A) ...", spec_idx);
+                let mut total_score = 0.0;
+
+                for (i, idea) in TEST_SET.iter().enumerate() {
+                    let n = i + 1;
+                    let article_path = format!("{}/topic_{:02}.md", target_dir, n);
+                    let article_content = std::fs::read_to_string(&article_path).expect("读取生成文章失败");
+
+                    let result = judge_article(&client, &base, &key, &model, &spec_content, idea, &article_content)
+                        .await
+                        .expect("LLM-Judge A 评测文章失败");
+
+                    let mean = result.scores.mean();
+                    total_score += mean;
+
+                    println!(
+                        "  [Spec {:02} | Topic {:02}] 均分: {:.2} (破题={:.1}, 论证={:.1}, 节奏={:.1}, 人称={:.1}, 用词={:.1}, 结尾={:.1})",
+                        spec_idx, n, mean,
+                        result.scores.introduction,
+                        result.scores.argumentation,
+                        result.scores.rhythm,
+                        result.scores.persona,
+                        result.scores.vocabulary,
+                        result.scores.conclusion,
+                    );
+                }
+
+                let avg = total_score / TEST_SET.len() as f64;
+                println!(">>> Spec {:02} 综合 Eval 1 平均得分: {:.2} / 5.00", spec_idx, avg);
+            }
+            println!("\n================ 全量 Spec Eval 1 评测完成 ================");
         });
     }
 }
