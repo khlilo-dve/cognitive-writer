@@ -1,6 +1,6 @@
 [package]
 name = "cognitive-writer"
-version = "2.1.0"
+version = "3.3.2"
 edition = "2024"
 
 [dependencies]

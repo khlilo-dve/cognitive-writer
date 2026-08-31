@@ -1,12 +1,12 @@
-# Cognitive Writer v3.2
+# Cognitive Writer v3.3.2
 
 > 一个想法进去，两边文章出来。用 Rust 写的 AI 写作 Agent。
 
 <p align="center">
-  <strong>说人话 → 自动写文章 → 公众号 + 个人网站 双平台发布</strong>
+  <strong>说人话 → 智能风格匹配 / 逆向提取 → 自动写文章 → 公众号 + 个人网站 双平台发布</strong>
 </p>
 
-**版本**: v3.1.0 | **License**: MIT
+**版本**: v3.3.2 | **License**: MIT
 
 ---
 
@@ -28,11 +28,48 @@ Agent:  git push → Vercel 自动部署
         done. https://khlilo.xyz/signal/cognitive-bias-investing
 ```
 
-**三个关键设计：**
+**核心设计理念：**
 
-1. **端到端** — 从选题到两边上线，全程不切换工具
-2. **自然语言** — 不用记命令，LLM 理解你的意图
-3. **渐进确认** — 全文和发布两步确认，中间随时反悔或修改
+1. **端到端交付** — 从选题输入到公众号剪贴板与网站上线，全程不切换工具
+2. **自然语言交互** — 结构化意图识别 + 状态机流转，说人话即可调度
+3. **精细风格控制** — 10 维度 Spec 规范、智能拼音归一化匹配与 Jina Reader URL 风格逆向提取
+4. **渐进确认机制** — 大纲衔接、全文确认、局部重绘与发布确认，过程随时掌控
+
+---
+
+## 核心亮点：风格引擎与逆向分析
+
+Cognitive Writer 内置了针对中文严肃/商业/个人 IP 写作的**风格工程系统**，彻底告别宽泛无力的“文笔流畅”、“情感充沛”等感性提示词，转为硬核的规则化约束。
+
+### 1. 10 维度高密度风格规范（Style Spec）
+每一份风格模板（`styles/*.md`）均由系统抽象为 10 个标准层级的严苛执行 Spec，在生成阶段同时注入骨架大纲（Pass 1）与全文渲染（Pass 2）：
+- **定位**：角色人设与核心表达机制
+- **标题**：句式结构、长度限制与情绪张力
+- **开头**：破题机制（场景白描 / 日期时间钉子 / 否定反常识）与起手禁忌
+- **结构与论证**：推进骨架（递进算账 / 分层排除 / 因果递推）
+- **段落与句式**：长短句交错节拍、自问自答密度
+- **语气与人称**：视距控制与作者姿态
+- **用词**：语域分布、修辞偏好、中英文混用规则
+- **结尾**：落幅机制（冷峻现实承认 / 留白 / 裁量权交付）
+- **排版**：视觉节奏、单句成段与加粗规范
+- **禁止项（Negative Rules）**：3-6 条最易破功的致命硬性禁令（规则冲突时绝对优先）
+
+### 2. URL 一键风格逆向提取（Learn Pipeline）
+看到优质好文想沉淀其写作风格？只需提供文章链接，系统自动完成提取：
+```bash
+# REPL 中直接输入：
+> https://mp.weixin.qq.com/s/xxxxxx 学一下这个风格
+
+# 或 CLI 模式：
+cargo run -- learn https://mp.weixin.qq.com/s/xxxxxx
+```
+- **智能抓取**：基于 Jina Reader API（`r.jina.ai`）深度解析 SPA、反爬与微信公众号排版，自动降级纯文本清洗
+- **结构逆向**：使用外置提示词 `prompts/learn_style.md` 将长文提炼为纯指令化、零业务名词污染的 400-600 字标准 Spec 并落盘归档
+
+### 3. 智能风格选择与双向匹配
+- **拼音归一化精确匹配**：基于 `pinyin` 库支持中文名与拼音文件名的双向智能互通（如 `轻辩` ↔ `qingbian`），避免同音异字或大小写错位导致的匹配混乱
+- **时间上下文感知**：支持口语化表达匹配（如“用*刚学的风格*写一篇...”自动定位最近更新的风格）
+- **交互式风格选择**：未指定风格时自动列出风格库摘要供选择，支持 `/styles` 或自然语言查看详情与管理
 
 ---
 
@@ -41,7 +78,7 @@ Agent:  git push → Vercel 自动部署
 需要 Rust 1.80+。
 
 ```bash
-git clone https://github.com/khlilo/cognitive-writer.git
+git clone https://github.com/khlilo-dve/cognitive-writer.git
 cd cognitive-writer
 cargo build --release
 ```
@@ -52,37 +89,39 @@ cargo build --release
 
 ```env
 API_KEY=your-api-key-here
-BASE_URL=https://api.deepseek.com        # 任何 OpenAI 兼容端点
-MODEL=deepseek-v4-pro
-WEBSITE_PATH=/path/to/your/website        # 可选，个人网站项目路径
+BASE_URL=https://api.openai.com/v1       # 任何 OpenAI 兼容端点（如 DeepSeek / OpenRouter）
+MODEL=gpt-4o
+WEBSITE_PATH=/path/to/your/website       # 可选，个人网站项目路径（为空则跳过网站发布）
 ```
 
-## 使用
+## 使用方式
 
-### REPL 模式（主要方式）
+### REPL 模式（推荐交互方式）
 
 ```bash
 cargo run
-# 进入对话，说人话就行
 ```
 
-行末加 `\` 可以换行继续输入，适合粘贴多段落素材：
+进入交互终端后支持自然语言与多行输入（行末加 `\` 换行）：
 
 ```
-> 写一篇关于认知偏差在投资中的应用，轻辩风格 \
+> 写一篇关于认知偏差在投资中的应用，孙割风格 \
 素材：认知偏差是投资中最大的隐性成本。 \
 行为金融学研究表明，即使是专业投资者也无法完全避免这些偏差。 \
 关键是建立一套系统性的纠正机制。
-Agent: 匹配风格 → 生成大纲 → ...
+
+Agent: 匹配风格 → 生成大纲 → 渲染全文...
 ```
 
 ### CLI 快捷模式
 
+适合脚本集成或单次任务：
+
 ```bash
-cargo run -- generate          # 生成文章
-cargo run -- learn <URL>       # 学风格
-cargo run -- refine <FILE>     # 局部重绘
-cargo run -- update <FILE>     # 全文重写
+cargo run -- generate          # 交互式选择素材与风格生成文章
+cargo run -- learn <URL>       # 逆向学习文章风格并保存为 Spec
+cargo run -- refine <FILE>     # 基于 <AI_EDIT> 标记局部重绘
+cargo run -- update <FILE>     # 输入修改意见全篇重写
 ```
 
 ---
@@ -91,83 +130,76 @@ cargo run -- update <FILE>     # 全文重写
 
 | ✅ 能做 | ❌ 不做（by design） |
 |---------|---------------------|
-| 自然语言 → 结构化意图（LLM 分类） | 选题推荐 |
-| 10 维度逆向学习写作风格 | 多轮闲聊 |
-| 骨架→渲染双通道 LLM 生成 | 数据统计 / 定时发布 |
-| 微信富文本剪贴板注入 | Web UI |
-| 个人网站 MDX + git push 发布 | 多平台分发 |
-| 风格库模糊匹配 + 管理 | 英文版同步生成 |
-| 会话持久化（进程中断可恢复） | 公众号 API 集成 |
+| 自然语言 → 结构化意图（LLM 意图分类） | 选题自动化推荐 |
+| 10 维度高质量风格逆向提取（URL/文本） | 无意义多轮闲聊 |
+| 骨架（大纲）→ 渲染（正文）双通道生成 | 粉丝数据统计 / 定时发布 |
+| 风格库拼音归一化精确匹配与管理 | Web 网页端 UI |
+| 微信公众号富文本剪贴板注入（CF_HTML） | 第三方全平台自动矩阵分发 |
+| 个人网站 MDX 自动化构建 + Git Push 部署 | 微信公众号官方后台 API 登录对接 |
+| 会话持久化与异常中断恢复机制 | 英文版多语言机器翻译 |
 
 ---
 
-## 架构
+## 架构设计
 
-14 个源文件，132 个单元测试。main.rs 从 667 行降到 126 行。
+16 个核心源文件，145+ 单元测试，内置双核 LLM-Judge 自动化评测体系。
 
 ```
 src/
-├── main.rs         # REPL/CLI 分流器 (126 行)
-├── repl.rs         # 异步 REPL 循环 + 状态机 + 会话持久化 (1116 行)
-├── intent.rs       # LLM 意图分类 + 关键词 fallback (894 行)
-├── generate.rs     # 骨架→渲染双通道
-├── learn.rs        # Jina Reader + 10 维度风格逆向
-├── website.rs      # MDX 生成 + git push
-├── styles.rs       # 风格库管理
-├── refine.rs       # 局部重绘
-├── update.rs       # 全文重写
-├── llm.rs          # OpenAI 兼容 API 客户端
-├── clipboard.rs    # 跨平台 CF_HTML 剪贴板
-├── io.rs           # 文件 I/O + 版本管理
-├── error.rs        # AppError 枚举
-└── lib.rs          # 库入口
+├── main.rs         # REPL/CLI 路由与启动分流器
+├── repl.rs         # 异步 REPL 循环 + 4 状态状态机 + 会话持久化
+├── intent.rs       # LLM 意图分类 + 关键词匹配 fallback
+├── generate.rs     # 骨架 (Pass 1) → 渲染 (Pass 2) 双通道生成
+├── learn.rs        # Jina Reader 抓取 + 10 维度风格逆向工程
+├── styles.rs       # 风格库管理 + 拼音归一化精确匹配
+├── eval.rs         # 生成端 (Rubric A) + 提取端 (Rubric B) 双核评测引擎
+├── website.rs      # 个人网站 MDX 模板生成 + Git Push 发布
+├── refine.rs       # <AI_EDIT> 局部精确重绘
+├── update.rs       # 全文指令迭代重写
+├── clipboard.rs    # 跨平台标准 CF_HTML 微信剪贴板格式注入
+├── llm.rs          # OpenAI 兼容 API 客户端 + 泛型重试
+├── io.rs           # 文件 I/O 与版本号递增管理
+├── utils.rs        # 环境变量 / HTML 转换等公共工具
+├── error.rs        # 强类型 AppError 枚举
+└── lib.rs          # 库入口定义
 ```
 
-完整架构文档：[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-演进史与设计理念：[docs/EVOLUTION.md](docs/EVOLUTION.md)
+完整架构与设计文档：
+- 系统架构说明：[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- 演进史与设计理念：[docs/EVOLUTION.md](docs/EVOLUTION.md)
+- 评测体系架构设计：[docs/EVAL_SYSTEM_ARCHITECTURE.md](docs/EVAL_SYSTEM_ARCHITECTURE.md)
 
 ---
 
 ## 📮 Hosted Version — Coming Soon
 
-在做一个托管版：不用装 Rust、不用配环境、不用管 API key。浏览器打开，输入选题，点发布。预计 2026 年 Q3 内测。
+托管版正在筹备中：免配置 Rust 环境与 API Key，浏览器开箱即用。
 
-开源版永远免费。托管版感兴趣的话直接联系我：**ferkasybilla312@gmail.com**
+开源版持续维护并保持免费。托管版感兴趣可联系：**ferkasybilla312@gmail.com**
 
 ---
 
 ## 更新日志
 
-### v3.1.0 (2026-07-26) — 异步事件循环 + 会话持久化
+### v3.3.2 (2026-08) — 风格工程演进 + 自动化 Eval 评测体系
+- **风格提示词重构**：全面落地 10 维度执行 Spec，消灭感性赏析词，确立负面禁止规则最高优先级
+- **风格逆向提取升级**：外置提示词机制 + Jina Reader API 深度解析，支持微信文章 URL 一键逆向
+- **拼音归一化精确匹配**：支持中文名与拼音文件名双向精准映射与口语化时间感知查询
+- **双核 LLM-Judge 评测体系**：引入生成端（Rubric A 匹配度）与提取端（Rubric B 规范度）自动化评估套件
+- **稳定性与交付加固**：Result 强类型错误传播，本地生成产物版本化归档，145 个单测全量通过
 
-- REPL 升级 tokio 异步 stdin + `select!` 事件循环，Ctrl+C 自动保存
-- 会话持久化：每次操作后自动写 `~/.cognitive-writer/current.json`
-- 启动恢复：检测未完成会话并提示恢复
-- UX 改进（bugfix）：`spawn_blocking` 恢复终端行编辑（退格、方向键正常）、多行输入（行末 `\` 续行）、取消反馈优化、`/quit` 清除 session、启动 banner 增强
-- 132 个单元测试
+### v3.1.0 (2026-07) — 异步事件循环 + 会话持久化
+- REPL 升级 tokio 异步 stdin + `select!` 事件循环，支持异常中断自动保存
+- 会话持久化机制：每次交互自动写入 `~/.cognitive-writer/current.json`，启动时智能检测恢复
+- 交互优化：多行输入（行末 `\` 续行）、终端行编辑能力恢复
 
-### v3.0.0 (2026-07-26) — CLI → 对话式 Agent
+### v3.0.0 (2026-07) — CLI → 对话式 Agent
+- 自然语言 REPL 交互 + 4 状态对话状态机（Idle → WaitingForOutline → WaitingForFulltext → WaitingForPublish）
+- LLM 意图分类替代传统纯关键词硬匹配
+- 个人网站发布模块（MDX + Git Push）
 
-- REPL 自然语言交互 + 4 状态对话状态机
-- LLM 意图分类替代关键词匹配
-- 个人网站发布模块（MDX + git push）
-- 风格库管理、模块拆分（main.rs 667→126 行）
-
-### v2.1.0 (2026-07-18) — 模块化重构
-
-6 模块拆分、thiserror 强类型错误、泛型重试、36 单测、spinner 进度
-
-### v2.0.0 — 初始版本
-
-generate / learn 子命令、骨架-渲染双通道、跨平台剪贴板
-
----
-
-## Star History
-
-如果这个项目对你有用，给个 ⭐ 就是对我最大的支持。
-
-[![Star History Chart](https://api.star-history.com/svg?repos=khlilo/cognitive-writer&type=Date)](https://star-history.com/#khlilo/cognitive-writer&Date)
+### v2.1.0 (2026-07) — 模块化重构
+- 6 模块解耦、thiserror 错误类型、泛型 API 重试与进度反馈
 
 ---
 
