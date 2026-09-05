@@ -3,10 +3,10 @@
 //! v3.1: LLM 分类主导，关键词匹配降级为 fallback。
 //! `classify_intent` 是主路径，`parse_intent` 只做快速预检（confirm/cancel）。
 
-use serde::{Deserialize, Serialize};
 use crate::error::AppError;
 use crate::llm::call_llm;
 use reqwest::Client;
+use serde::{Deserialize, Serialize};
 
 // ── SessionState ─────────────────────────────────────────────────────
 
@@ -23,7 +23,6 @@ pub enum SessionState {
     /// 等待用户确认发布。
     WaitingForPublish,
 }
-
 
 // ── LLM 意图分类 ────────────────────────────────────────────────────────
 
@@ -69,10 +68,16 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 /// 每个状态下的有效意图，注入分类提示词，帮助模型在状态机下正确分类。
 fn state_valid_intents(state: &SessionState) -> &'static str {
     match state {
-        SessionState::Idle => "有效意图：Generate（写文章）、Learn（学风格）、ListStyles、ShowStyle、DeleteStyle、RefineFile、UpdateFile、Cancel。",
+        SessionState::Idle => {
+            "有效意图：Generate（写文章）、Learn（学风格）、ListStyles、ShowStyle、DeleteStyle、RefineFile、UpdateFile、Cancel。"
+        }
         SessionState::WaitingForOutline => "有效意图：Confirm（确认大纲）、Cancel。",
-        SessionState::WaitingForFulltext => "有效意图：Confirm（确认全文）、ModifySection（改某段）、ChangeStyle（换风格）、Cancel。",
-        SessionState::WaitingForPublish => "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。",
+        SessionState::WaitingForFulltext => {
+            "有效意图：Confirm（确认全文）、ModifySection（改某段）、ChangeStyle（换风格）、Cancel。"
+        }
+        SessionState::WaitingForPublish => {
+            "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。"
+        }
     }
 }
 
@@ -100,7 +105,15 @@ pub async fn classify_intent(
         .replace("{valid_intents}", state_valid_intents(state));
     let user_prompt = format!("用户输入：{}", input);
 
-    let raw = call_llm(client, base_url, api_key, model, &system_prompt, &user_prompt).await?;
+    let raw = call_llm(
+        client,
+        base_url,
+        api_key,
+        model,
+        &system_prompt,
+        &user_prompt,
+    )
+    .await?;
 
     parse_classify_response(&raw, input)
 }
@@ -230,7 +243,9 @@ pub enum Intent {
 pub fn parse_intent(input: &str, _state: &SessionState) -> Intent {
     let input = input.trim();
     if input.is_empty() {
-        return Intent::Unknown { reason: "输入为空".to_string() };
+        return Intent::Unknown {
+            reason: "输入为空".to_string(),
+        };
     }
 
     // ── 0 成本快速预检：确认 / 取消 ──
@@ -242,7 +257,9 @@ pub fn parse_intent(input: &str, _state: &SessionState) -> Intent {
     }
 
     // ── 其余返回 Unknown，由调用方走 LLM 分类 ──
-    Intent::Unknown { reason: "无法理解意图".to_string() }
+    Intent::Unknown {
+        reason: "无法理解意图".to_string(),
+    }
 }
 
 // ── Layer 1 模式检测辅助 ────────────────────────────────────────────
@@ -315,7 +332,15 @@ fn extract_url(input: &str) -> Option<String> {
 pub fn is_confirm(input: &str) -> bool {
     let s = input.trim();
     const CONFIRM_ZH: &[&str] = &[
-        "没问题", "继续", "就这样", "好", "可以", "行", "对", "是的", "嗯",
+        "没问题",
+        "继续",
+        "就这样",
+        "好",
+        "可以",
+        "行",
+        "对",
+        "是的",
+        "嗯",
     ];
     if CONFIRM_ZH.contains(&s) {
         return true;
@@ -328,9 +353,7 @@ pub fn is_confirm(input: &str) -> bool {
 /// 判断输入是否为取消语义（大小写不敏感）。
 pub fn is_cancel(input: &str) -> bool {
     let s = input.trim();
-    const CANCEL_ZH: &[&str] = &[
-        "算了", "取消", "不写了", "不要了", "换一个", "放弃",
-    ];
+    const CANCEL_ZH: &[&str] = &["算了", "取消", "不写了", "不要了", "换一个", "放弃"];
     if CANCEL_ZH.contains(&s) {
         return true;
     }
@@ -393,7 +416,9 @@ fn try_extract(text: &str) -> Option<(String, String)> {
     let yong_pos = before_fengge.rfind('用')?;
 
     let topic = after_kw[..yong_pos].trim().to_string();
-    let style_name = after_kw[yong_pos + "用".len()..fengge_pos].trim().to_string();
+    let style_name = after_kw[yong_pos + "用".len()..fengge_pos]
+        .trim()
+        .to_string();
 
     if topic.is_empty() || style_name.is_empty() {
         return None;
@@ -506,10 +531,14 @@ fn extract_md_path(input: &str) -> Option<String> {
 #[allow(dead_code)]
 /// 在 WaitingForPublish 状态下匹配发布相关意图。
 fn match_publish_intent(input: &str) -> Intent {
-    if input.contains("只发网站") || input.contains("只部署网站") || input.contains("网站发布") {
+    if input.contains("只发网站") || input.contains("只部署网站") || input.contains("网站发布")
+    {
         return Intent::PublishWebsiteOnly;
     }
-    if input.contains("发布") || input.contains("推") || input.contains("上线") || input.contains("发")
+    if input.contains("发布")
+        || input.contains("推")
+        || input.contains("上线")
+        || input.contains("发")
     {
         return Intent::Publish;
     }
@@ -521,7 +550,9 @@ fn match_publish_intent(input: &str) -> Intent {
     {
         return Intent::Hold;
     }
-    Intent::Unknown { reason: "无法理解意图".to_string() }
+    Intent::Unknown {
+        reason: "无法理解意图".to_string(),
+    }
 }
 
 #[cfg(test)]
@@ -529,13 +560,12 @@ fn match_publish_intent(input: &str) -> Intent {
 /// 在 WaitingForFulltext 状态下匹配正文修改相关意图。
 fn match_fulltext_intent(input: &str) -> Intent {
     // 更换风格
-    if (input.contains("整体") && input.contains("风格"))
+    if ((input.contains("整体") && input.contains("风格"))
         || (input.contains("换成") && input.contains("风格"))
-        || input.contains("改风格")
+        || input.contains("改风格"))
+        && let Some(style_name) = extract_style_name(input)
     {
-        if let Some(style_name) = extract_style_name(input) {
-            return Intent::ChangeStyle { style_name };
-        }
+        return Intent::ChangeStyle { style_name };
     }
 
     // 其余输入视为段落修改指令
@@ -683,8 +713,7 @@ mod tests {
 
     #[test]
     fn test_extract_update() {
-        let (path, inst) =
-            extract_update("重写 outputs/test_v1.md 改成更正式的语气").unwrap();
+        let (path, inst) = extract_update("重写 outputs/test_v1.md 改成更正式的语气").unwrap();
         assert_eq!(path, "outputs/test_v1.md");
         assert_eq!(inst, "更正式的语气");
     }
@@ -713,26 +742,17 @@ mod tests {
 
     #[test]
     fn test_extract_style_name_kankan() {
-        assert_eq!(
-            extract_style_name("看看鲁迅风格").unwrap(),
-            "鲁迅"
-        );
+        assert_eq!(extract_style_name("看看鲁迅风格").unwrap(), "鲁迅");
     }
 
     #[test]
     fn test_extract_style_name_delete() {
-        assert_eq!(
-            extract_style_name("删掉测试风格").unwrap(),
-            "测试"
-        );
+        assert_eq!(extract_style_name("删掉测试风格").unwrap(), "测试");
     }
 
     #[test]
     fn test_extract_style_name_gaifengge() {
-        assert_eq!(
-            extract_style_name("改风格鲁迅").unwrap(),
-            "鲁迅"
-        );
+        assert_eq!(extract_style_name("改风格鲁迅").unwrap(), "鲁迅");
     }
 
     // ── parse_intent: Layer 1 ──────────────────────────────────
@@ -775,8 +795,7 @@ mod tests {
     #[test]
     fn test_parse_update() {
         // v3.1: parse_intent 已裁剪，重写由 LLM 分类处理
-        let result =
-            parse_intent("重写 outputs/test.md 改成更正式", &SessionState::Idle);
+        let result = parse_intent("重写 outputs/test.md 改成更正式", &SessionState::Idle);
         assert!(matches!(result, Intent::Unknown { .. }));
     }
 
@@ -860,10 +879,7 @@ mod tests {
     #[test]
     fn test_url_priority_over_generate() {
         // v3.1: parse_intent 已裁剪，URL 优先检测由 LLM 分类处理
-        let result = parse_intent(
-            "写一篇用鲁迅风格 https://example.com",
-            &SessionState::Idle,
-        );
+        let result = parse_intent("写一篇用鲁迅风格 https://example.com", &SessionState::Idle);
         assert!(matches!(result, Intent::Unknown { .. }));
     }
 
@@ -958,5 +974,4 @@ mod tests {
         );
         assert!(matches!(result, Intent::Unknown { .. }));
     }
-
 }

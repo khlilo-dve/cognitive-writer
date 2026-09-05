@@ -82,23 +82,13 @@ pub fn write_mdx_draft(
 
     // 确保目录存在
     let content_dir = root.join("content").join(taxonomy);
-    std::fs::create_dir_all(&content_dir).map_err(|e| {
-        AppError::Website(format!(
-            "无法创建目录 {}: {}",
-            content_dir.display(),
-            e
-        ))
-    })?;
+    std::fs::create_dir_all(&content_dir)
+        .map_err(|e| AppError::Website(format!("无法创建目录 {}: {}", content_dir.display(), e)))?;
 
     // 写入文件
     let file_path = content_dir.join(format!("{}.mdx", slug));
-    std::fs::write(&file_path, &mdx_content).map_err(|e| {
-        AppError::Website(format!(
-            "无法写入文件 {}: {}",
-            file_path.display(),
-            e
-        ))
-    })?;
+    std::fs::write(&file_path, &mdx_content)
+        .map_err(|e| AppError::Website(format!("无法写入文件 {}: {}", file_path.display(), e)))?;
 
     Ok(file_path.display().to_string())
 }
@@ -113,10 +103,7 @@ pub fn write_mdx_draft(
 ///
 /// # Returns
 /// 成功时返回网站 URL（如 "https://khlilo.xyz/signal/{slug}"）
-pub fn publish_to_website(
-    website_path: &str,
-    slug: &str,
-) -> Result<String, AppError> {
+pub fn publish_to_website(website_path: &str, slug: &str) -> Result<String, AppError> {
     // 检查网站路径是否存在
     let root = Path::new(website_path);
     if !root.is_dir() {
@@ -131,8 +118,19 @@ pub fn publish_to_website(
     // 1. git add
     run_git(website_path, &["add", &file_path])?;
 
-    // 2. git commit（"nothing to commit" 不算错误）
-    let commit_output = run_git_raw(website_path, &["commit", "-m", &format!("post: {}", slug)]);
+    // 2. 只提交本次文章。网站仓库可能已有用户手动暂存的其他修改，
+    // 普通 `git commit` 会把它们一并带入发布提交。
+    let commit_output = run_git_raw(
+        website_path,
+        &[
+            "commit",
+            "--only",
+            "-m",
+            &format!("post: {}", slug),
+            "--",
+            &file_path,
+        ],
+    );
     match commit_output {
         Ok(_) => {}
         Err(e) => {
@@ -176,10 +174,7 @@ fn run_git(working_dir: &str, args: &[&str]) -> Result<String, AppError> {
 }
 
 /// 执行 git 命令，返回原始错误信息（用于区分 "nothing to commit"）
-fn run_git_raw(
-    working_dir: &str,
-    args: &[&str],
-) -> Result<String, AppError> {
+fn run_git_raw(working_dir: &str, args: &[&str]) -> Result<String, AppError> {
     let output = Command::new("git")
         .arg("-C")
         .arg(working_dir)
@@ -210,6 +205,16 @@ fn run_git_raw(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn run_git_test(working_dir: &std::path::Path, args: &[&str]) {
+        let status = Command::new("git")
+            .arg("-C")
+            .arg(working_dir)
+            .args(args)
+            .status()
+            .expect("git should start");
+        assert!(status.success(), "git {:?} failed", args);
+    }
 
     // ── extract_summary ──────────────────────────────────────────
 
@@ -382,5 +387,37 @@ mod tests {
         let err = result.unwrap_err();
         let err_msg = err.to_string();
         assert!(err_msg.contains("网站项目路径不存在"));
+    }
+
+    #[test]
+    fn test_post_commit_keeps_existing_staged_files_out_of_commit() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        run_git_test(root, &["init", "-q"]);
+        run_git_test(root, &["config", "user.email", "test@example.com"]);
+        run_git_test(root, &["config", "user.name", "Test User"]);
+
+        std::fs::write(root.join("README.md"), "initial").unwrap();
+        run_git_test(root, &["add", "README.md"]);
+        run_git_test(root, &["commit", "-qm", "initial"]);
+
+        std::fs::create_dir_all(root.join("content/signal")).unwrap();
+        std::fs::write(root.join("content/signal/post.mdx"), "post").unwrap();
+        std::fs::write(root.join("unrelated.md"), "do not publish").unwrap();
+        run_git_test(root, &["add", "unrelated.md"]);
+
+        let root_str = root.to_str().unwrap();
+        let post_path = "content/signal/post.mdx";
+        run_git(root_str, &["add", post_path]).unwrap();
+        run_git_raw(
+            root_str,
+            &["commit", "--only", "-m", "post: post", "--", post_path],
+        )
+        .unwrap();
+
+        let committed = run_git(root_str, &["show", "--format=", "--name-only", "HEAD"]).unwrap();
+        assert_eq!(committed, post_path);
+        let still_staged = run_git(root_str, &["diff", "--cached", "--name-only"]).unwrap();
+        assert_eq!(still_staged, "unrelated.md");
     }
 }

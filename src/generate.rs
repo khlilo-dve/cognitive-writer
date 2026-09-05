@@ -2,7 +2,9 @@ use reqwest::Client;
 
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
-use crate::io::{extract_idea_slug, list_styles, next_version, read_file, select_style, write_file};
+use crate::io::{
+    extract_idea_slug, list_styles, next_version, read_file, select_style, write_file,
+};
 use crate::llm::{call_llm, new_spinner, with_retry};
 use crate::utils::{env_var, env_var_or, fatal, md_to_wechat_html};
 
@@ -107,7 +109,14 @@ async fn generate_with_outline(
     let render_user = render_prompt(&outline, idea);
     let spinner = new_spinner("正在渲染正文...");
     let markdown = with_retry(3, "正文渲染", || {
-        call_llm(client, base_url, api_key, model, &render_system, &render_user)
+        call_llm(
+            client,
+            base_url,
+            api_key,
+            model,
+            &render_system,
+            &render_user,
+        )
     })
     .await?;
     spinner.finish_with_message("正文渲染完成");
@@ -141,9 +150,13 @@ pub async fn run_generate(input: &str, no_clipboard: bool) {
     // 读取素材
     let idea = read_file(input).unwrap_or_else(|e| fatal(&e));
     if idea.trim().is_empty() {
-        fatal(&format!("{} 内容为空，请先写入创作素材", input));
+        fatal(format!("{} 内容为空，请先写入创作素材", input));
     }
-    println!("[info] 素材 {} 字符 | 风格 {} 字符", idea.len(), style.len());
+    println!(
+        "[info] 素材 {} 字符 | 风格 {} 字符",
+        idea.len(),
+        style.len()
+    );
 
     // 双通道生成：骨架 → 渲染
     let client = Client::new();
@@ -222,5 +235,4 @@ mod tests {
         assert!(p.contains("这是素材"));
         assert!(p.contains("不要输出核对过程"));
     }
-
 }

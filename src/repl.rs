@@ -11,13 +11,11 @@ use serde::{Deserialize, Serialize};
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
 use crate::generate::{generate_outline, render_fulltext};
-use crate::intent::{classify_intent, is_confirm, is_cancel, parse_intent, Intent, SessionState};
+use crate::intent::{Intent, SessionState, classify_intent, is_cancel, is_confirm, parse_intent};
 use crate::io::extract_idea_slug;
 use crate::llm::{call_llm, with_retry};
 use crate::refine::REFINE_SYSTEM_PROMPT;
-use crate::styles::{
-    delete_style, fuzzy_match_style, list_styles_with_desc, show_style_detail,
-};
+use crate::styles::{delete_style, fuzzy_match_style, list_styles_with_desc, show_style_detail};
 use crate::utils::md_to_wechat_html;
 use crate::website::{publish_to_website, write_mdx_draft};
 
@@ -149,12 +147,11 @@ impl Repl {
 
     /// 新建实例，关联 session 目录。
     pub fn new_with_session_dir(session_dir: &std::path::Path) -> Result<Self, AppError> {
-        let api_key = std::env::var("API_KEY")
-            .map_err(|_| AppError::EnvVar("API_KEY 未设置".to_string()))?;
-        let base_url = std::env::var("BASE_URL")
-            .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
-        let model = std::env::var("MODEL")
-            .unwrap_or_else(|_| "gpt-4o".to_string());
+        let api_key =
+            std::env::var("API_KEY").map_err(|_| AppError::EnvVar("API_KEY 未设置".to_string()))?;
+        let base_url =
+            std::env::var("BASE_URL").unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
+        let model = std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".to_string());
         let website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
         let client = Client::new();
 
@@ -186,10 +183,9 @@ impl Repl {
         let mut repl: Repl = serde_json::from_str(&json).ok()?;
         // 重新初始化 #[serde(skip)] 字段
         repl.api_key = std::env::var("API_KEY").ok()?;
-        repl.base_url = std::env::var("BASE_URL")
-            .unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
-        repl.model = std::env::var("MODEL")
-            .unwrap_or_else(|_| "gpt-4o".to_string());
+        repl.base_url =
+            std::env::var("BASE_URL").unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
+        repl.model = std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".to_string());
         repl.website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
         repl.client = Client::new();
         repl.session_dir = Some(session_dir.to_path_buf());
@@ -207,8 +203,9 @@ impl Repl {
             Some(d) => d.clone(),
             None => return Ok(()),
         };
-        std::fs::create_dir_all(&dir)
-            .map_err(|e| AppError::FileWrite(format!("session 目录创建失败 {}: {}", dir.display(), e)))?;
+        std::fs::create_dir_all(&dir).map_err(|e| {
+            AppError::FileWrite(format!("session 目录创建失败 {}: {}", dir.display(), e))
+        })?;
         let path = dir.join("current.json");
         let json = serde_json::to_string_pretty(self)
             .map_err(|e| AppError::Parse(format!("序列化失败: {}", e)))?;
@@ -225,8 +222,9 @@ impl Repl {
         };
         let path = dir.join("current.json");
         if path.exists() {
-            std::fs::remove_file(&path)
-                .map_err(|e| AppError::FileWrite(format!("清除 session 失败 {}: {}", path.display(), e)))?;
+            std::fs::remove_file(&path).map_err(|e| {
+                AppError::FileWrite(format!("清除 session 失败 {}: {}", path.display(), e))
+            })?;
         }
         Ok(())
     }
@@ -264,9 +262,9 @@ impl Repl {
                             }
                             Ok(_) => {
                                 let trimmed = line.trim_end_matches('\n').trim_end_matches('\r');
-                                if trimmed.ends_with('\\') {
-                                    // 续行：去掉末尾 \，保留此行内容
-                                    collected.push(trimmed[..trimmed.len()-1].to_string());
+                                if let Some(stripped) = trimmed.strip_suffix('\\') {
+                                    // 续行：去掉末尾 \\，保留此行内容
+                                    collected.push(stripped.to_string());
                                 } else {
                                     collected.push(trimmed.to_string());
                                     break;
@@ -401,10 +399,7 @@ impl Repl {
     fn print_state(&self) {
         println!("{}", sep());
         println!("状态: {:?}", self.state);
-        println!(
-            "话题: {}",
-            self.current_topic.as_deref().unwrap_or("(无)")
-        );
+        println!("话题: {}", self.current_topic.as_deref().unwrap_or("(无)"));
         println!(
             "大纲: {}",
             self.current_outline
@@ -423,10 +418,7 @@ impl Repl {
             "风格: {}",
             self.current_style_name.as_deref().unwrap_or("(无)")
         );
-        println!(
-            "slug: {}",
-            self.current_slug.as_deref().unwrap_or("(无)")
-        );
+        println!("slug: {}", self.current_slug.as_deref().unwrap_or("(无)"));
         println!("配置: model={} base_url={}", self.model, self.base_url);
         println!(
             "网站路径: {}",
@@ -442,10 +434,18 @@ impl Repl {
     /// 当前状态下的可用操作提示，用于「没理解」或「状态不对」时给用户指路。
     fn state_hint(&self) -> &'static str {
         match self.state {
-            SessionState::Idle => "可以：「写一篇关于XX的文章，用YY风格」「列出风格」「学一下这个风格 <链接>」，或 /help 看全部用法。",
-            SessionState::WaitingForOutline => "可以：「OK」确认大纲、「第X点改成…」修改大纲、「算了」取消。",
-            SessionState::WaitingForFulltext => "可以：「OK」确认全文、「第X段加案例」修改、「换成XX风格」换风格、「算了」取消。",
-            SessionState::WaitingForPublish => "可以：「发布」「只发网站」「等一下」暂缓、「算了」取消。",
+            SessionState::Idle => {
+                "可以：「写一篇关于XX的文章，用YY风格」「列出风格」「学一下这个风格 <链接>」，或 /help 看全部用法。"
+            }
+            SessionState::WaitingForOutline => {
+                "可以：「OK」确认大纲、「第X点改成…」修改大纲、「算了」取消。"
+            }
+            SessionState::WaitingForFulltext => {
+                "可以：「OK」确认全文、「第X段加案例」修改、「换成XX风格」换风格、「算了」取消。"
+            }
+            SessionState::WaitingForPublish => {
+                "可以：「发布」「只发网站」「等一下」暂缓、「算了」取消。"
+            }
         }
     }
 
@@ -514,7 +514,9 @@ impl Repl {
                 self.reset_state();
             }
             (SessionState::WaitingForPublish, Intent::Hold) => {
-                println!("草稿已保留。公众号：打开微信后台粘贴 (已注入剪贴板)。网站：MDX 文件已写入。");
+                println!(
+                    "草稿已保留。公众号：打开微信后台粘贴 (已注入剪贴板)。网站：MDX 文件已写入。"
+                );
                 self.reset_state();
             }
 
@@ -538,16 +540,15 @@ impl Repl {
     /// 3. 调用 generate_outline → 骨架
     /// 4. 自动调用 render_fulltext → 全文
     /// 5. 切换到 WaitingForFulltext 状态
-    async fn handle_generate(
-        &mut self,
-        topic: &str,
-        style_name: &str,
-    ) -> Result<(), AppError> {
+    async fn handle_generate(&mut self, topic: &str, style_name: &str) -> Result<(), AppError> {
         // 模糊匹配风格
-        let (disp_name, style_content) =
-            fuzzy_match_style("styles", style_name)?;
+        let (disp_name, style_content) = fuzzy_match_style("styles", style_name)?;
 
-        println!("[info] 匹配风格: {} ({} 字符)", disp_name, style_content.len());
+        println!(
+            "[info] 匹配风格: {} ({} 字符)",
+            disp_name,
+            style_content.len()
+        );
 
         self.current_style_name = Some(disp_name);
         self.current_style_content = Some(style_content.clone());
@@ -661,13 +662,7 @@ impl Repl {
         // 网站草稿
         if !self.website_path.is_empty() {
             let title = extract_title(fulltext);
-            match write_mdx_draft(
-                &self.website_path,
-                "signal",
-                slug,
-                &title,
-                fulltext,
-            ) {
+            match write_mdx_draft(&self.website_path, "signal", slug, &title, fulltext) {
                 Ok(path) => println!("[done] 网站草稿已写入: {}", path),
                 Err(e) => eprintln!("[warn] 网站草稿写入失败: {}", e),
             }
@@ -678,7 +673,9 @@ impl Repl {
         self.state = SessionState::WaitingForPublish;
 
         println!();
-        println!("  草稿已就绪。输入「发布」正式发布，「只发网站」仅发布到网站，「等一下」保留草稿。");
+        println!(
+            "  草稿已就绪。输入「发布」正式发布，「只发网站」仅发布到网站，「等一下」保留草稿。"
+        );
 
         Ok(())
     }
@@ -693,10 +690,8 @@ impl Repl {
             .ok_or_else(|| AppError::Intent("slug 丢失，无法发布".to_string()))?;
 
         if !self.website_path.is_empty() {
-            match publish_to_website(&self.website_path, slug) {
-                Ok(url) => println!("[done] 网站已发布: {}", url),
-                Err(e) => eprintln!("[warn] 网站发布失败: {}", e),
-            }
+            let url = publish_to_website(&self.website_path, slug)?;
+            println!("[done] 网站已发布: {}", url);
         }
 
         println!("[info] 公众号请手动到微信后台粘贴发布 (Ctrl+V)");
@@ -712,14 +707,13 @@ impl Repl {
             .ok_or_else(|| AppError::Intent("slug 丢失，无法发布".to_string()))?;
 
         if self.website_path.is_empty() {
-            println!("[info] WEBSITE_PATH 未配置，无法发布到网站");
-            return Ok(());
+            return Err(AppError::Website(
+                "WEBSITE_PATH 未配置，无法发布到网站".to_string(),
+            ));
         }
 
-        match publish_to_website(&self.website_path, slug) {
-            Ok(url) => println!("[done] 网站已发布: {}", url),
-            Err(e) => eprintln!("[warn] 网站发布失败: {}", e),
-        }
+        let url = publish_to_website(&self.website_path, slug)?;
+        println!("[done] 网站已发布: {}", url);
 
         Ok(())
     }
@@ -727,10 +721,7 @@ impl Repl {
     // ── handle: Refine section ────────────────────────────────────
 
     /// 用 REFINE_SYSTEM_PROMPT 局部重绘全文中的指定段落。
-    async fn handle_refine_section(
-        &mut self,
-        instruction: &str,
-    ) -> Result<(), AppError> {
+    async fn handle_refine_section(&mut self, instruction: &str) -> Result<(), AppError> {
         let fulltext = self
             .current_fulltext
             .as_deref()
@@ -774,18 +765,14 @@ impl Repl {
 
     /// 模糊匹配新风格 → 更新 current_style_content →
     /// LLM 按新风格重写全文。
-    async fn handle_change_style(
-        &mut self,
-        style_name: &str,
-    ) -> Result<(), AppError> {
+    async fn handle_change_style(&mut self, style_name: &str) -> Result<(), AppError> {
         let fulltext = self
             .current_fulltext
             .as_deref()
             .ok_or_else(|| AppError::Intent("全文内容丢失".to_string()))?;
 
         // 模糊匹配新风格
-        let (disp_name, style_content) =
-            fuzzy_match_style("styles", style_name)?;
+        let (disp_name, style_content) = fuzzy_match_style("styles", style_name)?;
 
         println!(
             "[info] 切换风格: {} → {}",
@@ -833,11 +820,7 @@ impl Repl {
     // ── handle: Refine file ───────────────────────────────────────
 
     /// 读取 .md 文件，根据指令用 LLM 局部重绘，输出版本化结果。
-    async fn handle_refine_file(
-        &mut self,
-        path: &str,
-        instruction: &str,
-    ) -> Result<(), AppError> {
+    async fn handle_refine_file(&mut self, path: &str, instruction: &str) -> Result<(), AppError> {
         let content = crate::io::read_file(path)
             .map_err(|e| AppError::FileRead(format!("读取 {} 失败: {}", path, e)))?;
 
@@ -966,16 +949,34 @@ mod tests {
     #[test]
     fn test_state_label_covers_all_states() {
         assert_eq!(state_label(&SessionState::Idle), "空闲");
-        assert_eq!(state_label(&SessionState::WaitingForFulltext), "等待确认全文");
-        assert_eq!(state_label(&SessionState::WaitingForPublish), "等待确认发布");
-        assert_eq!(state_label(&SessionState::WaitingForOutline), "等待确认大纲");
+        assert_eq!(
+            state_label(&SessionState::WaitingForFulltext),
+            "等待确认全文"
+        );
+        assert_eq!(
+            state_label(&SessionState::WaitingForPublish),
+            "等待确认发布"
+        );
+        assert_eq!(
+            state_label(&SessionState::WaitingForOutline),
+            "等待确认大纲"
+        );
     }
 
     #[test]
     fn test_intent_label_known_and_unknown() {
-        assert_eq!(intent_label(&Intent::Generate { topic: "t".into(), style_name: "s".into() }), "写文章");
+        assert_eq!(
+            intent_label(&Intent::Generate {
+                topic: "t".into(),
+                style_name: "s".into()
+            }),
+            "写文章"
+        );
         assert_eq!(intent_label(&Intent::Confirm), "确认");
-        assert_eq!(intent_label(&Intent::Unknown { reason: "x".into() }), "无法识别");
+        assert_eq!(
+            intent_label(&Intent::Unknown { reason: "x".into() }),
+            "无法识别"
+        );
     }
 
     // ── md_to_wechat_html ──────────────────────────────────────────
@@ -1030,10 +1031,7 @@ mod tests {
 
     #[test]
     fn test_extract_title_skips_empty_lines() {
-        assert_eq!(
-            extract_title("\n\n# 跳过空行"),
-            "跳过空行"
-        );
+        assert_eq!(extract_title("\n\n# 跳过空行"), "跳过空行");
     }
 
     // ── Repl::new ──────────────────────────────────────────────────
@@ -1095,6 +1093,25 @@ mod tests {
         assert!(repl.current_style_name.is_none());
         assert!(repl.current_style_content.is_none());
         assert!(repl.current_slug.is_none());
+
+        unsafe { std::env::remove_var("API_KEY") };
+    }
+
+    #[test]
+    fn test_website_only_publish_without_config_preserves_session() {
+        let _g = ENV_MUTEX.lock().unwrap();
+        unsafe { std::env::set_var("API_KEY", "test-key") };
+        unsafe { std::env::remove_var("WEBSITE_PATH") };
+
+        let mut repl = Repl::new().unwrap();
+        repl.state = SessionState::WaitingForPublish;
+        repl.current_slug = Some("test-post".into());
+
+        let runtime = tokio::runtime::Runtime::new().unwrap();
+        let result = runtime.block_on(repl.dispatch(Intent::PublishWebsiteOnly, "只发网站"));
+        assert!(result.is_err());
+        assert_eq!(repl.state, SessionState::WaitingForPublish);
+        assert_eq!(repl.current_slug.as_deref(), Some("test-post"));
 
         unsafe { std::env::remove_var("API_KEY") };
     }

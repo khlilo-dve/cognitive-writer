@@ -6,7 +6,6 @@ use crate::io::{extract_idea_slug, next_version, read_file, write_file};
 use crate::llm::{call_llm, new_spinner, with_retry};
 use crate::utils::{env_var, env_var_or, fatal, md_to_wechat_html};
 
-
 pub const REFINE_SYSTEM_PROMPT: &str = r#"你是一个严苛的文本重构引擎。
 请根据用户给出的修改指令，重写指定的文本片段。
 
@@ -26,18 +25,20 @@ pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
     let mut edits = Vec::new();
     let mut pos = 0;
 
-    loop {
+    while let Some(i) = content[pos..].find("<AI_EDIT ") {
         // 1. 找开标签起始
-        let open_start = match content[pos..].find("<AI_EDIT ") {
-            Some(i) => pos + i,
-            None => break,
-        };
+        let open_start = pos + i;
 
         // 2. 提取 instruction="..."
         let inst_key = "instruction=\"";
         let inst_start = match content[open_start..].find(inst_key) {
             Some(i) => open_start + i + inst_key.len(),
-            None => return Err(format!("AI_EDIT 标签缺少 instruction 属性 (位置 {})", open_start)),
+            None => {
+                return Err(format!(
+                    "AI_EDIT 标签缺少 instruction 属性 (位置 {})",
+                    open_start
+                ));
+            }
         };
         let inst_end = match content[inst_start..].find('"') {
             Some(i) => inst_start + i,
@@ -208,7 +209,10 @@ mod tests {
     fn test_parse_ai_edits_no_tag_is_error() {
         let result = parse_ai_edits("没有任何标记的普通文本");
         assert!(result.is_err());
-        { let err_msg = result.err().unwrap(); assert!(err_msg.contains("未找到")); };
+        {
+            let err_msg = result.err().unwrap();
+            assert!(err_msg.contains("未找到"));
+        };
     }
 
     #[test]
@@ -216,7 +220,10 @@ mod tests {
         // <AI_EDIT> 不带 instruction 属性
         let result = parse_ai_edits("<AI_EDIT >文本</AI_EDIT>");
         assert!(result.is_err());
-        { let err_msg = result.err().unwrap(); assert!(err_msg.contains("instruction")); };
+        {
+            let err_msg = result.err().unwrap();
+            assert!(err_msg.contains("instruction"));
+        };
     }
 
     #[test]
@@ -240,6 +247,9 @@ mod tests {
         let content = "<AI_EDIT instruction=\"测试\">原文</AI_EDIT>";
         let edits = parse_ai_edits(content).unwrap();
         assert_eq!(edits.len(), 1);
-        assert_eq!(edits[0].full_match, "<AI_EDIT instruction=\"测试\">原文</AI_EDIT>");
+        assert_eq!(
+            edits[0].full_match,
+            "<AI_EDIT instruction=\"测试\">原文</AI_EDIT>"
+        );
     }
 }

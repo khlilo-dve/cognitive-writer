@@ -1,5 +1,5 @@
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::time::SystemTime;
 
 use pinyin::ToPinyin;
@@ -9,7 +9,7 @@ use crate::error::AppError;
 /// 风格摘要
 pub struct StyleSummary {
     #[allow(dead_code)]
-    pub filename: String,     // e.g. "qingbian.md"; retained for library callers
+    pub filename: String, // e.g. "qingbian.md"; retained for library callers
     pub display_name: String, // e.g. "qingbian" (without extension)
     pub description: String,  // first non-empty non-heading paragraph
 }
@@ -52,6 +52,22 @@ fn is_recent_query(query: &str) -> bool {
     keywords.iter().any(|kw| query.contains(kw))
 }
 
+/// 将用户提供的风格名限制为单个文件名，防止读写操作逃出 styles 目录。
+fn style_file_path(styles_dir: &str, name: &str) -> Result<PathBuf, AppError> {
+    let name = name.trim();
+    let components: Vec<_> = Path::new(name).components().collect();
+    if name.is_empty()
+        || name.contains(['/', '\\', '\0'])
+        || !matches!(components.as_slice(), [std::path::Component::Normal(_)])
+    {
+        return Err(AppError::FileRead(format!(
+            "无效的风格名称 `{name}`：名称必须是单个文件名"
+        )));
+    }
+
+    Ok(Path::new(styles_dir).join(format!("{name}.md")))
+}
+
 /// 把名称归一化为可用于精确比对的键：中文转无声调拼音，ASCII 转小写，其余原样。
 ///
 /// 这样「轻辩」与「qingbian」得到同一个键，而「qingbain」保持不同，实现
@@ -71,8 +87,8 @@ fn match_key(name: &str) -> String {
 /// Find the most recently modified .md file in the given directory.
 /// Returns `(display_name, file_content)`.
 fn find_most_recent(styles_dir: &str) -> Result<(String, String), AppError> {
-    let dir_entries =
-        fs::read_dir(styles_dir).map_err(|e| AppError::NoStyles(format!("无法读取风格目录: {e}")))?;
+    let dir_entries = fs::read_dir(styles_dir)
+        .map_err(|e| AppError::NoStyles(format!("无法读取风格目录: {e}")))?;
 
     let mut best: Option<(SystemTime, String, String)> = None;
 
@@ -110,12 +126,9 @@ fn find_most_recent(styles_dir: &str) -> Result<(String, String), AppError> {
 /// 3. Most-recently-modified (when query contains "刚学"/"最近"/"上次")
 ///
 /// Returns `(display_name, file_content)` on success.
-pub fn fuzzy_match_style(
-    styles_dir: &str,
-    query: &str,
-) -> Result<(String, String), AppError> {
-    let dir_entries =
-        fs::read_dir(styles_dir).map_err(|e| AppError::NoStyles(format!("无法读取风格目录: {e}")))?;
+pub fn fuzzy_match_style(styles_dir: &str, query: &str) -> Result<(String, String), AppError> {
+    let dir_entries = fs::read_dir(styles_dir)
+        .map_err(|e| AppError::NoStyles(format!("无法读取风格目录: {e}")))?;
 
     // Collect .md entries
     let mut md_files: Vec<(String, String)> = Vec::new(); // (display_name, full_path_string)
@@ -138,7 +151,7 @@ pub fn fuzzy_match_style(
     }
 
     // Priority 1: exact filename match
-    let exact_path = Path::new(styles_dir).join(format!("{query}.md"));
+    let exact_path = style_file_path(styles_dir, query)?;
     if exact_path.exists() {
         let content = fs::read_to_string(&exact_path)
             .map_err(|e| AppError::FileRead(format!("无法读取 `{}`: {e}", exact_path.display())))?;
@@ -150,9 +163,8 @@ pub fn fuzzy_match_style(
     if !query_key.is_empty() {
         for (display, path_str) in &md_files {
             if match_key(display) == query_key {
-                let content = fs::read_to_string(path_str).map_err(|e| {
-                    AppError::FileRead(format!("无法读取 `{path_str}`: {e}"))
-                })?;
+                let content = fs::read_to_string(path_str)
+                    .map_err(|e| AppError::FileRead(format!("无法读取 `{path_str}`: {e}")))?;
                 return Ok((display.clone(), content));
             }
         }
@@ -165,9 +177,8 @@ pub fn fuzzy_match_style(
 
     // Priority 4: content keyword match (first 200 chars)
     for (display, path_str) in &md_files {
-        let content = fs::read_to_string(path_str).map_err(|e| {
-            AppError::FileRead(format!("无法读取 `{path_str}`: {e}"))
-        })?;
+        let content = fs::read_to_string(path_str)
+            .map_err(|e| AppError::FileRead(format!("无法读取 `{path_str}`: {e}")))?;
         let preview: String = content.chars().take(200).collect();
         if preview.contains(query) {
             return Ok((display.clone(), content));
@@ -184,8 +195,8 @@ pub fn fuzzy_match_style(
 /// Returns `Err(NoStyles)` when the directory is empty or contains no .md
 /// files.
 pub fn list_styles_with_desc(styles_dir: &str) -> Result<Vec<StyleSummary>, AppError> {
-    let entries =
-        fs::read_dir(styles_dir).map_err(|e| AppError::NoStyles(format!("无法读取风格目录: {e}")))?;
+    let entries = fs::read_dir(styles_dir)
+        .map_err(|e| AppError::NoStyles(format!("无法读取风格目录: {e}")))?;
 
     let mut results: Vec<StyleSummary> = Vec::new();
     for entry in entries.flatten() {
@@ -201,9 +212,8 @@ pub fn list_styles_with_desc(styles_dir: &str) -> Result<Vec<StyleSummary>, AppE
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string();
-            let content = fs::read_to_string(&path).map_err(|e| {
-                AppError::FileRead(format!("无法读取 `{}`: {e}", path.display()))
-            })?;
+            let content = fs::read_to_string(&path)
+                .map_err(|e| AppError::FileRead(format!("无法读取 `{}`: {e}", path.display())))?;
             let description = extract_description(&content);
             results.push(StyleSummary {
                 filename,
@@ -226,10 +236,9 @@ pub fn list_styles_with_desc(styles_dir: &str) -> Result<Vec<StyleSummary>, AppE
 /// Read and return the full content of a style file by its display name
 /// (without `.md` extension).
 pub fn show_style_detail(styles_dir: &str, name: &str) -> Result<String, AppError> {
-    let path = Path::new(styles_dir).join(format!("{name}.md"));
-    fs::read_to_string(&path).map_err(|e| {
-        AppError::FileRead(format!("无法读取风格文件 `{}`: {e}", path.display()))
-    })
+    let path = style_file_path(styles_dir, name)?;
+    fs::read_to_string(&path)
+        .map_err(|e| AppError::FileRead(format!("无法读取风格文件 `{}`: {e}", path.display())))
 }
 
 /// Delete a style file by its display name (without `.md` extension).
@@ -237,7 +246,7 @@ pub fn show_style_detail(styles_dir: &str, name: &str) -> Result<String, AppErro
 /// The caller is responsible for performing a confirmation check before
 /// calling this function.
 pub fn delete_style(styles_dir: &str, name: &str) -> Result<(), AppError> {
-    let path = Path::new(styles_dir).join(format!("{name}.md"));
+    let path = style_file_path(styles_dir, name)?;
     fs::remove_file(&path)
         .map_err(|e| AppError::FileRead(format!("无法删除风格文件 `{}`: {e}", path.display())))
 }
@@ -291,9 +300,7 @@ mod tests {
 
     #[test]
     fn test_fuzzy_match_not_found() {
-        let (_dir, dir_str) = setup_temp_styles(&[
-            ("only.md", "# Only\n没有匹配的内容。"),
-        ]);
+        let (_dir, dir_str) = setup_temp_styles(&[("only.md", "# Only\n没有匹配的内容。")]);
 
         let result = fuzzy_match_style(&dir_str, "不存在的关键词");
         assert!(result.is_err());
@@ -344,9 +351,7 @@ mod tests {
 
     #[test]
     fn test_fuzzy_match_wrong_pinyin_letter_does_not_match() {
-        let (_dir, dir_str) = setup_temp_styles(&[
-            ("qingbian.md", "# 轻辩\n理性分析。"),
-        ]);
+        let (_dir, dir_str) = setup_temp_styles(&[("qingbian.md", "# 轻辩\n理性分析。")]);
         // 错一个字母（qingbain ≠ qingbian）绝不能匹配上
         assert!(fuzzy_match_style(&dir_str, "qingbain").is_err());
     }
@@ -359,6 +364,12 @@ mod tests {
         assert!(result.is_err());
     }
 
+    #[test]
+    fn test_fuzzy_match_rejects_path_traversal() {
+        let (_dir, dir_str) = setup_temp_styles(&[("exists.md", "# Exists")]);
+        assert!(fuzzy_match_style(&dir_str, "../outside").is_err());
+    }
+
     // ── list_styles_with_desc ───────────────────────────────────────
 
     #[test]
@@ -368,10 +379,7 @@ mod tests {
                 "style_a.md",
                 "# 风格A\n这是风格A的第一段描述内容。\n## 二级标题\n更多内容。",
             ),
-            (
-                "style_b.md",
-                "# 风格B\n风格B的简介在这里。",
-            ),
+            ("style_b.md", "# 风格B\n风格B的简介在这里。"),
         ]);
 
         let summaries = list_styles_with_desc(&dir_str).unwrap();
@@ -405,12 +413,10 @@ mod tests {
 
     #[test]
     fn test_show_style_detail() {
-        let (_dir, dir_str) = setup_temp_styles(&[
-            (
-                "mystyle.md",
-                "# My Style\n完整的风格描述内容在这里。\n\n更多段落。",
-            ),
-        ]);
+        let (_dir, dir_str) = setup_temp_styles(&[(
+            "mystyle.md",
+            "# My Style\n完整的风格描述内容在这里。\n\n更多段落。",
+        )]);
 
         let content = show_style_detail(&dir_str, "mystyle").unwrap();
         assert!(content.contains("My Style"));
@@ -423,6 +429,12 @@ mod tests {
         let (_dir, dir_str) = setup_temp_styles(&[("exists.md", "# Exists")]);
         let result = show_style_detail(&dir_str, "nonexistent");
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_show_style_detail_rejects_path_traversal() {
+        let (_dir, dir_str) = setup_temp_styles(&[("exists.md", "# Exists")]);
+        assert!(show_style_detail(&dir_str, "../outside").is_err());
     }
 
     // ── delete_style ────────────────────────────────────────────────
@@ -448,6 +460,13 @@ mod tests {
         let (_dir, dir_str) = setup_temp_styles(&[("exists.md", "# Exists")]);
         let result = delete_style(&dir_str, "nonexistent");
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_delete_style_rejects_path_traversal() {
+        let (_dir, dir_str) = setup_temp_styles(&[("exists.md", "# Exists")]);
+        assert!(delete_style(&dir_str, "../outside").is_err());
+        assert!(std::path::Path::new(&dir_str).join("exists.md").exists());
     }
 
     // ── extract_description ─────────────────────────────────────────
