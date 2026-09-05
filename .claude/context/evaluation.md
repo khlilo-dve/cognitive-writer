@@ -1,38 +1,28 @@
-# 评测体系与 Eval 基线 (evaluation.md)
+# 评测体系与可续跑评测
 
-## 双评测维度体系
+## 两套独立评测
+- Rubric A：生成文章与输入风格 Spec 的匹配度；破题、论证、节奏、人称、用词、结尾六维 1–5 分。只评最终正文，素材与 Spec 单独提供。
+- Rubric B：样文提取出的 Spec 质量；结构覆盖、可执行性、精简度、特征捕捉、去素材污染五维 1–5 分。不是文章通用质量评测。
+- JSON 分数必须在 1–5 之间，均分由代码重新计算。模型评分与人工黄金标准分开记录。
 
-写作系统的输出主观性极高，本项目建立了一套科学可量化的自动化评测体系：
+## 实现与产物
+- `src/eval.rs`：冻结主题、Judge 解析与验证、历史归档正文提取、底部 ignored 入口。
+- `src/eval_store.rs`：请求快照、检查点、请求漂移检测、错误脱敏。每个成功请求独立保存，中断后可复用；输入变化必须新开 run_id。
+- `src/eval_runs.rs`：A/B 基线重评、候选文章与 Spec 对比、5×5 交叉评测、JSON/Markdown 汇总。
+- 目录与命名规范见 `eval/AGENTS.md`。历史输入只读，新结果在 `eval/runs/{run_id}/`；JSON 保存输入和结果，Markdown 是便于阅读的正文/Spec 副本。
+- 候选提取 Prompt 仅保存在运行目录，针对已发现的原句引用和超长问题增加抽象/长度约束，不替换 `prompts/learn_style.md`。
 
-### 1. Rubric A：风格匹配度评测 (Style Fidelity)
-- **目标**: 衡量生成文章是否严格契合目标 StyleSpec 的约束，杜绝模型自我发挥导致的“AI 味”。
-- **评分维度**:
-  - 结构范式拟合度
-  - 核心论证逻辑与认知深度
-  - 句式与语言语气习惯
-  - 负向约束遵守率（是否误用了禁止词）
+## 运行
+```bash
+# 离线
+cargo test --lib
+# 完整在线运行；断网后原命令续跑
+EVAL_RUN_ID=20260905-auto-v1 cargo test --lib eval_automated_suite -- --ignored --nocapture
+```
+可单独运行：`eval_judge_baseline_suite`、`eval_judge_learn_baseline_suite`、`eval_style_compare_suite`、`eval_learn_compare_suite`、`eval_all_specs_on_eval1_suite`。相同 run_id 共享检查点，不同时运行相同入口或同名任务。
 
-### 2. Rubric B：文章质感与独立可读性评测 (Writing Quality)
-- **目标**: 脱离特定风格，评估文章作为一篇大众公众号传播内容的综合水准。
-- **评分维度**:
-  - 抓人程度（Hooking / 黄金前三屏）
-  - 论点推进流畅性与内在逻辑连贯性
-  - 金句密度与认知价值提炼
-
-## LLM-Judge 自动化评测引擎 (`src/eval.rs`)
-
-为了实现无人工介入的基线监控与批量回归：
-- **评测驱动**: `src/eval.rs` 加载预定义的 Baseline 题目 (`eval/baseline/*.md`)。
-- **评分提示词**:
-  - `prompts/eval_judge_style.md`: 驱动 LLM 按照 Rubric A 规范严格量化打分（1~5 分制），并输出结构化 JSON 理由。
-  - `prompts/eval_judge_learn.md`: 评测逆向学习提取的 Spec 本身是否完整精准。
-- **评测输出**: 评分与理由自动记录至 `eval/spec_runs/` 下便于对比版本间差异。
-
-## 目录结构映射
-- `eval/baseline/`: 冻结的标准选题基线集，用于每次版本变更后的横向对比。
-- `eval/samples/`: 人类作者真实样本文章库，用于风格逆向学习的标准输入。
-- `eval/baseline_specs/`: 冻结的基准风格 Spec 快照。
-
-## 何时需要查阅代码
-- 增加或修改评分维度：查阅 `prompts/eval_judge_style.md` 与 `src/eval.rs`。
-- 新增评测集或修改评测运行方式：查阅 `eval/` 目录结构与 `tests/` 中的 eval 用例。
+## 解释边界
+- 历史 Baseline 缺少完整生成模型/Prompt 元数据，与候选的分差不能单独归因于本轮改动。
+- 5 篇单次胜率只用于发现问题，不代表统计显著改善。
+- 字数、标题覆盖、连续 12 字原文重合单独作为机械检查线索，不伪装成人工判断。
+- 人工校准仍需用户审阅样文、基线与候选 Spec；自动执行完不代表人工任务完成。

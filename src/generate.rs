@@ -11,7 +11,7 @@ use crate::utils::{env_var, env_var_or, fatal, md_to_wechat_html};
 // ── Prompt builders ──────────────────────────────────────────────────
 
 /// 大纲生成 system prompt：注入风格执行指令，让大纲在结构层就贴合风格。
-fn outline_system_prompt(style: &str) -> String {
+pub(crate) fn outline_system_prompt(style: &str) -> String {
     format!(
         "你是一个写作结构设计专家。\n\n\
          以下是本次文章必须遵循的写作风格（逐条执行，硬约束）：\n\n---\n{style}\n---\n\n\
@@ -29,7 +29,7 @@ fn outline_system_prompt(style: &str) -> String {
 /// 正文渲染 system prompt：风格 spec 外包一层硬约束与事实边界。
 /// 通用约束（只输出正文 / 不伪造事实 / 冲突时禁止优先）放在代码里，
 /// 不写进每个风格文件，避免重复与漂移。
-fn style_system_prompt(style: &str) -> String {
+pub(crate) fn style_system_prompt(style: &str) -> String {
     format!(
         "你是一名中文写作者。以下是必须严格遵循的写作风格，逐条执行，这是硬约束：\n\n---\n{style}\n---\n\n\
          通用约束：\n\
@@ -40,7 +40,7 @@ fn style_system_prompt(style: &str) -> String {
 }
 
 /// 正文渲染 user prompt：大纲 + 素材 + 输出前自检要求。
-fn render_prompt(outline: &str, idea: &str) -> String {
+pub(crate) fn render_prompt(outline: &str, idea: &str) -> String {
     format!(
         "以下是符合风格的逻辑大纲，请严格按此结构展开正文：\n\n---\n{}\n---\n\n原始素材：\n\n---\n{}\n---\n\n\
          请按大纲结构展开，输出完整的 Markdown 正文。输出前核对：开头破题、核心论证、段落节奏、句式人称、结尾收束是否符合给定风格，是否出现 AI 套话或素材外事实；核对后直接输出正文，不要输出核对过程。",
@@ -95,31 +95,25 @@ async fn generate_with_outline(
     idea: &str,
 ) -> Result<String, AppError> {
     // Pass 1 — 风格化骨架
-    let outline_system = outline_system_prompt(style);
     let spinner = new_spinner("正在生成大纲骨架...");
-    let outline = with_retry(3, "大纲生成", || {
-        call_llm(client, base_url, api_key, model, &outline_system, idea)
-    })
-    .await?;
-    spinner.finish_with_message("大纲生成完成");
+    let result = generate_outline(client, base_url, api_key, model, style, idea).await;
+    spinner.finish_with_message(if result.is_ok() {
+        "大纲生成完成"
+    } else {
+        "大纲生成失败"
+    });
+    let outline = result?;
     println!("[info] 大纲 {} 字符", outline.len());
 
     // Pass 2 — 渲染
-    let render_system = style_system_prompt(style);
-    let render_user = render_prompt(&outline, idea);
     let spinner = new_spinner("正在渲染正文...");
-    let markdown = with_retry(3, "正文渲染", || {
-        call_llm(
-            client,
-            base_url,
-            api_key,
-            model,
-            &render_system,
-            &render_user,
-        )
-    })
-    .await?;
-    spinner.finish_with_message("正文渲染完成");
+    let result = render_fulltext(client, base_url, api_key, model, style, &outline, idea).await;
+    spinner.finish_with_message(if result.is_ok() {
+        "正文渲染完成"
+    } else {
+        "正文渲染失败"
+    });
+    let markdown = result?;
     println!("[info] 正文 {} 字符", markdown.len());
 
     Ok(markdown)

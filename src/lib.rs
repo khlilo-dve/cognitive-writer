@@ -4,6 +4,8 @@
 pub mod clipboard;
 pub mod error;
 pub mod eval;
+pub mod eval_runs;
+pub mod eval_store;
 pub mod generate;
 pub mod intent;
 pub mod io;

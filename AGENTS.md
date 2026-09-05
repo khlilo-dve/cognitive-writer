@@ -37,7 +37,7 @@
 ## 技术债简要
 - `run_learn` 在 REPL 下阻塞读 stdin 与 REPL 异步循环冲突，待两阶段对话改造
 - `handle_delete_style` 仍有同步 `stdin.read_line()`，待异步化
-- `generate.rs` 中 CLI 与 REPL 存在骨架与正文渲染逻辑双通道重复，待统一合并
+- CLI/REPL 底层生成已统一；剩余：公开 String 错误类型迁移、intent/styles 模块规模治理，详见当前计划。
 
 ## 目录与产物约定
 - `src/`：扁平 Rust 模块；新模块在 `src/lib.rs` 注册，测试内嵌模块底部。
