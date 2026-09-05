@@ -142,7 +142,7 @@ cargo run -- update <FILE>     # 输入修改意见全篇重写
 
 ## 架构设计
 
-16 个核心源文件，145+ 单元测试，内置双核 LLM-Judge 自动化评测体系。
+核心模块与测试数量以 `src/` 和 `cargo test --lib` 为准，内置生成端与风格提取端两套 LLM-Judge 评测。
 
 ```
 src/
@@ -206,3 +206,13 @@ src/
 ## License
 
 MIT
+
+
+## 可续跑自动评测
+
+```bash
+cargo test --lib
+EVAL_RUN_ID=20260905-auto-v1 cargo test --lib eval_automated_suite -- --ignored --nocapture
+```
+
+网络恢复后原命令续跑，已经完成的请求直接复用。输入、Prompt 或模型变化时请换新的 `EVAL_RUN_ID`。本轮结果写入 `eval/runs/{run_id}/summary.md` 和 `summary.json`；历史基线不会被覆盖。目录规则见 [eval/AGENTS.md](eval/AGENTS.md)，人工校准仍须独立完成。

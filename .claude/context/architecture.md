@@ -27,8 +27,8 @@ generate  learn        refine         update        eval
 
 REPL 会话由 4 个核心状态驱动：
 
-1. **`Idle` (空闲态)**: 等待输入主题/灵感，触发 `generate` 意图生成大纲。
-2. **`WaitingForOutline` (大纲确认态)**: 大纲已生成，等待确认或提出调整要求。
+1. **`Idle` (空闲态)**: 等待输入主题/灵感，触发生成大纲并自动渲染正文。
+2. **`WaitingForOutline` (历史枚举)**: 常规流程不进入；dispatch 未实现该状态确认分支，旧会话兼容处置待方案确认。
 3. **`WaitingForFulltext` (正文审阅态)**: 正文已生成，可要求局部修改 (`refine`)、重写 (`update`) 或确认通过。
 4. **`WaitingForPublish` (发布确认态)**: 正文通过，询问是否推送至个人网站博客并复制到剪贴板。
 
@@ -36,9 +36,9 @@ REPL 会话由 4 个核心状态驱动：
 
 - **`src/main.rs`**: 保持极致精简，仅做环境判断与分流，不包含业务逻辑。
 - **`src/lib.rs`**: 库的唯一导出入口，暴露所有公共模块供 `main.rs` 和单元测试调用。
-- **`src/repl.rs`**: 最核心的编排层，管理 `ReplState` 和用户交互。
+- **`src/repl.rs`**: 最核心的编排层，管理 `SessionState` 和用户交互。
 - **`src/error.rs`**: 全局 `AppError` 错误枚举。任何跨模块暴露的函数必须使用 `Result<T, AppError>`。
 
 ## 何时需要查阅代码
-- 需要修改或增加新的交互状态：查阅 `src/repl.rs` 中的 `State` 枚举与状态流转分支。
+- 需要修改或增加新的交互状态：查阅 `src/repl.rs` 中的 `SessionState` 枚举与状态流转分支。
 - 需要暴露新的系统服务：查阅 `src/lib.rs` 与 `src/error.rs`。

@@ -5,7 +5,7 @@
 ## 项目概述
 - Rust 对话式写作 Agent (v3.3.2)，面向微信公众号 + 个人网站 (khlilo.xyz)
 - 源文件与测试数量以 `src/` 和 `cargo test --lib` 为准；REPL 自然语言交互 + CLI 快捷模式
-- 常规状态流程: `Idle` → `WaitingForFulltext` → `WaitingForPublish`；`WaitingForOutline` 保留兼容历史会话，当前生成自动衔接大纲与正文
+- 常规状态流程: `Idle` → `WaitingForFulltext` → `WaitingForPublish`；`WaitingForOutline` 枚举仍保留，当前生成自动衔接大纲与正文；旧状态恢复待完善
 
 ## 运行方式
 - REPL 交互模式: `cargo run`

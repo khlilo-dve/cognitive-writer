@@ -284,11 +284,11 @@ v3.1: 14 文件, ~4500 行, 132 测试
 
 ## 六、技术债
 
-以下问题记录在案，留待后续：
+以下为历史技术债及当前状态（2026-09-05 核对）：
 
-1. `run_learn` / `run_update` 内部 `process::exit(1)` 会杀 REPL。应改为 `Result`。
-2. 多模块中有私有的 `env_var` / `md_to_wechat_html` 副本。应提取到 `utils.rs`。
-3. `clap` 依赖已无使用方，可移除。
+1. 已解决：`run_learn` / `run_update` 已返回 Result，失败不会直接退出 REPL。
+2. 已解决：共享工具已提取至 `utils.rs`。
+3. 已解决：`clap` 依赖已移除。
 4. `handle_delete_style` 内仍有阻塞 `stdin.read_line()`，待异步化。
 
 ---

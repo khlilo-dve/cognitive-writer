@@ -1,43 +1,18 @@
-# 文章生成与意图调度 (generation.md)
+# 文章生成与意图调度
 
-## 两阶段生成流水线 (Two-Stage Pipeline)
+## 当前生成流程
+`Generate → generate_outline → render_fulltext → WaitingForFulltext`。
+大纲与正文分别调用模型，使用同一份 Markdown 风格规范；当前自动从大纲衔接正文，不要求用户确认大纲。CLI 也复用这两组底层函数，并保留 spinner。
 
-为了彻底避免“一步到位直接写正文导致跑题或无法掌控结构”的问题，系统强制使用两阶段流水线：
+`WaitingForOutline` 仍存在于枚举、标签和历史资料中，但常规生成流程不进入，当前 dispatch 也没有该状态确认分支。不要将其描述为已可用的大纲修改能力；历史恢复的处置纳入状态机改造方案。
 
-```
-[用户输入主题/选题]
-        │
-        ▼ 阶段一：大纲推导 (Outline Stage)
-   generate_outline()
-        │
-        ▼
-   [大纲确认态: WaitingForOutline] ──(用户提出大纲修改要求)──┐
-        │                                                    │
-        ▼ (用户明确确认大纲)                                  ▼
-   阶段二：正文渲染 (Fulltext Stage)                    重新调整大纲
-   render_fulltext() (结合所选 StyleSpec 展开各章节论据与案例)
-        │
-        ▼
-   [正文审阅态: WaitingForFulltext]
-```
+## 意图解析
+- 入口位于 `src/intent.rs`，具体枚举以 `Intent` 为准；不存在 `IntentParser` 类型。
+- REPL 对明确确认/取消做快速预检，其余输入调用 `classify_intent`；分类 prompt 携带状态与有效意图。
+- 当前 `parse_intent` 仅解析确认/取消，其余返回 Unknown。因此 REPL 日志写的“回退关键词匹配”并不等于复杂意图有完整离线降级，纳入后续交互方案。
+- `ModifySection` / `ChangeStyle` 由 REPL 内部处理正文修改；文件版局部/全文重写分别在 `refine.rs` / `update.rs`。
 
-## 意图解析系统 (`src/intent.rs`)
-
-用户在 REPL 中的自然语言输入，不直接发送给大模型，而是先经过本地快速规则与意图提取器：
-
-- **`Intent` 枚举**: 包括 `Generate`, `Confirm`, `Modify`, `Refine`, `Update`, `Learn`, `SelectStyle`, `Help`, `Exit` 等。
-- **意图判定逻辑**:
-  - `IntentParser::parse(input, current_state)`: 结合**当前状态机状态**来解析相同字词的不同含义。例如在 `WaitingForOutline` 状态下输入“好的/可以”，解析为 `Confirm`（触发渲染正文）；而在 `Idle` 状态下可能作为普通闲聊或提示无效。
-  - 49 个单元测试保障了各种口语化中文意图的鲁棒性。
-
-## 文章演进与重写模块
-
-- **局部微调 (`src/refine.rs`)**:
-  - 针对正文中特定段落/论点的重写，只替换局部内容，保持全文其他上下文不变。
-- **全文重写 (`src/update.rs`)**:
-  - 保持现有主题与大纲基本框架，依据新的调优提示进行全篇深度重绘。
-
-## 何时需要查阅代码
-- 扩展或调整中文自然语言匹配规则：查阅 `src/intent.rs`。
-- 调整大纲与正文生成提示词工程及参数：查阅 `src/generate.rs` 与 `src/llm.rs`。
-- 修改局部替换或全文更新逻辑：查阅 `src/refine.rs` 与 `src/update.rs`。
+## 源码指针
+- 两阶段 Prompt 与调用：`src/generate.rs`。
+- 状态分派与审阅：`src/repl.rs::dispatch`。
+- 意图分类及解析：`src/intent.rs`。

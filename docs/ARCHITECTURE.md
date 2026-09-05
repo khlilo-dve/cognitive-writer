@@ -1,5 +1,7 @@
 # Cognitive Writer — 系统架构文档
 
+> 2026-09-05 核对：下文保留历史设计与示例，可能与当前实现不同（尤其大纲确认、意图枚举、测试计数）。当前行为以 `src/` 和 `.claude/context/` 的更新说明为准；当前自动由大纲进入正文。
+
 > 面向微信公众号 + 个人网站的 AI 文章生成 Agent，Rust 实现。
 
 ---
@@ -73,7 +75,7 @@ cognitive-writer/
     └── ARCHITECTURE.md
 ```
 
-> **测试总计：145 tests, 0 failed + 2 ignored 评测**（`cargo test --lib`）
+> 历史测试计数已过期；当前数量以 `cargo test --lib` 为准。
 
 ---
 
@@ -765,7 +767,7 @@ tokio = { features = ["full"] }  # 已有 full feature，包含 signal + io-util
 1. **`run_learn` 在 REPL 下用 `dialoguer` 阻塞读 stdin 命名** — 与 REPL 的 `spawn_blocking` 读 stdin 是两套输入系统，异步上下文下会卡住或乱序。应改成两阶段对话（展示摘要 → 等 REPL 输入名称 → 保存）。
 2. **Dead code warnings** — `delete_file`（`io.rs`）和 `StyleSummary.filename` 字段存在 `#[allow(dead_code)]`。需评估是移除死代码还是暴露为公开 API。
 3. **`handle_delete_style` 中阻塞 `std::io::stdin().read_line()`** — 删除风格前的二次确认直接调用阻塞 stdin 读取，应改为通过 `spawn_blocking` 统一输入获取方式。
-4. **CLI/REPL 双通道重复** — `generate.rs` 的 `generate_with_outline`（CLI）与 `generate_outline`/`render_fulltext`（REPL）编排逻辑重复，待合并。
+4. **CLI/REPL 双通道重复（2026-09-05 已解决）** — CLI 复用 `generate_outline` / `render_fulltext`。
 
 ---
 
