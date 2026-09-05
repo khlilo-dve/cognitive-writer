@@ -262,24 +262,38 @@ async fn compare_b(store: &Store, input: &Inputs, baselines: &[Row]) -> Result<V
     Ok(rows)
 }
 
-async fn cross(store: &Store, input: &Inputs) -> Result<Vec<Row>, AppError> {
+async fn cross_spec(store: &Store, input: &Inputs, s: usize) -> Result<Vec<Row>, AppError> {
     let mut rows = Vec::new();
-    for (s, spec) in input.specs.iter().enumerate() {
-        for (t, idea) in TEST_SET.iter().enumerate() {
-            let name = format!("cross_s{:02}_t{:02}", s + 1, t + 1);
-            let body = generate(store, &name, spec, idea).await?;
-            let details =
-                judge_a(store, input, &format!("{name}_judge"), spec, idea, &body).await?;
-            rows.push(row(
-                "cross",
-                name.clone(),
-                details,
-                None,
-                format!("{name}.md"),
-            )?);
-        }
+    let spec = &input.specs[s];
+    for (t, idea) in TEST_SET.iter().enumerate() {
+        let name = format!("cross_s{:02}_t{:02}", s + 1, t + 1);
+        let body = generate(store, &name, spec, idea).await?;
+        let details = judge_a(store, input, &format!("{name}_judge"), spec, idea, &body).await?;
+        rows.push(row(
+            "cross",
+            name.clone(),
+            details,
+            None,
+            format!("{name}.md"),
+        )?);
     }
     Ok(rows)
+}
+
+async fn cross(store: &Store, input: &Inputs) -> Result<Vec<Row>, AppError> {
+    let (a, b, c, d, e) = tokio::join!(
+        cross_spec(store, input, 0),
+        cross_spec(store, input, 1),
+        cross_spec(store, input, 2),
+        cross_spec(store, input, 3),
+        cross_spec(store, input, 4)
+    );
+    Ok([a, b, c, d, e]
+        .into_iter()
+        .collect::<Result<Vec<_>, _>>()?
+        .into_iter()
+        .flatten()
+        .collect())
 }
 
 fn report(rows: &[Row], model: &str) -> String {
@@ -361,28 +375,41 @@ pub async fn run(mode: &str) -> Result<(), AppError> {
         "body_template":style_system_prompt("{style}"),
         "render_template":render_prompt("{outline}", "{idea}")}))?;
     println!("[run] {} (mode={mode})", store.root.display());
-    let result: Result<Vec<Row>, AppError> = async {
+    let group_a = async {
         let mut rows = Vec::new();
-        if mode == "all" || mode == "baseline_a" || mode == "compare_a" {
+        if ["all", "baseline_a", "compare_a"].contains(&mode) {
             let baseline = baseline_a(&store, &input).await?;
-            if mode == "all" || mode == "compare_a" {
+            if ["all", "compare_a"].contains(&mode) {
                 rows.extend(compare_a(&store, &input, &baseline).await?);
             }
             rows.extend(baseline);
         }
-        if mode == "all" || mode == "baseline_b" || mode == "compare_b" {
+        Ok::<_, AppError>(rows)
+    };
+    let group_b = async {
+        let mut rows = Vec::new();
+        if ["all", "baseline_b", "compare_b"].contains(&mode) {
             let baseline = baseline_b(&store, &input).await?;
-            if mode == "all" || mode == "compare_b" {
+            if ["all", "compare_b"].contains(&mode) {
                 rows.extend(compare_b(&store, &input, &baseline).await?);
             }
             rows.extend(baseline);
         }
-        if mode == "all" || mode == "cross" {
-            rows.extend(cross(&store, &input).await?);
+        Ok::<_, AppError>(rows)
+    };
+    let group_cross = async {
+        if ["all", "cross"].contains(&mode) {
+            cross(&store, &input).await
+        } else {
+            Ok(Vec::new())
         }
-        Ok(rows)
-    }
-    .await;
+    };
+    let (a, b, c) = tokio::join!(group_a, group_b, group_cross);
+    let result = [a, b, c]
+        .into_iter()
+        .collect::<Result<Vec<_>, AppError>>()
+        .map(|groups| groups.into_iter().flatten().collect::<Vec<Row>>());
+
     match result {
         Ok(rows) => {
             let prefix = if mode == "all" {

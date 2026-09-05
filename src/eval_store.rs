@@ -27,6 +27,7 @@ pub(crate) struct Store {
     pub root: PathBuf,
     pub model: String,
     client: Client,
+    permits: tokio::sync::Semaphore,
     base: String,
     key: String,
 }
@@ -130,6 +131,7 @@ impl Store {
         Ok(Self {
             root,
             key,
+            permits: tokio::sync::Semaphore::new(3),
             model: std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".into()),
             base: std::env::var("BASE_URL").unwrap_or_else(|_| "https://api.openai.com/v1".into()),
             client: Client::builder()
@@ -162,6 +164,11 @@ impl Store {
             println!("[resume] {name}");
             return Ok(response);
         }
+        let _permit = self
+            .permits
+            .acquire()
+            .await
+            .map_err(|_| AppError::Network("评测并发控制已关闭".into()))?;
         println!("[request] {name}");
         let response = with_retry(3, name, || async {
             let response = call_llm(
@@ -288,6 +295,7 @@ mod tests {
         let store = Store {
             root: dir.path().into(),
             model: "test".into(),
+            permits: tokio::sync::Semaphore::new(3),
             client: Client::new(),
             base: format!("http://{addr}"),
             key: "fixture-only".into(),
