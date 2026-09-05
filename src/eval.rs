@@ -14,9 +14,11 @@ use crate::llm::{call_llm, with_retry};
 /// Extract only the body of a legacy batch archive. Plain articles remain intact.
 pub fn article_body(content: &str) -> Result<&str, AppError> {
     let content = content.trim();
-    let body = if content.starts_with("# 主题 ") && content.contains("\n## 大纲\n") {
+    let body = if content.starts_with("# 主题 ") && content.lines().any(|line| line == "## 大纲")
+    {
         content
             .split_once("\n## 正文\n")
+            .or_else(|| content.split_once("\n## 正文\r\n"))
             .map(|(_, body)| body.trim())
             .ok_or_else(|| AppError::Parse("评测归档缺少正文分隔符".into()))?
     } else {
@@ -431,6 +433,12 @@ mod tests {
         let input = article_judge_input("规则", "主题", archive).unwrap();
         assert!(input.ends_with("# 真标题\n正文\n## 正文\n文章自己的小节"));
         assert!(!input.contains("包装"));
+        let windows_archive = archive.replace('\n', "\r\n");
+        assert!(
+            !article_judge_input("规则", "主题", &windows_archive)
+                .unwrap()
+                .contains("包装")
+        );
         assert!(article_body("# 主题 1：x\n## 大纲\nx").is_err());
         assert!(article_body(" ").is_err());
         assert_eq!(

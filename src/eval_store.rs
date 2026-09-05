@@ -256,6 +256,50 @@ mod tests {
     }
 
     #[test]
+    fn cached_call_works_without_network_and_freeze_rejects_changed_inputs() {
+        let dir = tempfile::tempdir().unwrap();
+        let store = Store {
+            root: dir.path().into(),
+            model: "test".into(),
+            base: "invalid-endpoint".into(),
+            key: "fixture-secret".into(),
+            client: Client::new(),
+            permits: tokio::sync::Semaphore::new(3),
+        };
+        let inputs = serde_json::json!({"prompt":"original"});
+        store.freeze_inputs(&inputs).unwrap();
+        store.freeze_inputs(&inputs).unwrap();
+        assert!(
+            store
+                .freeze_inputs(&serde_json::json!({"prompt":"changed"}))
+                .is_err()
+        );
+        let request = Request {
+            endpoint_fingerprint: fingerprint("invalid-endpoint"),
+            ..request()
+        };
+        write_json(
+            &dir.path().join("cached.json"),
+            &Checkpoint {
+                request,
+                response: "cached answer".into(),
+                completed_at: "now".into(),
+            },
+        )
+        .unwrap();
+        let answer = tokio::runtime::Runtime::new()
+            .unwrap()
+            .block_on(store.call("cached", "prompt", "input", |_| Ok(())))
+            .unwrap();
+        assert_eq!(answer, "cached answer");
+        assert!(
+            !std::fs::read_to_string(dir.path().join("cached.json"))
+                .unwrap()
+                .contains("fixture-secret")
+        );
+    }
+
+    #[test]
     fn errors_hide_credentials_and_response_bodies() {
         let error = safe_error(AppError::ApiError {
             status: 401,
