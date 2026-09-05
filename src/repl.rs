@@ -64,8 +64,10 @@ fn intent_label(intent: &Intent) -> &'static str {
 
 // ── Help text ─────────────────────────────────────────────────────────
 
-const HELP_TEXT: &str = r#"
-Cognitive Writer v3.0 — 对话式写作 Agent
+const HELP_TEXT: &str = concat!(
+    "\nCognitive Writer v",
+    env!("CARGO_PKG_VERSION"),
+    r#" — 对话式写作 Agent
 ─────────────────────────────────────────
 
 核心工作流:
@@ -88,7 +90,8 @@ Cognitive Writer v3.0 — 对话式写作 Agent
   删掉<名称>   → 删除指定风格
   重写 <路径> 改成 <指令>  → 根据指令重写文章
   <路径> 改 <指令>          → 局部重绘文件
-"#;
+"#
+);
 
 // ── Helpers ─────────────────────────────────────────────────────────
 
@@ -232,7 +235,10 @@ impl Repl {
     // ── Main loop ─────────────────────────────────────────────────
 
     pub async fn run(&mut self) {
-        println!("Cognitive Writer v3.1 — 对话式写作 Agent (会话自动保存)");
+        println!(
+            "Cognitive Writer v{} — 对话式写作 Agent (会话自动保存)",
+            env!("CARGO_PKG_VERSION")
+        );
         println!("输入内容后按 Enter 发送。行末加 \\ 可以换行继续输入。");
         println!("输入 /help 查看帮助，/quit 退出。");
 
@@ -320,8 +326,8 @@ impl Repl {
                                 intent
                             }
                             Err(e) => {
-                                eprintln!("[warn] LLM 分类失败: {}，回退关键词匹配", e);
-                                parse_intent(&input, &self.state)
+                                eprintln!("[warn] LLM 分类失败: {}", e);
+                                Intent::Unknown { reason: "意图识别服务暂不可用，请稍后重试。也可使用 /help 或 /styles。".into() }
                             }
                         }
                     };
@@ -438,7 +444,7 @@ impl Repl {
                 "可以：「写一篇关于XX的文章，用YY风格」「列出风格」「学一下这个风格 <链接>」，或 /help 看全部用法。"
             }
             SessionState::WaitingForOutline => {
-                "可以：「OK」确认大纲、「第X点改成…」修改大纲、「算了」取消。"
+                "这是历史大纲状态，当前版本无法继续确认。可以输入「算了」回到空闲后重新生成。"
             }
             SessionState::WaitingForFulltext => {
                 "可以：「OK」确认全文、「第X段加案例」修改、「换成XX风格」换风格、「算了」取消。"
