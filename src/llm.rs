@@ -1,5 +1,5 @@
-use indicatif::{ProgressBar, ProgressStyle};
 use crate::error::AppError;
+use indicatif::{ProgressBar, ProgressStyle};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
@@ -68,7 +68,10 @@ pub async fn call_llm(
         .map_err(|e| AppError::Network(format!("{}", e)))?;
 
     let status = resp.status();
-    let raw_body = resp.text().await.unwrap_or_default();
+    let raw_body = resp
+        .text()
+        .await
+        .map_err(|e| AppError::Network(e.to_string()))?;
 
     if !status.is_success() {
         return Err(AppError::ApiError {
@@ -81,7 +84,7 @@ pub async fn call_llm(
         AppError::Parse(format!(
             "{}\n原始响应: {}",
             e,
-            &raw_body[..raw_body.len().min(500)]
+            raw_body.chars().take(500).collect::<String>()
         ))
     })?;
 
@@ -109,11 +112,7 @@ pub fn new_spinner(msg: &str) -> ProgressBar {
 
 // ── 泛型重试函数 ───────────────────────────────────────────────────
 
-pub async fn with_retry<T, F, Fut>(
-    max_retries: u32,
-    label: &str,
-    f: F,
-) -> Result<T, AppError>
+pub async fn with_retry<T, F, Fut>(max_retries: u32, label: &str, f: F) -> Result<T, AppError>
 where
     F: Fn() -> Fut,
     Fut: std::future::Future<Output = Result<T, AppError>>,
@@ -124,7 +123,10 @@ where
             Ok(result) => return Ok(result),
             Err(e) => {
                 if attempt < max_retries {
-                    eprintln!("[warn] {} 第 {} 次失败: {}，2 秒后重试 ...", label, attempt, e);
+                    eprintln!(
+                        "[warn] {} 第 {} 次失败: {}，2 秒后重试 ...",
+                        label, attempt, e
+                    );
                     tokio::time::sleep(std::time::Duration::from_secs(2)).await;
                 }
                 last_err = Some(e);
@@ -137,4 +139,58 @@ where
         max_retries,
         last_err.unwrap_or_else(|| AppError::Parse("with_retry: max_retries 不能为 0".to_string()))
     )))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::io::{Read, Write};
+
+    fn local_response(response: String) -> (String, std::thread::JoinHandle<()>) {
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        let address = listener.local_addr().unwrap();
+        let thread = std::thread::spawn(move || {
+            let (mut stream, _) = listener.accept().unwrap();
+            let mut request = [0; 8192];
+            stream.read(&mut request).unwrap();
+            stream.write_all(response.as_bytes()).unwrap();
+        });
+        (format!("http://{address}"), thread)
+    }
+
+    #[test]
+    fn invalid_unicode_response_returns_error_without_panicking() {
+        let body = "中".repeat(300);
+        let (base, server) = local_response(format!(
+            "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
+            body.len()
+        ));
+        let result = tokio::runtime::Runtime::new().unwrap().block_on(call_llm(
+            &Client::new(),
+            &base,
+            "fixture",
+            "fixture",
+            "p",
+            "i",
+        ));
+        assert!(matches!(result, Err(AppError::Parse(_))));
+        server.join().unwrap();
+    }
+
+    #[test]
+    fn interrupted_response_is_network_error_instead_of_empty_json() {
+        let (base, server) = local_response(
+            "HTTP/1.1 200 OK\r\nContent-Length: 1000\r\nConnection: close\r\n\r\n{partial".into(),
+        );
+        let result = tokio::runtime::Runtime::new().unwrap().block_on(call_llm(
+            &Client::new(),
+            &base,
+            "fixture",
+            "fixture",
+            "p",
+            "i",
+        ));
+        assert!(matches!(result, Err(AppError::Network(_))));
+        server.join().unwrap();
+    }
 }

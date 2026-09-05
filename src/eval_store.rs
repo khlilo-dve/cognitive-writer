@@ -79,6 +79,15 @@ fn safe_error(error: AppError) -> AppError {
         },
         AppError::Network(_) => AppError::Network("连接失败或请求超时（端点已隐藏）".into()),
         AppError::EmptyChoices => AppError::EmptyChoices,
+        AppError::Parse(message) => AppError::Parse(
+            message
+                .lines()
+                .next()
+                .unwrap_or("无法解析模型响应")
+                .chars()
+                .take(160)
+                .collect(),
+        ),
         _ => AppError::Parse("模型响应无效；未保存为完成检查点".into()),
     }
 }
@@ -165,7 +174,17 @@ impl Store {
             )
             .await
             .map_err(safe_error)?;
-            validate(&response).map_err(safe_error)?;
+            // Validation errors contain schema diagnostics, not raw HTTP responses.
+            if let Err(error) = validate(&response) {
+                write_json(
+                    &self.root.join(format!("rejected-{name}.json")),
+                    &serde_json::json!({
+                        "status":"rejected", "at":chrono::Utc::now().to_rfc3339(),
+                        "validation_error":error.to_string(), "model_output":response,
+                    }),
+                )?;
+                return Err(error);
+            }
             Ok(response)
         })
         .await?;
