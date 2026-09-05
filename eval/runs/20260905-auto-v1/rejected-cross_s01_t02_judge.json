@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-05T05:28:40.416786806+00:00",
+  "model_output": "",
+  "status": "rejected",
+  "validation_error": "API 响应解析失败: Judge JSON 无效: EOF while parsing a value at line 1 column 0"
+}

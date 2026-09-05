@@ -27,9 +27,9 @@
 - 保留所有已有冻结样本及历史文章，不覆盖、不删除、不发布、不修改密钥或系统配置。
 
 ## 完成标准 (Definition of Done)
-- [ ] `cargo test --lib` 通过
-- [ ] `git diff` 已人工检查，无误改/无关文件
-- [ ] `git add` + `git commit` 完成
+- [x] `cargo test --lib` 通过
+- [x] `git diff` 已审查，无误改/无关文件
+- [x] 实现已 git add + git commit；最终评测产物随结果记录提交
 
 
 ## 需要用户确认后实施的较大改造（尚未执行）

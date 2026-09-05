@@ -1,0 +1,23 @@
+{
+  "offline_tests": {
+    "passed": 161,
+    "failed": 0,
+    "ignored": 6
+  },
+  "binary_check": "passed",
+  "online_suite": "passed",
+  "online_results": 45,
+  "cross_cases": 25,
+  "successful_request_checkpoints": 110,
+  "resume_check": {
+    "reused": 110,
+    "new_model_requests": 0,
+    "exit_code": 0
+  },
+  "artifact_links_and_score_means": "verified",
+  "credential_scan": "passed; credential values never displayed",
+  "frozen_inputs_and_production_style_prompt": "unchanged since 73e62d1",
+  "diff_review": "One intentional Markdown two-space hard line break in cross_s02_t01.md retained to preserve the model output; no other whitespace findings.",
+  "candidate_learn_prompt_decision": "not adopted: lower mean score and all five candidate specs exceed 600 characters",
+  "human_calibrated": false
+}
