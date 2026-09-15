@@ -13,7 +13,7 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 {valid_intents}
 
 ## 全部意图及字段
-- Generate：想写/生成文章。字段 topic（主题）、style_name（风格名，省略则留空）
+- Generate：想写/生成文章。字段 topic（主题及篇幅、受众等写作要求）、style_name（用户明确指定的风格名，必须摘自原话；省略或不确定则留空）
 - Learn：想从某个链接学写作风格。字段 url（http/https 链接）
 - ListStyles：想看有哪些风格
 - ShowStyle：想看某风格详情/摘要。字段 name
@@ -33,11 +33,13 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 - 识别口语、同义、省略表达："整一篇/来一篇/帮我写/写个"=Generate；"拉倒/算了算了/不搞了"=Cancel；"行/好/OK/对"=Confirm
 - 输入与写作完全无关（闲聊、查天气等）→ Unknown，reason 写「与写作无关」
 - 输入像指令但含糊不清 → Unknown，reason 写「无法理解意图」
+- 已明确想写文章但未说明风格，仍返回 Generate，style_name 留空，不得返回 Unknown。
+- 不得猜测、补全默认风格；“犀利点/轻松点”等只保留在 topic 中，不当作具体风格名。被否定的风格（如“不要轻辩”）不算选择。
 - 只输出一行 JSON，不要解释、不要 Markdown 代码块
 
 ## few-shot 示例（输入 → 输出）
 "写一篇关于 AI 的文章，用轻辩风格" → {"intent_type":"Generate","topic":"关于 AI 的文章","style_name":"轻辩"}
-"帮我整一篇认知偏差的，犀利点" → {"intent_type":"Generate","topic":"认知偏差","style_name":""}
+"帮我整一篇认知偏差的，犀利点" → {"intent_type":"Generate","topic":"认知偏差，犀利点","style_name":""}
 "学一下这个风格 https://example.com/a" → {"intent_type":"Learn","url":"https://example.com/a"}
 "风格库里有什么" → {"intent_type":"ListStyles"}
 "今天天气怎么样" → {"intent_type":"Unknown","reason":"与写作无关"}
@@ -57,6 +59,7 @@ fn state_valid_intents(state: &SessionState) -> &'static str {
         SessionState::WaitingForPublish => {
             "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。"
         }
+        SessionState::WaitingForGenerationStyle => "由 REPL 本地处理风格选择输入。",
         SessionState::WaitingForStyleName => "由 REPL 本地处理风格名称输入。",
         SessionState::WaitingForDeleteStyleConfirmation => "由 REPL 本地处理删除确认。",
     }
@@ -79,7 +82,9 @@ pub async fn classify_intent(
         SessionState::WaitingForOutline => "等待用户确认大纲",
         SessionState::WaitingForFulltext => "等待用户确认全文",
         SessionState::WaitingForPublish => "等待用户确认发布",
-        SessionState::WaitingForStyleName | SessionState::WaitingForDeleteStyleConfirmation => {
+        SessionState::WaitingForGenerationStyle
+        | SessionState::WaitingForStyleName
+        | SessionState::WaitingForDeleteStyleConfirmation => {
             return Err(AppError::Intent(
                 "当前状态的输入必须由 REPL 本地处理".into(),
             ));
@@ -105,7 +110,7 @@ pub async fn classify_intent(
 }
 
 /// 解析 LLM 返回的 JSON → Intent。
-fn parse_classify_response(raw: &str, _original_input: &str) -> Result<Intent, AppError> {
+fn parse_classify_response(raw: &str, original_input: &str) -> Result<Intent, AppError> {
     let json_str = raw
         .trim()
         .trim_start_matches("```json")
@@ -125,12 +130,20 @@ fn parse_classify_response(raw: &str, _original_input: &str) -> Result<Intent, A
 
     match intent_type {
         "Generate" => {
-            let topic = v["topic"].as_str().unwrap_or("").to_string();
-            let style_name = v["style_name"].as_str().unwrap_or("").to_string();
-            if topic.is_empty() || style_name.is_empty() {
-                return Err(AppError::Intent(
-                    "LLM 分类 Generate 缺少 topic/style_name".into(),
-                ));
+            let topic = v["topic"].as_str().unwrap_or("").trim().to_string();
+            let proposed = v["style_name"].as_str().unwrap_or("").trim();
+            // 分类器返回的名称必须能在原话中找到；凭空补出的风格进入追问。
+            let style_name = if !proposed.is_empty()
+                && original_input
+                    .to_lowercase()
+                    .contains(&proposed.to_lowercase())
+            {
+                proposed.to_string()
+            } else {
+                String::new()
+            };
+            if topic.is_empty() {
+                return Err(AppError::Intent("LLM 分类 Generate 缺少 topic".into()));
             }
             Ok(Intent::Generate { topic, style_name })
         }
@@ -189,6 +202,7 @@ mod tests {
     async fn test_classify_rejects_local_interaction_states_without_network() {
         let client = Client::new();
         for state in [
+            SessionState::WaitingForGenerationStyle,
             SessionState::WaitingForStyleName,
             SessionState::WaitingForDeleteStyleConfirmation,
         ] {
@@ -212,7 +226,7 @@ mod tests {
     #[test]
     fn test_parse_classify_response_generate() {
         let raw = r#"{"intent_type": "Generate", "topic": "AI", "style_name": "轻辩"}"#;
-        let result = parse_classify_response(raw, "test input").unwrap();
+        let result = parse_classify_response(raw, "写 AI，用轻辩风格").unwrap();
         match result {
             Intent::Generate { topic, style_name } => {
                 assert_eq!(topic, "AI");
@@ -253,6 +267,7 @@ mod tests {
             SessionState::WaitingForOutline,
             SessionState::WaitingForFulltext,
             SessionState::WaitingForPublish,
+            SessionState::WaitingForGenerationStyle,
             SessionState::WaitingForStyleName,
             SessionState::WaitingForDeleteStyleConfirmation,
         ] {
@@ -268,5 +283,25 @@ mod tests {
 ```"#;
         let result = parse_classify_response(raw, "test input").unwrap();
         assert!(matches!(result, Intent::Confirm));
+    }
+
+    #[test]
+    fn generate_without_a_supported_style_keeps_topic_for_clarification() {
+        for raw in [
+            r#"{"intent_type":"Generate","topic":"AI，800字"}"#,
+            r#"{"intent_type":"Generate","topic":"AI，800字","style_name":"   "}"#,
+            r#"{"intent_type":"Generate","topic":"AI，800字","style_name":"模型编造的风格"}"#,
+        ] {
+            match parse_classify_response(raw, "写 AI，800字").unwrap() {
+                Intent::Generate { topic, style_name } => {
+                    assert_eq!(topic, "AI，800字");
+                    assert!(style_name.is_empty());
+                }
+                other => panic!("unexpected {other:?}"),
+            }
+        }
+        assert!(
+            parse_classify_response(r#"{"intent_type":"Generate","topic":" "}"#, "写文章").is_err()
+        );
     }
 }

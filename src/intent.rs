@@ -11,6 +11,8 @@ pub use crate::intent_quick::{is_cancel, is_confirm, parse_intent};
 pub enum SessionState {
     /// 空闲状态，等待用户发起新操作。
     Idle,
+    /// 已接收写作需求，等待用户明确选择风格。
+    WaitingForGenerationStyle,
     /// 等待用户对大纲骨架的反馈。
     WaitingForOutline,
     /// 等待用户对正文的反馈。
@@ -27,7 +29,7 @@ pub enum SessionState {
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub enum Intent {
-    /// 生成文章：指定主题 + 风格名称。
+    /// 生成文章：主题必需，风格名称可为空并由 REPL 追问。
     Generate { topic: String, style_name: String },
     /// 从 URL 学习写作风格。
     Learn { url: String },

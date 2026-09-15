@@ -15,6 +15,7 @@ use crate::intent::{Intent, SessionState, classify_intent, is_cancel, is_confirm
 use crate::io::extract_idea_slug;
 use crate::llm::{call_llm, with_retry};
 use crate::refine::REFINE_SYSTEM_PROMPT;
+use crate::style_selection::{self, named_matches, read_options, selection_query};
 use crate::styles::{
     delete_style, fuzzy_match_style, list_styles_with_desc, save_new_style, show_style_detail,
 };
@@ -37,6 +38,7 @@ const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给
 fn state_label(state: &SessionState) -> &'static str {
     match state {
         SessionState::Idle => "空闲",
+        SessionState::WaitingForGenerationStyle => "等待选择风格",
         SessionState::WaitingForStyleName => "等待风格命名",
         SessionState::WaitingForDeleteStyleConfirmation => "等待删除确认",
         SessionState::WaitingForOutline => "等待确认大纲",
@@ -78,6 +80,7 @@ const HELP_TEXT: &str = concat!(
   写一篇关于<主题>的文章用<风格名>风格    → 生成大纲 → 自动渲染全文 → 发布
 
 状态内指令:
+  [选择风格]  未明确风格时先追问；回复名称或编号继续，/styles 查看候选
   [全文确认]  确认/好/没问题 → 注入剪贴板 + 存草稿  |  修改指令 → 局部重绘  |  整体换成<风格名> → 换风格
   [发布确认]  发布/推 → 正式发布  |  只发网站 → 仅网站  |  等一下/先不/看看 → 保留草稿
 
@@ -123,6 +126,10 @@ pub struct Repl {
     state: SessionState,
     // 当前文章上下文
     current_topic: Option<String>,
+    #[serde(default)]
+    generation_request: Option<String>,
+    #[serde(default)]
+    pending_style_choices: Vec<String>,
     current_outline: Option<String>,
     current_fulltext: Option<String>,
     current_style_name: Option<String>,
@@ -213,6 +220,8 @@ impl Repl {
         Ok(Self {
             state: SessionState::Idle,
             current_topic: None,
+            generation_request: None,
+            pending_style_choices: Vec::new(),
             current_outline: None,
             current_fulltext: None,
             current_style_name: None,
@@ -311,6 +320,11 @@ impl Repl {
         );
         println!("输入内容后按 Enter 发送。行末加 \\ 可以换行继续输入。");
         println!("输入 /help 查看帮助，/quit 保存并退出。");
+        if self.state == SessionState::WaitingForGenerationStyle {
+            if let Err(e) = self.show_generation_choices("", false) {
+                eprintln!("[error] {e}");
+            }
+        }
         loop {
             repl_input::prompt(&format!("[{}] > ", state_label(&self.state)));
             let received = tokio::select! {
@@ -375,6 +389,12 @@ impl Repl {
 
     async fn process_input(&mut self, input: &str) -> Result<bool, AppError> {
         let input = input.trim();
+        if self.state == SessionState::WaitingForGenerationStyle
+            && (!input.starts_with('/') || input == "/styles")
+        {
+            self.handle_generation_style_input(input).await?;
+            return Ok(false);
+        }
         if input.starts_with('/') {
             return Ok(self.handle_command(input));
         }
@@ -470,6 +490,8 @@ impl Repl {
     fn reset_state(&mut self) {
         self.state = SessionState::Idle;
         self.current_topic = None;
+        self.generation_request = None;
+        self.pending_style_choices.clear();
         self.current_outline = None;
         self.current_fulltext = None;
         self.current_style_name = None;
@@ -521,6 +543,9 @@ impl Repl {
     /// 当前状态下的可用操作提示，用于「没理解」或「状态不对」时给用户指路。
     fn state_hint(&self) -> &'static str {
         match self.state {
+            SessionState::WaitingForGenerationStyle => {
+                "回复风格名称或编号；/styles 查看候选；/cancel 取消；/quit 保存需求退出。"
+            }
             SessionState::WaitingForStyleName => {
                 "输入新风格名称保存；/cancel 取消；/quit 保存提取结果退出。"
             }
@@ -548,7 +573,7 @@ impl Repl {
         match (&self.state, intent) {
             // ── Idle 状态 ──
             (SessionState::Idle, Intent::Generate { topic, style_name }) => {
-                self.handle_generate(&topic, &style_name).await?;
+                self.begin_generation(&topic, &style_name, input).await?;
             }
             (SessionState::Idle, Intent::Learn { url }) => {
                 println!("[info] 开始学习风格: {}", url);
@@ -627,16 +652,129 @@ impl Repl {
         Ok(())
     }
 
+    // ── First-generation style clarification ──────────────────────
+
+    async fn begin_generation(
+        &mut self,
+        topic: &str,
+        style: &str,
+        original: &str,
+    ) -> Result<(), AppError> {
+        self.current_topic = Some(topic.to_string());
+        self.generation_request = Some(original.to_string());
+        self.pending_style_choices.clear();
+        self.state = SessionState::WaitingForGenerationStyle;
+        let options = read_options(&self.styles_dir)?;
+        let matches = named_matches(&options, style);
+        if matches.len() == 1 {
+            return self.handle_generate(topic, &matches[0]).await;
+        }
+        if style.trim().is_empty() {
+            println!("这篇文章想用哪种风格？请从下列风格中选择。");
+        } else {
+            println!("无法唯一确定「{style}」对应的风格，请选择具体名称或编号。");
+        }
+        self.show_generation_choices(style, true)
+    }
+
+    fn show_generation_choices(&mut self, query: &str, refresh: bool) -> Result<(), AppError> {
+        let options = read_options(&self.styles_dir)?;
+        if refresh || self.pending_style_choices.is_empty() {
+            let suggested = style_selection::suggestions(&options, query);
+            self.pending_style_choices = if suggested.is_empty() {
+                options.iter().map(|o| o.name.clone()).collect()
+            } else {
+                suggested
+            };
+        }
+        println!(
+            "已保留写作需求：{}",
+            self.generation_request
+                .as_deref()
+                .or(self.current_topic.as_deref())
+                .unwrap_or("(无)")
+        );
+        if options.is_empty() {
+            println!(
+                "风格库为空。请先 /cancel，再输入文章链接学习风格；也可导入风格文件后输入 /styles 刷新。需求可用 /quit 保存。"
+            );
+            return Ok(());
+        }
+        for (index, name) in self.pending_style_choices.iter().enumerate() {
+            let description = options
+                .iter()
+                .find(|o| &o.name == name)
+                .map(|o| o.description.as_str())
+                .unwrap_or("文件已移除，请 /styles 刷新");
+            println!("  {}. {} — {}", index + 1, name, description);
+        }
+        println!("回复名称、编号或「用某某风格」；/styles 查看全部，/cancel 取消。");
+        Ok(())
+    }
+
+    async fn handle_generation_style_input(&mut self, input: &str) -> Result<(), AppError> {
+        if is_cancel(input) {
+            self.reset_state();
+            println!("已取消当前写作需求。");
+            return Ok(());
+        }
+        if style_selection::is_list_request(input) {
+            return self.show_generation_choices("", true);
+        }
+        if input.is_empty() || is_confirm(input) {
+            println!("还需要选择具体风格，请回复名称或编号。");
+            return self.show_generation_choices("", false);
+        }
+        let options = read_options(&self.styles_dir)?;
+        let query = selection_query(input);
+        let mut matches = named_matches(&options, input);
+        if matches.is_empty() {
+            matches = named_matches(&options, query);
+        }
+        let selected = if matches.len() == 1 {
+            Some(matches.remove(0))
+        } else if let Ok(number) = query.parse::<usize>() {
+            number
+                .checked_sub(1)
+                .and_then(|i| self.pending_style_choices.get(i))
+                .cloned()
+        } else {
+            None
+        };
+        if let Some(name) = selected {
+            let topic = self.current_topic.clone().ok_or_else(|| {
+                AppError::Intent("待生成主题丢失，请 /cancel 后重新输入需求".into())
+            })?;
+            return self.handle_generate(&topic, &name).await;
+        }
+        println!("还不能确定使用哪种风格，请选择具体名称或有效编号。");
+        self.show_generation_choices(query, true)
+    }
+
+    fn generation_brief(&self) -> Result<String, AppError> {
+        let topic = self
+            .current_topic
+            .as_deref()
+            .ok_or_else(|| AppError::Intent("创作主题丢失".into()))?;
+        Ok(match self.generation_request.as_deref() {
+            Some(request) => format!(
+                "主题：{topic}\n原始写作要求：{request}\n风格以当前选定的风格规范为准；保留原请求的篇幅、受众等其他要求。"
+            ),
+            None => topic.to_string(),
+        })
+    }
+
     // ── handle: Generate ──────────────────────────────────────────
 
-    /// 1. 模糊匹配风格 → 得到风格名+内容
+    /// 1. 按已选定的名称读取风格内容
     /// 2. 存储风格信息
     /// 3. 调用 generate_outline → 骨架
     /// 4. 自动调用 render_fulltext → 全文
     /// 5. 切换到 WaitingForFulltext 状态
     async fn handle_generate(&mut self, topic: &str, style_name: &str) -> Result<(), AppError> {
-        // 模糊匹配风格
-        let (disp_name, style_content) = fuzzy_match_style(&self.styles_dir, style_name)?;
+        // 上游已明确选择文件；再次按确切名称读取，避免重排或文件变化导致误选。
+        let style_content = show_style_detail(&self.styles_dir, style_name)?;
+        let disp_name = style_name.to_string();
 
         println!(
             "[info] 匹配风格: {} ({} 字符)",
@@ -647,6 +785,8 @@ impl Repl {
         self.current_style_name = Some(disp_name);
         self.current_style_content = Some(style_content.clone());
         self.current_topic = Some(topic.to_string());
+        self.pending_style_choices.clear();
+        let brief = self.generation_brief()?;
 
         self.current_outline = None;
         self.state = SessionState::WaitingForOutline;
@@ -658,7 +798,7 @@ impl Repl {
             &self.api_key,
             &self.model,
             &style_content,
-            topic,
+            &brief,
         )
         .await?;
         spinner.finish_with_message("大纲生成完成");
@@ -687,10 +827,7 @@ impl Repl {
             .as_deref()
             .filter(|s| !s.trim().is_empty())
             .ok_or_else(|| AppError::Intent("大纲内容丢失".to_string()))?;
-        let topic = self
-            .current_topic
-            .as_deref()
-            .ok_or_else(|| AppError::Intent("创作主题丢失".to_string()))?;
+        let brief = self.generation_brief()?;
 
         let spinner = crate::llm::new_spinner("正在渲染正文...");
         let fulltext = render_fulltext(
@@ -700,7 +837,7 @@ impl Repl {
             &self.model,
             style,
             outline,
-            topic,
+            &brief,
         )
         .await?;
         spinner.finish_with_message("正文渲染完成");
@@ -1532,6 +1669,101 @@ mod tests {
                 Some(value) => std::env::set_var("API_KEY", value),
                 None => std::env::remove_var("API_KEY"),
             }
+        }
+    }
+
+    #[tokio::test]
+    async fn missing_unknown_and_ambiguous_styles_wait_without_generation() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        for name in ["轻辩", "清变"] {
+            save_new_style(&repl.styles_dir, name, "犀利，短句。").unwrap();
+        }
+        let request = "写一篇 AI 焦虑，800 字，给学生看，犀利点";
+        for query in ["", "未知名称", "犀利", "qingbian", "最近用过的风格"] {
+            repl.begin_generation("AI 焦虑", query, request)
+                .await
+                .unwrap();
+            assert_eq!(repl.state, SessionState::WaitingForGenerationStyle);
+            assert_eq!(repl.generation_request.as_deref(), Some(request));
+            assert_eq!(repl.pending_style_choices.len(), 2);
+            assert!(repl.current_outline.is_none());
+            for reply in ["好", "", "0", "999", "qingbian", "犀利"] {
+                repl.process_input(reply).await.unwrap();
+                assert_eq!(repl.state, SessionState::WaitingForGenerationStyle);
+            }
+        }
+        repl.process_input("有哪些风格").await.unwrap();
+        assert_eq!(repl.generation_request.as_deref(), Some(request));
+        repl.process_input("/styles").await.unwrap();
+        assert_eq!(repl.current_topic.as_deref(), Some("AI 焦虑"));
+        assert!(repl.process_input("/quit").await.unwrap());
+        let path = repl.session_dir.as_ref().unwrap().join("current.json");
+        let saved: Repl = serde_json::from_str(&std::fs::read_to_string(&path).unwrap()).unwrap();
+        assert_eq!(saved.pending_style_choices, repl.pending_style_choices);
+        assert_eq!(saved.generation_request, repl.generation_request);
+        repl.process_input("取消").await.unwrap();
+        assert_eq!(repl.state, SessionState::Idle);
+        assert!(repl.generation_request.is_none());
+        assert!(repl.pending_style_choices.is_empty());
+        assert!(!path.exists());
+    }
+
+    #[tokio::test]
+    async fn empty_and_single_style_libraries_never_auto_select() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.begin_generation("主题", "", "写主题，300 字")
+            .await
+            .unwrap();
+        assert_eq!(repl.state, SessionState::WaitingForGenerationStyle);
+        assert!(repl.pending_style_choices.is_empty());
+        save_new_style(&repl.styles_dir, "唯一", "规则").unwrap();
+        repl.process_input("/styles").await.unwrap();
+        assert_eq!(repl.pending_style_choices, vec!["唯一"]);
+        assert_eq!(repl.state, SessionState::WaitingForGenerationStyle);
+        repl.process_input("好").await.unwrap();
+        assert_eq!(repl.state, SessionState::WaitingForGenerationStyle);
+        // 选项显示后文件被删除：不能默默选择另一个文件。
+        std::fs::remove_file(std::path::Path::new(&repl.styles_dir).join("唯一.md")).unwrap();
+        assert!(matches!(
+            repl.process_input("1").await,
+            Err(AppError::FileRead(_))
+        ));
+        assert_eq!(repl.generation_request.as_deref(), Some("写主题，300 字"));
+        repl.process_input("/cancel").await.unwrap();
+        assert_eq!(repl.state, SessionState::Idle);
+    }
+
+    #[tokio::test]
+    async fn selected_name_and_number_use_exact_file_and_keep_requirements_on_failure() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        save_new_style(&repl.styles_dir, "beta", "beta 原规则").unwrap();
+        repl.begin_generation("主题", "", "写主题，800 字，给学生看")
+            .await
+            .unwrap();
+        // 模拟恢复时目录新增排序更靠前的文件，旧编号仍指向 beta。
+        save_new_style(&repl.styles_dir, "alpha", "alpha 新规则").unwrap();
+        repl.show_generation_choices("", false).unwrap();
+        assert_eq!(repl.pending_style_choices, vec!["beta"]);
+        // 无效 URL 触发生成失败与现有重试，不访问外部模型。
+        repl.base_url = "invalid-url".into();
+        for reply in ["1", "用beta风格", "beta"] {
+            repl.state = SessionState::WaitingForGenerationStyle;
+            repl.pending_style_choices = vec!["beta".into()];
+            assert!(repl.process_input(reply).await.is_err());
+            assert_eq!(repl.current_style_name.as_deref(), Some("beta"));
+            assert_eq!(repl.current_style_content.as_deref(), Some("beta 原规则"));
+            assert_eq!(
+                repl.generation_request.as_deref(),
+                Some("写主题，800 字，给学生看")
+            );
+            assert!(
+                repl.generation_brief()
+                    .unwrap()
+                    .contains("800 字，给学生看")
+            );
         }
     }
 }

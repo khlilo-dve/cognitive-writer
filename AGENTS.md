@@ -5,7 +5,7 @@
 ## 项目概述
 - Rust 对话式写作 Agent (v3.3.2)，面向微信公众号 + 个人网站 (khlilo.xyz)
 - 源文件与测试数量以 `src/` 和 `cargo test --lib` 为准；REPL 自然语言交互 + CLI 快捷模式
-- 常规状态流程: `Idle` → `WaitingForOutline`（内部检查点）→ `WaitingForFulltext` → `WaitingForPublish`；大纲自动衔接正文，中断后可确认已有大纲继续；学习命名、删除确认另有等待态
+- 常规状态流程: `Idle` → `WaitingForOutline`（内部检查点）→ `WaitingForFulltext` → `WaitingForPublish`；大纲自动衔接正文，中断后可确认已有大纲继续；未明确风格时先进入选择等待态，学习命名、删除确认另有等待态
 
 ## 运行方式
 - REPL 交互模式: `cargo run`
@@ -13,6 +13,7 @@
 - 全量库测试: `cargo test --lib`
 - 单模块测试: `cargo test --lib <module_name>`
 - 真实终端回归（Linux/WSL，无真实 API）：`cargo build --bin cognitive-writer && python3 scripts/verify_repl_terminal.py`
+- 首次生成风格追问回归：`python3 scripts/verify_style_selection.py`（先构建二进制）。
 
 ## 核心开发规范
 - **模块入口**: 新模块必须在 `src/lib.rs` 注册；`src/main.rs` 仅作为启动分流器（无参数进入 REPL，有子命令参数进入 CLI；stdin 可为终端或管道）
@@ -39,7 +40,7 @@
 - REPL 单一 stdin 读取器位于 `repl_input.rs`；学习命名、删除确认由主循环处理，等待态支持取消/保存恢复。
 - CLI/REPL 生成已统一；公开 I/O/解析/环境错误已迁移为 AppError，intent/styles 职责已拆分。
 - 三组人评与确定性字数分档见 `eval/human_calibration.json`、`eval/AGENTS.md`；新提示词仍需以实际评测结果判断效果，不能把模型分数当人评。
-- 未指定风格的 Generate 仍会返回缺参错误；宽泛生成需求的默认风格交互不在本轮已授权 A–C 范围内。
+- 首次 Generate 风格缺失、未知或有歧义时进入 WaitingForGenerationStyle；保留原始需求，按名称/编号选择后生成，支持取消与保存恢复。不自动选择唯一/最近风格；描述性匹配仅供候选参考。
 
 ## 目录与产物约定
 - `src/`：扁平 Rust 模块；新模块在 `src/lib.rs` 注册，测试内嵌模块底部。
