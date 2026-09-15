@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-12T15:23:11.905058297+00:00",
+  "error": "API 响应解析失败: spec_01_baseline_judge 连续 3 次失败: LLM API 错误 (HTTP 400): 评测请求失败，响应正文未记录（避免泄漏凭据）",
+  "resume": "用相同 EVAL_RUN_ID 运行 eval_calibration_suite",
+  "status": "failed"
+}

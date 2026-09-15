@@ -3,7 +3,7 @@
 //! 用户通过终端 REPL 用自然语言交互，Agent 解析意图、管理对话状态、
 //! 分发到对应的功能模块。
 
-use std::io::{self, Write};
+use crate::repl_input::{self, Input};
 
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -15,7 +15,9 @@ use crate::intent::{Intent, SessionState, classify_intent, is_cancel, is_confirm
 use crate::io::extract_idea_slug;
 use crate::llm::{call_llm, with_retry};
 use crate::refine::REFINE_SYSTEM_PROMPT;
-use crate::styles::{delete_style, fuzzy_match_style, list_styles_with_desc, show_style_detail};
+use crate::styles::{
+    delete_style, fuzzy_match_style, list_styles_with_desc, save_new_style, show_style_detail,
+};
 use crate::utils::md_to_wechat_html;
 use crate::website::{publish_to_website, write_mdx_draft};
 
@@ -35,6 +37,8 @@ const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给
 fn state_label(state: &SessionState) -> &'static str {
     match state {
         SessionState::Idle => "空闲",
+        SessionState::WaitingForStyleName => "等待风格命名",
+        SessionState::WaitingForDeleteStyleConfirmation => "等待删除确认",
         SessionState::WaitingForOutline => "等待确认大纲",
         SessionState::WaitingForFulltext => "等待确认全文",
         SessionState::WaitingForPublish => "等待确认发布",
@@ -79,7 +83,8 @@ const HELP_TEXT: &str = concat!(
 
 其他命令:
   /help        显示此帮助
-  /quit        退出程序
+  /quit        保存未完成进度并退出
+  /cancel      取消当前操作
   /styles      列出风格库（等同于「我的风格库有什么」）
   /state       显示当前状态（调试用）
 
@@ -123,6 +128,12 @@ pub struct Repl {
     current_style_name: Option<String>,
     current_style_content: Option<String>,
     current_slug: Option<String>,
+    #[serde(default)]
+    pending_style_content: Option<String>,
+    #[serde(default)]
+    pending_delete_name: Option<String>,
+    #[serde(skip, default = "default_styles_dir")]
+    styles_dir: String,
     // 配置（不持久化，从环境变量恢复）
     #[serde(skip)]
     api_key: String,
@@ -140,12 +151,52 @@ pub struct Repl {
     session_dir: Option<std::path::PathBuf>,
 }
 
+fn default_styles_dir() -> String {
+    "styles".into()
+}
+
+/// 恢复提示与 REPL 共用同一个 stdin 读取器；Ctrl+C/EOF 保留旧会话。
+pub async fn run_session(session_dir: &std::path::Path) -> Result<(), AppError> {
+    let mut input = repl_input::stdin_input();
+    let mut repl = if let Some(saved) = Repl::restore(session_dir) {
+        println!(
+            "检测到未完成会话（{}）。Enter 恢复，n 放弃。",
+            state_label(saved.current_state())
+        );
+        loop {
+            let answer = tokio::select! {
+                line = input.recv() => line,
+                _ = tokio::signal::ctrl_c() => return Ok(()),
+            };
+            match answer {
+                None => return Ok(()),
+                Some(Err(e)) => return Err(e),
+                Some(Ok(answer)) => match answer.trim().to_lowercase().as_str() {
+                    "" | "y" | "yes" => break saved,
+                    "n" | "no" => {
+                        let fresh = Repl::new_with_session_dir(session_dir)?;
+                        saved.clear_session()?;
+                        break fresh;
+                    }
+                    _ => println!("Enter 恢复，n 放弃；其他输入不会清除进度。"),
+                },
+            }
+        }
+    } else {
+        Repl::new_with_session_dir(session_dir)?
+    };
+    repl.run_with_input(input).await;
+    Ok(())
+}
+
 impl Repl {
     // ── Constructors ─────────────────────────────────────────────
 
-    #[allow(dead_code)]
+    /// 新建不持久化的实例；需要恢复进度时使用 new_with_session_dir。
     pub fn new() -> Result<Self, AppError> {
-        Self::new_with_session_dir(&std::path::PathBuf::from("."))
+        let mut repl = Self::new_with_session_dir(std::path::Path::new("."))?;
+        repl.session_dir = None;
+        Ok(repl)
     }
 
     /// 新建实例，关联 session 目录。
@@ -166,6 +217,9 @@ impl Repl {
             current_style_name: None,
             current_style_content: None,
             current_slug: None,
+            pending_style_content: None,
+            pending_delete_name: None,
+            styles_dir: default_styles_dir(),
             api_key,
             base_url,
             model,
@@ -212,8 +266,7 @@ impl Repl {
         let path = dir.join("current.json");
         let json = serde_json::to_string_pretty(self)
             .map_err(|e| AppError::Parse(format!("序列化失败: {}", e)))?;
-        std::fs::write(&path, json)
-            .map_err(|e| AppError::FileWrite(format!("{}: {}", path.display(), e)))?;
+        crate::io::write_file_atomic(&path, &json)?;
         Ok(())
     }
 
@@ -235,122 +288,134 @@ impl Repl {
     // ── Main loop ─────────────────────────────────────────────────
 
     pub async fn run(&mut self) {
+        self.run_with_input(repl_input::stdin_input()).await;
+    }
+
+    async fn run_with_input(&mut self, mut input: Input) {
         println!(
             "Cognitive Writer v{} — 对话式写作 Agent (会话自动保存)",
             env!("CARGO_PKG_VERSION")
         );
         println!("输入内容后按 Enter 发送。行末加 \\ 可以换行继续输入。");
-        println!("输入 /help 查看帮助，/quit 退出。");
-
+        println!("输入 /help 查看帮助，/quit 保存并退出。");
         loop {
-            let prompt = match self.state {
-                SessionState::Idle => "> ",
-                SessionState::WaitingForFulltext => "[全文确认] > ",
-                SessionState::WaitingForPublish => "[发布确认] > ",
-                _ => "> ",
+            repl_input::prompt(&format!("[{}] > ", state_label(&self.state)));
+            let received = tokio::select! {
+                line = input.recv() => line,
+                _ = tokio::signal::ctrl_c() => { if self.save_on_exit() { return; } else { continue; } }
             };
-            print!("{}", prompt);
-            let _ = std::io::stdout().flush();
-
-            tokio::select! {
-                read_result = tokio::task::spawn_blocking(|| {
-                    let mut collected = Vec::new();
-                    loop {
-                        let mut line = String::new();
-                        match std::io::stdin().read_line(&mut line) {
-                            Ok(0) => {
-                                // EOF — submit whatever we have, or None if empty
-                                return if collected.is_empty() {
-                                    None
-                                } else {
-                                    Some(collected.join("\n"))
-                                };
-                            }
-                            Ok(_) => {
-                                let trimmed = line.trim_end_matches('\n').trim_end_matches('\r');
-                                if let Some(stripped) = trimmed.strip_suffix('\\') {
-                                    // 续行：去掉末尾 \\，保留此行内容
-                                    collected.push(stripped.to_string());
-                                } else {
-                                    collected.push(trimmed.to_string());
-                                    break;
-                                }
-                            }
-                            Err(_) => return None,
-                        }
-                    }
-                    Some(collected.join("\n"))
-                }) => {
-                    let input = match read_result {
-                        Ok(Some(s)) => s,
-                        Ok(None) => {
-                            // EOF (Ctrl+D)
-                            println!("\n再见。");
-                            let _ = self.clear_session();
-                            return;
-                        }
-                        Err(e) => {
-                            eprintln!("[error] stdin 读取失败: {}", e);
-                            return;
-                        }
-                    };
-
-                    if input.is_empty() {
-                        continue;
-                    }
-
-                    // 特殊命令
-                    if input.starts_with('/') {
-                        if self.handle_command(&input) {
-                            return;
-                        }
-                        continue;
-                    }
-
-                    // 意图分派：快速预检 → LLM 分类 → 关键词 fallback
-                    let intent = if is_confirm(&input) || is_cancel(&input) {
-                        parse_intent(&input, &self.state)
+            let line = match received {
+                Some(Ok(line)) => line,
+                Some(Err(e)) => {
+                    eprintln!("[error] stdin 读取失败: {e}");
+                    self.save_on_exit();
+                    return;
+                }
+                None => {
+                    self.save_on_exit();
+                    return;
+                }
+            };
+            // 信号同时包住分类与整个 dispatch，模型等待期间也能中断。
+            let result = tokio::select! {
+                result = self.process_input(&line) => Some(result),
+                _ = tokio::signal::ctrl_c() => None,
+            };
+            match result {
+                None => {
+                    if self.save_on_exit() {
+                        return;
                     } else {
-                        match classify_intent(
-                            &self.client,
-                            &self.base_url,
-                            &self.api_key,
-                            &self.model,
-                            &input,
-                            &self.state,
-                        )
-                        .await
-                        {
-                            Ok(intent) => {
-                                println!("[debug] LLM 分类: {:?}", intent);
-                                intent
-                            }
-                            Err(e) => {
-                                eprintln!("[warn] LLM 分类失败: {}", e);
-                                Intent::Unknown { reason: "意图识别服务暂不可用，请稍后重试。也可使用 /help 或 /styles。".into() }
-                            }
-                        }
-                    };
-
-                    if let Err(e) = self.dispatch(intent, &input).await {
-                        eprintln!("[error] {}", e);
-                    }
-
-                    // 每次 dispatch 后自动保存
-                    if let Err(e) = self.save() {
-                        eprintln!("[warn] 会话保存失败: {}", e);
+                        continue;
                     }
                 }
-                _ = tokio::signal::ctrl_c() => {
-                    println!("\n收到中断信号，正在保存会话...");
-                    if let Err(e) = self.save() {
-                        eprintln!("[warn] 保存失败: {}", e);
-                    }
-                    println!("会话已保存。下次启动 `cog` 可恢复。再见。");
-                    std::process::exit(0);
-                }
+                Some(Ok(true)) => return,
+                Some(Err(e)) => eprintln!("[error] {e}"),
+                Some(Ok(false)) => {}
+            }
+            if let Err(e) = self.persist_progress() {
+                eprintln!("[warn] 会话保存失败: {e}");
             }
         }
+    }
+
+    fn persist_progress(&self) -> Result<(), AppError> {
+        if self.state == SessionState::Idle {
+            self.clear_session()
+        } else {
+            self.save()
+        }
+    }
+
+    fn save_on_exit(&self) -> bool {
+        match self.persist_progress() {
+            Ok(()) => {
+                println!("进度已保存。再见。");
+                true
+            }
+            Err(e) => {
+                eprintln!("[error] 会话保存失败: {e}；请保存内容或修复目录后重试退出。");
+                false
+            }
+        }
+    }
+
+    async fn process_input(&mut self, input: &str) -> Result<bool, AppError> {
+        let input = input.trim();
+        if input.starts_with('/') {
+            return Ok(self.handle_command(input));
+        }
+        // 命名不做意图识别，避免把风格名当作写作指令或多付一次分类调用。
+        if self.state == SessionState::WaitingForStyleName {
+            if is_cancel(input) {
+                self.reset_state();
+                return Ok(false);
+            }
+            let content = self
+                .pending_style_content
+                .as_deref()
+                .ok_or_else(|| AppError::Parse("待保存风格缺失；输入 /cancel 取消".into()))?;
+            let path = save_new_style(&self.styles_dir, input, content)?;
+            println!("[done] 风格已保存 → {}", path.display());
+            self.reset_state();
+            return Ok(false);
+        }
+        if self.state == SessionState::WaitingForDeleteStyleConfirmation {
+            if is_cancel(input) || input.is_empty() {
+                self.reset_state();
+                return Ok(false);
+            }
+            if !matches!(input.to_lowercase().as_str(), "y" | "yes" | "确认删除") {
+                println!("输入 y / yes / 确认删除 才会删除，输入 /cancel 取消。");
+                return Ok(false);
+            }
+            let name = self
+                .pending_delete_name
+                .as_deref()
+                .ok_or_else(|| AppError::Parse("待删除名称缺失；输入 /cancel 取消".into()))?;
+            delete_style(&self.styles_dir, name)?;
+            println!("[done] 风格 '{name}' 已删除。");
+            self.reset_state();
+            return Ok(false);
+        }
+        if input.is_empty() {
+            return Ok(false);
+        }
+        let intent = if is_confirm(input) || is_cancel(input) {
+            parse_intent(input, &self.state)
+        } else {
+            classify_intent(
+                &self.client,
+                &self.base_url,
+                &self.api_key,
+                &self.model,
+                input,
+                &self.state,
+            )
+            .await?
+        };
+        self.dispatch(intent, input).await?;
+        Ok(false)
     }
 
     // ── Special-command handler ────────────────────────────────────
@@ -359,15 +424,16 @@ impl Repl {
     /// exit (i.e. `/quit`).
     fn handle_command(&mut self, input: &str) -> bool {
         match input.trim() {
+            "/cancel" => {
+                self.reset_state();
+                println!("已取消。");
+                false
+            }
             "/help" => {
                 println!("{}", HELP_TEXT);
                 false
             }
-            "/quit" => {
-                println!("再见。");
-                let _ = self.clear_session();
-                true
-            }
+            "/quit" => self.save_on_exit(),
             "/styles" => {
                 match self.handle_list_styles() {
                     Ok(()) => {}
@@ -396,6 +462,8 @@ impl Repl {
         self.current_style_name = None;
         self.current_style_content = None;
         self.current_slug = None;
+        self.pending_style_content = None;
+        self.pending_delete_name = None;
         // 全流程完成，清除 session 文件（下次启动不提示恢复）
         let _ = self.clear_session();
     }
@@ -440,11 +508,17 @@ impl Repl {
     /// 当前状态下的可用操作提示，用于「没理解」或「状态不对」时给用户指路。
     fn state_hint(&self) -> &'static str {
         match self.state {
+            SessionState::WaitingForStyleName => {
+                "输入新风格名称保存；/cancel 取消；/quit 保存提取结果退出。"
+            }
+            SessionState::WaitingForDeleteStyleConfirmation => {
+                "输入 y / yes / 确认删除；/cancel 取消。"
+            }
             SessionState::Idle => {
                 "可以：「写一篇关于XX的文章，用YY风格」「列出风格」「学一下这个风格 <链接>」，或 /help 看全部用法。"
             }
             SessionState::WaitingForOutline => {
-                "这是历史大纲状态，当前版本无法继续确认。可以输入「算了」回到空闲后重新生成。"
+                "输入「确认」或「OK」从已有大纲继续正文；内容缺失时可输入「算了」取消重试。"
             }
             SessionState::WaitingForFulltext => {
                 "可以：「OK」确认全文、「第X段加案例」修改、「换成XX风格」换风格、「算了」取消。"
@@ -465,9 +539,9 @@ impl Repl {
             }
             (SessionState::Idle, Intent::Learn { url }) => {
                 println!("[info] 开始学习风格: {}", url);
-                if let Err(e) = crate::learn::run_learn(&url).await {
-                    eprintln!("[error] 学习风格失败: {}", e);
-                }
+                self.pending_style_content = Some(crate::learn::extract_style(&url).await?);
+                self.state = SessionState::WaitingForStyleName;
+                println!("风格已提取，请输入名称保存，或 /cancel 取消。");
             }
             (SessionState::Idle, Intent::ListStyles) => {
                 self.handle_list_styles()?;
@@ -499,6 +573,9 @@ impl Repl {
                 println!("    {}", self.state_hint());
             }
 
+            (SessionState::WaitingForOutline, Intent::Confirm) => {
+                self.handle_render_fulltext().await?;
+            }
             // ── WaitingForFulltext ──
             (SessionState::WaitingForFulltext, Intent::Confirm) => {
                 self.handle_draft_publish().await?;
@@ -548,7 +625,7 @@ impl Repl {
     /// 5. 切换到 WaitingForFulltext 状态
     async fn handle_generate(&mut self, topic: &str, style_name: &str) -> Result<(), AppError> {
         // 模糊匹配风格
-        let (disp_name, style_content) = fuzzy_match_style("styles", style_name)?;
+        let (disp_name, style_content) = fuzzy_match_style(&self.styles_dir, style_name)?;
 
         println!(
             "[info] 匹配风格: {} ({} 字符)",
@@ -560,6 +637,8 @@ impl Repl {
         self.current_style_content = Some(style_content.clone());
         self.current_topic = Some(topic.to_string());
 
+        self.current_outline = None;
+        self.state = SessionState::WaitingForOutline;
         // 生成风格化大纲（风格也注入 Pass 1，让结构贴合风格）
         let spinner = crate::llm::new_spinner("正在生成大纲骨架...");
         let outline = generate_outline(
@@ -574,6 +653,7 @@ impl Repl {
         spinner.finish_with_message("大纲生成完成");
 
         self.current_outline = Some(outline);
+        self.save()?;
 
         // 大纲已生成，自动进入全文渲染（检查点 1 已取消）
         self.handle_render_fulltext().await?;
@@ -589,10 +669,12 @@ impl Repl {
         let style = self
             .current_style_content
             .as_deref()
+            .filter(|s| !s.trim().is_empty())
             .ok_or_else(|| AppError::Intent("风格内容丢失".to_string()))?;
         let outline = self
             .current_outline
             .as_deref()
+            .filter(|s| !s.trim().is_empty())
             .ok_or_else(|| AppError::Intent("大纲内容丢失".to_string()))?;
         let topic = self
             .current_topic
@@ -778,16 +860,13 @@ impl Repl {
             .ok_or_else(|| AppError::Intent("全文内容丢失".to_string()))?;
 
         // 模糊匹配新风格
-        let (disp_name, style_content) = fuzzy_match_style("styles", style_name)?;
+        let (disp_name, style_content) = fuzzy_match_style(&self.styles_dir, style_name)?;
 
         println!(
             "[info] 切换风格: {} → {}",
             self.current_style_name.as_deref().unwrap_or("(未知)"),
             disp_name
         );
-
-        self.current_style_name = Some(disp_name);
-        self.current_style_content = Some(style_content.clone());
 
         // 构建 prompt：当前文章 + 新风格
         let user_prompt = format!(
@@ -809,6 +888,8 @@ impl Repl {
         .await?;
         spinner.finish_with_message("风格切换完成");
 
+        self.current_style_name = Some(disp_name);
+        self.current_style_content = Some(style_content);
         let slug = extract_idea_slug(&new_fulltext);
         self.current_slug = Some(slug);
         self.current_fulltext = Some(new_fulltext.clone());
@@ -827,8 +908,7 @@ impl Repl {
 
     /// 读取 .md 文件，根据指令用 LLM 局部重绘，输出版本化结果。
     async fn handle_refine_file(&mut self, path: &str, instruction: &str) -> Result<(), AppError> {
-        let content = crate::io::read_file(path)
-            .map_err(|e| AppError::FileRead(format!("读取 {} 失败: {}", path, e)))?;
+        let content = crate::io::read_file(path)?;
 
         if content.trim().is_empty() {
             return Err(AppError::Intent(format!("文件内容为空: {}", path)));
@@ -858,8 +938,7 @@ impl Repl {
         let ver = crate::io::next_version("outputs", &slug);
         let md_path = format!("outputs/{}_v{}.md", slug, ver);
 
-        crate::io::write_file(&md_path, &rewritten)
-            .map_err(|e| AppError::FileWrite(format!("写入 {} 失败: {}", md_path, e)))?;
+        crate::io::write_file(&md_path, &rewritten)?;
 
         println!("{}", sep());
         println!("{}", rewritten);
@@ -872,7 +951,7 @@ impl Repl {
     // ── handle: List styles ───────────────────────────────────────
 
     fn handle_list_styles(&self) -> Result<(), AppError> {
-        let summaries = list_styles_with_desc("styles")?;
+        let summaries = list_styles_with_desc(&self.styles_dir)?;
         if summaries.is_empty() {
             println!("风格库为空。试试说「学一下这个风格 https://...」来创建第一个风格。");
             return Ok(());
@@ -891,7 +970,7 @@ impl Repl {
     // ── handle: Show style detail ─────────────────────────────────
 
     fn handle_show_style(&self, name: &str) -> Result<(), AppError> {
-        match show_style_detail("styles", name) {
+        match show_style_detail(&self.styles_dir, name) {
             Ok(content) => {
                 println!("{}", sep());
                 println!("风格: {}", name);
@@ -909,33 +988,12 @@ impl Repl {
 
     // ── handle: Delete style ──────────────────────────────────────
 
-    fn handle_delete_style(&self, name: &str) -> Result<(), AppError> {
-        // 二次确认
-        print!("确认删除风格 '{}'? [y/N] ", name);
-        let _ = io::stdout().flush();
-
-        let mut confirm = String::new();
-        if io::stdin().read_line(&mut confirm).is_err() {
-            println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
-            return Ok(());
-        }
-
-        let confirm = confirm.trim().to_lowercase();
-        if confirm != "y" && confirm != "yes" {
-            println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
-            return Ok(());
-        }
-
-        match delete_style("styles", name) {
-            Ok(()) => {
-                println!("[done] 风格 '{}' 已删除。", name);
-                Ok(())
-            }
-            Err(e) => {
-                eprintln!("[error] 删除失败: {}", e);
-                Err(e)
-            }
-        }
+    fn handle_delete_style(&mut self, name: &str) -> Result<(), AppError> {
+        show_style_detail(&self.styles_dir, name)?;
+        self.pending_delete_name = Some(name.trim().into());
+        self.state = SessionState::WaitingForDeleteStyleConfirmation;
+        println!("确认删除风格 '{name}'？输入 y / yes / 确认删除，/cancel 取消。");
+        Ok(())
     }
 }
 
@@ -1157,19 +1215,182 @@ mod tests {
     // ── handle_list_styles ─────────────────────────────────────────
 
     #[test]
-    fn test_handle_list_styles_empty_dir_ok() {
-        let _g = ENV_MUTEX.lock().unwrap();
-        unsafe { std::env::set_var("API_KEY", "test-key") };
-        let repl = Repl::new().unwrap();
+    fn test_handle_list_styles_empty_dir_reports_no_styles() {
+        let dir = tempfile::tempdir().unwrap();
+        let repl = isolated_repl(dir.path());
+        std::fs::create_dir_all(&repl.styles_dir).unwrap();
+        assert!(matches!(
+            repl.handle_list_styles(),
+            Err(AppError::NoStyles(_))
+        ));
+    }
+    fn isolated_repl(dir: &std::path::Path) -> Repl {
+        let mut repl: Repl = serde_json::from_value(serde_json::json!({"state":"Idle"})).unwrap();
+        repl.session_dir = Some(dir.join("session"));
+        repl.styles_dir = dir.join("styles").to_str().unwrap().into();
+        repl.base_url = "http://127.0.0.1:1".into();
+        repl.api_key = "local-test".into();
+        repl
+    }
 
-        // If the styles dir doesn't exist or is empty, list_styles_with_desc
-        // returns Err — but handle_list_styles returns Ok(()) after printing.
-        // Test the graceful handling path using a temp dir.
-        // We can't easily redirect stdout in unit tests, so test the non-panic
-        // property: the function returns a Result.
-        let _ = repl.handle_list_styles();
-        // Either Ok or Err from the underlying call is acceptable — the
-        // function itself doesn't panic.
-        unsafe { std::env::remove_var("API_KEY") };
+    #[tokio::test]
+    async fn naming_is_local_and_rejects_collision_and_paths() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        save_new_style(&repl.styles_dir, "已有", "不能覆盖").unwrap();
+        repl.state = SessionState::WaitingForStyleName;
+        repl.pending_style_content = Some("新风格机制".into());
+        for name in ["已有", "../逃出", "..", "", "x/y", "x\\y"] {
+            assert!(repl.process_input(name).await.is_err(), "{name}");
+            assert_eq!(repl.state, SessionState::WaitingForStyleName);
+            assert_eq!(repl.pending_style_content.as_deref(), Some("新风格机制"));
+        }
+        assert_eq!(
+            show_style_detail(&repl.styles_dir, "已有").unwrap(),
+            "不能覆盖"
+        );
+        // 看起来像意图的名称仍按名称处理，不访问不可用的分类地址。
+        repl.process_input("写一篇").await.unwrap();
+        assert_eq!(
+            show_style_detail(&repl.styles_dir, "写一篇").unwrap(),
+            "新风格机制"
+        );
+        assert_eq!(repl.state, SessionState::Idle);
+        assert!(repl.pending_style_content.is_none());
+    }
+
+    #[tokio::test]
+    async fn deletion_requires_explicit_confirmation_and_can_cancel() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        save_new_style(&repl.styles_dir, "待删除", "保留直到确认").unwrap();
+        repl.handle_delete_style("待删除").unwrap();
+        repl.process_input("好").await.unwrap();
+        assert_eq!(repl.state, SessionState::WaitingForDeleteStyleConfirmation);
+        assert!(show_style_detail(&repl.styles_dir, "待删除").is_ok());
+        repl.process_input("/cancel").await.unwrap();
+        assert_eq!(repl.state, SessionState::Idle);
+        assert!(show_style_detail(&repl.styles_dir, "待删除").is_ok());
+        repl.handle_delete_style("待删除").unwrap();
+        repl.process_input("yes").await.unwrap();
+        assert_eq!(repl.state, SessionState::Idle);
+        assert!(show_style_detail(&repl.styles_dir, "待删除").is_err());
+    }
+
+    #[tokio::test]
+    async fn eof_preserves_both_pending_operations_without_side_effects() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForStyleName;
+        repl.pending_style_content = Some("已提取的结果".into());
+        let (sender, receiver) = tokio::sync::mpsc::channel(1);
+        drop(sender);
+        repl.run_with_input(receiver).await;
+        let path = repl.session_dir.as_ref().unwrap().join("current.json");
+        let saved: Repl = serde_json::from_str(&std::fs::read_to_string(&path).unwrap()).unwrap();
+        assert_eq!(saved.pending_style_content, repl.pending_style_content);
+        assert_eq!(saved.state, SessionState::WaitingForStyleName);
+        assert!(!std::path::Path::new(&repl.styles_dir).exists());
+        repl.process_input("/cancel").await.unwrap();
+        assert!(!path.exists());
+        save_new_style(&repl.styles_dir, "留着", "内容").unwrap();
+        repl.handle_delete_style("留着").unwrap();
+        let (sender, receiver) = tokio::sync::mpsc::channel(1);
+        drop(sender);
+        repl.run_with_input(receiver).await;
+        let saved: Repl = serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap();
+        assert_eq!(saved.pending_delete_name.as_deref(), Some("留着"));
+        assert!(show_style_detail(&repl.styles_dir, "留着").is_ok());
+    }
+
+    #[tokio::test]
+    async fn old_outline_session_missing_data_preserves_state_and_can_cancel() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForOutline;
+        assert!(repl.pending_style_content.is_none());
+        assert!(repl.pending_delete_name.is_none());
+        assert!(repl.process_input("ok").await.is_err());
+        assert_eq!(repl.state, SessionState::WaitingForOutline);
+        repl.process_input("/cancel").await.unwrap();
+        assert_eq!(repl.state, SessionState::Idle);
+    }
+
+    #[tokio::test]
+    async fn saved_outline_continues_rendering_without_classification() {
+        use tokio::io::{AsyncReadExt, AsyncWriteExt};
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForOutline;
+        repl.current_topic = Some("主题".into());
+        repl.current_outline = Some("已有大纲".into());
+        repl.current_style_content = Some("短句规则".into());
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        repl.base_url = format!("http://{}", listener.local_addr().unwrap());
+        let server = tokio::spawn(async move {
+            let (mut socket, _) = listener.accept().await.unwrap();
+            let mut request = vec![0; 32768];
+            let n = socket.read(&mut request).await.unwrap();
+            let text = String::from_utf8_lossy(&request[..n]);
+            assert!(text.contains("已有大纲"));
+            assert!(!text.contains("intent_type"));
+            let body = r##"{"choices":[{"message":{"content":"# 新正文\n正文内容"}}]}"##;
+            socket.write_all(format!("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",body.len()).as_bytes()).await.unwrap();
+        });
+        repl.process_input("ok").await.unwrap();
+        server.await.unwrap();
+        assert_eq!(repl.state, SessionState::WaitingForFulltext);
+        assert_eq!(repl.current_fulltext.as_deref(), Some("# 新正文\n正文内容"));
+    }
+
+    #[tokio::test]
+    async fn failed_save_keeps_pending_name_on_quit() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForStyleName;
+        repl.pending_style_content = Some("不能丢失的结果".into());
+        // 用普通文件占据会话目录，跨平台稳定地产生保存失败。
+        std::fs::write(repl.session_dir.as_ref().unwrap(), "blocked").unwrap();
+        assert!(!repl.process_input("/quit").await.unwrap());
+        assert_eq!(
+            repl.pending_style_content.as_deref(),
+            Some("不能丢失的结果")
+        );
+        repl.process_input("另存风格").await.unwrap();
+        assert_eq!(
+            show_style_detail(&repl.styles_dir, "另存风格").unwrap(),
+            "不能丢失的结果"
+        );
+    }
+
+    #[tokio::test]
+    async fn cancelled_style_request_keeps_original_metadata_and_body() {
+        use tokio::io::AsyncReadExt;
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForFulltext;
+        repl.current_style_name = Some("原风格".into());
+        repl.current_style_content = Some("原规则".into());
+        repl.current_fulltext = Some("原正文".into());
+        save_new_style(&repl.styles_dir, "新风格", "新规则").unwrap();
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        repl.base_url = format!("http://{}", listener.local_addr().unwrap());
+        let (tx, rx) = tokio::sync::oneshot::channel();
+        let server = tokio::spawn(async move {
+            let (mut socket, _) = listener.accept().await.unwrap();
+            let mut request = [0; 8192];
+            socket.read(&mut request).await.unwrap();
+            tx.send(()).unwrap();
+            std::future::pending::<()>().await;
+        });
+        tokio::select! {
+            _ = rx => {},
+            result = repl.handle_change_style("新风格") => panic!("request finished: {result:?}"),
+        }
+        server.abort();
+        assert_eq!(repl.current_style_name.as_deref(), Some("原风格"));
+        assert_eq!(repl.current_style_content.as_deref(), Some("原规则"));
+        assert_eq!(repl.current_fulltext.as_deref(), Some("原正文"));
+        assert_eq!(repl.state, SessionState::WaitingForFulltext);
     }
 }

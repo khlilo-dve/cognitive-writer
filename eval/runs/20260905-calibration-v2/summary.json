@@ -1,0 +1,593 @@
+{
+  "calibrated_judge_mae_by_dimension": [
+    0.0,
+    0.9166666666666666,
+    0.4166666666666667,
+    1.3333333333333333
+  ],
+  "completed_at": "2026-09-06T07:01:17.158484932+00:00",
+  "expected_checkpoints": 12,
+  "expected_judgments": 9,
+  "expected_new_specs": 3,
+  "historical_mae_by_dimension": [
+    0.0,
+    1.0833333333333333,
+    0.4166666666666667,
+    1.1666666666666667
+  ],
+  "human_calibration_cases": 3,
+  "model": "deepseek-v4-flash",
+  "new_candidates_human_reviewed": false,
+  "non_length_dimensions": [
+    "coverage",
+    "actionability",
+    "distinctiveness",
+    "cleanliness"
+  ],
+  "rows": [
+    {
+      "artifact": "spec_01_baseline.md",
+      "case": "spec_01",
+      "historical_judgment": {
+        "fidelity_analysis": "提炼极为精准：抓住了‘反直觉开场—算账式递进—钢印级断言—人称三角关系—冷感实物比喻—止损收尾’这套核心修辞与论证机制，已将原作从内容层面抽离为一套可复制的风格语法，颗粒度犀利。",
+        "improvement_suggestions": "1）将《禁止》中与正面规则重复的条目合并或约化为‘不得违背上述正面规则’，进一步压缩篇幅至 600 字内。 2）把‘标题’‘开头’‘断言’中的原文短句替换为同构的非原文模板，例如标题可抽象为公式：‘为什么[绝大多数人][得不到/赚不到][某种稀缺资源]？’，以彻底剥离原作文本痕迹。",
+        "negative_hits": [
+          "全文字数偏长，估算接近 650-700 字（不含标记），超出 600 字精简线；《禁止》一节部分条目与正文规则存在重复表达，如‘不落动作细节’与‘抽象概念必接具象动作’重复，‘长短交错’在段落与禁止两处重复。",
+          "少量样例直接取自原文短句/标题，如‘认知从来不是免费的’‘先算一笔账’‘剪片/打电话/改文案’等，虽未构成大段原文污染，但仍存在轻微的素材耦合，未做到完全零原文示例。"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 5.0,
+          "cleanliness": 4.0,
+          "conciseness": 3.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "10 个二级标题全部覆盖，顺序与要求保持一致：《定位》《标题》《开头》《结构与论证》《段落与句式》《语气与人称》《用词》《结尾》《排版》《禁止》均齐备，格式规整。"
+      },
+      "historical_non_length_signed_delta": [
+        0.0,
+        3.0,
+        1.0,
+        3.0
+      ],
+      "human_mean_with_deterministic_length": 3.0,
+      "human_raw_scores": [
+        5.0,
+        2.0,
+        3.0,
+        4.0,
+        1.0
+      ],
+      "judgment": {
+        "characters_without_whitespace": 824,
+        "fidelity_analysis": "对样文的风格密码捕捉极为精准：标题的否定式设问与反直觉错位、开头三拍的‘流行语引用—反直觉判断—加粗靶子’结构、层层递进的算账逻辑、短句钢印级断言、三种人称的分工、抽象概念接具象动作、冷感实物型比喻等都抓得有颗粒度，不是泛化模板。美中不足是部分特征以直接摘录源文句式或结论的方式给出，造成污染，削弱了规则的跨主题可迁移性。",
+        "improvement_suggestions": "提取时增加一道‘污染清洗’指令：所有规则必须用机制或类型描述表达，禁止把源文的具体标题、结论、动作链或特色词汇直接写进规范正文。若需示例，应统一放在独立“示例（非指令）”区块并对每个源文引用标注“仅用于说明，禁止复用”，然后让所有核心规则在无关主题上做一次模拟改写检测，凡导致无法迁移的源文残留一律删除。",
+        "model_conciseness": 3.0,
+        "model_score_mean": 3.8,
+        "negative_hits": [
+          "“标题”板块直接写出源文标题“为什么绝大多数人赚不到认知的钱？”，会让下一篇在无关主题上照搬该具体问题，破坏迁移性。",
+          "“结尾”板块要求“先做让步承认‘确实有暴利窗口期’”，这是源文的特定让步结论而非抽象机制，下一篇文章若主题不同会被迫沿袭原样文的观点链。",
+          "“段落与句式”中括号示例“认知从来不是免费的”，直接引用了源文的断言结论，属于源文核心论点的素材残留。",
+          "“用词”板块列举“醍醐灌顶、滚瓜烂熟”“剪片/打电话/改文案”“闭环/飞轮”“游泳/熔炉”等大量源文具体词汇与案例，容易诱导 AI 在新文章中复述甚至拼接这些源文内容，而非生成同类型的新例子。",
+          "“开头”板块中的“紧接‘但我必须直接说一个反直觉的判断’第二拍”把源文的一句话当作必用衔接语，属于对源文固定句式的直接挪用。"
+        ],
+        "overall_score": 3.8,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 2.0,
+          "conciseness": 3.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "完整覆盖了 10 个标准二级标题，顺序与《定位》《标题》《开头》《结构与论证》《段落与句式》《语气与人称》《用词》《结尾》《排版》《禁止》严格对应，结构完整规范。每个板块均围绕写作机制展开，没有明显章节重复或顺序错乱。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 824,
+        "deterministic_conciseness": 3.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [
+          "为什么绝大多数人赚不到认",
+          "什么绝大多数人赚不到认知",
+          "么绝大多数人赚不到认知的",
+          "绝大多数人赚不到认知的钱",
+          "大多数人赚不到认知的钱？"
+        ],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "variant": "baseline"
+    },
+    {
+      "artifact": "spec_01_old_candidate.md",
+      "case": "spec_01",
+      "historical_judgment": {
+        "fidelity_analysis": "捕捉到了非常核心的风格机制：标题的群体压力反问、开头的反共识否定、单向递进拆解、“算账”式例证、以“你/我见到”建立可信度、物理世界冷喻、结尾不给成功路径而只做止损式提醒。这些确实是蔡叔式商业认知拆解的关键特征，不是通用模板。但个别表达仍贴着原文议题展开（如“认知付费/买课”），若迁移到其他主题会削弱风格纯度。整体还原度很高，但还差一层抽象提炼。",
+        "improvement_suggestions": "1. 将括号内所有原文具象案例抽象为规则类别：例如用“一次高风险商业动作”代替“打冷电话/买课”，用“冷硬物理或身体风险意象”代替“呛水、熔炉”，彻底清除样文素材污染。2. 修正错字并统一指令句法：把“姿态是……”“形成……张力”等效果描述改成硬指令，例如“设定作者身份：已为真相付过费的人；话语动作：戳穿低成本概念认知”，确保每条都能直接输入给 LLM 执行。",
+        "negative_hits": [
+          "“开头”节的“切入不答应判断”为语义硬伤，应为“反直觉判断/否定判断”。",
+          "语气与人称、用词、结尾保留了原文本的具象素材：打冷电话、转发好文、砸钱/剪辑/封号/打骚扰电话、呛水、熔炉、买课劝止，与其自身“不保留原文本特定的行为案例”一条相矛盾。",
+          "“禁止”节“必须坚守‘真相在付费行为之外’”是原文本议题相关观点，而非可迁移的风格语法，会限制模板的作用域。"
+        ],
+        "overall_score": 3.8,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 3.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "十个标准二级标题齐全，顺序为定位→标题→开头→结构与论证→段落与句式→语气与人称→用词→结尾→排版→禁止，覆盖完整，命名基本符合规范。整体结构无缺失；只是“开头”条目内“切入不答应判断”疑似错字，影响语义但未伤及标题架构。"
+      },
+      "historical_non_length_signed_delta": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "human_mean_with_deterministic_length": 2.8,
+      "human_raw_scores": [
+        5.0,
+        3.0,
+        2.0,
+        3.0,
+        1.0
+      ],
+      "judgment": {
+        "characters_without_whitespace": 927,
+        "fidelity_analysis": "核心风格基因抓得准：反直觉断言的转身结构、自问自答与反问交替推进、长句推演与单句锤击的句式分工、以你代入与'我见到'经验证据、物理世界意象与判别句式、冷峻收束均来自样文真实机制，颗粒度较为犀利。标题公式'热词+赚钱'提炼度较高。局部偏窄在于部分规则仍贴着'认知/付费'话题写，未完全上升到抽象叙事层。",
+        "improvement_suggestions": "提取时建议做一层'人名/话题剥离替换测试'：把样文中的'认知'换成其他流行概念（如'管理''流量'），逐条确认规则是否依然成立，不成立即删去具体词并抽象为纯机制表述。尤其是结尾和禁止部分，应将'买课/付费'这类具体行动泛化为'劝阻一项与该概念直接挂钩的高成本盲目消费行为'，避免下一篇复述源文结论。",
+        "model_conciseness": 4.0,
+        "model_score_mean": 4.0,
+        "negative_hits": [
+          "结尾中'买课的劝止'直接锚定样文最后一句的行动（少买认知付费课），属于具体素材残留，新主题被迫带出'劝止买课'的动作。",
+          "禁止节'必须坚守“真相在付费行为之外”'将源文对认知付费课的特定立场写成了普适规则，属于主题绑定式结论污染。",
+          "禁止节多次使用'认知拆解'一词（而非通用'观念拆解/真相拆解'），使规则读起来仍像在服务样文主题本身。"
+        ],
+        "overall_score": 3.6,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "严格包含 10 个标准二级标题（## 定位/标题/开头/结构与论证/段落与句式/语气与人称/用词/结尾/排版/禁止），顺序完整工整，无缺失或命名不当，结构上达到满分标准。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 927,
+        "deterministic_conciseness": 2.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "variant": "old_candidate"
+    },
+    {
+      "artifact": "spec_01_new_candidate.md",
+      "case": "spec_01",
+      "historical_judgment": null,
+      "historical_non_length_signed_delta": null,
+      "human_mean_with_deterministic_length": null,
+      "human_raw_scores": null,
+      "judgment": {
+        "characters_without_whitespace": 958,
+        "fidelity_analysis": "对样文的辨识度捕捉相当准：标题的否定大众设问、开头共识引用+“我必须直接说”反转、阶梯下探再让步回收、长句推演+短句断言、每2–3段设问且问后立答、商业语域+数量词门槛、结尾轻止损建议都被命中，不是通用模板。若更苛刻一点，样文里“风险熔炉/概念收藏家/账户清瘦”这类将抽象能力转成具象物的隐喻机制没有被独立提炼；因此未给满分。",
+        "improvement_suggestions": "1）把具体素材示例改成占位符或移到外部 few-shot 区，如“N 个真实样本/N 百次实测/N 版草稿”，并把“认知”替换为主题无关的“某项能力”；2）压缩非空白字数到 400–600：合并“定位”与“语气”中重复的冷峻批判姿态，删去“手机三行视觉高度”等依赖渲染条件的低收益描述，让每条都成为可直接执行的 Do/Don't。",
+        "model_conciseness": 2.0,
+        "model_score_mean": 3.6,
+        "negative_hits": [
+          "用词节举例“几百个”“一百遍”“第十版”直接取自样文，虽作为数量词示例，仍属素材级残留，可能引导生成时复述原样文动作链。",
+          "禁止节用“认知或某项能力”保留了样文的主题关键词“认知”；换主题时会造成边界绑定，应参数化为“某项能力/被讨论的标的”。",
+          "全篇非空白字数明显超出400–600字的理想区间，信息再密也会摊薄DSL的即时可执行性。"
+        ],
+        "overall_score": 3.6,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "十个 `##` 二级标题齐全，顺序为定位→标题→开头→结构与论证→段落与句式→语气与人称→用词→结尾→排版→禁止，完全符合规范；章节内部未出现发散式多余主层级，结构完成度可打满分。主要问题在长度与样文残留上，而不在结构本体。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 958,
+        "deterministic_conciseness": 2.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": null,
+      "variant": "new_candidate"
+    },
+    {
+      "artifact": "spec_02_baseline.md",
+      "case": "spec_02",
+      "historical_judgment": {
+        "fidelity_analysis": "准确抓住了该样文的核心风格语法：零度白描、以动作与物件替代心理、旁观者式第一人称、物理时间推进、单句成段与长短句顿挫、对白不附情态、结尾拒绝升华而悬置意义。同时提炼出关键禁忌，如禁止内心推测、禁止类比词、禁止为数字与细节附加意义。这些特征并非泛化模板，而是该样文极具辨识度的写作机制。",
+        "improvement_suggestions": "无明显硬伤。唯一可微调之处是「标题」小节更像从首句逆推的公式，若原始样文未提供正式标题，可在提取说明中标注为“可生成标题建议”，以进一步降低推断性污染风险。",
+        "negative_hits": [],
+        "overall_score": 5.0,
+        "scores": {
+          "actionability": 5.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "Spec 严格包含全部 10 个标准二级标题，且顺序工整：定位、标题、开头、结构与论证、段落与句式、语气与人称、用词、结尾、排版、禁止。每个小节职责清晰，无结构缺失或标题命名不规范问题。"
+      },
+      "historical_non_length_signed_delta": [
+        0.0,
+        0.5,
+        0.5,
+        0.0
+      ],
+      "human_mean_with_deterministic_length": 4.8,
+      "human_raw_scores": [
+        5.0,
+        4.5,
+        5.0,
+        4.5,
+        5.0
+      ],
+      "judgment": {
+        "characters_without_whitespace": 599,
+        "fidelity_analysis": "精准抓住了样文的核心语言机制：零心理描写、用具体动作与物件替代情绪、细节长句后接短句形成“顿”、对白只录内容不加情态、环境音与身体动作承担转场、结尾意义悬置。颗粒度整体较高。轻微不足是“结尾回扣开头场景”更像通用套话，未必贴合样文“什么都没有发生”式否定收束；“标题公式”带有一定臆测性，欠缺真实标题证据。",
+        "improvement_suggestions": "将事件前提抽象为可迁移机制：例如把“最后一次见面”改为“精确时间+关系/场景锚点”，把“离别现场”改成“任意被观察的微小时刻或结束点”，避免下篇复述源文事件。\n删掉或降低“标题公式 8-15字”“结尾回扣开头场景”这类缺少直接证据或过度泛化的规则，改从样文实际节奏提炼，如“结尾用一句无事件的单句否定式陈述截住意义”。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.2,
+        "negative_hits": [
+          "“定位”要求“记录一次离别现场”，“开头”要求“最后一次见面+日期”，把源文的事件前提写成了规则；换主题时会被迫沿用“最后一面”的叙事设定。",
+          "“结构与论证”的“场景内动作→对话→转场→离开”基本取自源文的动作线，属于事件绑定，超越了可迁移的纯表达机制。"
+        ],
+        "overall_score": 4.2,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 5.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "10 个标准二级标题齐全，顺序与规范骨架一致，无缺节。格式本身没有硬伤；主要扣分点不在结构覆盖，而在个别规则存在事件框架残留。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 599,
+        "deterministic_conciseness": 5.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": true,
+        "within_target_range": true
+      },
+      "non_length_signed_delta": [
+        0.0,
+        -0.5,
+        -0.5,
+        -2.0
+      ],
+      "variant": "baseline"
+    },
+    {
+      "artifact": "spec_02_old_candidate.md",
+      "case": "spec_02",
+      "historical_judgment": {
+        "fidelity_analysis": "特征捕捉非常精准，成功提炼出原文最核心的白描美学：冷镜头视角、第三人称保持一臂之距、顺时序物理推进、用时间/数字/器物替代心理阐释、结尾回归微小物件与无声画面。也准确抓取了该风格的关键禁忌，如不升华、不点穿、不心理透题。整体没有流于泛化模板，和样文灵魂高度吻合。",
+        "improvement_suggestions": "1. 将重复出现的心理描写禁令、定性标签禁令、意象升华禁令统一收敛到“禁止”模块，其他模块只保留各自的差异化规则，避免同一规则出现三次以上。 2. 全文压缩至 500-600 字，每个二级标题严格控制在 1-2 行；同时把带有文学修辞色彩的表述改写为可机械执行的祈使句，例如：“短句收尾，只写一个动作或一个声音。”",
+        "negative_hits": [
+          "无原文具体剧情污染、无代码块、无过程思考，也没有文学性赞美或赏析废话。",
+          "主要问题在于篇幅过长，总字数接近 900 字，超出 600 字精简线；且多条规则跨模块重复，如“不评价、不心理透题、不升华”在定位、语气、用词、禁止中反复出现，造成冗余。",
+          "个别表达仍偏文学性而非纯指令，如“短句做‘嗒’的一声收住”“叙事底盘”等，虽不致命，但不如“只用短句收尾”这类硬规范工具化。"
+        ],
+        "overall_score": 4.2,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "结构完整，严格具备 10 个标准二级标题，顺序与要求完全一致：定位、标题、开头、结构与论证、段落与句式、语气与人称、用词、结尾、排版、禁止。各模块职责划分清晰，没有缺失标题或格式错位。"
+      },
+      "historical_non_length_signed_delta": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "human_mean_with_deterministic_length": 4.2,
+      "human_raw_scores": [
+        5.0,
+        4.0,
+        2.0,
+        5.0,
+        5.0
+      ],
+      "judgment": {
+        "characters_without_whitespace": 954,
+        "fidelity_analysis": "高保真捕捉了样文的灵魂：冷眼—白描—零度叙述，用日期/钟点/数字/物件物理参数代替心理与评判；句式上单动作、计量数字、对白单独成段，“短句收束”和“结尾回到物理残留”尤其准确；也抓住了禁心理透题、禁定性词、禁比喻升华等关键禁忌。若要在颗粒度上再进一步，可把原文本中极短答句（如“好”“嗯”）式的对话节拍单列出来，但现有规则已足以复现核心风格。",
+        "improvement_suggestions": "1) 将全文压缩至 400–600 非空白字：删除重复的“禁意义/禁升华/禁内心”交叉表述，合并“定位、语气、禁止”中重复的冷眼规则，并把六条 bullet 改为紧凑分号句式。2) 把“口语湿度”“嗒的一声”等修辞性说法改写为可直接执行的语言参数：对话篇幅、句子字数限制、形容词允许范围、禁止符号清单等。",
+        "model_conciseness": 2.0,
+        "model_score_mean": 4.2,
+        "negative_hits": [
+          "按非空白字符估测全文约 954 字，落在 851–1000 字档，未达到 400–600 字的高信息密度标准，精简度被大幅拖低。",
+          "个别指令仍属氛围化措辞，需要模型另做揣摩：“叙事底盘带口语湿度”“短句做‘嗒’的一声收住”不如“对白答句不超过1–10字”“段末用4字以内短句收束”这类硬指令可执行。",
+          "未发现须沿用样文具体情节、人物或结论的污染项。"
+        ],
+        "overall_score": 4.2,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "完整具备全部 10 个标准二级标题，顺序为“定位/标题/开头/结构与论证/段落与句式/语气与人称/用词/结尾/排版/禁止”，无遗漏、无排序错位，格式结构达标。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 954,
+        "deterministic_conciseness": 2.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "variant": "old_candidate"
+    },
+    {
+      "artifact": "spec_02_new_candidate.md",
+      "case": "spec_02",
+      "historical_judgment": null,
+      "historical_non_length_signed_delta": null,
+      "human_mean_with_deterministic_length": null,
+      "human_raw_scores": null,
+      "judgment": {
+        "characters_without_whitespace": 927,
+        "fidelity_analysis": "准确抓住了样文的核心语言机制：情绪不命名、关系不解释、我只看与走；通过动作时长、物件细节和精确数字间接透出情绪；短段落短句推进，拒绝因果链；结尾以离开动作自然收束并用‘无事发生’式反高潮。规则不是泛化模板，能直接指导同类非虚构白描写作。",
+        "improvement_suggestions": "1) 下一次提取时设置 400–600 非空白字符的预算，删除解释性判断，如‘克制本身即是叙事发动机’‘其功能是形成无声反差’，只保留可直接执行的祈使句。2) 将结尾等小节中的具体动作链改为可选项，用‘例如’标明，避免把源文的‘到门口—上车—汇入车流’固化为下一篇文章的强制事件链。",
+        "model_conciseness": 2.0,
+        "model_score_mean": 4.0,
+        "negative_hits": [
+          "全篇为指令型，未见文学赏析废话；但按非空白字符数量估计已落在 851–1000 字档，导致 conciseness 仅能得 2 分。",
+          "结尾规则把样文的离场动作链写成硬性动作序列：‘移动至门口、上车、汇入车流’，在无车或非城市场景中会迫使下一篇复述源文的终止情节，存在一处边缘素材残留。"
+        ],
+        "overall_score": 4.0,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 4.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "10 个标准二级标题齐全：定位、标题、开头、结构与论证、段落与句式、语气与人称、用词、结尾、排版、禁止；顺序与规范完全一致，无遗漏、无多余，结构本身清晰。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 927,
+        "deterministic_conciseness": 2.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": null,
+      "variant": "new_candidate"
+    },
+    {
+      "artifact": "spec_03_baseline.md",
+      "case": "spec_03",
+      "historical_judgment": {
+        "fidelity_analysis": "特征捕捉总体锐度较高：准确提炼出“常识开场→反直觉断言→设问→分层论证→具体案例→原则清单”的推进骨架，且对“无我、少你、禁比喻、禁抒情、量化案例、平衡论收尾”的捕捉贴近原样。主要遗漏是“我们”的用法：原样第一句“我们经常会遇到”是知识分享式共识感的来源，但 Spec 只写“我”绝不出现，按字面执行会误伤“我们”，削弱原样中的知性共场感。另有“标题”规则无法完全由输入样文验证，因为原文并未给出真实标题。",
+        "improvement_suggestions": "建议1：将原文句式例证和具体数字全部脱敏为语法占位符，如“[领域/场景] + 我们常见[共性现象]，但细察[对象]会发现[反直觉判断]”，只保留“用具体数字、阈值实体”的类型要求，使 Spec 真正可迁移。建议2：补一条人称机制正面指令：正文可用“我们”建立共识，但不用“我”做个人叙事主语；“你”只用于引导读者进入观察场景。这样既能保留原样语感，也避免字面执行时误杀“我们”。",
+        "negative_hits": [
+          "污染类：规则示例直接带入原文具体素材“两万行代码”“十几个微服务”，使 Spec 与原始案例耦合；应抽象成“用带量级、有对比度的具体数字/实体”，否则下游 LLM 可能照抄原例。",
+          "污染类：开头的句式示例直接摘录原文片段（“在日常……我们经常会遇到……”“但如果你仔细审视……你会发现……”），未完全转成占位符模板；虽非大段引用，但离“零原文污染”还差一档。",
+          "表达含糊/硬伤：人称规则写“我”绝不出现，未区分“第一人称单数”与“我们”的复数共识用法；原样中的“我们”会被误伤。",
+          "表达含糊/硬伤：“零中英混搭空格规则不予凸显”语法与语义缠绕，不是清晰可执行的风格指令，易让模型不知如何操作，疑似提炼错误。",
+          "推演类：输入样文没有真实文章标题，Spec 却给出“标题长度 10-14 字、拒绝感叹号”的确定性规则，属于无法由输入验证的臆测；应标注为推断而非定论。"
+        ],
+        "overall_score": 4.0,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 4.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "严格覆盖全部 10 个二级标题：定位、标题、开头、结构与论证、段落与句式、语气与人称、用词、结尾、排版、禁止；顺序与标准一致，格式工整，无缺漏，已形成完整的 DSL 骨架。"
+      },
+      "historical_non_length_signed_delta": [
+        0.0,
+        -1.0,
+        0.0,
+        -2.0
+      ],
+      "human_mean_with_deterministic_length": 4.2,
+      "human_raw_scores": [
+        5.0,
+        5.0,
+        5.0,
+        4.0,
+        5.0
+      ],
+      "judgment": {
+        "characters_without_whitespace": 910,
+        "fidelity_analysis": "并非泛化模板，抓到了原样独特语感：以环境共性冷开场、第二句转逆直觉断言、自问自答切换论证、短句独立成段下结论、用具体阈值数字替代抽象形容、零比喻，并以“不是……而是……”的平衡论和克制警句收尾。作为生成 DSL，已能较好复刻原样的冷峻技术理性派口吻；但部分特征说明直接借用源文词句，抽象层级稍受拖累。",
+        "improvement_suggestions": "删除或替换括号内取自样文的实例，改用中性占位描述，让每条规则脱离源文即可执行；同时把模糊量化和含混措辞改写为硬约束，并将全篇压缩到 400–600 非空白字符目标区间。",
+        "model_conciseness": 2.0,
+        "model_score_mean": 3.6,
+        "negative_hits": [
+          "标题与结尾小节中的“系统设计的平衡术”“动态平衡论收束”“保持克制，尊重简单……”依赖样文末段观点和结论句，可能让下一篇复述同一哲学观。",
+          "段落与句式小节中的“结果是什么？”“开发效率反倒下降了”来自样文微服务案例的设问与结论，而不是完全可迁移的通用句式示例。",
+          "用词小节中的“两万行代码”“十几个微服务”是样文案例里的具体数字论据，会带入源文素材。",
+          "开头小节中的“在日常……我们经常会遇到……”和“但如果你仔细审视……你会发现……”是样文开头句式的同构改写，建议替换为不含原句的占位描述。",
+          "用词小节“零中英混搭空格规则不予凸显”语义含混，看不出是禁止空格还是不强调空格规则，需要改成明确指令。"
+        ],
+        "overall_score": 3.6,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "严格包含并完整按序排布了 10 个标准 ## 二级标题：定位、标题、开头、结构与论证、段落与句式、语气与人称、用词、结尾、排版、禁止；各部分直接按功能切分，结构清晰，没有缺失或错序。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 910,
+        "deterministic_conciseness": 2.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": [
+        0.0,
+        -1.0,
+        0.0,
+        -2.0
+      ],
+      "variant": "baseline"
+    },
+    {
+      "artifact": "spec_03_old_candidate.md",
+      "case": "spec_03",
+      "historical_judgment": {
+        "fidelity_analysis": "特征捕捉非常贴近样文：精准提炼出“理性工程技术顾问”式人设、反直觉断言开头、现象—反转—归因—反例—清单—收束的骨架，“为什么这么说？”自问断拍、加粗编号原则清单、结尾格言式收口等核心节奏机制。没有把规则与具体“微服务拆分”剧情绑定，通用性较强。小扣分在于个别表达如“定节奏器”“断拍与转向”仍偏描述性赏析，可进一步转化为更冷硬的行动指令。",
+        "improvement_suggestions": "1. 在提取 Prompt 中增加硬性限制：总字数 ≤600，每个二级标题下只允许 1—3 行，规则一律以“使用/禁止/保持/不得/必须”开头。2. 将示例压缩至最多 1—2 处，并注明“示例只解释抽象层级，不得限定具体主题词”，避免规则与样文素材产生耦合。",
+        "negative_hits": [
+          "全篇约 900—1000 字，明显超过“≤600 字”的高密度线；多个小节仍在解释性描述而非纯祈使指令，精简度不达标。",
+          "存在“瓶颈”“链路追踪”“跨网络重试”等来自样文的短语作为示例，虽属对风格特征的注解而非具体剧情污染，但属于边界性噪音。"
+        ],
+        "overall_score": 4.0,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "严格包含并规范排序了全部 10 个标准二级标题（定位/标题/开头/结构与论证/段落与句式/语气与人称/用词/结尾/排版/禁止），标题命名准确，无遗漏、无替换、无顺序错乱。"
+      },
+      "historical_non_length_signed_delta": [
+        0.0,
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "human_mean_with_deterministic_length": 4.2,
+      "human_raw_scores": [
+        5.0,
+        5.0,
+        5.0,
+        4.0,
+        5.0
+      ],
+      "judgment": {
+        "characters_without_whitespace": 998,
+        "fidelity_analysis": "Spec 抓到了样文的核心机制：反直觉断言作钩子、设问句作断拍、长短句分工、显性技术词混合白话、去个人化冷峻语气、编号加粗原则清单、结尾不做华丽升华等。其论证骨架抽象为“现象—反转—归因—举例—恶果—清单—收束”也较为精炼，明显不是泛化模板。扣分点在于部分规则仍用源文具体例证代替更抽象的指令，标题公式也存在从源文具体内容反向推断的痕迹，特征颗粒度尚未达到满分级的“语言密码”精度。",
+        "improvement_suggestions": "1) 将源文具体论据替换为抽象可迁移模板，例如“方向相反的两组具象状态或成本项”，并在词汇规则中说明“按新主题的专业语域更换技术名词”，使规则可跨主题执行。2) 压缩冗余解释：用祈使句重写各小节，删掉对样文人设和领域场景的说明性内容，把非空白字符数压回 400–600 字区间，避免密度分被篇幅拖累。",
+        "model_conciseness": 2.0,
+        "model_score_mean": 3.8,
+        "negative_hits": [
+          "“核心名词大量使用显性技术词（如“瓶颈”“边界”“链路追踪”）”直接引用源文术语，会让新篇倾向于复用同一批技术词。",
+          "“修辞集中在具象对照：成本下降vs复杂度上升，单体边界清晰vs跨网络重试等”把源文的具体论据写成了风格样例，属于局部素材残留。",
+          "“理性工程技术顾问”“工程师同侪”“互联网产品”等语域多次出现；若未来主题不限于软件工程，会构成领域绑定风险。",
+          "“偏高度的格言式判断”中“偏高度”语义含混，属于可执行性瑕疵。"
+        ],
+        "overall_score": 3.8,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 4.0,
+          "conciseness": 2.0,
+          "coverage": 5.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "10 个二级标题齐全，顺序与标准命名（定位/标题/开头/结构与论证/段落与句式/语气与人称/用词/结尾/排版/禁止）一致，无格式硬伤。主要问题是全文非空白字符量偏大，已接近 1000 字，超出高信息密度上限，因此密度项只能给 2 分。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 998,
+        "deterministic_conciseness": 2.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": [
+        0.0,
+        -1.0,
+        0.0,
+        -1.0
+      ],
+      "variant": "old_candidate"
+    },
+    {
+      "artifact": "spec_03_new_candidate.md",
+      "case": "spec_03",
+      "historical_judgment": null,
+      "historical_non_length_signed_delta": null,
+      "human_mean_with_deterministic_length": null,
+      "human_raw_scores": null,
+      "judgment": {
+        "characters_without_whitespace": 1152,
+        "fidelity_analysis": "捕捉非常精准，提炼出了样文的核心节奏：普遍场景开头—第二句反直觉断言—设问中转—“以……为例”反例推导—数字/规模对比—编号原则列表—“从来不是……而是……”收尾。也准确抓住了“我们/你”的同侪视角、情绪克制、不靠个人经历自证等深层特征。只是输入样文中没有真实标题可验证，“标题”节更多属于类型先验，但整体不削弱风格复刻精度。",
+        "improvement_suggestions": "1) 将篇幅压缩到 500 字左右：把原文数字、工程对象和具体意象改成可迁移的占位参数，例如“穿插与本主题相关的精确数字（规模、时延、代码量）”而非直接列出“两万行/几毫秒/灾难的起点”。2) 将软性限定改为可判定约束，比如“正文每个非列表段落必须在 2–4 行内”“全篇最多使用一个比喻意象”，删除“可视情况”等弹性授权。",
+        "model_conciseness": 1.0,
+        "model_score_mean": 3.6,
+        "negative_hits": [
+          "非空白字符数约 1150，超过 1000，超出 400–600 字符的满分区间，conciseness 只能按 1/5 计。",
+          "用词规则中残留源文具体素材：如“两万行”“几毫秒”“位运算、RPC、日志链路”，以及意象示例“灾难的起点”；这些不是可迁移的写作机制，可能导致下一篇不必要地复述源文细节。",
+          "仍存在“尽量控制在 2–4 行”“可视情况”“少量使用”“少用/偶用”等弹性授权，削弱了规则的硬性可执行边界。"
+        ],
+        "overall_score": 3.6,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 1.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "10 个标准二级标题全部齐全，命名与顺序完全符合规范：定位→标题→开头→结构与论证→段落与句式→语气与人称→用词→结尾→排版→禁止。每个标题均使用“##”标记，无缺失、无错序，结构层面符合满分特征；超长问题单列在精简度中扣分。"
+      },
+      "mechanical_checks": {
+        "characters_without_whitespace": 1152,
+        "deterministic_conciseness": 1.0,
+        "exact_ten_headings_in_order": true,
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。",
+        "source_overlap_12_char_examples": [],
+        "within_600_characters": false,
+        "within_target_range": false
+      },
+      "non_length_signed_delta": null,
+      "variant": "new_candidate"
+    }
+  ],
+  "status": "complete"
+}

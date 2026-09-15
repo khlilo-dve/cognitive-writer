@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-05",
+  "source": "用户当前会话人工评分；只评三组，用户不再补评04–05",
+  "dimensions": [
+    "coverage",
+    "actionability",
+    "conciseness",
+    "distinctiveness",
+    "cleanliness"
+  ],
+  "historical_run": "20260905-auto-v1",
+  "raw_scores": {
+    "spec_01": {
+      "baseline": [
+        5,
+        2,
+        3,
+        4,
+        1
+      ],
+      "candidate": [
+        5,
+        3,
+        2,
+        3,
+        1
+      ],
+      "comment": "冻结不够抽象，绝大多数用例文内容诠释风格；候选同样污染严重。"
+    },
+    "spec_02": {
+      "baseline": [
+        5,
+        4.5,
+        5,
+        4.5,
+        5
+      ],
+      "candidate": [
+        5,
+        4,
+        2,
+        5,
+        5
+      ],
+      "candidate_source": "用户接受历史模型评分",
+      "comment": "冻结几乎无例文污染，执行性及特征捕捉各减0.5。"
+    },
+    "spec_03": {
+      "baseline": [
+        5,
+        5,
+        5,
+        4,
+        5
+      ],
+      "candidate": [
+        5,
+        5,
+        5,
+        4,
+        5
+      ],
+      "comment": "句点是五个维度的分隔符。"
+    }
+  },
+  "policy_note": "原始精简度保留；新报告单独按非空白Unicode字符数（含标题、标点、Markdown）重算，不回写人评。"
+}

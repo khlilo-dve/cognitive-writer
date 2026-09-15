@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-06T06:39:24.174593286+00:00",
+  "error": "API 响应解析失败: spec_01_baseline_judge 连续 3 次失败: 网络请求失败: 连接失败或请求超时（端点已隐藏）",
+  "resume": "用相同 EVAL_RUN_ID 运行 eval_calibration_suite",
+  "status": "failed"
+}

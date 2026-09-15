@@ -11,3 +11,12 @@
 - 正文/Spec 的 `.md` 为检查点的阅读副本，`inputs.json` 冻结本轮输入；候选提示词只在运行目录落盘。
 - 本地离线测试只用 tempfile。真实模型任务使用 ignored 测试单独运行，不使用泛化的 `--ignored eval` 批量触发旧基线生成入口。
 - 不自动删除历史产物；清理或重新冻结基线需单独确认。
+
+## 人工校准与精简度（本轮授权）
+- `human_calibration.json` 保存用户对 Spec 01–03 的原始评分及评价；04–05 不再要求补评，未评数据不伪造为人评。
+- 用户原始精简度分数保留；后续运行使用确定性的长度分档，两者分别记录，不回写历史报告。
+- 字数包含标题、标点和 Markdown 标记，排除所有空白字符。400–600 字为 5 分；300–399 / 601–700 为 4 分；200–299 / 701–850 为 3 分；100–199 / 851–1000 为 2 分；少于 100 / 超过 1000 为 1 分。满分最低字数为 400，低于即扣分。
+- 新校准后实验新建 run_id；不得与 20260905-auto-v1 混用。用户授权修改提取提示词与评分规范，保留冻结输入和原始人评。
+
+三组在线校准命令：`MODEL=deepseek-v4-flash EVAL_RUN_ID=20260912-calibration-v3-fixed EVAL_CONCURRENCY=3 EVAL_TIMEOUT_SECONDS=180 cargo test --lib eval_calibration_suite -- --ignored --nocapture`。请求并发1–3、超时30–900秒可配置，默认分别3和180；这些运输设置不改变请求快照。每个成功checkpoint复用，首次失败记录与后续完成结果并存以便审计。
+终端回归产物 `eval/repl-terminal-validation.json` 来自 `scripts/verify_repl_terminal.py`，使用临时目录与本地mock API，不属于模型评分或冻结业务样本。

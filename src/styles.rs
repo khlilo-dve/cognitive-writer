@@ -1,8 +1,8 @@
 use std::fs;
-use std::path::{Path, PathBuf};
+
 use std::time::SystemTime;
 
-use pinyin::ToPinyin;
+use crate::style_names::{extract_description, is_recent_query, match_key, style_file_path};
 
 use crate::error::AppError;
 
@@ -15,74 +15,6 @@ pub struct StyleSummary {
 }
 
 // ── private helpers ────────────────────────────────────────────────────
-
-/// Extract the first non-empty, non-heading paragraph from a Markdown style
-/// file as a one-line description (capped at 120 chars).
-fn extract_description(content: &str) -> String {
-    for line in content.lines() {
-        let trimmed = line.trim();
-        if trimmed.is_empty() {
-            continue;
-        }
-        if trimmed.starts_with('#') {
-            continue;
-        }
-        // Find the byte position after the first sentence-ending punctuation.
-        let end_byte = trimmed
-            .char_indices()
-            .find(|(_, c)| matches!(c, '。' | '！' | '？'))
-            .map(|(idx, c)| idx + c.len_utf8())
-            .unwrap_or(trimmed.len());
-
-        let desc = &trimmed[..end_byte];
-        let char_count = desc.chars().count();
-        if char_count > 120 {
-            let truncated: String = desc.chars().take(120).collect();
-            return format!("{}...", truncated);
-        }
-        return desc.to_string();
-    }
-    String::new()
-}
-
-/// Check whether `query` contains time-related keywords used to indicate
-/// "the most recent style".
-fn is_recent_query(query: &str) -> bool {
-    let keywords = ["刚学", "最近", "上次"];
-    keywords.iter().any(|kw| query.contains(kw))
-}
-
-/// 将用户提供的风格名限制为单个文件名，防止读写操作逃出 styles 目录。
-fn style_file_path(styles_dir: &str, name: &str) -> Result<PathBuf, AppError> {
-    let name = name.trim();
-    let components: Vec<_> = Path::new(name).components().collect();
-    if name.is_empty()
-        || name.contains(['/', '\\', '\0'])
-        || !matches!(components.as_slice(), [std::path::Component::Normal(_)])
-    {
-        return Err(AppError::FileRead(format!(
-            "无效的风格名称 `{name}`：名称必须是单个文件名"
-        )));
-    }
-
-    Ok(Path::new(styles_dir).join(format!("{name}.md")))
-}
-
-/// 把名称归一化为可用于精确比对的键：中文转无声调拼音，ASCII 转小写，其余原样。
-///
-/// 这样「轻辩」与「qingbian」得到同一个键，而「qingbain」保持不同，实现
-/// 中文名 ↔ 拼音文件名的精确跨编码匹配，同时不引入模糊匹配。
-fn match_key(name: &str) -> String {
-    let mut out = String::with_capacity(name.len());
-    for c in name.trim().chars() {
-        if let Some(py) = c.to_pinyin() {
-            out.push_str(py.plain());
-        } else {
-            out.extend(c.to_lowercase());
-        }
-    }
-    out
-}
 
 /// Find the most recently modified .md file in the given directory.
 /// Returns `(display_name, file_content)`.
@@ -251,7 +183,38 @@ pub fn delete_style(styles_dir: &str, name: &str) -> Result<(), AppError> {
         .map_err(|e| AppError::FileRead(format!("无法删除风格文件 `{}`: {e}", path.display())))
 }
 
-// ── tests ──────────────────────────────────────────────────────────────
+/// 创建新风格；以 create_new 原子地拒绝同名文件（包括符号链接）。
+pub fn save_new_style(
+    styles_dir: &str,
+    name: &str,
+    content: &str,
+) -> Result<std::path::PathBuf, AppError> {
+    use std::io::Write;
+    let path = style_file_path(styles_dir, name)?;
+    if content.trim().is_empty() {
+        return Err(AppError::FileWrite("提取内容为空，不能保存风格".into()));
+    }
+    fs::create_dir_all(styles_dir).map_err(|e| AppError::FileWrite(e.to_string()))?;
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&path)
+        .map_err(|e| {
+            AppError::FileWrite(format!("{}: {e}；请换一个未使用的名称", path.display()))
+        })?;
+    if let Err(e) = file.write_all(content.as_bytes()) {
+        drop(file);
+        // 只清理本次 create_new 创建的半成品，不触碰已有同名风格。
+        fs::remove_file(&path).map_err(|cleanup| {
+            AppError::FileWrite(format!(
+                "写入失败: {e}；清理 {} 失败: {cleanup}",
+                path.display()
+            ))
+        })?;
+        return Err(AppError::FileWrite(e.to_string()));
+    }
+    Ok(path)
+}
 
 #[cfg(test)]
 mod tests {
@@ -318,24 +281,6 @@ mod tests {
         // Either file could be "more recent" depending on filesystem timing;
         // we just verify it returns Ok (finds something).
         assert!(result.is_ok());
-    }
-
-    // ── match_key（拼音归一化）──────────────────────────────────
-
-    #[test]
-    fn test_match_key_chinese_to_pinyin() {
-        assert_eq!(match_key("轻辩"), "qingbian");
-    }
-
-    #[test]
-    fn test_match_key_ascii_lowercased() {
-        assert_eq!(match_key("QingBian"), "qingbian");
-    }
-
-    #[test]
-    fn test_match_key_mixed_chinese_and_ascii() {
-        // 中文转拼音、英文小写，用于混合名
-        assert_eq!(match_key("轻bian"), "qingbian");
     }
 
     #[test]
@@ -467,39 +412,5 @@ mod tests {
         let (_dir, dir_str) = setup_temp_styles(&[("exists.md", "# Exists")]);
         assert!(delete_style(&dir_str, "../outside").is_err());
         assert!(std::path::Path::new(&dir_str).join("exists.md").exists());
-    }
-
-    // ── extract_description ─────────────────────────────────────────
-
-    #[test]
-    fn test_extract_description_basic() {
-        let input = "# 标题\n这是描述。\n第二段。";
-        assert_eq!(extract_description(input), "这是描述。");
-    }
-
-    #[test]
-    fn test_extract_description_skips_empty_lines() {
-        let input = "\n\n# 标题\n\n这是描述内容。";
-        assert_eq!(extract_description(input), "这是描述内容。");
-    }
-
-    #[test]
-    fn test_extract_description_no_description() {
-        let input = "# 只有标题\n## 二级\n### 三级";
-        assert_eq!(extract_description(input), "");
-    }
-
-    #[test]
-    fn test_extract_description_empty_input() {
-        assert_eq!(extract_description(""), "");
-    }
-
-    #[test]
-    fn test_extract_description_long_first_sentence() {
-        let long = "a".repeat(150) + "。";
-        let input = format!("# Title\n{long}");
-        let desc = extract_description(&input);
-        assert!(desc.len() <= 123); // 120 + "..."
-        assert!(desc.ends_with("..."));
     }
 }

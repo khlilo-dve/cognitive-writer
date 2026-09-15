@@ -88,6 +88,18 @@ pub(crate) fn parse_learn_judgment(raw: &str) -> Result<LearnJudgeResult, AppErr
     Ok(r)
 }
 
+/// Preserve the model estimate, then apply the shared deterministic length policy.
+pub(crate) fn score_learn_judgment(raw: &str, spec: &str) -> Result<LearnJudgeResult, AppError> {
+    let mut result = parse_learn_judgment(raw)?;
+    let count = crate::spec_quality::character_count(spec);
+    result.model_conciseness = Some(result.scores.conciseness);
+    result.model_score_mean = Some(result.overall_score);
+    result.characters_without_whitespace = Some(count);
+    result.scores.conciseness = crate::spec_quality::conciseness_score(count);
+    result.overall_score = result.scores.mean();
+    Ok(result)
+}
+
 // ── eval 1：风格提示词（生成端）───────────────────────────────────────
 
 /// LLM-Judge 对单篇文章的 6 维度评分
@@ -236,6 +248,12 @@ impl LearnJudgeScores {
 pub struct LearnJudgeResult {
     pub scores: LearnJudgeScores,
     pub overall_score: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub model_conciseness: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub model_score_mean: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub characters_without_whitespace: Option<usize>,
     pub structure_analysis: String,
     pub fidelity_analysis: String,
     pub negative_hits: Vec<String>,
@@ -265,7 +283,7 @@ pub async fn judge_learn_spec(
     })
     .await?;
 
-    parse_learn_judgment(&raw_resp)
+    score_learn_judgment(&raw_resp, extracted_spec)
 }
 
 /// 评测提取提示词：喂一篇风格鲜明的文章 → 提取 spec，输出 spec 精简度指标。
@@ -281,7 +299,7 @@ pub async fn eval_learn_prompt(
     let spec = call_llm(client, base_url, api_key, model, &prompt, article).await?;
 
     // 具体指标
-    let spec_len = spec.chars().count();
+    let spec_len = crate::spec_quality::character_count(&spec);
     let sections = [
         "## 定位",
         "## 标题",
@@ -303,7 +321,7 @@ pub async fn eval_learn_prompt(
     };
 
     println!("\n===== eval 2 learn 提取提示词（提取端）=====");
-    println!("[指标] spec 字符数: {} (目标 ≤600)", spec_len);
+    println!("[指标] spec 非空白字符数: {} (目标 400–600)", spec_len);
     println!("[指标] 10 段覆盖率: {}/{}", covered, total);
     println!("[指标] 平均每段字数: {:.1}", avg_section_len);
     println!("--- spec ---\n{}", spec);
@@ -323,105 +341,7 @@ pub const TEST_SET: [&str; 5] = [
     "文章主题：从消费者转向生产者\n基本内容：消费是被动接收价值，生产是主动创造价值；生产者思维带来复利（作品、资产、能力），消费者思维只消耗；离生产越近的人赚钱越多。",
 ];
 
-/// 跑整批测试集，生成每篇的大纲+正文，存到 target_dir 作为基准或候选文章。
-pub async fn eval_style_batch(
-    client: &Client,
-    base_url: &str,
-    api_key: &str,
-    model: &str,
-    style: &str,
-    target_dir: &str,
-) -> Result<(), AppError> {
-    let target = std::path::Path::new(target_dir);
-    if target.exists() && std::fs::read_dir(target)?.next().is_some() {
-        return Err(AppError::FileWrite(
-            "目标目录非空；使用新目录或可续跑的 eval_automated_suite".into(),
-        ));
-    }
-    std::fs::create_dir_all(target_dir)
-        .map_err(|e| AppError::Intent(format!("创建目录失败: {}", e)))?;
-
-    for (i, idea) in TEST_SET.iter().enumerate() {
-        let n = i + 1;
-        let outline = generate_outline(client, base_url, api_key, model, style, idea).await?;
-        let fulltext =
-            render_fulltext(client, base_url, api_key, model, style, &outline, idea).await?;
-
-        let quoted_idea: String = idea
-            .split('\n')
-            .map(|l| format!("> {}", l))
-            .collect::<Vec<_>>()
-            .join("\n");
-        let content = format!(
-            "# 主题 {}：{}\n\n{}\n\n## 大纲\n\n{}\n\n## 正文\n\n{}",
-            n,
-            idea.lines()
-                .next()
-                .unwrap_or("")
-                .trim_start_matches("文章主题："),
-            quoted_idea,
-            outline,
-            fulltext,
-        );
-        let path = format!("{}/topic_{:02}.md", target_dir, n);
-        std::fs::write(&path, content)
-            .map_err(|e| AppError::Intent(format!("写文件失败: {}", e)))?;
-        println!(
-            "[{}] 主题 {} 已保存 → {} (正文 {} 字符)",
-            target_dir,
-            n,
-            path,
-            fulltext.chars().count()
-        );
-    }
-
-    Ok(())
-}
-
-/// 跑整批样文测试集，提取 10 段式 Spec 并存到 target_dir。
-pub async fn eval_learn_batch(
-    client: &Client,
-    base_url: &str,
-    api_key: &str,
-    model: &str,
-    target_dir: &str,
-) -> Result<(), AppError> {
-    let target = std::path::Path::new(target_dir);
-    if target.exists() && std::fs::read_dir(target)?.next().is_some() {
-        return Err(AppError::FileWrite(
-            "目标目录非空；使用新目录或可续跑的 eval_automated_suite".into(),
-        ));
-    }
-    std::fs::create_dir_all(target_dir)
-        .map_err(|e| AppError::Intent(format!("创建目录失败: {}", e)))?;
-
-    let prompt = std::fs::read_to_string("prompts/learn_style.md")
-        .map_err(|e| AppError::Intent(format!("读取提取提示词失败: {}", e)))?;
-
-    for n in 1..=5 {
-        let sample_path = format!("eval/samples/sample_{:02}.md", n);
-        let sample_text = std::fs::read_to_string(&sample_path)
-            .map_err(|e| AppError::Intent(format!("读取样文失败: {}", e)))?;
-
-        let spec: String = with_retry(3, "Learn Spec LLM", || {
-            call_llm(client, base_url, api_key, model, &prompt, &sample_text)
-        })
-        .await?;
-        let out_path = format!("{}/spec_{:02}.md", target_dir, n);
-        std::fs::write(&out_path, &spec)
-            .map_err(|e| AppError::Intent(format!("写 Spec 失败: {}", e)))?;
-
-        println!(
-            "[{}] 样文 {} 已提取 → {} ({} 字符)",
-            target_dir,
-            n,
-            out_path,
-            spec.chars().count()
-        );
-    }
-
-    Ok(())
-}
+pub use crate::eval_batch::{eval_learn_batch, eval_style_batch};
 
 #[cfg(test)]
 mod tests {

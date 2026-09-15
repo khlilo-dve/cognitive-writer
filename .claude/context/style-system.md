@@ -1,46 +1,19 @@
-# 风格系统与逆向学习 (style-system.md)
+# 风格系统与逆向学习
 
-## 风格系统理念
+风格保存为 `styles/*.md` 的 Markdown 文本，运行时直接注入生成提示词；不存在 StyleSpec 解析结构体。十节提取规范由 `prompts/learn_style.md` 定义，历史风格文件不强制回写为同一格式。
 
-传统写作者提示词往往堆砌模糊的形容词（如“幽默风趣”、“深度专业”），LLM 执行效果差且易漂移。
-本项目将风格抽象为**可执行的工程规范 (Executable Style Spec)**，包含具体结构模板、语调禁忌、句式偏好和金句落脚点。
+## 学习与保存
+`learn::extract_style(url)` 抓取单篇 URL（Jina Reader，失败降级直接抓取去标签），读取提取提示词并调用 LLM，只返回文本，不读 stdin。
+- CLI `run_learn` 包装交互命名，/cancel 取消。
+- REPL 收到提取结果后进入 WaitingForStyleName，保存待命名文本，再由主循环读取名称。重名或非法名称返回错误并保留提取结果。
+- `styles::save_new_style` 使用 create_new 防覆盖；中途写入失败清理本次新建半成品。
+- 删除风格由 REPL 先保存待删除名称，下次明确确认后调用 `delete_style`。
 
-## 风格规范格式 (`styles/*.md`)
+## 规范与校准
+提取要求跨主题可迁移；既禁止源句引用，也禁止把源文论点、事件或动作链换词写成规则。保留语域、视角、语气与节奏特征，避免过度抽象成通用套话。目标为含标题、标点及 Markdown 的非空白 Unicode 字符 400–600；长度分数由代码计算，详见 evaluation.md。
 
-每个风格文件存储在 `styles/` 目录下（如 `styles/蔡叔.md`, `styles/wechat_base.md`），具有严格的分块结构：
-
-1. **角色定义与认知基座**: 作者身份、思考模型、对待读者的姿态。
-2. **结构范式**: 标配的引入方式（痛点叙事/反直觉观点）、论证层级、收尾升华方式。
-3. **语言习惯与修辞特征**: 句式长短分布、口头禅/标志性过渡词、标点使用癖好。
-4. **负向约束 (Negative Constraints)**: 严禁使用的套话（如“在当今快节奏的社会中…”）、严禁使用的空洞总结词。
-
-## 逆向风格学习流水线 (`src/learn.rs`)
-
-支持输入一篇或多篇已有公众号优质文章，由系统自动逆向提炼并沉淀为风格文件：
-
-```
-[原始文章/网页 HTML]
-        │
-        ▼ 文本清洗 (learn::strip_html_tags 去除 DOM 噪音)
-   [纯净正文文本]
-        │
-        ▼ 提示词驱动分析 (prompts/learn_style.md)
-   [LLM 提取解构] ──分析结构节奏、修辞特征、负向模式
-        │
-        ▼ 序列化生成
-   [styles/{style_name}.md] (落盘为可重复利用的 Spec)
-```
-
-## 核心实现与代码映射
-
-- **`src/styles.rs`**:
-  - 管理本地风格文件的枚举、读取、切换与校验。
-  - `StyleSpec` 结构体：解析 Markdown 中的分块，组装为注入大纲与正文的 System Prompt。
-- **`src/learn.rs`**:
-  - 风格学习调度器，处理输入清洗并调用逆向 Prompt。
-- **`prompts/learn_style.md`**:
-  - 专门设计的风格提取元提示词。
-
-## 何时需要查阅代码
-- 需要为提示词增加新的维度约束：查阅 `src/styles.rs` 中 `StyleSpec` 的构建与注入逻辑。
-- 需要调优风格逆向分析效果：查阅 `prompts/learn_style.md`。
+## 代码职责
+- `styles.rs`：文件列表、查找、读取、创建与删除。
+- `style_names.rs`：名称路径校验、拼音归一化、摘要提取。
+- `learn.rs`：抓取及提取阶段、CLI 命名包装。
+- `generate.rs`：将风格 Markdown 注入大纲与正文。

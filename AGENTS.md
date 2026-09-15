@@ -5,16 +5,17 @@
 ## 项目概述
 - Rust 对话式写作 Agent (v3.3.2)，面向微信公众号 + 个人网站 (khlilo.xyz)
 - 源文件与测试数量以 `src/` 和 `cargo test --lib` 为准；REPL 自然语言交互 + CLI 快捷模式
-- 常规状态流程: `Idle` → `WaitingForFulltext` → `WaitingForPublish`；`WaitingForOutline` 枚举仍保留，当前生成自动衔接大纲与正文；旧状态恢复待完善
+- 常规状态流程: `Idle` → `WaitingForOutline`（内部检查点）→ `WaitingForFulltext` → `WaitingForPublish`；大纲自动衔接正文，中断后可确认已有大纲继续；学习命名、删除确认另有等待态
 
 ## 运行方式
 - REPL 交互模式: `cargo run`
 - CLI 快捷指令: `cargo run -- generate|learn|refine|update [...]`
 - 全量库测试: `cargo test --lib`
-- 单模块测试: `cargo test -- <module_name>`
+- 单模块测试: `cargo test --lib <module_name>`
+- 真实终端回归（Linux/WSL，无真实 API）：`cargo build --bin cognitive-writer && python3 scripts/verify_repl_terminal.py`
 
 ## 核心开发规范
-- **模块入口**: 新模块必须在 `src/lib.rs` 注册；`src/main.rs` 仅作为启动分流器（终端进入 REPL，参数/管道进入 CLI）
+- **模块入口**: 新模块必须在 `src/lib.rs` 注册；`src/main.rs` 仅作为启动分流器（无参数进入 REPL，有子命令参数进入 CLI；stdin 可为终端或管道）
 - **错误处理**: 公开函数必须返回 `crate::error::AppError`，禁止私自使用裸 `String` 作为错误类型
 - **测试约束**: 单元测试必须内嵌在模块底部的 `#[cfg(test)] mod tests` 中；文件 I/O 测试一律使用 `tempfile`，严禁污染工程真实目录
 - **单一职责**: 每个模块控制在 500 行以内，`src/repl.rs` 作为状态机与交互编排层可除外
@@ -34,10 +35,11 @@
 4. **历史操作经验** → 由 `Codex-mem` 自动记录与检索。
 5. **代码实现事实** → `src/` 下的具体代码，Context 仅是指针，真实逻辑以代码为准。
 
-## 技术债简要
-- `run_learn` 在 REPL 下阻塞读 stdin 与 REPL 异步循环冲突，待两阶段对话改造
-- `handle_delete_style` 仍有同步 `stdin.read_line()`，待异步化
-- CLI/REPL 底层生成已统一；剩余：公开 String 错误类型迁移、intent/styles 模块规模治理，详见当前计划。
+## 当前实现与后续观察
+- REPL 单一 stdin 读取器位于 `repl_input.rs`；学习命名、删除确认由主循环处理，等待态支持取消/保存恢复。
+- CLI/REPL 生成已统一；公开 I/O/解析/环境错误已迁移为 AppError，intent/styles 职责已拆分。
+- 三组人评与确定性字数分档见 `eval/human_calibration.json`、`eval/AGENTS.md`；新提示词仍需以实际评测结果判断效果，不能把模型分数当人评。
+- 未指定风格的 Generate 仍会返回缺参错误；宽泛生成需求的默认风格交互不在本轮已授权 A–C 范围内。
 
 ## 目录与产物约定
 - `src/`：扁平 Rust 模块；新模块在 `src/lib.rs` 注册，测试内嵌模块底部。

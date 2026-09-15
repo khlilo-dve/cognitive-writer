@@ -9,10 +9,10 @@
 
 | 任务场景 / 关键词 | 对应 Context 文件 | 核心覆盖范围 | 源码指针建议 |
 |---|---|---|---|
-| 架构设计、状态机扭转、新增模块、异步循环 | [architecture.md](architecture.md) | 总体拓扑、4 状态机模型、异步架构与入口分流 | `src/repl.rs`, `src/lib.rs`, `src/main.rs` |
+| 架构设计、状态机扭转、新增模块、异步循环 | [architecture.md](architecture.md) | 总体拓扑、6 状态机模型、异步架构与入口分流 | `src/repl.rs`, `src/lib.rs`, `src/main.rs` |
 | 公众号格式、剪贴板输出、个人网站 MDX 发布 | [domain.md](domain.md) | 业务背景、双发布通道（微信富文本 / Astro 博客） | `src/website.rs`, `src/clipboard.rs` |
 | 文章撰写、大纲生成、局部微调、全文重写、意图识别 | [generation.md](generation.md) | 大纲与正文两阶段渲染流水线、意图解析器机制 | `src/generate.rs`, `src/intent.rs`, `src/refine.rs` |
-| 写作风格库、逆向风格学习、执行 Spec 注入 | [style-system.md](style-system.md) | StyleSpec 数据结构、风格逆向学习流程、提示词模板 | `src/styles.rs`, `src/learn.rs`, `prompts/learn_style.md` |
+| 写作风格库、逆向风格学习、执行 Spec 注入 | [style-system.md](style-system.md) | Markdown 风格规范、风格逆向学习流程、提示词模板 | `src/styles.rs`, `src/learn.rs`, `prompts/learn_style.md` |
 | 评测指标、LLM-Judge、Baseline 样本集、自动化评分 | [evaluation.md](evaluation.md) | Rubric A/B 评测体系、自动化评分引擎、基线比对 | `src/eval.rs`, `eval/`, `prompts/eval_judge_*.md` |
 | 架构决策背景、为什么这样做、技术选型历史、技术债详情 | [decisions.md](decisions.md) | 历史架构决策 (ADR)、已知技术债剖析、演进路线 | `docs/ARCHITECTURE.md`, `docs/EVOLUTION.md` |
 

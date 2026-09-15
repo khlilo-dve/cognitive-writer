@@ -1,0 +1,64 @@
+{
+  "20260905-calibration-v2": {
+    "checkpoints": 12,
+    "judgments": 9,
+    "new_specs": 3,
+    "length_and_means_verified": true
+  },
+  "20260912-calibration-v3-fixed": {
+    "checkpoints": 12,
+    "judgments": 9,
+    "new_specs": 3,
+    "length_and_means_verified": true
+  },
+  "cache_replay": {
+    "resumed": 12,
+    "new_requests": 0
+  },
+  "credential_scan": "passed: current configured secrets not present in changed/new files",
+  "frozen_inputs": "unchanged",
+  "library_tests": {
+    "passed": 177,
+    "ignored_online_entries": 7,
+    "failed": 0
+  },
+  "terminal_cases": 11,
+  "module_lines": {
+    "src/learn.rs": 255,
+    "src/spec_quality.rs": 51,
+    "src/io.rs": 319,
+    "src/utils.rs": 42,
+    "src/intent.rs": 60,
+    "src/repl_input.rs": 72,
+    "src/refine.rs": 271,
+    "src/lib.rs": 31,
+    "src/intent_quick.rs": 261,
+    "src/repl.rs": 1396,
+    "src/eval_store.rs": 384,
+    "src/eval_runs.rs": 482,
+    "src/update.rs": 129,
+    "src/eval.rs": 402,
+    "src/intent_legacy_style.rs": 149,
+    "src/eval_calibration.rs": 344,
+    "src/website.rs": 423,
+    "src/eval_batch.rs": 106,
+    "src/style_names.rs": 124,
+    "src/llm.rs": 196,
+    "src/main.rs": 92,
+    "src/generate.rs": 232,
+    "src/error.rs": 34,
+    "src/intent_legacy_extract.rs": 260,
+    "src/clipboard.rs": 247,
+    "src/intent_classify.rs": 272,
+    "src/styles.rs": 416
+  },
+  "configured_model_issue": {
+    "requested": "deepseek-v4.1-flash",
+    "http_status": 400,
+    "supported_model_names_reported": [
+      "deepseek-flash",
+      "deepseek-v4-pro"
+    ],
+    "env_modified": false
+  }
+}

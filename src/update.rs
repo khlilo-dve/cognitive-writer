@@ -8,7 +8,7 @@ use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
 use crate::io::{extract_idea_slug, next_version, read_file, write_file};
 use crate::llm::{call_llm, new_spinner, with_retry};
-use crate::utils::{env_var, env_var_or, md_to_wechat_html, to_app_error};
+use crate::utils::{env_var, env_var_or, md_to_wechat_html};
 
 // ── Update system prompt ────────────────────────────────────────────
 
@@ -27,7 +27,7 @@ pub async fn run_update(
     instruction: Option<String>,
     no_clipboard: bool,
 ) -> Result<(), AppError> {
-    let api_key = env_var("API_KEY").map_err(to_app_error)?;
+    let api_key = env_var("API_KEY")?;
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
 
@@ -35,9 +35,9 @@ pub async fn run_update(
     println!("[info] MODEL    = {}", model);
 
     // 1. 读取目标文件
-    let content = read_file(file).map_err(to_app_error)?;
+    let content = read_file(file)?;
     if content.trim().is_empty() {
-        return Err(to_app_error("目标文件内容为空，无法重写"));
+        return Err(AppError::FileRead("目标文件内容为空，无法重写".into()));
     }
     println!("[info] 已读取 {}, {} 字符", file, content.len());
 
@@ -47,11 +47,11 @@ pub async fn run_update(
         None => Input::<String>::with_theme(&ColorfulTheme::default())
             .with_prompt("请输入修改指令")
             .interact_text()
-            .map_err(|e| to_app_error(format!("输入读取失败: {}", e)))?,
+            .map_err(|e| AppError::Parse(format!("输入读取失败: {e}")))?,
     };
     let instruction = instruction.trim();
     if instruction.is_empty() {
-        return Err(to_app_error("修改指令不能为空"));
+        return Err(AppError::Parse("修改指令不能为空".into()));
     }
 
     // 3. 拼接 prompt 并调用 LLM 重写
@@ -75,7 +75,7 @@ pub async fn run_update(
     .await
     .map_err(|e| {
         spinner.finish_with_message("重写失败");
-        to_app_error(e)
+        e
     })?;
     spinner.finish_with_message("重写完成");
     println!("[info] 重写完成, {} 字符", rewritten.len());
@@ -87,7 +87,7 @@ pub async fn run_update(
     let html_path = format!("outputs/{}_v{}.html", slug, ver);
 
     // Markdown 归档
-    write_file(&md_path, &rewritten).map_err(to_app_error)?;
+    write_file(&md_path, &rewritten)?;
     println!("[done] Markdown → {}", md_path);
 
     // HTML 转换 + 归档
@@ -96,7 +96,7 @@ pub async fn run_update(
         "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
         html_fragment
     );
-    write_file(&html_path, &html_doc).map_err(to_app_error)?;
+    write_file(&html_path, &html_doc)?;
     println!("[done] HTML     → {}", html_path);
 
     // 剪贴板注入

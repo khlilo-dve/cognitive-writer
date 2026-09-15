@@ -1,3 +1,4 @@
+use crate::error::AppError;
 // ── refine 子命令 — 局部重绘 ─────────────────────────────────────
 use reqwest::Client;
 
@@ -21,7 +22,7 @@ pub struct AiEdit {
     pub full_match: String,
 }
 
-pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
+pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, AppError> {
     let mut edits = Vec::new();
     let mut pos = 0;
 
@@ -34,29 +35,44 @@ pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
         let inst_start = match content[open_start..].find(inst_key) {
             Some(i) => open_start + i + inst_key.len(),
             None => {
-                return Err(format!(
+                return Err(AppError::AiEditParse(format!(
                     "AI_EDIT 标签缺少 instruction 属性 (位置 {})",
                     open_start
-                ));
+                )));
             }
         };
         let inst_end = match content[inst_start..].find('"') {
             Some(i) => inst_start + i,
-            None => return Err(format!("instruction 属性引号未闭合 (位置 {})", inst_start)),
+            None => {
+                return Err(AppError::AiEditParse(format!(
+                    "instruction 属性引号未闭合 (位置 {})",
+                    inst_start
+                )));
+            }
         };
         let instruction = content[inst_start..inst_end].to_string();
 
         // 3. 找开标签结束 '>'
         let tag_end = match content[inst_end..].find('>') {
             Some(i) => inst_end + i + 1, // +1 跳过 '>' 本身
-            None => return Err(format!("AI_EDIT 开标签未闭合 (位置 {})", open_start)),
+            None => {
+                return Err(AppError::AiEditParse(format!(
+                    "AI_EDIT 开标签未闭合 (位置 {})",
+                    open_start
+                )));
+            }
         };
 
         // 4. 找闭标签
         let close_tag = "</AI_EDIT>";
         let close_start = match content[tag_end..].find(close_tag) {
             Some(i) => tag_end + i,
-            None => return Err(format!("未找到匹配的 </AI_EDIT> (位置 {})", open_start)),
+            None => {
+                return Err(AppError::AiEditParse(format!(
+                    "未找到匹配的 </AI_EDIT> (位置 {})",
+                    open_start
+                )));
+            }
         };
         let close_end = close_start + close_tag.len();
 
@@ -73,7 +89,7 @@ pub fn parse_ai_edits(content: &str) -> Result<Vec<AiEdit>, String> {
     }
 
     if edits.is_empty() {
-        return Err("未找到 AI_EDIT 标记".to_string());
+        return Err(AppError::AiEditParse("未找到 AI_EDIT 标记".into()));
     }
     Ok(edits)
 }
@@ -211,7 +227,7 @@ mod tests {
         assert!(result.is_err());
         {
             let err_msg = result.err().unwrap();
-            assert!(err_msg.contains("未找到"));
+            assert!(err_msg.to_string().contains("未找到"));
         };
     }
 
@@ -222,7 +238,7 @@ mod tests {
         assert!(result.is_err());
         {
             let err_msg = result.err().unwrap();
-            assert!(err_msg.contains("instruction"));
+            assert!(err_msg.to_string().contains("instruction"));
         };
     }
 

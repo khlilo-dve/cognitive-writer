@@ -1,10 +1,10 @@
-use reqwest::Client;
 use dialoguer::{Input, theme::ColorfulTheme};
+use reqwest::Client;
 
 use crate::error::AppError;
-use crate::io::write_file;
 use crate::llm::{call_llm, new_spinner};
-use crate::utils::{env_var, env_var_or, to_app_error};
+use crate::styles::save_new_style;
+use crate::utils::{env_var, env_var_or};
 
 // ── Jina Reader + fallback strip-tags ───────────────────────────────
 
@@ -37,14 +37,14 @@ fn strip_html_tags(html: &str) -> String {
         .to_string()
 }
 
-async fn fetch_readable_text(client: &Client, url: &str) -> Result<String, String> {
+async fn fetch_readable_text(client: &Client, url: &str) -> Result<String, AppError> {
     let jina_url = format!("https://r.jina.ai/{}", url);
     println!("[info] 正在通过 Jina Reader 抓取 ...");
 
     let jina_client = reqwest::Client::builder()
         .timeout(std::time::Duration::from_secs(30))
         .build()
-        .map_err(|e| format!("创建 HTTP Client 失败: {}", e))?;
+        .map_err(|e| AppError::Network(e.to_string()))?;
 
     let resp = jina_client
         .get(&jina_url)
@@ -58,9 +58,9 @@ async fn fetch_readable_text(client: &Client, url: &str) -> Result<String, Strin
             let text = r
                 .text()
                 .await
-                .map_err(|e| format!("读取 Jina 响应体失败: {}", e))?;
+                .map_err(|e| AppError::Network(e.to_string()))?;
             if text.trim().is_empty() {
-                return Err("Jina Reader 返回空内容".to_string());
+                return Err(AppError::Parse("Jina Reader 返回空内容".into()));
             }
             println!("[info] Jina Reader 抓取成功, {} 字符", text.len());
             Ok(text)
@@ -79,26 +79,32 @@ async fn fetch_readable_text(client: &Client, url: &str) -> Result<String, Strin
     }
 }
 
-async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, String> {
+async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, AppError> {
     let resp = client
         .get(url)
-        .header("User-Agent", "Mozilla/5.0 (compatible; cognitive-writer/0.3)")
+        .header(
+            "User-Agent",
+            "Mozilla/5.0 (compatible; cognitive-writer/0.3)",
+        )
         .send()
         .await
-        .map_err(|e| format!("HTTP 请求失败: {}", e))?;
+        .map_err(|e| AppError::Network(e.to_string()))?;
 
     if !resp.status().is_success() {
-        return Err(format!("HTTP 返回错误状态码: {}", resp.status()));
+        return Err(AppError::Network(format!(
+            "HTTP 返回错误状态码: {}",
+            resp.status()
+        )));
     }
 
     let html_body = resp
         .text()
         .await
-        .map_err(|e| format!("读取响应体失败: {}", e))?;
+        .map_err(|e| AppError::Network(e.to_string()))?;
 
     let text = strip_html_tags(&html_body);
     if text.is_empty() {
-        return Err("提取的正文内容为空".to_string());
+        return Err(AppError::Parse("提取的正文内容为空".into()));
     }
     println!("[info] 降级抓取完成 (strip-tags), {} 字符", text.len());
     Ok(text)
@@ -108,13 +114,12 @@ async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, Stri
 
 const LEARN_PROMPT_PATH: &str = "prompts/learn_style.md";
 
-fn load_learn_prompt() -> Result<String, String> {
-    let prompt = std::fs::read_to_string(LEARN_PROMPT_PATH).map_err(|e| {
-        format!("无法读取逆向风格提取提示词 `{LEARN_PROMPT_PATH}`: {e}")
-    })?;
+fn load_learn_prompt() -> Result<String, AppError> {
+    let prompt = std::fs::read_to_string(LEARN_PROMPT_PATH)
+        .map_err(|e| AppError::FileRead(format!("{LEARN_PROMPT_PATH}: {e}")))?;
 
     if prompt.trim().is_empty() {
-        return Err(format!("逆向风格提取提示词 `{LEARN_PROMPT_PATH}` 为空"));
+        return Err(AppError::FileRead(format!("{LEARN_PROMPT_PATH} 为空")));
     }
 
     Ok(prompt)
@@ -122,8 +127,9 @@ fn load_learn_prompt() -> Result<String, String> {
 
 // ── learn 子命令入口 ───────────────────────────────────────────────
 
-pub async fn run_learn(url: &str) -> Result<(), AppError> {
-    let api_key = env_var("API_KEY").map_err(to_app_error)?;
+/// 提取阶段不读取 stdin；CLI 和 REPL 共用。
+pub async fn extract_style(url: &str) -> Result<String, AppError> {
+    let api_key = env_var("API_KEY")?;
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
 
@@ -133,12 +139,10 @@ pub async fn run_learn(url: &str) -> Result<(), AppError> {
     // 1. 通过 Jina Reader 抓取正文（失败时降级为 strip-tags）
     println!("[info] 目标 URL: {}", url);
     let client = Client::new();
-    let article_text = fetch_readable_text(&client, url)
-        .await
-        .map_err(to_app_error)?;
+    let article_text = fetch_readable_text(&client, url).await?;
 
     // 2. 读取提示词并调用 LLM 逆向分析风格
-    let system_prompt = load_learn_prompt().map_err(to_app_error)?;
+    let system_prompt = load_learn_prompt()?;
     let spinner = new_spinner("正在分析写作风格...");
     let style_analysis = call_llm(
         &client,
@@ -151,37 +155,36 @@ pub async fn run_learn(url: &str) -> Result<(), AppError> {
     .await
     .map_err(|e| {
         spinner.finish_with_message("分析失败");
-        to_app_error(e)
+        e
     })?;
     spinner.finish_with_message("分析完成");
     println!("[info] LLM 返回 {} 字符", style_analysis.len());
 
-    // 4. 用户输入文件名
-    let name: String = Input::with_theme(&ColorfulTheme::default())
-        .with_prompt("请为该风格命名（将保存为 styles/<name>.md）")
-        .validate_with(|input: &String| -> Result<(), String> {
-            let s = input.trim();
-            if s.is_empty() {
-                return Err("名称不能为空".to_string());
+    if style_analysis.trim().is_empty() {
+        return Err(AppError::Parse("提取风格为空".into()));
+    }
+    Ok(style_analysis)
+}
+
+/// CLI 交互包装；REPL 直接调用 extract_style，命名交由主循环。
+pub async fn run_learn(url: &str) -> Result<(), AppError> {
+    let content = extract_style(url).await?;
+    loop {
+        let name: String = Input::with_theme(&ColorfulTheme::default())
+            .with_prompt("请为该风格命名（输入 /cancel 取消）")
+            .interact_text()
+            .map_err(|e| AppError::Parse(format!("输入读取失败: {e}")))?;
+        if name.trim() == "/cancel" {
+            return Ok(());
+        }
+        match save_new_style("styles", &name, &content) {
+            Ok(path) => {
+                println!("[done] 风格已保存 → {}", path.display());
+                return Ok(());
             }
-            if s.contains('/') || s.contains('\\') || s.contains('\0') {
-                return Err("名称不能包含路径分隔符".to_string());
-            }
-            Ok(())
-        })
-        .interact_text()
-        .map_err(|e| to_app_error(format!("输入读取失败: {}", e)))?;
-
-    let name = name.trim();
-
-    // 5. 保存风格文件
-    let path = format!("styles/{}.md", name);
-    write_file(&path, &style_analysis).map_err(to_app_error)?;
-    println!("[done] 风格已保存 → {}", path);
-    println!();
-    println!("  现在可以用 `cargo run -- generate` 选择该风格来生成文章");
-
-    Ok(())
+            Err(e) => eprintln!("[error] {e}"),
+        }
+    }
 }
 #[cfg(test)]
 mod tests {
@@ -227,7 +230,10 @@ mod tests {
         let input = "line1\n\n\nline2";
         let result = strip_html_tags(input);
         // 三个空行被压缩，不应存在三连 \n
-        assert!(!result.contains("\n\n\n"), "blank lines should be compressed");
+        assert!(
+            !result.contains("\n\n\n"),
+            "blank lines should be compressed"
+        );
     }
 
     #[test]
@@ -246,5 +252,4 @@ mod tests {
         let result = strip_html_tags("");
         assert_eq!(result, "");
     }
-
 }

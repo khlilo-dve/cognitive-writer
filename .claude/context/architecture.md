@@ -1,44 +1,20 @@
-# 架构与系统分层 (architecture.md)
+# 架构与系统分层
 
-## 总体系统拓扑
+`main.rs` 加载环境与参数：有子命令参数进入 CLI，否则进入 REPL（stdin 可为终端或管道）。业务模块仅在 `lib.rs` 注册；main 使用库，避免编译两套模块。
 
-```
-[Terminal Stdin / CLI Args]
-           │
-           ▼
-     src/main.rs (分流器: TTY 进 REPL，参数/管道走 CLI 子命令)
-           │
-           ▼
-     src/repl.rs (异步事件循环 + 4状态机 + 意图分发)
-           │
-     ┌─────┼─────────────┬──────────────┬─────────────┐
-     ▼     ▼             ▼              ▼             ▼
-generate  learn        refine         update        eval
- (生成)   (风格学习)   (局部重绘)     (全文重写)    (评测引擎)
-     │     │             │              │             │
-     └─────┴─────────────┼──────────────┴─────────────┘
-                         ▼
-             [底层通用支撑服务层]
-       llm.rs        styles.rs      clipboard.rs
-       website.rs    io.rs          error.rs
-```
+## 状态与输入
+- `Idle`：生成、学习、管理风格、编辑文件。
+- `WaitingForOutline`：生成中的大纲检查点。常规流程自动衔接正文；旧会话或中断恢复后可确认已有大纲继续，缺少前置内容则报错并可取消。
+- `WaitingForFulltext`：审阅正文、修改、换风格或确认。
+- `WaitingForPublish`：发布、仅网站发布、暂缓或取消。
+- `WaitingForStyleName`：保存提取内容后等待命名；名称直接处理，不调用分类模型。
+- `WaitingForDeleteStyleConfirmation`：只接受 y / yes / 确认删除，其他自然语言不会触发删除。
 
-## 核心状态机 (src/repl.rs)
+`repl_input.rs` 的一个独立线程读取 stdin，通过通道交给 REPL。恢复提示与主循环共用读取器；模型请求与信号同时被轮询，Ctrl+C 可取消正在等待的请求。线程不占 Tokio blocking pool，退出不会等待被 stdin 阻塞的任务。
 
-REPL 会话由 4 个核心状态驱动：
+## 保存与错误
+等待态的 Ctrl+C、EOF、/quit 保存会话；/cancel 放弃当前操作。保存失败时 /quit、Ctrl+C 保持交互，允许另存或修复后再退出。EOF 时会报告失败；已存在的会话文件不会被半次写入破坏。
 
-1. **`Idle` (空闲态)**: 等待输入主题/灵感，触发生成大纲并自动渲染正文。
-2. **`WaitingForOutline` (历史枚举)**: 常规流程不进入；dispatch 未实现该状态确认分支，旧会话兼容处置待方案确认。
-3. **`WaitingForFulltext` (正文审阅态)**: 正文已生成，可要求局部修改 (`refine`)、重写 (`update`) 或确认通过。
-4. **`WaitingForPublish` (发布确认态)**: 正文通过，询问是否推送至个人网站博客并复制到剪贴板。
+会话先写临时文件再替换 current.json；待命名文本与待删除名称通过 serde default 兼容旧 JSON。密钥/客户端/路径配置不持久化，恢复时从环境重建。换风格的正文与风格元数据只在模型成功后一起更新。
 
-## 关键文件与职责边界
-
-- **`src/main.rs`**: 保持极致精简，仅做环境判断与分流，不包含业务逻辑。
-- **`src/lib.rs`**: 库的唯一导出入口，暴露所有公共模块供 `main.rs` 和单元测试调用。
-- **`src/repl.rs`**: 最核心的编排层，管理 `SessionState` 和用户交互。
-- **`src/error.rs`**: 全局 `AppError` 错误枚举。任何跨模块暴露的函数必须使用 `Result<T, AppError>`。
-
-## 何时需要查阅代码
-- 需要修改或增加新的交互状态：查阅 `src/repl.rs` 中的 `SessionState` 枚举与状态流转分支。
-- 需要暴露新的系统服务：查阅 `src/lib.rs` 与 `src/error.rs`。
+源码入口：`src/repl.rs`、`src/repl_input.rs`、`src/intent.rs`、`src/io.rs::write_file_atomic`。

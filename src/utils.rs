@@ -1,12 +1,12 @@
 //! 共享工具函数：环境变量读取、Markdown→微信 HTML、致命错误。
 
-use pulldown_cmark::{html, Options, Parser as MdParser};
+use pulldown_cmark::{Options, Parser as MdParser, html};
 
 use crate::error::AppError;
 
 /// 读取必需环境变量，缺失时返回错误。
-pub fn env_var(key: &str) -> Result<String, String> {
-    std::env::var(key).map_err(|_| format!("环境变量 `{}` 未设置，请检查 .env 文件", key))
+pub fn env_var(key: &str) -> Result<String, AppError> {
+    std::env::var(key).map_err(|_| AppError::EnvVar(key.into()))
 }
 
 /// 读取可选环境变量，缺失时用默认值。
@@ -36,7 +36,7 @@ pub fn fatal(msg: impl std::fmt::Display) -> ! {
     std::process::exit(1);
 }
 
-/// 把 String 错误包装成 AppError，供子命令改为返回 Result 而非退出。
+/// 历史兼容入口；新代码应使用具体 AppError 变体，已有 AppError 直接传播。
 pub fn to_app_error(msg: impl std::fmt::Display) -> AppError {
     AppError::Intent(format!("{}", msg))
 }

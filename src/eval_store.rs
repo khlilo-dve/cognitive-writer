@@ -93,6 +93,20 @@ fn safe_error(error: AppError) -> AppError {
     }
 }
 
+fn bounded_setting(key: &str, default: u64, min: u64, max: u64) -> Result<u64, AppError> {
+    let value = match std::env::var(key) {
+        Ok(raw) => raw
+            .parse::<u64>()
+            .map_err(|_| AppError::EnvVar(format!("{key} 必须为整数")))?,
+        Err(std::env::VarError::NotPresent) => default,
+        Err(_) => return Err(AppError::EnvVar(format!("{key} 编码无效"))),
+    };
+    if !(min..=max).contains(&value) {
+        return Err(AppError::EnvVar(format!("{key} 必须在 {min}–{max} 之间")));
+    }
+    Ok(value)
+}
+
 impl Store {
     pub fn freeze_inputs(&self, inputs: &serde_json::Value) -> Result<(), AppError> {
         let path = self.root.join("inputs.json");
@@ -131,11 +145,18 @@ impl Store {
         Ok(Self {
             root,
             key,
-            permits: tokio::sync::Semaphore::new(3),
+            permits: tokio::sync::Semaphore::new(
+                bounded_setting("EVAL_CONCURRENCY", 3, 1, 3)? as usize
+            ),
             model: std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".into()),
             base: std::env::var("BASE_URL").unwrap_or_else(|_| "https://api.openai.com/v1".into()),
             client: Client::builder()
-                .timeout(std::time::Duration::from_secs(180))
+                .timeout(std::time::Duration::from_secs(bounded_setting(
+                    "EVAL_TIMEOUT_SECONDS",
+                    180,
+                    30,
+                    900,
+                )?))
                 .build()
                 .map_err(|_| AppError::Network("无法构建评测客户端".into()))?,
         })

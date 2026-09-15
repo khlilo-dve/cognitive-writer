@@ -1,15 +1,17 @@
+use crate::error::AppError;
 use dialoguer::{Select, theme::ColorfulTheme};
 use std::fs;
 use std::path::Path;
 
 // ── Style selection ─────────────────────────────────────────────────
 
-pub fn list_styles(dir: &str) -> Result<Vec<String>, String> {
+pub fn list_styles(dir: &str) -> Result<Vec<String>, AppError> {
     let mut styles = Vec::new();
-    let entries = fs::read_dir(dir)
-        .map_err(|e| format!("无法读取 {} 目录: {}", dir, e))?;
+    let entries =
+        fs::read_dir(dir).map_err(|e| AppError::FileRead(format!("无法读取 {dir} 目录: {e}")))?;
 
-    for entry in entries.flatten() {
+    for entry in entries {
+        let entry = entry?;
         let path = entry.path();
         if path.extension().is_some_and(|ext| ext == "md") {
             styles.push(path.display().to_string());
@@ -18,12 +20,15 @@ pub fn list_styles(dir: &str) -> Result<Vec<String>, String> {
 
     styles.sort();
     if styles.is_empty() {
-        return Err(format!("{} 目录下没有 .md 风格文件", dir));
+        return Err(AppError::NoStyles(dir.into()));
     }
     Ok(styles)
 }
 
-pub fn select_style(styles: &[String]) -> Result<usize, String> {
+pub fn select_style(styles: &[String]) -> Result<usize, AppError> {
+    if styles.is_empty() {
+        return Err(AppError::NoStyles("没有可选择的风格".into()));
+    }
     if styles.len() == 1 {
         let name = styles[0].strip_prefix("styles/").unwrap_or(&styles[0]);
         println!("[info] 使用唯一风格: {}", name);
@@ -40,13 +45,13 @@ pub fn select_style(styles: &[String]) -> Result<usize, String> {
         .items(&labels)
         .default(0)
         .interact()
-        .map_err(|e| format!("风格选择失败: {}", e))
+        .map_err(|e| AppError::Parse(format!("风格选择失败: {e}")))
 }
 
 // ── File I/O ────────────────────────────────────────────────────────
 
-pub fn read_file(path: &str) -> Result<String, String> {
-    fs::read_to_string(path).map_err(|e| format!("无法读取 `{}`: {}", path, e))
+pub fn read_file(path: &str) -> Result<String, AppError> {
+    fs::read_to_string(path).map_err(|e| AppError::FileRead(format!("{path}: {e}")))
 }
 
 pub fn extract_idea_slug(idea: &str) -> String {
@@ -101,18 +106,50 @@ pub fn next_version(dir: &str, slug: &str) -> u32 {
     max + 1
 }
 
-pub fn write_file(path: &str, content: &str) -> Result<(), String> {
+pub fn write_file(path: &str, content: &str) -> Result<(), AppError> {
     let dir = Path::new(path).parent().unwrap_or(Path::new("."));
     if !dir.exists() {
-        fs::create_dir_all(dir).map_err(|e| format!("无法创建目录 `{}`: {}", dir.display(), e))?;
+        fs::create_dir_all(dir)
+            .map_err(|e| AppError::FileWrite(format!("{}: {e}", dir.display())))?;
     }
-    fs::write(path, content).map_err(|e| format!("无法写入 `{}`: {}", path, e))
+    fs::write(path, content).map_err(|e| AppError::FileWrite(format!("{path}: {e}")))
+}
+
+/// 写完临时文件后再替换目标；写入失败不截断已有会话。
+pub fn write_file_atomic(path: &Path, content: &str) -> Result<(), AppError> {
+    use std::io::Write;
+    let parent = path.parent().unwrap_or(Path::new("."));
+    fs::create_dir_all(parent).map_err(|e| AppError::FileWrite(e.to_string()))?;
+    let stamp = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| AppError::FileWrite(e.to_string()))?
+        .as_nanos();
+    let pending = parent.join(format!(".cognitive-{}-{stamp}.pending", std::process::id()));
+    let mut file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&pending)
+        .map_err(|e| AppError::FileWrite(e.to_string()))?;
+    let result = file
+        .write_all(content.as_bytes())
+        .and_then(|_| file.sync_all());
+    drop(file);
+    let result = result.and_then(|_| fs::rename(&pending, path));
+    if let Err(e) = result {
+        fs::remove_file(&pending).map_err(|cleanup| {
+            AppError::FileWrite(format!(
+                "写入失败: {e}；清理 {} 失败: {cleanup}",
+                pending.display()
+            ))
+        })?;
+        return Err(AppError::FileWrite(format!("{}: {e}", path.display())));
+    }
+    Ok(())
 }
 
 #[cfg(test)]
-pub fn delete_file(path: &str) -> Result<(), String> {
-    std::fs::remove_file(path)
-        .map_err(|e| format!("无法删除 `{}`: {}", path, e))
+pub fn delete_file(path: &str) -> Result<(), AppError> {
+    std::fs::remove_file(path).map_err(|e| AppError::FileWrite(format!("删除 {path}: {e}")))
 }
 
 #[cfg(test)]
@@ -260,5 +297,23 @@ mod tests {
     fn test_delete_file_not_found() {
         let result = delete_file("/nonexistent/path/for/testing/delete_file_test.md");
         assert!(result.is_err());
+    }
+    #[test]
+    fn file_errors_keep_their_category_and_empty_selection_is_safe() {
+        let dir = tempfile::tempdir().unwrap();
+        let missing = dir.path().join("missing.md");
+        assert!(matches!(
+            read_file(missing.to_str().unwrap()),
+            Err(AppError::FileRead(_))
+        ));
+        assert!(matches!(
+            write_file(dir.path().to_str().unwrap(), "x"),
+            Err(AppError::FileWrite(_))
+        ));
+        assert!(matches!(select_style(&[]), Err(AppError::NoStyles(_))));
+        assert!(matches!(
+            list_styles(dir.path().to_str().unwrap()),
+            Err(AppError::NoStyles(_))
+        ));
     }
 }

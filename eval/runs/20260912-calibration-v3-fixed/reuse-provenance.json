@@ -1,0 +1,7 @@
+{
+  "source_run": "20260905-calibration-v2",
+  "reused_checkpoints": 6,
+  "model": "deepseek-v4-flash",
+  "reason": "以历史实验相同模型控制变量；完整请求在Store中再次验证",
+  "current_model_attempt": "20260912-calibration-v3-current 收到HTTP400，未完成评分；未修改.env"
+}

@@ -17,3 +17,15 @@ pub mod styles;
 pub mod update;
 pub mod utils;
 pub mod website;
+
+mod eval_batch;
+pub mod eval_calibration;
+mod intent_classify;
+#[cfg(test)]
+mod intent_legacy_extract;
+#[cfg(test)]
+mod intent_legacy_style;
+mod intent_quick;
+mod repl_input;
+pub mod spec_quality;
+mod style_names;

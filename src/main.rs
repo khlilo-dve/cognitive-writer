@@ -1,16 +1,4 @@
-mod clipboard;
-mod error;
-mod generate;
-mod intent;
-mod io;
-mod learn;
-mod llm;
-mod refine;
-mod repl;
-mod styles;
-mod update;
-mod utils;
-mod website;
+use cognitive_writer::{generate, learn, refine, repl, update};
 
 fn main() {
     if let Err(e) = dotenvy::dotenv() {
@@ -26,43 +14,14 @@ fn main() {
 }
 
 fn run_repl_mode() {
+    let session_dir = dirs::home_dir()
+        .unwrap_or_else(|| std::path::PathBuf::from("."))
+        .join(".cognitive-writer");
     let rt = tokio::runtime::Runtime::new().expect("无法创建 tokio runtime");
-    rt.block_on(async {
-        // Session 目录
-        let session_dir = dirs::home_dir()
-            .unwrap_or_else(|| std::path::PathBuf::from("."))
-            .join(".cognitive-writer");
-
-        // 尝试恢复
-        let mut repl = if let Some(r) = crate::repl::Repl::restore(&session_dir) {
-            println!("[info] 检测到未完成的会话 (状态: {:?})", r.current_state());
-            println!("是否恢复上次进度？按 Enter 恢复，输入 n 放弃: ");
-            
-            let mut answer = String::new();
-            let _ = std::io::stdin().read_line(&mut answer);
-            
-            if matches!(answer.trim().to_lowercase().as_str(), "" | "y" | "yes") {
-                println!("已恢复。");
-                r
-            } else {
-                let _ = std::fs::remove_file(session_dir.join("current.json"));
-                println!("放弃恢复，开始新会话。");
-                crate::repl::Repl::new_with_session_dir(&session_dir)
-                    .unwrap_or_else(|e| {
-                        eprintln!("[error] 初始化失败: {}", e);
-                        std::process::exit(1);
-                    })
-            }
-        } else {
-            crate::repl::Repl::new_with_session_dir(&session_dir)
-                .unwrap_or_else(|e| {
-                    eprintln!("[error] 初始化失败: {}", e);
-                    std::process::exit(1);
-                })
-        };
-
-        repl.run().await;
-    });
+    if let Err(e) = rt.block_on(repl::run_session(&session_dir)) {
+        eprintln!("[error] {e}");
+        std::process::exit(1);
+    }
 }
 
 fn run_cli_mode(args: Vec<String>) {
@@ -73,8 +32,7 @@ fn run_cli_mode(args: Vec<String>) {
     rt.block_on(async {
         match subcommand {
             Some("generate") => {
-                let input = extract_arg(&remaining, "-i", "--input")
-                    .unwrap_or("inputs/idea_01.md");
+                let input = extract_arg(&remaining, "-i", "--input").unwrap_or("inputs/idea_01.md");
                 let no_clipboard = remaining.contains(&"--no-clipboard");
                 crate::generate::run_generate(input, no_clipboard).await;
             }
@@ -100,10 +58,11 @@ fn run_cli_mode(args: Vec<String>) {
             }
             Some("update") => {
                 let no_clipboard = remaining.contains(&"--no-clipboard");
-                let instruction = extract_arg(&remaining, "-i", "--instruction")
-                    .map(|s| s.to_string());
+                let instruction =
+                    extract_arg(&remaining, "-i", "--instruction").map(|s| s.to_string());
                 if let Some(file) = remaining.iter().find(|&a| a.ends_with(".md")) {
-                    if let Err(e) = crate::update::run_update(file, instruction, no_clipboard).await {
+                    if let Err(e) = crate::update::run_update(file, instruction, no_clipboard).await
+                    {
                         eprintln!("[error] {}", e);
                         std::process::exit(1);
                     }

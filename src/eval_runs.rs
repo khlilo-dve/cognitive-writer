@@ -5,6 +5,7 @@ use serde_json::{Value, json};
 use crate::error::AppError;
 use crate::eval::{
     TEST_SET, article_body, article_judge_input, parse_article_judgment, parse_learn_judgment,
+    score_learn_judgment,
 };
 use crate::eval_store::{Store, write_json};
 use crate::generate::{outline_system_prompt, render_prompt, style_system_prompt};
@@ -91,13 +92,13 @@ async fn judge_b(
             parse_learn_judgment(s).map(|_| ())
         })
         .await?;
-    let mut result = serde_json::to_value(parse_learn_judgment(&raw)?)
+    let mut result = serde_json::to_value(score_learn_judgment(&raw, spec)?)
         .map_err(|e| AppError::Parse(e.to_string()))?;
     result["mechanical_checks"] = spec_checks(sample, spec);
     Ok(result)
 }
 
-fn spec_checks(sample: &str, spec: &str) -> Value {
+pub(crate) fn spec_checks(sample: &str, spec: &str) -> Value {
     let headings = [
         "定位",
         "标题",
@@ -126,8 +127,10 @@ fn spec_checks(sample: &str, spec: &str) -> Value {
         }
     }
     json!({"characters_without_whitespace": chars.len(), "within_600_characters": chars.len() <= 600,
+        "within_target_range": (400..=600).contains(&chars.len()),
+        "deterministic_conciseness": crate::spec_quality::conciseness_score(chars.len()),
         "exact_ten_headings_in_order": actual == headings, "source_overlap_12_char_examples": overlaps,
-        "note": "连续 12 字重合仅为复核线索，不自动判定抄袭或修改模型分数。"})
+        "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。"})
 }
 
 fn row(
@@ -230,11 +233,7 @@ async fn compare_a(store: &Store, input: &Inputs, baselines: &[Row]) -> Result<V
 }
 
 async fn compare_b(store: &Store, input: &Inputs, baselines: &[Row]) -> Result<Vec<Row>, AppError> {
-    // Candidate only: address observed source quotes without changing the production prompt.
-    let candidate = format!(
-        "{}\n\n候选实验约束：\n- 标题只写抽象句式公式，不给示例标题。\n- 不引用样文任何原句、口头禅或金句，也不写具体人物、数字、事件；只描述可跨主题执行的机制。\n- 输出前压缩至含标题不含空白的 600 字以内，删除重复约束；只输出十节 Spec。",
-        input.learn
-    );
+    let candidate = input.learn.clone();
     std::fs::write(store.root.join("candidate_learn_prompt.md"), &candidate)?;
     let mut rows = Vec::new();
     for i in 0..5 {
