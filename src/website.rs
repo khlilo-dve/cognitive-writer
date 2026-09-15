@@ -85,9 +85,9 @@ pub fn write_mdx_draft(
     std::fs::create_dir_all(&content_dir)
         .map_err(|e| AppError::Website(format!("无法创建目录 {}: {}", content_dir.display(), e)))?;
 
-    // 写入文件
+    // 原子替换，失败时不截断已有网站草稿。
     let file_path = content_dir.join(format!("{}.mdx", slug));
-    std::fs::write(&file_path, &mdx_content)
+    crate::io::write_file_atomic(&file_path, &mdx_content)
         .map_err(|e| AppError::Website(format!("无法写入文件 {}: {}", file_path.display(), e)))?;
 
     Ok(file_path.display().to_string())

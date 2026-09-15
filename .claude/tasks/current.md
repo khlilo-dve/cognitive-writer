@@ -1,6 +1,6 @@
 # 当前任务状态
 
-更新：2026-09-15。A–C、三组人评记录、提取实验与收尾已完成。
+更新：2026-09-15。A–C、三组人评记录、提取实验与收尾已完成；用户新授权的草稿保存与会话恢复修复也已完成。
 
 - [x] 三组原始人评存入 eval/human_calibration.json；04–05由用户明确跳过。
 - [x] 精简度代码计数，400–600满分，过短/过长都扣分，原始人评不改。
@@ -19,3 +19,9 @@
 - docs/2026-09-12-completion.md
 - eval/runs/20260912-calibration-v3-fixed/summary.md
 - eval/repl-terminal-validation.json
+
+## 当前修复
+- [x] 草稿保存失败不进入发布态，Markdown / HTML / 已配置的网站 MDX 原子写入并支持重试。
+- [x] 会话恢复失败明确报错并保留原文件；正常旧会话兼容恢复。
+- [x] 库测试 181 通过、7 忽略；真实终端 17 项通过（新增 6 项）；文档同步与 diff 审查完成。
+- 验证记录：docs/2026-09-15-draft-session-recovery.md。

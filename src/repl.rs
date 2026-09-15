@@ -157,8 +157,9 @@ fn default_styles_dir() -> String {
 
 /// 恢复提示与 REPL 共用同一个 stdin 读取器；Ctrl+C/EOF 保留旧会话。
 pub async fn run_session(session_dir: &std::path::Path) -> Result<(), AppError> {
+    let saved = Repl::restore(session_dir)?;
     let mut input = repl_input::stdin_input();
-    let mut repl = if let Some(saved) = Repl::restore(session_dir) {
+    let mut repl = if let Some(saved) = saved {
         println!(
             "检测到未完成会话（{}）。Enter 恢复，n 放弃。",
             state_label(saved.current_state())
@@ -229,24 +230,36 @@ impl Repl {
         })
     }
 
-    /// 尝试从 session 目录恢复状态。
-    /// 成功时返回 Some(Repl)，失败或无文件时返回 None。
-    pub fn restore(session_dir: &std::path::Path) -> Option<Self> {
+    /// 无会话时返回 None；恢复失败返回错误，调用方不得以新会话覆盖原文件。
+    pub fn restore(session_dir: &std::path::Path) -> Result<Option<Self>, AppError> {
         let path = session_dir.join("current.json");
-        if !path.exists() {
-            return None;
-        }
-        let json = std::fs::read_to_string(&path).ok()?;
-        let mut repl: Repl = serde_json::from_str(&json).ok()?;
-        // 重新初始化 #[serde(skip)] 字段
-        repl.api_key = std::env::var("API_KEY").ok()?;
+        let json = match std::fs::read_to_string(&path) {
+            Ok(json) => json,
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+            Err(e) => {
+                return Err(AppError::FileRead(format!(
+                    "无法恢复会话 {}: {e}；原文件未改动，请检查文件或权限后重试",
+                    path.display()
+                )));
+            }
+        };
+        let mut repl: Repl = serde_json::from_str(&json).map_err(|e| {
+            AppError::FileRead(format!(
+                "无法解析会话 {}: {e}；原文件未改动，请修复文件，或将其移走备份后重新启动",
+                path.display()
+            ))
+        })?;
+        // 重新初始化 #[serde(skip)] 字段；配置错误同样不能丢弃旧会话。
+        repl.api_key = std::env::var("API_KEY").map_err(|_| {
+            AppError::EnvVar(format!("API_KEY（会话 {} 保持原样）", path.display()))
+        })?;
         repl.base_url =
             std::env::var("BASE_URL").unwrap_or_else(|_| "https://api.openai.com/v1".to_string());
         repl.model = std::env::var("MODEL").unwrap_or_else(|_| "gpt-4o".to_string());
         repl.website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
         repl.client = Client::new();
         repl.session_dir = Some(session_dir.to_path_buf());
-        Some(repl)
+        Ok(Some(repl))
     }
 
     /// 返回当前状态的引用。
@@ -597,9 +610,7 @@ impl Repl {
                 self.reset_state();
             }
             (SessionState::WaitingForPublish, Intent::Hold) => {
-                println!(
-                    "草稿已保留。公众号：打开微信后台粘贴 (已注入剪贴板)。网站：MDX 文件已写入。"
-                );
+                println!("草稿已保留在本地 outputs 目录，可打开 HTML 文件复制到公众号后台。");
                 self.reset_state();
             }
 
@@ -712,8 +723,26 @@ impl Repl {
 
     // ── handle: Draft + Clipboard → WaitingForPublish ─────────────
 
-    /// 剪贴板注入 + MDX 草稿写入 → 切换到 WaitingForPublish。
+    /// 必需草稿全部落盘后才进入发布态；剪贴板失败不影响已保存文件。
     async fn handle_draft_publish(&mut self) -> Result<(), AppError> {
+        let html_fragment = self.prepare_draft("outputs").map_err(|e| {
+            AppError::FileWrite(format!(
+                "草稿保存未完成: {e}；正文仍保留，修复目录后输入「确认」重试，或 /quit 保存会话"
+            ))
+        })?;
+        match inject_clipboard(&html_fragment) {
+            Ok(tool) => println!("[done] 富文本已注入剪贴板 (via {})", tool),
+            Err(e) => eprintln!("[warn] 剪贴板注入失败: {}；可打开本地 HTML 文件复制", e),
+        }
+        println!();
+        println!(
+            "  草稿已就绪。输入「发布」正式发布，「只发网站」仅发布到网站，「等一下」保留草稿。"
+        );
+        Ok(())
+    }
+
+    /// 路径参数让故障测试使用独立目录，不改进程工作目录或真实文章。
+    fn prepare_draft(&mut self, outputs_dir: &str) -> Result<String, AppError> {
         let fulltext = self
             .current_fulltext
             .as_deref()
@@ -722,50 +751,28 @@ impl Repl {
             .current_slug
             .as_deref()
             .ok_or_else(|| AppError::Intent("slug 丢失".to_string()))?;
-
-        // 剪贴板注入
         let html_fragment = md_to_wechat_html(fulltext);
-        match inject_clipboard(&html_fragment) {
-            Ok(tool) => println!("[done] 富文本已注入剪贴板 (via {})", tool),
-            Err(e) => eprintln!("[warn] 剪贴板注入失败: {}", e),
-        }
-
-        // 本地归档：写 outputs/{slug}_v{N}.md 和 .html，公众号文章有本地原件
-        let ver = crate::io::next_version("outputs", slug);
-        let md_path = format!("outputs/{}_v{}.md", slug, ver);
-        let html_path = format!("outputs/{}_v{}.html", slug, ver);
+        let ver = crate::io::next_version(outputs_dir, slug);
+        let md_path = std::path::Path::new(outputs_dir).join(format!("{slug}_v{ver}.md"));
+        let html_path = std::path::Path::new(outputs_dir).join(format!("{slug}_v{ver}.html"));
         let html_doc = format!(
             "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"></head>\n<body>\n{}\n</body>\n</html>",
             html_fragment
         );
-        match crate::io::write_file(&md_path, fulltext) {
-            Ok(()) => println!("[done] Markdown → {}", md_path),
-            Err(e) => eprintln!("[warn] 本地归档失败: {}", e),
-        }
-        match crate::io::write_file(&html_path, &html_doc) {
-            Ok(()) => println!("[done] HTML     → {}", html_path),
-            Err(e) => eprintln!("[warn] 本地 HTML 归档失败: {}", e),
-        }
+        crate::io::write_file_atomic(&md_path, fulltext)?;
+        println!("[done] Markdown → {}", md_path.display());
+        crate::io::write_file_atomic(&html_path, &html_doc)?;
+        println!("[done] HTML     → {}", html_path.display());
 
-        // 网站草稿
         if !self.website_path.is_empty() {
             let title = extract_title(fulltext);
-            match write_mdx_draft(&self.website_path, "signal", slug, &title, fulltext) {
-                Ok(path) => println!("[done] 网站草稿已写入: {}", path),
-                Err(e) => eprintln!("[warn] 网站草稿写入失败: {}", e),
-            }
+            let path = write_mdx_draft(&self.website_path, "signal", slug, &title, fulltext)?;
+            println!("[done] 网站草稿已写入: {}", path);
         } else {
             println!("[info] WEBSITE_PATH 未配置，跳过网站草稿");
         }
-
         self.state = SessionState::WaitingForPublish;
-
-        println!();
-        println!(
-            "  草稿已就绪。输入「发布」正式发布，「只发网站」仅发布到网站，「等一下」保留草稿。"
-        );
-
-        Ok(())
+        Ok(html_fragment)
     }
 
     // ── handle: Publish ───────────────────────────────────────────
@@ -1392,5 +1399,139 @@ mod tests {
         assert_eq!(repl.current_style_content.as_deref(), Some("原规则"));
         assert_eq!(repl.current_fulltext.as_deref(), Some("原正文"));
         assert_eq!(repl.state, SessionState::WaitingForFulltext);
+    }
+
+    #[test]
+    fn draft_failure_preserves_body_and_allows_retry() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForFulltext;
+        repl.current_fulltext = Some("# 标题\n不能丢失的正文".into());
+        repl.current_slug = Some("draft".into());
+        let outputs = dir.path().join("outputs");
+        std::fs::write(&outputs, "阻止创建目录").unwrap();
+        assert!(repl.prepare_draft(outputs.to_str().unwrap()).is_err());
+        assert_eq!(repl.state, SessionState::WaitingForFulltext);
+        repl.persist_progress().unwrap();
+        let saved: Repl = serde_json::from_str(
+            &std::fs::read_to_string(repl.session_dir.as_ref().unwrap().join("current.json"))
+                .unwrap(),
+        )
+        .unwrap();
+        assert_eq!(saved.current_fulltext, repl.current_fulltext);
+        assert_eq!(saved.state, SessionState::WaitingForFulltext);
+
+        std::fs::remove_file(&outputs).unwrap();
+        repl.prepare_draft(outputs.to_str().unwrap()).unwrap();
+        assert_eq!(repl.state, SessionState::WaitingForPublish);
+        assert_eq!(
+            std::fs::read_to_string(outputs.join("draft_v1.md")).unwrap(),
+            repl.current_fulltext.as_deref().unwrap()
+        );
+        assert!(
+            std::fs::read_to_string(outputs.join("draft_v1.html"))
+                .unwrap()
+                .contains("不能丢失的正文")
+        );
+    }
+
+    #[test]
+    fn website_draft_failure_keeps_review_state_and_local_copy() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForFulltext;
+        repl.current_fulltext = Some("# 标题\n网站正文".into());
+        repl.current_slug = Some("draft".into());
+        let outputs = dir.path().join("outputs");
+        let website = dir.path().join("website");
+        std::fs::create_dir_all(&website).unwrap();
+        std::fs::write(website.join("content"), "阻止创建目录").unwrap();
+        repl.website_path = website.to_str().unwrap().into();
+        assert!(repl.prepare_draft(outputs.to_str().unwrap()).is_err());
+        assert_eq!(repl.state, SessionState::WaitingForFulltext);
+        let original = std::fs::read(outputs.join("draft_v1.md")).unwrap();
+        assert_eq!(
+            original,
+            repl.current_fulltext.as_deref().unwrap().as_bytes()
+        );
+        std::fs::remove_file(website.join("content")).unwrap();
+        repl.prepare_draft(outputs.to_str().unwrap()).unwrap();
+        assert_eq!(repl.state, SessionState::WaitingForPublish);
+        assert_eq!(
+            std::fs::read(outputs.join("draft_v1.md")).unwrap(),
+            original
+        );
+        assert!(
+            std::fs::read_to_string(website.join("content/signal/draft.mdx"))
+                .unwrap()
+                .contains("网站正文")
+        );
+        assert!(
+            !std::fs::read_dir(website.join("content/signal"))
+                .unwrap()
+                .any(|p| p
+                    .unwrap()
+                    .path()
+                    .extension()
+                    .is_some_and(|ext| ext == "pending"))
+        );
+    }
+
+    #[test]
+    fn restore_distinguishes_missing_invalid_and_unreadable_sessions() {
+        let dir = tempfile::tempdir().unwrap();
+        assert!(matches!(Repl::restore(dir.path()), Ok(None)));
+        let path = dir.path().join("current.json");
+        for content in [
+            b"{broken".as_slice(),
+            b"{\"state\":\"UnknownState\"}",
+            b"\xff\xfe",
+        ] {
+            std::fs::write(&path, content).unwrap();
+            let result = Repl::restore(dir.path());
+            let error = match result {
+                Err(e) => e.to_string(),
+                _ => panic!("invalid session accepted"),
+            };
+            assert!(error.contains(&path.display().to_string()));
+            assert!(error.contains("原文件未改动"));
+            assert_eq!(std::fs::read(&path).unwrap(), content);
+        }
+        std::fs::remove_file(&path).unwrap();
+        std::fs::create_dir(&path).unwrap();
+        assert!(matches!(
+            Repl::restore(dir.path()),
+            Err(AppError::FileRead(_))
+        ));
+        assert!(path.is_dir());
+    }
+
+    #[test]
+    fn restore_preserves_session_on_missing_config_and_loads_legacy_state() {
+        let _g = ENV_MUTEX.lock().unwrap();
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("current.json");
+        let original = r##"{"state":"WaitingForFulltext","current_fulltext":"# 旧文章","current_slug":"old"}"##;
+        std::fs::write(&path, original).unwrap();
+        let previous_key = std::env::var_os("API_KEY");
+        unsafe { std::env::remove_var("API_KEY") };
+        assert!(matches!(
+            Repl::restore(dir.path()),
+            Err(AppError::EnvVar(_))
+        ));
+        assert_eq!(std::fs::read_to_string(&path).unwrap(), original);
+        unsafe { std::env::set_var("API_KEY", "local-test") };
+        let saved = Repl::restore(dir.path()).unwrap().unwrap();
+        assert_eq!(saved.state, SessionState::WaitingForFulltext);
+        assert_eq!(saved.current_fulltext.as_deref(), Some("# 旧文章"));
+        assert!(saved.pending_style_content.is_none());
+        assert_eq!(saved.session_dir.as_deref(), Some(dir.path()));
+        assert_eq!(std::fs::read_to_string(path).unwrap(), original);
+        unsafe {
+            match previous_key {
+                Some(value) => std::env::set_var("API_KEY", value),
+                None => std::env::remove_var("API_KEY"),
+            }
+        }
     }
 }

@@ -48,13 +48,13 @@ class Terminal:
                 self.output += chunk
         self.output = self.output[self.output.index(expected) + len(expected):]
 
-    def exited(self, timeout=3):
+    def exited(self, timeout=3, expected_code=0):
         start = time.monotonic()
         while time.monotonic() - start < timeout:
             pid, status = os.waitpid(self.pid, os.WNOHANG)
             if pid:
                 self.reaped = True
-                assert os.waitstatus_to_exitcode(status) == 0, status
+                assert os.waitstatus_to_exitcode(status) == expected_code, status
                 return round(time.monotonic() - start, 3)
             time.sleep(0.02)
         raise AssertionError("REPL did not exit promptly; possible blocked stdin/runtime")
@@ -175,6 +175,99 @@ def check_case(name, state=None, action="interrupt", model=False, restore_only=F
         thread.join()
 
 
+def check_restore_error(kind):
+    with tempfile.TemporaryDirectory(prefix="cognitive-restore-") as temp:
+        work = Path(temp)
+        home = work / "home"
+        session = home / ".cognitive-writer/current.json"
+        session.parent.mkdir(parents=True)
+        if kind == "unreadable":
+            session.mkdir()
+            (session / "keep").write_bytes(b"preserve")
+        else:
+            session.write_bytes(b'{broken' if kind == "corrupt" else b'\xff\xfe')
+        original = session.read_bytes() if session.is_file() else None
+        env = {**os.environ, "HOME":str(home), "API_KEY":"local-test-only", "WEBSITE_PATH":""}
+        terminal = Terminal(work, env)
+        try:
+            terminal.until("原文件未改动")
+            latency = terminal.exited(expected_code=1)
+            if original is not None:
+                assert session.read_bytes() == original
+            else:
+                assert (session / "keep").read_bytes() == b"preserve"
+            return {"case":f"restore_{kind}_preserves_original", "status":"passed", "exit_seconds":latency}
+        finally:
+            terminal.close()
+
+
+def check_draft_error(kind):
+    with tempfile.TemporaryDirectory(prefix="cognitive-draft-") as temp:
+        work = Path(temp)
+        home = work / "home"
+        session = home / ".cognitive-writer/current.json"
+        session.parent.mkdir(parents=True)
+        # Compact session fits under the file limit; rendered HTML exceeds it.
+        body = "# 标题\n" + "**a** " * 80
+        snapshot = {"state":"WaitingForFulltext", "current_fulltext":body, "current_slug":"draft"}
+        session.write_text(json.dumps(snapshot, ensure_ascii=False))
+        outputs = work / "outputs"
+        website = work / "website"
+        if kind == "local":
+            outputs.write_text("blocked")
+        elif kind == "website":
+            website.mkdir()
+            (website / "content").write_text("blocked")
+        mock_bin = work / "bin"
+        mock_bin.mkdir()
+        for command, script in {"wslpath":"#!/bin/sh\nexit 1\n", "xclip":"#!/bin/sh\n/bin/cat >/dev/null\n"}.items():
+            tool = mock_bin / command
+            tool.write_text(script)
+            tool.chmod(0o755)
+        env = {**os.environ, "HOME":str(home), "API_KEY":"local-test-only", "MODEL":"local-mock",
+               "PATH":str(mock_bin), "BASE_URL":"http://127.0.0.1:1",
+               "WEBSITE_PATH":str(website) if kind == "website" else ""}
+        terminal = Terminal(work, env, file_limit=1024 if kind == "html" else None)
+        try:
+            terminal.until("Enter 恢复，n 放弃")
+            terminal.send("\n")
+            terminal.until("[等待确认全文] > ")
+            terminal.send("ok\n")
+            terminal.until("草稿保存未完成")
+            terminal.until("[等待确认全文] > ")
+            saved = json.loads(session.read_text())
+            assert saved["state"] == "WaitingForFulltext"
+            assert saved["current_fulltext"] == body
+            if kind == "local":
+                assert outputs.read_text() == "blocked"
+            else:
+                assert (outputs / "draft_v1.md").read_text() == body
+                assert not list(outputs.glob("*.pending"))
+                if kind == "html":
+                    assert not (outputs / "draft_v1.html").exists(), "partial HTML left behind"
+                else:
+                    assert (outputs / "draft_v1.html").is_file()
+                    assert (website / "content").read_text() == "blocked"
+            terminal.send("/quit\n")
+            latency = terminal.exited()
+            assert json.loads(session.read_text())["current_fulltext"] == body
+            assert not list(session.parent.glob("*.pending"))
+        finally:
+            terminal.close()
+        # Reopen the exact saved file and restore the article after the failure.
+        terminal = Terminal(work, env)
+        try:
+            terminal.until("Enter 恢复，n 放弃")
+            terminal.send("\n")
+            terminal.until("[等待确认全文] > ")
+            terminal.send("/quit\n")
+            terminal.exited()
+            assert json.loads(session.read_text())["current_fulltext"] == body
+        finally:
+            terminal.close()
+        return {"case":f"draft_{kind}_failure_preserves_and_restores", "status":"passed", "exit_seconds":latency}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--report", type=Path)
@@ -197,6 +290,12 @@ def main():
         result = check_case(name, **kwargs)
         results.append(result)
         print(json.dumps(result, ensure_ascii=False), flush=True)
+    for check, kinds in [(check_restore_error, ("corrupt", "invalid_utf8", "unreadable")),
+                         (check_draft_error, ("local", "html", "website"))]:
+        for kind in kinds:
+            result = check(kind)
+            results.append(result)
+            print(json.dumps(result, ensure_ascii=False), flush=True)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps({"binary":str(BINARY), "checks":results}, ensure_ascii=False, indent=2)+"\n")
