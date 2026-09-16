@@ -59,6 +59,7 @@ fn state_valid_intents(state: &SessionState) -> &'static str {
         SessionState::WaitingForPublish => {
             "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。"
         }
+        SessionState::WaitingForEditTarget => "由 REPL 本地处理局部修改目标选择。",
         SessionState::WaitingForGenerationStyle => "由 REPL 本地处理风格选择输入。",
         SessionState::WaitingForStyleName => "由 REPL 本地处理风格名称输入。",
         SessionState::WaitingForDeleteStyleConfirmation => "由 REPL 本地处理删除确认。",
@@ -82,7 +83,8 @@ pub async fn classify_intent(
         SessionState::WaitingForOutline => "等待用户确认大纲",
         SessionState::WaitingForFulltext => "等待用户确认全文",
         SessionState::WaitingForPublish => "等待用户确认发布",
-        SessionState::WaitingForGenerationStyle
+        SessionState::WaitingForEditTarget
+        | SessionState::WaitingForGenerationStyle
         | SessionState::WaitingForStyleName
         | SessionState::WaitingForDeleteStyleConfirmation => {
             return Err(AppError::Intent(
@@ -202,6 +204,7 @@ mod tests {
     async fn test_classify_rejects_local_interaction_states_without_network() {
         let client = Client::new();
         for state in [
+            SessionState::WaitingForEditTarget,
             SessionState::WaitingForGenerationStyle,
             SessionState::WaitingForStyleName,
             SessionState::WaitingForDeleteStyleConfirmation,
@@ -267,6 +270,7 @@ mod tests {
             SessionState::WaitingForOutline,
             SessionState::WaitingForFulltext,
             SessionState::WaitingForPublish,
+            SessionState::WaitingForEditTarget,
             SessionState::WaitingForGenerationStyle,
             SessionState::WaitingForStyleName,
             SessionState::WaitingForDeleteStyleConfirmation,

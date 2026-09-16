@@ -15,6 +15,8 @@ pub enum SessionState {
     WaitingForGenerationStyle,
     /// 等待用户对大纲骨架的反馈。
     WaitingForOutline,
+    /// 已保留局部修改指令，等待用户明确目标内容块。
+    WaitingForEditTarget,
     /// 等待用户对正文的反馈。
     WaitingForFulltext,
     /// 等待用户确认发布。

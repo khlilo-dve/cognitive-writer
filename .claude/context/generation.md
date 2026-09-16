@@ -11,7 +11,7 @@
 - 兼容入口位于 `src/intent.rs`；LLM 分类在 `intent_classify.rs`，确认/取消在 `intent_quick.rs`，历史关键词提取仅用于测试；不存在 `IntentParser` 类型。
 - REPL 对明确确认/取消做快速预检，其余输入调用 `classify_intent`；分类 prompt 携带状态与有效意图。
 - 当前 `parse_intent` 仅解析确认/取消，其余返回 Unknown。分类调用失败时明确提示服务暂不可用；不宣称复杂意图可离线降级，用户仍可使用 /help、/styles 等本地命令。
-- 风格选择、命名与删除确认在 REPL 本地处理，三个等待态的分类入口会直接拒绝请求。
+- 风格选择、局部修改位置选择、命名与删除确认在 REPL 本地处理，四个等待态的分类入口会直接拒绝请求。
 - `ModifySection` / `ChangeStyle` 由 REPL 内部处理正文修改；文件版局部/全文重写分别在 `refine.rs` / `update.rs`。
 
 ## 源码指针
@@ -26,3 +26,11 @@
 - 候选名称列表随会话保存，恢复时编号沿用原列表；选择时按确切文件名重新读取，不受目录新增文件重排影响。/quit、Ctrl+C、EOF 保存；/cancel 清除待生成需求。
 - 选择后直接生成，不追加确认。不扩展 CLI 选择器或正文换风格流程。
 - 验证：`scripts/verify_style_selection.py`，结果记录见 `docs/2026-09-15-style-clarification.md`。
+
+## 局部修改范围保护（2026-09-16）
+- `edit_blocks.rs` 按 Markdown 原文偏移索引顶层内容块。正文自然段单独计数，标题、列表、引用、代码和表格另列 B 编号；不重新渲染原文。
+- 明确正文段落序号、标题下段落、唯一原文引用可直接定位；重复原文、模糊范围、包含排除/参考关系的复杂指令进入 `WaitingForEditTarget`，本地选择 B 编号。/blocks 展示位置，/cancel 只取消本次修改而保留文章。
+- `local_edit.rs` 将完整原文、索引、允许编号、风格与用户原始修改指令交给模型，仅接受 edits 数组；程序按偏移拼接原文。额外/重复/缺失编号、空替换、无效 JSON、Markdown 边界外溢均拒绝，多个目标要全部有效才应用。
+- 替换内容使用 Markdown；原始 HTML 替换会被拒绝，避免跨块影响。空替换不作为删除整块命令处理。
+- 成功后保留一份修改前正文，/undo 可撤销且支持重启恢复。标题未改时文章 slug 保持原样；错误或中断不提交正文变更。
+- `scripts/verify_local_edit.py` 使用完整原文断言及字节拼接比较，验证流程与边界，不评价真实模型改写质量。

@@ -21,6 +21,7 @@ use crate::styles::{
 };
 use crate::utils::md_to_wechat_html;
 use crate::website::{publish_to_website, write_mdx_draft};
+use crate::{edit_blocks, local_edit};
 
 // ── Local constants ─────────────────────────────────────────────────
 
@@ -38,6 +39,7 @@ const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给
 fn state_label(state: &SessionState) -> &'static str {
     match state {
         SessionState::Idle => "空闲",
+        SessionState::WaitingForEditTarget => "等待选择修改位置",
         SessionState::WaitingForGenerationStyle => "等待选择风格",
         SessionState::WaitingForStyleName => "等待风格命名",
         SessionState::WaitingForDeleteStyleConfirmation => "等待删除确认",
@@ -89,6 +91,8 @@ const HELP_TEXT: &str = concat!(
   /quit        保存未完成进度并退出
   /cancel      取消当前操作
   /styles      列出风格库（等同于「我的风格库有什么」）
+  /blocks      显示原文内容块编号，便于指定修改位置
+  /undo        撤销上一次成功的局部修改
   /state       显示当前状态（调试用）
 
 独立操作 (Idle 状态可用):
@@ -122,6 +126,19 @@ fn extract_title(markdown: &str) -> String {
 // ── Repl ────────────────────────────────────────────────────────────
 
 #[derive(Serialize, Deserialize)]
+struct PendingEdit {
+    instruction: String,
+    candidate_ids: Vec<usize>,
+}
+
+#[derive(Serialize, Deserialize)]
+struct EditUndo {
+    fulltext: String,
+    slug: Option<String>,
+    edited_text: String,
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct Repl {
     state: SessionState,
     // 当前文章上下文
@@ -132,6 +149,10 @@ pub struct Repl {
     pending_style_choices: Vec<String>,
     current_outline: Option<String>,
     current_fulltext: Option<String>,
+    #[serde(default)]
+    pending_edit: Option<PendingEdit>,
+    #[serde(default)]
+    edit_undo: Option<EditUndo>,
     current_style_name: Option<String>,
     current_style_content: Option<String>,
     current_slug: Option<String>,
@@ -224,6 +245,8 @@ impl Repl {
             pending_style_choices: Vec::new(),
             current_outline: None,
             current_fulltext: None,
+            pending_edit: None,
+            edit_undo: None,
             current_style_name: None,
             current_style_content: None,
             current_slug: None,
@@ -325,6 +348,9 @@ impl Repl {
                 eprintln!("[error] {e}");
             }
         }
+        if self.state == SessionState::WaitingForEditTarget {
+            self.print_edit_choices();
+        }
         loop {
             repl_input::prompt(&format!("[{}] > ", state_label(&self.state)));
             let received = tokio::select! {
@@ -389,6 +415,12 @@ impl Repl {
 
     async fn process_input(&mut self, input: &str) -> Result<bool, AppError> {
         let input = input.trim();
+        if self.state == SessionState::WaitingForEditTarget
+            && (!input.starts_with('/') || matches!(input, "/cancel" | "/blocks"))
+        {
+            self.handle_edit_target_input(input).await?;
+            return Ok(false);
+        }
         if self.state == SessionState::WaitingForGenerationStyle
             && (!input.starts_with('/') || input == "/styles")
         {
@@ -457,6 +489,16 @@ impl Repl {
     /// exit (i.e. `/quit`).
     fn handle_command(&mut self, input: &str) -> bool {
         match input.trim() {
+            "/blocks" => {
+                self.print_edit_choices();
+                false
+            }
+            "/undo" => {
+                if let Err(e) = self.undo_local_edit() {
+                    eprintln!("[error] {e}");
+                }
+                false
+            }
             "/cancel" => {
                 self.reset_state();
                 println!("已取消。");
@@ -494,6 +536,8 @@ impl Repl {
         self.pending_style_choices.clear();
         self.current_outline = None;
         self.current_fulltext = None;
+        self.pending_edit = None;
+        self.edit_undo = None;
         self.current_style_name = None;
         self.current_style_content = None;
         self.current_slug = None;
@@ -543,6 +587,9 @@ impl Repl {
     /// 当前状态下的可用操作提示，用于「没理解」或「状态不对」时给用户指路。
     fn state_hint(&self) -> &'static str {
         match self.state {
+            SessionState::WaitingForEditTarget => {
+                "回复内容块编号（如 B2 或 B2,B4）；/blocks 查看候选；/cancel 只取消本次修改。"
+            }
             SessionState::WaitingForGenerationStyle => {
                 "回复风格名称或编号；/styles 查看候选；/cancel 取消；/quit 保存需求退出。"
             }
@@ -618,8 +665,9 @@ impl Repl {
             (SessionState::WaitingForFulltext, Intent::Confirm) => {
                 self.handle_draft_publish().await?;
             }
-            (SessionState::WaitingForFulltext, Intent::ModifySection { instruction }) => {
-                self.handle_refine_section(&instruction).await?;
+            (SessionState::WaitingForFulltext, Intent::ModifySection { .. }) => {
+                // 定位使用用户原话，避免分类器摘要改写段落指代。
+                self.handle_refine_section(input).await?;
             }
             (SessionState::WaitingForFulltext, Intent::ChangeStyle { style_name }) => {
                 self.handle_change_style(&style_name).await?;
@@ -952,44 +1000,169 @@ impl Repl {
 
     // ── handle: Refine section ────────────────────────────────────
 
-    /// 用 REFINE_SYSTEM_PROMPT 局部重绘全文中的指定段落。
+    /// 先确定允许修改的原文范围，范围不明确时本地追问。
     async fn handle_refine_section(&mut self, instruction: &str) -> Result<(), AppError> {
-        let fulltext = self
+        let article = self
             .current_fulltext
             .as_deref()
-            .ok_or_else(|| AppError::Intent("全文内容丢失".to_string()))?;
+            .ok_or_else(|| AppError::Intent("全文内容丢失".into()))?;
+        match edit_blocks::locate(article, instruction) {
+            edit_blocks::Location::Selected(ids) => self.apply_local_edit(instruction, &ids).await,
+            edit_blocks::Location::Ask(candidate_ids) => {
+                self.pending_edit = Some(PendingEdit {
+                    instruction: instruction.into(),
+                    candidate_ids,
+                });
+                self.state = SessionState::WaitingForEditTarget;
+                println!("请明确本次要修改的位置，原文保持不变。");
+                self.print_edit_choices();
+                Ok(())
+            }
+        }
+    }
 
-        let user_prompt = format!(
-            "以下是需要修改的文章全文：\n\n---\n{}\n---\n\n修改指令：{}\n\n请根据修改指令输出修改后的完整 Markdown 正文。",
-            fulltext, instruction
+    fn print_edit_choices(&self) {
+        let Some(article) = self.current_fulltext.as_deref() else {
+            println!("当前没有可修改的文章。");
+            return;
+        };
+        if let Some(pending) = &self.pending_edit {
+            println!("已保留修改要求：{}", pending.instruction);
+        }
+        println!("正文段落编号不计标题、列表、引用和代码块；B 编号表示下面列出的内容块。");
+        for block in edit_blocks::blocks(article) {
+            if self
+                .pending_edit
+                .as_ref()
+                .is_some_and(|p| !p.candidate_ids.contains(&block.id))
+            {
+                continue;
+            }
+            let label = block
+                .paragraph
+                .map(|n| format!("正文第{n}段"))
+                .unwrap_or(block.kind);
+            let excerpt: String = article[block.start..block.end].chars().take(100).collect();
+            println!(
+                "B{} [{}] {}",
+                block.id,
+                label,
+                excerpt.replace("\r\n", " / ").replace('\n', " / ")
+            );
+        }
+        if self.pending_edit.is_some() {
+            println!("回复 B 编号（如 B2 或 B2,B4）；/cancel 取消本次修改，/quit 保存退出。");
+        } else {
+            println!("请指定位置和修改要求，例如「第二段加案例」。");
+        }
+    }
+
+    async fn handle_edit_target_input(&mut self, input: &str) -> Result<(), AppError> {
+        if input == "/cancel" || is_cancel(input) {
+            self.pending_edit = None;
+            self.state = SessionState::WaitingForFulltext;
+            println!("已取消本次修改，原文保留。");
+            return Ok(());
+        }
+        if input == "/blocks" || input.is_empty() || is_confirm(input) {
+            self.print_edit_choices();
+            return Ok(());
+        }
+        let pending = self
+            .pending_edit
+            .as_ref()
+            .ok_or_else(|| AppError::Intent("修改要求丢失，请 /cancel 后重新输入".into()))?;
+        let ids = edit_blocks::block_ids(input, true);
+        let Some(ids) = ids.filter(|ids| ids.iter().all(|id| pending.candidate_ids.contains(id)))
+        else {
+            println!("请从已列出的候选中选择具体 B 编号。");
+            self.print_edit_choices();
+            return Ok(());
+        };
+        let instruction = pending.instruction.clone();
+        self.apply_local_edit(&instruction, &ids).await
+    }
+
+    async fn apply_local_edit(&mut self, instruction: &str, ids: &[usize]) -> Result<(), AppError> {
+        let article = self
+            .current_fulltext
+            .as_deref()
+            .ok_or_else(|| AppError::Intent("全文内容丢失".into()))?;
+        let user_prompt = local_edit::request(
+            article,
+            ids,
+            instruction,
+            self.current_style_content
+                .as_deref()
+                .unwrap_or("保持原文风格"),
         );
-
-        let spinner = crate::llm::new_spinner("正在局部修改...");
-        let new_fulltext = with_retry(3, "局部重绘", || {
+        let spinner = crate::llm::new_spinner("正在修改指定内容...");
+        let response = with_retry(3, "局部修改", || {
             call_llm(
                 &self.client,
                 &self.base_url,
                 &self.api_key,
                 &self.model,
-                REFINE_SYSTEM_PROMPT,
+                local_edit::SYSTEM_PROMPT,
                 &user_prompt,
             )
         })
         .await?;
-        spinner.finish_with_message("修改完成");
+        let updated = local_edit::apply(article, ids, &response)?;
+        let before = article.to_string();
+        let undo = EditUndo {
+            fulltext: before.clone(),
+            slug: self.current_slug.clone(),
+            edited_text: updated.clone(),
+        };
+        // 不允许模型写其他段落；全部校验完成后才提交内存变更。
+        if extract_title(&before) != extract_title(&updated) {
+            self.current_slug = Some(extract_idea_slug(&updated));
+        }
+        self.current_fulltext = Some(updated.clone());
+        self.edit_undo = Some(undo);
+        self.pending_edit = None;
+        self.state = SessionState::WaitingForFulltext;
+        spinner.finish_with_message("指定内容修改完成，其他内容保持原样");
+        println!(
+            "修改范围：{}",
+            ids.iter()
+                .map(|id| format!("B{id}"))
+                .collect::<Vec<_>>()
+                .join(", ")
+        );
+        for block in edit_blocks::blocks(&before)
+            .iter()
+            .filter(|b| ids.contains(&b.id))
+        {
+            println!(
+                "B{} 修改前：\n{}",
+                block.id,
+                &before[block.start..block.end]
+            );
+        }
+        println!("修改后全文：\n{}\n{}\n{}", sep(), updated, sep());
+        println!("请确认全文或继续修改；/undo 可撤销上一次局部修改。");
+        Ok(())
+    }
 
-        // 更新 slug（文章内容可能发生显著变化）
-        let slug = extract_idea_slug(&new_fulltext);
-        self.current_slug = Some(slug);
-        self.current_fulltext = Some(new_fulltext.clone());
-
-        println!("{}", sep());
-        println!("{}", new_fulltext);
-        println!("{}", sep());
-        println!();
-        println!("  请确认修改后的全文，或继续输入修改指令。");
-
-        // 保持 WaitingForFulltext 状态
+    fn undo_local_edit(&mut self) -> Result<(), AppError> {
+        if self.state != SessionState::WaitingForFulltext {
+            return Err(AppError::Intent("仅在正文审阅时可以撤销局部修改".into()));
+        }
+        let undo = self
+            .edit_undo
+            .as_ref()
+            .ok_or_else(|| AppError::Intent("没有可撤销的局部修改".into()))?;
+        if self.current_fulltext.as_deref() != Some(undo.edited_text.as_str()) {
+            return Err(AppError::Intent(
+                "正文已被其他操作更新，不能撤销旧修改".into(),
+            ));
+        }
+        self.current_fulltext = Some(undo.fulltext.clone());
+        self.current_slug = undo.slug.clone();
+        self.edit_undo = None;
+        println!("已恢复上一次局部修改前的全文。");
         Ok(())
     }
 

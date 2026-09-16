@@ -30,3 +30,5 @@ mod repl_input;
 pub mod spec_quality;
 mod style_names;
 mod style_selection;
+mod edit_blocks;
+mod local_edit;
