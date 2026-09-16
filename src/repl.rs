@@ -11,7 +11,9 @@ use serde::{Deserialize, Serialize};
 use crate::clipboard::inject_clipboard;
 use crate::error::AppError;
 use crate::generate::{generate_outline, render_fulltext};
-use crate::intent::{Intent, SessionState, classify_intent, is_cancel, is_confirm, parse_intent};
+use crate::intent::{
+    Intent, SessionState, classify_intent, is_cancel, is_confirm, is_undo, parse_intent,
+};
 use crate::io::extract_idea_slug;
 use crate::llm::{call_llm, with_retry};
 use crate::refine::REFINE_SYSTEM_PROMPT;
@@ -61,6 +63,7 @@ fn intent_label(intent: &Intent) -> &'static str {
         Intent::UpdateFile { .. } => "重写文件",
         Intent::Confirm => "确认",
         Intent::Cancel => "取消",
+        Intent::Undo => "撤销上次修改",
         Intent::ModifySection { .. } => "修改段落",
         Intent::ChangeStyle { .. } => "换风格",
         Intent::Publish => "发布",
@@ -83,7 +86,7 @@ const HELP_TEXT: &str = concat!(
 
 状态内指令:
   [选择风格]  未明确风格时先追问；回复名称或编号继续，/styles 查看候选
-  [全文确认]  确认/好/没问题 → 注入剪贴板 + 存草稿  |  修改指令 → 局部重绘  |  整体换成<风格名> → 换风格
+  [全文确认]  确认/好/没问题 → 注入剪贴板 + 存草稿  |  修改指令 → 局部重绘  |  撤销刚才的修改/改回去 → 恢复上一版  |  整体换成<风格名> → 换风格
   [发布确认]  发布/推 → 正式发布  |  只发网站 → 仅网站  |  等一下/先不/看看 → 保留草稿
 
 其他命令:
@@ -466,7 +469,10 @@ impl Repl {
         if input.is_empty() {
             return Ok(false);
         }
-        let intent = if is_confirm(input) || is_cancel(input) {
+        let intent = if is_confirm(input)
+            || is_cancel(input)
+            || self.state == SessionState::WaitingForFulltext && is_undo(input)
+        {
             parse_intent(input, &self.state)
         } else {
             classify_intent(
@@ -648,6 +654,9 @@ impl Repl {
             }
 
             // ── 任意状态 ──
+            (_, Intent::Undo) => {
+                self.undo_local_edit()?;
+            }
             (_, Intent::Cancel) => {
                 println!("已取消当前操作，回到空闲状态。你可以重新选题或说其他指令。");
                 self.reset_state();
@@ -1142,7 +1151,7 @@ impl Repl {
             );
         }
         println!("修改后全文：\n{}\n{}\n{}", sep(), updated, sep());
-        println!("请确认全文或继续修改；/undo 可撤销上一次局部修改。");
+        println!("请确认全文或继续修改；说「撤销刚才的修改」可恢复上一版，也支持 /undo。");
         Ok(())
     }
 
@@ -1938,5 +1947,40 @@ mod tests {
                     .contains("800 字，给学生看")
             );
         }
+    }
+
+    #[tokio::test]
+    async fn natural_undo_is_local_and_never_discards_the_article() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.state = SessionState::WaitingForFulltext;
+        for phrase in [
+            "撤销刚才的修改",
+            "恢复修改前",
+            "改回去",
+            "请帮我撤销上次修改",
+        ] {
+            repl.current_fulltext = Some("修改后".into());
+            repl.current_slug = Some("new".into());
+            repl.edit_undo = Some(EditUndo {
+                fulltext: "原文".into(),
+                slug: Some("old".into()),
+                edited_text: "修改后".into(),
+            });
+            repl.process_input(phrase).await.unwrap();
+            assert_eq!(repl.current_fulltext.as_deref(), Some("原文"));
+            assert_eq!(repl.current_slug.as_deref(), Some("old"));
+            assert_eq!(repl.state, SessionState::WaitingForFulltext);
+            assert!(repl.edit_undo.is_none());
+            assert!(repl.process_input(phrase).await.is_err());
+            assert_eq!(repl.current_fulltext.as_deref(), Some("原文"));
+        }
+        repl.edit_undo = Some(EditUndo {
+            fulltext: "很早的原文".into(),
+            slug: None,
+            edited_text: "另一版".into(),
+        });
+        assert!(repl.dispatch(Intent::Undo, "恢复之前那版").await.is_err());
+        assert_eq!(repl.current_fulltext.as_deref(), Some("原文"));
     }
 }

@@ -37,7 +37,8 @@ def check_case(mode):
             except ValueError:
                 edit = None
             if edit is None:
-                answer = json.dumps({"intent_type": "ModifySection", "instruction": instruction}, ensure_ascii=False)
+                intent = "Undo" if "刚才改得不好，还是恢复之前的那版" in user else "ModifySection"
+                answer = json.dumps({"intent_type": intent, "instruction": instruction}, ensure_ascii=False)
             else:
                 edits.append(edit)
                 arrived.set()
@@ -140,7 +141,7 @@ def check_case(mode):
                             expected = (data[:block["start"]] + f"修改块{block['id']}。\n\n新增案例。".encode() + data[block["end"]:]).decode()
                     assert saved["current_fulltext"] == expected, "content outside selected ranges changed"
                     assert saved["edit_undo"]["fulltext"] == ARTICLE
-                    if mode == "undo":
+                    if mode in ("undo", "undo_natural", "undo_llm"):
                         terminal.send("/quit\n")
                         terminal.exited()
                         terminal.close()
@@ -148,10 +149,13 @@ def check_case(mode):
                         terminal.until("Enter 恢复，n 放弃")
                         terminal.send("\n")
                         terminal.until("[等待确认全文] > ")
-                        terminal.send("/undo\n")
+                        phrase = {"undo":"/undo", "undo_natural":"撤销刚才的修改", "undo_llm":"刚才改得不好，还是恢复之前的那版"}[mode]
+                        terminal.send(phrase + "\n")
                         terminal.until("已恢复上一次局部修改前的全文")
                         terminal.until("[等待确认全文] > ")
                         assert json.loads(session.read_text())["current_fulltext"] == ARTICLE
+                        assert len(requests) == (3 if mode == "undo_llm" else 2)
+                        assert len(edits) == 1, "undo must restore saved bytes, not ask model to rewrite"
                 terminal.send("/quit\n")
                 terminal.exited()
                 assert not list(session.parent.glob("*.pending"))
@@ -166,6 +170,6 @@ def check_case(mode):
 
 
 if __name__ == "__main__":
-    for mode in ["single", "multi", "ambiguity", "restore", "cancel", "undo", "outside_id",
+    for mode in ["single", "multi", "ambiguity", "restore", "cancel", "undo", "undo_natural", "undo_llm", "outside_id",
                  "missing_id", "empty", "unclosed", "invalid_json", "interrupt"]:
         print(json.dumps(check_case(mode), ensure_ascii=False), flush=True)

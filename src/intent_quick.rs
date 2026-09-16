@@ -1,18 +1,22 @@
-//! 无网络调用的确认、取消与空输入预检。
+//! 无网络调用的确认、取消、正文撤销与空输入预检。
 
 use crate::intent::{Intent, SessionState};
 
 /// 解析用户输入，返回结构化 Intent（快速预检模式）。
 ///
 /// 本函数仅做 0 成本快速预检
-///（confirm/cancel/empty），其余情况返回 Unknown 由调用方走 LLM 分类。
+///（confirm/cancel/undo/empty），其余情况返回 Unknown 由调用方走 LLM 分类。
 /// 旧关键词提取函数仅保留在测试模块中，生产路径不提供复杂意图离线降级。
-pub fn parse_intent(input: &str, _state: &SessionState) -> Intent {
+pub fn parse_intent(input: &str, state: &SessionState) -> Intent {
     let input = input.trim();
     if input.is_empty() {
         return Intent::Unknown {
             reason: "输入为空".to_string(),
         };
+    }
+
+    if *state == SessionState::WaitingForFulltext && is_undo(input) {
+        return Intent::Undo;
     }
 
     // ── 0 成本快速预检：确认 / 取消 ──
@@ -62,6 +66,36 @@ pub fn is_cancel(input: &str) -> bool {
     let lower = s.to_lowercase();
     const CANCEL_EN: &[&str] = &["cancel", "no", "n"];
     CANCEL_EN.contains(&lower.as_str())
+}
+
+/// 常见撤销表达本地识别；精确匹配避免把否定或混合指令误当成撤销。
+pub fn is_undo(input: &str) -> bool {
+    let text = input
+        .trim()
+        .trim_end_matches(['。', '！', '!', '.', '吧'])
+        .trim();
+    let text = ["请帮我", "麻烦你", "帮我", "请", "麻烦"]
+        .iter()
+        .find_map(|prefix| text.strip_prefix(prefix))
+        .unwrap_or(text)
+        .trim();
+    matches!(
+        text,
+        "撤销"
+            | "撤回"
+            | "撤销刚才的修改"
+            | "撤销刚才修改"
+            | "撤销上次修改"
+            | "撤销上一次修改"
+            | "撤销上一次局部修改"
+            | "撤回刚才的改动"
+            | "恢复修改前"
+            | "恢复到修改前"
+            | "改回去"
+            | "改回原样"
+            | "回到上一版"
+            | "还是用上一版"
+    )
 }
 
 #[cfg(test)]
@@ -257,5 +291,35 @@ mod tests {
             &SessionState::Idle,
         );
         assert!(matches!(result, Intent::Unknown { .. }));
+    }
+
+    #[test]
+    fn undo_phrases_are_local_but_negations_and_mixed_requests_are_not() {
+        for input in [
+            "撤销刚才的修改",
+            "恢复修改前",
+            "改回去",
+            "请帮我改回去吧！",
+            "还是用上一版",
+        ] {
+            assert!(is_undo(input), "{input}");
+            assert!(matches!(
+                parse_intent(input, &SessionState::WaitingForFulltext),
+                Intent::Undo
+            ));
+        }
+        for input in [
+            "不要撤销",
+            "别改回去",
+            "撤销这个词换个说法",
+            "撤销刚才的修改，再改第三段",
+            "能撤销吗？",
+        ] {
+            assert!(!is_undo(input), "{input}");
+        }
+        assert!(matches!(
+            parse_intent("撤销", &SessionState::Idle),
+            Intent::Unknown { .. }
+        ));
     }
 }

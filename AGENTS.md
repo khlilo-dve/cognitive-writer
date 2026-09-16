@@ -43,7 +43,7 @@
 - 三组人评与确定性字数分档见 `eval/human_calibration.json`、`eval/AGENTS.md`；新提示词仍需以实际评测结果判断效果，不能把模型分数当人评。
 - 首次 Generate 风格缺失、未知或有歧义时进入 WaitingForGenerationStyle；保留原始需求，按名称/编号选择后生成，支持取消与保存恢复。不自动选择唯一/最近风格；描述性匹配仅供候选参考。
 
-- REPL 局部修改使用完整文章作为模型上下文，只接收目标块替换内容；程序按原文偏移应用并校验范围外内容。位置不明确进入 WaitingForEditTarget，/cancel 仅取消本次修改；/blocks 查看块编号，/undo 撤销上一次成功的局部修改。
+- REPL 局部修改使用完整文章作为模型上下文，只接收目标块替换内容；程序按原文偏移应用并校验范围外内容。位置不明确进入 WaitingForEditTarget，/cancel 仅取消本次修改；/blocks 查看块编号，可直接说“撤销刚才的修改”“恢复修改前”“改回去”撤销上次局部修改，/undo 保留兼容。
 
 ## 目录与产物约定
 - `src/`：扁平 Rust 模块；新模块在 `src/lib.rs` 注册，测试内嵌模块底部。

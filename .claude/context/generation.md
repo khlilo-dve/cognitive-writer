@@ -9,10 +9,10 @@
 
 ## 意图解析
 - 兼容入口位于 `src/intent.rs`；LLM 分类在 `intent_classify.rs`，确认/取消在 `intent_quick.rs`，历史关键词提取仅用于测试；不存在 `IntentParser` 类型。
-- REPL 对明确确认/取消做快速预检，其余输入调用 `classify_intent`；分类 prompt 携带状态与有效意图。
-- 当前 `parse_intent` 仅解析确认/取消，其余返回 Unknown。分类调用失败时明确提示服务暂不可用；不宣称复杂意图可离线降级，用户仍可使用 /help、/styles 等本地命令。
+- REPL 对明确确认/取消，以及正文审阅中的常见撤销表达做本地预检；其他输入调用 `classify_intent`，分类 prompt 携带状态与有效意图。
+- 当前 `parse_intent` 解析确认/取消，以及正文审阅中的常见撤销表达；其余返回 Unknown。分类调用失败时明确提示服务暂不可用；不宣称复杂意图可离线降级，用户仍可使用 /help、/styles 等本地命令。
 - 风格选择、局部修改位置选择、命名与删除确认在 REPL 本地处理，四个等待态的分类入口会直接拒绝请求。
-- `ModifySection` / `ChangeStyle` 由 REPL 内部处理正文修改；文件版局部/全文重写分别在 `refine.rs` / `update.rs`。
+- `ModifySection` / `ChangeStyle` / `Undo` 由 REPL 内部处理正文修改及撤销；文件版局部/全文重写分别在 `refine.rs` / `update.rs`。
 
 ## 源码指针
 - 两阶段 Prompt 与调用：`src/generate.rs`。
@@ -34,3 +34,5 @@
 - 替换内容使用 Markdown；原始 HTML 替换会被拒绝，避免跨块影响。空替换不作为删除整块命令处理。
 - 成功后保留一份修改前正文，/undo 可撤销且支持重启恢复。标题未改时文章 slug 保持原样；错误或中断不提交正文变更。
 - `scripts/verify_local_edit.py` 使用完整原文断言及字节拼接比较，验证流程与边界，不评价真实模型改写质量。
+
+自然语言撤销：正文审阅中可说“撤销刚才的修改”“恢复修改前”“改回去”等，常见表达直接在本地恢复；其他明确撤销说法经分类器返回 Undo 后复用同一入口。不用模型重新写旧稿，不扩大撤销范围；无记录或正文已被其他操作更新时保持原文并报错。/undo 保留兼容。

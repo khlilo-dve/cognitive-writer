@@ -26,6 +26,7 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 - PublishWebsiteOnly：只想发布到网站
 - Hold：暂缓/先不发布
 - Confirm：确认当前操作
+- Undo：明确要求撤销上一次局部修改，恢复修改前的正文；无字段
 - Cancel：取消当前操作
 - Unknown：与写作无关、或无法理解的输入。字段 reason（一句话说明原因）
 
@@ -35,6 +36,7 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 - 输入像指令但含糊不清 → Unknown，reason 写「无法理解意图」
 - 已明确想写文章但未说明风格，仍返回 Generate，style_name 留空，不得返回 Unknown。
 - 不得猜测、补全默认风格；“犀利点/轻松点”等只保留在 topic 中，不当作具体风格名。被否定的风格（如“不要轻辩”）不算选择。
+- 正文审阅中，“刚才改得不好，还是恢复之前的那版”等明确回退请求 → Undo，不能映射为 Cancel 或 ModifySection。仅询问能否撤销、否定撤销、多步撤销或同时撤销又提出新修改时 → Unknown，reason 请用户明确当前要执行的操作。
 - 只输出一行 JSON，不要解释、不要 Markdown 代码块
 
 ## few-shot 示例（输入 → 输出）
@@ -43,6 +45,8 @@ const INTENT_CLASSIFY_PROMPT: &str = r#"你是「对话式写作 Agent」的意�
 "学一下这个风格 https://example.com/a" → {"intent_type":"Learn","url":"https://example.com/a"}
 "风格库里有什么" → {"intent_type":"ListStyles"}
 "今天天气怎么样" → {"intent_type":"Unknown","reason":"与写作无关"}
+"恢复到刚才修改之前吧" → {"intent_type":"Undo"}
+"不要撤销，保留现在这版" → {"intent_type":"Unknown","reason":"保留当前内容，不执行撤销"}
 "行" → {"intent_type":"Confirm"}
 "拉倒吧" → {"intent_type":"Cancel"}"#;
 
@@ -54,7 +58,7 @@ fn state_valid_intents(state: &SessionState) -> &'static str {
         }
         SessionState::WaitingForOutline => "有效意图：Confirm（确认大纲）、Cancel。",
         SessionState::WaitingForFulltext => {
-            "有效意图：Confirm（确认全文）、ModifySection（改某段）、ChangeStyle（换风格）、Cancel。"
+            "有效意图：Confirm（确认全文）、ModifySection（改某段）、ChangeStyle（换风格）、Undo（撤销上次局部修改）、Cancel。"
         }
         SessionState::WaitingForPublish => {
             "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。"
@@ -188,6 +192,7 @@ fn parse_classify_response(raw: &str, original_input: &str) -> Result<Intent, Ap
         "Hold" => Ok(Intent::Hold),
         "Confirm" => Ok(Intent::Confirm),
         "Cancel" => Ok(Intent::Cancel),
+        "Undo" => Ok(Intent::Undo),
         _ => {
             // LLM 无法分类 → 携带原因，供上层准确报错
             let reason = v["reason"].as_str().unwrap_or("无法理解意图").to_string();
@@ -307,5 +312,17 @@ mod tests {
         assert!(
             parse_classify_response(r#"{"intent_type":"Generate","topic":" "}"#, "写文章").is_err()
         );
+    }
+
+    #[test]
+    fn parses_model_undo_intent() {
+        assert!(matches!(
+            parse_classify_response(
+                r#"{"intent_type":"Undo"}"#,
+                "刚才改得不好，还是恢复之前的那版"
+            )
+            .unwrap(),
+            Intent::Undo
+        ));
     }
 }

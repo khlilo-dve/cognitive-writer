@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 pub use crate::intent_classify::classify_intent;
-pub use crate::intent_quick::{is_cancel, is_confirm, parse_intent};
+pub use crate::intent_quick::{is_cancel, is_confirm, is_undo, parse_intent};
 
 /// 多轮对话的会话状态。
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -47,6 +47,8 @@ pub enum Intent {
     UpdateFile { path: String, instruction: String },
     /// 确认当前待处理操作。
     Confirm,
+    /// 撤销上一次成功的局部修改，恢复修改前的正文。
+    Undo,
     /// 取消当前待处理操作。
     Cancel,
     /// 修改特定段落：携带修改指令。
