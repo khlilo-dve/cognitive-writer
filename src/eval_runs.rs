@@ -25,7 +25,7 @@ struct Inputs {
     style: String,
     judge_a: String,
     judge_b: String,
-    learn: String,
+    learn: crate::style_learning::LearningPrompts,
     articles: Vec<String>,
     samples: Vec<String>,
     specs: Vec<String>,
@@ -46,7 +46,7 @@ impl Inputs {
             style: read("styles/蔡叔.md")?,
             judge_a: read("prompts/eval_judge_style.md")?,
             judge_b: read("prompts/eval_judge_learn.md")?,
-            learn: read("prompts/learn_style.md")?,
+            learn: crate::style_learning::LearningPrompts::load()?,
             articles: read_set("baseline", "topic")?,
             samples: read_set("samples", "sample")?,
             specs: read_set("baseline_specs", "spec")?,
@@ -99,23 +99,6 @@ async fn judge_b(
 }
 
 pub(crate) fn spec_checks(sample: &str, spec: &str) -> Value {
-    let headings = [
-        "定位",
-        "标题",
-        "开头",
-        "结构与论证",
-        "段落与句式",
-        "语气与人称",
-        "用词",
-        "结尾",
-        "排版",
-        "禁止",
-    ];
-    let actual: Vec<_> = spec
-        .lines()
-        .filter_map(|l| l.strip_prefix("## "))
-        .map(str::trim)
-        .collect();
     let compact = |s: &str| s.chars().filter(|c| !c.is_whitespace()).collect::<String>();
     let source = compact(sample);
     let chars: Vec<_> = compact(spec).chars().collect();
@@ -129,7 +112,8 @@ pub(crate) fn spec_checks(sample: &str, spec: &str) -> Value {
     json!({"characters_without_whitespace": chars.len(), "within_600_characters": chars.len() <= 600,
         "within_target_range": (400..=600).contains(&chars.len()),
         "deterministic_conciseness": crate::spec_quality::conciseness_score(chars.len()),
-        "exact_ten_headings_in_order": actual == headings, "source_overlap_12_char_examples": overlaps,
+        "execution_text_valid": crate::spec_quality::validate_execution_spec(spec).is_ok(),
+        "format_policy": "free-form-v1", "source_overlap_12_char_examples": overlaps,
         "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。"})
 }
 
@@ -234,13 +218,21 @@ async fn compare_a(store: &Store, input: &Inputs, baselines: &[Row]) -> Result<V
 
 async fn compare_b(store: &Store, input: &Inputs, baselines: &[Row]) -> Result<Vec<Row>, AppError> {
     let candidate = input.learn.clone();
-    std::fs::write(store.root.join("candidate_learn_prompt.md"), &candidate)?;
+    write_json(&store.root.join("candidate_learn_prompts.json"), &candidate)?;
     let mut rows = Vec::new();
     for i in 0..5 {
         let name = format!("candidate_b_{:02}", i + 1);
-        let spec = store
-            .call(&name, &candidate, &input.samples[i], text_valid)
-            .await?;
+        let learned = crate::style_learning::extract_with(
+            &input.samples[i],
+            &candidate,
+            |stage, system, user| {
+                let task = format!("{name}_{stage}");
+                async move { store.call(&task, &system, &user, text_valid).await }
+            },
+        )
+        .await?;
+        write_json(&store.root.join(format!("{name}_learning.json")), &learned)?;
+        let spec = learned.spec;
         std::fs::write(store.root.join(format!("{name}.md")), &spec)?;
         let details = judge_b(
             store,
@@ -444,12 +436,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn mechanical_checks_expose_source_quotes_and_missing_headings() {
+    fn mechanical_checks_allow_free_format_and_expose_source_quotes() {
         let checks = spec_checks(
             "这是一整句仅属于样文的特定内容。",
             "## 标题\n这是一整句仅属于样文的特定内容。",
         );
-        assert_eq!(checks["exact_ten_headings_in_order"], false);
+        assert_eq!(checks["execution_text_valid"], true);
         assert!(
             !checks["source_overlap_12_char_examples"]
                 .as_array()

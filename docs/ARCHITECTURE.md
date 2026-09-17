@@ -196,18 +196,20 @@ pub enum Intent {
 
 ```
 URL → Jina Reader (降级: strip-tags) → MD 正文
-    → 读取 prompts/learn_style.md
-    → LLM 逆向提取 → 精简风格执行 spec（10 段，≤600 字）
+    → STYLE_LEARNING_METHOD 选择（默认 legacy 单阶段）
+    → 机械校验/有界修复 → 执行 spec（目标400–600非空白字符）
     → 用户命名 → styles/{name}.md
 ```
 
 **提示词来源：**
-- `prompts/learn_style.md` 是逆向风格提取的唯一运行时 system prompt
-- 输出不再是"分析报告 + 原文示例"，而是可直接注入的 10 段执行指令
-- 文件不存在、无法读取或内容为空时直接返回明确错误，不回退到硬编码提示词
+- 默认使用冻结的旧提示词；`direct_free` 使用 `learn_style_direct.md`
+- `two_stage` 选项中 `prompts/analyze_style.md` 与 `prompts/learn_style.md` 分别负责证据分析和指令编写
+- `style_learning.rs` 共享运行与评测逻辑，每阶段最多一次诊断修复；最终只有执行 Markdown 入库，阶段记录在 outputs/style-learning/
+- 校验和评测不限制栏目；旧默认提示词仍为十节，两个候选使用自由格式。新候选的换题实验均未达到采用条件，详情见 2026-09-17-style-learning-results.md
+- 候选提示词不存在、无法读取或内容为空时明确报错；legacy只使用编译时嵌入的冻结快照，不因候选文件缺失而静默切换
 
 **REPL 集成适配：**
-- `fetch_and_analyze(url)` → 返回风格分析文本
+- `extract_style(url)` → 返回纯风格执行文本
 - 展示摘要（前 500 字符）
 - 用户在 REPL 中输入名称 → 保存
 

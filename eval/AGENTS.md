@@ -20,3 +20,12 @@
 
 三组在线校准命令：`MODEL=deepseek-v4-flash EVAL_RUN_ID=20260912-calibration-v3-fixed EVAL_CONCURRENCY=3 EVAL_TIMEOUT_SECONDS=180 cargo test --lib eval_calibration_suite -- --ignored --nocapture`。请求并发1–3、超时30–900秒可配置，默认分别3和180；这些运输设置不改变请求快照。每个成功checkpoint复用，首次失败记录与后续完成结果并存以便审计。
 终端回归产物 `eval/repl-terminal-validation.json` 来自 `scripts/verify_repl_terminal.py`，使用临时目录与本地mock API，不属于模型评分或冻结业务样本。
+
+## 单篇自由格式实验（2026-09-17）
+- `fixtures/learn_style_single_v1.md`、`fixtures/eval_judge_learn_v1.md` 为本次变更前的提示词快照，只读；历史人评校准入口继续使用 v1。当前 Rubric B v2 的 coverage 改为证据机制覆盖，不能与 v1 人评分数直接计算校准误差。
+- 新入口：`EVAL_RUN_ID=20260917-single-article-v2 EVAL_CONCURRENCY=3 EVAL_TIMEOUT_SECONDS=180 cargo test --lib eval_single_article_learning_suite -- --ignored --nocapture`。同模型重跑旧单阶段与新两阶段，并做五组同主题迁移；题材/生成提示词/Judge固定。
+- 两阶段分析/编写原始响应检查点可以包含随后被语义/结构校验拒绝的输出；修复为独立命名请求。只有最终完整 summary 才表示该实验完成，不能把阶段响应视为合格 Spec。最多一次诊断修复；运输失败仍由 Store 有界重试。
+- 自由格式不得按十标题得分。最低字数和确定性分档保持不变；未达目标不强行填充，无效执行文本不能入正式库。
+
+- 单阶段自由格式对照：`EVAL_LEARNING_METHOD=direct_free EVAL_RUN_ID=20260917-single-article-direct-v1 cargo test --lib eval_single_article_learning_suite -- --ignored --nocapture`；省略方法变量仍为两阶段。每种候选各用新run_id。
+- 产物核验：`python3 scripts/verify_learning_run.py eval/runs/<run_id> --current`（历史不同提示词省略--current）。默认方案的选择以完整结果报告为依据，不因Spec分数上升而忽略换题退化。

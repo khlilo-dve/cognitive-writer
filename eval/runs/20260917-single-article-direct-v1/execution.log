@@ -1,0 +1,84 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/deps/cognitive_writer-01a6798ffc47c41f)
+
+running 1 test
+[resume] s01_single_stage_extract
+[resume] s01_single_stage_judge
+[resume] s01_single_stage_outline
+[resume] s01_single_stage_body
+[resume] s01_single_stage_transfer
+[request] s01_direct_free_direct_0
+[request] s02_direct_free_direct_0
+[resume] s03_single_stage_extract
+[resume] s03_single_stage_judge
+[resume] s03_single_stage_outline
+[resume] s03_single_stage_body
+[resume] s03_single_stage_transfer
+[request] s03_direct_free_direct_0
+[resume] s05_single_stage_extract
+[resume] s05_single_stage_judge
+[resume] s05_single_stage_outline
+[resume] s05_single_stage_body
+[resume] s05_single_stage_transfer
+[saved] s02_direct_free_direct_0
+[request] s04_direct_free_direct_0
+[saved] s01_direct_free_direct_0
+[request] s05_direct_free_direct_0
+[saved] s03_direct_free_direct_0
+[request] s02_direct_free_judge
+[saved] s05_direct_free_direct_0
+[request] s01_direct_free_judge
+[saved] s04_direct_free_direct_0
+[request] s03_direct_free_judge
+test eval_learning::tests::eval_single_article_learning_suite has been running for over 60 seconds
+[saved] s01_direct_free_judge
+[request] s05_direct_free_judge
+[saved] s03_direct_free_judge
+[request] s04_direct_free_judge
+[saved] s02_direct_free_judge
+[request] s01_direct_free_outline
+[saved] s05_direct_free_judge
+[request] s03_direct_free_outline
+[saved] s01_direct_free_outline
+[request] s02_direct_free_outline
+[saved] s04_direct_free_judge
+[request] s05_direct_free_outline
+[saved] s03_direct_free_outline
+[request] s01_direct_free_body
+[saved] s02_direct_free_outline
+[request] s04_direct_free_outline
+[saved] s01_direct_free_body
+[request] s03_direct_free_body
+[saved] s05_direct_free_outline
+[request] s02_direct_free_body
+[saved] s02_direct_free_body
+[request] s01_direct_free_transfer
+[saved] s04_direct_free_outline
+[request] s05_direct_free_body
+[saved] s03_direct_free_body
+[request] s02_direct_free_transfer
+[saved] s05_direct_free_body
+[request] s04_direct_free_body
+[saved] s04_direct_free_body
+[request] s03_direct_free_transfer
+[saved] s01_direct_free_transfer
+[request] s05_direct_free_transfer
+[saved] s02_direct_free_transfer
+[resume] s02_single_stage_extract
+[resume] s02_single_stage_judge
+[resume] s02_single_stage_outline
+[resume] s02_single_stage_body
+[resume] s02_single_stage_transfer
+[request] s04_direct_free_transfer
+[saved] s03_direct_free_transfer
+[saved] s05_direct_free_transfer
+[saved] s04_direct_free_transfer
+[resume] s04_single_stage_extract
+[resume] s04_single_stage_judge
+[resume] s04_single_stage_outline
+[resume] s04_single_stage_body
+[resume] s04_single_stage_transfer
+[complete] eval/runs/20260917-single-article-direct-v1 {"adopt_candidate":false,"new_severe_contamination":false,"semantic_mean":{"candidate":4.75,"single_stage":4.4},"spec_cleanliness":{"candidate":4.8,"single_stage":5.0},"transfer_cleanliness":{"candidate":4.0,"single_stage":4.8},"transfer_mean":{"candidate":4.15,"single_stage":4.45},"transfer_style_fidelity":{"candidate":4.6,"single_stage":4.4},"transfer_task_fulfillment":{"candidate":4.0,"single_stage":4.8}}
+test eval_learning::tests::eval_single_article_learning_suite ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 215 filtered out; finished in 193.19s

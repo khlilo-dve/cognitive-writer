@@ -32,3 +32,6 @@ mod style_names;
 mod style_selection;
 mod edit_blocks;
 mod local_edit;
+
+mod style_learning;
+pub mod eval_learning;

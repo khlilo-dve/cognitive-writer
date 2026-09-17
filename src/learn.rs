@@ -62,7 +62,7 @@ async fn fetch_readable_text(client: &Client, url: &str) -> Result<String, AppEr
             if text.trim().is_empty() {
                 return Err(AppError::Parse("Jina Reader 返回空内容".into()));
             }
-            println!("[info] Jina Reader 抓取成功, {} 字符", text.len());
+            println!("[info] Jina Reader 抓取成功, {} 字符", text.chars().count());
             Ok(text)
         }
         Ok(r) => {
@@ -106,23 +106,128 @@ async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, AppE
     if text.is_empty() {
         return Err(AppError::Parse("提取的正文内容为空".into()));
     }
-    println!("[info] 降级抓取完成 (strip-tags), {} 字符", text.len());
+    println!(
+        "[info] 降级抓取完成 (strip-tags), {} 字符",
+        text.chars().count()
+    );
     Ok(text)
 }
 
-// ── Learn system prompt ─────────────────────────────────────────────
+#[derive(Clone, Copy)]
+enum LearningMethod {
+    Legacy,
+    DirectFree,
+    TwoStage,
+}
 
-const LEARN_PROMPT_PATH: &str = "prompts/learn_style.md";
-
-fn load_learn_prompt() -> Result<String, AppError> {
-    let prompt = std::fs::read_to_string(LEARN_PROMPT_PATH)
-        .map_err(|e| AppError::FileRead(format!("{LEARN_PROMPT_PATH}: {e}")))?;
-
-    if prompt.trim().is_empty() {
-        return Err(AppError::FileRead(format!("{LEARN_PROMPT_PATH} 为空")));
+fn learning_method() -> Result<LearningMethod, AppError> {
+    // Three matched experiments did not pass the adoption gate; keep the frozen method by default.
+    match std::env::var("STYLE_LEARNING_METHOD")
+        .as_deref()
+        .unwrap_or("legacy")
+    {
+        "legacy" => Ok(LearningMethod::Legacy),
+        "direct_free" => Ok(LearningMethod::DirectFree),
+        "two_stage" => Ok(LearningMethod::TwoStage),
+        _ => Err(AppError::EnvVar(
+            "STYLE_LEARNING_METHOD须为legacy、direct_free或two_stage".into(),
+        )),
     }
+}
 
-    Ok(prompt)
+/// Shared raw-text learning entry for CLI/REPL and legacy batch evaluators.
+pub async fn extract_style_text(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    article: &str,
+) -> Result<String, AppError> {
+    let root = std::path::Path::new("outputs/style-learning").join(format!(
+        "{}-{}",
+        chrono::Utc::now().format("%Y%m%dT%H%M%S%9fZ"),
+        std::process::id()
+    ));
+    extract_style_text_at(
+        client,
+        base_url,
+        api_key,
+        model,
+        article,
+        &root,
+        learning_method()?,
+    )
+    .await
+}
+
+fn write_audit(path: &std::path::Path, value: &impl serde::Serialize) -> Result<(), AppError> {
+    let content =
+        serde_json::to_string_pretty(value).map_err(|e| AppError::Parse(e.to_string()))?;
+    crate::io::write_file_atomic(path, &content)
+}
+
+async fn extract_style_text_at(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    article: &str,
+    root: &std::path::Path,
+    method: LearningMethod,
+) -> Result<String, AppError> {
+    std::fs::create_dir_all(root)?;
+    let audit = root;
+    let call = |stage: String, system: String, user: String| async move {
+        let path = audit.join(format!("{stage}.json"));
+        write_audit(
+            &path,
+            &serde_json::json!({
+                "status":"pending", "model":model, "system":system, "user":user
+            }),
+        )?;
+        let response = call_llm(client, base_url, api_key, model, &system, &user).await;
+        write_audit(
+            &path,
+            &serde_json::json!({
+                "status":if response.is_ok() {"received"} else {"failed"},
+                "model":model, "system":system, "user":user,
+                "response":response.as_ref().ok(),
+                "error":response.as_ref().err().map(|_| "模型请求失败，未记录端点或HTTP正文")
+            }),
+        )?;
+        response
+    };
+    let result = match method {
+        LearningMethod::Legacy => crate::style_learning::extract_legacy_with(article, call).await,
+        LearningMethod::DirectFree => {
+            let prompt = std::fs::read_to_string("prompts/learn_style_direct.md")?;
+            crate::style_learning::extract_direct_with(article, &prompt, call).await
+        }
+        LearningMethod::TwoStage => {
+            let prompts = crate::style_learning::LearningPrompts::load()?;
+            crate::style_learning::extract_with(article, &prompts, call).await
+        }
+    };
+    match result {
+        Ok(learned) => {
+            write_audit(&root.join("result.json"), &learned)?;
+            for warning in &learned.warnings {
+                eprintln!("[warn] {warning}");
+            }
+            println!("[info] 学习记录 → {}", root.display());
+            Ok(learned.spec)
+        }
+        Err(error) => {
+            write_audit(
+                &root.join("result.json"),
+                &serde_json::json!({
+                    "status":"failed", "message":"学习未通过或模型调用失败；阶段响应保留用于诊断，未保存正式风格"
+                }),
+            )?;
+            eprintln!("[info] 未保存正式风格；阶段记录 → {}", root.display());
+            Err(error)
+        }
+    }
 }
 
 // ── learn 子命令入口 ───────────────────────────────────────────────
@@ -133,7 +238,6 @@ pub async fn extract_style(url: &str) -> Result<String, AppError> {
     let base_url = env_var_or("BASE_URL", "https://api.openai.com/v1");
     let model = env_var_or("MODEL", "gpt-4o");
 
-    println!("[info] BASE_URL = {}", base_url);
     println!("[info] MODEL    = {}", model);
 
     // 1. 通过 Jina Reader 抓取正文（失败时降级为 strip-tags）
@@ -141,34 +245,20 @@ pub async fn extract_style(url: &str) -> Result<String, AppError> {
     let client = Client::new();
     let article_text = fetch_readable_text(&client, url).await?;
 
-    // 2. 读取提示词并调用 LLM 逆向分析风格
-    let system_prompt = load_learn_prompt()?;
-    let spinner = new_spinner("正在分析写作风格...");
-    let style_analysis = call_llm(
-        &client,
-        &base_url,
-        &api_key,
-        &model,
-        &system_prompt,
-        &article_text,
-    )
-    .await
-    .map_err(|e| {
-        spinner.finish_with_message("分析失败");
-        e
-    })?;
-    spinner.finish_with_message("分析完成");
-    println!("[info] LLM 返回 {} 字符", style_analysis.len());
-
-    if style_analysis.trim().is_empty() {
-        return Err(AppError::Parse("提取风格为空".into()));
-    }
-    Ok(style_analysis)
+    let spinner = new_spinner("正在学习风格并校验结果...");
+    let result = extract_style_text(&client, &base_url, &api_key, &model, &article_text).await;
+    spinner.finish_with_message(if result.is_ok() {
+        "分析完成"
+    } else {
+        "分析失败"
+    });
+    result
 }
 
 /// CLI 交互包装；REPL 直接调用 extract_style，命名交由主循环。
 pub async fn run_learn(url: &str) -> Result<(), AppError> {
     let content = extract_style(url).await?;
+    crate::spec_quality::validate_execution_spec(&content)?;
     loop {
         let name: String = Input::with_theme(&ColorfulTheme::default())
             .with_prompt("请为该风格命名（输入 /cancel 取消）")
@@ -190,20 +280,85 @@ pub async fn run_learn(url: &str) -> Result<(), AppError> {
 mod tests {
     use super::*;
 
-    // ── strip_html_tags ─────────────────────────────────────────
-
-    #[test]
-    fn test_load_learn_prompt_from_external_file() {
-        let prompt = load_learn_prompt().expect("external learn prompt should be readable");
-        assert!(!prompt.trim().is_empty());
-        assert!(prompt.contains("写作风格逆向工程专家") || prompt.contains("写作风格分析专家"));
-        assert!(prompt.contains("提炼机制而非总结内容") || prompt.contains("不要评价文章质量"));
-        // 新版契约：直接产出精简执行 spec，而非冗长分析报告
-        assert!(prompt.contains("## 定位"));
-        assert!(prompt.contains("## 禁止"));
-        assert!(prompt.contains("零污染抽象") || prompt.contains("不要引用原文"));
-        assert!(prompt.contains("600 字") || prompt.contains("600"));
+    #[tokio::test]
+    async fn live_text_entry_saves_only_execution_text_and_audits_without_credentials() {
+        use std::io::{Read, Write};
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        let addr = listener.local_addr().unwrap();
+        let server = std::thread::spawn(move || {
+            let mut requests = Vec::new();
+            let analysis = serde_json::json!({"features":[{"observation":"描述", "evidence":["这是原文。"],
+                "rule":"用短句收束。", "condition":"判断结束时", "support":"local"}], "uncertain":[]}).to_string();
+            let compiled = serde_json::json!({"spec":"先铺陈判断，再用短句收束。", "evidence_insufficient":true}).to_string();
+            for response in [analysis, compiled] {
+                let (mut stream, _) = listener.accept().unwrap();
+                stream
+                    .set_read_timeout(Some(std::time::Duration::from_secs(5)))
+                    .unwrap();
+                let mut bytes = Vec::new();
+                loop {
+                    let mut chunk = [0; 4096];
+                    let n = stream.read(&mut chunk).unwrap();
+                    assert!(n > 0);
+                    bytes.extend_from_slice(&chunk[..n]);
+                    if let Some(end) = bytes.windows(4).position(|w| w == b"\r\n\r\n") {
+                        let headers = String::from_utf8_lossy(&bytes[..end]).to_lowercase();
+                        let len: usize = headers
+                            .lines()
+                            .find_map(|l| l.strip_prefix("content-length: "))
+                            .unwrap()
+                            .parse()
+                            .unwrap();
+                        if bytes.len() >= end + 4 + len {
+                            requests.push(
+                                serde_json::from_slice::<serde_json::Value>(&bytes[end + 4..])
+                                    .unwrap(),
+                            );
+                            break;
+                        }
+                    }
+                }
+                let body =
+                    serde_json::json!({"choices":[{"message":{"content":response}}]}).to_string();
+                write!(
+                    stream,
+                    "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+                    body.len(),
+                    body
+                )
+                .unwrap();
+            }
+            requests
+        });
+        let dir = tempfile::tempdir().unwrap();
+        let spec = extract_style_text_at(
+            &Client::new(),
+            &format!("http://{addr}"),
+            "fixture-secret",
+            "fixture-model",
+            "这是原文。",
+            dir.path(),
+            LearningMethod::TwoStage,
+        )
+        .await
+        .unwrap();
+        assert_eq!(spec, "先铺陈判断，再用短句收束。");
+        let requests = server.join().unwrap();
+        assert!(
+            !requests[1]["messages"][1]["content"]
+                .as_str()
+                .unwrap()
+                .contains("这是原文")
+        );
+        for entry in std::fs::read_dir(dir.path()).unwrap() {
+            let text = std::fs::read_to_string(entry.unwrap().path()).unwrap();
+            assert!(!text.contains("fixture-secret"));
+            assert!(!text.contains(&addr.to_string()));
+        }
+        assert!(dir.path().join("result.json").exists());
     }
+
+    // ── strip_html_tags ─────────────────────────────────────────
 
     #[test]
     fn test_strip_html_simple_tag() {

@@ -294,36 +294,8 @@ pub async fn eval_learn_prompt(
     model: &str,
     article: &str,
 ) -> Result<(), AppError> {
-    let prompt = std::fs::read_to_string("prompts/learn_style.md")
-        .map_err(|e| AppError::Intent(format!("读取提取提示词失败: {}", e)))?;
-    let spec = call_llm(client, base_url, api_key, model, &prompt, article).await?;
-
-    // 具体指标
-    let spec_len = crate::spec_quality::character_count(&spec);
-    let sections = [
-        "## 定位",
-        "## 标题",
-        "## 开头",
-        "## 结构与论证",
-        "## 段落与句式",
-        "## 语气与人称",
-        "## 用词",
-        "## 结尾",
-        "## 排版",
-        "## 禁止",
-    ];
-    let covered = sections.iter().filter(|s| spec.contains(**s)).count();
-    let total = sections.len();
-    let avg_section_len = if covered == 0 {
-        0.0
-    } else {
-        spec_len as f64 / covered as f64
-    };
-
-    println!("\n===== eval 2 learn 提取提示词（提取端）=====");
-    println!("[指标] spec 非空白字符数: {} (目标 400–600)", spec_len);
-    println!("[指标] 10 段覆盖率: {}/{}", covered, total);
-    println!("[指标] 平均每段字数: {:.1}", avg_section_len);
+    let spec = crate::learn::extract_style_text(client, base_url, api_key, model, article).await?;
+    println!("[指标] {}", crate::eval_runs::spec_checks(article, &spec));
     println!("--- spec ---\n{}", spec);
 
     Ok(())

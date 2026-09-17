@@ -253,8 +253,8 @@ fn report(rows: &[Row], model: &str) -> String {
 pub async fn run() -> Result<(), AppError> {
     let human = read_json("eval/human_calibration.json")?;
     let cases = load_cases(&human)?;
-    let learn = read("prompts/learn_style.md")?;
-    let judge = read("prompts/eval_judge_learn.md")?;
+    let learn = read("eval/fixtures/learn_style_single_v1.md")?;
+    let judge = read("eval/fixtures/eval_judge_learn_v1.md")?;
     let store = Store::from_env()?;
     store.freeze_inputs(&json!({"schema":2, "suite":"three_case_calibration",
         "model":store.model, "learn_prompt":learn, "judge_prompt":judge,

@@ -14,7 +14,7 @@ use crate::utils::{env_var, env_var_or, fatal, md_to_wechat_html};
 pub(crate) fn outline_system_prompt(style: &str) -> String {
     format!(
         "你是一个写作结构设计专家。\n\n\
-         以下是本次文章必须遵循的写作风格（逐条执行，硬约束）：\n\n---\n{style}\n---\n\n\
+         以下是本次文章的写作风格：核心偏好优先采用，条件策略仅在适用时使用；当前任务明确要求与事实边界优先：\n\n---\n{style}\n---\n\n\
          用户会给你一份创作素材，请输出一份【符合上述风格】的文章逻辑大纲。\n\n\
          要求：\n\
          1. 用 Markdown 层级列表（- / 1. 2. 3.）\n\
@@ -26,16 +26,16 @@ pub(crate) fn outline_system_prompt(style: &str) -> String {
     )
 }
 
-/// 正文渲染 system prompt：风格 spec 外包一层硬约束与事实边界。
-/// 通用约束（只输出正文 / 不伪造事实 / 冲突时禁止优先）放在代码里，
+/// 正文渲染 system prompt：风格 spec 外包一层适用条件与事实边界。
+/// 通用约束（只输出正文 / 不伪造事实 / 任务明确要求优先）放在代码里，
 /// 不写进每个风格文件，避免重复与漂移。
 pub(crate) fn style_system_prompt(style: &str) -> String {
     format!(
-        "你是一名中文写作者。以下是必须严格遵循的写作风格，逐条执行，这是硬约束：\n\n---\n{style}\n---\n\n\
+        "你是一名中文写作者。以下是本次写作风格：核心偏好优先采用，条件策略仅在适用时使用，不把单篇观察升级为每段必须执行：\n\n---\n{style}\n---\n\n\
          通用约束：\n\
          - 只输出 Markdown 正文，不复述风格规则，不输出思考、自检或写作过程\n\
-         - 可适当补充有深度的案例、数据、反例，保持自洽、合理、不矛盾\n\
-         - 风格规则若冲突，以「禁止」一节为准"
+         - 不虚构亲身经历、引用、精确数据或事实；可用明确标记为假设的例子解释\n\
+         - 当前写作任务的明确要求与事实边界优先；风格内未规定的维度不强行补齐"
     )
 }
 
@@ -218,8 +218,8 @@ mod tests {
         let p = style_system_prompt("## 定位\n理性分析");
         assert!(p.contains("## 定位"));
         assert!(p.contains("只输出 Markdown 正文"));
-        assert!(p.contains("禁止"));
-        assert!(p.contains("硬约束"));
+        assert!(p.contains("条件策略仅在适用时使用"));
+        assert!(p.contains("明确要求与事实边界优先"));
     }
 
     #[test]

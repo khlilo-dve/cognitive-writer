@@ -13,9 +13,53 @@ pub fn conciseness_score(count: usize) -> f64 {
     }
 }
 
+/// Free-form execution Markdown; length target is scored separately, not padded into validity.
+pub fn validate_execution_spec(spec: &str) -> Result<(), crate::error::AppError> {
+    let count = character_count(spec);
+    if count == 0
+        || count > 1000
+        || spec.contains("```")
+        || spec.contains("~~~")
+        || spec.trim_start().starts_with('{')
+        || serde_json::from_str::<serde_json::Value>(spec).is_ok()
+        || !spec.lines().any(|l| {
+            let l = l.trim();
+            !l.is_empty() && !l.starts_with('#') && l.chars().any(char::is_alphanumeric)
+        })
+    {
+        return Err(crate::error::AppError::Parse(
+            "风格执行文本为空、只有标题、含 JSON/代码围栏或超过1000字符".into(),
+        ));
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn free_format_accepts_unheaded_rules_but_rejects_broken_envelopes() {
+        for valid in [
+            "先给判断，再用短问句限定。",
+            "## 节奏\n短句收束。",
+            "- 先叙述，再停顿。",
+        ] {
+            assert!(validate_execution_spec(valid).is_ok());
+        }
+        for invalid in [
+            "",
+            "## 节奏",
+            "```markdown\n规则\n```",
+            "{}",
+            r#"["规则"]"#,
+            r#""规则""#,
+            "---",
+        ] {
+            assert!(validate_execution_spec(invalid).is_err());
+        }
+        assert!(validate_execution_spec(&"字".repeat(1001)).is_err());
+    }
 
     #[test]
     fn counts_unicode_scalars_and_markdown_but_not_unicode_whitespace() {

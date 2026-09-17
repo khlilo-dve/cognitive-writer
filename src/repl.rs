@@ -443,6 +443,7 @@ impl Repl {
                 .pending_style_content
                 .as_deref()
                 .ok_or_else(|| AppError::Parse("待保存风格缺失；输入 /cancel 取消".into()))?;
+            crate::spec_quality::validate_execution_spec(content)?;
             let path = save_new_style(&self.styles_dir, input, content)?;
             println!("[done] 风格已保存 → {}", path.display());
             self.reset_state();
@@ -1335,6 +1336,18 @@ mod tests {
     static ENV_MUTEX: Mutex<()> = Mutex::new(());
 
     // ── state_label / intent_label ────────────────────────────────
+
+    #[tokio::test]
+    async fn recovered_invalid_learning_result_is_not_saved() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut repl = isolated_repl(dir.path());
+        repl.styles_dir = dir.path().to_string_lossy().to_string();
+        repl.state = SessionState::WaitingForStyleName;
+        repl.pending_style_content = Some("```json\n{}\n```".into());
+        assert!(repl.process_input("不能入库").await.is_err());
+        assert!(!dir.path().join("不能入库.md").exists());
+        assert!(repl.pending_style_content.is_some());
+    }
 
     #[test]
     fn test_state_label_covers_all_states() {
