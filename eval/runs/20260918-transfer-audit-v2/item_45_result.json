@@ -1,0 +1,39 @@
+{
+  "id": "item_45",
+  "group": "creative",
+  "sample": 5,
+  "variant": "two_stage",
+  "body_artifact": "item_45.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 783,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务为明确标注的虚构场景创作，正文开头已用“# 虚构场景”注明。给定核心事实均保留：社区活动室旧物修理日、两名志愿者、台灯接线松动并修好、风扇缺零件未当场修好且登记型号和联系办法、只检查与力所能及修复且不保证全部恢复、旁观者提问以及修理与替换取舍。新增的黄铜灯罩、约四十厘米、四十瓦、电容或轴承等属于虚构物件与场景细节，在 creative 权限下允许；未伪造外部真实统计或真实引用。",
+      "naturalness": "整体连贯可读，场景推进清楚，对话和收束也基本自然。少量地方有模板痕迹和机械化重复，如多次强调“不保证修好/不保证恢复/不宣称修好”，以及“相反，有人更在意替代品”这一转折略显生硬，但未影响理解，故为4。",
+      "source_independence": "未发现可证实的内容迁移。正文主题、事件、人物、结论均为社区旧物修理日，与参考文的猪、知青生活、古希腊斯巴达等核心素材无关。个别连接词如“因为这个缘故”属于短功能词/论证操作，不构成内容污染。",
+      "style_fidelity": "以第一人称回望式叙述进入具体场景，并用短句、口语化插话和物象收束展开：如“先说那盏台灯”“再看那台风扇”“我当时也不见得能等”“那等还是换？能等就等，不能等就换”。这些与参考文的叙述者位置、具体对象切入、夹叙夹议和结尾回扣的机制相近；但讽刺性、离题密度和荒诞感明显弱于参考文，因此不是完全鲜明体现，只能给4。",
+      "task_completion": "完整围绕指定主题：社区活动室旧物修理日、台灯与旧风扇、两名志愿者检查、旁观者提问、台灯修好、风扇未当场修好并登记、修复边界、修理与替换的取舍均有呈现，无核心素材遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

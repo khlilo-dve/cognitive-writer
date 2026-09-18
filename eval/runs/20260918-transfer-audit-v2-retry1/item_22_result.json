@@ -1,0 +1,39 @@
+{
+  "id": "item_22",
+  "group": "strict",
+  "sample": 3,
+  "variant": "single_stage",
+  "body_artifact": "item_22.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 720,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "台灯接线松动并恢复、风扇缺件并登记型号和后续联系且未宣称修好、活动仅检查与力所能及修复、不保证全部恢复等均与权限一致；其余如“电流过不去”“时间也是成本”属于同义转述或逻辑解释，没有新增独立事件、精确时间或数值、外部统计或人物履历。",
+      "naturalness": "全文连贯，场景到判断再到原则的推进顺畅，反问和粗体句使用有节制；但三条原则与多处粗体断言仍带有轻度模板化、格言化痕迹，因此给4。",
+      "source_independence": "正文核心素材来自本次任务：台灯、风扇、志愿者、登记零件、旁观提问、修理与替换取舍；参考样文的软件工程、性能重构、微服务、Profiling 等结论和例证均未迁移。共享的粗体、反问、编号原则属于论证操作和文体形式，不是可证实内容搬运。",
+      "style_fidelity": "参考样文以直接引入、粗体中心论断、反问推进、编号原则和收束格言组织论证；正文同样用“我们经常遇到这样的犹豫”、粗体判断句、“那为什么还要办？”、三条原则和末尾收束，且把这些机制改造成旧物修理场景，体现鲜明并适应新主题。",
+      "task_completion": "覆盖社区活动室旧物修理日、两名志愿者检查、台灯修好、风扇未当场修好并登记、旁观提问、修复边界以及修理与替换的取舍，未发现核心素材遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

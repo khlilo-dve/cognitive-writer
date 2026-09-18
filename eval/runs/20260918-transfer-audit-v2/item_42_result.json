@@ -1,0 +1,41 @@
+{
+  "id": "item_42",
+  "group": "creative",
+  "sample": 4,
+  "variant": "single_stage",
+  "body_artifact": "item_42.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 669,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务为明确标注的虚构场景创作，正文标题即含“虚构场景”。给定的核心事实均未被改写：社区活动室、接触不良的台灯与转动缓慢的风扇、两名志愿者、台灯接线松动重新固定后恢复、风扇需换零件且当天没有、登记型号与后续联系办法且未宣称修好、只提供检查与力所能及的修复而不保证全部恢复。新增内容限于虚构提问与议论，且未伪造外部统计或真实引用。",
+      "naturalness": "整体连贯可读，定义句、场景段与条件段衔接自然；但“这是边界”“这也是好例子”“两种都叫不动脑子”等处有模板化重复，小标题切分较密，因此未给满分。",
+      "source_independence": "样文讨论财富与金钱之别、大饼谬论、创业、可测量性与可放大性、创造人们想要的东西；正文主题为旧物修理与替换的判断条件，未出现样文的论点、例证或结论，无可证实的内容迁移。",
+      "style_fidelity": "保留了样文的多项核心机制：第二人称直呼（“如果你想创造财富”→“如果你走进社区活动室”）、先定义再展开的澄清动作（“财富与金钱并不是同义词”→“修，不是让旧物变新，而是判断它还能不能安全、低成本地继续用”）、加粗点题句、以具体实例支撑抽象判断（木匠与程序员→台灯与风扇两个现场）、分条列条件（“可测量性和可放大性”→“条件有三。一，……二，……三，……”）、以及收尾的凝练断语（“做出人们真正想要的东西……这就是创造财富的核心秘密”→“修是选择，换也是选择，诚实是底线”）。但样文是连贯段落推进，本文大量使用小标题与断句分行，节拍更碎，故未给满分。",
+      "task_completion": "完整覆盖指定主题与全部核心素材：社区旧物修理日与活动室场景、两件待修旧物、两名志愿者的检查、旁观者提问、台灯当场修好、风扇因缺件未当场修好并登记型号与联系方式、修复边界说明，以及修理与替换的取舍讨论。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "正文“有人问，为什么不直接买新的？有人问，等零件要多久？”为新增的虚构提问，属任务在creative模式下允许的对话与观察者创作，未见违反给定核心事实，故未计为事实违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

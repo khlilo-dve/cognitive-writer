@@ -44,5 +44,17 @@ MODEL=deepseek-v4-flash EVAL_RUN_ID=20260912-calibration-v3-fixed EVAL_CONCURREN
 `eval_learning.rs` 同模型重跑冻结的旧单阶段提示词与新两阶段流程，五份样文各自学习，迁移到同一个新主题；共享生成包装和匿名Judge。没有多篇合并学习，不要求新增人评。报告结构/长度、非长度均分、去污染、换题四维、提取调用次数与耗时，采用条件见需求文档。
 Rubric B v2 取消十标题奖惩；旧 coverage 人评语义不再直接适用。`eval_calibration_suite` 专用于历史 v1 校准，固定读取 `eval/fixtures/*_v1.md`，不评测当前学习流程。学习流水线的阶段检查点只表示响应已收到，完整合格以最终 summary 为准；失败诊断与修复请求独立保留。
 
-默认提取保留 legacy：两阶段v2/v3与自由格式单阶段均未通过预定采用条件。结果见 `docs/2026-09-17-style-learning-results.md`。增加 `EVAL_LEARNING_METHOD=direct_free` 可运行单阶段自由格式对照；省略或设为 two_stage 则运行两阶段。各方法独立run_id；直接复用相同请求时必须保留来源记录。
+2026-09-17按当时门槛保留legacy；该混合门槛已被下文Transfer v2修正，旧未通过不代表新提示词整体失败。结果见 `docs/2026-09-17-style-learning-results.md`。增加 `EVAL_LEARNING_METHOD=direct_free` 可运行单阶段自由格式对照；省略或设为 two_stage 则运行两阶段。各方法独立run_id；直接复用相同请求时必须保留来源记录。
 离线产物核验：`python3 scripts/verify_learning_run.py eval/runs/<run_id> --current`，核对十行结果、请求模型、来源和候选提示词、执行文本/正文、长度、阶段调用数和复用SHA。历史提示词不同的run省略--current。
+
+## Transfer v2 修正（2026-09-18）
+当前风格迁移评测入口为 `eval_transfer_audit_suite`，评分提示词 `prompts/eval_judge_transfer_v2.md`。分开报告风格保真、原文独立性、事实合规、自然度、主题/核心素材完成度；字数按非空白Unicode字符独立计算600–900达标率，不交给模型估算，不重复计入主题或风格。没有合成总分或自动采用判定。
+- `transfer_quality.rs`：匿名评分输入、独立分数与可定位引用校验、字数诊断；低分须有对应证据，最多一次诊断修复。
+- `eval_transfer_audit.rs`：复用15篇历史正文重评，冻结15份Spec在同一新题材的strict/creative权限下各生成15篇；四个裁判机制控制，所有请求留证/续跑。
+- `transfer_report.rs`：分任务五维均分、逐样文配对差异、长度达标率和控制的非目标维度漂移。四项控制通过不代表模型评分稳定或人工校准。
+- `scripts/verify_transfer_audit.py eval/runs/<run_id> --current`：离线核验45行/4控制、原正文/Spec未变、请求匿名输入/生成模板、逐项分数和引用、字数及汇总。
+旧 `eval_single_article_learning_suite` 保留用于历史复现，其混合cleanliness与综合采用标准不再用于判断方法总体优劣。旧4.45/4.15等综合分不能与新分项相减。当前默认legacy作为稳定基线保留，本轮只修正评测，未调提取提示词或默认学习方法。
+
+评分的结构/引用修复耗尽后，错误响应检查点仍保留；不能反复同ID重放同一无效输出。使用新run_id，仅复用已验证请求，排除失败评分请求并记录复用来源SHA；不删除历史失败，也不手工补分。运输失败且未形成有效响应的请求可继续用原ID续跑。本轮最终完整记录为 `20260918-transfer-audit-v2-retry1`，原 `20260918-transfer-audit-v2` 保留44成功/1格式失败的证据。
+
+完整结果见 `docs/2026-09-18-transfer-eval-results.md`；不能从旧总分判新提示词整体失败，新旧方法需按场景和独立维度解释。

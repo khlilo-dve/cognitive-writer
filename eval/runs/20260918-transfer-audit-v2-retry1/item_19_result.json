@@ -1,0 +1,64 @@
+{
+  "id": "item_19",
+  "group": "strict",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "item_19.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 658,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实基本保留，但 strict 权限下多处新增了材料未提供的具体物件和独立事件，超出同义转述、逻辑解释和简单连接动作的范围。",
+      "naturalness": "整体连贯，短句和重复主谓结构形成可读的冷峻节奏，但一句一动作的排列和反复的他说她说带来少量机械感与模板痕迹。",
+      "source_independence": "正文主题、事件、人物和结论均来自新任务；与参考文没有可指认的具体内容迁移，只有极简短句、第一人称旁观等通用写作手法。",
+      "style_fidelity": "参考文以短句、独立成段、具体物件与动作推进、极少对话、第一人称旁观者声音和克制留白为核心机制；正文同样以短句、动作链、片段对话、首人称旁观和物件收束来展开，并把这些机制适配到社区修理日这一新主题，不是只取表面形式。",
+      "task_completion": "围绕旧物修理日，涵盖社区活动室、两名志愿者、台灯接线松动并修好、风扇缺零件未能当场修好、登记型号和联系办法、不宣称修好、只做检查和力所能及修复、不保证全部恢复、旁观提问以及继续修理与购买替代之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "他拧开后盖。",
+        "reason": "材料未提供台灯有后盖这一具体物件；strict 权限不允许新增具体物件或拆解细节。"
+      },
+      {
+        "article_quote": "她把灯罩转正，把台灯推到桌子一角。",
+        "reason": "材料未提供灯罩和移动台灯到桌角的动作，属于新增具体物件及位置事件。"
+      },
+      {
+        "article_quote": "外面在换路灯。吊臂横过路对面，黄色的。",
+        "reason": "外部换路灯为新独立事件，吊臂也是新具体物件，与给定旧物修理日场景无关。"
+      },
+      {
+        "article_quote": "他喝了一口水。",
+        "reason": "喝水是新增独立动作并引入水这一具体物件，不属于给定协助动作中的简单停顿或看向。"
+      },
+      {
+        "article_quote": "有人伸手拨了一下风扇的叶片。叶片转着，慢慢停下。",
+        "reason": "材料只允许来访者旁观并提问，未提供触碰风扇叶片这一独立事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "‘风扇的电源线垂在桌沿’是否可视为风扇固有部件的逻辑描写而非新增物件，存在轻微判断边界，本次未计入确定违规。",
+      "‘纸上的字还没有干’是否属于给定纸笔登记动作的状态延伸，存在轻微边界，本次未计入确定违规。",
+      "‘有人把双手插在口袋里，站在桌边’可能属于允许的简单连接动作，未计入确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

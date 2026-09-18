@@ -45,7 +45,9 @@
 
 - REPL 局部修改使用完整文章作为模型上下文，只接收目标块替换内容；程序按原文偏移应用并校验范围外内容。位置不明确进入 WaitingForEditTarget，/cancel 仅取消本次修改；/blocks 查看块编号，可直接说“撤销刚才的修改”“恢复修改前”“改回去”撤销上次局部修改，/undo 保留兼容。
 
-- 单篇学习已实现 legacy / direct_free / two_stage；`STYLE_LEARNING_METHOD` 默认 legacy，因为两轮两阶段和一次自由格式单阶段对照均未通过采用条件。校验与 Rubric B v2 不要求十标题，仍按400–600非空白字符满分、低于最低扣分；阶段留证在 outputs/style-learning/。结果见 docs/2026-09-17-style-learning-results.md。
+- 单篇学习已实现 legacy / direct_free / two_stage；`STYLE_LEARNING_METHOD` 默认 legacy，作为稳定基线保留；旧混合总分不再作为新提示词整体失败的证据。校验与 Rubric B v2 不要求十标题，仍按400–600非空白字符满分、低于最低扣分；阶段留证在 outputs/style-learning/。历史实验见 docs/2026-09-17-style-learning-results.md。
+
+- 当前迁移评测使用 Transfer v2：风格保真、原文独立性、事实合规、自然度、主题完成度独立报告；字数程序统计，不合成采用总分。入口 `eval_transfer_audit_suite`，方案见 docs/superpowers/specs/2026-09-18-transfer-eval-correction.md。
 
 ## 目录与产物约定
 - `src/`：扁平 Rust 模块；新模块在 `src/lib.rs` 注册，测试内嵌模块底部。

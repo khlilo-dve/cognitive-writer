@@ -1,0 +1,39 @@
+{
+  "id": "item_44",
+  "group": "creative",
+  "sample": 5,
+  "variant": "single_stage",
+  "body_artifact": "item_44.md",
+  "length": {
+    "above": 0,
+    "below": 46,
+    "characters": 554,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "事实模式为creative且开头已标注“虚构场景”。给定的核心事实均未被改写：两名志愿者（“两名志愿者穿灰马甲，一左一右坐下”）、台灯接线松动并当场修好（“说接线松了，重新固定就好。三分钟，灯亮了”）、风扇缺零件且只登记不承诺（“缺零件。型号记下，联系方式也写了，只是没拍胸脯说”）、检查不收费且不保证（“检查不要钱，能修的修，不能修的登记，不保证”）。灰马甲、标语、虚构对话与人物属于creative模式明确允许的虚构元素；文中没有伪造外部真实统计或真实引用，也没有把虚构经历冒充作者现实经历。",
+      "naturalness": "整体连贯，口语化对话与叙述交替自然，反讽比喻与人物互动贴合场景。稍有机械感的是多处“像……”比喻和对称短句（“松了，紧一紧；缺了，得等”“灯是松了，风扇是缺了”）密集排布，格言化痕迹偏重，因此未给满分。",
+      "source_independence": "正文题材、人物、场景与结论均来自本次任务给定的社区旧物修理日，与参考样文（插队喂猪、特立独行的猪、斯巴达）没有任何可指认的内容对应关系；可共有的只是第一人称叙述、反讽比喻和短句节拍这类通用手法，不构成内容迁移。",
+      "style_fidelity": "保留了参考样文最显眼的几项机制：第一人称旁观者口吻（“我拎着一盏接触不良的台灯去”）、以比喻制造反讽的闲笔（“像在跟人赌气”“像认领失散亲戚”“像某种合同条款”）、短促的断言式节拍（“灯是松了，风扇是缺了。”）以及结尾用一个不动声色的具象收束（“风扇留在桌上，转得慢，但没停。”）。与样文相比，缺失的是那种由一个具体对象展开抽象推论、并反复回到“设置/命运”这类大命题的论证性铺展——本文的议论压缩成一句“我算前者，但不绝对”，因此只算多数而非全部主要机制得到体现。",
+      "task_completion": "完整涵盖要求的核心素材：修好的台灯、未能当场修好的风扇及型号/联系方式登记、来访者旁观并提问（“有人在一旁提问，问什么算‘能修’”）、修复边界与不保证（“能修的修，不能修的登记，不保证”），并以叙述者看重“灯还亮着”与姑娘考虑“先买新的？”两条线呈现修理与替换的取舍；主题始终围绕该场景，无遗漏项。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

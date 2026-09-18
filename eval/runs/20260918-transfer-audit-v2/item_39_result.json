@@ -1,0 +1,43 @@
+{
+  "id": "item_39",
+  "group": "creative",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "item_39.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 666,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "creative模式允许虚构人物、动作、对话和物件；标题与首句均注明“虚构场景”，台灯接线松动并修好、风扇缺件只登记且不宣称修好、只检查与力所能及修复、旁观提问、修理与替换取舍等给定核心事实均保留，未伪造外部真实统计或引用。",
+      "naturalness": "整体连贯，设问—举例—原则—收束清楚；但“两种相反趋势”“让缺件登记像推脱”“把隐形成本摊开”等表达略生硬，编号原则与前文衔接有模板痕迹，故为4。",
+      "source_independence": "未发现可证实的核心内容或结论从参考样文迁移；软件工程、性能瓶颈、架构腐化等内容均未出现，台灯、风扇、修理日、修换取舍均来自本次任务材料。共享的设问、编号原则、首尾对照等属于论证操作和句法框架，按规则不计污染。",
+      "style_fidelity": "以“我们/你”的直接对话、粗体命题句、“为什么？”设问、首先/其次推进、“看一处对比”式例证、编号原则和末段对照式收束，回应并适应了参考样文的论证声音与展开节拍，不只是表面形式。",
+      "task_completion": "围绕旧物修理日、社区活动室、台灯修复、风扇未修好并登记、旁观提问、修复边界和修换取舍展开，核心事件基本完整；但“两名志愿者负责检查”未明确落实为两名志愿者，文中只出现志愿者小林和未标明志愿者身份的工作人员，属次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确呈现任务要求的“两名志愿者负责检查”：正文只出现志愿者小林，另一处为未标明志愿者身份的工作人员。"
+    ],
+    "uncertainties": [
+      "“工作人员”是否可视为任务要求的第二名志愿者、是否参与检查，文本未明确；未据此判定事实违规或源文迁移。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

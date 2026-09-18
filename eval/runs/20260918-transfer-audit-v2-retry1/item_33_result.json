@@ -1,0 +1,39 @@
+{
+  "id": "item_33",
+  "group": "creative",
+  "sample": 1,
+  "variant": "single_stage",
+  "body_artifact": "item_33.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 719,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注‘虚构场景’，在creative权限内加入志愿者、老人、年轻人、对话和具体零件诊断等虚构元素；台灯接线松动并修好、风扇缺件登记未称修好、只检查和力所能及修复等给定核心事实均未被改写，也没有伪造外部统计或真实引用。",
+      "naturalness": "短句、反问和粗体金句的密度较高，但围绕台灯与风扇两个场景推进，转折和收束自然，未出现生硬拼贴或机械重复到影响阅读。",
+      "source_independence": "没有可指认的参考文核心结论、论据或具体素材迁移；共享的只是‘你经常听到’式开场、反问、算账、粗体判断等论证操作和功能词，按规则不计污染。",
+      "style_fidelity": "与参考文同样采用第二人称直接对话、反问推进、粗体断言、‘不是X而是Y’的校正句式和先给判断再拆账的论证节拍；内容已转为旧物修理，机制适应新主题。",
+      "task_completion": "覆盖社区活动室修理日、接触不良台灯、转动缓慢风扇、修好台灯、缺件风扇登记未称修好、旁观提问、修复边界，以及等待与替换的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

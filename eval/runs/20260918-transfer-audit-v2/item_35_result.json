@@ -1,0 +1,41 @@
+{
+  "id": "item_35",
+  "group": "creative",
+  "sample": 2,
+  "variant": "single_stage",
+  "body_artifact": "item_35.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 806,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务为creative模式并允许虚构人物、动作、对话、物件与独立事件；正文开头已注明“虚构场景”，未改写给定核心事实（台灯接线松动并修好、风扇缺零件、登记型号与电话、未宣称已修好、只做检查与力所能及的修复），未伪造外部真实统计、真实引用或作者现实经历。",
+      "naturalness": "整体连贯可读，短句与对白节奏统一；但“有人问：”及问答对反复出现同一模板，问答块之间的衔接略显机械，属少量模板痕迹。",
+      "source_independence": "主题、场景、人物、事件链全部来自本次任务给定的社区修理日素材，未发现任何可指认来自参考样文的内容、结论或细节迁移；重复出现的只是对白分行、短句成段等通用句法/论证操作，不构成污染。",
+      "style_fidelity": "沿用参考样文的核心机制：极短陈述句独立成段（“门开着。”“线头松。”“灯亮。”）、无引导语的连续对白交替成行、以具体小物件承载动作（指甲锉／橡皮筋、镊子、铁盒）、结尾用否定式收束（样文“什么都没有发生”对应本文“没有更多回答”“风扇没有转”）。差异在于样文是第一人称内省式观察者并有较密的感官铺陈，本文转为旁观第三人称、偏流程记录，故未到5。",
+      "task_completion": "完整覆盖核心素材：桌上接触不良的台灯经重新压线后恢复、旧风扇因电容/缺零件当天未修好并登记型号与电话、旁观者的多轮提问、修复边界（“不能。”“能修一件是一件。”），并通过“买新的不是更快”“先买新的用／旧的呢——先放着”呈现修理与替换的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "文中多轮问答未标注说话人，部分问答归属需读者推断，但这属于叙事留白，不构成事实违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

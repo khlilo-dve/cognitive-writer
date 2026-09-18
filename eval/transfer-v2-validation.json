@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "date": "2026-09-18",
+  "run": "20260918-transfer-audit-v2-retry1",
+  "library_tests": {
+    "passed": 215,
+    "failed": 0,
+    "ignored": 9
+  },
+  "binary_build": "passed",
+  "artifact_verification": {
+    "status": "passed",
+    "rows": 45,
+    "control_cases": 4,
+    "judge_controls_passed": true,
+    "checkpoints": 109,
+    "current_prompts_verified": true
+  },
+  "judge_controls_passed": true,
+  "control_mode_drift": {
+    "extra": {
+      "creative_minus_strict": {
+        "factual_compliance": 2.0,
+        "naturalness": 0.0,
+        "source_independence": 0.0,
+        "style_fidelity": 0.0,
+        "task_completion": 0.0
+      },
+      "non_fact_drift_observed": false
+    },
+    "leak": {
+      "creative_minus_strict": {
+        "factual_compliance": 2.0,
+        "naturalness": 1.0,
+        "source_independence": 1.0,
+        "style_fidelity": 1.0,
+        "task_completion": 0.0
+      },
+      "non_fact_drift_observed": true
+    }
+  },
+  "recovery": {
+    "previous_run": "20260918-transfer-audit-v2",
+    "completed_rows": 44,
+    "format_failures": 1,
+    "reused_requests": 108,
+    "new_requests": 1,
+    "previous_console_log": "unavailable after continuation; failure/partial and raw responses preserved"
+  },
+  "cache_resume": {
+    "hits": 109,
+    "new_requests": 0
+  },
+  "protected_paths_unchanged": [
+    "prompts/analyze_style.md",
+    "prompts/learn_style.md",
+    "prompts/learn_style_direct.md",
+    "eval/fixtures",
+    "src/generate.rs",
+    "src/learn.rs",
+    "src/style_learning.rs",
+    "eval/samples",
+    "eval/baseline",
+    "eval/baseline_specs",
+    "eval/human_calibration.json",
+    "styles",
+    "eval/runs/20260917-single-article-v2",
+    "eval/runs/20260917-single-article-v3",
+    "eval/runs/20260917-single-article-direct-v1"
+  ],
+  "default_method": "legacy",
+  "human_reviewed": false
+}

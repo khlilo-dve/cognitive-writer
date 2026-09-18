@@ -1,0 +1,60 @@
+{
+  "id": "item_20",
+  "group": "strict",
+  "sample": 2,
+  "variant": "single_stage",
+  "body_artifact": "item_20.md",
+  "length": {
+    "above": 0,
+    "below": 8,
+    "characters": 592,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "严格素材下多处增加素材未给出的具体物件、环境细节和独立动作/事件，如螺丝刀、后盖、桌面木纹划痕、来访者放下物品登记离开、台灯被拿走等。",
+      "naturalness": "整体连贯，短句和留白有节奏；但“有人…”“没有人…”连续排比与若干被动短句略显模板化、机械。",
+      "source_independence": "未发现可指认来自参考样文的核心内容、结论、专名或独特素材；活动室、台灯、风扇、登记、取舍均来自当前任务。",
+      "style_fidelity": "延续参考文的极简短句、近景现在时、物件主导、少因果解释、用停顿和“没有”收束；但参考文的第一人称回忆、精确数字与高密度物质细节未全量对应，属于适应新主题后的部分机制保留。",
+      "task_completion": "围绕社区旧物修理日，涵盖活动室、接触不良台灯修好、旧风扇缺件未修好并登记型号与联系办法、旁观提问、只检查和修复边界、继续使用与替换/等待取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "桌面是浅色木纹，边上有旧划痕。",
+        "reason": "严格素材未给出桌面材质与划痕细节，属于新增具体物件/环境信息。"
+      },
+      {
+        "article_quote": "螺丝刀拧了几下。",
+        "reason": "素材只允许“重新固定接线”的转述，未提供螺丝刀这一具体工具，属于新增具体物件。"
+      },
+      {
+        "article_quote": "志愿者拆开后盖，把零件取出来看。",
+        "reason": "素材只说明风扇需要更换零件且当天没有合适零件，未提供拆开后盖、取出零件查看的独立动作和具体部件。"
+      },
+      {
+        "article_quote": "有人把手里的东西放下，登记，离开。",
+        "reason": "素材只允许来访者旁观并提问、工作人员登记零件型号和联系办法；这里新增来访者放下物品、登记并离开的独立事件。"
+      },
+      {
+        "article_quote": "台灯被拿走。",
+        "reason": "素材未提供台灯被拿走或取回的后续事件，属于新增独立事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

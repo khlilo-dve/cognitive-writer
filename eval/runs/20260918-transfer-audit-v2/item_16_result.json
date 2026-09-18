@@ -1,0 +1,44 @@
+{
+  "id": "item_16",
+  "group": "strict",
+  "sample": 1,
+  "variant": "two_stage",
+  "body_artifact": "item_16.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 673,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "正文中的事件性信息均可由任务素材支持或作同义转述：台灯接触不良与接线重新固定后亮起、风扇缺件当天未修好、登记型号和后续联系办法、没有宣称修好、不保证全部恢复、等待与购买替代的取舍均有对应；未新增可证实的人物履历、精确时间/数值、新物件、独立事件或外部引用。",
+      "naturalness": "整体连贯，短句和反复对照有文章节奏，但多处反义对照和排比式短段略呈模板化，机制使用不像完全自然生成。",
+      "source_independence": "核心内容围绕社区修理日、台灯与风扇的具体结果展开，未搬运参考样文的认知变现、信息到风险、付费课等结论或素材；共享的“我承认”、反问和低成本/高成本对照属论证操作，不构成可证实内容迁移。",
+      "style_fidelity": "与参考样文一样采用第二人称直陈、先立反直觉判断再用粗体句强调、以反问推进、用具体场景做论证、以成本/账目式对照收束，并保留“我承认”式让步；这些机制被自然移到修理日主题上。",
+      "task_completion": "已涵盖台灯修好、风扇未当场修好、旁观提问、修复边界和修理/替换取舍；但任务明确要求的“两名志愿者”未写出，只以“志愿者”笼统指代，属次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确写出“两名志愿者”这一数量信息，只以“志愿者”笼统出现。"
+    ],
+    "uncertainties": [
+      "文中如“便宜的东西坏了就换”“修理是情怀，不是现实”等评价性判断未在素材中逐字给出，但更像议论/逻辑解释而非可证实事实新增，未据此扣分。",
+      "“这句话写在活动的边界里”可理解为比喻，也可理解为存在书面表述；缺乏更多证据，未判为事实越界。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

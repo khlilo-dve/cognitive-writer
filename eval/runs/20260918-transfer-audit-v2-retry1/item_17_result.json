@@ -1,0 +1,47 @@
+{
+  "id": "item_17",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "item_17.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 698,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "给定核心素材基本以同义转述和逻辑解释呈现，但加入材料未给的成本判断“修起来也不贵。这是低代价的一类”，属于strict模式下新增主张。",
+      "naturalness": "整体连贯，场景—检查—边界—取舍—建议的推进顺畅，句子可读；仍有“一层/筛选/取舍”等重复痕迹和参考式设问模板感。",
+      "source_independence": "主题、场景、物件、论证结论均围绕旧物修理日重新组织，未发现参考文中认知变现、风险下注、概念收藏家等核心内容或结论迁移；共享的只是设问、分层、加粗断言等论证操作。",
+      "style_fidelity": "沿用参考文的设问标题、加粗反直觉断言、第二人称劝告、分层推进（先看/再看/再往下一层）和结尾实用建议；也使用短句与自问自答。但缺少参考文那种第一人称经验举证和算账式具象展开，故为4。",
+      "task_completion": "涵盖社区活动室、台灯和风扇、两名志愿者、旁观提问、台灯接线松动并修好、风扇缺零件并登记未修好、不保证全修以及修理与替换取舍，核心素材无遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "你看，问题不大，修起来也不贵。这是低代价的一类。",
+        "reason": "严格事实权限只允许写台灯接线松动、志愿者重新固定接线后灯恢复正常，未提供任何关于维修费用或低代价的判断；该句新增了材料未给的成本主张。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“灯不亮”可视为“接触不良”的合理表现，但也较原文更具体，性质介于同义转述与新增症状之间。",
+      "“工具、判断、零件”和“看过拆装”是否只是逻辑解释，还是新增具体物件/独立活动，界限不够明确，未据此扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

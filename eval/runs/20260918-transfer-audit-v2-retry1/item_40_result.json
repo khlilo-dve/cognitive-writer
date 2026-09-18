@@ -1,0 +1,45 @@
+{
+  "id": "item_40",
+  "group": "creative",
+  "sample": 4,
+  "variant": "two_stage",
+  "body_artifact": "item_40.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 772,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 4.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注‘虚构场景’，社区修理日的给定核心事实均被保留，未伪造外部真实统计或引用；新增的‘轴承’‘转子发涩’等细节属于creative模式允许的虚构物件与动作，不构成越界。",
+      "naturalness": "整体连贯，论证推进清楚；但‘可感情境是’等表达略生硬，定位/处理、修/替等二分句式重复较多，带有一定模板感。",
+      "source_independence": "核心情节、结论和任务给定素材均未从参考样文迁移；共享的概念辨析、举例、设问等属论证操作，不计污染。但正文复用了参考样文‘压缩过程’这一独特隐喻，构成一处轻微可证实短语/概念绑定。",
+      "style_fidelity": "开篇以概念边界和‘不是A而是B’重新界定核心词，随后用具体情境、第二人称设问、‘试想一下’‘同样’‘我认为’推进，并以边界/核心收束；这些论证动作与参考样文高度一致，且自然适配修理日主题。",
+      "task_completion": "覆盖社区活动室、接触不良台灯、转动缓慢风扇、两名志愿者、旁观提问、接线松动后修复、风扇缺零件并登记联系、不宣称修好、修复边界及修/替取舍，核心素材完整。"
+    },
+    "source_leakage": [
+      {
+        "article_quote": "修是压缩过程，不是无限延长寿命",
+        "source_quote": "你可以把创业想象成一个压缩过程",
+        "reason": "样文用‘压缩过程’描述创业把多年工作压缩成几年；正文把同一独特隐喻直接移用到‘修’上，构成一处可证实的短语/概念绑定。"
+      }
+    ],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

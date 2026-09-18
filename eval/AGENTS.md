@@ -29,3 +29,12 @@
 
 - 单阶段自由格式对照：`EVAL_LEARNING_METHOD=direct_free EVAL_RUN_ID=20260917-single-article-direct-v1 cargo test --lib eval_single_article_learning_suite -- --ignored --nocapture`；省略方法变量仍为两阶段。每种候选各用新run_id。
 - 产物核验：`python3 scripts/verify_learning_run.py eval/runs/<run_id> --current`（历史不同提示词省略--current）。默认方案的选择以完整结果报告为依据，不因Spec分数上升而忽略换题退化。
+
+## Transfer v2 迁移评测修正（2026-09-18）
+- 当前入口：`EVAL_RUN_ID=20260918-transfer-audit-v2 EVAL_CONCURRENCY=3 EVAL_TIMEOUT_SECONDS=180 cargo test --lib eval_transfer_audit_suite -- --ignored --nocapture`。复用旧正文重评15项，同一新题材下strict/creative权限补测30项，四个独立控制；不重新提取Spec。
+- 五维分别报告：style_fidelity / source_independence / factual_compliance / naturalness / task_completion。事实与字数不能重复扣主题/风格分；原文污染必须有原文和正文两处可定位证据。程序单独统计600–900非空白字符达标率。
+- 不再合成自动采用总分；按任务、维度、配对差异解释。模型控制失败或非事实维度漂移必须如实呈现，不调裁判直到获得期望结论。
+- 旧提示词、Spec、文章、历史summary及原人评只读；新评分保存新run_id。阶段评分响应检查点仅表示收到，若证据校验失败会有独立repair请求。只有最终完整summary标记完成。
+- 离线检查：`python3 scripts/verify_transfer_audit.py eval/runs/20260918-transfer-audit-v2 --current`；续跑应缓存命中且0新请求。
+
+评分的结构/引用修复耗尽后，错误响应检查点仍保留；不能反复同ID重放同一无效输出。使用新run_id，仅复用已验证请求，排除失败评分请求并记录复用来源SHA；不删除历史失败，也不手工补分。运输失败且未形成有效响应的请求可继续用原ID续跑。本轮最终完整记录为 `20260918-transfer-audit-v2-retry1`，原 `20260918-transfer-audit-v2` 保留44成功/1格式失败的证据。

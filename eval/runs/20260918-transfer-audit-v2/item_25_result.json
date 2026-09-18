@@ -1,0 +1,41 @@
+{
+  "id": "item_25",
+  "group": "strict",
+  "sample": 4,
+  "variant": "two_stage",
+  "body_artifact": "item_25.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 707,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 3.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "正文核心事实均与任务给定素材一致：社区活动室、台灯和风扇、两名志愿者、旁观提问、台灯接线松动并恢复、风扇需换零件且当天无合适零件、工作人员登记零件型号和联系办法且未宣称修好、只提供检查和力所能及修复。新增内容主要是定义、逻辑解释和评价性讨论，没有新增人物履历、精确数值、外部统计、新物件或独立事件。",
+      "naturalness": "整体可读且连贯，但模板化短句和重复论证标记偏密，如两次“但事实是”、“不是……而是……”、“两者不可互换”、“这就是……核心”，若干段落呈断句式推进，读感偏机械，未达到自然有节制的程度。",
+      "source_independence": "正文没有迁移参考样文的财富、金钱、大饼谬论、创业、可测量性/可放大性等核心内容或结论；可见相似主要是论证动作、句式模板和术语定义格式，属于共享论证操作，不构成内容绑定。",
+      "style_fidelity": "明显沿用参考样文的论证型随笔机制：以术语定义和括号英文建立区分，先立常见成见再以“但事实是”反驳，用“不是……而是……”“两者不可互换”制造对照，第二人称发问并以“我认为”收束，最后用“这就是……核心”点题；这些机制从财富论说迁移到修理日主题，且基本适配。",
+      "task_completion": "完整覆盖指定核心素材：社区活动室、台灯与风扇、两名志愿者、旁观者提问、台灯修复、风扇因缺零件未当场修好并登记、活动边界、修理与替换取舍。主题始终围绕旧物修理日，没有明显遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“工具和手艺够用”“答案取决于物品、故障与你的时间”“修理日不替你作道德判断”属于解释性或评价性表述，是否被严格视为素材未提供的主张存在轻微解释空间；因不构成新增独立事实，未列为确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

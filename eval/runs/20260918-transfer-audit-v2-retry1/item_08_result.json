@@ -1,0 +1,58 @@
+{
+  "id": "item_08",
+  "group": "historical",
+  "sample": 3,
+  "variant": "two_stage",
+  "body_artifact": "item_08.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 849,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心素材基本按权限展开，未添加人物履历、统计、外部引用或冒充真实经验；但任务素材只说工作人员走过去协助，未说明老年读者最终完成借阅，正文却写“借阅完成了”，属于新增未提供的结果事件，strict 模式下越界。",
+      "naturalness": "整体连贯，场景从快速借阅者转到老年读者再转到工作人员协助，逻辑清楚；但“不是……而是……”和成组对比反复出现，略有机机械模板感，因此不超过4。",
+      "source_independence": "正文讨论对象、场景、论点和结论均围绕社区图书馆、自助借书机、老年读者与人工窗口展开，未迁移参考样文中关于软件工程、性能瓶颈、微服务、重构或可观测性的内容；共享的只是“仔细审视”“为什么这么说”“结果是什么”等论证操作和功能句式，不构成内容迁移。",
+      "style_fidelity": "开头以“但如果你仔细审视”提出反直觉命题，并用“为什么这么说？”“以……为例”“结果是什么？”推进，结尾用编号原则和“从来不是为了……而是……”收束，明显延续参考样文的说理骨架与节拍，同时迁移到社区图书馆可达性主题，属于鲜明体现并适应新主题。",
+      "task_completion": "围绕“社区图书馆如何让不同读者都方便借书”，涵盖自助借书机、快速完成借阅的读者、停在屏幕前的老年读者、工作人员协助、人工窗口仍保留等核心素材，并讨论了效率与可达性关系，主题与素材完成度高。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "借阅完成了",
+        "reason": "任务素材仅说明工作人员走过去协助，未说明老年读者最终完成借阅；strict 模式不允许新增未提供的事件或结果，这里增加了“完成借阅”这一结果事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "工作人员“问了一句，然后一步步指着屏幕说明”是否属于对“协助”的合理细化，难以完全确定；若按 strict 严格解释，也可能被视为新增具体动作。",
+      "“机器旁标明可请工作人员帮忙”属于建议而非冒充既成事实，但 strict 模式对新增具体物件或未提供主张的边界存在解释空间。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 0,
+  "previous_transfer": {
+    "cleanliness": 5.0,
+    "naturalness": 4.0,
+    "reasons": [
+      "style_fidelity：文章明显迁移了样文的系统思考/知识分享机制，如先给反直觉判断“效率提升不等于可达性提升”，再用“为什么这么说？”展开，以具体场景为例，用“结果是什么？”收束，并落到编号原则和“不是……而是……”式结论。",
+      "task_fulfillment：完整覆盖给定素材：自助借书机、读者快速完成、老年读者停在屏幕前、工作人员上前协助、人工服务窗口仍保留；围绕效率与可达性关系讨论，且采用允许的观察者第一人称，没有添加具体统计、外部引用或人物履历。",
+      "cleanliness：未复述参考样文中的软件工程、架构腐化、微服务拆分、性能瓶颈等素材和结论；正文事实均来自新任务场景或由其合理展开。",
+      "naturalness：整体通顺、结构清楚，但“为什么这么说”“以……为例”“结果是什么”以及“不是……而是……”的复用密度较高，模板痕迹较明显，部分对偶句略机械。"
+    ],
+    "style_fidelity": 5.0,
+    "task_fulfillment": 5.0
+  }
+}

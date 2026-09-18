@@ -1,0 +1,59 @@
+{
+  "id": "item_10",
+  "group": "historical",
+  "sample": 4,
+  "variant": "two_stage",
+  "body_artifact": "item_10.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 813,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 4.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "全文只使用任务给定的自助借书机、读者快速借阅、老年读者停在屏幕前、工作人员协助、人工窗口保留等场景；未新增人物履历、精确统计、外部引用或独立事件。观察者第一人称和连接动作在允许范围内。",
+      "naturalness": "行文连贯，能顺畅读完；但“第一步不是问……而是问……”“流行说法是……”“但事实并非如此”“试想一下”等模板式论说痕迹较明显，机制使用略显机械。",
+      "source_independence": "除一处经济短语绑定外，正文主题、场景、结论均来自本次任务；未迁移财富、创业、大饼谬论、可测量性/可放大性等样文核心内容。",
+      "style_fidelity": "文章明显复现参考文的论说声音：先做概念区分并用英文括注（效率（efficiency）/可达性（accessibility）），再树“流行说法”并反驳“但事实并非如此”，插入“试想一下”式例证，最后用“你希望……吗？我认为不是”和第二人称收束。这些机制贴合社区图书馆主题，不是主题复制。",
+      "task_completion": "围绕社区图书馆让不同读者方便借书展开，涵盖自助借书机、快速借阅读者、停在屏幕前的老年读者、工作人员协助、保留人工窗口，并讨论效率与可达性关系。"
+    },
+    "source_leakage": [
+      {
+        "article_quote": "边际成本几乎为零",
+        "source_quote": "复制给一百万个用户的边际成本几乎为零",
+        "reason": "正文用样文中的经济命题“边际成本几乎为零”来论证自助机服务，虽换了对象，但短语和概念可直接追溯到参考样文，构成一处轻微内容绑定。"
+      }
+    ],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“把自助机放低、字大、旁边有人”与“工作人员主动看屏幕前停留的人”是否算 strict 下新增具体安排或主张存在边界；因属建议性措施而非事实断言，未列为事实违规。",
+      "“我站在借书区”的地点交代是否超出给定观察场景存在轻微边界；因任务允许观察者第一人称且未增加独立事件，未列为事实违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 0,
+  "previous_transfer": {
+    "cleanliness": 4.0,
+    "naturalness": 4.0,
+    "reasons": [
+      "风格上沿用参考样文的核心机制：先做概念区分（财富/金钱→效率/可达性），再指出流行说法并还原推理链，用“但事实并非如此”转折，插入“试想一下”和问答收束，并保留中英括号术语（efficiency/accessibility/self-service kiosk），且已适配社区图书馆借书场景。",
+      "任务完成度高：完整覆盖自助借书机、熟练读者快速完成借阅、老年读者停在屏幕前、工作人员协助、人工窗口保留等给定素材，围绕效率与可达性展开，未添加人物履历、统计或外部引用，符合600–900字要求。",
+      "清洁度基本合格，未复述参考样文的财富/创业观点或情节；但“一台自助机让熟练读者少等一会儿，边际成本几乎为零”与参考样文“复制给一百万个用户的边际成本几乎为零”表达相近，且该成本判断未由新任务素材提供，属轻微源文表达/无依据事实残留。",
+      "语言总体通顺，但“流行说法是……推理链……但事实并非如此”“试想一下”“你希望……吗？我认为不是”“这就是……核心”等句式明显套用参考样文模板，衔接略机械。"
+    ],
+    "style_fidelity": 5.0,
+    "task_fulfillment": 5.0
+  }
+}

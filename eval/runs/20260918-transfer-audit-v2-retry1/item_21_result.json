@@ -1,0 +1,55 @@
+{
+  "id": "item_21",
+  "group": "strict",
+  "sample": 2,
+  "variant": "two_stage",
+  "body_artifact": "item_21.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 614,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心流程基本来自素材，但strict权限下新增了材料未给的对话主张与物件履历，并加入若干具体人物独立动作，如风扇使用年限、折登记单、空手离开、留下等联系，越出同义转述、逻辑解释和不增加独立事实的连接动作范围。",
+      "naturalness": "整体连贯，短句和重复有节奏控制，但重复句式出现较多，局部略呈刻意模板感，故为4。",
+      "source_independence": "样文围绕香港酒店、合同、豪车等私人叙事，正文围绕社区修理日，未发现共享的具体人物、事件、物件、数字、结论或可证实的内容迁移。",
+      "style_fidelity": "采用第三人称、短句、克制留白、重复对照和结尾停滞感，与样文的冷感、短句节拍、重复动作和低情绪叙事相近；但样文的第一人称和密集精确数字等机制未被采用，故为4。",
+      "task_completion": "完整围绕社区修理日，涵盖社区活动室、两名志愿者、台灯接触不良并修好、风扇需换件且当天无合适零件并登记后续联系、旁观提问、修复边界，以及修理与替换的取舍场景。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "旁边有人说，新的也不贵。",
+        "reason": "strict模式不允许补造材料未提供的对话主张；此句新增了旁人关于购买替代品的具体观点。"
+      },
+      {
+        "article_quote": "另一个人说，这台用了很多年。",
+        "reason": "strict模式不允许补造新物件履历或新增信息；素材未提供这台风扇已使用多年。"
+      },
+      {
+        "article_quote": "有人把登记单折好，放进口袋。有人空手离开，说回去再想想。有人留下等联系。",
+        "reason": "strict模式不允许新增独立事件；素材未提供来访者折单、空手离开或留下等待联系等具体动作。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“拆底座”“螺丝”“外壳”“插头”等是否算新增具体物件，还是修理给定台灯/风扇时必要的组成部件与连接动作，存在解释空间，未计为确定违规。",
+      "“志愿者说，可以试，但转得慢，电机可能发热。”可能被视为对风扇转动缓慢后果的逻辑解释，也可能被视为新增对话主张或具体后果，未计为确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,42 @@
+{
+  "id": "item_36",
+  "group": "creative",
+  "sample": 2,
+  "variant": "two_stage",
+  "body_artifact": "item_36.md",
+  "length": {
+    "above": 0,
+    "below": 116,
+    "characters": 484,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "按creative权限，开头已注明“虚构场景”，人物、对话、物件、独立事件和内部统计均属虚构；未改写给定核心事实，未伪造外部真实统计或真实引用。",
+      "naturalness": "短句与精确细节的使用连贯，动作推进清楚，对话不僵硬，结尾收束自然，没有明显拼贴或模板痕迹。",
+      "source_independence": "正文未出现可证实的参考样文内容迁移；场景、人物、物件、对话与结论均为新任务素材或creative权限内的虚构新增，与样文的酒店、签字、豪车等无对应关系。",
+      "style_fidelity": "短句、精确数字、动作推进、克制对话、以物件收束等机制明显；但参考样文为第一人称私密记忆与关系场景，本文改为第三人称外部观察，人称和情绪层级存在差异，故未完全贴合。",
+      "task_completion": "覆盖修好的台灯、待件风扇、旁观提问、修复边界和修理与替换取舍；但未明确两名志愿者，且未点明社区与旧物修理日，属次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确写出“社区”与“旧物修理日”，只以活动室和活动指代。",
+      "未明确体现两名志愿者，正文只标注志愿者老周；登记型号者为工作人员，未说明其是否为第二名志愿者。"
+    ],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

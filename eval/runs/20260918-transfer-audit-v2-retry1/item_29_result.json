@@ -1,0 +1,46 @@
+{
+  "id": "item_29",
+  "group": "strict",
+  "sample": 5,
+  "variant": "single_stage",
+  "body_artifact": "item_29.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 700,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实均与材料一致：两志愿者、台灯接线松动并修复、风扇缺零件并登记、不保证全修好、修理/替换取舍。惟“多半是‘还能修吗’”在strict下新增了材料未提供的具体对话/提问原文，属轻微越界。",
+      "naturalness": "整体连贯，句法有节制，反讽和复沓（算、慢）服务主题；但“有人……有人……”与若干格言式收束稍显模板化，故4。",
+      "source_independence": "正文围绕社区修物日展开，未复现样文中猪、插队、斯巴达、样板戏等具体素材，也未迁移其结论或叙事段落；仅共享第一人称与随笔议论这类非内容机制。",
+      "style_fidelity": "沿用了参考样文的第一人称随笔声音、自嘲式旁观位置、由具体物件转向抽象计较的论证动作，以及“修理日不是保修日”“算到一半”这类格言/反讽句；但叙事戏剧性和插叙幅度弱于样文，故为4。",
+      "task_completion": "涵盖活动室修理日、两名志愿者、修好的台灯、未当场修好的风扇、登记联系办法、旁观提问、修复边界及等待/替换取舍，核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "多半是“还能修吗”",
+        "reason": "严格素材写作允许同义转述、逻辑解释和不增加独立事实的连接动作，不允许新增对话主张或具体引用；材料只说明来访者可以旁观并提问，未提供该具体问话。该句在正文中补造了直接引语。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“围观的人松口气”“答案并不统一”等是否算新增可证实信息，介于氛围/逻辑解释与新增事实之间，按不确定处理，不据此额外扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

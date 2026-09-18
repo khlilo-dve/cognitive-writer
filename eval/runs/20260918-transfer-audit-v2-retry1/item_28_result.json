@@ -1,0 +1,61 @@
+{
+  "id": "item_28",
+  "group": "strict",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "item_28.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 660,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 2.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "给定核心事实基本保留，但在严格权限下补入多处独立事件、对话主张和亲身经历：叙述者按开关拍底座拧灯泡、旁人说接线松了、有人问具体问题、后来没见过等，均非素材提供。",
+      "naturalness": "整体连贯，短句和停顿有效地服务主题；但‘有人…有人…’与‘两类都算处置’等重复稍显机械，故为4。",
+      "source_independence": "核心内容转向社区修理日、台灯、风扇与修理/替换取舍，未出现参考文中的猪、插队、斯巴达、特立独行等具体内容；仅有第一人称、短句和‘不抱怨’式姿态等可共享的叙述/论证操作，未构成可证实的内容迁移。",
+      "style_fidelity": "全文以第一人称旁观者声音展开，短句、短段落、克制反讽和“先铺一般状态，再引入例外个例”的写法，与参考文的叙述机制高度一致；‘修，是让它继续。换，是让等待结束’一类并置定义和结尾‘就这样’的收束，也把原风格适应到旧物修理主题。",
+      "task_completion": "修理日、社区活动室、台灯接线松动并修复、风扇缺零件且登记、旁观提问、修复边界、修理与替换取舍均已出现；但未明确写出‘两名’志愿者，只以‘志愿者’‘工作人员’指称，属次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "我伸手按开关，拍底座，拧灯泡。",
+        "reason": "严格模式不允许补造独立事件/亲身操作；材料只说明台灯接触不良，未提供叙述者按开关、拍底座、拧灯泡这些动作。"
+      },
+      {
+        "article_quote": "旁边有人说，接线松了。",
+        "reason": "严格模式不允许补造对话主张；材料只说明接线松动，未提供旁边有人说出这句话。"
+      },
+      {
+        "article_quote": "有人问，能不能凑合转。有人问，等零件值不值。",
+        "reason": "严格模式不允许补造具体对话/独立事件；材料只说来访者可以旁观并提问，未提供这些具体问题。"
+      },
+      {
+        "article_quote": "我后来没再见过“什么都能修好”的修理日。",
+        "reason": "严格模式不允许补造亲身经历；材料未提供叙述者后来对修理日的个人观察或经历。"
+      }
+    ],
+    "task_issues": [
+      "未明确写出“两名志愿者负责检查”，文中只以“志愿者”“工作人员”指称，未说明人数。"
+    ],
+    "uncertainties": [
+      "“这种安排未必可抱怨。我也不更高明”与参考文“我不认为这有什么可抱怨的”姿态相近，但属于论证操作，未按原文独立性扣分。",
+      "“志愿者拆开底座”是修复接线的具体动作，是否算严格模式下的新独立事件存在边界，未列为确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

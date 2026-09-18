@@ -1,0 +1,42 @@
+{
+  "id": "item_34",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "item_34.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 697,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头注明“虚构场景”，本次为creative模式；新增的志愿者、蓝外套、老人、电水壶、停水通知、商场六十块等均为虚构场景内的人物、物件、对话或独立事件，未改写台灯修好、风扇因缺零件未当场修好、登记型号和联系办法、不保证修好等给定核心事实，未冒充作者现实经历，也未伪造外部真实统计或真实引用。",
+      "naturalness": "叙述连贯，短句和留白服务于克制的观察视角，物件与对话交替推进，结尾以环境声收束，整体机制使用自然且有节制，没有明显拼贴或模板化堆砌。",
+      "source_independence": "人物、场景、事件与结论均围绕社区旧物修理日展开，未迁移参考文中的香港酒店、指甲锉、英文合同、转账通知、车辆等核心素材；第一人称、短句、精确时间、对话格式等属于可共享的叙述机制，不构成内容绑定；未发现可证实的内容迁移。",
+      "style_fidelity": "采用第一人称旁观者视角、精确时间锚点（周六上午九点四十、十点零二分、十点二十）、短句与独立成段、稀疏对话、以物件和环境声承载情绪（螺丝落在铁盘里、轮子压过地砖、通知纸响了一下），并保持冷静克制的收束方式，与参考文的观察式叙事、时间标记、物件细节和低声量结尾机制高度一致，同时自然适配社区修理日主题。",
+      "task_completion": "完整围绕社区活动室旧物修理日展开，涵盖接触不良台灯被重新固定接线后恢复、旧风扇因无合适零件未能当场修好、志愿者登记零件型号与后续联系办法、不宣称已修好且只提供检查和力所能及的修复、旁观者提问，以及老人愿意等待与蓝外套提出购买替代品之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "正文中“有人推着手推车经过，轮子压过地砖”与参考文“清洁工推着布草车在走廊里过去，轮子轧过地毯的声音很闷”在环境声细节上略近，但载体、场景、介质和叙事功能不同，不足以判定为内容迁移。",
+      "“我拿起台灯”与老人说灯是“我家的”之间存在物品归属或叙述者身份的轻微歧义；creative模式允许虚构人物和动作，且未改变给定核心事实，因此不按事实违规处理。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}
