@@ -1,0 +1,39 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 732,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "严格模式下逐条核对：台灯接触不良、接线松动、重新固定后恢复正常；风扇需换件、当天无合适零件、登记型号与联系办法、未宣称修好；志愿者检查、来访者旁观提问；活动只提供检查与力所能及修复、不保证恢复；原物延续与等待/替换的取舍，均来自任务素材，转述中未新增人物履历、精确时间数值、新物件、独立事件、对话或外部引用。“修好一盏灯，登记一台风扇”等均是对给定事件的概括。",
+      "naturalness": "行文连贯，定义与分类的展开节奏与主题贴合，正反例对照清晰；仅“前者看重延续，后者看重时间”一带有轻微模板化痕迹，整体机制使用克制自然。",
+      "source_independence": "未发现可证实的内容迁移：正文围绕旧物修理日，与样文的财富、创业、可测量性等结论与素材无交集；“定义断言—正反情境—破流行说法—分类术语—取舍收束”属论证操作而非内容绑定，术语括注英文是样文的体例机制，不构成素材搬运。",
+      "style_fidelity": "样文的核心机制在新主题上鲜明重现：开头以定义式断言立论（“修理，不等于修好”对应“财富与金钱并不是同义词”），紧接正/反双情境演示（台灯与风扇对应魔法机器与荒岛），用流行说法立靶再给出“真正的命题”，并引入带英文原词的三元术语分类（检查/on-site fix/待件对应Measurement/Leverage/Make something people want），结尾以两个祈使式短句收束。隐喻延展（把旧物想象成老友）也对应样文的椅子/软件类比与压缩过程想象，论证动作与信息展开一致。",
+      "task_completion": "完整覆盖全部核心素材：修好的台灯、未能当场修好的风扇、旁观提问、修复边界，并以分类和“继续使用/等待与替换”两段讨论了修理与替换的取舍，主题聚焦旧物修理日。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 2,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

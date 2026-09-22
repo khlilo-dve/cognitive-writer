@@ -104,7 +104,13 @@ async fn learn_case(store: &Store, input: &Input, sample: usize) -> Result<Vec<S
         let source = &input.sources[sample - 1];
         let call = |stage, system: String, user: String| {
             let id = format!("{name}_{stage}");
-            async move { store.call(&id, &system, &user, text_valid).await }
+            async move {
+                if variant == "direct_free" {
+                    store.call_json(&id, &system, &user, text_valid).await
+                } else {
+                    store.call(&id, &system, &user, text_valid).await
+                }
+            }
         };
         let learned = if variant == "direct_free" {
             crate::style_learning::extract_direct_with(source, &input.learn, call).await?
@@ -113,7 +119,7 @@ async fn learn_case(store: &Store, input: &Input, sample: usize) -> Result<Vec<S
         };
         write_json(&store.root.join(format!("{name}.json")), &learned)?;
         let raw = store
-            .call(
+            .call_json(
                 &format!("spec_{variant}_{sample:02}_judge"),
                 &input.judge,
                 &format!("原始样文：\n{source}\n\n待评风格指令：\n{}", learned.spec),
@@ -135,15 +141,24 @@ pub async fn run() -> Result<(), AppError> {
     let input = Arc::new(Input::load()?);
     let store = Arc::new(Store::from_env()?);
     if let Some(id) = &input.source_run {
-        if read_json(&format!("eval/runs/{id}/summary.json"))?["model"] != store.model {
-            return Err(AppError::Parse("确认模型必须与开发阶段一致".into()));
+        if read_json(&format!("eval/runs/{id}/summary.json"))?["model"] != store.model
+            || read_json(&format!("eval/runs/{id}/inputs.json"))?.get("structured_response_format")
+                != crate::llm::json_response_format(&store.model).as_ref()
+        {
+            return Err(AppError::Parse(
+                "确认模型与JSON输出模式必须与开发阶段一致".into(),
+            ));
         }
     }
-    store.freeze_inputs(&json!({"schema":1,"suite":"free_style_release","phase":input.phase,"source_run":input.source_run,
+    let mut snapshot = json!({"schema":1,"suite":"free_style_release","phase":input.phase,"source_run":input.source_run,
         "model":store.model,"learn_prompt":input.learn,"legacy_prompt":read("eval/fixtures/learn_style_single_v1.md")?,"spec_judge":input.judge,"transfer_judge":input.transfer,
         "sources":input.sources,"all_preregistered_tasks":input.tasks,"confirmed_specs":input.confirmed_specs,
         "outline_template":outline_system_prompt("{style}"),"body_template":style_system_prompt("{style}"),"render_template":render_prompt("{outline}","{idea}"),
-        "criteria":"free-release-v1: Spec 400-600, actionability/distinctiveness mean>=4, every cleanliness>=4; per task style>=4, source>=4.8, facts strict>=4.4/creative>=4.8, naturalness>=3.8, completion>=4.8, key scores>2, length>=4/5"}))?;
+        "criteria":"free-release-v1: Spec 400-600, actionability/distinctiveness mean>=4, every cleanliness>=4; per task style>=4, source>=4.8, facts strict>=4.4/creative>=4.8, naturalness>=3.8, completion>=4.8, key scores>2, length>=4/5"});
+    if let Some(format) = crate::llm::json_response_format(&store.model) {
+        snapshot["structured_response_format"] = format;
+    }
+    store.freeze_inputs(&snapshot)?;
     let result=async{
         let mut specs=if let Some(specs)=&input.confirmed_specs{specs.clone()}else{
             // One complete case smoke-tests the configured API before scheduling the rest.
@@ -158,6 +173,9 @@ pub async fn run() -> Result<(), AppError> {
         specs.sort_by(|a,b|(a.sample,&a.variant).cmp(&(b.sample,&b.variant)));
         for spec in &specs {std::fs::write(store.root.join(format!("spec_{}_{:02}.md",spec.variant,spec.sample)),&spec.text)?;}
         write_json(&store.root.join("specs.json"),&specs)?;
+        let preflight=crate::free_style_gate::assess_specs(&specs)?;
+        write_json(&store.root.join("preflight.json"),&preflight)?;
+        if preflight["passed"] != true {return Err(AppError::Parse("Spec未通过既定门槛，已停止正文生成；见preflight.json".into()));}
         let mut jobs=Vec::new();
         for mode in ["strict","creative"]{for sample in 1..=5{for variant in if sample%2==0 {["direct_free","single_stage"]}else{["single_stage","direct_free"]}{
             let spec=specs.iter().find(|s|s.sample==sample && s.variant==variant).ok_or_else(||AppError::Parse("缺少Spec".into()))?;

@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 618,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已标注'（虚构场景）'，属creative模式。台灯接线松动被重新固定后恢复、风扇需换零件且当天无合适件、登记型号与后续联系、只做检查和力所能及修复等核心事实均未改写；大姐与对话等属允许的虚构人物与事件，无伪造外部统计或真实引用。",
+      "naturalness": "叙述流畅，细节（拧开底座、指头压住松动接线、用外套裹好台灯抱走）具体而有节制，对话与议论衔接自然，无拼贴感或机械重复。",
+      "source_independence": "全文内容均为修理日场景，无参考文中猪、知青、糖厂汽笛等具体内容或结论迁移。'真正的例外是'与'以下谈到的一只猪有些与众不同'仅属论证转折动作，'我敬'与'我一直怀念'属收束句式，均非内容迁移。",
+      "style_fidelity": "体现了参考文的主要机制：第一人称回忆加议论的叙事口吻（'我自己就是那种把接触不良当报废处理的人'）；'我原以为说法只有两种：修好，或者算了。我低估了'式的自我修正与抑扬；'真正的例外是那盏台灯'式的例外转折（对应样文'以下谈到的一只猪有些与众不同'的论证动作）；幽默反讽的节拍（'隆重得有点滑稽''这话字很大，没人看'）；结尾以'我敬肯等的人'作判断性收束，呼应样文的怀念式收束。两类人群对照（'两本账我都翻过，都不亏心'）也保留了样文的对照议论机制。但样文更深层的反讽层次与铺排式历史例证未充分体现，故为4。",
+      "task_completion": "涵盖修好的台灯、未能当场修好的风扇、旁观提问（大姐问能否学拧）、修复边界（门口张贴说明、不保证全部恢复），并通过'算账的人'与'裹走台灯的人'及'两本账'呈现修理与替换的取舍，主题与核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

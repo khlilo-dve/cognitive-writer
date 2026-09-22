@@ -1,0 +1,10 @@
+{
+  "failures": [
+    "Spec2格式或400–600字目标未达标（370）"
+  ],
+  "passed": false,
+  "spec_means": {
+    "actionability": 4.4,
+    "distinctiveness": 4.8
+  }
+}

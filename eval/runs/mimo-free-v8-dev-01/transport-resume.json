@@ -1,0 +1,6 @@
+{
+  "reason": "Last uncompleted Spec judgment exhausted retries after HTTP/JSON issues and transport timeouts; no accepted checkpoint for that request",
+  "timeout_seconds": 600,
+  "concurrency": 2,
+  "prompts_and_model_unchanged": true
+}

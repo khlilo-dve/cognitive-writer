@@ -166,7 +166,7 @@ async fn judge(
 ) -> Result<(Judgment, usize), AppError> {
     grade_with(source, topic, mode, body, |attempt, user| {
         let name = format!("{id}_judge_{attempt}");
-        async move { store.call(&name, prompt, &user, text_valid).await }
+        async move { store.call_json(&name, prompt, &user, text_valid).await }
     })
     .await
 }

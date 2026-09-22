@@ -1,0 +1,39 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 656,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "严格模式下全部内容可在任务素材中找到依据或属于不增加事实的逻辑解释：两名志愿者检查并重新固定接线、灯恢复正常；风扇需更换零件、当天无合适零件、登记型号与联系办法、未宣称修好；活动只提供力所能及的修复。文中的换整台灯、零件全部更换等均为明确标注的假设推演（“若”“极端些说”），未新增独立事件或数据。",
+      "naturalness": "行文连贯，论点推进自然，具体例子与格言式收束衔接顺畅；但开篇辨析、谬误命名、“需要两样东西”等处对参考样文结构模板的复现较显眼，略有模板痕迹。",
+      "source_independence": "正文主题、场景、例子（台灯、风扇、活动室、登记表）均来自任务素材，未出现财富、金钱、木匠、创业、饼的大小等参考样文的论点或结论。两文共有的只有句法骨架和论证操作（概念辨析、谬误命名、“需要两样东西”的列举），按标准不构成内容迁移。",
+      "style_fidelity": "参考样文的核心机制被鲜明移植：开篇先辨析概念（样文“财富与金钱并不是同义词”→正文“修理是一件事，修好是另一件事”）；命名并反驳一个谬误（样文“大饼谬论”及“但事实完全不是这样”→正文“当场修好谬论”及“不是这样”）；用具体劳动实例证明抽象论点（样文的木匠椅子→正文的接线固定的台灯）；归纳成“需要两样东西”（样文“可测量性和可放大性”→正文“力所能及的修复，与如实的登记”）；以短促断言收束（样文结尾“Make something people want”式格言→正文“修理承诺的是动作，不是结局”）。句式节拍与论证动作一致且适应了新主题。",
+      "task_completion": "涵盖修好的台灯、未能当场修好的风扇、旁观与提问、修复边界（力所能及的修复与如实登记），并以登记表与风扇为场景讨论了继续使用原物与等待/购买替代品的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

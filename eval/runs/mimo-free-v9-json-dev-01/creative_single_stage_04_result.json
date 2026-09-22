@@ -1,0 +1,39 @@
+{
+  "id": "creative_single_stage_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 724,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务声明为虚构场景，开头已标注“虚构场景”。小周、扎马尾姑娘、阿姨等人物、对话与观察均属creative模式允许的虚构；核心事实（台灯接线松动修复、风扇需换零件未修好、登记零件型号与联系方式、只做检查和力所能及的修复、旁观提问、修与换取舍）均按给定保留，无伪造外部统计或真实引用。",
+      "naturalness": "叙述流畅，场景与论理交替自然，命名概念与对话使用有节制，未见拼贴或机械重复痕迹。",
+      "source_independence": "全文主题为旧物修理场景，无任何可指认的参考样文内容、结论或素材迁移。共享的仅是人称、命名概念的论证操作和节拍，属于风格机制而非内容污染。",
+      "style_fidelity": "样文的核心机制是：先辨析概念并命名（如“大饼谬论”并加括号注解）、面对反驳者给出判断（“但事实完全不是这样”）、用具体场景/思想实验佐证、把复杂问题拆成条件，结尾以短祈使句收束。正文鲜明体现并适应了新主题：开头“先辨清一个词”并命名“‘手边修’（当场修复）和‘记账修’（登记待件）”；“有位看客摇头：……这判断错了”对应样文驳斥反对意见的动作；“拆条件才好走路：……四个答案齐了”对应样文拆解问题的论证动作；“等待和购买，这笔账得你自己算”与样文“这笔账”式的自我分担语气一致；以短句“问清边界”收尾，与样文核心口号式收尾节拍一致。",
+      "task_completion": "涵盖了修好的台灯、未当场修好的风扇、旁观提问（“为什么不直接换台新的”等）、修复边界（“只做检查和力所能及的修复”）以及修理与替换的取舍（等待零件与购买替代品的对比、阿姨选择等），主题聚焦。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

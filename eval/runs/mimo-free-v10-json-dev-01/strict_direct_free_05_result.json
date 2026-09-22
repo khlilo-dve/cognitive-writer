@@ -1,0 +1,39 @@
+{
+  "id": "strict_direct_free_05",
+  "group": "strict",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 704,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "正文全部信息可回溯到任务核心素材：台灯接触不良、接线松动、重新固定后恢复正常，风扇需换零件、当天无合适零件、登记零件型号与后续联系办法，活动边界、旁观提问、修理与替换的取舍。比喻（“像说话打磕巴”“像两位候诊的老人”）与取舍分析（等的时间成本、买的时间收益）均为修辞与逻辑解释，未新增独立事件、数字、物件、对话主张或外部引用，无越界。",
+      "naturalness": "行文短句与格言式转折交替，节奏有起伏，末段“一张桌子，两样交代”的收束自然；仅“不替谁说话”“没说已经修好”“不替结果打包票”一类否定式收句略显模板化重复，故为4。",
+      "source_independence": "正文与样文在题材、事件、结论上均无可指认的重合，仅共享第一人称议论插入语、短句判断等句法与论证操作，属风格层面，不构成内容迁移。",
+      "style_fidelity": "样文的可辨机制包括：短促干脆的陈述句（“它也学不像”“我不认为这有什么可抱怨的”式判断）、从具体事物上升为一般道理的格言式转折（“对生活做种种设置是人特有的品性”）、干冷的幽默与拟人化的旁观姿态、以“我估计/我以为”插入的第一人称议论收束。正文鲜明复现了这些机制：短句判断式推进（“就这么点事”“登记表就是登记表，不替结果打包票”）、格言式收束（“这里是修理，不是包好”“同一笔账，记法不同”）、拟人旁观（“像两位候诊的老人，谁也不替谁说话”）、以及“我估计两种心思都算得实在”“我以为，肯为一件旧物多花心思的人”的第一人称议论。未完全复现的是样文那种带自传经历的叙事框架与夹叙夹议的漫游节拍，正文以场景素描为主，故为4。",
+      "task_completion": "台灯修复、风扇未修与登记、旁观提问、修复边界、修理与替换的取舍五项核心要素全部涵盖，且取舍通过议论得到展开。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

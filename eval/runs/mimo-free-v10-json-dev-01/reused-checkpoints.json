@@ -1,0 +1,166 @@
+{
+  "source_run": "mimo-free-v9-json-dev-01",
+  "reason": "Same model and native JSON settings; unchanged legacy extraction, writing and judgment only; all v10 candidate stages fresh",
+  "files": [
+    {
+      "file": "spec_single_stage_03_judge.json",
+      "sha256": "81703248ba5b083dfaa6a1cac6dfaeb2ffc24a55f5588bc60e9fd146bedd2f80"
+    },
+    {
+      "file": "spec_single_stage_01_judge.json",
+      "sha256": "5798e377e505a36a8335c9da7d0013872c6cd538d2d553240d9c2ad9c582da00"
+    },
+    {
+      "file": "creative_single_stage_03_outline.json",
+      "sha256": "8bdb83794b3bb1b6d3f638c2213cc496cbe23012faed740493fa2f06f3533730"
+    },
+    {
+      "file": "strict_single_stage_02_judge_0.json",
+      "sha256": "a245a3c0839ab9eab34fe28156ca68790ec5483882143ba49e956a2223efe184"
+    },
+    {
+      "file": "creative_single_stage_03_body.json",
+      "sha256": "03b7159040f1cdd008bcee3afcb21d0c12305a524d5bd96a12686162e77a29c2"
+    },
+    {
+      "file": "strict_single_stage_04_judge_0.json",
+      "sha256": "5502207f15cc811f20da7d9b4a01d8c4f7d4defd5dbad6bacc902a99d67d55d8"
+    },
+    {
+      "file": "creative_single_stage_03_judge_0.json",
+      "sha256": "1e23e84d4b5996886c85d0af97652fb388c92ddd6b009f91e3b2e4651dd92f74"
+    },
+    {
+      "file": "strict_single_stage_03_outline.json",
+      "sha256": "1261ff38b9597ab7b3ba78c0f52822502a98dd52aa72df96ae62a3bda9f3d7bb"
+    },
+    {
+      "file": "spec_single_stage_04_judge.json",
+      "sha256": "4ae721e27730f0eaa37befe1c377856cef41ff624b2d67e397629dcc7086d5e8"
+    },
+    {
+      "file": "creative_single_stage_02_judge_0.json",
+      "sha256": "78e04f1c5600ba2e8e03bbd762236924cf5a6012f2a82ca6de9b0d89edb9ba05"
+    },
+    {
+      "file": "learn_single_stage_05_legacy_0.json",
+      "sha256": "197fa60db462924d1559914d385efdcc5703e1fd259dccb071dc2d7b22d39fbc"
+    },
+    {
+      "file": "spec_single_stage_02_judge.json",
+      "sha256": "0b9956233bbeab03946955b3af2838f8511d5643c0a0281927d10ae4e0723b1a"
+    },
+    {
+      "file": "spec_single_stage_05_judge.json",
+      "sha256": "90b1e21b66862a8bba022529854bbcef05ecce3c6e020a2efcb3da668c7604f0"
+    },
+    {
+      "file": "creative_single_stage_04_judge_0.json",
+      "sha256": "39aa08e83b7507c28305fa8dd7e3a93d3296d0a3612da3ac318637e24e48a272"
+    },
+    {
+      "file": "strict_single_stage_02_body.json",
+      "sha256": "acff37cc22b72aac6fb0bb83648e703e8e37a608713fd3ca99ce90ac9a4f7c7e"
+    },
+    {
+      "file": "creative_single_stage_04_body.json",
+      "sha256": "0b500401fc4a7895d6ffdb90a7800c0024d25f78b805a58d8295f913d60e9b76"
+    },
+    {
+      "file": "creative_single_stage_05_body.json",
+      "sha256": "4f65538ec97cd41d71692c2899fbefd7d5875f630fa4813a12fc93caf2bd7f97"
+    },
+    {
+      "file": "strict_single_stage_03_body.json",
+      "sha256": "553685edfbbac38c0b2b08732bd850559c4949ec0a900b8fac17863daad5e180"
+    },
+    {
+      "file": "learn_single_stage_04_legacy_0.json",
+      "sha256": "d3e99f195a22b4d410ab27114050a1aec20424af506f3280c67a04f6e77f96c4"
+    },
+    {
+      "file": "creative_single_stage_02_outline.json",
+      "sha256": "11f56ff38858b006921de669cace73b72b5820a9e35de54556dd71a786d569d2"
+    },
+    {
+      "file": "creative_single_stage_05_outline.json",
+      "sha256": "b37e342ac43bf10fa5b0aad9d35abae186257e6d9d98fe95fbfc832750628a11"
+    },
+    {
+      "file": "learn_single_stage_02_legacy_0.json",
+      "sha256": "652588af39755b50d5596eb589666bc8f9a59f642099876f7b164d4e0555cfef"
+    },
+    {
+      "file": "creative_single_stage_05_judge_0.json",
+      "sha256": "a57b27ea88467677a24587211d920389ece9e1a9be8fc8f85e17918165b02858"
+    },
+    {
+      "file": "strict_single_stage_01_body.json",
+      "sha256": "b0a8dfc7a9206fc6a6d6a9e9dfc2e22ddafe02acf79bf38c72010d292af6140a"
+    },
+    {
+      "file": "strict_single_stage_04_body.json",
+      "sha256": "51f3d1dd28b6353f24839f83b59cfced48a44b82aa013438ccd8c35c0e871120"
+    },
+    {
+      "file": "strict_single_stage_05_body.json",
+      "sha256": "d33b08a37baad8d71efc876a2c9e6fb6969116e5291899bcade420b36d84eb60"
+    },
+    {
+      "file": "strict_single_stage_03_judge_0.json",
+      "sha256": "a156bb9cd9eaa59b6a8213f7e17ff973ac1a9a7b83c7e24a43264d959da771e2"
+    },
+    {
+      "file": "creative_single_stage_04_outline.json",
+      "sha256": "953fa9b6c307801632e4bf5801e3effafea18d1f8c30ba5182f63a3276158b9d"
+    },
+    {
+      "file": "strict_single_stage_01_judge_0.json",
+      "sha256": "62f2bc837a653c93b563ab7c00351e26614338fb4b13ed6e5abcf35edac21371"
+    },
+    {
+      "file": "creative_single_stage_01_body.json",
+      "sha256": "9d28880557d4df9e9af4cccf866d421edd5007bc4b59259391306550aff1b39b"
+    },
+    {
+      "file": "learn_single_stage_01_legacy_0.json",
+      "sha256": "342264ba5a0537a2bd61dc21d5e0428231b2a681026bb1442e6803ef460d49ff"
+    },
+    {
+      "file": "strict_single_stage_02_outline.json",
+      "sha256": "df2b197628e30f48f4a3d829aa06668aa7d31b58e32e4eda33b49c7412596d80"
+    },
+    {
+      "file": "strict_single_stage_01_outline.json",
+      "sha256": "67886b982fabe4df86f9207b95be23e488e4b61fa57fb7a977f678112bc4f925"
+    },
+    {
+      "file": "creative_single_stage_02_body.json",
+      "sha256": "c6d23e16d707793e5869c16cfc3ee90f04f2adee14c801f147f5ec60b10310ce"
+    },
+    {
+      "file": "strict_single_stage_05_judge_0.json",
+      "sha256": "0c7b189f2f757d1fcd4517c2d146a9e37020168d937b2b0e4ffe35b148a1d8ae"
+    },
+    {
+      "file": "strict_single_stage_04_outline.json",
+      "sha256": "d3bcffa392c37e681bbeb0ed4a52228cb7631102fd9ed9cd87ebe9a6f09ff7de"
+    },
+    {
+      "file": "creative_single_stage_01_outline.json",
+      "sha256": "67f2c859cb99f0364241586b44e37280ab00ea997057a10e147bf3fd691b0cb2"
+    },
+    {
+      "file": "creative_single_stage_01_judge_0.json",
+      "sha256": "a1021241d034be3fe33a432e6434b56fabf6d835daf39934507717c5cfef7300"
+    },
+    {
+      "file": "strict_single_stage_05_outline.json",
+      "sha256": "0886bf699223068ff7698ca6a6c8b6487fdf43c3b368a7374ef0b6a140900ded"
+    },
+    {
+      "file": "learn_single_stage_03_legacy_0.json",
+      "sha256": "fd576ef40a0d01a5c67121fa786f003792f81ab0b2bdd118867b5e5dc7036dd5"
+    }
+  ]
+}

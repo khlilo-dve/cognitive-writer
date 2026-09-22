@@ -14,7 +14,7 @@ pub(crate) struct Spec {
     pub extraction_calls: usize,
     pub judgment: LearnJudgeResult,
 }
-pub(crate) fn evaluate(specs: &[Spec], rows: &[Row]) -> Result<Value, AppError> {
+pub(crate) fn assess_specs(specs: &[Spec]) -> Result<Value, AppError> {
     let expected: std::collections::BTreeSet<_> = (1..=5)
         .flat_map(|i| ["single_stage", "direct_free"].map(|m| (i, m.to_string())))
         .collect();
@@ -22,10 +22,8 @@ pub(crate) fn evaluate(specs: &[Spec], rows: &[Row]) -> Result<Value, AppError> 
         .iter()
         .map(|s| (s.sample, s.variant.clone()))
         .collect();
-    if specs.len() != 10 || expected != actual || rows.len() != 20 {
-        return Err(AppError::Parse(
-            "发布评测需要两方法各五份Spec及严格/创作各十篇文章".into(),
-        ));
+    if specs.len() != 10 || expected != actual {
+        return Err(AppError::Parse("发布评测需要两方法各五份Spec".into()));
     }
     let mut failures = Vec::new();
     let candidates: Vec<_> = specs
@@ -56,6 +54,21 @@ pub(crate) fn evaluate(specs: &[Spec], rows: &[Row]) -> Result<Value, AppError> 
     if action < 4.0 || distinctive < 4.0 {
         failures.push("Spec可执行性或特征捕捉均分低于4".into());
     }
+    Ok(json!({"passed":failures.is_empty(),"failures":failures,
+        "spec_means":{"actionability":action,"distinctiveness":distinctive}}))
+}
+
+pub(crate) fn evaluate(specs: &[Spec], rows: &[Row]) -> Result<Value, AppError> {
+    let preflight = assess_specs(specs)?;
+    if rows.len() != 20 {
+        return Err(AppError::Parse("发布评测需要严格/创作各十篇文章".into()));
+    }
+    let mut failures: Vec<String> = preflight["failures"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|f| f.as_str().unwrap().to_string())
+        .collect();
     let mut by_mode = serde_json::Map::new();
     for mode in ["strict", "creative"] {
         let mut methods = serde_json::Map::new();
@@ -153,7 +166,7 @@ pub(crate) fn evaluate(specs: &[Spec], rows: &[Row]) -> Result<Value, AppError> 
     }
     Ok(
         json!({"criteria":"free-release-v1","passed":failures.is_empty(),"failures":failures,
-        "spec_means":{"actionability":action,"distinctiveness":distinctive},"by_mode":by_mode,
+        "spec_means":preflight["spec_means"],"by_mode":by_mode,
         "interpretation":"工程期望门槛，不是整体分数或统计显著优越性"}),
     )
 }
@@ -246,6 +259,18 @@ mod tests {
             }
         }
         (specs, rows)
+    }
+    #[test]
+    fn preflight_rejects_pollution_and_length_before_articles_exist() {
+        let (mut specs, _) = fixtures();
+        assert_eq!(assess_specs(&specs).unwrap()["passed"], true);
+        specs[1].judgment.scores.cleanliness = 3.0;
+        specs[3].text = "字".repeat(636);
+        let result = assess_specs(&specs).unwrap();
+        assert_eq!(result["passed"], false);
+        assert_eq!(result["failures"].as_array().unwrap().len(), 2);
+        specs.pop();
+        assert!(assess_specs(&specs).is_err());
     }
     #[test]
     fn gate_rejects_missing_cases_severe_failures_and_length_regressions() {

@@ -32,16 +32,21 @@ def verify(root, current=False):
     repo = Path(__file__).resolve().parents[1]
     inputs, summary = read(root / "inputs.json"), read(root / "summary.json")
     assert summary["status"] == "complete" and summary["model"] == inputs["model"]
+    if "structured_response_format" in inputs:
+        assert inputs["structured_response_format"] == {"type":"json_object"}
     specs, rows = summary["specs"], summary["rows"]
     assert len(specs) == 10 and {(s["sample"], s["variant"]) for s in specs} == {(i,m) for i in range(1,6) for m in METHODS}
     assert len(rows) == 20 and {(r["sample"], r["variant"], r["group"]) for r in rows} == {(i,m,g) for i in range(1,6) for m in METHODS for g in MODES}
     jobs = {j["id"]:j for j in read(root / "jobs.json")}
     assert len(jobs) == 20 and set(jobs) == {r["id"] for r in rows}
     requests = 0
-    def checkpoint(name):
+    def checkpoint(name, structured=False):
         nonlocal requests
         cp = read(root / (name + ".json")); requests += 1
-        assert set(cp["request"]) == {"schema", "endpoint_fingerprint", "model", "system", "user"}
+        fmt = inputs.get("structured_response_format") if structured else None
+        keys = {"schema", "endpoint_fingerprint", "model", "system", "user"}
+        if fmt is not None: keys.add("response_format")
+        assert set(cp["request"]) == keys and cp["request"].get("response_format") == fmt
         assert cp["request"]["model"] == inputs["model"]
         return cp
     for s in specs:
@@ -52,14 +57,14 @@ def verify(root, current=False):
             records = sorted(root.glob(f"learn_{m}_{i:02}_*.json"))
             assert len(records) == s["extraction_calls"]
             for f in records:
-                cp = checkpoint(f.stem)
+                cp = checkpoint(f.stem, structured=m == "direct_free")
                 assert cp["request"]["system"] == inputs["learn_prompt" if m == "direct_free" else "legacy_prompt"]
             assert records and read(records[0])["request"]["user"] == inputs["sources"][i-1]
             last_raw = read(records[-1])["response"]
             extracted = json.loads(last_raw)["spec"].strip() if m == "direct_free" else last_raw.strip()
             learned = read(root / f"learn_{m}_{i:02}.json")
             assert learned["spec"] == s["text"] == extracted
-            cp = checkpoint(f"spec_{m}_{i:02}_judge")
+            cp = checkpoint(f"spec_{m}_{i:02}_judge", structured=True)
             assert cp["request"]["system"] == inputs["spec_judge"] and s["text"] in cp["request"]["user"]
             raw = cp["response"]; raw = json.loads(raw[raw.index("{"):raw.rindex("}")+1])
             for dim in ["coverage","actionability","distinctiveness","cleanliness"]:
@@ -84,7 +89,7 @@ def verify(root, current=False):
         assert final["request"]["system"] == inputs["body_template"].replace("{style}",s["text"])
         assert final["request"]["user"] == inputs["render_template"].format(outline=outline["response"],idea=job["topic"])
         for attempt in range(r["judge_calls"]):
-            cp = checkpoint(r["id"] + f"_judge_{attempt}")
+            cp = checkpoint(r["id"] + f"_judge_{attempt}", structured=True)
             assert cp["request"]["system"] == inputs["transfer_judge"]
             user = json.loads(cp["request"]["user"])
             if attempt: user = user["original_input"]

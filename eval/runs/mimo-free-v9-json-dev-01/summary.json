@@ -1,0 +1,1233 @@
+{
+  "at": "2026-09-22T12:25:33.534958410+00:00",
+  "gate": {
+    "by_mode": {
+      "creative": {
+        "candidate_minus_legacy": {
+          "factual_compliance": 0.0,
+          "naturalness": 0.1999999999999993,
+          "source_independence": 0.0,
+          "style_fidelity": -0.20000000000000018,
+          "task_completion": 0.20000000000000018
+        },
+        "direct_free": {
+          "length_passes": 5,
+          "means": {
+            "factual_compliance": 5.0,
+            "naturalness": 4.6,
+            "source_independence": 5.0,
+            "style_fidelity": 4.8,
+            "task_completion": 5.0
+          },
+          "n": 5
+        },
+        "paired_counts": {
+          "factual_compliance": {
+            "losses": 0,
+            "ties": 5,
+            "wins": 0
+          },
+          "naturalness": {
+            "losses": 0,
+            "ties": 4,
+            "wins": 1
+          },
+          "source_independence": {
+            "losses": 0,
+            "ties": 5,
+            "wins": 0
+          },
+          "style_fidelity": {
+            "losses": 1,
+            "ties": 4,
+            "wins": 0
+          },
+          "task_completion": {
+            "losses": 0,
+            "ties": 4,
+            "wins": 1
+          }
+        },
+        "single_stage": {
+          "length_passes": 5,
+          "means": {
+            "factual_compliance": 5.0,
+            "naturalness": 4.4,
+            "source_independence": 5.0,
+            "style_fidelity": 5.0,
+            "task_completion": 4.8
+          },
+          "n": 5
+        }
+      },
+      "strict": {
+        "candidate_minus_legacy": {
+          "factual_compliance": 0.40000000000000036,
+          "naturalness": -0.20000000000000018,
+          "source_independence": 0.0,
+          "style_fidelity": -0.20000000000000018,
+          "task_completion": 0.0
+        },
+        "direct_free": {
+          "length_passes": 5,
+          "means": {
+            "factual_compliance": 5.0,
+            "naturalness": 4.0,
+            "source_independence": 5.0,
+            "style_fidelity": 4.2,
+            "task_completion": 5.0
+          },
+          "n": 5
+        },
+        "paired_counts": {
+          "factual_compliance": {
+            "losses": 0,
+            "ties": 4,
+            "wins": 1
+          },
+          "naturalness": {
+            "losses": 1,
+            "ties": 4,
+            "wins": 0
+          },
+          "source_independence": {
+            "losses": 0,
+            "ties": 5,
+            "wins": 0
+          },
+          "style_fidelity": {
+            "losses": 2,
+            "ties": 2,
+            "wins": 1
+          },
+          "task_completion": {
+            "losses": 0,
+            "ties": 5,
+            "wins": 0
+          }
+        },
+        "single_stage": {
+          "length_passes": 4,
+          "means": {
+            "factual_compliance": 4.6,
+            "naturalness": 4.2,
+            "source_independence": 5.0,
+            "style_fidelity": 4.4,
+            "task_completion": 5.0
+          },
+          "n": 5
+        }
+      }
+    },
+    "criteria": "free-release-v1",
+    "failures": [],
+    "interpretation": "工程期望门槛，不是整体分数或统计显著优越性",
+    "passed": true,
+    "spec_means": {
+      "actionability": 4.2,
+      "distinctiveness": 4.4
+    }
+  },
+  "human_reviewed": false,
+  "model": "mimo-v2.6-pro",
+  "phase": "development",
+  "rows": [
+    {
+      "body_artifact": "creative_direct_free_01.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_direct_free_01",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "虚构模式下，核心事实（台灯接触不良、两名志愿者、接线松动并修复、风扇需换零件、当天无合适零件、登记型号与联系办法、不保证全部恢复、旁观提问、修理与替换取舍）均保留且未改写；阿姨、年轻人、对话与剪胶固定等属允许的虚构细节，未伪造外部真实统计或真实引用。",
+          "naturalness": "整体连贯，节拍推进自然，'像把一封信寄给还没到的快递'和'那件下一件会坏的东西'两处措辞略显拗口，是少量痕迹，其余段落衔接顺畅。",
+          "source_independence": "全文内容围绕修理日展开，无人物、事件、结论或素材可追溯到参考样文；'我必须说''我承认''再拆一层'等属于论证操作和连接词，不算内容迁移。",
+          "style_fidelity": "样文的多数核心机制被迁移到新主题：以'你经常听到一句话'式二手引语开场对应'这话你一定听过'；加粗的反直觉判断句'但换之前，请先把旧的拆开看一眼。'对应样文'但我必须直接说一个反直觉的判断：**…**'；'我必须说，风扇这边就没这么干脆'对应'但我必须直接说'的断言节拍；'再拆一层：'对应'我们再往深处拆一层。'的逐层推进动作；'我承认，这两条路各有各的道理'对应'我承认，信息差…'的让步段；短促格言式结论'小毛病，当场结案。'对应'用低成本的智力消费，逃避高成本的现实行动。'；结尾的自嘲式个人收束也与样文收尾的告诫性余味节拍相通。",
+          "task_completion": "修好的台灯、未能当场修好的风扇、旁观提问、修复边界四要素齐全，并通过阿姨等待零件与年轻人比价下单的对照呈现修理与替换的取舍，主题聚焦。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 648,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 1,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "creative_direct_free_02.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_direct_free_02",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "开头标注“虚构场景。”符合要求。人物（小周、老人、年轻人、工作人员）、对话、细节（如“上午进出二十三人”“买台新的八十九块”）均属虚构场景内新增，未冒充作者真实经历，未引用外部真实统计或文献；核心事实（台灯接线松动修复、风扇缺零件未修、登记联系方式、只做力所能及修复）均未改写。",
+          "naturalness": "整体连贯，短句堆叠的节奏与风格一致且克制；少数段落（如物品逐项列举、连续问答）略带清单式的模板痕迹，故扣一档。",
+          "source_independence": "未发现可证实的内容迁移。正文的物件、人物、数字、事件（台灯、风扇、螺丝、老人、登记本）均为任务给定或新创，与样文的指甲锉、渡轮、合同、埃尔法等无可指认的对应关系；仅人称、句法节拍和论证/叙事操作相似，属风格层面。",
+          "style_fidelity": "鲜明体现参考样文的核心机制：第一人称冷静旁观叙述、精确时间标记（“九点”“十点二十”“中午十二点。收摊。”对应样文“六点整”“六点零七分”“电梯下行用了二十八秒”）、带具体规格的物件特写（“三颗螺丝，长短不一”“十二股散着三股”“盒子里十七颗螺丝”对应样文“一把灰色的指甲锉，两面”“三毫米宽的黑色遮光胶带”）、极简问答式对话（“能一直用吗。”“能。”对应“‘好。’我说”）、克制的内心一笔（“我原以为十分钟的事。卡在型号上。”对应“其实那个车库有八百平米”），以及以平直场景句收束（“风扇不动。”对应“什么都没有发生。”），且都成功迁移到修理日主题。",
+          "task_completion": "完整覆盖全部核心素材：社区活动室的旧物修理日、接触不良的台灯经固定接线后修复并复测、风扇因缺零件当天未修好并登记型号与电话、旁观者的连续提问、门口说明呈现的修复边界，以及老人坚持继续使用原物与年轻人计算等待成本与新购替代两种取舍。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 666,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 2,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "creative_direct_free_03.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_direct_free_03",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "开头已按要求注明'虚构场景'。正文覆盖的台灯接线松动并修复、风扇缺件登记型号与联系办法、志愿者只做检查与力所能及修复等均来自任务给定核心事实，未改写；新增的围观动作、孩子拨扇叶、人物话语属creative权限明确允许的虚构场景内容，未出现伪造的外部真实统计或真实引用。",
+          "naturalness": "行文连贯，短句与断言交替自然，比喻（'两种算盘'）与转场（'把这一天翻过来看'）衔接顺畅，未见机械模板堆叠或明显拼贴痕迹。",
+          "source_independence": "正文全部内容围绕旧物修理日展开，与参考样文的软件架构领域无可证实的内容绑定：'留下/替换'权衡是任务本身要求的取舍素材，加粗断言、自问句式、格言结尾属于论证操作与风格机制，不构成污染。无参考样文中的概念、结论或案例内容被搬运。",
+          "style_fidelity": "鲜明复现参考样文的论证机制：先破常识（'向来只被夸\"妙手回春\"'对应'性能瓶颈与架构腐化'式的引题），随即用加粗句给出反直觉主张（'敢当众说\"修不好\"，比当场修好更难'对应'过早的局部优化，往往是系统性灾难的起点'），再用'凭什么呢？'承接样文'为什么这么说？'的自问自答节拍；随后以并列的具体案例（台灯/风扇）代替'以微服务拆分为例'的例证展开；结尾以短促格言收束（'前者是本事，后者更难'对应'保持克制，尊重简单，这比炫耀技巧要困难得多'），且'留下/替换'双项条目对应样文的编号原则清单，平衡论断'从来不是对错题，而是时间和价钱的加减'对应'资源、时间和复杂性之间寻找动态的平衡点'。整体语气、人称（议论者立场与'我认为'）、加粗断言的节拍均忠实迁移并适应了新主题。",
+          "task_completion": "完整涵盖全部核心素材：活动室场景、接触不良的台灯（接线松动、重固定后恢复）、转动缓慢的旧风扇（当天无合适零件、登记型号与后续联系办法、未宣称修好）、旁观者提问与只答能做部分的修复边界、以及以'留下/替换'条目和结尾讨论呈现修理与替换的取舍。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 5.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 648,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 3,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "creative_direct_free_04.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_direct_free_04",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "事实权限为creative模式。开头已注明\"虚构场景。\"；新增的老周、小柯、孩子、邻居、对话与登记单等均属允许的虚构人物与事件，未改变给定核心事实（台灯接线松动重新固定后恢复、风扇需换零件且当天无合适零件、工作人员登记零件型号和后续联系办法并明确未宣称修好、活动只提供检查和力所能及的修复），也未伪造外部真实统计或真实引用，叙述者未把虚构冒充为自身经历。",
+          "naturalness": "行文连贯，格言短句、场景片段与说理段落交替自然，引号内口语（\"不知道，至少今天能用\"）与议论句衔接顺畅，短语回环（\"修不成\"→\"等得到\"、\"坏掉的台灯\"→\"能用的灯\"）服务论证而不显堆砌，仅有极少量样板式句感。",
+          "source_independence": "未发现可证实的内容迁移。正文的台灯、风扇、零件登记、修理边界均来自本次任务给定素材；\"取舍需要两样东西\"与样文\"你需要两样东西\"只是句法模板与短功能词层面的呼应，枚举内容（继续使用原物的价值、等待与购买的成本）与样文的可测量性/可放大性完全不同，属论证操作而非内容搬运。",
+          "style_fidelity": "样文的主要机制在正文中鲜明体现并适应新主题：格言式短句开场（\"修理不是替换。\"对应样文\"财富与金钱并不是同义词\"式的定义切分）；先立靶再驳倒的论证动作（\"有人把它叫作「一次修好论」……这个推论不成立\"，对应样文驳\"大饼谬论\"的段落）；假设性思想实验（\"假设所有旧物都能当场修好，修理日就该清空这张桌子\"，对应\"魔法机器\"与\"荒岛\"的假想）；成对具体例子加价值差额分析（台灯与风扇，对应木匠与程序员两个例子，\"差额就是一段被拧紧的铜线\"对应椅子价值超过木头与面包成本的算账式收束）；以\"我认为，这取决于……\"直接给出立场（对应\"我认为最好的办法就是自己创业\"）；\"取舍需要两样东西：\"的两条枚举（对应\"你需要两样东西：可测量性和可放大性\"）；以及结尾独立格言收束（\"修好与修不成，同样算作成果\"，对应\"Make something people want\"式的收尾）。",
+          "task_completion": "修好的台灯（接线松动、重新固定、灯恢复）、未能当场修好的风扇（换零件、当天无合适零件、登记型号与联系方式、未宣称修好）、旁观提问（孩子与\"问得比修得还细\"的来访者）、修复边界（门口写明、不保证恢复）以及修理与替换的取舍（使用原物的价值对等待与购买的成本）均已覆盖。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 5.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "\"取舍需要两样东西：\"与参考样文\"你需要两样东西：可测量性（Measurement）和可放大性（Leverage）\"存在句式平行，但枚举内容互不相干，按共享句法不计为内容迁移，仅作记录。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 636,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 4,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "creative_direct_free_05.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_direct_free_05",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "开头已标注'（虚构场景）'，属creative模式。台灯接线松动被重新固定后恢复、风扇需换零件且当天无合适件、登记型号与后续联系、只做检查和力所能及修复等核心事实均未改写；大姐与对话等属允许的虚构人物与事件，无伪造外部统计或真实引用。",
+          "naturalness": "叙述流畅，细节（拧开底座、指头压住松动接线、用外套裹好台灯抱走）具体而有节制，对话与议论衔接自然，无拼贴感或机械重复。",
+          "source_independence": "全文内容均为修理日场景，无参考文中猪、知青、糖厂汽笛等具体内容或结论迁移。'真正的例外是'与'以下谈到的一只猪有些与众不同'仅属论证转折动作，'我敬'与'我一直怀念'属收束句式，均非内容迁移。",
+          "style_fidelity": "体现了参考文的主要机制：第一人称回忆加议论的叙事口吻（'我自己就是那种把接触不良当报废处理的人'）；'我原以为说法只有两种：修好，或者算了。我低估了'式的自我修正与抑扬；'真正的例外是那盏台灯'式的例外转折（对应样文'以下谈到的一只猪有些与众不同'的论证动作）；幽默反讽的节拍（'隆重得有点滑稽''这话字很大，没人看'）；结尾以'我敬肯等的人'作判断性收束，呼应样文的怀念式收束。两类人群对照（'两本账我都翻过，都不亏心'）也保留了样文的对照议论机制。但样文更深层的反讽层次与铺排式历史例证未充分体现，故为4。",
+          "task_completion": "涵盖修好的台灯、未能当场修好的风扇、旁观提问（大姐问能否学拧）、修复边界（门口张贴说明、不保证全部恢复），并通过'算账的人'与'裹走台灯的人'及'两本账'呈现修理与替换的取舍，主题与核心素材完整。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 5.0,
+          "source_independence": 5.0,
+          "style_fidelity": 4.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 618,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 5,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "creative_single_stage_01.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_single_stage_01",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "开头标注\"虚构场景。\"，符合任务声明要求。核心事实全部保持：台灯接线松动重固后恢复、风扇需换零件当天无货、登记零件型号和联系电话、未宣称修好、活动只做检查与力所能及的修复、不承诺全部恢复。老周、小陈、对话与\"两百块\"均属虚构角色与场景内内容，creative 模式允许；止损线是作者主张而非伪造的外部统计或真实引用。",
+          "naturalness": "行文连贯，账目隐喻与等待主题一以贯之，场景叙述与议论切换自然。仅少量模板痕迹：连续使用粗体金句、\"但\"字句式在中段连用两次（\"但老周那套账……\"\"但请把等待的时间也押上去算\"）略显机械，未到影响阅读的程度。",
+          "source_independence": "全文围绕旧物修理日展开，人物（老周、小陈）、场景、物件（台灯、风扇）均为本任务设定或虚构新增，无参考样文关于认知、变现、投流、冷电话等核心内容或结论的迁移。\"先算一笔账\"等属共用的论证操作与短功能表达，不构成污染。",
+          "style_fidelity": "参考样文的核心机制被完整迁移并适配新题：以人人会说的俗语开场并立刻翻转（\"这话人人会说。\"→\"但修理从来不是美德，是一笔账。\"），对应样文\"你经常听到一句话……但我必须直接说一个反直觉的判断\"；加粗断言式判断句（\"怎么修，是手艺的事。值不值得修，是你的事。\"）对应样文的粗体反直觉论断；\"先算一笔账\"式账目隐喻贯穿（\"这是他的账\"\"小陈在旁边算另一笔\"）；\"修理的门槛就是这样一级一级抬高的\"对应样文\"从信息，到理解，到验证……每往前走一步\"的阶梯式淘汰结构；结尾给出可执行的硬规则（\"定一条线：超过原价一半的钱，或超过十天的等待，就放手换新的。\"）对应样文结尾\"至少可以少买几门教你财富跃迁的认知付费课\"的收束动作；第二人称直接喊话（\"你我站的位置不同\"\"是你说了算\"）也在。",
+          "task_completion": "标题与正文完整覆盖指定素材：接触不良的台灯及修好过程、转动缓慢且未能当场修好的风扇及登记联系方式、围观提问（\"还能用多久？\"\"换零件要钱吗？\"）、修复边界（\"不承诺每件都能恢复\"），并以老周与小陈两笔账及等待成本明确呈现修理与替换的取舍。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 696,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 1,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "creative_single_stage_02.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_single_stage_02",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "核心事实全部吻合：台灯接线松动后重新固定恢复正常；风扇需换零件、当天无合适型号、登记型号与电话且未宣称修好；墙纸写明只做检查与力所能及的修复、不保证全部修好；旁观提问、修理与替换取舍均以虚构人物言行呈现。新增细节（十九年、两百块、两分钟等）属创意模式允许的虚构人物与事件，未冒充作者真实经历，也无外部真实统计或引用。",
+          "naturalness": "整体连贯，克制的短句与留白与样文气质一致，物—人交替的叙述有节奏感；但中段清单式罗列（连续的“有人问……答……”）和近乎电报体的句群略显机械，重复模板感轻微存在。",
+          "source_independence": "无内容迁移。场景、人物、事件与结论均属新任务自身设定（社区修理日、台灯与风扇、志愿者），未指认出任何来自样文的素材或观点答案。相似之处限于人称、句式节拍、度量式细节和收尾动作等风格机制，不构成污染。",
+          "style_fidelity": "鲜明体现样文的多项核心机制并适配新主题：第一人称旁观者视角与克制叙述（“我站在桌边，看了两小时”对应样文“我看了看手表”式的观察者位置）；精确度量与物件细节的展开（“灯罩直径十八厘米”“扇叶三片，直径三十厘米”“手柄十五厘米”对应样文“两百多平米”“二十八秒”“五毫米宽”）；极短句、频繁句号的节拍；零碎对话的干瘪收束（“答，说不准”对应样文“‘嗯。’”）；以无事发生的静场收尾（“没有人再开口”对应“什么都没有发生。”）。信息展开方式同样是先物后人、以物承载情感（“用了十九年”对应“车库放不下”）。",
+          "task_completion": "围绕社区旧物修理日展开，完整涵盖修好的台灯、未修好的风扇、登记型号与联系办法、旁观提问、墙上写明的修复边界，并通过“风扇是父亲的、用了十九年”与“买台新的，两百块”“等零件不如买新的”的对照呈现修理与替换的取舍。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 661,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 2,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "creative_single_stage_03.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_single_stage_03",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "creative 模式，开头已标注\"（虚构场景）\"。台灯接线松动、重新固定后灯亮；风扇需换零件、当天无合适零件、登记零件型号与联系办法、未宣称修好；活动只提供检查与力所能及的修复、不保证复原；旁观提问；原物与替换的取舍——均与任务给定核心事实一致。新增的对话（\"回去应该没问题\"）、围观者的提问等属创意模式明示允许的虚构内容，未伪造外部真实统计或真实引用，也未把虚构冒充作者亲身经历。",
+          "naturalness": "行文连贯，机制使用得当，加粗论断、设问、编号清单与格言收束都落在自然语流里；仅\"你若审视会发现\"一处对样文句式的借用略显刻意，属轻微模板痕迹。",
+          "source_independence": "正文全部内容绑定于任务给定的修理日场景（台灯、风扇、登记零件型号、修复边界、原物与替换取舍），未见样文中的软件工程具体内容（Profiling、RPC、微服务、I/O 阻塞等）或结论迁移。重合处限于句式、论证操作与短功能词（审视句式、加粗论断、编号原则、平衡式收束），不构成内容污染。",
+          "style_fidelity": "样文的核心机制被完整迁移并适配新主题：先立常识性开场（\"经常会遇到……\"→社区活动室默认\"修理等于复原\"），再用\"但如果你仔细审视……你会发现一个规律\"的句式引出加粗反直觉论断（样文\"过早的局部优化……\"→正文\"真正会修的人，恰恰不肯把话说满\"）；随后以机制推演展开代价分析（对应样文微服务拆分段的\"原本……变成了……\"式推演）；设置设问过渡（\"为什么这么说？\"→\"围观的人会问，为什么不找个差不多的零件凑上\"）；末尾三条加粗引导词的原则清单对应样文的三条原则；收束句\"在资源、时间和复杂性之间寻找动态的平衡点\"式的双面平衡判断（\"在坚持原物与放手换新之间取衡\"）以及以格言式短句收尾（\"这比炫耀技巧要困难得多\"→\"说修不好，是更难的本事\"）均一一对应。人称的第二人称审视角、节拍与信息展开顺序也保持一致。",
+          "task_completion": "涵盖了修好的台灯、未能当场修好的风扇、旁观提问、修复边界以及修理与替换的取舍（通过两种价值观与最终选择呈现），主题围绕社区旧物修理日。次要遗漏：任务核心素材提到\"两名志愿者负责检查\"，正文只泛称\"志愿者\"与\"工作人员\"，未明确两人这一设定。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 4.0
+        },
+        "source_leakage": [],
+        "task_issues": [
+          "未明确呈现'两名志愿者负责检查'这一核心素材细节，正文仅泛称志愿者与工作人员"
+        ],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 678,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 3,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "creative_single_stage_04.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_single_stage_04",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "任务声明为虚构场景，开头已标注“虚构场景”。小周、扎马尾姑娘、阿姨等人物、对话与观察均属creative模式允许的虚构；核心事实（台灯接线松动修复、风扇需换零件未修好、登记零件型号与联系方式、只做检查和力所能及的修复、旁观提问、修与换取舍）均按给定保留，无伪造外部统计或真实引用。",
+          "naturalness": "叙述流畅，场景与论理交替自然，命名概念与对话使用有节制，未见拼贴或机械重复痕迹。",
+          "source_independence": "全文主题为旧物修理场景，无任何可指认的参考样文内容、结论或素材迁移。共享的仅是人称、命名概念的论证操作和节拍，属于风格机制而非内容污染。",
+          "style_fidelity": "样文的核心机制是：先辨析概念并命名（如“大饼谬论”并加括号注解）、面对反驳者给出判断（“但事实完全不是这样”）、用具体场景/思想实验佐证、把复杂问题拆成条件，结尾以短祈使句收束。正文鲜明体现并适应了新主题：开头“先辨清一个词”并命名“‘手边修’（当场修复）和‘记账修’（登记待件）”；“有位看客摇头：……这判断错了”对应样文驳斥反对意见的动作；“拆条件才好走路：……四个答案齐了”对应样文拆解问题的论证动作；“等待和购买，这笔账得你自己算”与样文“这笔账”式的自我分担语气一致；以短句“问清边界”收尾，与样文核心口号式收尾节拍一致。",
+          "task_completion": "涵盖了修好的台灯、未当场修好的风扇、旁观提问（“为什么不直接换台新的”等）、修复边界（“只做检查和力所能及的修复”）以及修理与替换的取舍（等待零件与购买替代品的对比、阿姨选择等），主题聚焦。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 5.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 724,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 4,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "creative_single_stage_05.md",
+      "generation_calls": 2,
+      "group": "creative",
+      "id": "creative_single_stage_05",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "虚构创作在creative权限内。给定核心事实全部保留：台灯接线松动、志愿者重新固定后灯亮、风扇需换零件当天没有、登记零件型号和后续联系办法、不宣称修好、只做检查和力所能及的修复、不保证恢复。其余如老光、九年、旧货摊、登记本、围观对话等均为权限允许的虚构细节，无外部真实统计或引用，也未冒充作者现实经历。",
+          "naturalness": "叙述连贯，短句与长句交替自然，格言式断语与叙事衔接顺畅（如“调岗就是这么回事”“剩下的都算陪审”），反讽比喻有节制，无模板化拼贴或机械重复。",
+          "source_independence": "没有可证实的内容迁移。参考样文的核心素材（知青喂猪、猪兄学汽笛、围捕、斯巴达与样板戏等）均未出现；正文中的命名、格言断句、官僚反讽、结尾怀念属于共享的论证与修辞操作，不是内容搬运。任务自带的社区修理场景为新任务给定内容。",
+          "style_fidelity": "鲜明体现参考样文的核心机制：第一人称亲历者带着对一个被体制化命名的动物/物件的私人感情，给对象起名并自嘲（“我管它叫老光。名字是我起的，它没反对过。”对应猪兄的命名与宠儿身份）；由具体叙事归纳出格言式断语（“人好像都有替旧物安排前途的天性”对应“对生活做种种设置是人特有的品性”）；用官僚词汇作冷幽默反讽（“编制外”“留任”“停职留薪”）；短促收束的机锋句（“好在物件不会写申诉材料。”）；结尾以怀念式短句留余味（“老光还亮着。风扇的下落，我没有再问。”对应“我一直怀念这只特立独行的猪”）。人称、节拍、从叙事到议论再回到独白的展开顺序都得到保留并适配旧物修理主题。",
+          "task_completion": "完整覆盖主题与核心素材：社区活动室的旧物修理日、修好的台灯、未当场修好的风扇、志愿者检查与旁观提问、修复边界声明（“只做检查和力所能及的修复，不保证所有物品都能恢复”），并通过围观对话和结尾个人取向呈现修理与替换的取舍，并已在开头注明虚构场景。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 5.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 663,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 5,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "strict_direct_free_01.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_direct_free_01",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "核心事实全部来自任务给定：两名志愿者检查、接线松动重新固定后灯恢复、风扇需换零件且当天无合适零件、登记零件型号和后续联系办法、未宣称修好、活动只提供检查和力所能及的修复、旁观提问、继续使用原物与等待/购买替代品的取舍。文中的\"老搭档\"\"新风扇的标价\"属比喻性表达，服务于给定的购买替代品取舍，未新增独立事件或人物履历。",
+          "naturalness": "整体行文连贯，说理与场景交替自然，口语转场（\"说回桌上那盏台灯\"\"说白了\"）顺畅。略有模板痕迹：两次使用三段式压缩链条（\"松动、固定、亮起\"\"转得慢、缺零件、留办法\"）句式雷同，节拍上稍显可预期。",
+          "source_independence": "全文围绕旧物修理日展开，台灯、风扇、登记零件等均为本任务给定素材，与参考样文的创业认知主题无内容交集。可比对的只有\"我承认\"这类短让步标记和步骤列举等论证操作，属共享修辞手段，不构成内容迁移。",
+          "style_fidelity": "参考样文的核心机制在正文中成套出现：开头以流传说法设靶（\"流传的说法是：旧东西拿去修一修\"对标\"人赚不到认知以外的钱\"），紧跟粗体反直觉判断（\"**社区活动室这场旧物修理日真交到你手上的，是检查和力所能及的修复，不是许诺让旧物复活。**\"对标\"**绝大多数人以为的'认知'，根本不是认知……**\"）；压缩步骤链条（\"松动、固定、亮起，三步走完\"、\"转得慢、缺零件、留办法\"对标\"从信息，到理解，到验证，再到能够承担风险下注\"）；分层推进（\"再往深一层，是取舍\"对标\"我们再往深处拆一层\"）；\"我承认……\"式让步句（\"我承认，台灯那种当场归队的，看着最痛快\"对标\"我承认，信息差在某些极端窗口期确实能带来暴利\"）；短促格言句（\"那一行登记，比什么许诺都实在\"对标\"认知从来不是免费的\"）；结尾落到可执行的追问与自嘲收束（\"先问一句：是今天亮，还是登记在册？\"对标\"至少可以少买几门……认知付费课\"）。机制齐全且已适应旧物修理主题。",
+          "task_completion": "修好的台灯、未能当场修好的风扇、旁观提问、修复边界、修理与替换的取舍五项核心素材均覆盖，且取舍通过场景与比喻展开。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "\"多半会先瞟一眼新风扇的标价\"中的\"标价\"为取舍话题的比喻性延伸，可解释为对\"购买替代品\"的逻辑解释，也可能被读作轻微新增的具体场景细节，未据此扣分。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 635,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 1,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "strict_direct_free_02.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_direct_free_02",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "严格模式下正文只对任务给定素材做同义转述和逻辑解释：台灯接线松动→重新固定→灯恢复；风扇需换零件、当天无合适零件→登记零件型号与后续联系办法；活动只做检查与力所能及的修复、不保证全部恢复；取舍限定在继续用原物与等待/购买替代品之间。无人物履历、精确时间数值、新物件、独立事件、外部统计或亲身经历。",
+          "naturalness": "全文以一致的短句节奏写成，段落衔接顺畅，克制的断言与否定句用得自然有节制；少数句式略显同构（……着……着／没有……没有……），但整体有明确的语感设计，未见拼贴痕迹。",
+          "source_independence": "正文全部内容围绕任务自给的旧物修理日素材展开，无可指认的参考样文内容、结论或素材迁移。人称（无）、短句、否定式收束等属共享的论证/形式操作，不计为污染。",
+          "style_fidelity": "参考样文的重要机制包括：极短陈述句层层推进、用精确数量压住叙述（三毫米、一亿两千万、二十八秒）、稀疏的一两句式对话、以及以否定句拒绝过度断言（她看都没看一眼／没有文字／什么都没有发生）并在收束处留白。正文保留了短句推进、克制的数量限定（桌上两件／没有第三件／登记的就这两样）和拒绝过度断言的机制（没有人说这台风扇已经修好／没有人当场答应，件件都能修好／没有转。没有零件。），结尾也以留白收束，是多数主要机制的体现并适应了新主题。但样文的核心声音还依赖第一人称见证、两句式对话交替和细密的材质/声音微细节（卡扣扣上的声音很清脆），正文几乎没有对话与感官微细节，人物也不带视角。故评 3。",
+          "task_completion": "完整覆盖核心素材：社区活动室与桌上的台灯、风扇；两名志愿者检查、来访者旁观提问；台灯接线固定后恢复正常；风扇需换零件、当天无件、登记型号与联系方式、未宣称修好；活动边界（只做检查与力所能及的修复）；并通过专节场景呈现继续使用原物与等待/购买替代品的取舍。无缺失项。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 3.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "“志愿者把接线重新固定。该紧的地方，再紧一遍。”中“再紧一遍”可视为对任务给定“重新固定接线”的操作性转述，也可能读作轻微的动作细化，未据此扣分。",
+          "“电送得断断续续”是对“接触不良”的逻辑解释，未计为新增事实。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 626,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 2,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "strict_direct_free_03.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_direct_free_03",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "strict模式下逐条核对：地点'社区活动室'、两件旧物（接触不良的台灯、转动缓慢的旧风扇）、两名志愿者、旁观提问、接线松动重新固定后灯恢复正常、需换零件而当天无合适零件、登记型号与联系办法、不保证全部修好、'只提供检查和力所能及的修复'、两类取舍（继续使用原物 vs 等待/购买替代品），全部为素材给定内容的同义转述或逻辑解释；'故障在连接/故障在零件'的对比、'看得见接线才判断得了值不值得修'属不增加独立事实的解释。编号条目中的'值得等那颗零件''购买替代品更划算'是基于给定取舍的论述，不是新增事件、数据或引用。无确定越界。",
+          "naturalness": "行文连贯，条件式排比（'故障明确则当场动手，接线松动则重新固定'）与两个案例的对称结构有意识地服务于'病在连接/病在零件'的对照，读来顺滑；'最小的胜利，也是胜利''谁承诺了百分百，谁就欠着一份兑现不了的账'等格言密度略高，'则'字条件链连用三段带有轻微模板痕迹，故取4。",
+          "source_independence": "两篇为完全不同的领域（软件架构 vs 旧物修理日），无任何可指认的素材、论点或结论迁移；重合的只是普遍修辞动作（普遍化开场—加粗论点—设问—举例—编号原则—破折号格言）与短功能词，按规则不算污染。故为5，source_leakage为空。",
+          "style_fidelity": "样文的核心机制被清晰移植：先破'常见圆满叙事'的普遍化开场（'所有社区活动都容易被讲成一个圆满的故事'对应'我们经常会遇到……'），紧接加粗论点句（'修理的诚意，恰恰在于承认有些东西当天修不好'对应'过早的局部优化，往往是系统性灾难的起点'）；设问自答推进（'为什么要让人围观？'对应'为什么这么说？'）；'以微服务拆分为例'式的案例拆解变成'案例一，台灯''案例二，风扇'；末尾编号原则清单收束为'1.继续使用原物2.等待或换新'，并以'——'破折号格言式收尾（'留住一件旧物靠手艺，放下一件旧物靠判断——而后者往往更难'对应'保持克制，尊重简单，这比炫耀技巧要困难得多'）。扣一档在于编号条目改成了'你在乎的是……'的第二人称建议口吻，与样文'度量先行/延迟决策/可观测性优先'的祈使式原则命名在节拍上不完全对应。",
+          "task_completion": "主题与核心素材全覆盖：社区活动室旧物修理日、台灯修好、风扇未能当场修好、旁观提问、修复边界（不保证所有物品恢复）、以及通过'继续使用原物 vs 等待或换新'编号场景讨论修理与替换的取舍。无主题或核心素材缺失。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 4.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "'联系办法留下则等待有了期限'可能被读作给'等待'设定了一个具体期限，而素材只说登记了后续联系办法；但也可理解为逻辑解释（留下联系办法使等待有下文），按不凭猜测扣分处理，未计违规。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 684,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 3,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "strict_direct_free_04.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_direct_free_04",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "严格模式下全部内容可在任务素材中找到依据或属于不增加事实的逻辑解释：两名志愿者检查并重新固定接线、灯恢复正常；风扇需更换零件、当天无合适零件、登记型号与联系办法、未宣称修好；活动只提供力所能及的修复。文中的换整台灯、零件全部更换等均为明确标注的假设推演（“若”“极端些说”），未新增独立事件或数据。",
+          "naturalness": "行文连贯，论点推进自然，具体例子与格言式收束衔接顺畅；但开篇辨析、谬误命名、“需要两样东西”等处对参考样文结构模板的复现较显眼，略有模板痕迹。",
+          "source_independence": "正文主题、场景、例子（台灯、风扇、活动室、登记表）均来自任务素材，未出现财富、金钱、木匠、创业、饼的大小等参考样文的论点或结论。两文共有的只有句法骨架和论证操作（概念辨析、谬误命名、“需要两样东西”的列举），按标准不构成内容迁移。",
+          "style_fidelity": "参考样文的核心机制被鲜明移植：开篇先辨析概念（样文“财富与金钱并不是同义词”→正文“修理是一件事，修好是另一件事”）；命名并反驳一个谬误（样文“大饼谬论”及“但事实完全不是这样”→正文“当场修好谬论”及“不是这样”）；用具体劳动实例证明抽象论点（样文的木匠椅子→正文的接线固定的台灯）；归纳成“需要两样东西”（样文“可测量性和可放大性”→正文“力所能及的修复，与如实的登记”）；以短促断言收束（样文结尾“Make something people want”式格言→正文“修理承诺的是动作，不是结局”）。句式节拍与论证动作一致且适应了新主题。",
+          "task_completion": "涵盖修好的台灯、未能当场修好的风扇、旁观与提问、修复边界（力所能及的修复与如实登记），并以登记表与风扇为场景讨论了继续使用原物与等待/购买替代品的取舍。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 656,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 4,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "strict_direct_free_05.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_direct_free_05",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "严格模式下逐一核对任务给定素材：旧物修理日、社区活动室、台灯接触不良与接线松动后重新固定、风扇转动缓慢需换零件且当天无合适零件、登记零件型号和后续联系办法、未宣称修好、旁观提问、修复边界、修与替换取舍均有对应。文中“顺着线路往下查”“志愿者边检查边答”属允许的连接动作与逻辑解释，未新增独立事件、精确时间/数值、新物件或引用。第一人称介入（“我估计不少人是冲着……”“我偏向把旧的多留一会儿”）是立场表态而非虚构亲身经历事件。无确定越界，故为5。",
+          "naturalness": "行文连贯，议论与叙事衔接顺畅，格言式短句使用有节制且与主题贴合；仅个别处（“型号、联系、后续，字眼都端正”）略显刻意，整体无明显拼贴或机械重复。给4。",
+          "source_independence": "正文与样文在具体内容上无可证实的迁移：样文的猪、牛、斯巴达、糖厂汽笛等素材均未出现，仅共享第一人称随笔的人称、格言式句法和转折节拍，这些不属于内容污染。故为5。",
+          "style_fidelity": "样文的声音机制是第一人称随笔式：夹叙夹议的口语化介入（“我估计它到附近的村寨里找母猪去了”）、格言式收束（“对生活做种种设置是人特有的品性”）、以及从具体叙述跳到普遍判断的论证动作（“除了这只猪，还没见过谁敢于如此无视对生活的设置”）。正文多数机制得到体现并适配新主题：“我估计不少人是冲着‘修好’来的”“我两边都懂”“我偏向把旧的多留一会儿”保留了带立场的个人化插入；“修东西从来不是许愿”“修复边界就在这个下午摊开”复现格言式与普遍化动作；“先说那个例外”“风扇是另一半答案”对应样文“以下谈到的一只猪有些与众不同”的转折节拍；结尾“修与换，一个留住原物，一个省下等待”回到议论收束。因普遍化深度和幽默反讽略弱于样文，给4。",
+          "task_completion": "修好的台灯、未能当场修好并登记的风扇、来访者旁观提问、活动的修复边界（只检查和力所能及的修复、不保证恢复）、以及继续使用原物与等待/购买替代品之间的取舍均被涵盖，并通过场景和议论两条路径呈现取舍。核心素材无缺失。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 4.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "“我估计不少人是冲着‘修好’来的，我自己也算其中一个”“我两边都懂”等第一人称表述是否构成严格模式禁止的“亲身经历”，按随笔立场表态处理未扣分，存疑记录。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 604,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 5,
+      "variant": "direct_free"
+    },
+    {
+      "body_artifact": "strict_single_stage_01.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_single_stage_01",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "严格模式下全部内容可回溯到任务给定素材或其同义转述：台灯接线松动并重新固定后恢复、风扇需换零件且当天无合适型号、工作人员登记零件型号与后续联系办法、不宣称修好、只做检查和力所能及的修复、原物情结与等待/买替代品的取舍，均无越界。无新物件、无精确时间数值、无外部统计引用、无个人经历。'不用买材料，不用等'是'只需重新固定接线'的直接逻辑后果，'等待本身就是价钱'以条件句（'一旦零件型号难寻'）呈现，属允许的逻辑解释。",
+          "naturalness": "行文以短句与加粗断言推进，节奏干脆，说理与场景切换顺畅，'这两样舍不得，只能挑一样'等收束句有节制。略显模板化的是加粗短句出现六次、多为三到四字起手的格言式断言，个别处（'它拦不住谁''它开始筛人'）比喻叠用稍密，故给4。",
+          "source_independence": "核心结论（认知变现须经风险与代价）与本文修复边界／等待有价的结论不重合，场景、物件、人物全部来自本次任务给定素材。'账'的隐喻（'台灯是拧一下就能继续用的账'）与'免费'一词（'不会把等待当成免费'）虽与样文'先算一笔账''认知从来不是免费的'用词相近，但属短功能词与论证操作层面的共用修辞，绑定的是完全不同的内容，不构成可证实的内容迁移。",
+          "style_fidelity": "样文的核心机制被完整迁移并适配新主题：开头用流传说法起手再以加粗反直觉判断反转（'旧话讲，旧的不去，新的不来'→加粗'但修理不是让旧物永远不出事，是让它今天还能亮'），对应样文'人赚不到认知以外的钱'→加粗'根本不是认知'；'第一道门槛／第二道门槛……它开始筛人'复刻样文'每往前走一步，淘汰率都是数量级的上升'的阶梯淘汰机制；'先说台灯'与'两张账，不能用同一句话算'延续样文'先算一笔账'的算账框架与成本隐喻；设问自答（'那你还修它做什么？有人要继续用原物'）对应样文'为什么很多人懂得很多道理……因为'；结尾先给可执行动作再抛加粗警句（'下次走进修理日，先问志愿者一句'＋加粗'问出这一句，你就不会把等待当成免费'）对应样文结尾'至少可以少买几门'式收束。样文第一人称见闻因strict权限禁止亲身经历而合理省略，属适应而非缺失。",
+          "task_completion": "主题与核心素材全部覆盖：社区活动室修理日场景、接触不良台灯与转动缓慢旧风扇、两名志愿者检查、来访者旁观提问、台灯修复、风扇未能当场修好并登记型号与联系方式、只做检查和力所能及修复的边界，以及继续使用原物与等待/购买替代品之间的取舍（'你舍不得的成立，但它只在零件还在、等待不长的地方成立'）。无主题或核心素材缺失。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "'两名志愿者俯身检查，围在桌边的人看着'中的'俯身''围在桌边'属给定检查与旁观动作的简单连接性姿态描写，按strict规则未扣分，列出供复核。",
+          "'也开口问：这还有救吗？'与'旁观的人问得最多的，正是这一句：为什么它不能也修好？'以转述形式呈现提问，任务本身要求覆盖'旁观提问'，问题内容不超出给定修理结果，未认定为编造对话主张，列出供复核。",
+          "'不用买材料，不用等'未在素材中明说，但可由'接线松动、重新固定后灯恢复正常'直接推得，按逻辑解释处理，列出供复核。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 685,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 1,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "strict_single_stage_02.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_single_stage_02",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [
+          {
+            "article_quote": "屋里开着顶灯",
+            "reason": "strict模式禁止新增具体物件；任务素材仅给定社区活动室、台灯、风扇等，顶灯为新物件。"
+          },
+          {
+            "article_quote": "窗外是白天",
+            "reason": "任务素材未提供时间/天色信息，属新增场景事实。"
+          },
+          {
+            "article_quote": "门外有人走过",
+            "reason": "strict模式禁止新增独立事件；此为素材未给定的独立场景事件。"
+          }
+        ],
+        "reasons": {
+          "factual_compliance": "strict模式下正文有数处素材未提供的具体物件与独立事件/场景事实：新增物件“屋里开着顶灯”，新增事件“门外有人走过”，新增场景事实“窗外是白天”。这些均超出同义转述与简单连接动作的许可范围。",
+          "naturalness": "行文连贯，短句节奏统一，“有的只是看。有的开口问。”“一件亮过。一件没有。”等句式重复有节制且服务收束效果，仅个别处（如结尾连续数段单句）略显模板化，整体自然。",
+          "source_independence": "正文内容全部来自本次任务给定素材（旧物修理日、台灯、风扇、志愿者、取舍），无可指认的样文内容、结论或细节迁移。两文共有的只有短句平叙、物件特写、克制对话和否定句收束等写法机制，属风格层面而非内容污染。",
+          "style_fidelity": "样文的主要机制是短促的平叙句（“我签了。用了三秒钟。”）、具体物件的精确特写（指甲锉两面、三毫米胶带）、极简而留白的对话（“好。”“嗯。”）、环境声的克制铺陈，以及以一句平坦否定收束（“什么都没有发生。”）。正文多数体现：短句平叙（“接线松动。”“灯亮了。一直亮着。”）、物件特写（“一盏接触不良的台灯”“零件型号”）、克制的应答式对话（“工作人员只说按写下的办法联系，别的话没有。”）、环境细节（顶灯、门外有人走过），结尾“风扇没有再被开动。”同样是平坦否定句收束。扣分点在于样文的第一人称回溯视角、日期式的开场定位、精确数值的节拍，以及言与未言之间的私人情感暗流均未出现或无法出现，声音变为第三人称白描。",
+          "task_completion": "修好的台灯、未能当场修好的风扇、旁观提问、修复边界（不保证恢复、登记后联系）以及保留原物与购买替代品之间的取舍（“一种要留着原物……另一种说等零件要等，买替代品也要挑”）均已涵盖。"
+        },
+        "scores": {
+          "factual_compliance": 3.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 4.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "“插头接回去”可视为“重新固定接线”动作的逻辑连接，未据此扣分，但严格解读下插头是否为新增物件存在界定空间。",
+          "“一种要留着原物，修好接着用”等表述以转述方式呈现两种取舍立场，因任务明确要求通过场景呈现取舍，按允许处理；若视为对话主张则属另一解读。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 657,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 2,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "strict_single_stage_03.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_single_stage_03",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "核心事实与任务给定素材一致：台灯接线松动经重新固定后恢复正常，风扇需更换零件、当天无合适零件，登记零件型号与后续联系办法、未宣称修好，活动只提供检查与力所能及的修复，观察与取舍（继续用原物/等待/购买替代品）均在任务范围内。未见人物履历、精确时间数值、新物件、独立事件、对话主张、外部统计或亲身经历。",
+          "naturalness": "行文连贯，抽象判断与具体两件旧物的对照推进顺畅，编号清单服务于\"修复边界\"主题，无明显拼贴或机械重复痕迹。",
+          "source_independence": "可确认为论证操作与句法骨架的复用（加粗断句、反问、编号原则、格言收尾、\"原本……最终演变成\"），未发现样文的具体内容、结论或语句迁移到修理日主题上；结尾对仗属于修辞操作层面的相似，不构成内容绑定。",
+          "style_fidelity": "鲜明复现了样文的主要机制并适配新主题：以群体预设开场并用加粗断句推翻（\"能修好的越多越好，这个判断本身站不住。\"对应样文的加粗规律句）；紧接着一个自设反问（\"凭什么也算成果？\"对应\"为什么这么说？\"）；随后给出具体展开例（\"台上这两件旧物，恰好摆出两种处境\"对应\"以微服务拆分为例\"）；用\"原本……最终演变成……\"的同型转折推进论证（\"原本只是检查的善意，最终演变成替人作主的越界\"）；以冒号引导的加粗编号原则清单收束（对应\"理性的工程实践应当遵循以下原则\"），并用\"X比Y更难\"的格言式收尾呼应样文结尾的\"这比炫耀技巧要困难得多\"。人称、节拍与信息展开顺序均与样文一致。",
+          "task_completion": "完整覆盖了指定地点与场景、修好的台灯、未当场修好的风扇、旁观提问、修复边界（只检查不担保）以及修理与替换的取舍，主题集中无偏移。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 5.0,
+          "source_independence": 5.0,
+          "style_fidelity": 5.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "\"问的从来不是手艺高低，而是这东西还值不值得等\"对旁观者提问内容作了概括性归类，虽在任务给定的提问与取舍主题范围内、非对话主张，但严格程度可再斟酌。",
+          "\"风扇下次的停转\"以假设后果形式出现，属论证性推演而非新增独立事件，未据此扣分。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 715,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 3,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "strict_single_stage_04.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_single_stage_04",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "任务给定的素材点均有对应且未增殖：地点社区活动室、桌上台灯与风扇、两名志愿者、可旁观提问、接线松动重新固定后灯恢复正常、风扇需换零件当天无合适零件、工作人员登记零件型号与后续联系办法且未宣称修好、活动只做检查和力所能及的修复不保证全部恢复、继续使用原物与等待/购买替代品的取舍。\"当场摘因\"\"留号待办\"是作者给分类起的名，不构成新增事实；\"当记忆，还是当工具\"是修辞性设喻，不主张新事件、新人物、新物件、时间数字或外部引用。未发现可证实越界。",
+          "naturalness": "行文连贯，短句判断有力（\"这不是敷衍，是把'修好'和'在办'分成两件事\"），比喻收束干净。扣分点在\"先验证。\"\"再破谬。\"\"最后给路，也就是取舍本身。\"这种显式工序标注读来略带机械感，且自造词\"留号待办\"略显生造，但整体不构成拼贴或模板堆砌。",
+          "source_independence": "全文论点与素材全部围绕社区旧物修理日的台灯、风扇与修复边界，与样文的财富创造、创业、可放大性等核心内容和结论无可指认的重合。相同处仅限于否定式定义开头、概念命名、驳谬段式、格言结尾等论证操作与句法框架，属于风格迁移而非内容迁移；\"当记忆，还是当工具\"等比喻为新任务语境下的自造表达。",
+          "style_fidelity": "样文的主要机制被较鲜明地移植：开篇用否定式定义切分（样文\"财富与金钱并不是同义词\"对正文\"修理不等于修复\"），随后把近义概念拆成两件事（\"把'修好'和'在办'分成两件事\"对应\"它们绝不是同一回事\"）；沿用给概念命名的动作（\"当场摘因\"\"留号待办\"对应\"大饼谬论\"\"可测量性\"\"可放大性\"）；沿用破谬一节的\"有人认为……但事实不是这样\"式驳论（\"有人把修理当成万能承诺……但活动只提供检查和力所能及的修复\"）；用具体物件做论证支点（台灯/风扇对应木匠椅子、程序员软件）；结尾落在短促格言（\"划清修复边界。\"对应\"Make something people want\"）。第二人称劝说口吻（\"你站在桌边看的不是魔术\"）也与样文\"如果你想致富\"的直接对话感一致。不足处是样文的设问转锋（\"应该怎么做？我认为……\"）与括注英文术语的动作未被使用，且\"先验证/再破谬/最后给路\"这种显式标注步骤比样文更像清单，削弱了节拍的自然推进，故不到5分。",
+          "task_completion": "主题围绕社区旧物修理日与修复边界展开，核心素材齐备：修好的台灯（接线松动、重固定后恢复）、未能当场修好的风扇（需换零件、当天无件、登记型号与联系方式、未宣称修好）、来访者旁观提问、活动只做检查与力所能及的修复的边界说明，并在结尾通过\"等零件让旧风扇继续转\"与\"重新买一台更快\"呈现修理与替换的取舍。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 4.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "正文\"却不是线的问题\"为对照台灯接线故障而作的排除性表述，任务只给定风扇需更换零件、未明说是否涉及线路；按严格模式的逻辑解释条款可视为允许，未据此扣分，但此处的确略超出字面素材。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 24,
+        "characters": 576,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": false
+      },
+      "previous_transfer": null,
+      "sample": 4,
+      "variant": "single_stage"
+    },
+    {
+      "body_artifact": "strict_single_stage_05.md",
+      "generation_calls": 2,
+      "group": "strict",
+      "id": "strict_single_stage_05",
+      "judge_calls": 1,
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "正文严格落在给定素材内：社区活动室、接触不良的台灯与转动缓慢的旧风扇、两名志愿者、先看后修再登记的流程、接线松动重固后灯亮、风扇需换零件当天无合适零件、登记零件型号与后续联系办法、只提供检查和力所能及的修复、不保证每件恢复、两种取舍倾向均有呈现。\"拆开看过\"是对\"需要换零件\"的合理检查解释，\"活动散的时候，台灯是亮着走的\"是灯已修好的连接性收尾，均未新增独立事实。可疑处仅列于uncertainties，不据以扣分。",
+          "naturalness": "全篇节奏统一，短句、格言句与场景句交替自然，如\"风扇那边麻烦一些。它能转，只是慢\"的省净表达贴合整体语气；类比（\"门当户对\"\"白捡了一件好事\"）出现得克制。少量段落连用三字格短句（\"检查，力所能及，不保证每件都恢复\"）有轻微的机锋堆叠感，故为4而非5。",
+          "source_independence": "逐句比对，正文没有可指认的样文内容或结论迁移：没有猪、牛、斯巴达、汽笛、糖厂、专政等样文素材，也没有\"对生活的设置\"这一核心论点的复述。相似处仅限于第一人称旁观、短句格言化、类比式俏皮等功能性手法，属于风格层面而非内容绑定。",
+          "style_fidelity": "样文的核心机制是第一人称旁观者的反讽式议论：先用朴素白描给出场景，再用一句格言式的概括收束（如样文\"对生活做种种设置是人特有的品性\"），并在具体细节后插入自嘲与类比。正文多处照此运转：\"这规矩没写在墙上，桌面的情形就这么运转\"是格言式概括；\"它们不说话……各有各的毛病，倒也算门当户对\"是样文\"前者像些斗鸡，后者像些母猪\"式的俏皮类比；\"修理这活计最诚实的地方，是不许诺结局\"\"\\u201c修好\\u201d两个字，今天不归它\"延续了样文把抽象判断压成短句的节拍；\"我站在一旁看着，站的位置有些尴尬\"\"像是白捡了一件好事\"对应样文里\"我估计它到附近的村寨里找母猪去了\"式的自嘲式插话；结尾\"安静得像一句没说完的话\"是样文\"我一直怀念这只特立独行的猪\"式的抒情收束。主要机制大多体现并迁移到新题材，但格言段落与场景段落的交替密度略低于样文，故为4。",
+          "task_completion": "五项核心素材全部覆盖：修好的台灯（接线松动重固、灯亮）、未能当场修好的风扇（需换零件、当天无合适零件、登记型号与联系办法）、旁观提问（围观者两问、志愿者克制作答）、修复边界（检查和力所能及、不保证恢复）、修理与替换的取舍（\"等几天要等，掏钱换新要掏\"及两种心思的对峙）。主题紧扣旧物修理日，无遗漏。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 4.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": [
+          "\"志愿者答得克制，只说到检查和力所能及的修复为止，不保证每件都能恢复\"把给定的服务边界表述为志愿者的口头回答，属对话内容；因未新增任何主张、仅复述给定政策且素材允许来访者提问，未按违规扣分。",
+          "\"两种心思各占一头，谁也说服不了谁，最后各自收回目光\"在给定的两种取舍倾向之外补了一点互动收尾，可视为任务允许的\"通过场景呈现取舍\"，也可能被读作新增小事件，故仅记不确定。",
+          "\"站的位置有些尴尬\"\"我看得有点不好意思\"为旁观者主观感受，属于允许的连接动作还是轻微新增描写，边界难定，未据此扣分。"
+        ]
+      },
+      "length": {
+        "above": 0,
+        "below": 0,
+        "characters": 689,
+        "max": 900,
+        "min": 600,
+        "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+        "within_range": true
+      },
+      "previous_transfer": null,
+      "sample": 5,
+      "variant": "single_stage"
+    }
+  ],
+  "runtime_default_changed": false,
+  "specs": [
+    {
+      "extraction_calls": 2,
+      "judgment": {
+        "characters_without_whitespace": 434,
+        "fidelity_analysis": "抓到了该文最锋利的几层灵魂而非表面版式：反转断言压流行说法的对抗式开场、\"概念收藏家\"式讽刺命名（Spec 只提炼机制未搬用原词，处理得当）、先让步后贬抑的立场回钉、以及反讽收束，都是蔡叔式商业拆解的标志性动作。\"比喻与推论基于已有信息表达，不冒充证据\"也精准对应\"在岸上看游泳视频→下水呛水\"这类推演性比喻的用法边界。颗粒度上仍有一处可再锐化：\"保住评点席位\"是意图描述而非可核对的动作，执行时可能退化为随意插入\"我承认/我必须说\"。",
+        "improvement_suggestions": "在提取 Prompt 中增加\"落点域去具体化\"检查：凡是把结尾/讽刺对象限定到某一内容域（消费、课程、流量、金钱等）的规则，必须改写成域无关的动作模板（如\"反讽指向读者在本主题下的一个可指认的日常行为\"），否则视为污染。\n要求 Spec 只输出表达机制规则，剔除与文风无关的通用执行卫生条款（事实核对、数量必写等），并把意图型描述（\"保住评点席位\"）改写为可核对的动作（\"每篇至少一次第一人称强断言＋一次让步回钉\"）。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.6,
+        "negative_hits": [
+          "「结尾用一句自嘲或反讽，指向读者的消费行为」——把收束落点钉死在\"消费行为\"这一内容域，属于主题绑定：换到与消费无关的主题（如技术选型、职业选择）会被迫硬造一个\"读者花钱\"的结尾。原文明明只在认知付费课这一具体语境下落到消费，应抽象为\"指向读者在本主题下的某个日常行为\"。",
+          "「执行边界：当前任务的事实、必写数量、身份、地点、状态与结果优先；写完双向检查…」——通用写作卫生/事实核对条款，不是风格机制，稀释信息密度。"
+        ],
+        "overall_score": 4.6,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 4.0,
+          "conciseness": 5.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "样文有辨识度的机制几乎全部命中且均有原文依据：(a) 流传说法→加粗反转强断言→结尾回指收束的开合结构（对应开头\"人赚不到认知以外的钱\"与末句\"少买几门…认知付费课\"）；(b) 逗号递进长句→独句钉死的节奏（\"认知从来不是免费的。\"），并明确\"一处即可，不逐段复制\"的局部策略边界，未把偶发的加粗短句升为逐段规律；(c) 场景推演三到四个并列动作＋一句类比收口（投流/剪一百条片子/账号被封→游泳教练视频类比），且给出\"有素材才具体化，无则停在推演\"的条件，避免无据扩写；(d) 双人称分工（\"我必须说\"\"我承认\" vs 第二人称假设情境），明确\"不虚构亲历\"；(e) 口播式转轴短语（\"先算一笔账。\"\"我们再往深处拆一层。\"）与设问即答；(f) 讽刺性命名标签＋带刺修饰＋让步后贬抑回钉＋结尾自嘲反讽。未发现无原文依据的维度扩张；遗漏的只有\"数量级/残酷\"一类量化语气强化，属次要。末段\"执行边界\"为通用写作卫生条款，与风格机制无关，属轻度冗余（不改变长度分档）。"
+      },
+      "sample": 1,
+      "text": "**结构**：先引一句流传说法，随即用一句反转式强断言压过去并加粗；结尾可回指该说法收束，但不复述结论。\n\n**节奏**：长句以逗号铺陈递进的信息链，落点收成短句钉死判断；短句独占一行、可加粗，一处即可，不逐段复制。场景推演先用三到四个并列动作铺开，再以一句类比收口；动作、数量等细节有素材才具体化，无则停在推演。\n\n**人称**：第二人称把读者放进假设情境推演；不虚构亲历。第一人称承担“我必须说”“我承认”式断言与让步，保住评点席位。\n\n**转轴**：用口播式短语切段并充当叙议接口——先讲情境，紧接一句判断收束。设问开场，紧跟作答不悬置；进更深一层前用一句轻描短语示意再拆一层。比喻与推论基于已有信息表达，不冒充证据。\n\n**锋芒**：给对象起讽刺性命名标签，配带刺修饰语挖苦；让步段先承认例外，再用一句贬抑把立场钉回原处。结尾用一句自嘲或反讽，指向读者的消费行为，不下命令。\n\n执行边界：当前任务的事实、必写数量、身份、地点、状态与结果优先；写完双向检查，删无据细节、补遗漏信息。",
+      "variant": "direct_free"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 498,
+        "fidelity_analysis": "Spec 精准捕捉了该文最有辨识度的骨架：先立共识再当面推翻并重划概念边界的\"纠正者\"定位、反直觉加粗断言、层层淘汰的门槛链条论证、你我逼问式对谈、坦承对方成立之处后限定边界的转折、以及落地止损收益的收尾，均与原文证据吻合，颗粒度较细（如\"让结论像钉子一样重重砸在句尾\"对应原文'认知从来不是免费的''它就不是你的资产，只是你的谈资'式的短判断收束）。轻微不足：未点出\"以量化代价清单和拟想具体场景替代抽象说理\"这一核心论证技法，导致对'举证方式'层面的捕捉略弱于对'语气节奏'层面的捕捉；\"用词\"一条的表述（'不靠抽象名词与术语堆砌出的密度'）与'禁止'一节存在部分语义重复。整体无误抓。",
+        "improvement_suggestions": "1. 在提取 Prompt 中要求单独识别\"举证/可信度构建机制\"（如用带数字的具体高成本动作清单、拟想具象场景替代抽象说理或引用），避免论证手段只被归入'用词'层面的意象描述而丢失。2. 增加一次条目间去重合并步骤（本例'用词'与'禁止'关于术语堆砌的表述重复），以提升信息密度和避免规则冗余。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.4,
+        "negative_hits": [
+          "未发现样文论点、事件链或案例配对的残留，规则可在无关主题执行；'日常劳作与押注意象'属风格机制而非素材绑定，不计污染",
+          "'用词'一节与'禁止'一节关于'不堆砌术语/抽象名词'存在重复表述，属信息冗余而非污染",
+          "未出现文学赏析式空话或评价性废话，格式干净"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "样文的重要表达机制包括：设问式标题、俗语靶子+加粗反直觉断言的开头、概念边界重划（知道概念 vs 拥有执行能力）、逐级抬高的门槛链条（信息→理解→验证→风险下注）、具体高成本动作的量化列举（真金白银投流、剪一百条片子、第十版销售文案、打冷电话）作为证据替代、拟想场景（咖啡馆高谈阔论、岸上看教练视频）作反例、你我对话口吻、\"我承认……但\"的让步限定转折、金句式短判断收束、结尾落到可执行的止损收益、加粗独立成句与短段落排版、三条禁止项。Spec 对标题、开头、链条结构、长短句节奏、对谈口吻+让步转折、具象意象、可执行结尾、排版与禁忌均有覆盖，且基本都有原文依据。主要遗漏是\"用量化、具体的高成本动作清单替代抽象论证/自证可信度\"这一机制——原文反复用\"投过流、剪一百条片子、第十版文案\"式带数字的动作列举建立说服力，Spec 只在\"用词\"一节以意象角度部分触达，未点明数量化代价列举这一独立手段。另一处是拟想具象场景作反例（咖啡馆创业者、看游泳视频）这一论证装置未被单独识别。无明显无依据扩展，\"先算一笔账\"式的账目切入未被升格为规则也是合理的克制。"
+      },
+      "sample": 1,
+      "text": "## 定位\n先抛出一句流传甚广的共识，再当面推翻它，顺势重新划定概念边界，把写作者摆在纠正大众误区的位置上。\n\n## 标题\n用设问句写标题，点出多数人正经历却解不开的困境，替读者说出憋着的疑问，让人为了求得答案而点开。\n\n## 开头\n开头先引一句人人听过的俗语作靶子，紧接用加粗断言抛出反直觉判断，在读者脑中制造认知冲突。\n\n## 结构与论证\n把抽象能力拆成逐级抬高的门槛链条，每一级都要付出更重代价，让论证顺着层层淘汰之势收束。\n\n## 段落与句式\n长短句交替推进：先用设问抛出悬念，随即以极短的判断句作答，让结论像钉子一样重重砸在句尾。\n\n## 语气与人称\n以你我对谈的口吻直逼读者处境，中途坦然承认对方立场确有成立之处，再话锋一转限定其适用边界。\n\n## 用词\n借日常劳作与押注意象承载抽象论述，把道理写得可触可感，不靠抽象名词与术语堆砌出的密度。\n\n## 结尾\n结尾落在一条读完即可执行的止损收益上，替读者少犯一个具体的错，既不喊口号也不拔高升华。\n\n## 排版\n关键的反直觉论断加粗并独立成句，段落一律切短，靠频繁换行与留白制造停顿和压迫感。\n\n## 禁止\n禁止平铺定义、教科书式罗列概念清单。禁止堆砌专业名词以术语制造深度假象。禁止结尾空喊口号或泛泛升华主题。",
+      "variant": "single_stage"
+    },
+    {
+      "extraction_calls": 2,
+      "judgment": {
+        "characters_without_whitespace": 467,
+        "fidelity_analysis": "对辨识度强的机制抓得很准：长短句分工、'大数额塞进一个从句 vs 小物件展开'的详略剪刀差、'相邻事实的落差显出反讽但不点破'（对应'其实那个车库有八百平米，空着一大半'与'以后别买那么多车了'的对位）、'一句干脆的否定作结'（对应'什么都没有发生'）都是该样文的灵魂。失准之处：'可承认判断、自嘲与事后回想'中'自嘲'在原文证据不足，属于轻微过度归纳；'不必请示亲历许可'措辞含混、难以在新主题直接执行，反而削弱了对'轻描淡写插一句事后判断'这一机制的表达；'问句可带嘱咐或牵挂的口气'把原文中一次出现的语用选择写成倾向性规则，颗粒度略粗，若限定为'其中一问可带嘱咐/牵挂口气'更精确。",
+        "improvement_suggestions": "1) 压缩/改写'语气与评论'一节：把'可承认判断、自嘲与事后回想，不必请示亲历许可'改成如'允许在停顿处插入一句事后判断或事实补充，措辞平实，不作结论式宣言'，去掉无证据的'自嘲'与含混的'请示亲历许可'。2) 对从单一实例归纳的偏好加上条件限定或标注为可选（例如把'问句可带嘱咐或牵挂的口气'改为'对白中至少一问可承载嘱咐/牵挂语用，其余保持中性'），避免把偶发现象升为硬规则。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.4,
+        "negative_hits": [
+          "'不必请示亲历许可'表述含混，属于抽象化措辞，不含样文内容但拉低可执行性",
+          "'自嘲'与'问句可带嘱咐或牵挂的口气'存在轻微过度归纳（样文中'自嘲'无明显证据；牵挂口气仅一例），非污染但属证据不足的扩展",
+          "无样文具体内容、情节、人物、引用污染，格式干净"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "覆盖到位的核心机制：短句骨架+句号切分+禁用连接词、长句仅容纳数值或单一连贯动作、最简提示语的紧贴问答、答语压到单字、时刻/耗时标进程、按位移换段、每段一物一声、大数额一笔带过 vs 小物质地数量声响展开、结尾停在动作/物件+一句干脆否定。这些都是原文中高频、稳定、可辨识的机制，均有明确证据（28秒电梯、3秒签字、三毫米胶带、磨白的皮套、'什么都没有发生'）。遗漏或偏弱：(1) 原文里天气/港湾/地毯轮声等环境音一并承担氛围，Spec 只在'每段一件物件或一种声响'里顺带提及，未明确"
+      },
+      "sample": 2,
+      "text": "**节奏**：短句作骨架，一句一件事，靠句号切分，不用连接词串连。长句仅用于容纳精确数值或一个连贯动作。关键句前后留空行，让停顿承担重量。叙述紧贴动作与所见，不替人物补动机。\n\n**对白**：只给最简提示语，一问一答紧贴排列。问句可带嘱咐或牵挂的口气，答语压到单字，答完即止，不追问、不解释。\n\n**推进**：用明确时刻与耗时标出进程，人物按位移逐段切换场景，每段只留一件物件或一种声响，换段即换景。\n\n**详略**：大数额、大体量塞进一个从句一笔带过，把篇幅留给一件小物的质地、数量与声响。数值尽量给到明确颗粒，有素材才写，无则省略该技法，不扩编感官与动作。\n\n**语气与评论**：第一人称在场，可承认判断、自嘲与事后回想，不必请示亲历许可；只在事件停住时插一句，措辞平实，不做宣言。锋芒与反讽由相邻事实的落差显出，不加评论点破。\n\n**收束**：结尾停在一个动作或物件上，对缺失的信息只交代有无，可用一句干脆的否定作结，短到近乎断句；不解释情感、不补意义。\n\n**执行边界**：任务给定的事实、身份、数量与结果优先；写完双向核对，删无据细节，补遗漏信息。",
+      "variant": "direct_free"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 511,
+        "fidelity_analysis": "语气、视角、节奏抓得准：\"不解释动机的在场旁观者\"\"以最短音节的应答收束对方的话\"\"避开评价性形容词\"都对得上原文证据，句式层的\"名词性白描句与无连接词并列\"\"每段一至三句\"颗粒度较锋利，结尾机制（未回应的静物＋否定式短句封口）是最有辨识度的特征且被准确捕捉。扣分点：漏掉反差纠正装置这一灵魂细节；\"让器物的度量细节承担情绪重量\"\"把情绪压进停顿与沉默\"偏赏析性描述而非动作指令，降低了特征的可复制精度。",
+        "improvement_suggestions": "1）提取时增加\"反差/事实纠正\"类机制的识别：当样文出现叙述者用一个精确数据悄悄推翻人物说法、或用事实反差制造克制讽刺时，应升格为独立规则（如\"在人物的说法后用一句精确事实作无声纠正，不作评价\"），而不是只保留\"度量替代抒情\"。2）对样文中不存在的结构位置（此处的标题/题记）不要补立规则；若首行确实兼任题记功能，应写成\"首行即正文开篇句\"并给出条件，同时把\"承担情绪重量\"这类效果描述改写成可检查的动作（如\"每段至少一处尺寸/时长/数量标注\"）。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.4,
+        "negative_hits": [
+          "\"标题：用一句带具体时间的短句充当标题或题记\"——样文无标题/题记实体，属无原文证据的扩展（非素材污染，但为无依据维度）",
+          "\"让器物的度量细节承担情绪重量\"\"留下空白让余味自生\"——效果描述多于可执行动作，接近文学赏析语汇但未达到\"文笔优美\"级废话，未触发维度2一票降级",
+          "未发现样文论点、情节、实例或结论复用；全文规则为机制层约束，跨主题可迁移"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "原文有辨识度的重要机制基本被覆盖：第一人称在场旁观、以对话间隙与门外/走廊声响推进时间、重大事件只给结果与额度用时（\"用了三秒钟\"\"一亿两千万美元\"）、器物物理度量替代抒情（三毫米胶带、八百平米车库、二十八秒电梯、六点零七分）、最短音节应答（\"我说好\"\"嗯\"）、未被回应的静物收尾＋否定式末句独立成段（\"什么都没有发生\"）、空行留白排版。遗漏的次要机制有两处：一是叙述者用一个精确事实悄悄纠正对方说法的反差装置（\"其实那个车库有八百平米，空着一大半\"），这是该样文很独特的克制讽刺手法，Spec 未收；二是倒计时式的数字递减与外部消息（助理、司机、转账通知）作为时间刻度的用法，仅被\"对话间隙与门外声响\"部分覆盖。\"标题\"一节属无依据扩展：样文正文没有标题或题记（\"# 样文 2\"只是数据标签），把首行时点句重新定义为\"标题或题记\"是给不存在的栏目立规则。"
+      },
+      "sample": 2,
+      "text": "## 定位\n以第一人称目击者身份进入私人场景，只记录目之所及与耳之所闻，把叙述者处理成不解释动机的在场旁观者。\n\n## 标题\n用一句带具体时间的短句充当标题或题记，只标记时刻与场景限度，不预告情感，不概括事件走向。\n\n## 开头\n以一句陈述句开篇，把一次会面锚定在年月上，随即转入天气与光线，让外部环境先于人物动作说话。\n\n## 结构与论证\n把时间推进交给对话间隙与门外声响，用等待中的空拍串联动作；重大事件只交代结果、额度或用时，不展开过程。\n\n## 段落与句式\n每段一至三句，句子一律短促，多用名词性白描句与无连接词并列，让器物的度量细节承担情绪重量。\n\n## 语气与人称\n叙述者保持低压冷静，以最短音节的应答收束对方的话，把情绪压进停顿与沉默，避开任何评价性形容词。\n\n## 用词\n偏好具象名词与可听可见的动词，给器物标注尺寸、数量、时长等物理度量，用度量的精确替代抒情。\n\n## 结尾\n以一个未被回应的静物细节收束全文，末句独立成段，用否定式短句封住叙事，留下空白让余味自生。\n\n## 排版\n以空行分段，段落普遍留白，不设小标题、不加分隔符，让版面的空旷呼应场景的空旷。\n\n## 禁止\n禁止直接抒情或替人物解释心理。禁止用形容词堆叠和比喻渲染气氛。禁止在结尾处升华主题、点明寓意或给出结论。",
+      "variant": "single_stage"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 448,
+        "fidelity_analysis": "锋芒、节奏、开篇、结尾几条抓住了该样文最锋利的机制（加粗反直觉判断、程度副词与比较级落刀、讽刺由反差产生、两段式格言收束），颗粒度够犀利，可辨识度高。人称视角（『你』『我们』、允许『我认为』与自嘲）也捕捉到位。误抓方面：『末句落下走低的结论』『劣化轨迹』隐含了论证形状必须走向负面/恶化的约束，是对论证内容方向的过度绑定，应改为允许机制化表述（如『以反向对比收束案例』）。『两段式格言』中的『后半句抬高难度』实为『后半句制造反差对比』的一种，实测样文是用对比抬高后者难度，但规则可更抽象以避免过度限定。技术语域缺失是主要漏抓。",
+        "improvement_suggestions": "1) 在提取 Prompt 中显式区分两类『边界』：(a) 论证型边界（限定适用范围、给出例外场景、程度词收束），(b) 事实型校验（数量/身份/地点/状态），要求按样文体裁只提取有证据的那一类，防止通用事实核查模板混入立论型样文。2) 增加『专业语域与术语密度』的检测维度（领域术语、术语与白话的搭配、术语出现的位置），并明确禁止把无证据的感官/现场动作类技法列为通用规则，避免从其他模板污染。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.4,
+        "negative_hits": [
+          "『涉及数字、物件、感官或现场动作的技法』中的『物件、感官、现场动作』在样文无证据，是从通用风格模板串入的无依据扩展。",
+          "『边界：当前任务的事实与必写数量、身份、地点、状态、结果优先』是通用事实核查模板，与样文的『论证适用范围/例外』类边界（如『在绝大多数非高频交易和底层图形渲染的场景下』）混淆，非样文机制。",
+          "『案例段…末句落下走低的结论』『劣化轨迹』对论证的语义走向做了负向硬绑定，边界模糊，属轻微形状污染（未搬运素材，故未降清洁度）。",
+          "遗漏技术/工程语域（I/O、RPC、Profiling 等术语密度）这一该样文较有辨识度的语言层特征。"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "样文的重要机制有六类：①宽泛陈述→转折收窄→加粗反直觉判断的开篇三段式；②长句因果推演+极短设问切换；③案例段『一行短句点明论域+两组对称并列复句呈现劣化轨迹+末句下行结论』；④揭示顺序（结论→成因→适用边界/例外范围）；⑤编号条目『加粗标签+一句阐释』的列表格式；⑥『抽象权衡总括+两段式格言收束（后半句抬高难度）』的结尾。Spec 对①②③⑤⑥都覆盖且细节到位（如『两组对称并列复句』『后半句抬高难度』），对④覆盖到位。遗漏：样文的技术/工程语域特征（I/O、RPC、Profiling、位运算、状态机等专业术语的密度与嵌入方式）未被任何规则触及，这是该样文较有辨识度的语言层特征。无依据扩展：『列举』节后半句『涉及数字、物件、感官或现场动作的技法』中，『物件、感官、现场动作』在样文无任何证据（样文只有数字与技术物件），属于从别的风格模板串入的通用条目；『边界』节的『必写数量、身份、地点、状态、结果』同样与样文的论证型『边界』（限定适用范围、给出例外场景，如『在绝大多数非高频交易和底层图形渲染的场景下』）完全不是一回事，是把事实核查类模板硬套进立论型样文。"
+      },
+      "sample": 3,
+      "text": "**开篇与立论**：先以一句宽泛的领域陈述引出普遍问题，再用转折语气收窄审视对象，随后以加粗单句抛出反直觉判断——判断先出，论证后到。\n\n**节奏**：长句承载因果推演与代价对比，从句层层搭接；关键反问用极短的独立设问停顿，把叙述切换到解释层。案例段以一行短句点明论域，再用两组对称的并列复句呈现劣化轨迹，末句落下走低的结论。\n\n**揭示顺序**：结论先立，随后依次给出成因、适用边界与例外范围，一段一层，不倒装、不预叙。\n\n**锋芒**：靠程度副词与比较级落刀，不靠形容词堆砌；讽刺意味从措辞的反差产生。评点可直接称读者为“你”、自称“我们”，“我认为”与自嘲不需亲历许可。\n\n**列举**：编号条目每条以加粗短语作标签，后接一句阐释，标签与阐释分离。涉及数字、物件、感官或现场动作的技法，素材有则用、无则省略，不编造。\n\n**收尾**：先用一句抽象的权衡式总括，再以两段式格言收束，后半句抬高难度形成对比。\n\n**边界**：当前任务的事实与必写数量、身份、地点、状态、结果优先；写完双向检查，删无据细节、补遗漏信息。",
+      "variant": "direct_free"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 502,
+        "fidelity_analysis": "对辨识度特征抓得较准：\"原本如何，最终演变成如何\"的对照句模板、\"不是为了A而是在B之间取衡\"的收束句式、加粗视觉重音、同行劝诫人称都是该样文的独特灵魂，且给出了可复用的句法骨架而非赏析。颗粒度不足之处：\"长短句交替\"\"段间留白\"偏通用；用词条给出的示例词对\"克制与炫技\"几乎就是原文收束句\"保持克制…比炫耀技巧要困难\"的换写，把源文的价值立场当成了词表；\"标题\"条可能误抓了不存在的机制。此外结构要求\"反例推演\"而禁止条又\"禁止复原案例细节\"，两者边界未划清，会让执行者无法判断反例推演允许写到什么具体度，削弱了对\"具体失算交替出现\"这一核心节奏的忠实还原。",
+        "improvement_suggestions": "1) 禁止类规则必须限定作用域并自检与结构条的相容性：例如改为\"精确数字不得充当论证依据，可用于反例场景的近似量化刻画\"，并对\"反例推演可写到何种具体度\"给出边界，避免结构要求与禁止项互相打架。 2) 举例槽位一律抽象化、与源文收束句/论点脱钩：把\"如投入与代价、克制与炫技\"替换为占位式槽位（如同语域抽象名词X与Y），并在 Prompt 中加入\"若样文未呈现某机制（如标题写法）则删除该条或标注不确定\"的规则，防止无依据补写。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.0,
+        "negative_hits": [
+          "禁止条\"禁用精确数字、阈值或比例充当论据\"与样文自身证据矛盾（原文有\"两万行代码\"\"十几个微服务\"\"几毫秒\"\"数倍时间\"），属于无依据的过度泛化禁令",
+          "禁止条\"禁止罗列技术名词清单或复原案例细节\"与结构条\"反例推演\"\"抽象论断与具体失算交替\"直接冲突，使反例推演无法落地",
+          "用词条示例\"克制与炫技\"高度贴近样文收束句的价值立场（\"保持克制…比炫耀技巧\"），存在把源文结论当词表沿用的轻微污染风险",
+          "标题条\"取代名词短语式命名\"在给定样文中无证据支持（样文标题为元数据\"样文3…\"），属无依据扩展"
+        ],
+        "overall_score": 4.0,
+        "scores": {
+          "actionability": 3.0,
+          "cleanliness": 4.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "从样文识别出的重要机制包括：承认困扰→加粗断言翻转共识→设问引出的三拍开头；断言—设问—成本对比—反例推演—原则清单—格言收束的推进链；\"原本…变成了/演化成了…\"的代价递增对照句；\"为什么这么说？\"\"结果是什么？\"式短设问过渡；\"以微服务拆分为例\"式短桥接句；\"我们\"共建语境+\"如果你仔细审视…你会发现\"邀请验证的人称机制；同一语域抽象名词成对对立（性能瓶颈与架构腐化、资源/时间/复杂性）；\"不是为了A，而是在B之间取衡\"转折收束+格言式短句戛然而止；加粗断言、有序列表配加粗引导词、正文不设小标题的排版。Spec 覆盖了绝大多数：定位、开头三拍、结构链、对照句、语气人称、用词对立、结尾转折+格言、排版均有依据，覆盖密度较高。遗漏/无依据扩展：(1) \"标题用违反直觉的判断句…取代名词短语式命名\"缺乏可见证据（给定样文标题为元数据），\"取代名词短语式命名\"属无依据补写；(2) 短设问过渡与\"以X为例\"桥接句未被单独捕捉（仅隐含在\"设问\"里）；(3) 禁止项\"禁用精确数字\"与原文\"两万行代码、十几个微服务、几毫秒、数倍时间\"的场景量化明显冲突，属把局部倾向升为普遍禁令的过度概括。综合为覆盖大部分机制、有次要遗漏与一处无依据扩展。"
+      },
+      "sample": 3,
+      "text": "## 定位\n面向技术实践者，以纠正常识误判为驱动，先立靶再拆解，收束为可执行的克制原则，以同行劝诫取代教学灌输。\n\n## 标题\n用一个违反直觉的判断句制造认知落差，取代名词短语式命名，让读者在读完前产生疑问。\n\n## 开头\n先用一段承认普遍困扰，再以加粗断言翻转共识，随后抛出设问引出下文，制造三拍节奏。\n\n## 结构与论证\n按\"断言—设问—成本对比—反例推演—原则清单—格言收束\"推进，抽象论断与具体失算交替出现。\n\n## 段落与句式\n用\"原本如何，最终演变成如何\"的前后对照句呈现代价递增，长短句交替，每段以一句短断言收口。\n\n## 语气与人称\n以同行口吻劝诫，用\"我们\"共建语境，再以\"你若审视会发现\"邀请读者自行验证，避免居高临下。\n\n## 用词\n选取同一语域的抽象名词成对对立，如投入与代价、克制与炫技，少用形容词堆砌与绝对化程度词。\n\n## 结尾\n以\"不是为了A而是在B之间取衡\"的转折句收束价值立场，再用一句格言式短句点明克制之难，戛然而止。\n\n## 排版\n断言句加粗制造视觉重音，原则条目用有序列表配加粗引导词，段间留白，长正文不设小标题。\n\n## 禁止\n- 禁用精确数字、阈值或比例充当论据。\n- 禁止罗列技术名词清单或复原案例细节。\n- 禁止以嘲讽命令口吻贬低对立立场。",
+      "variant": "single_stage"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 431,
+        "fidelity_analysis": "抓取的灵魂相当锐利：否定式概念切分＋极端假设验边界、谬论“命名+引号+绑定结论+独立段斩断”、‘同样’平行的具身演示＋动手前不存在的存在性断言、“需要两样东西”的并列双概念＋成本/倍数论据、末段一句决绝收束，以及“长句论证、短段断言”的节奏分工，都是该译笔下格雷厄姆随笔高度可辨识的机制，而非“字数/分段”类表面特征。扣分点有二：一是上述“不是……而是……”的句式—功能错配，属于轻微误抓（把对比句式安错了修辞职能）；二是“压缩比喻”这类把一个过程重构为另一类过程的建模式比喻缺席，这是本样文最有辨识度的语言动作之一，漏抓使锋利度打折。术语括注外文被正确降级为“有素材才用”的局部策略，区分合理。",
+        "improvement_suggestions": "1）在机制清单中强制检查“建模式比喻/过程重构”类动作（如“把创业想象成一个压缩过程：A 被压缩成 B”），并像对待术语括注一样标注其是否为局部策略，避免只盯句式模板而漏掉作者的思维构造手法。2）要求每条“句式规则”同时记录其在样文中的修辞职能与最小语境锚点（如“不是……而是……”用于时长/强度对比），并对“有素材才用，无则省”明确标注管辖的子句范围，防止句式与功能错配、条件豁免边界含混。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.6,
+        "negative_hits": [
+          "模式—功能错配：Spec 称“做规模对比时用‘不是……而是……’拉开差距”，但样文中该句式服务于时间/强度对比（压缩论证），规模对比实为“在大公司里……；而在几个人的创业团队里……”的对照结构——同义改写/换主题执行时会写出不合原味的对比句。",
+          "轻微主题拉力（未扣分项）：“抽象命题落地为一个具体劳动场景，算出投入与产出的差额”偏向生产/制造类论题，且“有素材才用，无则省”的管辖范围（仅指“同样”第二例，还是整条规则）表述含混，跨到非生产主题时存在歧义。",
+          "漏项而非污染：压缩比喻（“把X想象成一个压缩过程：……被压缩成……”）未被任何规则承接。"
+        ],
+        "overall_score": 4.6,
+        "scores": {
+          "actionability": 5.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "样文的重要机制包括：开篇悬置核心概念＋否定式区分（财富≠金钱）＋两个极端假设（魔法机器、荒岛巨款）；带外文括注的命名谬论（“大饼谬论（The Pie Fallacy）”）＋“从这个谬论出发……得出结论：”绑定句式＋独立短段斩断（“但事实完全不是这样”）；抽象命题→具体劳动场景（木匠制椅）＋投入产出算账＋“原本没有……现在有了”的存在性断言＋“同样”平行第二例（程序员）；设问引建议＋“我认为”；创业的压缩比喻（“把创业想象成一个压缩过程：……被压缩成短短几年”）＋“你不再是……而是……”强度对比＋大公司/小团队的组织规模对比；“需要两样东西：可测量性（Measurement）和可放大性（Leverage）”并列定义＋边际成本倍数论据；末段单句金句（含外文原句）。Spec 对前者的绝大多数覆盖到位且有“有素材才用，无则省”的条件标记。遗漏与偏差：一是压缩比喻这一“用模型化比喻重构事物”的手法完全未收（它同时承担第 2–3 句的对比铺垫）；二是组织规模对比被错配给“不是……而是……”——该句式在样文中出现在时间/强度对比（“你不再是低强度……工作四十年，而是以极限强度工作四年”），规模对比实际用的是“在大公司里……；而在几个人的创业团队里……”的双栏对照句式。无依据扩展基本没有，规则均有原文落点。故覆盖为 4。"
+      },
+      "sample": 4,
+      "text": "**概念奠基**：先以短句把核心概念悬置，随即作否定式区分（甲不等于乙），再用极端假设检验概念边界。术语首次出现可括注外文原词，有素材才用。\n\n**谬论命名**：为流行推论起一个名字并加引号，用绑定句式把被驳结论挂在它下面，随即以独立短段斩断否定。\n\n**转化演示**：抽象命题落地为一个具体劳动场景，算出投入与产出的差额，强调产物在动手前并不存在；再以“同样”平行接一个新场景，有素材才用，无则省。\n\n**自问自荐**：设问引出建议，答句以“我认为”开头——第一人称评点无需亲历许可，不得因缺素材改成第三人称。\n\n**双概念并置**：总说“需要两样东西”，再并列定义各自含义，各配一条倍数或成本论据（数字有则用）；做规模对比时用“不是……而是……”拉开差距。\n\n**收束**：末段只放一句核心判断，独立成段，短而决绝，不再解释。\n\n节奏：长句承担论证，短段承担断言与转折，段间留白即停顿。\n\n边界：任务的事实与必写信息优先，不得带回上述任何具体内容；写完双向核对，删无据细节、补遗漏要点。",
+      "variant": "direct_free"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 531,
+        "fidelity_analysis": "抓得准的：第二人称笃定对话、遇反驳一句干脆否定转折（\"但事实完全不是这样\"）、俗名＋英文括注的造词法（大饼谬论/The Pie Fallacy、可测量性/Measurement）、具体物件名词清单（木头、椅子、面包）、短断言先行的句式节奏、口号式祈使收尾（对应 Make something people want）、破折号串联而非项目符号——这些都与样文证据吻合且颗粒度较细。抓得不够犀利的：思想实验与比例化量化推理未被捕获，使\"破谬—验证\"环节缺少具体可用的论证工具，只剩链条名目；\"辨析—验证—破谬—给路—拆条件—收格言\"是对样文顺序的合理抽象，但各环节内部动作（如何验证、如何拆条件）略显名目化。总体忠实度较高，无明显误抓。",
+        "improvement_suggestions": "1) 增补\"假设思想实验\"规则：要求用一个带反事实条件的具体场景（如'如果X会怎样/即使Y也没用'）把抽象命题推到极端验证，覆盖样文魔法机器—荒岛式的论证装置。2) 增补\"抽象机制量化具象\"规则：把过程类概念写成比例或数量对照（如压缩/倍数/边际成本式表达），并在结构链条的\"验证—破谬\"环节直接挂钩这两类论证工具，避免链条只剩名目。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.4,
+        "negative_hits": [
+          "未发现以样文论点、事件链或结论解释规则的污染项；\"大饼谬论\"\"木匠\"\"创业\"等源文素材均未进入规则",
+          "\"辨析—验证—破谬—给路—拆条件—收格言\"是链条名目，各环节动词偏抽象，执行时需自补动作，属可执行性弱点而非污染",
+          "\"把读者按进澄清的节奏\"一类表述接近赏析式描写，但整体未构成文学评价，不触发维度2扣分上限"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 4.0
+        },
+        "structure_analysis": "样文的重要机制包括：①概念辨析（财富≠金钱）并以假设思想实验（魔法机器、荒岛）验证；②点名并拆解谬误（大饼谬论＋英文原词括注）；③正反实例对（木匠/程序员、大公司/创业团队）以\"相反/同样\"勾连；④短断言＋慢解释的节奏；⑤抽象机制具象化（把创业\"想象成压缩过程\"、四十年/四年的比例对照、边际成本为零的量化说理）；⑥收尾格言（Make something people want）压缩成口号。Spec 覆盖了①的概念辨析面、③④（段落与句式节明确\"相反/同样\"与一紧一松）、②的破谬环节（链条中的\"破谬\"＋用词节的原词括注）、⑥（结尾节），以及标题式、第二人称、具体名词、排版等机制，覆盖面较广且基本有据。明显遗漏：a) 假设性思想实验装置（\"如果有一台魔法机器……\"\"流落荒岛\"）——这是样文最有辨识度的论证手法，Spec 未提及；b) 抽象概念的比例化/量化具象（压缩过程、四年对四十年、边际成本近零），Spec 只在\"具体名词\"层面沾边。无依据扩展不明显，\"面向准备动手做事的读者\"属于合理读者设定推断。"
+      },
+      "sample": 4,
+      "text": "## 定位\n面对准备动手做事的读者，作者扮演向导与同伴的双重角色，用对话感的推理带着你把模糊直觉拆成清晰概念。\n\n## 标题\n采用\"如何加动作\"或\"如何达目标\"的短句式，不设悬念不玩修辞，让读者一眼看明白全文要解决的问题。\n\n## 开头\n第一句就抛出一个未经解释的断言或条件，紧接着调转话锋声明要先辨清概念，把读者按进澄清的节奏。\n\n## 结构与论证\n用\"辨析—验证—破谬—给路—拆条件—收格言\"的推进链条作骨架，每个环节只推一步、收一结论。\n\n## 段落与句式\n先用一句短断言定论，再用一两句较慢的解释句铺陈，正反例证以\"相反/同样\"勾连，让节奏一紧一松。\n\n## 语气与人称\n全程以\"你\"对话读者，语气笃定但不居高临下，遇反驳时以一句干脆的否定完成转折，不掩饰判断。\n\n## 用词\n给自创概念起一个画面感强的俗名，配合原词括注；日常物件一律用具体名词，不改成抽象集合词。\n\n## 结尾\n压缩成一句祈使短句作终章，只留一个核心动词与一个目标名词，像口号一样在读者脑中留下可复述的残影。\n\n## 排版\n正文纯段落式，不设小标题；关键术语或俗名加引号或括注原词，用破折号串联同层次条目，不列项目符号。\n\n## 禁止\n只给定义不补上可感实例，禁止让概念悬空。\n用抽象集合词替代具体物件，禁止飘在上位词。\n在结论前堆叠模糊限定语，禁止把判断稀释掉。",
+      "variant": "single_stage"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 479,
+        "fidelity_analysis": "特征捕捉相当犀利，几处做到\"有名字的机制\"而非泛化描述：直接引用了\"我估计/我以为\"作为情态标记写法；指出\"锋芒靠并置和反差，不靠形容词堆砌\"——这是原文反讽成立的关键；\"关键时先抬高腔调再急落为平实陈述\"精确对应\"正在这千钧一发之际…双方都怕误伤自己人，不敢开枪\"的腔调坍塌；\"用对举句收两边\"\"末句只留态度，不下结论\"对应\"想要设置别人生活的人/对被设置生活安之若素的人\"与\"我一直怀念…\"的收尾方式。比喻一节\"就地取材，落在日常可感的物上，用完即止，不升格\"准确区分了原文比较式明喻（像山羊/像猫）与被拒绝的抒情升格。轻微瑕疵：\"对对象用亲近称呼（材料有则用）\"表述较弱，\"猪兄\"这一称呼所承载的并置反讽（同辈称谓+锋利评点）在规则里只落到\"与锋利评点并置\"，称呼本身的平等/拟友意味没有点出；\"关键时刻\"未定义什么算关键，颗粒度稍欠。",
+        "improvement_suggestions": "1）在提取 Prompt 中要求：当原文有\"以推测口气虚构不可见场景\"（如\"我估计…去了\"）这类幽默机制时，Spec 应给出显式的允许/禁止边界（例如\"推测性虚写须以'我估计/我以为'标明，不得伪装为亲见\"），并与\"不编造\"类元约束对齐，避免生成互相抵消的规则。2）要求对\"并置类机制\"写出最小完整配方：标签/称谓来源域＋对照细节域＋（禁）追加解释，让\"锋芒靠并置\"能落到可核查的动作，而不是停在原则层。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.6,
+        "negative_hits": [
+          "\"边界\"节的\"不编造亲见、对白与动作\"与原文\"我估计它到附近的村寨里找母猪去了\"式推测性虚构幽默存在执行冲突（非污染，但属于规则内部张力，应补边界：推测性虚写在标注为推测时允许）",
+          "\"对对象用亲近称呼（材料有则用）\"中\"材料有则用\"较含糊，未说明何时用、称呼应达到何种并置效果，容易被弱化为可选项"
+        ],
+        "overall_score": 4.6,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 5.0,
+          "conciseness": 5.0,
+          "coverage": 4.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "样文中的重要机制包括：①认知情态显式标注（\"我估计\"\"我以为\"\"我不认为\"）；②体制化/正式标签与身体物质细节的贴身并置（\"破坏春耕的坏分子\" vs 房上学汽笛；\"亡命战士/生育机器\" vs 斗鸡/母猪）；③普遍命题→显式过渡（\"以下谈到的…\"）→例外个案→回到普遍判断并用对举句收束；④自嘲置于批评之前，把自己一并纳入被批评的一方（\"我也不见得丰富了多少\"、\"我也觉得它不正经\"）；⑤关键时刻的节奏：抬高腔调（\"正在这千钧一发之际\"）后急落为平实计算陈述；⑥段末/篇末下坠短句；⑦就近取材的比较式比喻（像山羊、像猫、像斗鸡、像母猪），用完即止；⑧首尾\"四十岁了/一直怀念\"的态度性收束，不下结论。Spec 对①②③④⑤⑥⑦⑧都有对应的显式规则，覆盖度高且均有原文证据，未凑维度。次要遗漏：开篇用自传性小场景（\"插队的时候，我喂过猪\"）作为平淡起点、以具体经验开场引入普遍命题的入题手法未被提及；\"但这毫无成效：人和猪的音色差得太远了\"一类的谐音/物理性打脸式落空（dry undercut）在\"句法·下坠\"里只覆盖了一部分。无依据扩展方面，\"边界\"节是通用元约束（不编造亲见、对白与动作），与原文的虚构性反讽语气略有张力——原文恰恰用\"我估计它到附近村寨里找母猪去了\"这样的推测性虚构场景制造幽默，规则的\"不编造亲见、对白与动作\"若严格执行会掐掉这一机制，属于轻微冲突。"
+      },
+      "sample": 5,
+      "text": "# 写作规则\n\n**句法**：长句铺陈可辨认的具体状态，随后用冒号收束成一句短断语；断语前不加连接词，靠停顿落地。段末以更短的一句收尾，制造下坠。\n\n**人称**：“我”全程在场，判断、推测、自嘲都明说出口；推测用“我估计”“我以为”标明，不充作事实。对对象用亲近称呼（材料有则用），与锋利评点并置。锋芒靠并置和反差，不靠形容词堆砌。\n\n**反讽**：挪用正式、体制化的标签命名，紧接身体的、物质的细节作对照，不追加解释，让反讽在并置中自成。自嘲放在批评之前，把自己一并纳入被批评的一方。\n\n**详略**：背景交代一笔带过，篇幅集中于一个例外个案的动作过程；细节只取足以反衬性格的少数几个。\n\n**结构**：先立普遍命题，再以显式过渡引出例外个案；个案写足动作与节奏——短句连发、动词具体，关键时刻先抬高腔调再急落为平实陈述。结尾回到普遍判断，用对举句收两边，末句只留态度，不下结论。\n\n**比喻**：就地取材，落在日常可感的物上，用完即止，不升格。\n\n边界：任务给定的事实与必写信息优先；写完双向核对，删无据细节，补遗漏信息。缺素材时靠语序、停顿、照应维持语气，不编造亲见、对白与动作。",
+      "variant": "direct_free"
+    },
+    {
+      "extraction_calls": 1,
+      "judgment": {
+        "characters_without_whitespace": 487,
+        "fidelity_analysis": "特征捕捉相当精准：用词条目（'官方化、组织化的正式词汇挪用到微末对象上，与口语混排，靠语域错位生出讽刺'）是全篇最有辨识度的机制，抓得很准；'给主角起亲昵称呼'捕捉到'猪兄''宠儿'这一关键手法；排版条目对短段节拍的观察也符合原文。但结构条目写成'先立论说人有设置他人的天性…转入个体反抗叙事'，把样文的论点内容（设置/反抗）直接塞进了'结构'这一本应是形式层的槽位——这既是 fidelity 上的错位（把主题误当机制），也是污染来源。结尾条目的'个例说成罕见''孤独的怀念'抓得很到位。",
+        "improvement_suggestions": "1. 在提取 Prompt 中增加一条强约束：'结构、结尾、禁止等槽位只允许填写形式机制（转折顺序、视角切换、收束类型、修辞禁区），禁止填入样文的论点、角色身份（如\"反抗者\"）或主题结论（如\"设置/被设置\"）；若必须举例说明，只能作为可被任意替换的示意，不能作为规则本体。' 2. 增加'反高潮/冷面降格'这一类独立机制的抽取指令：要求识别样文中'铺陈—突然收窄成一句自嘲或平淡陈述'的节奏单元，并将其形式化为可迁移的句法模板，而不是笼统归入'自嘲短句'。",
+        "model_conciseness": 5.0,
+        "model_score_mean": 4.4,
+        "negative_hits": [
+          "'先立论说人有设置他人的天性，再用跨域类比推向人类社会，转入个体反抗叙事'——把样文的论点（人设置动物/自我、个体反抗）写入结构规则，换任何非'设置-反抗'主题都无法照此执行，等于替下一篇预写了源文的结论关系。",
+          "'禁止把反抗者写成完人'——'反抗者'是样文的个例/角色位置，不是普遍可迁移的表达动作；新主题若无'反抗者'角色则此条空转。应改写为'不把反常规主角写成完人，保留其粗粝/任性的具体行动'一类机制化表述。",
+          "开头条目'白描对象顺性而活的日常，再让外部安排进入'中'顺性而活/外部安排'是源文'设置'论题的残留，属于主题绑定的边界模糊，虽可迁移但建议抽象为'先给对象一个自发的生活状态，再引入外部秩序的规训'。",
+          "未见文学赏析废话、未见大段引用或思考过程泄漏，格式干净。"
+        ],
+        "overall_score": 4.4,
+        "scores": {
+          "actionability": 4.0,
+          "cleanliness": 3.0,
+          "conciseness": 5.0,
+          "coverage": 5.0,
+          "distinctiveness": 5.0
+        },
+        "structure_analysis": "样文的关键机制基本被覆盖，且都有原文证据：①第一人称基层劳动回忆作引；②白描动物顺性而活与外部安排干预的落差；③跨域类比（斯巴达/斗鸡母猪）推向人类社会；④个体反抗叙事；⑤平实陈述中插入自嘲短句（'人和猪的音色差得太远了'）；⑥夸张场面层层加码的列举（手枪二十几、火枪十几、两路兜捕）；⑦官方组织词汇挪用到微末对象（'破坏春耕的坏分子''专政手段'）造成语域错位；⑧对主角的亲昵称呼与'一本正经说评判短句'；⑨一行成段的短段落与关键转折独句成段；⑩结尾回到成年叙述者处境（'我已经四十岁了'），个例说成罕见并以孤独怀念收束。这些都在 Spec 中有对应条目。无依据扩展不多，'平凡称谓+反常修饰语'也确由标题'一只特立独行的猪'支撑。遗漏点在于黑色幽默式的冷面反高潮（如'我曾尝试着指导它…毫无成效：人和猪的音色差得太远了'）只是被概括为'自嘲短句'，其降格/反高潮的具体机制未拆解；以及叙述者'看似真诚实则反讽'的双层语调没有被独立点出。"
+      },
+      "sample": 5,
+      "text": "## 定位\n用私人经历作引子，把尖锐判断藏进闲谈体杂文，让议论从生活轶事里长出来，而非直接宣示主张。\n\n## 标题\n给标题配一个平凡称谓加反常修饰语，让具体对象自带寓言味，一眼可读出对常规身份的偏离。\n\n## 开头\n以第一人称回忆基层劳作起笔，先白描对象顺性而活的日常，再让外部安排进入，制造干预前后的落差。\n\n## 结构与论证\n先立论说人有设置他人的天性，再用跨域类比推向人类社会，转入个体反抗叙事，收束回私人经验。\n\n## 段落与句式\n一段只走一步转折，句子以平淡陈述收尾前插入自嘲短句；铺陈夸张场面时用层层加码的列举放大荒诞。\n\n## 语气与人称\n让叙述者以参与者身份出现，给主角起亲昵称呼，用一本正经的口吻说出带评判意味的短句。\n\n## 用词\n把官方化、组织化的正式词汇挪用到微末对象上，与口语混排，靠语域错位生出讽刺。\n\n## 结尾\n回到成年叙述者的处境，把个例说成罕见，以一句孤独的怀念作结，把私人感伤留在纸面上。\n\n## 排版\n多用一行成段的短段落当节拍，在关键转折处独句成段，制造停顿与落款感。\n\n## 禁止\n禁止以口号或格言宣示立场，让判断藏在闲笔里。禁止把反抗者写成完人，保留其粗粝任性的面目。禁止结尾点破寓意，把解释权留给读者。",
+      "variant": "single_stage"
+    }
+  ],
+  "status": "complete"
+}

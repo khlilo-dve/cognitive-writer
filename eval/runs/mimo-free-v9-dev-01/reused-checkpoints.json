@@ -1,0 +1,42 @@
+{
+  "source_run": "mimo-free-v8-dev-01",
+  "reason": "Same MiMo model and unchanged legacy requests only; v9 candidate entirely fresh",
+  "files": [
+    {
+      "file": "spec_single_stage_03_judge.json",
+      "sha256": "efa3013b997ecfe6226b2bdf16ea3d17d910ac3875902ae55b55bb60befe1cf0"
+    },
+    {
+      "file": "spec_single_stage_01_judge.json",
+      "sha256": "2c56409a560b25e266ba08c5ae21984f0e34e4dfbac1310742e4f322de661d66"
+    },
+    {
+      "file": "spec_single_stage_04_judge.json",
+      "sha256": "9befcad6182c0f121a8af69bb7584164712f92208ff1bebdc064a74e1046c844"
+    },
+    {
+      "file": "learn_single_stage_05_legacy_0.json",
+      "sha256": "197fa60db462924d1559914d385efdcc5703e1fd259dccb071dc2d7b22d39fbc"
+    },
+    {
+      "file": "spec_single_stage_02_judge.json",
+      "sha256": "9e8a053e5aac5f6dea408f7595d0a70137b5809d5f28e9301fed0e0b9de099ac"
+    },
+    {
+      "file": "learn_single_stage_04_legacy_0.json",
+      "sha256": "d3e99f195a22b4d410ab27114050a1aec20424af506f3280c67a04f6e77f96c4"
+    },
+    {
+      "file": "learn_single_stage_02_legacy_0.json",
+      "sha256": "652588af39755b50d5596eb589666bc8f9a59f642099876f7b164d4e0555cfef"
+    },
+    {
+      "file": "learn_single_stage_01_legacy_0.json",
+      "sha256": "342264ba5a0537a2bd61dc21d5e0428231b2a681026bb1442e6803ef460d49ff"
+    },
+    {
+      "file": "learn_single_stage_03_legacy_0.json",
+      "sha256": "fd576ef40a0d01a5c67121fa786f003792f81ab0b2bdd118867b5e5dc7036dd5"
+    }
+  ]
+}

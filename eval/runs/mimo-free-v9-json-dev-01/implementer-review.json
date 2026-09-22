@@ -1,0 +1,23 @@
+{
+  "reviewer": "implementer",
+  "human_user_rating": false,
+  "model_gate_passed": true,
+  "ready_for_confirmation": false,
+  "issues": [
+    {
+      "sample": 1,
+      "quote": "指向读者的消费行为",
+      "reason": "Carries over the source ending target rather than only voice"
+    },
+    {
+      "sample": 4,
+      "quote": "算出投入与产出的差额，强调产物在动手前并不存在",
+      "reason": "Prescribes the source value-creation argument"
+    },
+    {
+      "sample": 2,
+      "quote": "第一人称在场，可承认判断、自嘲与事后回想，不必请示亲历许可",
+      "reason": "Conflates first-person judgments with memories and being on scene"
+    }
+  ]
+}

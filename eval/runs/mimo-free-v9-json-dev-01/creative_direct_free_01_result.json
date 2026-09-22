@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 648,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "虚构模式下，核心事实（台灯接触不良、两名志愿者、接线松动并修复、风扇需换零件、当天无合适零件、登记型号与联系办法、不保证全部恢复、旁观提问、修理与替换取舍）均保留且未改写；阿姨、年轻人、对话与剪胶固定等属允许的虚构细节，未伪造外部真实统计或真实引用。",
+      "naturalness": "整体连贯，节拍推进自然，'像把一封信寄给还没到的快递'和'那件下一件会坏的东西'两处措辞略显拗口，是少量痕迹，其余段落衔接顺畅。",
+      "source_independence": "全文内容围绕修理日展开，无人物、事件、结论或素材可追溯到参考样文；'我必须说''我承认''再拆一层'等属于论证操作和连接词，不算内容迁移。",
+      "style_fidelity": "样文的多数核心机制被迁移到新主题：以'你经常听到一句话'式二手引语开场对应'这话你一定听过'；加粗的反直觉判断句'但换之前，请先把旧的拆开看一眼。'对应样文'但我必须直接说一个反直觉的判断：**…**'；'我必须说，风扇这边就没这么干脆'对应'但我必须直接说'的断言节拍；'再拆一层：'对应'我们再往深处拆一层。'的逐层推进动作；'我承认，这两条路各有各的道理'对应'我承认，信息差…'的让步段；短促格言式结论'小毛病，当场结案。'对应'用低成本的智力消费，逃避高成本的现实行动。'；结尾的自嘲式个人收束也与样文收尾的告诫性余味节拍相通。",
+      "task_completion": "修好的台灯、未能当场修好的风扇、旁观提问、修复边界四要素齐全，并通过阿姨等待零件与年轻人比价下单的对照呈现修理与替换的取舍，主题聚焦。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

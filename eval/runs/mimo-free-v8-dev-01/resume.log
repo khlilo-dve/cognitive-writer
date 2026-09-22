@@ -1,0 +1,30 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.57s
+     Running unittests src/lib.rs (target/debug/deps/cognitive_writer-01a6798ffc47c41f)
+
+running 1 test
+[resume] learn_direct_free_01_direct_0
+[resume] spec_direct_free_01_judge
+[resume] learn_single_stage_01_legacy_0
+[resume] spec_single_stage_01_judge
+[resume] learn_single_stage_02_legacy_0
+[resume] learn_direct_free_05_direct_0
+[resume] learn_single_stage_04_legacy_0
+[resume] learn_direct_free_03_direct_0
+[resume] spec_single_stage_04_judge
+[resume] spec_direct_free_05_judge
+[resume] spec_single_stage_02_judge
+[resume] learn_direct_free_03_direct_1
+[resume] learn_single_stage_05_legacy_0
+[request] spec_single_stage_05_judge
+[resume] learn_direct_free_04_direct_0
+[resume] spec_direct_free_03_judge
+[resume] learn_direct_free_02_direct_0
+[resume] spec_direct_free_04_judge
+[resume] learn_single_stage_03_legacy_0
+[resume] spec_single_stage_03_judge
+[resume] spec_direct_free_02_judge
+test eval_free_release::tests::eval_free_style_release_suite has been running for over 60 seconds
+error: test failed, to rerun pass `--lib`
+
+Caused by:
+  process didn't exit successfully: `/home/khlilo/cognitive-writer/target/debug/deps/cognitive_writer-01a6798ffc47c41f eval_free_style_release_suite --ignored --nocapture` (signal: 2, SIGINT: terminal interrupt signal)

@@ -1,0 +1,39 @@
+{
+  "id": "creative_single_stage_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 661,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实全部吻合：台灯接线松动后重新固定恢复正常；风扇需换零件、当天无合适型号、登记型号与电话且未宣称修好；墙纸写明只做检查与力所能及的修复、不保证全部修好；旁观提问、修理与替换取舍均以虚构人物言行呈现。新增细节（十九年、两百块、两分钟等）属创意模式允许的虚构人物与事件，未冒充作者真实经历，也无外部真实统计或引用。",
+      "naturalness": "整体连贯，克制的短句与留白与样文气质一致，物—人交替的叙述有节奏感；但中段清单式罗列（连续的“有人问……答……”）和近乎电报体的句群略显机械，重复模板感轻微存在。",
+      "source_independence": "无内容迁移。场景、人物、事件与结论均属新任务自身设定（社区修理日、台灯与风扇、志愿者），未指认出任何来自样文的素材或观点答案。相似之处限于人称、句式节拍、度量式细节和收尾动作等风格机制，不构成污染。",
+      "style_fidelity": "鲜明体现样文的多项核心机制并适配新主题：第一人称旁观者视角与克制叙述（“我站在桌边，看了两小时”对应样文“我看了看手表”式的观察者位置）；精确度量与物件细节的展开（“灯罩直径十八厘米”“扇叶三片，直径三十厘米”“手柄十五厘米”对应样文“两百多平米”“二十八秒”“五毫米宽”）；极短句、频繁句号的节拍；零碎对话的干瘪收束（“答，说不准”对应样文“‘嗯。’”）；以无事发生的静场收尾（“没有人再开口”对应“什么都没有发生。”）。信息展开方式同样是先物后人、以物承载情感（“用了十九年”对应“车库放不下”）。",
+      "task_completion": "围绕社区旧物修理日展开，完整涵盖修好的台灯、未修好的风扇、登记型号与联系办法、旁观提问、墙上写明的修复边界，并通过“风扇是父亲的、用了十九年”与“买台新的，两百块”“等零件不如买新的”的对照呈现修理与替换的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

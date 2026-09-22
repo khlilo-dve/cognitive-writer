@@ -65,3 +65,5 @@ Rubric B v2 取消十标题奖惩；旧 coverage 人评语义不再直接适用�
 - `free_style_gate.rs`检查先登记的实用门槛，各维度独立；不修改裁判、不合成总分。详见docs/superpowers/specs/2026-09-21-free-style-release.md。通过开发与确认才采用，失败证据保留；对已看过的确认主题不能再声称未见。
 - 离线核验：`python3 scripts/verify_free_style_release.py eval/runs/<run> --current`。核对原始响应、学习结果、正文、匿名Judge、可定位引用、分项汇总、确定性长度、确认Spec来源与复用SHA。历史提示词变化的run不加--current。
 - Judge仅对task_issues/uncertainties的单字符串做无损单元素列表兼容；分数、理由与引用不补造，缺失证据仍拒绝。
+
+2026-09-23：发布评测先检查Spec，门槛未过写preflight.json并停止正文生成；数值门槛不变。MiMo JSON评分显式使用response_format，参数进入检查点身份，模式改变不能冒用旧请求。当前mimo-free-v10-json-dev-01数值和实现者复核通过，mimo-free-v10-json-confirm-01在新主题确认；模型分数仍不冒充人评。最新结果见docs/2026-09-22-mimo-style-release.md。

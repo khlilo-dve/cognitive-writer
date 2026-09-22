@@ -2,7 +2,7 @@ use dialoguer::{Input, theme::ColorfulTheme};
 use reqwest::Client;
 
 use crate::error::AppError;
-use crate::llm::{call_llm, new_spinner};
+use crate::llm::{call_llm_with_format, json_response_format, new_spinner};
 use crate::styles::save_new_style;
 use crate::utils::{env_var, env_var_or};
 
@@ -179,18 +179,32 @@ async fn extract_style_text_at(
     let audit = root;
     let call = |stage: String, system: String, user: String| async move {
         let path = audit.join(format!("{stage}.json"));
+        let format = if matches!(method, LearningMethod::Legacy) {
+            None
+        } else {
+            json_response_format(model)
+        };
         write_audit(
             &path,
             &serde_json::json!({
-                "status":"pending", "model":model, "system":system, "user":user
+                "status":"pending", "model":model, "system":system, "user":user, "response_format":format.as_ref()
             }),
         )?;
-        let response = call_llm(client, base_url, api_key, model, &system, &user).await;
+        let response = call_llm_with_format(
+            client,
+            base_url,
+            api_key,
+            model,
+            &system,
+            &user,
+            format.as_ref(),
+        )
+        .await;
         write_audit(
             &path,
             &serde_json::json!({
                 "status":if response.is_ok() {"received"} else {"failed"},
-                "model":model, "system":system, "user":user,
+                "model":model, "system":system, "user":user, "response_format":format.as_ref(),
                 "response":response.as_ref().ok(),
                 "error":response.as_ref().err().map(|_| "模型请求失败，未记录端点或HTTP正文")
             }),
@@ -288,9 +302,18 @@ mod tests {
         let compiled =
             serde_json::json!({"spec":"先铺陈判断，再用短句收束。", "evidence_insufficient":true})
                 .to_string();
-        for (method, responses) in [
-            (LearningMethod::TwoStage, vec![analysis, compiled.clone()]),
-            (LearningMethod::DirectFree, vec![compiled]),
+        for (method, model, responses) in [
+            (
+                LearningMethod::TwoStage,
+                "fixture-model",
+                vec![analysis, compiled.clone()],
+            ),
+            (LearningMethod::DirectFree, "mimo-v2.6-pro", vec![compiled]),
+            (
+                LearningMethod::Legacy,
+                "mimo-v2.6-pro",
+                vec!["先铺陈判断，再用短句收束。".to_string()],
+            ),
         ] {
             let expected_calls = responses.len();
             let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
@@ -342,7 +365,7 @@ mod tests {
                 &Client::new(),
                 &format!("http://{addr}"),
                 "fixture-secret",
-                "fixture-model",
+                model,
                 "这是原文。",
                 dir.path(),
                 method,
@@ -352,6 +375,16 @@ mod tests {
             assert_eq!(spec, "先铺陈判断，再用短句收束。");
             let requests = server.join().unwrap();
             assert_eq!(requests.len(), expected_calls);
+            for request in &requests {
+                if matches!(method, LearningMethod::DirectFree) {
+                    assert_eq!(
+                        request["response_format"],
+                        serde_json::json!({"type":"json_object"})
+                    );
+                } else {
+                    assert!(request.get("response_format").is_none());
+                }
+            }
             if expected_calls == 2 {
                 assert!(
                     !requests[1]["messages"][1]["content"]

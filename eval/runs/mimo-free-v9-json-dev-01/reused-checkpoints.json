@@ -1,0 +1,26 @@
+{
+  "source_run": "mimo-free-v9-dev-01",
+  "reason": "Only unchanged plain-text legacy extraction; all native-JSON extraction/judgment requests run fresh",
+  "files": [
+    {
+      "file": "learn_single_stage_05_legacy_0.json",
+      "sha256": "197fa60db462924d1559914d385efdcc5703e1fd259dccb071dc2d7b22d39fbc"
+    },
+    {
+      "file": "learn_single_stage_04_legacy_0.json",
+      "sha256": "d3e99f195a22b4d410ab27114050a1aec20424af506f3280c67a04f6e77f96c4"
+    },
+    {
+      "file": "learn_single_stage_02_legacy_0.json",
+      "sha256": "652588af39755b50d5596eb589666bc8f9a59f642099876f7b164d4e0555cfef"
+    },
+    {
+      "file": "learn_single_stage_01_legacy_0.json",
+      "sha256": "342264ba5a0537a2bd61dc21d5e0428231b2a681026bb1442e6803ef460d49ff"
+    },
+    {
+      "file": "learn_single_stage_03_legacy_0.json",
+      "sha256": "fd576ef40a0d01a5c67121fa786f003792f81ab0b2bdd118867b5e5dc7036dd5"
+    }
+  ]
+}

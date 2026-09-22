@@ -1,0 +1,39 @@
+{
+  "id": "creative_single_stage_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 696,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注\"虚构场景。\"，符合任务声明要求。核心事实全部保持：台灯接线松动重固后恢复、风扇需换零件当天无货、登记零件型号和联系电话、未宣称修好、活动只做检查与力所能及的修复、不承诺全部恢复。老周、小陈、对话与\"两百块\"均属虚构角色与场景内内容，creative 模式允许；止损线是作者主张而非伪造的外部统计或真实引用。",
+      "naturalness": "行文连贯，账目隐喻与等待主题一以贯之，场景叙述与议论切换自然。仅少量模板痕迹：连续使用粗体金句、\"但\"字句式在中段连用两次（\"但老周那套账……\"\"但请把等待的时间也押上去算\"）略显机械，未到影响阅读的程度。",
+      "source_independence": "全文围绕旧物修理日展开，人物（老周、小陈）、场景、物件（台灯、风扇）均为本任务设定或虚构新增，无参考样文关于认知、变现、投流、冷电话等核心内容或结论的迁移。\"先算一笔账\"等属共用的论证操作与短功能表达，不构成污染。",
+      "style_fidelity": "参考样文的核心机制被完整迁移并适配新题：以人人会说的俗语开场并立刻翻转（\"这话人人会说。\"→\"但修理从来不是美德，是一笔账。\"），对应样文\"你经常听到一句话……但我必须直接说一个反直觉的判断\"；加粗断言式判断句（\"怎么修，是手艺的事。值不值得修，是你的事。\"）对应样文的粗体反直觉论断；\"先算一笔账\"式账目隐喻贯穿（\"这是他的账\"\"小陈在旁边算另一笔\"）；\"修理的门槛就是这样一级一级抬高的\"对应样文\"从信息，到理解，到验证……每往前走一步\"的阶梯式淘汰结构；结尾给出可执行的硬规则（\"定一条线：超过原价一半的钱，或超过十天的等待，就放手换新的。\"）对应样文结尾\"至少可以少买几门教你财富跃迁的认知付费课\"的收束动作；第二人称直接喊话（\"你我站的位置不同\"\"是你说了算\"）也在。",
+      "task_completion": "标题与正文完整覆盖指定素材：接触不良的台灯及修好过程、转动缓慢且未能当场修好的风扇及登记联系方式、围观提问（\"还能用多久？\"\"换零件要钱吗？\"）、修复边界（\"不承诺每件都能恢复\"），并以老周与小陈两笔账及等待成本明确呈现修理与替换的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

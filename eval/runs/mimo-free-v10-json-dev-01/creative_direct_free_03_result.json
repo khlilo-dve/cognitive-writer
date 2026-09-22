@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_03",
+  "group": "creative",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 676,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注“（虚构场景）”，核心事实（台灯接线松动经重新固定恢复、两名志愿者、风扇需换件且当天无合适零件、工作人员登记型号与后续联系办法、不保证全部恢复、旁观提问、修理与替换的取舍）全部与任务一致。登记本、原样带回等细节属创作权限内的具体化，未新增可核查的外部统计、引用或独立事件，也未把虚构冒充作者经历。",
+      "naturalness": "行文顺畅，设问—回答—实例—边界的推进有逻辑节拍；“有人……有人……”的排比出现数次略有重复感，句尾格言化倾向略强，但整体节制，无拼贴痕迹。",
+      "source_independence": "全文主题、物件、人物与结论均围绕社区旧物修理日重新生成，无可指认的参考文内容、论点或结论迁移。共享的只是第二人称设问、加粗短句、编号原则清单、格言收尾等论证操作与短功能表达，按规则不算污染。",
+      "style_fidelity": "参考文的核心机制均有鲜明对应：先立场景域再用转折句抛出规律并加粗（参考文“但如果你仔细审视大多数团队的重构过程……”对应正文“但你若问修好没有，答案得当场分成两种。”及其加粗判语）；设问后紧跟否定式答案（参考文“为什么这么说？”对应正文“修好了就都结束了吗？”“不。”）；抽象论断后以单一实例展开（参考文“以微服务拆分为例。”对应正文以风扇换件展开）；中途加粗提炼短句；结尾用三加粗条目的原则清单（参考文三条工程原则对应正文“边界写成三句”）；收束于对仗式格言（参考文“保持克制，尊重简单……”对应“修好一件和没修好一件，同属这一天。”）。人称的对话式第二人称、并列句式节奏也保留并迁移到新主题。",
+      "task_completion": "标题、虚构场景标注齐全；修好的台灯、未修好的风扇、旁观提问、修复边界三条以及修理与替换的取舍（等待、购替代品的代价、各自认下）全部覆盖，无缺失。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

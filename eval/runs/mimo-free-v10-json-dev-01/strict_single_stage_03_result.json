@@ -1,0 +1,42 @@
+{
+  "id": "strict_single_stage_03",
+  "group": "strict",
+  "sample": 3,
+  "variant": "single_stage",
+  "body_artifact": "strict_single_stage_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 715,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实与任务给定素材一致：台灯接线松动经重新固定后恢复正常，风扇需更换零件、当天无合适零件，登记零件型号与后续联系办法、未宣称修好，活动只提供检查与力所能及的修复，观察与取舍（继续用原物/等待/购买替代品）均在任务范围内。未见人物履历、精确时间数值、新物件、独立事件、对话主张、外部统计或亲身经历。",
+      "naturalness": "行文连贯，抽象判断与具体两件旧物的对照推进顺畅，编号清单服务于\"修复边界\"主题，无明显拼贴或机械重复痕迹。",
+      "source_independence": "可确认为论证操作与句法骨架的复用（加粗断句、反问、编号原则、格言收尾、\"原本……最终演变成\"），未发现样文的具体内容、结论或语句迁移到修理日主题上；结尾对仗属于修辞操作层面的相似，不构成内容绑定。",
+      "style_fidelity": "鲜明复现了样文的主要机制并适配新主题：以群体预设开场并用加粗断句推翻（\"能修好的越多越好，这个判断本身站不住。\"对应样文的加粗规律句）；紧接着一个自设反问（\"凭什么也算成果？\"对应\"为什么这么说？\"）；随后给出具体展开例（\"台上这两件旧物，恰好摆出两种处境\"对应\"以微服务拆分为例\"）；用\"原本……最终演变成……\"的同型转折推进论证（\"原本只是检查的善意，最终演变成替人作主的越界\"）；以冒号引导的加粗编号原则清单收束（对应\"理性的工程实践应当遵循以下原则\"），并用\"X比Y更难\"的格言式收尾呼应样文结尾的\"这比炫耀技巧要困难得多\"。人称、节拍与信息展开顺序均与样文一致。",
+      "task_completion": "完整覆盖了指定地点与场景、修好的台灯、未当场修好的风扇、旁观提问、修复边界（只检查不担保）以及修理与替换的取舍，主题集中无偏移。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "\"问的从来不是手艺高低，而是这东西还值不值得等\"对旁观者提问内容作了概括性归类，虽在任务给定的提问与取舍主题范围内、非对话主张，但严格程度可再斟酌。",
+      "\"风扇下次的停转\"以假设后果形式出现，属论证性推演而非新增独立事件，未据此扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 680,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative模式允许虚构人物、物件、对话与独立事件。正文开头标注“虚构场景”，给定核心事实（台灯接触不良、接线松动后修好；风扇需换零件、当天无合适零件、登记型号与联系电话、未宣称修好；两名志愿者；旁观提问；只做力所能及修复的边界；修理与替换取舍）全部保留未改写。新增的保险丝盒、电饭锅与旧椅子的提问等均属允许的虚构细节，未伪造外部真实统计或真实引用，也未把虚构冒充作者真实经历。",
+      "naturalness": "叙述流畅，短句与议论段落衔接自然，人物对话简短克制，结尾收束干净；个别处的格言式短句（“两边都没错，看你要的是什么”“零件要等，人也要等”）略有刻意感，故给4。",
+      "source_independence": "逐句比对未发现内容、结论或叙事情节从样文迁移。正文中的“我估计”“我以为”“都没什么好说的”属共享的短功能词与论证操作，不构成污染；修理日的人物、物件、事件均为本任务给定或虚构新增。",
+      "style_fidelity": "参考样文的机制包括：第一人称旁观者叙述、从普遍命题切入（“对生活做种种设置是人特有的品性”对应正文“人来了，事情才开始”）、中段具体个例、夹叙夹议的短句和自嘲式插话（“我估计它到附近的村寨里找母猪去了”对应“我估计那盒保险丝一天没用上”）、作者以“我以为/我不认为”给出低调判断、呈现对立观点后给出通达结论、结尾以一句话回望收束（“我一直怀念这只特立独行的猪”对应“活动室关门的时候，桌上只剩那张登记单”）。正文多数重要机制得到体现并适应修理日主题；但样文最具辨识度的类比跳跃与叙事高潮（猪的突围）在正文中没有对应物，结尾也更淡，因此不到5。",
+      "task_completion": "修好的台灯、未能当场修好的风扇、旁观提问、修复边界规则均明确呈现，修理与替换的取舍通过争论场景和风扇主人的停留加以呈现，主题与核心素材完整覆盖。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

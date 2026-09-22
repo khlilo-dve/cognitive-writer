@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 636,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "创意模式且开头已注明\"**虚构场景**\"。核心事实全部保留：接触不良的台灯、接线松动重新固定后恢复、风扇需换零件当天无合适零件、登记零件型号与后续联系办法、未宣称修好、活动只承诺检查和力所能及的修复、旁观提问、原物与替代品的取舍。新增的\"老周\"及其\"这灯是结婚时买的\"属虚构人物与虚构台词，符合creative权限；未见伪造外部真实统计或冒充作者真实经历。",
+      "naturalness": "叙述连贯，判断与场景切换自然，对话简短贴合语境，末段的排比格言略有模板感但收束得体，无明显拼贴或机械重复。",
+      "source_independence": "主题、场景、论断全部围绕旧物修理日重写，未出现\"认知\"\"变现\"\"风险熔炉\"等样文的核心概念、结论或论据。算账意象（\"只有一笔算得很细的账\"）与样文\"先算一笔账\"同属常见惯用语和论证操作（设账比较），按标准不构成内容迁移；\"我承认\"属共享让步句式。无可证实的内容绑定。",
+      "style_fidelity": "样文的核心机制在正文中有较鲜明体现：反直觉的开篇判断（\"判准不在省下多少钱，而在你肯为\\\"原物\\\"两个字付多少耐心\"对应\"绝大多数人以为的'认知'，根本不是认知\"）；自认让步句式（\"我承认这一下很讨喜，可它的适用范围窄得可怜\"对应\"我承认，信息差在某些极端窗口期确实能带来暴利\"）；二元对照结构（\"两本账，谁也压不倒谁\"\"当记忆……当工具……\"对应\"收集概念的大脑阻力极低，而下场验证的痛苦极高\"）；设问推进（\"谁更划算？看你把它当什么\"）；短促格言式收束（\"不保证修好，不许诺时间，不假装成功\"）；转场短句（\"换挡，再看另一台\"对应\"我们再往深处拆一层\"）。整体是用样文的论断—让步—二分—格言节拍承载新主题，未到5是因为个别短句的格言化密度略高，机制调度不如样文舒展。",
+      "task_completion": "地点（活动室）、两件旧物、两名志愿者、旁观提问、修好的台灯、未当场修好的风扇、登记信息、修复边界、修理与替换的取舍均以场景和议论覆盖，无核心素材缺失。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

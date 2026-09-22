@@ -1,0 +1,55 @@
+{
+  "id": "strict_single_stage_02",
+  "group": "strict",
+  "sample": 2,
+  "variant": "single_stage",
+  "body_artifact": "strict_single_stage_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 657,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "strict模式下正文有数处素材未提供的具体物件与独立事件/场景事实：新增物件“屋里开着顶灯”，新增事件“门外有人走过”，新增场景事实“窗外是白天”。这些均超出同义转述与简单连接动作的许可范围。",
+      "naturalness": "行文连贯，短句节奏统一，“有的只是看。有的开口问。”“一件亮过。一件没有。”等句式重复有节制且服务收束效果，仅个别处（如结尾连续数段单句）略显模板化，整体自然。",
+      "source_independence": "正文内容全部来自本次任务给定素材（旧物修理日、台灯、风扇、志愿者、取舍），无可指认的样文内容、结论或细节迁移。两文共有的只有短句平叙、物件特写、克制对话和否定句收束等写法机制，属风格层面而非内容污染。",
+      "style_fidelity": "样文的主要机制是短促的平叙句（“我签了。用了三秒钟。”）、具体物件的精确特写（指甲锉两面、三毫米胶带）、极简而留白的对话（“好。”“嗯。”）、环境声的克制铺陈，以及以一句平坦否定收束（“什么都没有发生。”）。正文多数体现：短句平叙（“接线松动。”“灯亮了。一直亮着。”）、物件特写（“一盏接触不良的台灯”“零件型号”）、克制的应答式对话（“工作人员只说按写下的办法联系，别的话没有。”）、环境细节（顶灯、门外有人走过），结尾“风扇没有再被开动。”同样是平坦否定句收束。扣分点在于样文的第一人称回溯视角、日期式的开场定位、精确数值的节拍，以及言与未言之间的私人情感暗流均未出现或无法出现，声音变为第三人称白描。",
+      "task_completion": "修好的台灯、未能当场修好的风扇、旁观提问、修复边界（不保证恢复、登记后联系）以及保留原物与购买替代品之间的取舍（“一种要留着原物……另一种说等零件要等，买替代品也要挑”）均已涵盖。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "屋里开着顶灯",
+        "reason": "strict模式禁止新增具体物件；任务素材仅给定社区活动室、台灯、风扇等，顶灯为新物件。"
+      },
+      {
+        "article_quote": "窗外是白天",
+        "reason": "任务素材未提供时间/天色信息，属新增场景事实。"
+      },
+      {
+        "article_quote": "门外有人走过",
+        "reason": "strict模式禁止新增独立事件；此为素材未给定的独立场景事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“插头接回去”可视为“重新固定接线”动作的逻辑连接，未据此扣分，但严格解读下插头是否为新增物件存在界定空间。",
+      "“一种要留着原物，修好接着用”等表述以转述方式呈现两种取舍立场，因任务明确要求通过场景呈现取舍，按允许处理；若视为对话主张则属另一解读。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

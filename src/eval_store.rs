@@ -5,7 +5,7 @@ use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
 use crate::error::AppError;
-use crate::llm::{call_llm, with_retry};
+use crate::llm::{call_llm_with_format, json_response_format, with_retry};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 struct Request {
@@ -14,6 +14,8 @@ struct Request {
     model: String,
     system: String,
     user: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    response_format: Option<serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -169,6 +171,35 @@ impl Store {
         user: &str,
         validate: fn(&str) -> Result<(), AppError>,
     ) -> Result<String, AppError> {
+        self.call_with_format(name, system, user, validate, None)
+            .await
+    }
+
+    pub async fn call_json(
+        &self,
+        name: &str,
+        system: &str,
+        user: &str,
+        validate: fn(&str) -> Result<(), AppError>,
+    ) -> Result<String, AppError> {
+        self.call_with_format(
+            name,
+            system,
+            user,
+            validate,
+            json_response_format(&self.model),
+        )
+        .await
+    }
+
+    async fn call_with_format(
+        &self,
+        name: &str,
+        system: &str,
+        user: &str,
+        validate: fn(&str) -> Result<(), AppError>,
+        response_format: Option<serde_json::Value>,
+    ) -> Result<String, AppError> {
         if !valid_name(name) {
             return Err(AppError::Parse("无效的评测任务名".into()));
         }
@@ -178,6 +209,7 @@ impl Store {
             model: self.model.clone(),
             system: system.into(),
             user: user.into(),
+            response_format: response_format.clone(),
         };
         let path = self.root.join(format!("{name}.json"));
         if let Some(response) = load(&path, &request)? {
@@ -192,13 +224,14 @@ impl Store {
             .map_err(|_| AppError::Network("评测并发控制已关闭".into()))?;
         println!("[request] {name}");
         let response = with_retry(3, name, || async {
-            let response = call_llm(
+            let response = call_llm_with_format(
                 &self.client,
                 &self.base,
                 &self.key,
                 &self.model,
                 system,
                 user,
+                response_format.as_ref(),
             )
             .await
             .map_err(safe_error)?;
@@ -240,6 +273,7 @@ mod tests {
             model: "test".into(),
             system: "prompt".into(),
             user: "input".into(),
+            response_format: None,
         }
     }
 
@@ -259,6 +293,15 @@ mod tests {
         )
         .unwrap();
         assert_eq!(load(&path, &req).unwrap().unwrap(), "answer");
+        let mut formatted = req.clone();
+        formatted.response_format = Some(serde_json::json!({"type":"json_object"}));
+        assert!(load(&path, &formatted).is_err());
+        assert!(
+            serde_json::to_value(&req)
+                .unwrap()
+                .get("response_format")
+                .is_none()
+        );
         for field in ["model", "system", "user", "endpoint_fingerprint"] {
             let mut json = serde_json::to_value(&req).unwrap();
             json[field] = serde_json::json!("changed");

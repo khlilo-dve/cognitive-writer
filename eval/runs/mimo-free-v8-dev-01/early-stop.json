@@ -1,0 +1,6 @@
+{
+  "status": "stopped_before_transfer",
+  "reason": "Candidate Spec 02 cleanliness 3 < 4; Spec 03 has 636 non-whitespace characters after repair > 600; fixed release gates already fail",
+  "full_transfer_verdict": null,
+  "existing_artifacts_retained": true
+}

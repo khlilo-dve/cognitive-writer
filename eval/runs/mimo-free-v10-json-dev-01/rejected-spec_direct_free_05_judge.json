@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-22T20:26:43.607205688+00:00",
+  "model_output": "{\"scores\":{\"coverage\":4,\"actionability\":4,\"conciseness\":5,\"distinctiveness\":4,\"cleanliness\":5},\"overall_score\":4.4,\"structure_analysis\":\"样文的重要机制主要集中在：冷叙述+反讽判断、开篇\"  \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t,  \"placeholder\":\"ignore\"}",
+  "status": "rejected",
+  "validation_error": "API 响应解析失败: Judge JSON 无效: missing field `fidelity_analysis` at line 1 column 310"
+}

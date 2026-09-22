@@ -206,8 +206,13 @@ where
                 let count = character_count(&compiled.spec);
                 let outside = !(400..=600).contains(&count);
                 if outside && attempt == 0 && !(count < 400 && compiled.evidence_insufficient) {
+                    let adjustment = if count > 600 {
+                        "请压缩至约480–520字符：合并重复边界，删去次要说明和重复规则，保留核心声音。"
+                    } else {
+                        "仅补充有证据的表达操作至400–600字符，不凑字；证据确实不足时如实标记。"
+                    };
                     input = format!(
-                        "原始样文：{source}\n上次输出：{raw}\n程序统计 spec 为 {count} 个非空白字符，目标400–600。仅补充有证据的规则，不凑字；重新输出完整 JSON。"
+                        "原始样文：{source}\n上次输出：{raw}\n程序统计 spec 为 {count} 个非空白字符，目标400–600。{adjustment}重新输出完整 JSON。"
                     );
                     continue;
                 }
@@ -328,6 +333,27 @@ mod tests {
         assert_eq!(result.warnings.len(), 1);
     }
 
+    #[tokio::test]
+    async fn direct_length_repair_uses_the_correct_direction() {
+        for (length, expected) in [(700, "压缩"), (300, "补充")] {
+            let mut calls = 0;
+            let result = extract_direct_with("样文", "prompt", |_, _, input| {
+                calls += 1;
+                if calls == 2 {
+                    assert!(input.contains(expected));
+                }
+                let size = if calls == 1 { length } else { 500 };
+                std::future::ready(Ok(
+                    json!({"spec":"字".repeat(size),"evidence_insufficient":false}).to_string(),
+                ))
+            })
+            .await
+            .unwrap();
+            assert_eq!(calls, 2);
+            assert_eq!(result.spec, "字".repeat(500));
+            assert!(result.warnings.is_empty());
+        }
+    }
     #[tokio::test]
     async fn direct_variant_uses_same_validator_and_repair_limit() {
         let mut calls = 0;

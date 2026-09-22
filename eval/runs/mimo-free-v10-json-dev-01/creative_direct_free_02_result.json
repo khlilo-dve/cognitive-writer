@@ -1,0 +1,45 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 616,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 4.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "创意模式下允许虚构人物、对话、物件与独立事件；开头已注明“虚构场景”，未冒充作者现实经历。给定核心事实（活动室地点、台灯接线松动修复、风扇缺件登记型号与联系办法、不宣称修好、修复边界声明、修与换的取舍）均保留未改写，未出现伪造外部真实统计或真实引用。",
+      "naturalness": "句式短促但节奏统一，度量与数字嵌入叙述而不堆砌，对话省略提示语也自然，末段意象收束不生硬，无明显拼贴或机械重复痕迹。",
+      "source_independence": "整体内容为新任务主题，唯一可证实的绑定是一处轻微动作/物件搭配的迁移：正文“他把屏幕扣在桌上，没说话”与样文“我把手机扣在膝盖上”共享手机翻面扣放的特定手势短语，且都在人物情绪收束处出现。其余为风格机制与短功能词，不计污染。",
+      "style_fidelity": "样文的机制鲜明迁移：短促的陈述句串联与名词化收束（“两张长桌并排，桌面灰色，各一米八”对应“一把灰色的指甲锉，两面”式物件清点），精确数字与度量（“电线一米五，灯罩边缘裂了两厘米”“电容鼓包，一厘米高”对应“三毫米宽的黑色遮光胶带”“两百多平米”），时间戳节拍（14:00、14:26、17:00 对应“六点零七分”“用了三秒钟”），极简对话与单字应答（“他说：好。”对应“‘好。’我说。”），克制的旁观者视角与信息延迟揭示，以及以意象短句收尾（“叶片不动，像停住的钟面”“灯关了。纸条在阿姨口袋里。”对应“什么都没有发生。”）。“老人选了修，阿姨选了等，年轻人没选”延续样文以并置动作暗示取舍而非议论的论证动作。",
+      "task_completion": "涵盖社区活动室场景、桌上台灯与旧风扇、旁观者提问（“什么都能修？”“是缺油吗？”）、台灯重新固定接线后恢复、风扇当天无合适件且登记型号与电话、不保证修复的边界声明，并以老人修、阿姨等、年轻人看比价的三人对照呈现修理与替换的取舍，主题与核心素材完整。"
+    },
+    "source_leakage": [
+      {
+        "article_quote": "他把屏幕扣在桌上，没说话",
+        "source_quote": "我把手机扣在膝盖上",
+        "reason": "手机翻面扣放的特定手势短语（“把…扣在…”）在同一类情绪收束位置出现，属可证实的轻微动作内容绑定，非单纯句式或风格相似。"
+      }
+    ],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

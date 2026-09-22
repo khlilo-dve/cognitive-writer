@@ -1,0 +1,41 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 646,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative模式下开头已标注“虚构场景”；台灯接触不良、接线松动、重新固定后恢复正常，风扇需换件、当天无合适零件、只登记零件型号与后续联系、未宣称修好，以及只做检查和力所能及的修复、不保证全部恢复、两种取舍等核心事实均与任务一致。老人、年轻人的对话与动作属允许的虚构人物言行，未冒充作者真实经历，也无伪造外部真实统计或真实引用。",
+      "naturalness": "行文连贯，辨析—例证—立论—类比—问答—收束的推进自然，比喻与议论衔接顺畅；仅后半段格言式对句（“能当场验的就封口，验不了的先封住嘴”“边界比手艺更早被看见”）密度略高，略有模板化痕迹，故未给满分。",
+      "source_independence": "正文内容全部围绕任务给定的社区旧物修理日展开，无样文事实、结论或例证迁移。样文中出现“修好了一个……系统故障”，正文的“修好”是任务明给的核心素材（修好的台灯），不构成污染；“如果你”“我认为”“把……想象成”等句式与功能词属风格层面。",
+      "style_fidelity": "样文的核心机制都被识别并迁移：开头用定义性辨析切题（样文“财富与金钱并不是同义词”对应正文“‘修好’不等于‘修过’”）；用假设句警示后果（“如果你把两件事都说成……”）；显式的第一人称立论“我认为”；以类比解释取舍（正文“把‘修’想象成与旧物续一段缘”对样文“把创业想象成一个压缩过程”），并配对偶双例（台灯/风扇对样文木匠/程序员）；自问自答的转向句（“那么，修还是换？”对“如果你想致富，应该怎么做？”）；正反两方取舍并置后归到一句收束格言（“修好靠手艺，说清靠本分”对“做出人们真正想要的东西”）。主题全新而机制鲜明。",
+      "task_completion": "主题为社区活动室旧物修理日，完整涵盖修好的台灯、未当场修好的风扇、旁观提问、修复边界，并以老人与年轻人的对话讨论继续使用原物与等待/购买替代品的取舍；已标注虚构场景。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“它陪了我十几年”“等两周”属于虚构人物对话中的具体数字，creative模式允许虚构对话，故未作违规处理。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

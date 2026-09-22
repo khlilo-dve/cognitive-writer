@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 666,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注“虚构场景。”符合要求。人物（小周、老人、年轻人、工作人员）、对话、细节（如“上午进出二十三人”“买台新的八十九块”）均属虚构场景内新增，未冒充作者真实经历，未引用外部真实统计或文献；核心事实（台灯接线松动修复、风扇缺零件未修、登记联系方式、只做力所能及修复）均未改写。",
+      "naturalness": "整体连贯，短句堆叠的节奏与风格一致且克制；少数段落（如物品逐项列举、连续问答）略带清单式的模板痕迹，故扣一档。",
+      "source_independence": "未发现可证实的内容迁移。正文的物件、人物、数字、事件（台灯、风扇、螺丝、老人、登记本）均为任务给定或新创，与样文的指甲锉、渡轮、合同、埃尔法等无可指认的对应关系；仅人称、句法节拍和论证/叙事操作相似，属风格层面。",
+      "style_fidelity": "鲜明体现参考样文的核心机制：第一人称冷静旁观叙述、精确时间标记（“九点”“十点二十”“中午十二点。收摊。”对应样文“六点整”“六点零七分”“电梯下行用了二十八秒”）、带具体规格的物件特写（“三颗螺丝，长短不一”“十二股散着三股”“盒子里十七颗螺丝”对应样文“一把灰色的指甲锉，两面”“三毫米宽的黑色遮光胶带”）、极简问答式对话（“能一直用吗。”“能。”对应“‘好。’我说”）、克制的内心一笔（“我原以为十分钟的事。卡在型号上。”对应“其实那个车库有八百平米”），以及以平直场景句收束（“风扇不动。”对应“什么都没有发生。”），且都成功迁移到修理日主题。",
+      "task_completion": "完整覆盖全部核心素材：社区活动室的旧物修理日、接触不良的台灯经固定接线后修复并复测、风扇因缺零件当天未修好并登记型号与电话、旁观者的连续提问、门口说明呈现的修复边界，以及老人坚持继续使用原物与年轻人计算等待成本与新购替代两种取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

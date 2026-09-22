@@ -49,7 +49,11 @@ def verify(run, current=False):
         for attempt in range(calls):
             cp = read(run / f"{item['id']}_judge_{attempt}.json")
             req = cp["request"]
-            assert set(req) == {"schema", "endpoint_fingerprint", "model", "system", "user"}
+            keys = {"schema", "endpoint_fingerprint", "model", "system", "user"}
+            if "response_format" in req:
+                assert req["response_format"] == {"type":"json_object"}
+                keys.add("response_format")
+            assert set(req) == keys
             assert req["model"] == inputs["model"] and req["system"] == inputs["judge_prompt"]
             user = json.loads(req["user"])
             if attempt:

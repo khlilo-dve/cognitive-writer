@@ -1,0 +1,39 @@
+{
+  "id": "creative_single_stage_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 663,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "虚构创作在creative权限内。给定核心事实全部保留：台灯接线松动、志愿者重新固定后灯亮、风扇需换零件当天没有、登记零件型号和后续联系办法、不宣称修好、只做检查和力所能及的修复、不保证恢复。其余如老光、九年、旧货摊、登记本、围观对话等均为权限允许的虚构细节，无外部真实统计或引用，也未冒充作者现实经历。",
+      "naturalness": "叙述连贯，短句与长句交替自然，格言式断语与叙事衔接顺畅（如“调岗就是这么回事”“剩下的都算陪审”），反讽比喻有节制，无模板化拼贴或机械重复。",
+      "source_independence": "没有可证实的内容迁移。参考样文的核心素材（知青喂猪、猪兄学汽笛、围捕、斯巴达与样板戏等）均未出现；正文中的命名、格言断句、官僚反讽、结尾怀念属于共享的论证与修辞操作，不是内容搬运。任务自带的社区修理场景为新任务给定内容。",
+      "style_fidelity": "鲜明体现参考样文的核心机制：第一人称亲历者带着对一个被体制化命名的动物/物件的私人感情，给对象起名并自嘲（“我管它叫老光。名字是我起的，它没反对过。”对应猪兄的命名与宠儿身份）；由具体叙事归纳出格言式断语（“人好像都有替旧物安排前途的天性”对应“对生活做种种设置是人特有的品性”）；用官僚词汇作冷幽默反讽（“编制外”“留任”“停职留薪”）；短促收束的机锋句（“好在物件不会写申诉材料。”）；结尾以怀念式短句留余味（“老光还亮着。风扇的下落，我没有再问。”对应“我一直怀念这只特立独行的猪”）。人称、节拍、从叙事到议论再回到独白的展开顺序都得到保留并适配旧物修理主题。",
+      "task_completion": "完整覆盖主题与核心素材：社区活动室的旧物修理日、修好的台灯、未当场修好的风扇、志愿者检查与旁观提问、修复边界声明（“只做检查和力所能及的修复，不保证所有物品都能恢复”），并通过围观对话和结尾个人取向呈现修理与替换的取舍，并已在开头注明虚构场景。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

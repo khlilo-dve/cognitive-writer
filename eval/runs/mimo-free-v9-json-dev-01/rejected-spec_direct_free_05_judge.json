@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-22T11:43:11.164337552+00:00",
+  "model_output": "The request was rejected because it was considered high risk",
+  "status": "rejected",
+  "validation_error": "API 响应解析失败: Judge JSON 无效: expected value at line 1 column 1"
+}

@@ -42,6 +42,33 @@ pub async fn call_llm(
     system_prompt: &str,
     user_content: &str,
 ) -> Result<String, AppError> {
+    call_llm_with_format(
+        client,
+        base_url,
+        api_key,
+        model,
+        system_prompt,
+        user_content,
+        None,
+    )
+    .await
+}
+
+/// Known MiMo models support JSON mode; other providers retain their existing request contract.
+pub(crate) fn json_response_format(model: &str) -> Option<serde_json::Value> {
+    (model.starts_with("mimo-v2.5") || model.starts_with("mimo-v2.6"))
+        .then(|| serde_json::json!({"type":"json_object"}))
+}
+
+pub(crate) async fn call_llm_with_format(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    model: &str,
+    system_prompt: &str,
+    user_content: &str,
+    response_format: Option<&serde_json::Value>,
+) -> Result<String, AppError> {
     let url = format!("{}/chat/completions", base_url.trim_end_matches('/'));
 
     let body = ChatRequest {
@@ -58,6 +85,10 @@ pub async fn call_llm(
         ],
     };
 
+    let mut body = serde_json::to_value(body).map_err(|e| AppError::Parse(e.to_string()))?;
+    if let Some(format) = response_format {
+        body["response_format"] = format.clone();
+    }
     let resp = client
         .post(&url)
         .header("Authorization", format!("Bearer {}", api_key))

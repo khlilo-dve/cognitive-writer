@@ -1,0 +1,42 @@
+{
+  "id": "strict_direct_free_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 656,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "全部内容可在任务素材中找到依据或属不增事实的逻辑解释：台灯接线松动、重新固定、灯恢复正常，风扇需换件、无合适件、登记型号与后续联系办法，均同义转述自任务给定事实。",
+      "naturalness": "行文连贯，长短句交替有节奏，格言式收束（",
+      "source_independence": "未发现可证实的内容迁移。文中与样文相似处均为短功能句与论证操作（",
+      "style_fidelity": "鲜明复现了样文的核心论证动作：先抛出流传说法再直接否定（",
+      "task_completion": "完整覆盖指定主题与核心素材：修好的台灯、未能当场修好并登记的风扇、旁观提问、修复边界（"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "\"可以提问：为什么会坏，值不值得修\"——所列问题内容是任务",
+      "\"宁可等零件，让旧物回到手上\"——"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

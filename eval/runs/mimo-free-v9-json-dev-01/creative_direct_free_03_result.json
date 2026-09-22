@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_03",
+  "group": "creative",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 648,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已按要求注明'虚构场景'。正文覆盖的台灯接线松动并修复、风扇缺件登记型号与联系办法、志愿者只做检查与力所能及修复等均来自任务给定核心事实，未改写；新增的围观动作、孩子拨扇叶、人物话语属creative权限明确允许的虚构场景内容，未出现伪造的外部真实统计或真实引用。",
+      "naturalness": "行文连贯，短句与断言交替自然，比喻（'两种算盘'）与转场（'把这一天翻过来看'）衔接顺畅，未见机械模板堆叠或明显拼贴痕迹。",
+      "source_independence": "正文全部内容围绕旧物修理日展开，与参考样文的软件架构领域无可证实的内容绑定：'留下/替换'权衡是任务本身要求的取舍素材，加粗断言、自问句式、格言结尾属于论证操作与风格机制，不构成污染。无参考样文中的概念、结论或案例内容被搬运。",
+      "style_fidelity": "鲜明复现参考样文的论证机制：先破常识（'向来只被夸\"妙手回春\"'对应'性能瓶颈与架构腐化'式的引题），随即用加粗句给出反直觉主张（'敢当众说\"修不好\"，比当场修好更难'对应'过早的局部优化，往往是系统性灾难的起点'），再用'凭什么呢？'承接样文'为什么这么说？'的自问自答节拍；随后以并列的具体案例（台灯/风扇）代替'以微服务拆分为例'的例证展开；结尾以短促格言收束（'前者是本事，后者更难'对应'保持克制，尊重简单，这比炫耀技巧要困难得多'），且'留下/替换'双项条目对应样文的编号原则清单，平衡论断'从来不是对错题，而是时间和价钱的加减'对应'资源、时间和复杂性之间寻找动态的平衡点'。整体语气、人称（议论者立场与'我认为'）、加粗断言的节拍均忠实迁移并适应了新主题。",
+      "task_completion": "完整涵盖全部核心素材：活动室场景、接触不良的台灯（接线松动、重固定后恢复）、转动缓慢的旧风扇（当天无合适零件、登记型号与后续联系办法、未宣称修好）、旁观者提问与只答能做部分的修复边界、以及以'留下/替换'条目和结尾讨论呈现修理与替换的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}
