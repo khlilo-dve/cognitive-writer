@@ -51,8 +51,25 @@ pub(crate) struct Judgment {
     pub reasons: BTreeMap<String, String>,
     pub source_leakage: Vec<Leak>,
     pub fact_violations: Vec<Fact>,
+    #[serde(deserialize_with = "string_list")]
     pub task_issues: Vec<String>,
+    #[serde(deserialize_with = "string_list")]
     pub uncertainties: Vec<String>,
+}
+
+// Lossless shape compatibility only: no invented reasons, evidence, or changed scores.
+fn string_list<'de, D: serde::Deserializer<'de>>(d: D) -> Result<Vec<String>, D::Error> {
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum List {
+        Many(Vec<String>),
+        One(String),
+    }
+    Ok(match List::deserialize(d)? {
+        List::Many(v) => v,
+        List::One(s) if s.trim().is_empty() => Vec::new(),
+        List::One(s) => vec![s],
+    })
 }
 
 pub(crate) fn length_check(body: &str) -> Value {
@@ -163,6 +180,20 @@ mod tests {
             "reasons":DIMENSIONS.into_iter().map(|s|(s,"依据")).collect::<BTreeMap<_,_>>(),
             "source_leakage":[],"fact_violations":[],"task_issues":[],"uncertainties":[]})
     }
+    #[test]
+    fn singleton_diagnostic_text_is_normalized_without_altering_scores() {
+        let mut v = fixture();
+        v["scores"]["task_completion"] = json!(4);
+        v["task_issues"] = json!("缺少任务要求的人数");
+        v["uncertainties"] = json!("轻微细节难判断");
+        let j = parse_judgment(&v.to_string(), "原文", "正文").unwrap();
+        assert_eq!(j.scores.task_completion, 4.0);
+        assert_eq!(j.task_issues, vec!["缺少任务要求的人数"]);
+        assert_eq!(j.uncertainties, vec!["轻微细节难判断"]);
+        v["task_issues"] = json!("");
+        assert!(parse_judgment(&v.to_string(), "原文", "正文").is_err());
+    }
+
     #[tokio::test]
     async fn ungrounded_evidence_is_repaired_once_without_inflating_the_score() {
         let mut bad = fixture();

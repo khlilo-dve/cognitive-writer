@@ -1,0 +1,51 @@
+{
+  "id": "strict_direct_free_02",
+  "group": "strict",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 8,
+    "characters": 592,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 2.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 3.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "严格权限只允许同义转述、逻辑解释和不增加独立事实的连接动作；文中新增了来访者停留/离开以及修好后台灯被移出桌面的独立事件或状态。",
+      "naturalness": "整体可读，但重复与模板化明显，如反复使用“桌上放着”“活动……”“停在……”“一件……一件……”等句式，机械感较强。",
+      "source_independence": "参考样文写香港酒店、合同、指甲锉与渡轮等，本文写社区旧物修理日的台灯与风扇；未发现可证实的内容、结论或素材迁移。",
+      "style_fidelity": "参考样文是第一人称叙事，靠精确时间/数字、具体物件、对话、感官细节和克制的情节动作推进；本文则为非人称、清单式、重复短句的说明性写法，缺少对话、人物视角、具体感官氛围与叙事潜台词，仅保留短段落和浅层克制感。",
+      "task_completion": "围绕社区旧物修理日展开，涵盖社区活动室、台灯与旧风扇、两名志愿者检查、来访者旁观提问、台灯接线修好、风扇缺零件未当场修好并登记型号与后续联系办法、修复边界以及修理与替换取舍等核心素材。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "有人站了一会，走了。有人站着，没有走。",
+        "reason": "严格素材只允许来访者旁观和提问，未提供特定来访者停留或离开的行为；这属于新增独立事件。"
+      },
+      {
+        "article_quote": "台灯不在桌上。",
+        "reason": "素材只说明台灯接线松动并修好，未说明修好后被带离或移出桌面；该状态暗示新增了移除台灯的独立事件，且与前文“灯留在桌上，亮着”形成未给出的后续动作。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“台灯被拆开”“风扇被拆开”“志愿者把风扇装回原样”可能被视为检查或修复所必需的逻辑动作，也可能属于新增独立事件；未列为确定违规。",
+      "“扇叶不动”与素材初始“转动缓慢”的关系不确定：可能只是断电或停机状态，未必改变给定事实；未作为确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,41 @@
+{
+  "id": "strict_direct_free_05",
+  "group": "strict",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 737,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 3.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "所有核心事实均与任务权限一致：社区活动室、两名志愿者、台灯接线松动并修好、风扇缺件登记、不宣称修好、边界与继续使用/购买替代取舍。没有新增人物履历、精确时间数字、具体新物件、独立事件、引用或外部统计；解释性议论不算越界。",
+      "naturalness": "行文连贯，段落推进清楚，短句和对照句使用有节制；少数地方连续用“不是……而是……”“不等于”等抽象句式，略显机械，但整体可读自然。",
+      "source_independence": "正文主题、人物、物件和结论均可由任务素材解释；未发现猪、牛、斯巴达、样板戏、糖厂等参考文内容或结论迁移。",
+      "style_fidelity": "参考样文以第一人称、口语化叙事和幽默反讽展开（如“我喂过猪、也放过牛”），先写具体动物故事再转入生活设置议论；正文主要是冷静的第三人称说明文，仅有结尾“我不替。”露出第一人称，保留少量对照、限定、反讽式短句和议论收束，但缺少叙事人物、口语调侃与具体故事推进，因此只是部分保留主要机制。",
+      "task_completion": "完整覆盖社区旧物修理日、活动室、台灯与风扇、两名志愿者、旁观提问、台灯修好、风扇未当场修好及登记、修复边界和修理/替换取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“觉得时间、精力、价格都该算进去”是对“等待与购买替代品之间的取舍”的具体化解释，是否处于严格模式边界可复核；未发现其构成独立事实或事件。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

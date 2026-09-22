@@ -1,0 +1,41 @@
+{
+  "id": "strict_direct_free_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 696,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "在strict权限内，人物、物件、故障、志愿者处理、登记与边界声明均来自任务核心素材；主观解释、评价和假设性建议未增加新的独立事件、外部统计、引用或人物履历。",
+      "naturalness": "段落推进顺畅，叙事、辨析和收束之间无生硬拼贴；对照句式有节制，未出现明显模板复读。",
+      "source_independence": "正文主题、事件、结论均围绕旧物修理日与修/换取舍，未复用参考文中关于认知变现、商业风险、付费课等任何核心内容或观点，只有“不是……而是……”等通用论证句式。",
+      "style_fidelity": "与参考同样采用第一人称判断加第二人称劝导，开篇以“很多人以为/期待”引出反直觉判断，反复使用“不是……而是……”的对照句、短促格言化收束和最后落到行动建议。虽少了参考的加粗断言、连串反问和更密集的抽象拆解，但主要论证声音和节拍已迁移到修理日主题。",
+      "task_completion": "完整覆盖社区活动室、台灯与风扇、两名志愿者、旁观提问、台灯修复、风扇待换件并登记、不保证全部修复、修理边界及修理与替换取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“拆开台灯”未在核心素材中逐字出现，但可视为重新固定接线的必要连接动作，未按违规处理。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

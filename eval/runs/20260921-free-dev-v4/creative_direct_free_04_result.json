@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 737,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务为 creative 模式，正文标题和开头均注明‘虚构场景’，可加入虚构人物、动作、物件、对话和独立事件；给定核心事实均被保留：社区活动室、两件旧物、两名志愿者、来访者可旁观提问、台灯接线松动并修复、风扇需换零件且当天无合适型号、登记型号和后续联系办法、未宣称修好、只提供有限检查和修复。未伪造外部真实统计或真实引用，也未把虚构冒充作者现实经历。",
+      "naturalness": "从场景到分诊说明，再到修好与登记待修的对比、取舍讨论和建议，整体连贯自然；但‘没有统一答案，只有你自己的优先级’重复出现，部分段落有说明文式回环，因此未给满分。",
+      "source_independence": "正文核心主题、物品、人物、事件和结论均为旧物修理日：台灯修好、风扇登记待修、修理与替换取舍等，未迁移参考样文的财富、金钱、创业、可测量性、可放大性等内容；共享的‘并非同义词’式定义辨析、第一人称判断和直接呼告属于论证/句法操作，不构成可证实的内容迁移。",
+      "style_fidelity": "样文以定义辨析（财富与金钱并不是同义词）、对照论证、设问、第一人称判断和行动建议展开；正文同样用定义辨析（修好和登记待修，并非同义词）、边界对照（修理与替换不是道德高下）、‘我认为’、‘有人问’、‘如果你……’和收束式建议来推进，声音、节拍与信息展开方式鲜明对应并适配旧物修理日主题。",
+      "task_completion": "完整覆盖指定主题与核心素材：社区旧物修理日、活动室、台灯接触不良与修复、风扇未当场修好并登记、两名志愿者、来访者旁观提问、修复边界、修理与替换取舍；仅作次要延展，无核心素材遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

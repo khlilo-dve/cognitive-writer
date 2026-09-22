@@ -1,0 +1,64 @@
+{
+  "id": "strict_direct_free_02",
+  "group": "strict",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 612,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "strict 模式下多处新增具体物件与精确数值：插线板、螺丝刀、登记纸、纸条、笔、本子等均非核心素材明示，且出现“第三圈”这一素材未给的精确数值；虽多为场景道具，仍构成数处可证实越界。",
+      "naturalness": "整体连贯，短句和重复服务于场景，读来顺滑；但“又按一次，还亮。再按一次，也亮”等重复略机械，构成少量模板痕迹。",
+      "source_independence": "正文写社区旧物修理日、台灯与风扇、志愿者登记零件等，均来自当前任务给定素材；未发现可与参考样文确证绑定的核心内容、结论或局部素材迁移。",
+      "style_fidelity": "保留了参考样文短促陈述句的节拍、以具体物件和动作推进、少解释少抒情的克制感，以及把结论压低到场景末尾的收束方式，如“重新固定，拧紧”“又按一次，还亮”直到“纸条还贴在风扇上”；但缺少原文那种第一人称贴身声口和直接引语，精确数字式细节也明显减少，因此不是全量保真。",
+      "task_completion": "涵盖社区活动室、台灯接触不良并修好、风扇因缺零件未当场修好、志愿者检查、旁观者提问、工作人员登记型号和联系办法、不宣称修好、只做检查和力所能及修复，以及等待零件与购买替代的取舍；核心素材完成。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "接在插线板上",
+        "reason": "新增“插线板”这一具体物件；核心素材只给台灯、风扇和活动室，未提供电源插线板。"
+      },
+      {
+        "article_quote": "螺丝刀和一小叠登记纸放在面前",
+        "reason": "新增“螺丝刀”“登记纸”等具体物件；素材只要求志愿者检查、工作人员登记零件型号和后续联系办法，未明示这些工具和纸质载体。"
+      },
+      {
+        "article_quote": "转到第三圈就慢下去",
+        "reason": "新增精确数值“第三圈”；素材只说旧风扇转动缓慢，未给圈数。"
+      },
+      {
+        "article_quote": "纸条贴在机身上",
+        "reason": "新增“纸条”物件及贴纸条动作；素材只要求登记零件型号和后续联系办法、未宣称修好，未提供纸条。"
+      },
+      {
+        "article_quote": "笔还在纸上",
+        "reason": "新增“笔”这一具体物件及书写状态；素材未提供笔或桌面书写物。"
+      },
+      {
+        "article_quote": "登记纸被压在本子下面",
+        "reason": "新增“本子”这一具体物件；素材未提供该收纳物。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

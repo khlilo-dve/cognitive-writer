@@ -1,0 +1,41 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 762,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标题即标注“虚构场景”，符合creative模式的声明要求。给定核心事实全部保持：社区活动室、接触不良台灯与转动缓慢旧风扇、两名志愿者、可旁观提问、接线松动经重新固定后灯亮、风扇需换零件而当天无合适零件、工作人员登记型号与后续联系办法且未宣称修好、只检查与力所能及的修复、不保证恢复、继续使用与购买替代的取舍。虚构对话（志愿者“能修就修，不能修就登记型号，买不买由你决定。”）与观察者追问属creative模式允许的虚构人物与对话，未改写核心事实，未冒充作者现实经历，未出现外部真实统计或真实引用。",
+      "naturalness": "行文连贯、句法克制，段落推进清楚，机制使用总体自然；但“修理日/复原日”的对举与“为什么不直接买新的？”在相邻段落重复出现，个别句子偏口号化（“边界不是失败，边界是诚实的刻度”），略有模板痕，故为4。",
+      "source_independence": "样文讨论财富与金钱之别、大饼谬论、创业、可测量性与可放大性；正文讨论社区修理日、台灯接线、风扇缺件、修理与替换取舍，主题、结论与论据均无重合。“试想一下”“我认为”“但事实完全不是这样”一类仅为论证操作与功能表达，不构成内容迁移，未发现可证实的内容绑定。",
+      "style_fidelity": "保留了样文的多项核心机制：第二人称直呼（“你把一盏接触不良的台灯放在社区活动室的桌上”对应样文“如果你想创造财富”）；先定义再展开的辨析动作（“先分清两件事：检查是判断能不能修，修复是让它恢复工作”对应“财富与金钱并不是同义词”）；指认误读并反转（“把修理日当成复原日，是一种误读”对应“但事实完全不是这样”）；“试想一下”式假设推演（“试想一下，如果每件旧物都能当场复活”对应“试想一下，当一个木匠买来几块廉价的木头”）；第一人称表态（“我认为，修理的意义不在于拒绝替换”）与结尾格言收束（“——修理日真正教你的，不是……”对应“这就是创造财富的核心秘密”）。但样文以较长段落逐层拆解谬论、并用命名框架（可测量性、可放大性）搭建论证骨架，正文段落更碎、更依赖短句警句，铺陈密度偏低，故未给5。",
+      "task_completion": "完整覆盖指定核心素材：修理日地点、桌上两件旧物、两名志愿者、旁观提问、台灯接线松动修复、风扇缺件登记型号与后续联系且未称修好、只提供检查与力所能及的修复、不承诺恢复，并通过提问与对话呈现修理与替换的取舍，主题集中无偏题。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "正文在“修理日（Repair Day）”使用括号夹注英文术语，与样文“大饼谬论”（The Pie Fallacy）、“可测量性（Measurement）和可放大性（Leverage）”形式相近，属写作手法相似，无法据此指认具体内容迁移，故不列为source_leakage。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

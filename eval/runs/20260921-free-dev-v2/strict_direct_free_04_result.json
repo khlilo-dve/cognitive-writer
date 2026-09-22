@@ -1,0 +1,41 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 626,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "逐项核对严格素材：社区活动室、两名志愿者检查、台灯接触不良且接线松动后恢复、风扇转动缓慢且需更换零件、当天无合适零件、工作人员登记零件型号和后续联系办法且未宣称修好、只提供检查和力所能及的修复、不保证全部恢复、旁观与提问、继续使用原物与购买替代品的取舍，均与给定事实一致。其余为同义转述、逻辑解释或价值判断，未新增独立事件、精确数值、人物履历、外部引用或新物件。",
+      "naturalness": "整体连贯，段落推进清楚，具体物件到原则总结的过渡自然。主要模板痕迹是多次使用“不是……而是……”“不是天然对立”“边界不是……而是……”等否定—修正句式，略有机重复，但未到明显拼贴或难以阅读。",
+      "source_independence": "全文围绕社区修理日、台灯、风扇、旁观提问和修理/替换取舍展开，未见样文中财富与金钱、大饼谬论、创业、可测量性、可放大性、软件行业等核心内容或结论迁移。相似处主要是“先弄清楚是什么”“不是……而是……”“但事实完全不是”一类通用论证操作和句法框架，不构成可证实的内容绑定。",
+      "style_fidelity": "保留了样文式定义切入、概念澄清、正反对比和递进收束：如“要谈社区旧物修理日，先弄清它是什么”对应样文“先搞清楚什么是财富”；“不是……而是……”“但事实完全不是”“不是天然对立”等否定—修正句式明显；并从台灯、风扇两个具体对象推进到“修理与替换”的原则判断。人称与主题已换为第三人称社区场景，因此是多数重要机制体现并适应新主题，但不是逐项复制。",
+      "task_completion": "完整覆盖指定主题与核心素材：社区旧物修理日、社区活动室、接触不良台灯与转动缓慢风扇、两名志愿者、旁观提问、接线松动修复台灯、风扇缺零件未当场修好并登记型号与后续联系、只检查且不保证全部恢复、修理与替换的取舍。无次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“选择权应留给物主”“修理日不替代物主决定”属价值判断和结论性表述，未增加独立事件或人物履历；按严格素材允许的逻辑解释处理，但若权限要求完全去除规范性主张，则存在轻微解释空间。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

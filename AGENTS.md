@@ -45,7 +45,7 @@
 
 - REPL 局部修改使用完整文章作为模型上下文，只接收目标块替换内容；程序按原文偏移应用并校验范围外内容。位置不明确进入 WaitingForEditTarget，/cancel 仅取消本次修改；/blocks 查看块编号，可直接说“撤销刚才的修改”“恢复修改前”“改回去”撤销上次局部修改，/undo 保留兼容。
 
-- 单篇学习已实现 legacy / direct_free / two_stage；`STYLE_LEARNING_METHOD` 默认 legacy，作为稳定基线保留；旧混合总分不再作为新提示词整体失败的证据。校验与 Rubric B v2 不要求十标题，仍按400–600非空白字符满分、低于最低扣分；阶段留证在 outputs/style-learning/。历史实验见 docs/2026-09-17-style-learning-results.md。
+- 单篇学习已实现 legacy / direct_free / two_stage；`STYLE_LEARNING_METHOD` 默认 legacy，作为稳定基线保留；旧混合总分不再作为新提示词整体失败的证据。校验与 Rubric B v2 不要求十标题，仍按400–600非空白字符满分、低于最低扣分；阶段留证在 outputs/style-learning/。历史实验见 docs/2026-09-17-style-learning-results.md；2026-09-22当前候选v8因接口HTTP 402尚未完成采用验证，停止DS请求。换模型只对当前候选新建run对照，不能混用DS分数，续跑见docs/2026-09-22-free-style-progress.md。
 
 - 当前迁移评测使用 Transfer v2：风格保真、原文独立性、事实合规、自然度、主题完成度独立报告；字数程序统计，不合成采用总分。入口 `eval_transfer_audit_suite`，方案见 docs/superpowers/specs/2026-09-18-transfer-eval-correction.md。
 

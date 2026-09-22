@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 654,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标题含“虚构场景”，符合creative模式；未伪造外部真实统计或真实引用，未把虚构叙述者冒充作者现实经历。台灯接线松动后修好、风扇当天缺件登记且未宣称修好、修复边界和修理/替换取舍均未被改写或违反给定核心事实。",
+      "naturalness": "短句、对白和留白使场景基本连贯可读，动作与信息推进有节制；但通篇大量单句成段，“志愿者”“插上”等词重复较多，局部略显机械。",
+      "source_independence": "正文的社区修理事件、志愿者、台灯与风扇故障、登记和旁观提问均来自任务给定或属于新虚构内容；参考文的香港、半岛酒店、合同、渡轮、指甲锉、车库、埃尔法等核心内容均未出现。共享的短句、对白和具体物件写法属于风格机制，不构成内容迁移。",
+      "style_fidelity": "参考文以第一人称、短句断行、具体物件、时间刻度和克制对白推进；正文保留了短句成段、物件细节、对白留白、数量/时间标记和静物式收束，并适应社区修理主题。但正文多为第三人称旁观，第一人称仅出现在“我站着看了一会儿”，参考文持续的内省声音和情绪潜台词未充分延续。",
+      "task_completion": "围绕社区旧物修理日展开，涵盖修好的台灯、未能当场修好的风扇、登记零件型号与联系方式、旁观提问、检查与不保证的修复边界，以及继续修理和购买替代品之间的取舍，核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

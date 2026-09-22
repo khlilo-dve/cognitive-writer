@@ -1,0 +1,46 @@
+{
+  "id": "strict_direct_free_05",
+  "group": "strict",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 739,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "除一处新增提问主题外，其余内容基本按素材转述或作逻辑解释：台灯接线松动后修好、风扇缺件并登记、不保证全部修复、修理与替换的取舍等均在权限内。该处具体提问内容未获素材授权。",
+      "naturalness": "整体连贯，场景与议论衔接自然，短句节奏稳定；但“修好/没修好”“承认……不……”式对举反复出现，略见成文模板感，故为4而非5。",
+      "source_independence": "正文写社区旧物修理日，与参考样文的插队喂猪、猪兄叙事在人物、事件、意象、论点及展开动作上均无可证实重合，未见可指认的素材或观点迁移。",
+      "style_fidelity": "以短句、直陈和格言式收束推进，先摆出台灯与风扇的具体场景，再上升到“两套算法”的抽象议论，有“我以为”“你”等泛化人称和“承认办不完，不丢人”式反讽口吻，接近参考样文的随笔化议论与短句节拍；但参考中贯穿的第一人称叙事、知青经历和轶事式荒诞幽默在本文基本缺席，故未到最高。",
+      "task_completion": "标题和正文围绕旧物修理日，涵盖社区活动室、台灯与旧风扇、两名志愿者、旁观提问、台灯修复、风扇登记待件、修复边界以及修理与替换取舍，核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "旁观的人提问，问的是修理的门槛、零件的来路、值不值得等。",
+        "reason": "素材仅给定“来访者可以旁观并提问”，未提供任何具体提问内容；此处补出“修理门槛、零件来路、值不值得等”对话主题，属于strict权限禁止的新增对话主张或素材未提供信息。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“修好的东西摆在桌上，亮着”是否只是对台灯恢复状态的连接性补足，抑或轻微新增摆放动作，存在界定空间；未据此扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

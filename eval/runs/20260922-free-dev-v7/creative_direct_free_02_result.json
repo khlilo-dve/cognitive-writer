@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 656,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已注明‘虚构场景’，全文围绕社区修理日展开，未改写台灯修复、风扇需换件并登记型号与联系办法、不保证修好等给定核心事实；周伯、陈姐、电饭锅等均为creative权限允许的虚构人物和物件，无外部真实统计或引用，未冒充作者现实经历。",
+      "naturalness": "整体连贯，短句推进与对白插入自然，动作细节有节制；但‘志愿者说’、‘志愿者把’等重复稍多，个别动作描写略机械，未达到完全无痕。",
+      "source_independence": "正文与参考样文在人物、地点、事件、物件和结论上均无实质重合；共用的短句、时间标记、对白和动作推进属于通用叙事机制，不能证明内容迁移。",
+      "style_fidelity": "参考样文以短段落、精确时间、具体物件、对白和动作节制推进，并在结尾保持克制；正文也使用‘两点整’、螺丝刀/万用表/登记表等具体物件、短句对白和动作停顿来展开，信息逐段释放，适应了社区修理主题。但样文的‘我’第一人称、感官铺陈和更明显的情绪暗流在正文中转为第三人称客观记录，主要机制多数保留而非全部鲜明再现。",
+      "task_completion": "完全围绕社区旧物修理日，涵盖活动室、两名志愿者、台灯接触不良并修复、风扇需换件且登记型号与联系办法、旁观提问、只检查和不保证修好的边界，以及等待零件与网购替代之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

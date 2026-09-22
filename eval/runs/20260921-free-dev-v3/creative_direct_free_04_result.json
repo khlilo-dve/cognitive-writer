@@ -1,0 +1,41 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 713,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "标题开头已注明“虚构场景”，且给定核心事实均保留：社区活动室、接触不良台灯经重新固定接线恢复、风扇需更换零件且当天无合适零件、工作人员登记型号和联系办法、未宣称修好、活动只做检查和力所能及修复、不保证全部恢复，并呈现修理与替换取舍。新增对白、人物和动作属于creative模式允许的虚构，未伪造外部统计或真实引用。",
+      "naturalness": "整体连贯，场景与对白推进自然；但“施加的动作是重新固定接线，出现的结果是灯恢复正常”带有任务转写式机械感，“只提供检查和力所能及的修复”等表述重复出现，因此存在少量模板痕迹。",
+      "source_independence": "正文讨论修理日中的修理与替换取舍，与参考文关于财富、金钱、创业、可测量性、可放大性等核心内容没有可证实迁移；共享的只是第二人称、设问、对比、结论收束等通用论证操作，不构成内容绑定。",
+      "style_fidelity": "保留参考文的第二人称直接说理、定义式区分（不是A，也不是B）、设问后自答、由具体事例推进到原则总结等机制；但源文以抽象经济论证和长句解释为主，正文更偏场景化、对白更多，因此是多数重要机制体现并适应新主题，而非完全同质。",
+      "task_completion": "围绕旧物修理日展开，涵盖社区活动室、桌上台灯与风扇、台灯被修好、风扇未能当场修好、旁观提问、修复边界以及修理与替换的取舍；但核心素材中的“两名志愿者负责检查”未明确落实，仅以“志愿者”“工作人员”等泛称出现，属次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "核心素材中的“两名志愿者负责检查”未明确落实，文中仅出现“志愿者”“工作人员”等泛称。"
+    ],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

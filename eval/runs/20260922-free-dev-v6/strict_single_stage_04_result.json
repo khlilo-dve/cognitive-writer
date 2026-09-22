@@ -1,0 +1,43 @@
+{
+  "id": "strict_single_stage_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "single_stage",
+  "body_artifact": "strict_single_stage_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 659,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实均能对应任务素材：台灯接线松动并重新固定后恢复，风扇需换零件且当天无合适零件并登记型号和联系办法，来访者可旁观提问，活动只做检查和力所能及修复，讨论修理与替换取舍；未新增人物履历、精确时间、外部统计、引用或独立事件。若干边界与价值判断属于解释性延伸，不构成可证实越界。",
+      "naturalness": "行文连贯，转折和设问自然，“能修／不能修”等对照服务论述；小标题和复现对照略有模板感，但未明显影响可读性。",
+      "source_independence": "正文围绕修理日、台灯、风扇、旁观提问和修换取舍展开，未复现参考文关于财富与金钱、大饼谬论、创业、可测量性与可放大性等核心内容，也无可证实的内容迁移。",
+      "style_fidelity": "沿用参考文说明—反驳—区分—举例—设问收束的论述动作，并用“不是……而是……”“我们容易把……听成……”等重新界定概念；但小标题结构和更短促、格言化的段落使声音与参考文的长段解释和较多第二人称不完全一致。",
+      "task_completion": "涵盖修好的台灯、未当场修好的风扇及登记、旁观提问、修复边界和修理与替换取舍等核心素材；但未明确“两名志愿者”的数量，也未点明“社区活动室”的完整地点。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确写出“两名志愿者”的数量，只以“志愿者”“工作人员”概括。未明确写出“社区”或“社区活动室”的完整地点，只写“活动室”。"
+    ],
+    "uncertainties": [
+      "“能回答的，是检查所见和下一步办法；不能回答的，是值不值得等、该不该换”属于对修复边界的延伸解释，材料未明确授权，但更像逻辑解释而非独立事件。“购买替代品，意味着更快、更确定，也可能带来新的废弃”是一般性取舍说明，材料未直接给出，但未增加具体事件、数据或外部主张。"
+    ]
+  },
+  "judge_calls": 2,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

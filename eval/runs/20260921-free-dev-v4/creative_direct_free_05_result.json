@@ -1,0 +1,44 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 662,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 3.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注“虚构场景”，符合creative权限；台灯接线松动并修好、风扇缺零件并登记型号和联系方式、未宣称修好、检查与修复边界等均未改写给定核心事实，未伪造外部真实统计或真实引用。",
+      "naturalness": "叙述连贯，短句和留白有节制，“等零件，等通知，等一个有空的人”等重复有节奏功能，未见明显拼贴或模板堆叠。",
+      "source_independence": "主题、场景、人物、物件和议论均围绕旧物修理日展开，未发现可指认来自参考样文的连续内容、观点答案或素材迁移；共享的第一人称与议论动作不构成污染。",
+      "style_fidelity": "第一人称旁观、由具体物件引出取舍、短句和开放式收束，保留了参考文从具体经验转向生活议论的叙事动作；但参考文的反讽、强自我声音、较长的议论句法和层层推进的论辩锋芒基本未体现，整体更像静观短章，因而只保留部分主要机制。",
+      "task_completion": "涵盖旧物修理日、活动室、台灯修好、风扇未当场修好并登记、旁观提问、修复边界和修理与替换取舍；但未明确写出“两名志愿者”，“社区活动室”也只写作“活动室”，存在次要遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确呈现“两名志愿者”这一核心设定，正文仅以“志愿者”泛称/未标人数出现。",
+      "“社区活动室”仅写作“活动室”，社区属性未点明。"
+    ],
+    "uncertainties": [
+      "“志愿者”在汉语中可作集合/泛称，是否足以覆盖“两名志愿者”存在解释空间。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

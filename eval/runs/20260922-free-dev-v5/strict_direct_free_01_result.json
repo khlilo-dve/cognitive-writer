@@ -1,0 +1,46 @@
+{
+  "id": "strict_direct_free_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 685,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实与任务素材基本一致：台灯接线松动并重新固定后恢复，风扇因当天无合适零件被登记，活动只检查并做力所能及修复，包含旁观提问和修理/替换取舍。但开头引入素材未提供且未获准的外部俗语，属一处轻微越界。",
+      "naturalness": "整体连贯，短段落、反问和让步推进自然；但‘为什么……因为……’‘我承认’‘所以别……’等结构痕迹较明显，略有模板感。",
+      "source_independence": "未发现可证实的主题、结论或具体素材从参考样文迁移；与样文共享的第二人称、短句、反问、让步和直接建议属于通用论证操作，不构成内容污染。",
+      "style_fidelity": "开篇用‘你大概听过那句’对应样文‘你经常听到一句话’的切入方式，随后以加粗的反直觉判断立论，并用第二人称、连续短问、‘为什么……因为……’因果推进、‘我承认’式让步和结尾直接劝告收束；这些声音与论证动作鲜明且适配修理日主题。",
+      "task_completion": "完整涵盖社区活动室、接触不良台灯与转动缓慢旧风扇、两名志愿者、旁观与提问、台灯修复、风扇登记型号和后续联系、不保证全部修复的边界，以及继续使用原物与购买替代品之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "旧的不去，新的不来",
+        "reason": "严格素材写作权限不允许新增引用或素材未提供的主张；该俗语未在任务素材中出现，作为开篇外部引用引入。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "‘拆开’是否可完全视为‘检查’动作的自然延伸存在轻微界定空间，但未作为事实违规扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

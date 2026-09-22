@@ -1,0 +1,55 @@
+{
+  "id": "strict_direct_free_05",
+  "group": "strict",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 657,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 3.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心素材大多按权限写出，但新增了来访者的具体提问、问答结果以及把风扇搁在角落等候零件等材料未提供的对话主张与独立动作，违反严格模式下不得新增对话主张和独立事件的要求。",
+      "naturalness": "整体语言顺畅，短句、反讽和收束较自然，模板痕迹少；但“把风扇搁在角落”与结尾“风扇还在桌上”存在轻微场景衔接不一致，使自然度略降。",
+      "source_independence": "主题、事件和结论均围绕旧物修理日，未发现与参考样文可证实的核心内容或局部素材迁移；共享的议论语气和短句不属于内容污染。",
+      "style_fidelity": "参考样文的主要机制包括第一人称回忆/轶事、反讽口语、格言式议论和荒诞叙事；正文保留了反讽、短句和格言式判断（如“把话说满容易，把话说准难”），但缺少自我叙述、具体轶事和荒诞叙事推进，因此只部分保留主要风格机制。",
+      "task_completion": "完整覆盖社区活动室旧物修理日、台灯修好、风扇因缺零件未当场修好、志愿者检查、旁观者提问、登记型号与联系方式、不保证全部修复，以及修理与替换取舍等核心素材。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "接线为什么会松，零件为什么不好配。",
+        "reason": "严格模式不允许新增对话主张；材料只允许来访者可以旁观并提问，未提供这些具体提问内容。"
+      },
+      {
+        "article_quote": "有些答得上来，有些只能搁着。",
+        "reason": "严格模式不允许新增素材未提供的问答结果；材料未说明志愿者对哪些问题能答、哪些不能答。"
+      },
+      {
+        "article_quote": "有人愿意等，把风扇搁在角落，等零件到",
+        "reason": "严格模式不允许新增独立事件或动作；材料只给出有人重视继续使用原物、有人在意等待与购买替代品的取舍，未提供把风扇搁在角落等候零件这一具体事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“活动的范围写得很清楚”是否新增“书面写明”这一具体呈现方式，材料未明确，暂不据此扣分。",
+      "“慢的东西如今不太受欢迎”是否构成素材未提供的社会判断，边界较轻，暂不据此扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

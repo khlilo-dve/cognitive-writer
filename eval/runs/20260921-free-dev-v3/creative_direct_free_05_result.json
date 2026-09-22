@@ -1,0 +1,41 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 667,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已标注“虚构场景”，虚构的周姓邻居、志愿者对话、椅子等均属creative模式明确许可范围；台灯接线松动后重新固定恢复正常、风扇需更换零件且当天无合适型号、工作人员登记型号与联系方式并未宣称修好、活动只做检查和力所能及的修复不保证全部恢复，均与给定核心事实一致；未出现外部真实统计或真实引用。",
+      "naturalness": "段落推进连贯，对话与旁观视角衔接自然，没有明显拼接感；但“一种说……另一种说……”及“有人把时间算成钱，有人把旧物算成习惯”等对仗句式反复出现，读来略有模板痕迹，故为4。",
+      "source_independence": "主题、场景、人物、物件与全部结论均来自本次任务给定的核心素材，正文中未发现任何与参考样文可对应的内容、论断或意象迁移（无猪、无插队、无“设置生活”一类命题）。",
+      "style_fidelity": "保持参考文的旁观者第一人称视角（“我站在旁边看，不修，只问”“我也问了一句”），以短句陈述事实后接一句概括性议论（“答得平常，边界倒清楚”“这句话把台灯和风扇分开了：能修的修，不能修的登记”），结尾从具体物件转向普遍反思（“修理日真正修好的，未必只是那盏灯”），与样文由猪及理的收束动作同构；但句式整体偏极简、断裂，缺少样文那种长句铺陈与自嘲式幽默的节拍，因此未及5。",
+      "task_completion": "完整覆盖社区活动室旧物修理日、接触不良台灯与转动缓慢风扇、两名志愿者检查、旁观提问、台灯修好、风扇登记待件未宣称修好、修复边界以及修理与替换取舍的讨论，未发现核心素材遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“不混成一件”一句意在表达两类结果分别处理，语义稍显跳跃，但属表达问题，不构成事实越界。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

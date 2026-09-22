@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_03",
+  "group": "creative",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 730,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已注明“虚构场景”。新增的志愿者对话、拆开底座、旁观者追问、登记单、等待下一次修理日等均属 creative 模式允许的虚构人物、对话、动作、物件和事件；给定核心事实未被改写，也没有伪造外部真实统计或真实引用。",
+      "naturalness": "行文连贯，从场景、故障判断、取舍分析到原则总结推进顺畅。加粗命题、编号原则和反复对照没有造成机械拼贴，机制使用有节制，短句收束也符合全文节奏。",
+      "source_independence": "正文主题、案例、原则和结论均围绕社区旧物修理日的台灯、风扇、修复边界与修理/替换取舍展开；参考文中的性能瓶颈、微服务拆分、可观测性、I/O 阻塞等具体内容均未迁移。二者只共享“提出判断—举例—列原则—收束”的论证操作、第一人称复数与若干通用连接词，不构成可证实的内容污染。",
+      "style_fidelity": "延续参考文的论证展开方式：先提出起初判断，再用“更准确的判断是：**……**”转向反直觉命题，随后以台灯和风扇两个案例对照推进，最后用“可执行的原则并不复杂：”列出三条原则并以短句收束。第一人称复数“我们/你”、对比句式“不是……而是……”、加粗判断句、编号原则和克制结论等机制均被保留，并自然适配到修理日主题。",
+      "task_completion": "完整覆盖指定主题与核心素材：社区活动室、接触不良的台灯、转动缓慢的旧风扇、两名志愿者、来访者旁观提问、台灯接线松动并恢复、风扇缺零件且登记型号与后续联系办法、不宣称修好、修复边界，以及修理与替换之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

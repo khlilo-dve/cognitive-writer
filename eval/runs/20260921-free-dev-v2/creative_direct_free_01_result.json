@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 637,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头注明“虚构场景”；虚构人物、对话、动作均属creative模式允许范围，且给定核心事实（台灯接线修复、风扇缺件登记、不宣称修好、修复边界、取舍）未被改写。未伪造外部真实统计或真实引用。",
+      "naturalness": "场景与对话衔接顺畅，短句和对照使用自然，仅有少量格言式收束稍显刻意，未形成机械拼贴。",
+      "source_independence": "主题、论点和具体素材均为修理日场景，与参考文的认知变现论述无核心或局部内容迁移，未发现可证实绑定。",
+      "style_fidelity": "保留参考文的短段推进、设问、让步式对照和格言收束（如“两种取舍……都对”“不是答案，是边界”），也出现第二人称劝服“你可以……”；但参考文那种高密度反直觉断言和层层拆解较弱，故为4。",
+      "task_completion": "完整覆盖社区旧物修理日、活动室、台灯与风扇、两名志愿者、旁观提问、台灯修复、风扇登记零件与联系方式、不保证全修、修理与替换取舍等核心素材。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

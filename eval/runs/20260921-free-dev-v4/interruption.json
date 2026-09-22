@@ -1,0 +1,5 @@
+{
+  "date": "2026-09-22",
+  "state": "Process no longer running after interruption; temporary log missing; extraction checkpoints retained; no final summary or failure marker",
+  "resume": "Same immutable inputs, continue missing requests; rejected Spec judge response archived separately"
+}

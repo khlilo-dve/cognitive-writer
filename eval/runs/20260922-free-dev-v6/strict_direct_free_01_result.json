@@ -1,0 +1,44 @@
+{
+  "id": "strict_direct_free_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 698,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "未发现确定的权限越界。新增内容多属解释性、评价性或假设性修辞，未改变给定核心事实，也未增加人物履历、精确时间、外部统计或明确独立事件。",
+      "naturalness": "行文连贯，短句和反问使用自然，场景与议论衔接顺畅；结尾“成本算在不同的地方”等重复略见模板痕迹。",
+      "source_independence": "没有可证实的内容迁移；台灯、风扇、修理日、修理与替换取舍均来自当前任务，未沿用参考文的认知、赚钱、信息差、创业或付费课等材料。",
+      "style_fidelity": "保留了参考文第二人称直呼、反直觉开场、短句与反问推进、分层展开后收束的论证节拍，并把这些机制成功移植到修理日场景；语气虽更平缓，但核心声音机制鲜明。",
+      "task_completion": "涵盖修好的台灯、未能当场修好的风扇、旁观提问、修复边界以及修理与替换的取舍；仅未明确核心素材中的“两名志愿者”这一细节。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确“两名志愿者”，仅以“志愿者”和“工作人员”泛称，遗漏了核心素材中的志愿者人数。"
+    ],
+    "uncertainties": [
+      "“志愿者拆开底座检查接线”中的“底座”为素材未提及的具体部件，可能属于新增具体物件，但也可视为修复接线的逻辑连接动作。",
+      "“有来访者会问，那带东西来还有什么意义”为素材未提供的具体问句，可能属于新增对话主张，但任务已许可来访者提问，且此处更接近假设性修辞。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

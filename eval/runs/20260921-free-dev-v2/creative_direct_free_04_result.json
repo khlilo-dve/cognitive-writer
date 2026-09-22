@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 841,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已注明‘虚构场景’，新增志愿者姓名、对话、旁观提问和登记细节均在creative模式允许范围内；台灯修复、风扇缺件登记且未宣称修好等给定核心事实保持不变，也未伪造外部真实统计或真实引用。",
+      "naturalness": "整体连贯，场景推进和对话自然；但‘不是……而是……’、‘你看见……也看见……’等结构反复出现，机械排比痕迹略多，因此给4。",
+      "source_independence": "主题与参考文的财富、金钱、创业、杠杆等论证无实质内容对应；共享的第二人称、条件句、‘试想’等属于通用论证操作，不能证明内容迁移，未发现可证实源文绑定。",
+      "style_fidelity": "沿用参考样文的说理口吻：第二人称、先破后立、条件句推演、‘试想’式假设和结尾格言化总结都较明显，并适应了修理日主题；但正文场景叙事与对话占比更高，部分排比密度偏大，故未给5。",
+      "task_completion": "覆盖社区活动室、接触不良台灯并修复、转动缓慢风扇因缺件未当场修好、两名志愿者、旁观提问、只检查和力所能及修复、不保证全部恢复，以及继续使用与购买替代品之间的取舍和修复边界。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

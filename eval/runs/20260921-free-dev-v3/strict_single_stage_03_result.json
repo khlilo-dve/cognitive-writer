@@ -1,0 +1,47 @@
+{
+  "id": "strict_single_stage_03",
+  "group": "strict",
+  "sample": 3,
+  "variant": "single_stage",
+  "body_artifact": "strict_single_stage_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 662,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 4.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "台灯接触不良、接线松动、重新固定后恢复，风扇需要更换零件、当天无合适零件、登记型号和后续联系办法、未宣称修好，以及两名志愿者、来访者旁观提问、活动不保证全部恢复等均与素材一致；新增内容主要是逻辑解释、抽象判断与连接性概括，未发现可证实的新人物、时间、数字、物件、独立事件、对话主张或外部引用。",
+      "naturalness": "整体连贯可读，句子衔接顺畅，机制使用较自然；但“边界”复现较密集，结尾格言化和提问—分点—结语的结构带有明显模板痕迹，因此未给满分。",
+      "source_independence": "正文核心素材来自任务，未迁移参考文的软件工程、性能优化或微服务内容；但结尾“尊重简单”与参考文结尾的价值判断措辞及收束位置重合，构成一处轻微但可证实的观点/措辞绑定。",
+      "style_fidelity": "开头以“我们常把……”引入，随后用粗体命题立论，再以“为什么……”展开解释，中段插入场景与例证，后接分点原则和格言式收束，第一人称复数、反问节拍、对比句式和论证动作都与参考文高度对应，并自然适配到旧物修理日主题。",
+      "task_completion": "完整覆盖社区活动室、旧物修理日、接触不良台灯、转动缓慢旧风扇、两名志愿者、来访者旁观提问、台灯修好、风扇未当场修好、登记型号与后续联系办法、不保证全部恢复、修复边界及修理与替换取舍等要求。"
+    },
+    "source_leakage": [
+      {
+        "article_quote": "尊重简单，也尊重边界。",
+        "source_quote": "保持克制，尊重简单，这比炫耀技巧要困难得多。",
+        "reason": "正文结尾复用参考文结尾的价值判断短语“尊重简单”，且都置于收束性结论位置，构成一处轻微但可证实的观点/措辞绑定；除此之外未发现可指认的软件工程或架构内容迁移。"
+      }
+    ],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "文中“检查、确认、尝试、止步”是对志愿者检查与处理过程的概括，带有轻微微观动作补充；按严格素材规则可视为连接性说明，未作为确定违规扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

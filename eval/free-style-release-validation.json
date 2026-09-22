@@ -1,0 +1,104 @@
+{
+  "status": "offline_evidence_passed_online_incomplete",
+  "completed_runs": {
+    "20260921-free-dev-v2": {
+      "status": "passed",
+      "gate_passed": false,
+      "phase": "development",
+      "specs": 10,
+      "articles": 20,
+      "checkpoints": 82
+    },
+    "20260921-free-dev-v3": {
+      "status": "passed",
+      "gate_passed": false,
+      "phase": "development",
+      "specs": 10,
+      "articles": 20,
+      "checkpoints": 85
+    },
+    "20260921-free-dev-v4": {
+      "status": "passed",
+      "gate_passed": false,
+      "phase": "development",
+      "specs": 10,
+      "articles": 20,
+      "checkpoints": 84
+    },
+    "20260922-free-dev-v5": {
+      "status": "passed",
+      "gate_passed": false,
+      "phase": "development",
+      "specs": 10,
+      "articles": 20,
+      "checkpoints": 83
+    },
+    "20260922-free-dev-v6": {
+      "status": "passed",
+      "gate_passed": false,
+      "phase": "development",
+      "specs": 10,
+      "articles": 20,
+      "checkpoints": 82
+    },
+    "20260922-free-dev-v7": {
+      "status": "passed",
+      "gate_passed": false,
+      "phase": "development",
+      "specs": 10,
+      "articles": 20,
+      "checkpoints": 83
+    }
+  },
+  "current_run": {
+    "run": "20260922-free-dev-v8",
+    "status": "incomplete",
+    "learned_specs": 10,
+    "candidate_specs": 5,
+    "completed_articles": 10,
+    "completed_candidate_articles": 0,
+    "failed_candidate_chains": 10,
+    "http_status": 402,
+    "checkpoints": 54
+  },
+  "protected_head": "f4331ea23bc373681864de602f0821e6c83ea040",
+  "protected_files_sha256": {
+    "eval/baseline/topic_01.md": "464dfbb54c2747d0621a70563742fac2f2f6443bccb0f683412bbb0792667abf",
+    "eval/baseline/topic_02.md": "97e0c647af8c72fb1063dbd6c3f0dfb02259fd85e47a08ecff3492edfa338322",
+    "eval/baseline/topic_03.md": "3cc2c9836d29a8dea3189ee37df45a3f9bacce9a8c95e474d16342e36a8c65d6",
+    "eval/baseline/topic_04.md": "ff94a671e7b750e167b613185bda8f0a7dd43561110d5d73980179fab9ab1e1b",
+    "eval/baseline/topic_05.md": "895cd7f8bb368358c7f1936fe0c92d01d83590bd3b648bbb9a5218007094aaa5",
+    "eval/baseline_specs/spec_01.md": "efc71c1f4b0664fb7ff62047e6df957dea10c3bd8f53078ffee2514d2d2e3bfd",
+    "eval/baseline_specs/spec_02.md": "ec2122fa34791e6e476e28b419c3d1b72139c8165074b9df423bdc9b0fdfb76d",
+    "eval/baseline_specs/spec_03.md": "acd51b71dc81ecaf9046d5205f647efaeb176ec3d34ec6f3104c7dd27a4215d9",
+    "eval/baseline_specs/spec_04.md": "f6c704e955f32e33ee27d7aecd60ff27aebcf05c81b1f07883765d08433be8ef",
+    "eval/baseline_specs/spec_05.md": "95b5442fb355fc6ebd214a96c759d4beff4a02dfb844541747730af7f6b07234",
+    "eval/fixtures/learn_style_single_v1.md": "7a6497aec6bf0d295810f4abfcb5ae09f2bc1c36952c8db25f4bb7868dffbe9c",
+    "eval/human_calibration.json": "5a3275994e3480762d2611f11449e2b61344f5f1cefabe445f5d03d2507cfdc7",
+    "eval/samples/sample_01.md": "4dcab1ec069353c412ef0b5e7672a2a9449a05712161e5c9c8aa241899818ba1",
+    "eval/samples/sample_02.md": "2678cf0c9d7240805d8b869e965e22ad9212126368e249107c728a9df3642fce",
+    "eval/samples/sample_03.md": "852b1c1f493ad733f14352863b2d222cf9d2c785b3c09473f1b68fff77877026",
+    "eval/samples/sample_04.md": "2bdd6c1086b6962986778ec6b5337ad5ef93e88b4b19faa2550329eb5645c31b",
+    "eval/samples/sample_05.md": "d8e39d464fc15242ac0aac09400869ef7a07c8220f71afd5ef8b0a399fb7e806",
+    "prompts/eval_judge_learn.md": "ac163c51c5cb795fab7243eb1a6c5cdd8198efaef94e692d1757ee52b7a645c7",
+    "prompts/eval_judge_transfer_v2.md": "05d2e09f01ef8d81613234bb7f0fdfa71117e189982104e59ac19ace52fbad15",
+    "src/generate.rs": "7c2497353aa7649e2b55021c154296c7a329eeb26929f286b6d916c23958d8c9",
+    "styles/wechat_base.md": "da61600369cc7d4e606bdb3a4839bfc8ef1cb28366323839b4739d549c15be3c",
+    "styles/孙割.md": "3108692720d9cb756b440b5fcddb42e4fe0e653e653a4f6a9ab9024a5542a87b",
+    "styles/蔡叔.md": "04622e45c60d4cf1035b42ce86977e14c09372d2126319bc7021a95b9d7201cf"
+  },
+  "runtime_default": "legacy",
+  "adoption_completed": false,
+  "library_tests": {
+    "passed": 218,
+    "failed": 0,
+    "ignored": 10
+  },
+  "binary_build": "passed",
+  "terminal_checks": {
+    "repl": 17,
+    "style_selection": 11,
+    "local_edit": 14,
+    "failed": 0
+  }
+}

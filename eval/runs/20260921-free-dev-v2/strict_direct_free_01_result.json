@@ -1,0 +1,41 @@
+{
+  "id": "strict_direct_free_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 707,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "严格按给定素材写作：社区活动室、台灯接触不良与接线松动、两名志愿者重新固定接线、风扇需更换零件且当天没有合适零件、工作人员登记型号和后续联系办法、未宣称修好、只提供检查和力所能及的修复、旁观与提问、继续使用原物与购买替代的取舍均已涵盖。解释性句子未新增可证实的人物履历、精确时间/数值、独立事件、对话、外部统计或亲身经历。",
+      "naturalness": "整体连贯，短句节奏与主题匹配，读起来顺畅；但“不是……而是……”“登记”“边界”等表达反复出现，带有一定模板化强调痕迹，未达到完全自然、有节制的程度。",
+      "source_independence": "正文主题、场景、结论均围绕社区修理日和修理/替换取舍展开，未迁移参考样文中关于认知、商业风险、创业、付费课等核心内容或结论。共享的“你”、短句和“不是……而是……”属于一般论证操作，不构成内容绑定。",
+      "style_fidelity": "延续了参考样文直呼“你”、先给反直觉判断、短段落推进、用“不是……是……”做概念区分、由具体场景转入解释与劝说的声音。但参考样文中较突出的连续追问、分阶段拆解和加粗概念句在本文中较少，更多变成箴言式反复，因此保留多数机制但不算最鲜明。",
+      "task_completion": "完整覆盖指定主题与核心素材：修好的台灯、未能当场修好的风扇、旁观与提问、修复边界，以及等待继续使用原物和购买替代之间的取舍都有呈现或讨论。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“提问的人不一定动手”属于对来访者可旁观、可提问的弱推断式连接表达，未见为独立事件；若作最严格解释可能算轻微新增，但未达到确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

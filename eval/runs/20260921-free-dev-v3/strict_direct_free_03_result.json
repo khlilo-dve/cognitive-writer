@@ -1,0 +1,39 @@
+{
+  "id": "strict_direct_free_03",
+  "group": "strict",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 739,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "所有可核事实均来自任务：社区活动室、两名志愿者检查、台灯接线松动并修复、风扇待换零件且登记型号与后续联系、只提供检查与力所能及的修复、不保证修复；“熟悉、合适、不必重新选择”和成本讨论属于逻辑解释或给定取舍的展开，未新增人物履历、精确时间数值、独立事件或外部引用。",
+      "naturalness": "整体连贯，段间推进清楚，但“不是……而是……”、先看/再看、首先/其次等对举与分点式连接反复出现，带有一定模板痕迹，因此未给满分。",
+      "source_independence": "正文围绕社区修理日、台灯与风扇、修与换的取舍展开，未出现参考样文中的性能瓶颈、架构腐化、微服务拆分、Profiling、可观测性等具体观点或结论；“不是……而是……”等只是共享论证操作，不构成可证实的内容迁移。",
+      "style_fidelity": "参照样文以第一人称复数引入日常经验，用加粗句提出与常识有张力的判断，随后以具体案例推进，再转入“那么”式问题与“首先/其次”式收束；正文基本复现这些声音与论证动作，并能适配旧物修理主题，但结尾的追问和“或许”式软化与原文较克制的断言略有偏移。",
+      "task_completion": "完整覆盖指定主题和核心素材：社区旧物修理日、活动室、接触不良台灯与转动缓慢风扇、两名志愿者、旁观提问、台灯修好、风扇未当场修好且登记后续、修复边界，以及继续使用与购买替换之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

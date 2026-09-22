@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 675,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头注明虚构场景；未伪造外部统计或真实引用，未改变给定核心事实；螺丝、胶带、零件盒、登记本、电容鼓起等均为creative模式允许的虚构细节。",
+      "naturalness": "整体连贯，短句和留白有节制，但局部连续罗列物件及“台灯：/风扇：”式标签写法略显机械，属少量模板痕迹。",
+      "source_independence": "主题、场景、人物和事件均为社区修理日，未发现与参考样文可证实的内容迁移；短句、时间标记和克制语气属通用叙事机制，不构成污染。",
+      "style_fidelity": "沿用参考文的短句、物件清单、少量对白、精确时间推进和克制收束，但参考文是第一人称贴身叙述，本文改为第三人称观察/记录式，主观声音与人称机制明显减弱，因此为4。",
+      "task_completion": "涵盖社区活动室、台灯修复、风扇待零件登记、旁观提问、修复边界以及继续使用与替换取舍；两名志愿者虽未逐字点明，但志愿者与工作人员的行动承担了检查登记功能，核心素材完成。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

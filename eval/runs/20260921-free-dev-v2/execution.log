@@ -1,0 +1,183 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/deps/cognitive_writer-01a6798ffc47c41f)
+
+running 1 test
+[request] learn_direct_free_01_direct_0
+[saved] learn_direct_free_01_direct_0
+[request] spec_direct_free_01_judge
+[saved] spec_direct_free_01_judge
+[request] learn_single_stage_01_legacy_0
+[saved] learn_single_stage_01_legacy_0
+[request] spec_single_stage_01_judge
+test eval_free_release::tests::eval_free_style_release_suite has been running for over 60 seconds
+[saved] spec_single_stage_01_judge
+[request] learn_single_stage_02_legacy_0
+[request] learn_direct_free_03_direct_0
+[request] learn_single_stage_04_legacy_0
+[saved] learn_single_stage_02_legacy_0
+[request] learn_direct_free_05_direct_0
+[saved] learn_single_stage_04_legacy_0
+[request] spec_single_stage_02_judge
+[saved] learn_direct_free_03_direct_0
+[request] spec_single_stage_04_judge
+[saved] spec_single_stage_04_judge
+[request] spec_direct_free_03_judge
+[saved] learn_direct_free_05_direct_0
+[request] learn_direct_free_04_direct_0
+[saved] spec_single_stage_02_judge
+[request] spec_direct_free_05_judge
+[saved] spec_direct_free_03_judge
+[request] learn_direct_free_02_direct_0
+[saved] spec_direct_free_05_judge
+[request] learn_single_stage_03_legacy_0
+[saved] learn_direct_free_04_direct_0
+[request] learn_single_stage_05_legacy_0
+[saved] learn_single_stage_03_legacy_0
+[request] spec_direct_free_04_judge
+[saved] learn_direct_free_02_direct_0
+[request] spec_single_stage_03_judge
+[saved] spec_direct_free_04_judge
+[request] spec_direct_free_02_judge
+[saved] learn_single_stage_05_legacy_0
+[request] spec_single_stage_05_judge
+[saved] spec_single_stage_03_judge
+[saved] spec_direct_free_02_judge
+[saved] spec_single_stage_05_judge
+[request] strict_single_stage_01_outline
+[request] strict_single_stage_03_outline
+[request] strict_single_stage_04_outline
+[saved] strict_single_stage_01_outline
+[request] creative_single_stage_01_outline
+[saved] strict_single_stage_03_outline
+[request] creative_direct_free_01_outline
+[saved] strict_single_stage_04_outline
+[request] creative_direct_free_02_outline
+[saved] creative_direct_free_01_outline
+[request] creative_single_stage_02_outline
+[saved] creative_direct_free_02_outline
+[request] creative_single_stage_03_outline
+[saved] creative_single_stage_01_outline
+[request] creative_direct_free_03_outline
+[saved] creative_single_stage_02_outline
+[request] creative_direct_free_04_outline
+[saved] creative_single_stage_03_outline
+[request] creative_single_stage_04_outline
+[saved] creative_single_stage_04_outline
+[request] creative_single_stage_05_outline
+[saved] creative_direct_free_03_outline
+[request] creative_direct_free_05_outline
+[saved] creative_single_stage_05_outline
+[request] strict_single_stage_05_outline
+[saved] creative_direct_free_04_outline
+[request] strict_direct_free_03_outline
+[saved] strict_direct_free_03_outline
+[request] strict_direct_free_02_outline
+[saved] creative_direct_free_05_outline
+[request] strict_direct_free_01_outline
+[saved] strict_single_stage_05_outline
+[request] strict_single_stage_02_outline
+[saved] strict_direct_free_01_outline
+[request] strict_direct_free_04_outline
+[saved] strict_single_stage_02_outline
+[request] strict_direct_free_05_outline
+[saved] strict_direct_free_02_outline
+[request] strict_single_stage_01_body
+[saved] strict_single_stage_01_body
+[request] strict_single_stage_03_body
+[saved] strict_direct_free_04_outline
+[request] strict_single_stage_04_body
+[saved] strict_single_stage_03_body
+[request] creative_direct_free_01_body
+[saved] strict_direct_free_05_outline
+[request] creative_direct_free_02_body
+[saved] creative_direct_free_02_body
+[request] creative_single_stage_01_body
+[saved] creative_single_stage_01_body
+[request] creative_single_stage_02_body
+[saved] creative_single_stage_02_body
+[request] creative_single_stage_03_body
+[saved] strict_single_stage_04_body
+[request] creative_single_stage_04_body
+[saved] creative_direct_free_01_body
+[request] creative_direct_free_03_body
+[saved] creative_single_stage_04_body
+[request] creative_single_stage_05_body
+[saved] creative_single_stage_05_body
+[request] creative_direct_free_04_body
+[saved] creative_single_stage_03_body
+[request] strict_direct_free_03_body
+[saved] creative_direct_free_03_body
+[request] creative_direct_free_05_body
+[saved] creative_direct_free_04_body
+[request] strict_single_stage_05_body
+[saved] strict_direct_free_03_body
+[request] strict_direct_free_01_body
+[saved] creative_direct_free_05_body
+[request] strict_single_stage_02_body
+[saved] strict_direct_free_01_body
+[request] strict_direct_free_02_body
+[saved] strict_single_stage_05_body
+[request] strict_single_stage_01_judge_0
+[saved] strict_direct_free_02_body
+[request] strict_direct_free_04_body
+[saved] strict_single_stage_02_body
+[request] strict_single_stage_03_judge_0
+[saved] strict_direct_free_04_body
+[request] strict_direct_free_05_body
+[saved] strict_single_stage_01_judge_0
+[request] creative_direct_free_02_judge_0
+[saved] strict_single_stage_03_judge_0
+[request] creative_single_stage_01_judge_0
+[saved] strict_direct_free_05_body
+[request] creative_single_stage_02_judge_0
+[saved] creative_single_stage_01_judge_0
+[request] strict_single_stage_04_judge_0
+[saved] creative_direct_free_02_judge_0
+[request] creative_direct_free_01_judge_0
+[saved] creative_single_stage_02_judge_0
+[request] creative_single_stage_04_judge_0
+[saved] strict_single_stage_04_judge_0
+[request] creative_single_stage_05_judge_0
+[saved] creative_single_stage_04_judge_0
+[request] creative_single_stage_03_judge_0
+[saved] creative_direct_free_01_judge_0
+[request] creative_direct_free_03_judge_0
+[saved] creative_single_stage_05_judge_0
+[request] creative_direct_free_04_judge_0
+[saved] creative_single_stage_03_judge_0
+[request] strict_direct_free_03_judge_0
+[saved] creative_direct_free_03_judge_0
+[request] creative_direct_free_05_judge_0
+[saved] creative_direct_free_04_judge_0
+[request] strict_direct_free_01_judge_0
+[saved] creative_direct_free_05_judge_0
+[request] strict_single_stage_05_judge_0
+[saved] strict_direct_free_03_judge_0
+[request] strict_direct_free_02_judge_0
+[saved] strict_single_stage_05_judge_0
+[request] strict_single_stage_02_judge_0
+[saved] strict_direct_free_01_judge_0
+[request] strict_direct_free_04_judge_0
+[saved] strict_direct_free_04_judge_0
+[request] strict_direct_free_05_judge_0
+[saved] strict_direct_free_05_judge_0
+[request] strict_single_stage_04_judge_1
+[saved] strict_direct_free_02_judge_0
+[request] strict_single_stage_05_judge_1
+[saved] strict_single_stage_02_judge_0
+[saved] strict_single_stage_05_judge_1
+[saved] strict_single_stage_04_judge_1
+
+thread 'eval_free_release::tests::eval_free_style_release_suite' (1709) panicked at src/eval_free_release.rs:205:14:
+called `Result::unwrap()` on an `Err` value: Parse("部分写作/评分失败，见partial.json；保留检查点后按失败类型续跑")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test eval_free_release::tests::eval_free_style_release_suite ... FAILED
+
+failures:
+
+failures:
+    eval_free_release::tests::eval_free_style_release_suite
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 226 filtered out; finished in 711.08s
+
+error: test failed, to rerun pass `--lib`

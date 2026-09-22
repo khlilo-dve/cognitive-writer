@@ -1,0 +1,41 @@
+{
+  "id": "creative_single_stage_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 756,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative 模式下允许的虚构场景，开头已标注“虚构场景：旧物修理日”。给定核心事实全部保持：台灯接触不良、接线松动、重新固定后恢复正常；风扇转动缓慢、需更换零件、当天没有合适零件、登记型号与联系电话且未宣称修好（“到货了打电话。”他说。他没有说修好了。）；修复边界反复言明（“只提供检查与力所能及的修复。不保证所有物品恢复。”）。新增人物、价格与等待时长的对话均属虚构角色对白，未伪造外部真实统计、真实引用，也未把叙述者经历冒充作者现实经历。",
+      "naturalness": "整体连贯，短句节奏与对话推进自然，无拼贴感。但存在少量机械重复痕迹：连续三段以“戴帽子的女人说”引出对白，“不保证”与“能修就修”在多处近乎原样复现，问答结构略呈模板化。属轻微问题，判4。",
+      "source_independence": "主题、人物、场景、情节与结论均与参考样文无交集：样文写香港酒店套房、签字、离别与渡轮，正文写社区活动室的修理日、台灯接线与风扇电容。未发现任何可证实的内容、意象或结论迁移，仅有共享的短句、问答式对话和克制收束等通用写作操作。",
+      "style_fidelity": "保留了样文的主要机制：以短句独立成段的极简叙述（“下午两点，社区活动室。窗外没有太阳。”）、以简短问答推进场景（“还能用多久？”“等多久？”“两星期。不一定。”）、对具体物件的克制特写（“台灯罩有一道裂纹”“网罩缺了一根钢丝”）以及以环境细节收束而不点明情绪的结尾（“活动室很安静。窗外有车经过。灯还亮着。”）。与样文相比少了第一人称内视角和密集的精确数字铺陈，属于对机制的取舍而非照搬，故为4。",
+      "task_completion": "完全围绕指定主题：社区旧物修理日、社区活动室、一盏接触不良的台灯与一台转动缓慢的旧风扇、两名志愿者检查、旁观者提问。修好的台灯、未能当场修好的风扇、旁观提问与修复边界（“这里只检查。能修就修，不保证。”）均有呈现，并通过“等零件，还是买个新的”及价格、年限的对话完整呈现修理与替换的取舍。无核心素材遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“这个风扇买的时候三百”“两星期。不一定。”等虚构数字属任务允许的创作范围，但无材料可核，仅作记录，不构成违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

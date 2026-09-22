@@ -1,0 +1,46 @@
+{
+  "id": "strict_direct_free_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 659,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心素材基本按权限复述：台灯接线松动并修复、风扇缺件并登记、活动边界和取舍均有依据。但“有人问，为什么不直接换新的？志愿者没急着回答，只是把外壳打开给人看。”补出了素材未提供的具体提问和志愿者回应动作，strict 模式下属于新增对话/动作，扣一处轻微越界。",
+      "naturalness": "段落推进连贯，长短句交替，反问和加粗不显生硬；结尾收束自然，没有明显模板堆叠或机械重复。",
+      "source_independence": "正文主题、场景、论据与参考文的认知变现、创业、风险下注等核心内容无对应关系；仅共享议论文体、第二人称、反问等功能机制，不构成内容迁移。",
+      "style_fidelity": "开篇先立“听来的共识”再给加粗反直觉判断，延续参考文的“共识—反判断—具体例证—分层说理”动作；使用反问、第二人称收束、“先……再……”推进。但参考文的第一人称强断言、密集反问和攻击性语气更重，本文更克制，故为4。",
+      "task_completion": "涵盖社区活动室、台灯与风扇故障、两名志愿者、旁观提问、台灯修复、风扇未当场修复并登记型号与联系办法、不宣称修好、修复边界，以及继续使用与等待/换新的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "有人问，为什么不直接换新的？志愿者没急着回答，只是把外壳打开给人看。",
+        "reason": "素材只说明来访者可以旁观并提问，未提供该具体提问内容，也未提供志愿者以打开外壳回应的动作；strict 模式不允许补造具体对话主张或新增独立动作。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“从外壳到线路，从线路到零件”的检查顺序、“长桌”等具体化是否属于严格模式允许的逻辑解释/同义展开，材料未明示，边界模糊。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

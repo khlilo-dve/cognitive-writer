@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 669,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "标注“虚构场景”，在creative权限内加入旁观者、对话、风扇主人十年使用、等一周、拒绝修电饭锅等虚构人物事件；台灯接线松动并修好、风扇缺件登记型号电话未称修好、只检查与力所能及修复不保证恢复、修理与替换取舍等给定核心事实均未被改写，也未伪造外部真实统计或引用。",
+      "naturalness": "口语和短句推进自然，对话、停顿与观察交替，没有明显模板拼接或机械重复；“像在思考”等比喻和收束句虽有设计感但节制。",
+      "source_independence": "正文围绕社区旧物修理日展开，与参考文的插队、猪、设置生活等核心内容、人物、事件、结论均无可指认的迁移；共享第一人称、短句和概括口吻属于体裁与句法层面，不构成内容绑定。",
+      "style_fidelity": "以第一人称旁观者贯穿，短句、口语对话和“现在算”“等通知三个字，比灯亮更接近日常”“不是立场，是当天有没有那个零件”这类由具体场景抬升到概括的收束，接近参考文的声音与论证动作；但参考文有更完整的故事推进、戏谑自嘲和铺陈，本文压缩成片段式观察，故给4。",
+      "task_completion": "涵盖社区活动室修理日、接触不良台灯修好、转动缓慢风扇因缺件未当场修好并登记型号与联系办法、旁观提问、只检查且不保证恢复的修复边界，以及继续使用原物与等待或买替代品之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

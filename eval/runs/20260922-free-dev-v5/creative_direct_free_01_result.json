@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 740,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务为明确标注的虚构场景创作，正文标题即含“虚构场景”。给定核心事实均未被改写：台灯“接线松了，志愿者重新固定”后恢复；风扇“轴承磨损，需要换零件，当天没有”，工作人员“登记型号，留下后续联系办法”，并明确“没修好就是没修好，登记不等于承诺”，未宣称修好。新增成分（台灯亮时的“啪”、轴承磨损的具体零件层级、围观者对话）属于creative模式允许的虚构物件、动作与对话，未伪造外部真实统计或真实引用，也未冒充作者现实经历。",
+      "naturalness": "全文连贯，场景—追问—边界—取舍的推进顺畅，无拼接痕迹；扣分主要在于加粗警句与反问句式密度较高，出现相近节拍的重复（“这就是问题所在”“很多‘坏了’不过如此”“原物不是天然高尚，替换也不是天然明智”），模板感略可见。",
+      "source_independence": "主题、素材、结论均无交集：参考文讨论认知变现与风险下注，正文写社区修理日的台灯、风扇与修理替换取舍。可辨识的共同点仅为第二人称、加粗断语、 rhetorical question 等论证操作和短功能词，属于共享写法而非内容迁移，未发现可证实的内容绑定。",
+      "style_fidelity": "延续了参考文的论说机制：第二人称直接对话（“你该注意到的却不是童话”“你先看看它坏在哪儿”）、反直觉先立判断（“很多‘坏了’不过如此”）、加粗短断语作为节拍支点（“没修好就是没修好，登记不等于承诺。”“取舍的关键不是新旧，是你愿不愿意为‘继续用’承担等待、找零件和不确定。”）、以及从现象抽到机制的推进（“替换的诱惑从来不在价格，在于你不用面对‘我根本不知道它坏在哪’”）。差别在于原文的“先算一笔账／再往深处拆一层”这类显式分层动作被场景叙述替代，机制保留但层次更松散，故为4。",
+      "task_completion": "覆盖要求全部核心素材：社区活动室内的修理日、桌上接触不良的台灯与转得慢的旧风扇、两名志愿者检查、来访者围观提问（“值不值”“要多久”“是不是所有旧东西都能救回来”“那还不如买个新的？”）；台灯当场修好；风扇未当场修好并登记型号与后续联系；修复边界明示“只检查，只做力所能及的修复，不保证所有东西都能复活”；并就用原物与买替代的取舍展开讨论（“两种选择没有道德高下”“各自的账各自算”）。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

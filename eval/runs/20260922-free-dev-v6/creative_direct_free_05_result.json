@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 675,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注“虚构场景”，在creative权限内加入老周、小陈、围观提问和对话；台灯接线松动并修好、风扇缺零件并登记型号和联系办法且未称修好、活动只检查与力所能及修复且不保证全部恢复等给定核心事实均未被改写。",
+      "naturalness": "整体连贯可读，短句和重复有修辞意图；但若干“我把这理解为/我听着像”式转折略见模板感，机械重复虽不严重仍使自然度未到最高。",
+      "source_independence": "正文主题、人物、物件、对话与结论均围绕旧物修理日展开，未发现可证实的来自样文的连续内容或核心观点迁移；共享的第一人称与随笔议论方式不算污染。",
+      "style_fidelity": "第一人称旁观者、口语化短句、由具体修理场景转向克制式议论，以及“像法院/许愿池/账”这类类比，均延续样文的随笔声音；但样文更长的复合句、更强的反讽和自嘲推进较少，故非满值。",
+      "task_completion": "覆盖社区旧物修理日、活动室、台灯接触不良并修复、风扇缺零件未当场修好、登记型号与后续联系、旁观提问、修复边界，以及修理与替换、等待与购买的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -39,3 +39,6 @@ pub mod eval_learning;
 mod transfer_quality;
 pub mod eval_transfer_audit;
 mod transfer_report;
+
+pub mod eval_free_release;
+mod free_style_gate;

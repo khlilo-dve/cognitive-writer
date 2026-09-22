@@ -1,0 +1,41 @@
+{
+  "id": "creative_single_stage_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 777,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标注‘虚构场景’，正文新增人物、对话、动作和物件细节均在 creative 权限内，并与给定核心事实一致：台灯接线松动后修好，风扇缺零件未当场修好，登记型号和联系办法，没有伪造外部真实统计或引用。",
+      "naturalness": "整体连贯易读，场景与议论衔接自然；但‘不是……而是……’一类对比句式反复出现，留下少量模板化痕迹。",
+      "source_independence": "主题、场景、人物、冲突和结论均围绕旧物修理日展开，未发现财富、金钱、创业、可测量性/可放大性等参考样文命题、例证或结论的迁移；仅有议论文中常见的对比与总结动作。",
+      "style_fidelity": "保留了参考样文的直接说理、短段落推进、对比定义、由例证归纳结论和金句收束等主要机制；但参考样文更依赖贯穿性第二人称和抽象概念界定，本篇转为社区场景叙事，人称和展开动作有明显适应，因此不是完全同型。",
+      "task_completion": "围绕旧物修理日展开，涵盖社区活动室、接触不良台灯、转动缓慢旧风扇、旁观点提问、台灯修复、风扇因缺件未修并登记、修复边界以及修理与替换的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "正文以‘志愿者’泛指检查者，没有明确写出‘两名’；若将人数明示也视为核心素材要求，则存在轻微不确定，但未影响整体主题与核心情节覆盖。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

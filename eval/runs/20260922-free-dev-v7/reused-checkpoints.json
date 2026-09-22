@@ -1,0 +1,174 @@
+{
+  "source_run": "20260922-free-dev-v6",
+  "reason": "Unchanged legacy requests; candidate prompt v7 regenerates all candidate stages",
+  "files": [
+    {
+      "file": "spec_single_stage_03_judge.json",
+      "sha256": "f3cbdafad90630f1694e549ff5fd8b497b56c69d4146772f78f70d99db735804"
+    },
+    {
+      "file": "spec_single_stage_01_judge.json",
+      "sha256": "ef7f98cb098f0488224519cc7fd599724d6aeb135801566c10c5af9a9cb6ae83"
+    },
+    {
+      "file": "creative_single_stage_03_outline.json",
+      "sha256": "7911de325bb79c2bf6d0bd5e537733ceab55ccd6967b1aff6f3f8670dcf2bbd1"
+    },
+    {
+      "file": "strict_single_stage_02_judge_0.json",
+      "sha256": "5268c5f0655214e45e5d7b2592a6fd3c10a95c85dfdfca9843fc297014cd7d0c"
+    },
+    {
+      "file": "creative_single_stage_03_body.json",
+      "sha256": "9795026946dd73c7eebc72e491c09607aeaf0e8e2dd7945906de4d73adc39528"
+    },
+    {
+      "file": "strict_single_stage_04_judge_0.json",
+      "sha256": "cfe6aa6e2b402b6be9aaa8fd65eab64b942ddb51e15c7a1b55fa8efde849958c"
+    },
+    {
+      "file": "creative_single_stage_03_judge_0.json",
+      "sha256": "a6e7b8d07956fb8151878c9842b7d7714df9f827a68b95672b25a46bfeed76bd"
+    },
+    {
+      "file": "strict_single_stage_03_outline.json",
+      "sha256": "6fe49973d8d018416552a84b5e89e26706a2a5636229957a9dead79a022e529a"
+    },
+    {
+      "file": "spec_single_stage_04_judge.json",
+      "sha256": "a2c04980252856e04965975a8c442ba95d3d562dad6c5206ed3cb62a5be16202"
+    },
+    {
+      "file": "creative_single_stage_02_judge_0.json",
+      "sha256": "323404e92340ec343a480ec5dce5e8f29ba2ffb0a0ea9b815f3ed09cd4e3a51a"
+    },
+    {
+      "file": "learn_single_stage_05_legacy_0.json",
+      "sha256": "e863fd6489ecc9d0b88d9b1d727a89832c44be7b94d9fca2e1bf128145fcc836"
+    },
+    {
+      "file": "spec_single_stage_02_judge.json",
+      "sha256": "afaa7c9ba5b9ef5ed7e6bc736b87cd16ad264777b79be083b864e48fc2441f2a"
+    },
+    {
+      "file": "spec_single_stage_05_judge.json",
+      "sha256": "fce3ea5e58edbc85a817578cf62b11770bf199e693129930343393e9c44e94ee"
+    },
+    {
+      "file": "creative_single_stage_04_judge_0.json",
+      "sha256": "194b4d05fac4436bb9f9b76dadd72805f86b841633fca135fec4bfc0795f8b55"
+    },
+    {
+      "file": "strict_single_stage_05_judge_1.json",
+      "sha256": "dbd506469cf9ea7d5094b2b122ea29bc3d631f1186f7392e24eab11c2f1f0370"
+    },
+    {
+      "file": "strict_single_stage_02_body.json",
+      "sha256": "23b054fab21ed371d4d3887f9272ea14d704becbf03ff0d829edf873a0380a44"
+    },
+    {
+      "file": "creative_single_stage_04_body.json",
+      "sha256": "c0ccfaa7a0e3fe480f800e7e675afa7e9469a3d5bc2aa3ec2ced6fc22d186f3d"
+    },
+    {
+      "file": "creative_single_stage_05_body.json",
+      "sha256": "7373ffc54ad775d028b77100f800e47faab5ee23bbd070498c8025590644dce1"
+    },
+    {
+      "file": "strict_single_stage_03_body.json",
+      "sha256": "024f3a39b4a6f98b2fc56b705e0da04d268aff08d9d7bd7257acc083872ecae3"
+    },
+    {
+      "file": "learn_single_stage_04_legacy_0.json",
+      "sha256": "f952d0b137abe02e4a0ed9b0ed336590b665cea23dc3a93a0d2aeb004c6567e7"
+    },
+    {
+      "file": "creative_single_stage_02_outline.json",
+      "sha256": "54550cc5ad9d3e36c51a9a43bec484923a72070568516847e6f1d7bc39a25bd0"
+    },
+    {
+      "file": "creative_single_stage_05_outline.json",
+      "sha256": "45cb31c44caf1061c052b67c30a14a491c4e7dab634d7b4d51ee2cfdbabc65d5"
+    },
+    {
+      "file": "learn_single_stage_02_legacy_0.json",
+      "sha256": "dbdb31c24364e8aef55aecd48b2df2fc7f0ced7992453793e9018b9a98453e66"
+    },
+    {
+      "file": "creative_single_stage_05_judge_0.json",
+      "sha256": "ca71f52cdccc4659ee1daf0b79fcd5481d55285b17ee372665e28a9a7d12b3cd"
+    },
+    {
+      "file": "strict_single_stage_01_body.json",
+      "sha256": "deef493c885a095817efc26e275620ff1088062ba80563e35bb8d2ba98ecabdb"
+    },
+    {
+      "file": "strict_single_stage_04_body.json",
+      "sha256": "50efb1433f0923ba75f32b4a7bec0d7a442218f5335fff0982c460d9247823ea"
+    },
+    {
+      "file": "strict_single_stage_05_body.json",
+      "sha256": "f71e61a73576be8e12d5f84dc8a86dada851bea7f02b26d9a40ad76cc64023af"
+    },
+    {
+      "file": "strict_single_stage_03_judge_0.json",
+      "sha256": "0c4b4485440b1d1e778511a260d1e10f9df3f947b3962d15ef049bc37b6b7fab"
+    },
+    {
+      "file": "strict_single_stage_04_judge_1.json",
+      "sha256": "45fbed3e7d559572adead7209f12f7d0334468b5e73150d13a28d07007abad20"
+    },
+    {
+      "file": "creative_single_stage_04_outline.json",
+      "sha256": "3ff2895aedce9136d1a5e7f7138a34b7e0133511ab5df623b0969da9e8b64a5f"
+    },
+    {
+      "file": "strict_single_stage_01_judge_0.json",
+      "sha256": "543ba5bc3b6f1ef60dc2012f85c74231be7b9f9e851341eff54bce073ca6df31"
+    },
+    {
+      "file": "creative_single_stage_01_body.json",
+      "sha256": "fb89c58f316543bc73b0c8cc01fc708465908803d306f956486a0e1e7f28f0ee"
+    },
+    {
+      "file": "learn_single_stage_01_legacy_0.json",
+      "sha256": "c12b1034ad92395a759f9bcab17fff9943550bd371ed51b8d0cbb2b360f50ac6"
+    },
+    {
+      "file": "strict_single_stage_02_outline.json",
+      "sha256": "1c3034364ed37044803f25dd7057b92a6b49ec1808f28067f787e8a90e9faf47"
+    },
+    {
+      "file": "strict_single_stage_01_outline.json",
+      "sha256": "3f4c488e82592a4501a713e3244d99d3dba44b300a57090608b166e7f36dbcf7"
+    },
+    {
+      "file": "creative_single_stage_02_body.json",
+      "sha256": "9025ba3fcb8107095c4bca6f4aed94a563068a1e0586664e22c86a944f47aac0"
+    },
+    {
+      "file": "strict_single_stage_05_judge_0.json",
+      "sha256": "1e0252770993f6cbab361dc75691c16af4e6265eba3bbc28a4fa5297e3002da4"
+    },
+    {
+      "file": "strict_single_stage_04_outline.json",
+      "sha256": "353a2cf656f901313e196d892fb9029674331e498717b1a2b9fb64ce22856977"
+    },
+    {
+      "file": "creative_single_stage_01_outline.json",
+      "sha256": "cdc7858e484ae6bfe7fa8c54a9b34e9270e5b77c34276234f66caa0603cb0dbb"
+    },
+    {
+      "file": "creative_single_stage_01_judge_0.json",
+      "sha256": "11f25cd11409ebfc50899df1d0e65d45363adf0196ba7d37616acefdcddb5f3c"
+    },
+    {
+      "file": "strict_single_stage_05_outline.json",
+      "sha256": "ef13a0f1b7d909a51eaee1f6ab3f38a78ba4311e39af94bb80a7f94c349948f2"
+    },
+    {
+      "file": "learn_single_stage_03_legacy_0.json",
+      "sha256": "06df3660c9f49ba09a0ca7a72cc2e9165687a296719a93962e42b8a857653f15"
+    }
+  ]
+}

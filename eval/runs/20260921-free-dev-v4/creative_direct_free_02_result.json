@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 631,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "标题开头含“虚构场景”，在 creative 权限内新增志愿者、来访者、电水壶、吹风机、型号与对话等；未改写给定核心事实：台灯接触不良并修好、风扇需换零件且未当场修好、登记型号与联系办法、只做检查和力所能及、不保证恢复、呈现修理与替换取舍。也未伪造外部真实统计或引用。",
+      "naturalness": "整体连贯，短句和留白使用有节制；少量问答推进如多次“有人问”“志愿者说”略显模板化，故为4。",
+      "source_independence": "正文的社区修理日、台灯、风扇、志愿者、登记、旁观提问等均来自任务给定或新造；未发现与参考样文之间可证实的内容迁移。人称、短句和少量功能词重合不构成污染。",
+      "style_fidelity": "同为第一人称旁观/参与视角，采用短句、短段落、具体物件推进（台灯、风扇、螺丝、网罩），对话极简且不解释情绪，结尾以物件静止收束，整体接近参考的克制细节叙事。但参考中私密记忆语调、时间/数字密集感与情感潜流未被完全复现，故为4。",
+      "task_completion": "完整围绕社区旧物修理日，涵盖修好的台灯、未能当场修好的风扇、旁观提问、修复边界，以及继续使用与购买替代品之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,41 @@
+{
+  "id": "creative_single_stage_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 748,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已注明“虚构场景”，人物、对话、观察者经历均在creative权限内；台灯接线松动经重新固定后复原、风扇因零件缺失当日未修好并登记型号与联系方式、工作人员未宣称修好、活动只提供检查与力所能及的修复，均与给定核心事实一致；未出现外部真实统计或真实引用。",
+      "naturalness": "行文连贯，短句与分段有节制地服务于旁观—议论的节奏，对话与场景转换清晰；个别密集断行的处理略显整齐，故为4。",
+      "source_independence": "全文围绕社区旧物修理日的台灯、风扇、志愿者与登记流程展开，未发现可与参考样文对位的内容、结论或素材；仅共享第一人称叙述与议论性停顿这类通用手法，不构成内容迁移。",
+      "style_fidelity": "保留了参考样文的第一人称旁观者视角、短促直陈句与冷峻反讽的节拍，并在叙事中插入概括性议论（“修理日不保证什么。只提供检查和力所能及的修复。”“都对。”）和自我回溯式的对照（“我想起那盏被我扔掉的灯。”），结尾以具体物象收束（“灯已经亮了。风扇还没。”），与样文用具体对象承载抽象议论的动作一致；但样文多为长句连缀、从句推进，本文几乎全部拆成独立短段，句式机制只部分承袭，故为4。",
+      "task_completion": "完整覆盖核心素材：修好的台灯、未能当场修好的风扇、型号登记与后续联系、旁观者提问（“为什么不干脆劝人买新的？”）、修复边界（“做不了的，登记，不吹牛。”）以及修理与替换取舍的讨论（“修的时间够买三盏”“省事不是唯一的标准”），并落在“灯已经亮了。风扇还没。”的收束上。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "叙述者“我家以前也有那么一盏……后来我把它扔了”属虚构角色的个人经历，creative权限允许，未按越界计。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

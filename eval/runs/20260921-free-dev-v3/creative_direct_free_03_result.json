@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_03",
+  "group": "creative",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 621,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "标题已明示“虚构场景”，符合creative模式；核心事实均按给定内容展开，未伪造外部真实统计或真实引用。新增的怀疑灯管或开关、志愿者对话、旁观者提问等，属于虚构人物、动作、对话和独立事件的允许范围，未改写给定核心事实。",
+      "naturalness": "整体连贯，场景推进与议论衔接自然；但“初始做法是怀疑灯管或开关；引入变化是打开看见松动；实际结果是恢复照明。”带有流程或实验记录式模板痕迹，略突兀，因此为4。",
+      "source_independence": "正文的主题、物件、事件链和结论均围绕任务给定的旧物修理日展开；没有可指认的软件性能、架构腐化、微服务、RPC、Profiling 等参考文核心内容或结论迁移。“成本”“取舍”“边界”等词属于泛化论证词汇，不构成可证实的内容绑定。",
+      "style_fidelity": "沿用参考文的论证式推进：先提出普遍经验或二选一问题，再以具体案例展开，最后升到原则性收束；人称有“我们/你/有人”，短句与对照句较多，如“修，还是换？”“前者未必保守，后者也未必浪费”，与参考文“你会发现”“为什么这么说？”及收束句的节拍相呼应。但正文更偏场景化散文，少了参考文那种直接断言与条列式原则的硬度，故为4。",
+      "task_completion": "涵盖社区活动室、旧物修理日、两名志愿者、接触不良的台灯与转动缓慢的旧风扇、旁观提问、台灯接线松动并修好、风扇因缺合适零件只登记型号与后续联系办法、不保证全部恢复，以及继续使用原物与等待/购买替代品之间的取舍，核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

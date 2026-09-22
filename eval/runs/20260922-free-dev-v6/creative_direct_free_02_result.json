@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 620,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头已注明“虚构场景”，属于明确虚构创作。给定的社区活动室、两名志愿者、台灯接线松动并当场修复、风扇需换件且无匹配零件、登记型号和联系办法、不宣称修好、只做检查和力所能及修复等核心事实均未被改写。新增的老人、年轻人、手机询价、手工费说明等属于creative模式允许的虚构人物、对话、物件和事件；没有伪造外部真实统计、真实引用或作者现实经历。",
+      "naturalness": "全篇连贯，短句、无引号对话和物件特写形成统一节拍；重复出现的“没有”（没有匹配的、没有修好、没有人回答、没有接话、没有转）更像贯穿性静默motif，而非机械模板。信息推进清楚，场景收束自然，未见过度解释或拼贴感。",
+      "source_independence": "正文核心是社区旧物修理日、台灯与风扇维修、旁观提问和修理/替换取舍，均为本次任务给定或由任务合理延伸；与参考文在香港半岛酒店、指甲锉、合同签字、埃尔法、维多利亚港等具体事件、人物和结论没有可指认的内容迁移。共享的短句、时间标记、物件罗列和冷静对话属于叙事操作/句法层面，不构成内容污染。",
+      "style_fidelity": "参考文以精确时间、具体物件、短句推进、克制对话和结尾留白形成主要声音；正文同样用“周六下午两点”“四点”“第三档”等时间/数量锚点，A4纸、螺丝刀盒、万用表等物件清单，以及“没有人回答”“老人没有接话”的静默节拍来组织场景。差异在于参考文为第一人称、带私人回忆和都市奢华氛围，正文转为第三人称社区维修纪实，未保留第一人称内省，因此不是全机制复现，而是多数重要机制在新主题下的适配。",
+      "task_completion": "完整覆盖主题与核心素材：社区活动室、旧物修理日、两名志愿者、接触不良台灯并修复、转动缓慢旧风扇需换件且当天无匹配零件、工作人员登记型号和联系办法、旁观者提问、只检查/不保证修好的边界，以及老人倾向继续使用与年轻人考虑等待/买替代品的取舍。没有遗漏要求项。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

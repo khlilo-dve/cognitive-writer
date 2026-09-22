@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 718,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头标题注明“虚构场景”，创作权限允许虚构人物、对话和动作；台灯接线松动后重新固定并亮起、风扇因缺零件登记型号与联系办法且未宣称修好、活动只检查和不保证修复等核心事实均未被改写，也未出现伪造外部统计或真实引用。",
+      "naturalness": "整体连贯，场景、对白和议论衔接顺畅，比喻和议论句有节制；没有明显拼贴或机械重复。",
+      "source_independence": "正文场景、人物、事件和结论均为旧物修理日自身内容：台灯、风扇、志愿者、登记零件、修理与替换取舍；没有可指认的样文情节、猪/知青/斯巴达等素材或样文结论迁移。人称和“我以为”等功能词不构成污染。",
+      "style_fidelity": "第一人称旁观者、口语化短句、带调侃的比喻（“像两位等待体检的老头”“像在思考要不要退休”）和结尾收束式议论，都能在样文中找到对应声音；但样文更松弛、更爱岔开去讲一段荒诞轶事，本文场景推进更规整、对白更密，模仿未到通篇鲜明的程度。",
+      "task_completion": "完整覆盖社区活动室、台灯接触不良并修好、风扇转动缓慢且缺零件登记、志愿者检查、旁观提问、修复边界以及继续使用与购买替代的取舍，核心素材无遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

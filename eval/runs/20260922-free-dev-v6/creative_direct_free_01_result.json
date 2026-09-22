@@ -1,0 +1,41 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 763,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务标注为明确虚构场景创作，正文标题首词即“虚构场景”，符合标注要求。给定核心事实未被改写：台灯“接线松动”“重新固定……灯亮了”；风扇“需要更换零件，当天没有合适型号”“登记型号和后续联系办法”“没有说‘已经修好’”；“活动只提供检查和力所能及的修复，不保证所有物品都能恢复”被直接呈现；修理与替换取舍以虚构讨论呈现。新增的牌子、对话、三句问法均属creative模式允许的虚构元素，未伪造外部统计或真实引用。",
+      "naturalness": "行文连贯，场景、问答与议论衔接顺畅，节奏以短句和对话为主，读来不滞涩。但“不是……而是/是……”“不是谁更高尚，而是……”在第六段前后高频复用，形成可察觉的句式模板感，故未给满分。",
+      "source_independence": "正文内容全部指向社区旧物修理日的台灯、风扇、零件登记与修理/替换取舍，与参考文的认知变现、风险下注、付费课等核心结论、案例、数据均无可指认的对应；仅共享第二人称、反问推进、直断开篇等功能性论证操作，按规则不构成污染。",
+      "style_fidelity": "开篇即用与参考文同构的“反直觉直断”动作：参考文“我必须直接说一个反直觉的判断”，正文“最该说的，不是‘都能修’，而是‘不一定’”；同样以第二人称拉入读者（“你走进社区活动室”“你带旧物来”），用连续追问推进（“这么简单，为什么拖到现在？”“不能先凑合转吗？”“登记型号是不是拖延？”），并保留“先算一笔账/再往深处拆一层”式的分层推进与收尾箴言（“第三句答不上来，修好就只是口号”）。差异在于参考文全程抽象论证与商业场景，正文改为场景叙事加对话承载论点，机制多数保留但论述密度略低，未到5。",
+      "task_completion": "完整覆盖指定核心素材：社区活动室、接触不良台灯与转动缓慢旧风扇、旁观者提问、台灯当场修复、风扇因缺零件登记型号与联系方式且未宣称修好、活动只做检查与力所能及修复且不保证全部恢复、修理与替换的成本取舍，并含标题与虚构标注。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "任务写明“两名志愿者负责检查”，正文只出现“志愿者”与“工作人员”两种称谓，未明确是否为两名不同角色；这属于对给定设定的呈现方式，不构成可证实的事实越界。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,49 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 704,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "整体按给定素材写，但“也可能带走一张待办记录”新增了素材未提供的具体记录物件，属一处轻微越界；其余多为同义转述或逻辑解释。",
+      "naturalness": "整体连贯，但“不保证所有物品都能恢复”“能修则修，不能修则说清”等表述重复，部分句式偏模板化。",
+      "source_independence": "正文主题、例子、结论均围绕社区旧物修理日，未发现与参考样文中财富、金钱、创业、可测量性等核心内容或表述的迁移。",
+      "style_fidelity": "与参考文相近的第二人称教导式声音、先界定概念再举例、用“先看……再看……”推进、穿插“我认为”并作收束；但论证层次和类比张力弱于参考文，故为4。",
+      "task_completion": "修好的台灯、未修好的风扇、旁观提问、修复边界和修理替换取舍均已覆盖；但未明确“两名志愿者负责检查”，人数与检查责任这一核心素材细节缺失。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "也可能带走一张待办记录",
+        "reason": "严格素材只允许工作人员登记零件型号和后续联系办法，未提供来访者可带走一张待办记录；“一张待办记录”属于新增具体记录物件。"
+      }
+    ],
+    "task_issues": [
+      "未明确“两名志愿者负责检查”这一核心素材，只出现“志愿者”和“工作人员”处理具体事项；人数与检查责任表述不完整。"
+    ],
+    "uncertainties": [
+      "“你带旧物来”和“下次再来”属于泛指或可能性场景，是否应视为strict模式下新增独立事件存在边界性；未据此扣分。",
+      "“你可以问接线为何松动，也可以问重新固定解决了什么”是提问示例而非实际对话主张，是否算新增对话内容存在边界性；未据此扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

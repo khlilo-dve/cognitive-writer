@@ -1,0 +1,55 @@
+{
+  "id": "strict_direct_free_02",
+  "group": "strict",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 634,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 3.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 3.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "整体围绕给定素材，无虚构数据、外部引用或人物履历；但严格模式下新增了素材未提供的布置事件、具体物件和独立动作，构成数处轻微越界。",
+      "naturalness": "句子基本可读且连贯，但大量同构短句、重复列项和‘检查/等待/替换’等抽象回环造成明显机械感，模板痕迹较强。",
+      "source_independence": "除极通用的句式框架外，未发现可指认来自参考文的核心内容、结论、人物、场景或具体细节迁移；主题、物件、事件均属本任务给定素材。",
+      "style_fidelity": "延续了参考文的短句、具体物件、克制陈述和以物件状态收束的节拍，但没有体现参考文第一人称回忆、引号对话、精确时间/数字与感官细节等核心机制；第三人称程序化叙述使声音距离较大，只保留部分主要机制。",
+      "task_completion": "完整覆盖社区旧物修理日、台灯修复、风扇因缺零件未修、旁观提问、登记与修复边界，以及继续使用原物和等待或购买替代的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "社区活动室的长桌被推到中间。",
+        "reason": "事实权限只给定社区活动室及桌上有台灯和旧风扇，未提供‘长桌被推到中间’这一具体布置事件；严格模式不允许新增独立事件。"
+      },
+      {
+        "article_quote": "检查工具摊开",
+        "reason": "素材只给两名志愿者负责检查，未提供‘检查工具’这一具体物件；严格模式不允许新增具体物件。"
+      },
+      {
+        "article_quote": "志愿者用手拨了一下。",
+        "reason": "素材只说风扇转动缓慢、需要更换零件，未给志愿者用手拨动叶片这一独立动作；严格模式不允许新增独立事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "台灯留在桌上且电源线还接着、风扇外壳未装回等状态，是否属于修复检查后的合理连接动作，存在解释空间，未计为确定违规。",
+      "拆开底座、拆开外壳、线头从端子旁滑出等维修细节是否属于对给定接线松动和更换零件的逻辑解释，存在解释空间，未计为确定违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

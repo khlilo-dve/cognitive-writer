@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "case": "missing",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "single",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "unknown",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "ambiguous",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "descriptive",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "invented",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "direct",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "cancel",
+      "status": "passed",
+      "api_calls": 1
+    },
+    {
+      "case": "interrupt",
+      "status": "passed",
+      "api_calls": 1
+    },
+    {
+      "case": "eof",
+      "status": "passed",
+      "api_calls": 1
+    },
+    {
+      "case": "restore",
+      "status": "passed",
+      "api_calls": 3
+    }
+  ]
+}

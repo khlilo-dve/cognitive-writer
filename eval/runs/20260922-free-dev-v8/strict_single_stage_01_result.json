@@ -1,0 +1,43 @@
+{
+  "id": "strict_single_stage_01",
+  "group": "strict",
+  "sample": 1,
+  "variant": "single_stage",
+  "body_artifact": "strict_single_stage_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 846,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 4.0
+    },
+    "reasons": {
+      "factual_compliance": "严格素材内的要素被同义转述：社区活动室、接触不良台灯、转动缓慢旧风扇、志愿者检查与固定接线、风扇缺零件、登记型号和联系办法、未宣称修好、可旁观提问、不保证恢复、修理与替换取舍。未新增人物履历、精确时间/数值、新物件、独立事件、外部统计或引用。",
+      "naturalness": "整体连贯，短句、设问和加粗断言的节拍清楚；但“不是……而是……”“不在于……而在于……”及加粗核心句反复出现，模板感略明显，因此扣一分。",
+      "source_independence": "正文事实均来自本次任务给定素材，未发现参考样文中认知、赚钱、信息差、风险熔炉、付费课、创业者等具体论点或例证的迁移；风格机制相似不构成本维度污染。",
+      "style_fidelity": "以流行说法开场，用“我偏要说”直接抛出反直觉判断并加粗核心句；持续用第一/第二人称对话、设问推进、概念拆解（检查/修复、登记/解决）、短句对比和结尾行动建议，与参考文的论证声音、节拍和信息展开方式高度对应，并自然适配修理日主题。",
+      "task_completion": "除未明确写出“两名志愿者”这一数量信息外，其余核心素材均覆盖：社区活动室、台灯接线松动并被修好、风扇未能当场修好、登记零件型号和联系办法、未宣称已经修好、旁观提问、修复边界以及修理与替换取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [
+      "未明确写出任务给定的“两名志愿者”这一数量信息，正文只以“志愿者”“工作人员”指代，属于核心背景的次要遗漏。"
+    ],
+    "uncertainties": [
+      "“一句“修不了”，比十句“差不多能用”更值钱”属于修辞性评价，未发现构成新增事实或对话主张；若按极严格口径可能需讨论，但不作为确定违规扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

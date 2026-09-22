@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 714,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative 模式且开头注明“虚构场景”；给定核心事实（社区活动室、台灯接线松动修复、风扇缺零件登记、旁观提问、修复边界、修理与替换取舍）均未被改写，新增细节属虚构场景允许范围，无外部真实统计或引用。",
+      "naturalness": "叙述连贯，场景、对话、议论切换自然，论证推进有节奏；重复的“边界”承担主题聚焦而非机械模板，整体可读。",
+      "source_independence": "除共享第二人称、反问和论证动作外，未发现可证实的人物、事件、结论、数据或表达内容来自参考样文；主题和材料均为新任务给定/虚构扩展。",
+      "style_fidelity": "以第二人称直接驳斥常见预期开场（“你大概以为……我直说”），延续参考文的反直觉判断、直接第一人称立场、反问推进、场景/算账式论证和结尾反诘；同时按修理日场景化为叙事化论证，机制鲜明且适配。",
+      "task_completion": "完整覆盖社区旧物修理日、活动室、台灯修复、风扇未当场修好且登记、旁观提问、修复边界，并呈现继续使用与买替代品的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

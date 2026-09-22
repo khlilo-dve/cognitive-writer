@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 648,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "开头注明“虚构场景”，全文按 creative 模式展开。给定的社区活动室、修理日、台灯接触不良、风扇转动缓慢、两名志愿者、旁观提问、接线松动并重新固定、风扇需换零件且当天无合适零件、登记型号与后续联系方式、未宣称修好、只检查且不保证恢复等核心事实均未被改写。新增对话、螺丝、通电动作等属于明确虚构场景内允许的人物、动作与物件，未伪造外部真实统计或引用，也未冒充作者真实经历。",
+      "naturalness": "行文连贯，短句、停顿、通电测试和对话穿插自然；重复“能修就修，不能修就登记”“通电，灯亮”等有节奏控制，未显机械拼贴。第二人称与场景叙事结合顺畅，模板痕迹很少。",
+      "source_independence": "正文主题、核心事实、场景、人物、对话与结论均围绕社区旧物修理日展开，参考样文讨论的是认知变现、行动验证与风险下注。两者仅有第二人称、反问、俗语开头、谚语式收束等可共享的修辞操作，没有可证实的内容、观点或结论迁移。",
+      "style_fidelity": "保留了参考样文的部分主要机制：以流传俗语/套话开头再转折（“旧的不去，新的不来——你大概听过……先别急”），第二人称直接对话，短句判断和反常识收束（“这不是道德，是顺序”“别把修理日当许愿池”），并用“不是……而是……”式辨析推进。但它把论证散文改写为虚构场景叙事，参考样文中那种分层拆解、算账式推演与个人权威论断没有完整延续，因此为多数机制体现而非全盘对应。",
+      "task_completion": "完整覆盖指定主题与核心素材：社区旧物修理日、社区活动室、接触不良的台灯、转动缓慢的旧风扇、两名志愿者、旁观与提问、台灯接线松动后修复、风扇无合适零件并登记、未宣称修好、只检查和力所能及修复、不保证恢复，以及继续使用原物与等待/购买替代品之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

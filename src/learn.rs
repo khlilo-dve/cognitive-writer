@@ -283,79 +283,92 @@ mod tests {
     #[tokio::test]
     async fn live_text_entry_saves_only_execution_text_and_audits_without_credentials() {
         use std::io::{Read, Write};
-        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
-        let addr = listener.local_addr().unwrap();
-        let server = std::thread::spawn(move || {
-            let mut requests = Vec::new();
-            let analysis = serde_json::json!({"features":[{"observation":"描述", "evidence":["这是原文。"],
+        let analysis = serde_json::json!({"features":[{"observation":"描述", "evidence":["这是原文。"],
                 "rule":"用短句收束。", "condition":"判断结束时", "support":"local"}], "uncertain":[]}).to_string();
-            let compiled = serde_json::json!({"spec":"先铺陈判断，再用短句收束。", "evidence_insufficient":true}).to_string();
-            for response in [analysis, compiled] {
-                let (mut stream, _) = listener.accept().unwrap();
-                stream
-                    .set_read_timeout(Some(std::time::Duration::from_secs(5)))
-                    .unwrap();
-                let mut bytes = Vec::new();
-                loop {
-                    let mut chunk = [0; 4096];
-                    let n = stream.read(&mut chunk).unwrap();
-                    assert!(n > 0);
-                    bytes.extend_from_slice(&chunk[..n]);
-                    if let Some(end) = bytes.windows(4).position(|w| w == b"\r\n\r\n") {
-                        let headers = String::from_utf8_lossy(&bytes[..end]).to_lowercase();
-                        let len: usize = headers
-                            .lines()
-                            .find_map(|l| l.strip_prefix("content-length: "))
-                            .unwrap()
-                            .parse()
-                            .unwrap();
-                        if bytes.len() >= end + 4 + len {
-                            requests.push(
-                                serde_json::from_slice::<serde_json::Value>(&bytes[end + 4..])
-                                    .unwrap(),
-                            );
-                            break;
+        let compiled =
+            serde_json::json!({"spec":"先铺陈判断，再用短句收束。", "evidence_insufficient":true})
+                .to_string();
+        for (method, responses) in [
+            (LearningMethod::TwoStage, vec![analysis, compiled.clone()]),
+            (LearningMethod::DirectFree, vec![compiled]),
+        ] {
+            let expected_calls = responses.len();
+            let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+            let addr = listener.local_addr().unwrap();
+            let server = std::thread::spawn(move || {
+                let mut requests = Vec::new();
+                for response in responses {
+                    let (mut stream, _) = listener.accept().unwrap();
+                    stream
+                        .set_read_timeout(Some(std::time::Duration::from_secs(5)))
+                        .unwrap();
+                    let mut bytes = Vec::new();
+                    loop {
+                        let mut chunk = [0; 4096];
+                        let n = stream.read(&mut chunk).unwrap();
+                        assert!(n > 0);
+                        bytes.extend_from_slice(&chunk[..n]);
+                        if let Some(end) = bytes.windows(4).position(|w| w == b"\r\n\r\n") {
+                            let headers = String::from_utf8_lossy(&bytes[..end]).to_lowercase();
+                            let len: usize = headers
+                                .lines()
+                                .find_map(|l| l.strip_prefix("content-length: "))
+                                .unwrap()
+                                .parse()
+                                .unwrap();
+                            if bytes.len() >= end + 4 + len {
+                                requests.push(
+                                    serde_json::from_slice::<serde_json::Value>(&bytes[end + 4..])
+                                        .unwrap(),
+                                );
+                                break;
+                            }
                         }
                     }
+                    let body = serde_json::json!({"choices":[{"message":{"content":response}}]})
+                        .to_string();
+                    write!(
+                        stream,
+                        "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+                        body.len(),
+                        body
+                    )
+                    .unwrap();
                 }
-                let body =
-                    serde_json::json!({"choices":[{"message":{"content":response}}]}).to_string();
-                write!(
-                    stream,
-                    "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
-                    body.len(),
-                    body
-                )
-                .unwrap();
+                requests
+            });
+            let dir = tempfile::tempdir().unwrap();
+            let spec = extract_style_text_at(
+                &Client::new(),
+                &format!("http://{addr}"),
+                "fixture-secret",
+                "fixture-model",
+                "这是原文。",
+                dir.path(),
+                method,
+            )
+            .await
+            .unwrap();
+            assert_eq!(spec, "先铺陈判断，再用短句收束。");
+            let requests = server.join().unwrap();
+            assert_eq!(requests.len(), expected_calls);
+            if expected_calls == 2 {
+                assert!(
+                    !requests[1]["messages"][1]["content"]
+                        .as_str()
+                        .unwrap()
+                        .contains("这是原文")
+                );
+            } else {
+                assert_eq!(requests[0]["messages"][1]["content"], "这是原文。");
             }
-            requests
-        });
-        let dir = tempfile::tempdir().unwrap();
-        let spec = extract_style_text_at(
-            &Client::new(),
-            &format!("http://{addr}"),
-            "fixture-secret",
-            "fixture-model",
-            "这是原文。",
-            dir.path(),
-            LearningMethod::TwoStage,
-        )
-        .await
-        .unwrap();
-        assert_eq!(spec, "先铺陈判断，再用短句收束。");
-        let requests = server.join().unwrap();
-        assert!(
-            !requests[1]["messages"][1]["content"]
-                .as_str()
-                .unwrap()
-                .contains("这是原文")
-        );
-        for entry in std::fs::read_dir(dir.path()).unwrap() {
-            let text = std::fs::read_to_string(entry.unwrap().path()).unwrap();
-            assert!(!text.contains("fixture-secret"));
-            assert!(!text.contains(&addr.to_string()));
+            for entry in std::fs::read_dir(dir.path()).unwrap() {
+                let text = std::fs::read_to_string(entry.unwrap().path()).unwrap();
+                assert!(!text.contains("fixture-secret"));
+                assert!(!text.contains(&addr.to_string()));
+            }
+            assert!(dir.path().join("result.json").exists());
         }
-        assert!(dir.path().join("result.json").exists());
     }
 
     // ── strip_html_tags ─────────────────────────────────────────

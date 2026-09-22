@@ -1,0 +1,56 @@
+{
+  "id": "strict_direct_free_02",
+  "group": "strict",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 619,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 3.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心素材基本按严格权限转述，但新增了多处未给定的独立事件和具体物件：物品被拿走/留下、叙述者离场、灯罩等，超出“不增加独立事实的连接动作”范围。",
+      "naturalness": "整体可读、句子连贯，但重复和并列短句过密，如“检查是检查。修复是修复。”“我再看台灯。灯亮。我再看风扇。风扇停。”，机械模板痕迹明显，机制使用不够节制。",
+      "source_independence": "除共享第一人称、短句、旁观与离场等通用叙事操作外，未发现参考样文中香港、酒店、合同、渡轮、车辆、助理等具体内容或观点迁移；人物、地点、物件和事件均来自本次任务素材。",
+      "style_fidelity": "采用参考样文的第一人称旁观、短句断裂、低情绪叙述、物件/动作复现和开放式收束，如“台灯亮着。风扇停着。”与“我走出去”，能适应新主题；但参考样文的具体感官细节、对话和精确时间数字等机制未体现，重复也更机械。",
+      "task_completion": "完整围绕旧物修理日，涵盖社区活动室、台灯接触不良并修好、风扇需换零件且当天未修好、工作人员登记型号与后续联系、旁观提问、修复边界以及修理与替换取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "有人把台灯拿走。有人把风扇留下。",
+        "reason": "严格素材只规定台灯修好、风扇待零件，未提供活动结束后的物品处置；这里新增了有人拿走台灯、有人留下风扇的独立事件。"
+      },
+      {
+        "article_quote": "我离开桌边。门开着。我走出去。",
+        "reason": "严格权限允许不增加独立事实的连接动作，但这里新增叙述者离开活动室、门开着并走出去的独立事件/亲身经历，材料未提供。"
+      },
+      {
+        "article_quote": "灯罩没有换。电线还在原处。",
+        "reason": "材料只提供台灯接线松动并重新固定，未提灯罩；这里新增“灯罩”这一具体物件及其未更换状态，属于严格模式不允许的新增具体物件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“有人问，是哪里的事。志愿者回答：接线。问的人点头。”是对给定“可提问”的具体化，但严格模式禁止新增对话主张，是否越界存在解释空间，未据此单独扣分。",
+      "“志愿者收起工具。工作人员合上登记信息。”属于活动收尾动作，是否算严格权限允许的简单连接动作存在解释空间，未据此单独扣分。",
+      "“我站在桌边看。”的第一人称旁观视角是否构成严格权限中的“亲身经历”有解释空间，未单独据此扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

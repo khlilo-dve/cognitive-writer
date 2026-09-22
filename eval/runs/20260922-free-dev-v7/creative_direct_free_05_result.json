@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_05",
+  "group": "creative",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 719,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "任务声明为creative模式且正文开头明确标注虚构场景；虚构人物、对话、便签、主人抱走台灯等均属允许的创作，没有伪造外部统计或真实引用，也未改写台灯、风扇、登记型号、修复边界等给定核心事实。",
+      "naturalness": "口语对话、场景推进和反思收束总体连贯，‘有人……有人……’‘等待是成本，替换也是成本’等句略有格言模板感，但机制使用有节制，阅读顺畅。",
+      "source_independence": "正文与参考样文在人物、事件、意象、结论和句段上均无可证实的内容迁移；共享的第一人称观察、具体物件叙述和议论收束是通用写法，不构成原文绑定。",
+      "style_fidelity": "以第一人称旁观者降调叙述，围绕台灯、风扇等具体物件展开，并用短句、对话和‘我原先想……后来觉得……’式反身议论托出‘修与换’的抽象意味，接近参考文由琐事转向普遍话题、冷峻自嘲的写法；但参考文更突出的荒诞幽默、离题举例和反讽叙事没有充分展开，故非满分。",
+      "task_completion": "覆盖社区活动室旧物修理日、接触不良台灯和转动缓慢旧风扇、两名志愿者与旁观提问、台灯接线重新固定后恢复、风扇缺零件并登记型号和后续联系办法、不保证全部修复，以及继续使用原物与等待/购买替代品的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

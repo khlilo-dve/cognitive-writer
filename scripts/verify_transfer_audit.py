@@ -18,7 +18,10 @@ def raw_json(text):
     text = text.strip()
     if text.startswith("```json") and text.endswith("```"):
         text = text[7:-3].strip()
-    return json.loads(text)
+    value = json.loads(text)
+    for key in ("task_issues", "uncertainties"):
+        if isinstance(value.get(key), str): value[key] = [value[key]] if value[key].strip() else []
+    return value
 
 
 def length(body):

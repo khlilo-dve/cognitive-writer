@@ -1,0 +1,43 @@
+{
+  "id": "strict_direct_free_05",
+  "group": "strict",
+  "sample": 5,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_05.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 685,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 3.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "正文基本逐项落实给定事实：社区活动室、旧物修理日、两名志愿者、台灯接线松动并修好、风扇需更换零件且当天无合适零件、工作人员登记型号和后续联系办法、没有宣称修好、只提供检查与力所能及的修复，以及继续使用原物和购买替代品之间的取舍。评论性语句可视为逻辑解释或连接，未发现可证实的新增人物履历、精确数值、独立事件、引用或外部统计。",
+      "naturalness": "行文连贯，短句和议论节奏稳定，材料展开自然；少数地方如‘至于之后如何，素材里没有，也就不写’带元叙述痕迹，结尾格言略用力，但整体仅少量模板或人工痕迹。",
+      "source_independence": "正文围绕社区旧物修理日的给定素材展开，未复现参考文的猪、知青、斯巴达、‘设置生活’等核心内容或结论；‘边界’‘取舍’‘耐心’等抽象词属于任务自身主题与一般议论，不能证实为来自样文。",
+      "style_fidelity": "参考文以第一人称回忆/叙事推动，口语化反讽，借具体动物轶事转入抽象议论，并以格言式句子收束。正文是第三人称、说明式随笔，保留了短句、克制议论、对比推进和格言式收束（如‘人对物的耐心……’），但缺少原文的第一人称声音、幽默/反讽和具体轶事展开，只体现部分主要机制。",
+      "task_completion": "覆盖社区活动室旧物修理日、桌上台灯与风扇、两名志愿者、旁观提问、台灯修好、风扇缺件登记、修复边界，以及继续使用原物与购买替代品的取舍，核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "标题‘桌旁那台风扇’与正文及素材中‘桌上’的摆放表述不一致；正文仍写‘桌上摆着两样东西’，是否构成轻微事实越界难以确证，未据此扣分。",
+      "‘有人在旁边看，也有人问’把素材中的‘可以旁观并提问’写成实际有人旁观和提问；未添加提问内容或具体情节，是否算独立事件难以界定，未据此扣分。",
+      "‘换新的更快、更省事’以及‘手艺’‘当天条件’属于对修理与替换取舍或修复边界的逻辑解释，未见为独立新增事实，但边界稍可商榷。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,42 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 635,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "按strict权限，正文未新增人物履历、精确时间/数值、具体新物件、外部统计/引用或可证实的独立事件；关于“关系松了”“判断顺序”“诚实判断”等表述属于逻辑解释和评价性展开。",
+      "naturalness": "整体连贯，短句、对比和设问推进清楚；但“不是…是…”“不只在…也在…”等句式重复略多，个别抽象表达稍显公式化，因此为4。",
+      "source_independence": "正文核心素材均来自本次任务给定：台灯、风扇、登记、修复边界、修理与替换取舍；未发现参考文关于财富与金钱、大饼谬论、创业、可测量性/可放大性等内容或结论迁移，仅有“不是…是…”等通用论证句式。",
+      "style_fidelity": "延续参考文的第二人称说理、定义式对比、反问推进、由具体例子归纳一般原则的展开方式；如“你可以旁观…也可以提问”“不是东西坏了，是关系松了”“既然修不好，何必搬来”，并自然适配旧物修理主题。",
+      "task_completion": "覆盖社区活动室、接触不良台灯并重新固定后恢复、风扇需换零件且当天无合适零件并登记型号与联系办法、未宣称修好、检查与修复边界、旁观提问及修理与替换取舍；未见核心素材缺失。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“你看着一个人拆开、判断、复原”是否属于素材未明确给出的动作，存在解释空间；因其为概括性描述而非具体物件、时间或可证实独立事件，未按事实违规处理。",
+      "正文只写“志愿者检查”，未明确“两名”，但未改变核心场景，未按主题缺失处理。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

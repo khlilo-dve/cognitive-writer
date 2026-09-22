@@ -58,3 +58,10 @@ Rubric B v2 取消十标题奖惩；旧 coverage 人评语义不再直接适用�
 评分的结构/引用修复耗尽后，错误响应检查点仍保留；不能反复同ID重放同一无效输出。使用新run_id，仅复用已验证请求，排除失败评分请求并记录复用来源SHA；不删除历史失败，也不手工补分。运输失败且未形成有效响应的请求可继续用原ID续跑。本轮最终完整记录为 `20260918-transfer-audit-v2-retry1`，原 `20260918-transfer-audit-v2` 保留44成功/1格式失败的证据。
 
 完整结果见 `docs/2026-09-18-transfer-eval-results.md`；不能从旧总分判新提示词整体失败，新旧方法需按场景和独立维度解释。
+
+## 自由格式采用验证（2026-09-21起）
+- 开发：`EVAL_RUN_ID=<新ID> EVAL_RELEASE_PHASE=development cargo test --lib eval_free_style_release_suite -- --ignored --nocapture`。两方法×五样文分别提取，同一修理日任务分strict/creative生成20篇。旧法请求可精确复用，SHA与来源写入reused-checkpoints.json。
+- 确认：`EVAL_RUN_ID=<新ID> EVAL_RELEASE_PHASE=confirmation EVAL_RELEASE_SOURCE_RUN=<通过开发门槛的run> cargo test --lib eval_free_style_release_suite -- --ignored --nocapture`。冻结相同Spec与模型，换事先登记的新题材再生成20篇；不是新作者留出。
+- `free_style_gate.rs`检查先登记的实用门槛，各维度独立；不修改裁判、不合成总分。详见docs/superpowers/specs/2026-09-21-free-style-release.md。通过开发与确认才采用，失败证据保留；对已看过的确认主题不能再声称未见。
+- 离线核验：`python3 scripts/verify_free_style_release.py eval/runs/<run> --current`。核对原始响应、学习结果、正文、匿名Judge、可定位引用、分项汇总、确定性长度、确认Spec来源与复用SHA。历史提示词变化的run不加--current。
+- Judge仅对task_issues/uncertainties的单字符串做无损单元素列表兼容；分数、理由与引用不补造，缺失证据仍拒绝。

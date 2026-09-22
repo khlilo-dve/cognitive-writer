@@ -1,0 +1,41 @@
+{
+  "id": "strict_direct_free_03",
+  "group": "strict",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 702,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "所有可核查事实均来自任务素材或可由其同义转述、逻辑解释得到：社区活动室、台灯接触不良、风扇转动缓慢、两名志愿者、接线松动并重新固定、风扇缺零件并登记型号与后续联系办法、来访者旁观提问、只检查与力所能及修复、修理与替换取舍等均未越界。未发现新增人物履历、精确时间、外部统计、真实引用或独立事件。",
+      "naturalness": "整体连贯，场景、判断、原则和收束推进清楚，阅读顺畅；少数过渡如“同一张桌上，两件事把规则讲清楚了”和编号原则的整齐排列略带模板感，因此不在自然度给满分。",
+      "source_independence": "主题、事例和结论均围绕社区旧物修理日展开；未发现软件工程、性能优化、微服务拆分、可观测性等参考样文核心内容或结论的可证实迁移。共享的只是论证操作、转折句式和抽象边界讨论方式，不构成内容污染。",
+      "style_fidelity": "文章以“但……不只在……而在于……”立论，先给出边界判断，再用台灯与风扇形成能修/不能修的对照，接着插入编号原则，并在结尾用“不是……而是……”式判断收束；这种论证推进、短段落节拍和说理动作与参考样文高度一致，同时成功适配旧物修理日主题。",
+      "task_completion": "完整覆盖指定主题与核心素材：社区活动室、接触不良台灯与转动缓慢旧风扇、两名志愿者、旁观提问、台灯重新固定接线后恢复、风扇因缺零件未修并登记型号和后续联系办法、修复边界，以及继续使用原物与等待/购买替代品之间的取舍讨论。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“志愿者检查时说明思路与限制”可理解为素材中“检查”与“来访者可以提问”的合理延展，但也存在被界定为新增说明行为的轻微空间；未作为确定事实违规处理。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

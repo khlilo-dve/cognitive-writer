@@ -170,7 +170,7 @@ async fn judge(
     })
     .await
 }
-async fn run_job(store: &Store, prompt: &str, job: &Job) -> Result<Row, AppError> {
+pub(crate) async fn run_job(store: &Store, prompt: &str, job: &Job) -> Result<Row, AppError> {
     let (body, generation_calls) = if let Some(body) = &job.existing_body {
         (body.clone(), 0)
     } else {

@@ -1,0 +1,41 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 709,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "事实模式为creative，正文在开头标注'虚构场景'，虚构人物（老周、小林）、旁观者提问、胶带对话等均属声明内的虚构创作。给定核心事实均未被改写：'接线松动'后'重新固定接线，装回，按下开关，灯亮了'；风扇'需要更换零件，但当天没有合适零件'并'在登记表上写下零件型号和后续联系办法'且'没有说“差不多好了”'；'活动只做检查和力所能及的修复，不做危险改装，不承诺结果'；修换双方立场与'时间、安全、零件、花费、情感'的取舍亦保留。未出现外部真实统计或真实引用。",
+      "naturalness": "句读短促、衔接自然，场景转换（台灯—风扇—提问—取舍—收束）清楚，仅'问题很好，边界也在这里'、'核心是：'等处略见格言模板痕迹，重复的短判断句也使中段节奏偏均质。",
+      "source_independence": "通篇围绕社区修理日的台灯、风扇、修理边界与修换取舍展开，无一处概念、例证或结论取自样文（财富与金钱、大饼谬论、木匠、可测量性与可放大性等均未出现），仅共享第二人称与短句格言化句法这类非内容机制。",
+      "style_fidelity": "以第二人称'你'领起并给出先行判断（'你最好先看清规矩'），随后用短句做概念切分——'修，不等于全能；热心，也不等于包票'与样文'财富与金钱并不是同义词'同为对举式定义；中间反驳直觉式误解（'没当场修好，不等于失败'／'修理与替换，不是道德站队，而是一道比较题'），结尾收束为格言（'核心是：先看清边界，再谈取舍'）。但样文以抽象定义+类比推理推动，正文改为场景推进，论证密度与类比层级低于样文，故为多数机制体现而非鲜明全等。",
+      "task_completion": "完整覆盖核心素材：社区活动室、接触不良的台灯与转动缓慢的旧风扇、两名志愿者检查并允许旁观提问、台灯接线松动后修复、风扇缺零件并登记型号与联系办法且未宣称修好、只检查与力所能及修复的边界、以及继续使用原物与购买替代品之间的取舍讨论，标题亦在范围内。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "'凑合也许撑过今天，却可能烧坏电机'属虚构场景中的推测性风险陈述，creative模式允许，未见外部真实数据或引用支撑要求。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,42 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 781,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "逐项对应任务给定事实：两名志愿者、台灯接线松动并恢复、风扇缺零件并登记型号与联系方式、未宣称修好、活动只检查与力所能及修复、不保证恢复、旁观提问与修理/替换取舍均未越出。新增内容多为解释性连接或框架说明。",
+      "naturalness": "整体连贯，段落推进清楚；但“投入/产出”“边界”“检查/修复/替换”等标签反复出现，说明文式框架痕迹较明显，略机械，所以不给满分。",
+      "source_independence": "主题、例子、结论均围绕社区修理日；未发现财富、金钱、创业、大饼谬论、可测量性、可放大性等参考文核心内容或局部素材被搬运。共享的人称、定义句式和论证动作不构成内容迁移。",
+      "style_fidelity": "与参考文共享第二人称、定义式区分、加粗术语夹注英文、“不是……而是”纠偏、“我认为”、框架视角和收束式警句等主要机制，并把财富/创业例证替换为台灯/风扇/修复边界，适配新主题鲜明。",
+      "task_completion": "完整覆盖活动室、两名志愿者、台灯修好、风扇未当场修好且有登记、旁观提问、不保证恢复、修复边界及修理与替换取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“放在汽车维修里”的类比是否属于严格模式下的新增具体场景，存在边界判断空间，但未见明确独立事实。",
+      "“你可以问检查依据……”属于对“可以提问”的示例化展开，是否算新增对话主张存在轻微解释空间，未按确定违规处理。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

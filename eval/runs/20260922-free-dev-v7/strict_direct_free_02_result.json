@@ -1,0 +1,51 @@
+{
+  "id": "strict_direct_free_02",
+  "group": "strict",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 635,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 3.0,
+      "source_independence": 5.0,
+      "factual_compliance": 3.0,
+      "naturalness": 3.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "大部分内容在给定素材内，但严格模式不允许新增独立事件、新物件或对话主张。正文新增了下一人物品上台、志愿者打开外壳查看线路的独立检查事件，也新增了工作人员说明、来访者重复某句话的话语事件，超出素材提供的台灯、风扇、登记和活动边界等内容。",
+      "naturalness": "整体可读，但短句罗列和重复结构明显，如反复使用“没有”“被”“继续”等句式，部分表达冗余生硬，如“亮与不亮交替出现”“活动没有保证”，机械感较强。",
+      "source_independence": "正文与参考样文在人物、地点、事件、物件、结论上均无对应关系。共享的短句、并列动作、泛称“有人”属于常见句法，不构成可证实的内容迁移。",
+      "style_fidelity": "保留了参考样文一部分短句、克制陈述、按物件和动作推进的节拍，例如“桌上放着一盏台灯和一台旧风扇”“开关按下，灯亮”；但未复现样文核心的第一人称视角、短对话、精确感官细节和情绪留白，整体更接近第三人称事务记录，因此只算保留部分主要机制。",
+      "task_completion": "完整覆盖指定主题与核心素材：社区活动室、台灯接触不良并被重新固定接线后恢复、风扇转动缓慢且因缺零件未当场修好、工作人员登记联系方式、志愿者检查与旁观提问、活动不保证全部修复，以及继续使用原物与等待/购买替代品之间的取舍。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "下一个人把物品放到桌上。志愿者打开外壳，看里面的线。",
+        "reason": "严格权限只允许同义转述、逻辑解释和不增加独立事实的连接动作；素材只提供台灯和风扇以及志愿者检查、修复、登记等核心事实。此处新增新人物、新物品和打开外壳查看线路的独立检查事件，属于新增物件与独立事件。"
+      },
+      {
+        "article_quote": "这句话被工作人员说明，也被来访者重复。",
+        "reason": "素材只给出“活动只提供检查和力所能及的修复，不保证所有物品都能恢复”这一活动边界内容，未提供工作人员说明或来访者重复该话的具体话语事件。严格模式不允许新增对话主张或独立事件。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“台灯被推到桌子中间”“拆开底座”“开关按下，灯亮”“风扇接上电”“电源被拔掉，放回桌上”等是否属于素材允许的逻辑解释或简单连接动作，存在边界；未作为确定违规计入。",
+      "“有人带着物品来，有人只是看”可能由旧物修理日活动逻辑推出，也可能被视为新增一般事件，证据强度不足，未作为确定违规计入。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}
