@@ -50,6 +50,7 @@
 - 当前迁移评测使用 Transfer v2：风格保真、原文独立性、事实合规、自然度、主题完成度独立报告；字数程序统计，不合成采用总分。入口 `eval_transfer_audit_suite`，方案见 docs/superpowers/specs/2026-09-18-transfer-eval-correction.md。
 
 ## 目录与产物约定
+- `research/style-aggregation/`：2026-09-26启动规划的多文章作者风格研究；先读README、plan、protocol与journal最新记录。新增研究数据、图表、阶段报告、预算及飞书映射统一放此目录。研究先于架构，表征相似度与生成保真分开；具体方法/阶段/预算状态以该目录和`.claude/tasks/current.md`为准，不能把旧任务完成状态当本轮已完成。
 - `src/`：扁平 Rust 模块；新模块在 `src/lib.rs` 注册，测试内嵌模块底部。
 - `eval/`：冻结样本、候选产物和评测报告；具体命名、版本与续跑规则见 `eval/AGENTS.md`。不得用候选生成覆盖冻结基线。
 - `.claude/tasks/`：`current.md` 保存事实状态，`plan.md` 保存实施步骤及需人工确认项，任务结束后更新为实际结果。
