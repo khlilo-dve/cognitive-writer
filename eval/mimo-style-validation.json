@@ -96,5 +96,8 @@
       "自由系统解说",
       "蔡叔"
     ]
-  }
+  },
+  "runtime_model": "mimo-v2.6-flash",
+  "runtime_model_smoke": "eval/mimo-flash-smoke.json",
+  "model_scope": "development and confirmation evaluation"
 }

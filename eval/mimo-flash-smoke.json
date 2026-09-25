@@ -1,0 +1,14 @@
+{
+  "requested_model": "mimo-v2.6-flash",
+  "env_only_model_changed": true,
+  "adoption_commit": "c0d40f3",
+  "evaluation_model": "mimo-v2.6-pro",
+  "scope": "one minimal JSON connectivity request; not comparative quality evaluation",
+  "at": "2026-09-25T14:53:02.770774+00:00",
+  "http_status": 200,
+  "status": "passed",
+  "returned_model": "mimo-v2.6-flash",
+  "json_response": {
+    "ok": true
+  }
+}
