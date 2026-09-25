@@ -1,0 +1,69 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.11s
+     Running unittests src/lib.rs (target/debug/deps/cognitive_writer-01a6798ffc47c41f)
+
+running 1 test
+[resume] strict_single_stage_01_outline
+[resume] strict_direct_free_03_outline
+[resume] strict_single_stage_01_body
+[resume] strict_direct_free_03_body
+[resume] strict_direct_free_01_outline
+[resume] strict_direct_free_01_body
+[resume] strict_direct_free_03_judge_0
+[resume] strict_single_stage_01_judge_0
+[resume] strict_single_stage_05_outline
+[resume] strict_single_stage_05_body
+[resume] strict_direct_free_01_judge_0
+[resume] strict_single_stage_01_judge_1
+[resume] strict_direct_free_04_outline
+[resume] strict_direct_free_02_outline
+[resume] strict_direct_free_04_body
+[resume] strict_single_stage_05_judge_0
+[resume] strict_direct_free_02_body
+[resume] creative_single_stage_02_outline
+[resume] creative_direct_free_03_outline
+[resume] creative_single_stage_02_body
+[resume] creative_direct_free_03_body
+[resume] strict_direct_free_05_outline
+[resume] strict_direct_free_05_body
+[resume] strict_direct_free_02_judge_0
+[resume] strict_direct_free_04_judge_0
+[resume] creative_single_stage_02_judge_0
+[resume] creative_direct_free_03_judge_0
+[resume] strict_single_stage_02_outline
+[resume] strict_direct_free_05_judge_0
+[resume] strict_single_stage_02_body
+[resume] strict_single_stage_04_outline
+[resume] creative_direct_free_04_outline
+[resume] strict_single_stage_04_body
+[resume] creative_direct_free_04_body
+[resume] creative_single_stage_03_outline
+[resume] creative_single_stage_03_body
+[resume] strict_single_stage_02_judge_0
+[resume] creative_single_stage_01_outline
+[resume] creative_single_stage_01_body
+[resume] strict_single_stage_04_judge_0
+[resume] creative_direct_free_04_judge_0
+[resume] creative_single_stage_03_judge_0
+[resume] strict_single_stage_03_outline
+[resume] strict_single_stage_03_body
+[resume] creative_single_stage_04_outline
+[resume] creative_single_stage_01_judge_0
+[resume] creative_single_stage_04_body
+[resume] creative_single_stage_05_outline
+[resume] creative_direct_free_05_outline
+[resume] creative_single_stage_05_body
+[resume] creative_direct_free_05_body
+[resume] creative_direct_free_02_outline
+[resume] strict_single_stage_03_judge_0
+[resume] creative_direct_free_02_body
+[resume] creative_single_stage_04_judge_0
+[resume] creative_single_stage_05_judge_0
+[resume] creative_direct_free_05_judge_0
+[resume] creative_direct_free_02_judge_0
+[resume] creative_direct_free_01_outline
+[resume] creative_direct_free_01_body
+[resume] creative_direct_free_01_judge_0
+[complete] eval/runs/mimo-free-v10-json-confirm-01 gate=true
+test eval_free_release::tests::eval_free_style_release_suite ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 229 filtered out; finished in 0.02s

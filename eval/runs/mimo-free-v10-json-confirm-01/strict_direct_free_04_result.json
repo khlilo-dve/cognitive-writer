@@ -1,0 +1,46 @@
+{
+  "id": "strict_direct_free_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 722,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 4.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "基本遵守严格素材权限：十二把伞、两名工作人员、活动中心入口服务台、登记联系方式、沥水架、确认完好再借出、伞骨弯曲标为待维修当天未借出、免费、试点后查借还记录再决定等均与任务一致，未新增精确数字、物件、履历或外部统计。唯一越界是虚构了一句未被素材提供的他人主张（有人说过嫌登记麻烦），属于补造的对话主张。",
+      "naturalness": "行文连贯，句群推进顺畅，规则条目（登记是入口、沥水架是出口）转化为可感的画面，比喻自然。少量模板痕迹在三联定义句与末段的对仗式格言上，密度略高但仍可读。",
+      "source_independence": "正文未搬用样文的任何具体内容或结论：无财富、金钱、木匠、创业、可放大性等内容残留。相似之处集中在人称（我认为）、拆定义、括注英文术语、设问-建议的论证操作，均属风格机制而非内容迁移，任务本身给定的雨伞素材亦独立成立。",
+      "style_fidelity": "样文的核心机制在正文中成体系重现并适配了共享雨伞主题：开篇用概念区分起手（“「免费」不等于「不设条件」。免费只指不收钱；条件指你得留下联系方式。”对应“财富与金钱并不是同义词”式的拆解定义），术语加英文括注（共享（sharing）/方便（convenience）/维护（maintenance），对应可测量性（Measurement）/可放大性（Leverage）），“……意味着……”的成对定义句式（对应“可测量性意味着……可放大性意味着……”），假设性推演（“如果你只看到伞摆在那里……那不是共享，那是消耗。”对应魔法机器与荒岛的假想），反驳他人成见再给出己见（“有人说登记麻烦。我认为恰恰相反”对应“很多人在潜意识里持有……但事实完全不是这样”），设问转入行动建议（“那么你能做什么？很简单：”对应“如果你想致富，应该怎么做？我认为最好的办法就是”），以及收束的格言式断言（“方便是借出来的，维护是还回去的”对应结尾的 Make something people want）。主要论证动作都迁移了过来。",
+      "task_completion": "借出、归还后先上沥水架并检查、损坏伞暂停借出、两名工作人员与十二把伞、登记联系方式规则、试点尚待观察均覆盖，并以“方便—维护”的关系作为全文论点，核心素材完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [
+      {
+        "article_quote": "有人说登记麻烦。",
+        "reason": "strict模式禁止补造对话主张；任务素材中没有居民对登记表达嫌麻烦的说法或任何对话内容，此处是新增的他人主张。"
+      }
+    ],
+    "task_issues": [],
+    "uncertainties": [
+      "“每一把进出都过人手”可视为对“两名工作人员负责登记”的解释性转述，也可读作对操作细节的轻微外推，证据不足以判定为违规，故未扣分。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_04",
+  "group": "creative",
+  "sample": 4,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 650,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "创意模式下新增的虚构细节（如“我承认，我自己就借伞忘还过”明确归属虚构叙述者、待维修标注动作等）属于允许的虚构；十二把伞、两名工作人员、沥水架、伞骨弯曲伞当天未重新借出、登记联系方式、试点后看记录再决定且未宣称成功等核心事实均保持一致，无外部真实统计或伪造引用。",
+      "naturalness": "整体连贯、节奏有推进，定义—破立—步骤—行动—限定—收束的结构自然；仅“正面情形：／反面情形：”“句式不同，领域不同，结论相同”等少数处有模板化对仗痕迹，略显刻意但不影响阅读。",
+      "source_independence": "正文的核心内容、例证、结论均围绕共享雨伞试点，无一与参考样文的财富、金钱、饼谬论、木匠椅子、创业与可测量性／可放大性等具体素材或结论重合。与样文相似处仅为定义句式、括注英文、三段式概念列举和收束格言等句法与论证操作，按规则不算污染。",
+      "style_fidelity": "鲜明体现参考样文的核心机制：开篇用定义式辨析两个被混同的概念（“共享”不等于“随便取用”／财富与金钱不是同义词），先否定一个流行说法再给出替代命题（对应“大饼谬论”式先破后立），用“借出（checkout）意味着…检查（inspection）意味着…暂停（suspension）意味着…”复现样文“可测量性意味着…可放大性意味着…”的括注英文术语＋定义句式；“把共同维护想象成一条沥水架”对应“你可以把创业想象成一个压缩过程”的比喻展开，跨领域类比（门禁、图书馆借书）支撑同一结论也与样文的木匠／程序员例证同构；以“那么你能做什么？”直接向读者发问并收于格言式结尾，均是样文有原文证据的论证动作，且已适配共享雨伞新主题。",
+      "task_completion": "借出、归还后沥水架检查、损坏伞暂停借出、两名工作人员与十二把伞、登记联系方式、试点尚待观察等核心素材全部覆盖，并正面讨论了方便使用与共同维护的关系。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

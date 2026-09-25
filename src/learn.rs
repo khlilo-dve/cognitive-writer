@@ -113,7 +113,7 @@ async fn fetch_fallback_plain(client: &Client, url: &str) -> Result<String, AppE
     Ok(text)
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum LearningMethod {
     Legacy,
     DirectFree,
@@ -121,11 +121,11 @@ enum LearningMethod {
 }
 
 fn learning_method() -> Result<LearningMethod, AppError> {
-    // Three matched experiments did not pass the adoption gate; keep the frozen method by default.
-    match std::env::var("STYLE_LEARNING_METHOD")
-        .as_deref()
-        .unwrap_or("legacy")
-    {
+    parse_learning_method(std::env::var("STYLE_LEARNING_METHOD").as_deref().ok())
+}
+
+fn parse_learning_method(value: Option<&str>) -> Result<LearningMethod, AppError> {
+    match value.unwrap_or("direct_free") {
         "legacy" => Ok(LearningMethod::Legacy),
         "direct_free" => Ok(LearningMethod::DirectFree),
         "two_stage" => Ok(LearningMethod::TwoStage),
@@ -294,6 +294,22 @@ pub async fn run_learn(url: &str) -> Result<(), AppError> {
 mod tests {
     use super::*;
 
+    #[test]
+    fn default_learning_and_explicit_compatibility() {
+        assert_eq!(
+            parse_learning_method(None).unwrap(),
+            LearningMethod::DirectFree
+        );
+        for (name, method) in [
+            ("legacy", LearningMethod::Legacy),
+            ("direct_free", LearningMethod::DirectFree),
+            ("two_stage", LearningMethod::TwoStage),
+        ] {
+            assert_eq!(parse_learning_method(Some(name)).unwrap(), method);
+        }
+        assert!(parse_learning_method(Some("unknown")).is_err());
+    }
+
     #[tokio::test]
     async fn live_text_entry_saves_only_execution_text_and_audits_without_credentials() {
         use std::io::{Read, Write};
@@ -308,7 +324,11 @@ mod tests {
                 "fixture-model",
                 vec![analysis, compiled.clone()],
             ),
-            (LearningMethod::DirectFree, "mimo-v2.6-pro", vec![compiled]),
+            (
+                parse_learning_method(None).unwrap(),
+                "mimo-v2.6-pro",
+                vec![compiled],
+            ),
             (
                 LearningMethod::Legacy,
                 "mimo-v2.6-pro",

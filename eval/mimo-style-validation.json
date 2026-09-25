@@ -1,10 +1,10 @@
 {
-  "status": "development_passed_confirmation_running",
+  "status": "adopted",
   "model": "mimo-v2.6-pro",
   "development_run": "mimo-free-v10-json-dev-01",
   "development_checkpoints": 84,
   "library_tests": {
-    "passed": 220,
+    "passed": 221,
     "failed": 0,
     "ignored": 10
   },
@@ -40,5 +40,61 @@
     "checkpoints": 109,
     "status": "passed"
   },
-  "default_changed": false
+  "default_changed": true,
+  "confirmation_run": "mimo-free-v10-json-confirm-01",
+  "confirmation_checkpoints": 61,
+  "default_method": "direct_free",
+  "imported_styles": [
+    {
+      "sample": 1,
+      "path": "styles/自由直评拆解.md",
+      "sha256": "e527f0a06e409d79ab2c84d7b37c2cc2a91db3c14b69680ad5b413e1bfb43027"
+    },
+    {
+      "sample": 2,
+      "path": "styles/自由白描.md",
+      "sha256": "831a9c9d0fbeb7019248acf3d500c84b05943c427082faf52652f9ce27e58f7b"
+    },
+    {
+      "sample": 3,
+      "path": "styles/自由系统解说.md",
+      "sha256": "1459e1679f7aac9b430ee3283a97d2ebf29cd0301908f3b565270c65eaa88330"
+    },
+    {
+      "sample": 4,
+      "path": "styles/自由概念辨析.md",
+      "sha256": "645899aa0a949b1741b1cab73675b7ad7b244d7d8700fa33492ac8cc8f3f691c"
+    },
+    {
+      "sample": 5,
+      "path": "styles/自由冷面杂文.md",
+      "sha256": "41d2c11b643c48dae690c751d584a6ee00ff29f3e721efa48c4f8ab4d0101a6b"
+    }
+  ],
+  "cache_replays": {
+    "mimo-free-v10-json-dev-01": {
+      "cache_hits": 84,
+      "new_requests": 0
+    },
+    "mimo-free-v10-json-confirm-01": {
+      "cache_hits": 61,
+      "new_requests": 0
+    }
+  },
+  "binary_build": "passed",
+  "terminal_checks": 42,
+  "style_library_terminal": {
+    "status": "passed",
+    "count": 8,
+    "names": [
+      "wechat_base",
+      "孙割",
+      "自由冷面杂文",
+      "自由概念辨析",
+      "自由白描",
+      "自由直评拆解",
+      "自由系统解说",
+      "蔡叔"
+    ]
+  }
 }

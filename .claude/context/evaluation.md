@@ -53,7 +53,7 @@ Rubric B v2 取消十标题奖惩；旧 coverage 人评语义不再直接适用�
 - `eval_transfer_audit.rs`：复用15篇历史正文重评，冻结15份Spec在同一新题材的strict/creative权限下各生成15篇；四个裁判机制控制，所有请求留证/续跑。
 - `transfer_report.rs`：分任务五维均分、逐样文配对差异、长度达标率和控制的非目标维度漂移。四项控制通过不代表模型评分稳定或人工校准。
 - `scripts/verify_transfer_audit.py eval/runs/<run_id> --current`：离线核验45行/4控制、原正文/Spec未变、请求匿名输入/生成模板、逐项分数和引用、字数及汇总。
-旧 `eval_single_article_learning_suite` 保留用于历史复现，其混合cleanliness与综合采用标准不再用于判断方法总体优劣。旧4.45/4.15等综合分不能与新分项相减。当前默认legacy作为稳定基线保留，本轮只修正评测，未调提取提示词或默认学习方法。
+旧 `eval_single_article_learning_suite` 保留用于历史复现，其混合cleanliness与综合采用标准不再用于判断方法总体优劣。旧4.45/4.15等综合分不能与新分项相减。当时默认legacy作为稳定基线保留，该轮只修正评测，未调提取提示词或默认学习方法。
 
 评分的结构/引用修复耗尽后，错误响应检查点仍保留；不能反复同ID重放同一无效输出。使用新run_id，仅复用已验证请求，排除失败评分请求并记录复用来源SHA；不删除历史失败，也不手工补分。运输失败且未形成有效响应的请求可继续用原ID续跑。本轮最终完整记录为 `20260918-transfer-audit-v2-retry1`，原 `20260918-transfer-audit-v2` 保留44成功/1格式失败的证据。
 
@@ -67,3 +67,6 @@ Rubric B v2 取消十标题奖惩；旧 coverage 人评语义不再直接适用�
 - Judge仅对task_issues/uncertainties的单字符串做无损单元素列表兼容；分数、理由与引用不补造，缺失证据仍拒绝。
 
 2026-09-23：发布评测先检查Spec，门槛未过写preflight.json并停止正文生成；数值门槛不变。MiMo JSON评分显式使用response_format，参数进入检查点身份，模式改变不能冒用旧请求。当前mimo-free-v10-json-dev-01数值和实现者复核通过，mimo-free-v10-json-confirm-01在新主题确认；模型分数仍不冒充人评。最新结果见docs/2026-09-22-mimo-style-release.md。
+
+## 当前采用结果（2026-09-25）
+MiMo v10开发mimo-free-v10-json-dev-01与新主题确认mimo-free-v10-json-confirm-01均通过固定门槛；分别84/61请求检查点核验通过，缓存复跑均0新请求。五份Spec经实现者复核（不是新增用户人评），已成为独立风格；默认学习改为direct_free。报告见docs/2026-09-22-mimo-style-release.md。两轮评测模型均为mimo-v2.6-pro；用户随后要求切换Flash运行，Pro评分不作为Flash的同模型验证结果。

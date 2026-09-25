@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 670,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative模式允许虚构人物、对话、物件与独立事件。正文覆盖任务给定核心事实（十二把伞、两名工作人员、活动中心入口、免费借伞登记联系方式、沥水架、伞骨弯曲待维修、当日不再借出、试点待看借还记录再定），且均未被改写；虚构的周、林、男孩、老太太与观察细节属权限内新增。未伪造外部统计或真实引用。",
+      "naturalness": "叙述连贯，节奏与细节调用有节制，'借出是快的。问、写、递，三步。''方便是递伞那只手。维护是……那一串动作。'等段落过渡自然。仅'架上六根钢管''离伞顶三十公分'等数字密集处略显清单感，但与参考样文的机制一致，不构成明显模板痕迹。",
+      "source_independence": "无内容迁移。正文为社区共享雨伞的虚构场景，参考样文为港岛私人送别场景，人物、物件、事件、结论均无可指认的对应。句式、人称偏好、数字精确化与短句收束属写法机制，不算污染。",
+      "style_fidelity": "参考样文的核心机制是精确时刻与精确数字（'二零二三年十一月''六点零七分''一亿两千万美元'）、器物细节的工序化展开（'粗面打磨，细面抛光'）、极简对话（'我说好。'）、以及结尾一句冷调收束（'什么都没有发生。'）。正文保留了这些机制：落雨时间'雨在九点四十分落下'、借出时刻'十点零五分''十一点二十分'、'离伞顶三十公分''六根钢管'、'问、写、递，三步'式的动作拆解、极简对白（'林说好。''周说，找人修。'），以及'十二把伞，十一把靠在台边。那把坏的在角落，等一根伞骨。'的安静收束。人称改为第三人称观察视角、场景从私密套房转为公共服务台，属适应新主题的合理转换，整体机制体现充分但未及样文那种私人记忆独白的密度。",
+      "task_completion": "借出（男孩、老太太）、归还后检查（伞骨撑开三次、完好方可再借）、损坏伞单独放置标'待维修'当日未再借出、两名工作人员与十二把伞、登记姓名电话的规则、试点两周后看记录再决定且未宣称成功、以及方便使用与共同维护的对照段落均在文中呈现，无遗漏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

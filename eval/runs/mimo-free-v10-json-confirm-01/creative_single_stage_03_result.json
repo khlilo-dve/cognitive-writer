@@ -1,0 +1,39 @@
+{
+  "id": "creative_single_stage_03",
+  "group": "creative",
+  "sample": 3,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 631,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "核心事实全部按给定材料呈现：活动中心入口、服务台十二把伞、两名工作人员、借伞不收费但登记能打通的号码、归还先上沥水架确认完好再借出、伞骨弯曲的伞标为待维修且当天未重新借出、试点结束后看借还记录再定、未预先宣判成功。开头已标注“虚构场景”。新增内容（如握手、结清代价等比喻、反事实推演）属creative模式允许的修辞性虚构，未新增独立事件、外部统计或真实引用。",
+      "naturalness": "行文连贯，设问、反转叙事与原则清单衔接顺畅，无拼贴感；少量模板痕迹在于编号清单的加粗标签—破折号格式与收尾格言的排布略显程式，但使用自然、不生硬。",
+      "source_independence": "全文内容为共享雨伞服务，与样文的软件架构主题无任何事实或结论重合。迁移的是句式骨架与论证操作（“原本……变成”、编号原则、平衡式收束），这类结构性机制不属于内容污染；“取衡/平衡点”的提法是通用论证表述，且新任务自身要求讨论方便与共同维护的关系。无可指认的内容迁移。",
+      "style_fidelity": "参考文的核心机制几乎全部体现并迁移到新主题：加粗论断式开场（“可最先被省掉的那点麻烦，往往正是这项服务最后能给你的便利。”对应“过早的局部优化，往往是系统性灾难的起点。”）；设问推进（“为什么它被留下了？”对应“为什么这么说？”）；“原本……最终演变成……”的机制反转叙事（对应“原本进程内的一次函数调用，变成了跨网络的 RPC”）；加粗小标题编号原则清单；“这不是为了……而是在……之间取衡”的平衡句收束（对应“不是为了追求理论上的纯粹与完美，而是在……之间寻找动态的平衡点”）；以及格言式尾句（“把伞借出去容易，把方便留下来难。”）。论证动作（反向推演、把半步的受益者指认给下一位使用者）也延续了样文的指认式论证。",
+      "task_completion": "主题与全部核心素材均已覆盖：借出、归还后检查、损坏伞暂停借出、两名工作人员与十二把伞、登记规则、试点尚待观察，并贯穿讨论方便使用与共同维护的关系。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

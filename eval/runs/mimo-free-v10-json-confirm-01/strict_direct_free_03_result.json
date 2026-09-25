@@ -1,0 +1,42 @@
+{
+  "id": "strict_direct_free_03",
+  "group": "strict",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "strict_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 654,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "正文严格使用任务给定素材：活动中心入口服务台、十二把雨伞、两名工作人员登记、居民当天借还、沥水架、伞骨弯曲标待维修当天不借、免费但登记联系方式、试点后看记录再定去留、不宣称一定成功。未见新增人物、时间、数据、事件、对话或外部引用。",
+      "naturalness": "设问—回应的推进自然，加粗句密度克制，段落间有口语化的短句过渡，整体流畅无拼贴感。",
+      "source_independence": "参考样文讨论软件工程中的性能瓶颈与架构腐化，正文讨论社区共享雨伞的借还规矩，无可指认的内容、结论或素材迁移；两者共享的只是加粗句、设问推进、例证展开等功能性写法，不构成污染。",
+      "style_fidelity": "样文的核心机制被完整移植到新主题：反直觉的重新定义（样文“过早的局部优化，往往是系统性灾难的起点”，正文“伞摆上服务台不叫共享，借出与归还都守规矩才叫共享”）、加粗的单句论断、短促的设问推进（样文“为什么这么说？”，正文“伞出去了，然后呢？”“那这是不是添了麻烦？”“试点能成吗？”）、以具体例子展开论证（样文“以微服务拆分为例”，正文以弯曲伞骨为例）、并置式的平衡表述（样文“在资源、时间和复杂性之间寻找动态的平衡点”，正文“方便是借出端的体验，维护是归还端的代价，两者同属一条线”），以及结尾格言式收束（样文“保持克制，尊重简单”，正文“伞可以湿，账不能糊”）。声音、节拍和论证动作都鲜明体现且适应了共享雨伞的新题材。",
+      "task_completion": "借出、归还后沥水架与确认完好、损坏伞单独放置暂停借出、两名工作人员与十二把伞、登记规则、试点观察后再决定是否继续均已覆盖，并明确讨论了方便使用与共同维护的关系。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "“不收费、不押钱、不设门槛”中“不押钱、不设门槛”超出任务明示的“借伞不收费、需要登记联系方式”，可视为对免费无押金规则的同义/逻辑转述，也可能被读作轻微新增政策主张；未据此扣分。",
+      "“够不够用、亏不亏空、规矩守没守住”中的“亏不亏空”隐含借还记录会核算伞的缺损，属对记录用途的推断性表述，证据不足以判定越界。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "case": "single",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "multi",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "ambiguity",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "restore",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "cancel",
+      "status": "passed",
+      "api_calls": 1
+    },
+    {
+      "case": "undo",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "undo_natural",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "undo_llm",
+      "status": "passed",
+      "api_calls": 3
+    },
+    {
+      "case": "outside_id",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "missing_id",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "empty",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "unclosed",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "invalid_json",
+      "status": "passed",
+      "api_calls": 2
+    },
+    {
+      "case": "interrupt",
+      "status": "passed",
+      "api_calls": 2
+    }
+  ]
+}

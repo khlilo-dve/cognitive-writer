@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_01",
+  "group": "creative",
+  "sample": 1,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_01.md",
+  "length": {
+    "above": 0,
+    "below": 15,
+    "characters": 585,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "虚构场景在开头明确标注。虚构居民老周及其评语属允许的虚构人物与对话，未冒充作者现实经历。核心事实（活动中心入口、十二把伞、两名工作人员、借出登记联系方式、归还上沥水架并检查后重新借出、一把伞骨弯曲单独放置标待维修当天不借出、不收费、试点结束后看借还记录再决定且未宣称成功）均与任务一致，未新增外部真实统计或真实引用。",
+      "naturalness": "句段衔接顺畅，短句与金句交替有节制，比喻（“笔尖比伞骨管用”“沥水架先替它把话说完”“共同维护的价钱”）服务论证而非堆砌，读来无拼贴或模板机械感。",
+      "source_independence": "参考样文讨论认知变现与概念收藏家，正文讨论共享雨伞的借还与维护，两者无可指认的内容、结论或素材迁移。句式、人称、让步句、加粗论断句等属风格机制，不构成污染；正文的雨伞、沥水架、老周等内容均由任务或虚构授权产生。",
+      "style_fidelity": "鲜明复现参考样文的核心机制：先抛一句被奉为圭臬的流行说法（“共享”二字自带公益光环）再以短促判断翻转（“光环是宣传语，不是制度。”）；用参考文的分步拆解节拍推进（“先看借出。”“往下拆归还。”）；保留“我承认……可……”的让步动作；把论点压成加粗短断言（“即取即用是幻觉，登记与检查是维护的最小契约。”），并以类似“认知从来不是免费的”的收束金句结尾（“借还记录会自己开口；十二把伞的诚信测试，比口号诚实。”）。这些机制全部适配到共享雨伞新主题，而非照搬内容。",
+      "task_completion": "借出、归还后检查、损坏伞暂停借出、两名工作人员与十二把伞、登记规则、试点尚待观察全部覆盖，并以专门段落讨论方便使用与共同维护的关系，主题完整。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

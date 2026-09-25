@@ -1,0 +1,39 @@
+{
+  "id": "creative_direct_free_03",
+  "group": "creative",
+  "sample": 3,
+  "variant": "direct_free",
+  "body_artifact": "creative_direct_free_03.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 732,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 4.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 5.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative模式明确允许虚构人物、对话与独立事件。正文的工作人员老周、居民嘀咕、对白等均属虚构角色与场景，未冒充作者现实经历，未伪造外部真实统计或真实引用，核心事实（十二把伞、两名工作人员、活动中心入口、沥水架、伞骨弯曲待维修、登记联系方式、试点看记录再定）均按任务给定呈现。",
+      "naturalness": "行文流畅，叙述、议论、对话与清单自然衔接，转折（\"那算不算小题大做\"）有节制，结尾收束有力，无明显拼贴或机械重复。",
+      "source_independence": "参考样文讲软件架构的过早优化与重构，正文讲共享雨伞的借还维护，主题域、论据、例证、结论依据完全不同，无可指认的内容迁移；共有的仅是设问、编号清单、加粗论断等论证操作与短功能句式，不构成污染。",
+      "style_fidelity": "参考样文的核心机制是：先抛出反直觉论断（加粗）→设问切入（\"为什么这么说\"）→具体案例展开→编号原则清单（每条加粗短标签+说明）→收束于克制性的格言式结论。正文对应机制清晰：加粗反直觉句\"这十二把伞撑不过几场雨\"、设问\"那你想过没有\"与\"那算不算小题大做。我倒觉得，它停得不冤。\"、具体案例（沥水架与弯骨伞）、三条编号规则（\"先登记\"\"还了别直接上架\"\"坏了就停\"）、收束于\"方便是别人给的，维护却是自己的\"式的平衡结论。未给5是因为正文加入了参考文中没有的场景化人物与对话段落，且部分段落节奏更偏叙事而非论证，但主要论证动作均保留并适配新主题。",
+      "task_completion": "覆盖全部核心素材：借出与登记、归还后沥水架检查、损坏伞单独放置标待维修且当日不再借出、两名工作人员与十二把伞、借伞免费但登记联系方式、试点看借还记录再定且未预称成功，并以对话与议论呈现方便使用与共同维护的张力。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "creative_single_stage_02",
+  "group": "creative",
+  "sample": 2,
+  "variant": "single_stage",
+  "body_artifact": "creative_single_stage_02.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 656,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "creative模式下允许虚构场景、人物、对话与物件。开头已标注\"虚构场景\"，时间、尺寸、伞骨根数、托盘水滴等细节均属虚构叙述，未改动给定核心事实（十二把伞、两名工作人员、免费登记联系方式、损坏伞当日停借、试点后看记录再定），也未伪造外部真实统计或真实引用。",
+      "naturalness": "整体连贯，短句节奏与场景吻合，细节密度有变化，读来自然。仅中后段的计数句群（\"借出一把，两行字，一分钟。\"与\"借出一分钟。守台两个人，三点到五点半，两个半小时。\"）略有清点式机械重复感，扣一分。",
+      "source_independence": "未发现可证实的内容迁移。相似处限于人称、短句、数字清点和短功能对话（\"我说，好。\"与样文\"我说好\"属短功能词与论证操作），不构成内容污染；雨伞、登记簿、沥水架、待维修标签等均为本任务给定或新造素材，与样文的指甲锉、合同、渡轮无内容对应。",
+      "style_fidelity": "样文的机制被鲜明保留并移用到新主题：第一人称旁观者视角、极短陈述句串联、精确量度与时间戳（\"服务台一张，一米二长\"\"三点二十分，我拿走一把\"，对应样文\"一把灰色的指甲锉，两面\"\"六点零七分\"）、冷淡简短的对话与\"我说，好。\"的应答节拍（样文\"我说好\"）、物件清点式推进（台上九把、十把、十一把，对应样文账目与秒数的清点），以及以一句留白收束（\"没有人来收。\"对应\"什么都没有发生。\"）。信息以物件—动作—数字的顺序展开，克制不解释，论证动作同样是\"呈现而不评断\"。",
+      "task_completion": "核心素材齐备：借出（三点二十分）、归还后撑开检查、弯曲伞骨单独放入纸箱标\"待维修\"且当日不再借出、十二把伞与两名工作人员、登记姓名电话与借还时刻、试点到期末看记录再决定且\"没人说一定继续\"；方便使用（\"借出一分钟\"）与共同维护（\"伞便宜，回来才是难的\"\"还回的伞先上沥水架\"）之间的张力也以场景和对话呈现。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": []
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}

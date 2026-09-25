@@ -1,0 +1,32 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.29s
+     Running unittests src/lib.rs (target/debug/deps/cognitive_writer-01a6798ffc47c41f)
+
+running 1 test
+[request] strict_single_stage_01_outline
+[request] strict_direct_free_02_outline
+[request] strict_direct_free_04_outline
+test eval_free_release::tests::eval_free_style_release_suite has been running for over 60 seconds
+[saved] strict_direct_free_04_outline
+[request] strict_direct_free_05_outline
+[saved] strict_single_stage_01_outline
+[request] creative_single_stage_01_outline
+[saved] strict_direct_free_02_outline
+[request] creative_single_stage_02_outline
+[saved] strict_direct_free_05_outline
+[request] creative_single_stage_03_outline
+[saved] creative_single_stage_01_outline
+[request] creative_direct_free_03_outline
+[saved] creative_single_stage_03_outline
+[request] creative_direct_free_04_outline
+[saved] creative_single_stage_02_outline
+[request] creative_single_stage_04_outline
+[saved] creative_direct_free_03_outline
+[request] creative_single_stage_05_outline
+[saved] creative_single_stage_05_outline
+[request] creative_direct_free_01_outline
+[saved] creative_direct_free_04_outline
+[request] creative_direct_free_05_outline
+[saved] creative_single_stage_04_outline
+[request] creative_direct_free_02_outline
+[saved] creative_direct_free_01_outline
+[request] strict_direct_free_01_outline

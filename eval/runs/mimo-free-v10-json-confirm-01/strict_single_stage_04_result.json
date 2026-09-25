@@ -1,0 +1,42 @@
+{
+  "id": "strict_single_stage_04",
+  "group": "strict",
+  "sample": 4,
+  "variant": "single_stage",
+  "body_artifact": "strict_single_stage_04.md",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 636,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "judgment": {
+    "scores": {
+      "style_fidelity": 5.0,
+      "source_independence": 5.0,
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "task_completion": 5.0
+    },
+    "reasons": {
+      "factual_compliance": "严格模式下所有事实点均能对应回任务给定素材：活动中心入口服务台、十二把伞、两名工作人员登记、当天借出与归还、沥水架晾后确认完好再借、伞骨弯曲单独放置标待维修当天未再借、借伞不收费但登记联系方式、试点后看借还记录再决定续不续且未宣称必成。'把它单独放在一边，标上待维修'与'不收钱不等于没有代价'等属于同义转述与逻辑解释，未新增独立事件、人物履历、精确数字或引用。",
+      "naturalness": "行文连贯，段落间以'同样''相反''反过来''眼下'等自然衔接推进，短句断言与口语化表达（'扑空''拍胸脯''算平的'）使用得当。仅'不是防你，是……''不是小题大做，是……'这类同构句式在短篇内出现两次，略有模板感，故给4。",
+      "source_independence": "未发现样文的具体内容、结论或素材被搬运：财富、金钱、大饼谬论、木匠、程序员、创业、可测量性与可放大性等样文专属内容均未出现。'不是A，是B'式句法、第二人称、概念澄清与驳论属于写作动作与句式，不构成内容污染；十二把伞、两名工作人员等均为任务自带素材。",
+      "style_fidelity": "样文的核心机制在正文中鲜明体现并迁移到新主题：开篇先辨概念（'可接下来得辨清一个概念：不收钱不等于没有代价'对应样文'最好先搞清楚什么是财富''财富与金钱并不是同义词'的定义先行与A≠B澄清）；用具体小场景充当思想实验（湿伞沥水架、弯伞骨对应木匠造椅的具象例证）；设置并反驳误判（'有人会说，坏了换一把就是。不对。'对应样文'但事实完全不是这样'的转折驳论）；以第二人称'你'直面读者、短句断言收束（'护好共享伞。'对应样文结尾格言式一句'Make something people want'）。节拍上也是先澄清、再例证、再反转、最后格言，论证动作完整。",
+      "task_completion": "六项核心素材（借出、归还后沥水架检查、弯骨伞停借、两名工作人员与十二把伞、登记联系方式、试点记录未看尚未定论）全部覆盖，并以专段讨论方便使用与共同维护互相供养的关系，主题聚焦无偏。"
+    },
+    "source_leakage": [],
+    "fact_violations": [],
+    "task_issues": [],
+    "uncertainties": [
+      "'却保证你每次拿到手的伞都是干的、撑得住的'中'干的'是对沥水架作用的推断性发挥，未提供独立事件或新物件，按逻辑解释处理，未计为违规。",
+      "'登记台后站着两名工作人员'添加了站位这一连接性细节，幅度极小，未计为违规。"
+    ]
+  },
+  "judge_calls": 1,
+  "generation_calls": 2,
+  "previous_transfer": null
+}
