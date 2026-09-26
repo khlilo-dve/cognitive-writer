@@ -3,6 +3,7 @@ pub fn character_count(spec: &str) -> usize {
     spec.chars().filter(|c| !c.is_whitespace()).count()
 }
 
+/// Historical compact policy retained for frozen calibration.
 pub fn conciseness_score(count: usize) -> f64 {
     match count {
         400..=600 => 5.0,
@@ -13,11 +14,24 @@ pub fn conciseness_score(count: usize) -> f64 {
     }
 }
 
+pub const DETAILED_MIN: usize = 1500;
+pub const DETAILED_POLICY: &str = "detailed-v1";
+
+/// Length sufficiency only; redundancy and usefulness require separate review.
+pub fn detailed_length_score(count: usize) -> f64 {
+    match count {
+        0..=499 => 1.0,
+        500..=999 => 2.0,
+        1000..=1249 => 3.0,
+        1250..=1499 => 4.0,
+        _ => 5.0,
+    }
+}
+
 /// Free-form execution Markdown; length target is scored separately, not padded into validity.
 pub fn validate_execution_spec(spec: &str) -> Result<(), crate::error::AppError> {
     let count = character_count(spec);
     if count == 0
-        || count > 1000
         || spec.contains("```")
         || spec.contains("~~~")
         || spec.trim_start().starts_with('{')
@@ -28,7 +42,7 @@ pub fn validate_execution_spec(spec: &str) -> Result<(), crate::error::AppError>
         })
     {
         return Err(crate::error::AppError::Parse(
-            "风格执行文本为空、只有标题、含 JSON/代码围栏或超过1000字符".into(),
+            "风格执行文本为空、只有标题、含 JSON/代码围栏".into(),
         ));
     }
     Ok(())
@@ -58,7 +72,27 @@ mod tests {
         ] {
             assert!(validate_execution_spec(invalid).is_err());
         }
-        assert!(validate_execution_spec(&"字".repeat(1001)).is_err());
+        assert!(validate_execution_spec(&"字".repeat(6500)).is_ok());
+    }
+
+    #[test]
+    fn detailed_length_rewards_sufficiency_without_penalizing_long_specs() {
+        for (n, score) in [
+            (0, 1.0),
+            (499, 1.0),
+            (500, 2.0),
+            (999, 2.0),
+            (1000, 3.0),
+            (1249, 3.0),
+            (1250, 4.0),
+            (1499, 4.0),
+            (1500, 5.0),
+            (2000, 5.0),
+            (5000, 5.0),
+            (6500, 5.0),
+        ] {
+            assert_eq!(detailed_length_score(n), score);
+        }
     }
 
     #[test]

@@ -45,7 +45,7 @@
 
 - REPL 局部修改使用完整文章作为模型上下文，只接收目标块替换内容；程序按原文偏移应用并校验范围外内容。位置不明确进入 WaitingForEditTarget，/cancel 仅取消本次修改；/blocks 查看块编号，可直接说“撤销刚才的修改”“恢复修改前”“改回去”撤销上次局部修改，/undo 保留兼容。
 
-- 单篇学习默认 `direct_free`（自由格式，不强制十维）；`STYLE_LEARNING_METHOD` 可显式选择 legacy / direct_free / two_stage。MiMo v10同模型开发与新主题确认均通过既定实用门槛，五份已验证风格独立入库，原风格保留。校验与Rubric B v2仍按400–600非空白字符满分、低于最低扣分；阶段留证在 outputs/style-learning/。结果见 docs/2026-09-22-mimo-style-release.md。模型评分不等于人评或普遍优胜；DS历史分数未用于此次采用。
+- 单篇学习默认 `direct_free`（自由格式，不强制十维）；`STYLE_LEARNING_METHOD` 可显式选择 legacy / direct_free / two_stage。2026-09-26按用户要求改为详细说明：建议2000–5000非空白字符、1500完整度下限，不因过长压缩或拒绝保存；最多一次有证据的补充，证据不足如实提示。当前长度政策detailed-v1，历史400–600校准及MiMo v10采用记录保留原标准，不能当作详细版已完成质量对照。说明见docs/2026-09-26-detailed-style-learning.md；阶段留证在outputs/style-learning/。五份历史验证风格与原风格保留，模型评分不等于人评。
 
 - 当前迁移评测使用 Transfer v2：风格保真、原文独立性、事实合规、自然度、主题完成度独立报告；字数程序统计，不合成采用总分。入口 `eval_transfer_audit_suite`，方案见 docs/superpowers/specs/2026-09-18-transfer-eval-correction.md。
 

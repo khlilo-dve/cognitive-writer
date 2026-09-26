@@ -315,9 +315,9 @@ mod tests {
         use std::io::{Read, Write};
         let analysis = serde_json::json!({"features":[{"observation":"描述", "evidence":["这是原文。"],
                 "rule":"用短句收束。", "condition":"判断结束时", "support":"local"}], "uncertain":[]}).to_string();
+        let detailed_spec = "先铺陈判断，再用短句收束。".repeat(500);
         let compiled =
-            serde_json::json!({"spec":"先铺陈判断，再用短句收束。", "evidence_insufficient":true})
-                .to_string();
+            serde_json::json!({"spec":detailed_spec, "evidence_insufficient":false}).to_string();
         for (method, model, responses) in [
             (
                 LearningMethod::TwoStage,
@@ -392,7 +392,14 @@ mod tests {
             )
             .await
             .unwrap();
-            assert_eq!(spec, "先铺陈判断，再用短句收束。");
+            assert_eq!(
+                spec,
+                if matches!(method, LearningMethod::Legacy) {
+                    "先铺陈判断，再用短句收束。"
+                } else {
+                    &detailed_spec
+                }
+            );
             let requests = server.join().unwrap();
             assert_eq!(requests.len(), expected_calls);
             for request in &requests {

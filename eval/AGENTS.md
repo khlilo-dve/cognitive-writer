@@ -1,5 +1,10 @@
 # Eval 目录约定
 
+## 当前长度政策（2026-09-26）
+新学习/评测采用detailed-v1：建议2000–5000，完整度下限1500，不因过长扣分或拒绝；不足500=1、500–999=2、1000–1249=3、1250–1499=4、1500及以上=5。兼容字段conciseness表示长度充分度，不代表冗余评审；覆盖、可执行性、特征及去污染独立判断。当前Rubric B v3不限制标题数量。
+free_style_release新run登记free-release-v2-detailed及length_policy，候选至少1500，其他分项门槛不变。新提示词/政策须新run，不混用旧分数，旧run离线核验不加--current。以下400–600分档、旧门槛和模型成绩均为历史政策，原始人评不改；eval_calibration_suite继续冻结旧政策。
+
+
 - `baseline/`、`baseline_specs/`、`samples/` 为冻结输入，日常评测只读；建立新基线必须使用新的目录并记录来源。
 - `spec_runs/` 是历史交叉生成产物；缺少生成元数据时不得当作可复现的新版本产物，也不得覆盖。
 - `runs/{run_id}/` 保存本次自动评测：`run_id` 只允许字母、数字、下划线与连字符。设置 `EVAL_RUN_ID` 续跑同一轮，默认使用 `YYYYMMDDTHHMMSSffffffZ` 时间戳。

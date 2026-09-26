@@ -34,6 +34,10 @@ def verify(root, current=False):
     assert summary["status"] == "complete" and summary["model"] == inputs["model"]
     if "structured_response_format" in inputs:
         assert inputs["structured_response_format"] == {"type":"json_object"}
+    policy = inputs.get("length_policy", "compact-v1")
+    assert policy in ("compact-v1", "detailed-v1"), "unknown length policy"
+    def length_ok(text):
+        return count(text) >= 1500 if policy == "detailed-v1" else 400 <= count(text) <= 600
     specs, rows = summary["specs"], summary["rows"]
     assert len(specs) == 10 and {(s["sample"], s["variant"]) for s in specs} == {(i,m) for i in range(1,6) for m in METHODS}
     assert len(rows) == 20 and {(r["sample"], r["variant"], r["group"]) for r in rows} == {(i,m,g) for i in range(1,6) for m in METHODS for g in MODES}
@@ -53,6 +57,11 @@ def verify(root, current=False):
         i,m = s["sample"],s["variant"]
         assert (root / f"spec_{m}_{i:02}.md").read_text() == s["text"]
         assert s["judgment"]["characters_without_whitespace"] == count(s["text"])
+        n = count(s["text"])
+        if policy == "detailed-v1":
+            expected_length_score = 1 if n < 500 else 2 if n < 1000 else 3 if n < 1250 else 4 if n < 1500 else 5
+            assert s["judgment"]["scores"]["conciseness"] == expected_length_score
+
         if inputs["phase"] == "development":
             records = sorted(root.glob(f"learn_{m}_{i:02}_*.json"))
             assert len(records) == s["extraction_calls"]
@@ -103,7 +112,7 @@ def verify(root, current=False):
         for item in r["judgment"]["fact_violations"]:
             assert item["article_quote"] in body
     candidate = [s for s in specs if s["variant"] == "direct_free"]
-    passed = all(400 <= count(s["text"]) <= 600 and s["judgment"]["scores"]["cleanliness"] >= 4 for s in candidate)
+    passed = all(length_ok(s["text"]) and s["judgment"]["scores"]["cleanliness"] >= 4 for s in candidate)
     passed &= all(sum(s["judgment"]["scores"][dim] for s in candidate)/5 >= 4 for dim in ["actionability","distinctiveness"])
     for mode in MODES:
         minima = [4,4.8,4.4 if mode == "strict" else 4.8,3.8,4.8]

@@ -33,9 +33,12 @@ pub(crate) fn assess_specs(specs: &[Spec]) -> Result<Value, AppError> {
     for s in &candidates {
         let n = crate::spec_quality::character_count(&s.text);
         if crate::spec_quality::validate_execution_spec(&s.text).is_err()
-            || !(400..=600).contains(&n)
+            || n < crate::spec_quality::DETAILED_MIN
         {
-            failures.push(format!("Spec{}格式或400–600字目标未达标（{n}）", s.sample));
+            failures.push(format!(
+                "Spec{}格式或至少1500字符目标未达标（{n}）",
+                s.sample
+            ));
         }
         if s.judgment.scores.cleanliness < 4.0 {
             failures.push(format!("Spec{}去污染低于4", s.sample));
@@ -179,7 +182,7 @@ pub(crate) fn report(
     model: &str,
 ) -> String {
     let mut md = format!(
-        "# 自由格式学习发布评测\n\n阶段：{phase}；模型：{model}。固定Rubric B v2和Transfer v2，不合成总分。\n\n门槛通过：{}\n\n| 模式 | 方法 | 风格 | 原文独立 | 事实 | 自然度 | 素材完成 | 长度达标 |\n|---|---|---:|---:|---:|---:|---:|---:|\n",
+        "# 自由格式学习发布评测\n\n阶段：{phase}；模型：{model}。固定Rubric B v3（detailed-v1）和Transfer v2，不合成总分。\n\n门槛通过：{}\n\n| 模式 | 方法 | 风格 | 原文独立 | 事实 | 自然度 | 素材完成 | 长度达标 |\n|---|---|---:|---:|---:|---:|---:|---:|\n",
         gate["passed"]
     );
     for mode in ["strict", "creative"] {
@@ -247,7 +250,7 @@ mod tests {
                 specs.push(Spec {
                     sample,
                     variant: variant.into(),
-                    text: "规则".repeat(250),
+                    text: "规则".repeat(1000),
                     extraction_calls: 1,
                     judgment,
                 });
@@ -263,6 +266,8 @@ mod tests {
     #[test]
     fn preflight_rejects_pollution_and_length_before_articles_exist() {
         let (mut specs, _) = fixtures();
+        assert_eq!(assess_specs(&specs).unwrap()["passed"], true);
+        specs[1].text = "详细规则".repeat(2000);
         assert_eq!(assess_specs(&specs).unwrap()["passed"], true);
         specs[1].judgment.scores.cleanliness = 3.0;
         specs[3].text = "字".repeat(636);

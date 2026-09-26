@@ -101,7 +101,7 @@ def check_case(name, state=None, action="interrupt", model=False, restore_only=F
             shutil.copytree(ROOT / "prompts", work / "prompts")
             snapshot = {"state":state}
             if state == "WaitingForStyleName":
-                snapshot["pending_style_content"] = "已提取的抽象规则" * (1000 if action == "write_failure" else 1)
+                snapshot["pending_style_content"] = "已提取的抽象规则" * (1000 if action == "write_failure" else 800 if action == "name" else 1)
             if state == "WaitingForDeleteStyleConfirmation":
                 snapshot["pending_delete_name"] = "保留"
             if state == "WaitingForOutline":
@@ -150,7 +150,7 @@ def check_case(name, state=None, action="interrupt", model=False, restore_only=F
                 if action == "write_failure":
                     assert not session.exists()
                 elif action == "name":
-                    assert (styles / "写一篇.md").read_text() == "已提取的抽象规则"
+                    assert (styles / "写一篇.md").read_text() == snapshot["pending_style_content"]
                     assert not session.exists()
                 elif state:
                     saved = json.loads(session.read_text())

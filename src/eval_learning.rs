@@ -1,6 +1,6 @@
 //! Matched current-model comparison: frozen single-stage prompt versus evidence + compilation.
 use crate::error::AppError;
-use crate::eval::{LearnJudgeResult, parse_learn_judgment, score_learn_judgment};
+use crate::eval::{LearnJudgeResult, parse_learn_judgment, score_detailed_learn_judgment};
 use crate::eval_store::{Store, write_json};
 use crate::generate::{outline_system_prompt, render_prompt, style_system_prompt};
 use crate::style_learning::{LearningPrompts, extract_with};
@@ -126,7 +126,7 @@ async fn variant(store: &Store, input: &Inputs, case: usize, new: bool) -> Resul
             parse_learn_judgment(s).map(|_| ())
         })
         .await?;
-    let judgment = score_learn_judgment(&raw, &spec)?;
+    let judgment = score_detailed_learn_judgment(&raw, &spec)?;
     let outline = store
         .call(
             &format!("{name}_outline"),
@@ -206,7 +206,7 @@ fn decision(rows: &[Row]) -> Value {
 }
 fn report(rows: &[Row], model: &str, verdict: &Value) -> String {
     let mut md = format!(
-        "# 单篇风格学习对照\n\n模型：{model}；Rubric B v2。候选按本轮提示词在当前模型生成；未变化的旧请求可从同模型前轮精确复用，样文/主题/生成包装/Judge一致。每项一次采样，五种风格各迁移到同一个图书馆主题；不足以证明多主题泛化。模型兼任生成与评审，分数无人评背书。\n\n| 样本 | 方法 | 字数 | Spec均分 | 非长度均分 | 去污染 | 换题均分 | 提取请求数 | 提取耗时秒 |\n|---|---|---:|---:|---:|---:|---:|---:|---:|\n"
+        "# 单篇风格学习对照\n\n模型：{model}；Rubric B v3（detailed-v1）。候选按本轮提示词在当前模型生成；未变化的旧请求可从同模型前轮精确复用，样文/主题/生成包装/Judge一致。每项一次采样，五种风格各迁移到同一个图书馆主题；不足以证明多主题泛化。模型兼任生成与评审，分数无人评背书。\n\n| 样本 | 方法 | 字数 | Spec均分 | 非长度均分 | 去污染 | 换题均分 | 提取请求数 | 提取耗时秒 |\n|---|---|---:|---:|---:|---:|---:|---:|---:|\n"
     );
     for r in rows {
         md.push_str(&format!(
@@ -253,7 +253,7 @@ pub async fn run() -> Result<(), AppError> {
         "old_prompt":input.old,"new_prompts":input.new,"judge":input.judge,"transfer_judge":input.transfer,
         "samples":input.samples,"topic":TOPIC,"outline_template":outline_system_prompt("{style}"),
         "body_template":style_system_prompt("{style}"),"render_template":render_prompt("{outline}","{idea}"),
-        "length_policy":"non-whitespace Unicode scalars; 400-600=5; 300-399/601-700=4; 200-299/701-850=3; 100-199/851-1000=2; otherwise=1"});
+        "length_policy":crate::spec_quality::DETAILED_POLICY});
     if let Some(prompt) = &input.direct {
         frozen["direct_prompt"] = json!(prompt);
     }

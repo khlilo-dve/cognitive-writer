@@ -1,6 +1,6 @@
 //! Evidence-backed single-article extraction. The execution Markdown has no fixed headings.
 use crate::error::AppError;
-use crate::spec_quality::{character_count, validate_execution_spec};
+use crate::spec_quality::{DETAILED_MIN, character_count, validate_execution_spec};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::future::Future;
@@ -152,16 +152,16 @@ where
         match parse_compiled(&raw) {
             Ok(compiled) => {
                 let count = character_count(&compiled.spec);
-                let outside = !(400..=600).contains(&count);
-                if outside && attempt == 0 && !(count < 400 && compiled.evidence_insufficient) {
+                let outside = count < DETAILED_MIN;
+                if outside && attempt == 0 && !compiled.evidence_insufficient {
                     input = format!(
-                        "特征清单：{clean_input}\n上次输出：{raw}\n程序统计 spec 为 {count} 个非空白字符，目标400–600。仅根据已有证据修订；不足时标记证据不足，不凑字。输出完整 JSON。"
+                        "特征清单：{clean_input}\n上次输出：{raw}\n程序统计 spec 为 {count} 个非空白字符，完整度下限1500，建议2000–5000。补充已有证据支持的操作、条件、误用纠正与检查方法；不足时标记证据不足，不凑字。输出完整 JSON。"
                     );
                     continue;
                 }
                 let mut warnings = Vec::new();
                 if outside {
-                    warnings.push(format!("风格为 {count} 个非空白字符，未达400–600目标，长度评分已扣分；未强行填充或截断。"));
+                    warnings.push(format!("风格为 {count} 个非空白字符，低于1500字符完整度下限；需要更详细的操作、条件和检查方法，未强行填充。"));
                 }
                 if compiled.evidence_insufficient {
                     warnings.push("样文证据有限，已保留有依据的规则。".into());
@@ -204,21 +204,17 @@ where
         match parse_compiled(&raw) {
             Ok(compiled) => {
                 let count = character_count(&compiled.spec);
-                let outside = !(400..=600).contains(&count);
-                if outside && attempt == 0 && !(count < 400 && compiled.evidence_insufficient) {
-                    let adjustment = if count > 600 {
-                        "请压缩至约480–520字符：合并重复边界，删去次要说明和重复规则，保留核心声音。"
-                    } else {
-                        "仅补充有证据的表达操作至400–600字符，不凑字；证据确实不足时如实标记。"
-                    };
+                let outside = count < DETAILED_MIN;
+                if outside && attempt == 0 && !compiled.evidence_insufficient {
+                    let adjustment = "补充已有证据支持的操作、适用条件、误用纠正和检查方法，建议2000–5000字符；证据确实不足时如实标记，不凑字。";
                     input = format!(
-                        "原始样文：{source}\n上次输出：{raw}\n程序统计 spec 为 {count} 个非空白字符，目标400–600。{adjustment}重新输出完整 JSON。"
+                        "原始样文：{source}\n上次输出：{raw}\n程序统计 spec 为 {count} 个非空白字符，完整度下限1500。{adjustment}重新输出完整 JSON。"
                     );
                     continue;
                 }
                 let mut warnings = Vec::new();
                 if outside {
-                    warnings.push(format!("风格为 {count} 个非空白字符，未达400–600目标，长度评分已扣分；未强行填充或截断。"));
+                    warnings.push(format!("风格为 {count} 个非空白字符，低于1500字符完整度下限；需要更详细的操作、条件和检查方法，未强行填充。"));
                 }
                 if compiled.evidence_insufficient {
                     warnings.push("样文证据有限，已保留有依据的规则。".into());
@@ -334,15 +330,15 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn direct_length_repair_uses_the_correct_direction() {
-        for (length, expected) in [(700, "压缩"), (300, "补充")] {
+    async fn short_direct_spec_is_expanded_once() {
+        for (length, expected) in [(700, "补充"), (1499, "补充")] {
             let mut calls = 0;
             let result = extract_direct_with("样文", "prompt", |_, _, input| {
                 calls += 1;
                 if calls == 2 {
                     assert!(input.contains(expected));
                 }
-                let size = if calls == 1 { length } else { 500 };
+                let size = if calls == 1 { length } else { 2000 };
                 std::future::ready(Ok(
                     json!({"spec":"字".repeat(size),"evidence_insufficient":false}).to_string(),
                 ))
@@ -350,10 +346,36 @@ mod tests {
             .await
             .unwrap();
             assert_eq!(calls, 2);
-            assert_eq!(result.spec, "字".repeat(500));
+            assert_eq!(result.spec, "字".repeat(2000));
             assert!(result.warnings.is_empty());
         }
     }
+    #[tokio::test]
+    async fn detailed_specs_are_never_shortened_in_either_pipeline() {
+        let spec = "说明操作、使用条件与检查方法。".repeat(450);
+        let raw = json!({"spec":spec,"evidence_insufficient":false}).to_string();
+        let result = extract_direct_with("样文", "prompt", |_, _, _| {
+            std::future::ready(Ok(raw.clone()))
+        })
+        .await
+        .unwrap();
+        assert_eq!(result.calls, 1);
+        assert_eq!(result.spec, spec);
+        assert!(result.warnings.is_empty());
+        let result = extract_with("秘密原句", &prompts(), |stage, _, _| {
+            std::future::ready(Ok(if stage.starts_with("analysis") {
+                analysis()
+            } else {
+                raw.clone()
+            }))
+        })
+        .await
+        .unwrap();
+        assert_eq!(result.calls, 2);
+        assert_eq!(result.spec, spec);
+        assert!(result.warnings.is_empty());
+    }
+
     #[tokio::test]
     async fn direct_variant_uses_same_validator_and_repair_limit() {
         let mut calls = 0;

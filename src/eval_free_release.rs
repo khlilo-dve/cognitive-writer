@@ -1,6 +1,6 @@
 //! Iterate the free-form learner under fixed judges, then confirm on a preregistered topic.
 use crate::error::AppError;
-use crate::eval::{parse_learn_judgment, score_learn_judgment};
+use crate::eval::{parse_learn_judgment, score_detailed_learn_judgment};
 use crate::eval_store::{Store, write_json};
 use crate::eval_transfer_audit::{Job, Row, run_job};
 use crate::free_style_gate::Spec;
@@ -67,6 +67,8 @@ impl Input {
                 || summary["gate"]["passed"] != true
                 || frozen["phase"] != "development"
                 || frozen["learn_prompt"] != learn
+                || frozen["length_policy"] != crate::spec_quality::DETAILED_POLICY
+                || frozen["spec_judge"] != read("prompts/eval_judge_learn.md")?
             {
                 return Err(AppError::Parse(
                     "确认阶段必须使用已过开发门槛且提示词未变的Spec".into(),
@@ -129,7 +131,7 @@ async fn learn_case(store: &Store, input: &Input, sample: usize) -> Result<Vec<S
         specs.push(Spec {
             sample,
             variant: variant.into(),
-            judgment: score_learn_judgment(&raw, &learned.spec)?,
+            judgment: score_detailed_learn_judgment(&raw, &learned.spec)?,
             text: learned.spec,
             extraction_calls: learned.calls,
         });
@@ -154,7 +156,8 @@ pub async fn run() -> Result<(), AppError> {
         "model":store.model,"learn_prompt":input.learn,"legacy_prompt":read("eval/fixtures/learn_style_single_v1.md")?,"spec_judge":input.judge,"transfer_judge":input.transfer,
         "sources":input.sources,"all_preregistered_tasks":input.tasks,"confirmed_specs":input.confirmed_specs,
         "outline_template":outline_system_prompt("{style}"),"body_template":style_system_prompt("{style}"),"render_template":render_prompt("{outline}","{idea}"),
-        "criteria":"free-release-v1: Spec 400-600, actionability/distinctiveness mean>=4, every cleanliness>=4; per task style>=4, source>=4.8, facts strict>=4.4/creative>=4.8, naturalness>=3.8, completion>=4.8, key scores>2, length>=4/5"});
+        "length_policy":crate::spec_quality::DETAILED_POLICY,
+        "criteria":"free-release-v2-detailed: Spec >=1500 (no upper penalty), actionability/distinctiveness mean>=4, every cleanliness>=4; per task style>=4, source>=4.8, facts strict>=4.4/creative>=4.8, naturalness>=3.8, completion>=4.8, key scores>2, length>=4/5"});
     if let Some(format) = crate::llm::json_response_format(&store.model) {
         snapshot["structured_response_format"] = format;
     }

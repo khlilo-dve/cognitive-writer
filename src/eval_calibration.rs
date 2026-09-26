@@ -4,7 +4,7 @@ use serde_json::{Value, json};
 
 use crate::error::AppError;
 use crate::eval::{LearnJudgeResult, parse_learn_judgment, score_learn_judgment};
-use crate::eval_runs::spec_checks;
+use crate::eval_runs::legacy_spec_checks as spec_checks;
 use crate::eval_store::{Store, write_json};
 
 const HISTORY: &str = "eval/runs/20260905-auto-v1";

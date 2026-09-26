@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "length_policy": "detailed-v1",
+  "recommended_characters": [
+    2000,
+    5000
+  ],
+  "minimum_characters": 1500,
+  "upper_length_rejection": false,
+  "library_tests": {
+    "passed": 229,
+    "failed": 0,
+    "ignored": 10
+  },
+  "test_scope": "current working tree including pre-existing research changes; commit limited to single-article detail policy",
+  "binary_build": "passed",
+  "terminal_checks": 17,
+  "long_restore_save_characters": 6400,
+  "historical_run_integrity": {
+    "mimo-free-v10-json-dev-01": 84,
+    "mimo-free-v10-json-confirm-01": 61
+  },
+  "online_quality_comparison_run": false,
+  "original_styles_and_frozen_inputs_modified": false
+}

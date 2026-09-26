@@ -5,7 +5,7 @@ use serde_json::{Value, json};
 use crate::error::AppError;
 use crate::eval::{
     TEST_SET, article_body, article_judge_input, parse_article_judgment, parse_learn_judgment,
-    score_learn_judgment,
+    score_detailed_learn_judgment,
 };
 use crate::eval_store::{Store, write_json};
 use crate::generate::{outline_system_prompt, render_prompt, style_system_prompt};
@@ -92,13 +92,29 @@ async fn judge_b(
             parse_learn_judgment(s).map(|_| ())
         })
         .await?;
-    let mut result = serde_json::to_value(score_learn_judgment(&raw, spec)?)
+    let mut result = serde_json::to_value(score_detailed_learn_judgment(&raw, spec)?)
         .map_err(|e| AppError::Parse(e.to_string()))?;
     result["mechanical_checks"] = spec_checks(sample, spec);
     Ok(result)
 }
 
 pub(crate) fn spec_checks(sample: &str, spec: &str) -> Value {
+    let mut checks = legacy_spec_checks(sample, spec);
+    let n = crate::spec_quality::character_count(spec);
+    checks
+        .as_object_mut()
+        .unwrap()
+        .remove("within_600_characters");
+    checks["within_target_range"] = json!(n >= crate::spec_quality::DETAILED_MIN);
+    checks["execution_text_valid"] =
+        json!(crate::spec_quality::validate_execution_spec(spec).is_ok());
+    checks["deterministic_conciseness"] = json!(crate::spec_quality::detailed_length_score(n));
+    checks["length_policy"] = json!(crate::spec_quality::DETAILED_POLICY);
+    checks["note"] = json!("长度只检查充分度下限；冗余与可执行性另评。12字重合仅为线索。");
+    checks
+}
+
+pub(crate) fn legacy_spec_checks(sample: &str, spec: &str) -> Value {
     let compact = |s: &str| s.chars().filter(|c| !c.is_whitespace()).collect::<String>();
     let source = compact(sample);
     let chars: Vec<_> = compact(spec).chars().collect();
@@ -112,7 +128,7 @@ pub(crate) fn spec_checks(sample: &str, spec: &str) -> Value {
     json!({"characters_without_whitespace": chars.len(), "within_600_characters": chars.len() <= 600,
         "within_target_range": (400..=600).contains(&chars.len()),
         "deterministic_conciseness": crate::spec_quality::conciseness_score(chars.len()),
-        "execution_text_valid": crate::spec_quality::validate_execution_spec(spec).is_ok(),
+        "execution_text_valid": chars.len() <= 1000 && crate::spec_quality::validate_execution_spec(spec).is_ok(),
         "format_policy": "free-form-v1", "source_overlap_12_char_examples": overlaps,
         "note": "连续 12 字重合仅为复核线索，不能识别换词转述的语义污染；精简度由代码按长度分档，其余维度由模型判断。"})
 }
@@ -360,7 +376,7 @@ pub async fn run(mode: &str) -> Result<(), AppError> {
     let store = Store::from_env()?;
     store.freeze_inputs(&json!({"schema":1, "model":store.model, "topics":TEST_SET,
         "style":input.style, "judge_a":input.judge_a, "judge_b":input.judge_b,
-        "learn":input.learn, "baseline_articles":input.articles,
+        "length_policy":crate::spec_quality::DETAILED_POLICY, "learn":input.learn, "baseline_articles":input.articles,
         "samples":input.samples, "baseline_specs":input.specs,
         "outline_template":outline_system_prompt("{style}"),
         "body_template":style_system_prompt("{style}"),
@@ -442,6 +458,10 @@ mod tests {
             "## 标题\n这是一整句仅属于样文的特定内容。",
         );
         assert_eq!(checks["execution_text_valid"], true);
+        let detailed = spec_checks("", &"字".repeat(6500));
+        assert_eq!(detailed["execution_text_valid"], true);
+        assert_eq!(detailed["within_target_range"], true);
+        assert_eq!(detailed["deterministic_conciseness"], 5.0);
         assert!(
             !checks["source_overlap_12_char_examples"]
                 .as_array()
@@ -449,7 +469,7 @@ mod tests {
                 .is_empty()
         );
         assert_eq!(
-            spec_checks("", &"字".repeat(601))["within_600_characters"],
+            legacy_spec_checks("", &"字".repeat(601))["within_600_characters"],
             false
         );
     }

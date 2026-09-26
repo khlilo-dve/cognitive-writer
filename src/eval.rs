@@ -100,6 +100,18 @@ pub(crate) fn score_learn_judgment(raw: &str, spec: &str) -> Result<LearnJudgeRe
     Ok(result)
 }
 
+/// Current detailed policy; frozen calibration still uses score_learn_judgment.
+pub(crate) fn score_detailed_learn_judgment(
+    raw: &str,
+    spec: &str,
+) -> Result<LearnJudgeResult, AppError> {
+    let mut result = score_learn_judgment(raw, spec)?;
+    result.scores.conciseness =
+        crate::spec_quality::detailed_length_score(crate::spec_quality::character_count(spec));
+    result.overall_score = result.scores.mean();
+    Ok(result)
+}
+
 // ── eval 1：风格提示词（生成端）───────────────────────────────────────
 
 /// LLM-Judge 对单篇文章的 6 维度评分
@@ -283,7 +295,7 @@ pub async fn judge_learn_spec(
     })
     .await?;
 
-    score_learn_judgment(&raw_resp, extracted_spec)
+    score_detailed_learn_judgment(&raw_resp, extracted_spec)
 }
 
 /// 评测提取提示词：喂一篇风格鲜明的文章 → 提取 spec，输出 spec 精简度指标。
@@ -351,6 +363,41 @@ mod tests {
         v["scores"]["coverage"] = serde_json::json!(6);
         assert!(parse_learn_judgment(&v.to_string()).is_err());
         assert!(parse_learn_judgment("not json").is_err());
+    }
+
+    #[test]
+    fn detailed_and_historical_length_policies_do_not_mix() {
+        let raw = serde_json::json!({"scores":{"coverage":4,"actionability":4,"conciseness":2,
+            "distinctiveness":4,"cleanliness":4},"overall_score":0,
+            "structure_analysis":"s","fidelity_analysis":"f","negative_hits":[],
+            "improvement_suggestions":"i"})
+        .to_string();
+        let long = "说明".repeat(3000);
+        let detailed = score_detailed_learn_judgment(&raw, &long).unwrap();
+        assert_eq!(detailed.scores.conciseness, 5.0);
+        assert_eq!(detailed.model_conciseness, Some(2.0));
+        assert_eq!(detailed.overall_score, 4.2);
+        assert_eq!(
+            score_learn_judgment(&raw, &long)
+                .unwrap()
+                .scores
+                .conciseness,
+            1.0
+        );
+        assert_eq!(
+            score_detailed_learn_judgment(&raw, &"字".repeat(500))
+                .unwrap()
+                .scores
+                .conciseness,
+            2.0
+        );
+        assert_eq!(
+            score_learn_judgment(&raw, &"字".repeat(500))
+                .unwrap()
+                .scores
+                .conciseness,
+            5.0
+        );
     }
 
     macro_rules! suite {
