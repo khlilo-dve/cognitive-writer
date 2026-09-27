@@ -69,8 +69,28 @@ pub(crate) async fn call_llm_with_format(
     user_content: &str,
     response_format: Option<&serde_json::Value>,
 ) -> Result<String, AppError> {
-    let url = format!("{}/chat/completions", base_url.trim_end_matches('/'));
+    let body = request_body(model, system_prompt, user_content, response_format)?;
+    let raw_body = post_chat(client, base_url, api_key, &body).await?;
+    let chat_resp: ChatResponse = serde_json::from_str(&raw_body).map_err(|e| {
+        AppError::Parse(format!(
+            "{}\n原始响应: {}",
+            e,
+            raw_body.chars().take(500).collect::<String>()
+        ))
+    })?;
+    chat_resp
+        .choices
+        .first()
+        .map(|c| c.message.content.clone())
+        .ok_or(AppError::EmptyChoices)
+}
 
+pub(crate) fn request_body(
+    model: &str,
+    system_prompt: &str,
+    user_content: &str,
+    response_format: Option<&serde_json::Value>,
+) -> Result<serde_json::Value, AppError> {
     let body = ChatRequest {
         model: model.to_string(),
         messages: vec![
@@ -89,6 +109,16 @@ pub(crate) async fn call_llm_with_format(
     if let Some(format) = response_format {
         body["response_format"] = format.clone();
     }
+    Ok(body)
+}
+
+pub(crate) async fn post_chat(
+    client: &Client,
+    base_url: &str,
+    api_key: &str,
+    body: &serde_json::Value,
+) -> Result<String, AppError> {
+    let url = format!("{}/chat/completions", base_url.trim_end_matches('/'));
     let resp = client
         .post(&url)
         .header("Authorization", format!("Bearer {}", api_key))
@@ -111,19 +141,7 @@ pub(crate) async fn call_llm_with_format(
         });
     }
 
-    let chat_resp: ChatResponse = serde_json::from_str(&raw_body).map_err(|e| {
-        AppError::Parse(format!(
-            "{}\n原始响应: {}",
-            e,
-            raw_body.chars().take(500).collect::<String>()
-        ))
-    })?;
-
-    chat_resp
-        .choices
-        .first()
-        .map(|c| c.message.content.clone())
-        .ok_or(AppError::EmptyChoices)
+    Ok(raw_body)
 }
 
 // ── Spinner ─────────────────────────────────────────────────────────

@@ -1,0 +1,67 @@
+{
+  "count": 7,
+  "items": [
+    {
+      "field_id": "fldhC9JllD",
+      "field_name": "topic",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldxqHIHLX",
+      "field_name": "split",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldKhF5OcA",
+      "field_name": "characters",
+      "style": {
+        "percentage": false,
+        "precision": 2,
+        "thousands_separator": false,
+        "type": "plain"
+      },
+      "type": "number"
+    },
+    {
+      "field_id": "fld7B6Cjb6",
+      "field_name": "source_url",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fld7VcHfya",
+      "field_name": "article_id",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldlCABiWS",
+      "field_name": "author",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldUj1ucdM",
+      "field_name": "title",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    }
+  ],
+  "limit": 100,
+  "offset": 0,
+  "total": 7
+}

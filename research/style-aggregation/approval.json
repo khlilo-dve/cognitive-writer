@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "approved_at": "2026-09-26",
+  "authority": "user explicitly accepted the proposed 100 CNY total budget",
+  "currency": "CNY",
+  "total_limit_cny": 100,
+  "pilot_limit_cny": 5,
+  "pilot_included_in_total": true,
+  "model_roles": {"analysis": "mimo-v2.6-pro", "writer": "mimo-v2.6-flash"}
+}

@@ -5,3 +5,4 @@ outputs/
 CLAUDE.md
 
 .claude/settings.local.json
+research/style-aggregation/.execution.lock

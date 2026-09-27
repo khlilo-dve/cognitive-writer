@@ -1,0 +1,48 @@
+{
+  "count": 5,
+  "items": [
+    {
+      "field_id": "fldbsENWNU",
+      "field_name": "meaning",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldOfck7mX",
+      "field_name": "next_step",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldCYvupkQ",
+      "field_name": "event_id",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldNz03zU7",
+      "field_name": "kind",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fld1wwKzTn",
+      "field_name": "observation",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    }
+  ],
+  "limit": 100,
+  "offset": 0,
+  "total": 5
+}

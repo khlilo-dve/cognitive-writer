@@ -1,0 +1,6 @@
+{
+  "acquired_at": "2026-09-25T20:10:02.393983+00:00",
+  "selection_sha256": "e5d1fd350b372270107bcf35a0d4802678226a16786804d89d795b83506420cf",
+  "script_sha256": "0d0d88ad80adab173722ae4c995aafc35be824dc0168dceeead29ee02d114d8e",
+  "cleaning": "HTML p tags; explicit start/end boundaries; no content rewriting"
+}

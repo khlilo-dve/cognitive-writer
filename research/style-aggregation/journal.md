@@ -15,6 +15,28 @@
 - **不能据此说明**：作者可分、聚合有效、十篇足够、Flash 生成已达标。这些都尚未实验。
 - **下一步**：预算确认后进入 P1；在发起批量请求前完成样本核验、费用追踪与断点验证。
 
+## E0002 · 2026-09-26 · 预算接受与模型咨询（decision）
+
+用户明确接受100元API总预算、试跑最多5元包含其中。随后询问Lite及MiMo/DS选择：核对官方资料，Lite限Coding，不替代应用批量写作调用；当前继续Pro分析、Flash生成。DS4.1 Flash官方输出价格空闲4/高峰8元每百万，比MiMo Flash的2元高；尚无同条件文风对照，不宣称质量胜负。见approval.json、budget.md、model-choice.md。
+
+## E0003 · 2026-09-26 · 拒收编者后记（negative / data_quality）
+
+采集24篇候选时，wzq-05《后记》实际署名汪朝，正文谈“父亲的作品”。它不能代表汪曾祺，已从正式清单剔除，原始候选仍留证；以中国作家网署名明确的wzq-05b替换。另修复网页gb18030解码、段落换行和独立日期清洗。24篇现已按网页归属/边界核验并保存SHA，不冒充出版社纸本校勘。见datasets/review-v1.md及authors-v1/manifest.json。该步骤没有模型费用。
+
+## E0004 · 2026-09-26 · 详细版基线同步（method_change）
+
+用户另一已完成修改fc5c919把单篇Spec改为2000–5000字目标。此时尚无研究模型结果，故在第一次付费提取前同步协议为v2_detailed，Pro输出上限16384。原23.022元估算过时，新增详细版基准43.548元，计划50–90元，仍以100元为总上限。保留旧CSV与Git历史，不把短Spec旧评分当新基线证据。
+
+## E0005 · 2026-09-26 · P1四篇独立提取与恢复跑通（engineering_confirmed）
+
+run：p1-detailed-pilot-01。固定wxb-01/02、wzq-01/02，每篇只见本篇正文。四份Style为2080/1964/2034/2659个非空白字符，均无修复请求；其中1964低于建议目标2000，但超过1500完整度参考，不能为凑字重抽样。
+
+四次Pro响应均记录模型、usage和完成状态；不保存reasoning_content。按未缓存单价保守估算合计0.126534元，无未结费用预留。原命令复跑四次均命中缓存，0新请求。证据：runs/p1-detailed-pilot-01/summary.json、requests/、usage-ledger.json。仅证明独立提取、计费与恢复链可用，不证明风格判断正确或多文章聚合有效。
+
+## E0006 · 2026-09-26 · 飞书权限与写入差异修复（engineering_failure → resolved）
+
+Base由bot创建；用户完成过期登录重授权后，已给当前用户full_access，并用user身份base-get核验。创建Runs、Articles、Journal、Styles及概况仪表盘。CLI更新记录响应不带record_id，早期同步在第一条写入后停止；通过远端record-list找回真实ID，新增幂等回读恢复，未通过重建记录掩盖失败。Windows.cmd转发会损坏内联JSON参数，改用WSL中的node直接传argv。24篇样本已同步；后续同步严格核对字段类型与回读值。证据：lark/resources.json、last-sync.json。
+
 ## 新事件模板
 
 ```text

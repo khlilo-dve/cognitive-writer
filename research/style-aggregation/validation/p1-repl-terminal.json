@@ -1,0 +1,71 @@
+{
+  "binary": "/home/khlilo/cognitive-writer/target/debug/cognitive-writer",
+  "checks": [
+    {
+      "case": "failed_write_is_atomic",
+      "status": "passed",
+      "exit_seconds": 0.021,
+      "api_calls": 0
+    },
+    {
+      "case": "idle_ctrl_c",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "naming_ctrl_c",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "delete_ctrl_c",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "restore_prompt_ctrl_c",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "naming_eof",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "delete_eof",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "restored_naming_is_local",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 0
+    },
+    {
+      "case": "classification_ctrl_c",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 1
+    },
+    {
+      "case": "rendering_ctrl_c",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 1
+    },
+    {
+      "case": "old_outline_render",
+      "status": "passed",
+      "exit_seconds": 0.02,
+      "api_calls": 1
+    }
+  ]
+}

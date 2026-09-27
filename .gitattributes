@@ -1,0 +1,3 @@
+# Preserve acquired HTML byte-for-byte, including legacy encodings and publisher whitespace.
+/research/style-aggregation/datasets/*/raw/*.html -text -diff
+/research/style-aggregation/datasets/*/sources/*.md -text

@@ -1,0 +1,74 @@
+{
+  "completed_at": "2026-09-26T14:14:55.596720006+00:00",
+  "rows": [
+    {
+      "article_id": "wxb-01",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2080,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-02",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 1964,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-01",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2034,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-02",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2659,
+      "status": "complete",
+      "warnings": []
+    }
+  ],
+  "stage": "single",
+  "status": "complete",
+  "usage": {
+    "entries": {
+      "p1-detailed-pilot-01/wxb-01-direct_0": {
+        "actual_micro": 21390,
+        "phase": "pilot",
+        "reserved_micro": 130770,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wxb-02-direct_0": {
+        "actual_micro": 30774,
+        "phase": "pilot",
+        "reserved_micro": 135504,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wzq-01-direct_0": {
+        "actual_micro": 36033,
+        "phase": "pilot",
+        "reserved_micro": 142827,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wzq-02-direct_0": {
+        "actual_micro": 38337,
+        "phase": "pilot",
+        "reserved_micro": 135870,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      }
+    },
+    "occupied_cny": 0.126534,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.126534
+  }
+}

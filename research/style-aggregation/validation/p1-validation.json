@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-09-28",
+  "library_tests": {
+    "passed": 230,
+    "failed": 0,
+    "ignored": 10
+  },
+  "terminal_cases": 17,
+  "checkpoint_count": 4,
+  "source_count": 24,
+  "usage_micro_cny": 126534,
+  "cache_replay_new_requests": 0,
+  "base_user_access": "verified",
+  "lark_records": 34,
+  "report_url": "https://www.feishu.cn/docx/CxWidCey8oFsTFxr8GVc8pVzntc"
+}

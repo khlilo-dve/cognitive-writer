@@ -1,0 +1,9 @@
+stage,model,requests,input_tokens_per_request,output_tokens_per_request,cost_cny
+single_style,Pro,28,7000,9000,2.100
+comparison_view,Pro,28,7000,4000,1.260
+pair_comparison,Pro,190,12000,5000,12.540
+aggregate_and_compile,Pro,104,18000,6000,9.360
+convergence_audit,Pro,60,13000,4000,3.780
+outline_and_article,Flash,120,7000,2200,1.368
+generation_evaluation,Pro,120,19000,6000,11.160
+controls_and_review,Pro,30,12000,5000,1.980

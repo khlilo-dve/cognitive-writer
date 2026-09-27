@@ -1,6 +1,6 @@
 # 多文章作者风格研究
 
-状态：计划已形成，预算待用户确认；尚未启动付费实验。创建日期：2026-09-26。
+状态：100元预算已批准，P1已完成，接续P2；24篇网页样本清单、四篇独立提取试跑、费用与缓存核验、飞书Base及阶段报告已落地。创建日期：2026-09-26。当前协议v2_detailed适配用户的详细风格要求，费用新估算见budget.md顶部。
 
 本项目要回答：多篇文章能否比单篇文章更可靠地表示作者风格？增加样本后是否趋于稳定？这种稳定是否仍保留作者差异，并改善新主题写作？
 
@@ -12,6 +12,9 @@
 | [protocol.md](protocol.md) | 作者选择、实验组合、指标定义、盲测和负面结果处理 |
 | [budget.md](budget.md) | 官方价格、请求与 token 假设、费用范围、预算停止规则 |
 | [budget.csv](budget.csv) | 可重新计算的预算明细；这是估算，不是实际消费 |
+| [budget-detailed.csv](budget-detailed.csv) | 当前详细版预算；旧budget.csv仅作历史 |
+| [model-choice.md](model-choice.md) | MiMo/DS价格与选择边界、Lite用途 |
+| [implementation.md](implementation.md) | P1入口、费用与恢复实现约束 |
 | [lark-design.md](lark-design.md) | 飞书表格、图表、问卷和同步设计 |
 | [journal.md](journal.md) | 每次突破、失败、方法变更与阶段结论的连续记录 |
 | [templates/stage-report.md](templates/stage-report.md) | 面向用户的阶段报告模板 |
@@ -49,4 +52,4 @@ research/style-aggregation/
 
 ## 当前下一步
 
-用户审阅预算。随后执行 P1：收集并核验两位作者各 12 篇文章、冻结划分、实现最小研究入口与费用记录、建立飞书看板。付费试跑前先落实已批准额度。当前没有任何完成的多文章实验结论，也没有已创建的飞书 Base。
+进入P2，复用四份有效检查点，补齐单篇提取和重复实验。预算已批准，不再询问同一额度；样本来源等级和拒收案例见datasets/review-v1.md。P1工程结果不等于多文章研究结论。飞书Base：https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe ，用户已获得管理员权限并经user身份回读验证；P1报告：https://www.feishu.cn/docx/CxWidCey8oFsTFxr8GVc8pVzntc 。

@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "base_token": "Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
+  "url": "https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
+  "created_as": "bot",
+  "user_access": "full_access_granted_and_user_base_get_verified",
+  "tables": {
+    "Runs": "tblTZkf7bvLTeCKe",
+    "Articles": "tblm8TROVJPoz3cp",
+    "Journal": "tbl7t2mrziFJn99Q",
+    "Styles": "tblLftZIm3GTWcqP"
+  },
+  "dashboards": {
+    "overview": {
+      "created": true,
+      "dashboard": {
+        "dashboard_id": "blktUZxSwerWnX5L",
+        "name": "研究进展与样本概况",
+        "theme": {
+          "theme_style": "default"
+        }
+      }
+    }
+  },
+  "records": {
+    "Articles/wxb-01": "recvwhZwgP8euH",
+    "Articles/wxb-02": "recvwhZTA7pNtJ",
+    "Articles/wxb-03": "recvwhZUJNVbwE",
+    "Articles/wxb-04": "recvwhZVMNchYM",
+    "Articles/wxb-05": "recvwhZWKBJqUR",
+    "Articles/wxb-06": "recvwhZXHNG8fY",
+    "Articles/wxb-07": "recvwhZYGdcvda",
+    "Articles/wxb-08": "recvwhZZHD1b2I",
+    "Articles/wxb-09": "recvwi00GzQbGv",
+    "Articles/wxb-10": "recvwi01MVcCdp",
+    "Articles/wxb-11": "recvwi02LqIRvu",
+    "Articles/wxb-12": "recvwi03KD17K6",
+    "Articles/wzq-01": "recvwi04HZpy8Y",
+    "Articles/wzq-02": "recvwi05J4QduP",
+    "Articles/wzq-03": "recvwi06HM68JZ",
+    "Articles/wzq-04": "recvwi07Goj3Uu",
+    "Articles/wzq-05b": "recvwi08E38UG6",
+    "Articles/wzq-06": "recvwi09B1QswQ",
+    "Articles/wzq-07": "recvwi0axlvUrr",
+    "Articles/wzq-08": "recvwi0bxdJupV",
+    "Articles/wzq-09": "recvwi0cw9VEaJ",
+    "Articles/wzq-10": "recvwi0dtYNuBg",
+    "Articles/wzq-11": "recvwi0eul0fgk",
+    "Articles/wzq-12": "recvwi0fAoLcye",
+    "Runs/p1-detailed-pilot-01": "recvwkT7TtBtaL",
+    "Styles/p1-detailed-pilot-01/wxb-01": "recvwkTtota203",
+    "Journal/E0002": "recvwkUd1mtMc8",
+    "Journal/E0003": "recvwkUenkwWN1",
+    "Journal/E0004": "recvwkUfyqSoVW",
+    "Journal/E0005": "recvwkUgL0ukIL",
+    "Journal/E0006": "recvwkUhXgjBuJ",
+    "Styles/p1-detailed-pilot-01/wxb-02": "recvwkUkjpADpy",
+    "Styles/p1-detailed-pilot-01/wzq-01": "recvwkUlCaDga6",
+    "Styles/p1-detailed-pilot-01/wzq-02": "recvwkUmJSZdzt"
+  },
+  "blocks": {
+    "samples": "chtcnVAsHWRrhqiURhIlWIMnumf",
+    "cost": "chtcnMcW9pQmqEeYkbNGPw32m4e",
+    "length": "chtcniIbTtpjAA3I9BPNcVElEag"
+  },
+  "reports": {
+    "P1": "https://www.feishu.cn/docx/CxWidCey8oFsTFxr8GVc8pVzntc"
+  }
+}
