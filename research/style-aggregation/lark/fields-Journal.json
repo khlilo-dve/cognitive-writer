@@ -2,6 +2,22 @@
   "count": 5,
   "items": [
     {
+      "field_id": "fldNz03zU7",
+      "field_name": "kind",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fld1wwKzTn",
+      "field_name": "observation",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
       "field_id": "fldbsENWNU",
       "field_name": "meaning",
       "style": {
@@ -20,22 +36,6 @@
     {
       "field_id": "fldCYvupkQ",
       "field_name": "event_id",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldNz03zU7",
-      "field_name": "kind",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fld1wwKzTn",
-      "field_name": "observation",
       "style": {
         "type": "plain"
       },

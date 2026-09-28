@@ -1,0 +1,12 @@
+{
+  "manifest_sha256": "09b6c0357d411737479684966d1b36b29cddf8292375ce4ccdbc108692180214",
+  "script_sha256": "67d1ac1ee36d15fe2bcfe219144158a878234d845134601b4b220be850d6e882",
+  "articles": 20,
+  "split": "discovery",
+  "limitations": [
+    "标点切句，非语言学句法分析",
+    "人称为字符计数，包含引语和复数",
+    "题材和文本长度可影响统计，不能直接作为作者风格真值",
+    "未读取reference或confirmation正文"
+  ]
+}

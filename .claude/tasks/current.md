@@ -3,7 +3,11 @@
 单篇学习追加修改（2026-09-26）：用户要求参考孙割文件，详细优先。已调整提示词、长文本保存、补充修复及新旧评测长度政策，229项库测试、构建与17项终端回归通过，历史产物核验通过；记录见docs/2026-09-26-detailed-style-learning.md。本项不替代下方多文章研究状态，不启动其付费任务。
 
 
-## 2026-09-26 当前：多文章作者风格研究 P1完成，接续P2
+## 2026-09-29 当前：多文章作者风格研究 P2进行中
+
+- P2首次提取中断时19/20完成，wzq-09有0.143520元未知预留；恢复保留该费用，最多三次独立计费尝试。已完成结果复用，不修改提取Prompt。逐维比较、对照与绘图入口已实现，尚无比较结论。
+- 2026-09-29恢复后首次20/20完成，Style 1883–2684字；累计0.908841元（含未知预留），8次重复提取已启动。234项库测试通过。原文20篇程序统计已生成，未读reference/confirmation正文。
+- 随后重复8/8完成，28份产物/31份响应与费用核验通过；提取结束累计1.171947元，含0.143520元未知预留。后台scripts/run_style_p2_pipeline.py已启动views→pairs→figures，当前状态以research/style-aggregation/p2-pipeline-state.json及各run summary为准；不要重复启动或把running当complete。失败即停，P3–P6仍待完成。首次阶段云报告：https://www.feishu.cn/docx/MVu5dsxEho0v4GxSJ59cUNXBny0 。实现提交7ee3dfa。
 
 - 用户已委托具体实验方法与作者选择，要求先完成阶段计划、预算、飞书看板/问卷设计与统一产物目录。
 - 主入口：`research/style-aggregation/README.md`；约束：`plan.md` 与 `protocol.md`；过程：`journal.md`。
@@ -13,7 +17,7 @@
 - P1 run为p1-detailed-pilot-01：四篇Style 2080/1964/2034/2659字，4成功/0失败，约0.126534元未缓存单价估算；复跑4缓存命中/0新请求。它不证明风格准确或聚合有效。
 - 研究入口、SHA校验、模型角色、usage、全研究费用账本/试跑共享上限和进程锁已实现，.env未改。测试与提交证据见P1报告及journal。
 - 飞书授权已恢复，用户获得管理员权限并回读成功。Base：https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe 。24样本、4风格、过程日志及图表已入表；P1云报告：https://www.feishu.cn/docx/CxWidCey8oFsTFxr8GVc8pVzntc 。问卷尚未创建。
-- 下一步P2：精确复用四份检查点，补齐16篇单篇和重复提取，构建逐维证据比较；无需再确认预算或作者。模型选择仍Pro分析/Flash生成；Lite不适用本应用的非Coding批量调用。
+- 下一步P2：检查后台逐维证据比较及控制结果，完成噪声、题材混淆和图表解释，再推进P3；无需再确认预算或作者。模型选择仍Pro分析/Flash生成；Lite不适用本应用的非Coding批量调用。
 
 ## 上一阶段归档（2026-09-25；不代表本轮研究已完成）
 

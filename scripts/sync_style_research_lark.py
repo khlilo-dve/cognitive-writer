@@ -138,8 +138,9 @@ def main():
     if args.run:
         summary = json.loads((args.run / "summary.json").read_text())
         rid = args.run.name
-        report_file = ROOT / "lark/p1-report-doc.json"
-        report_url = json.loads(report_file.read_text())["data"]["doc_url"] if rid == "p1-detailed-pilot-01" and report_file.exists() else None
+        report_name = {"p1-detailed-pilot-01": "p1-report-doc.json", "p2-detailed-single-01": "p2-single-report-doc.json"}.get(rid)
+        report_file = ROOT / "lark" / report_name if report_name else None
+        report_url = json.loads(report_file.read_text())["data"]["doc_url"] if report_file and report_file.exists() else None
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": "详细风格能否独立提取、准确计费并断点复用？",

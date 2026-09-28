@@ -27,6 +27,223 @@
       "reserved_micro": 135870,
       "actual_micro": 38337,
       "state": "settled"
+    },
+    "p2-detailed-repeat-01/wxb-01-r2-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 130770,
+      "actual_micro": 30606,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wxb-01-r3-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 130770,
+      "actual_micro": 27612,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wxb-02-r2-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 135504,
+      "actual_micro": 39432,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wxb-02-r3-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 135504,
+      "actual_micro": 31962,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wzq-01-r2-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 142827,
+      "actual_micro": 30705,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wzq-01-r3-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 142827,
+      "actual_micro": 37431,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wzq-02-r2-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 135870,
+      "actual_micro": 33963,
+      "state": "settled"
+    },
+    "p2-detailed-repeat-01/wzq-02-r3-direct_0": {
+      "run_id": "p2-detailed-repeat-01",
+      "phase": "full",
+      "reserved_micro": 135870,
+      "actual_micro": 31395,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-03-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 147435,
+      "actual_micro": 32166,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-04-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 132816,
+      "actual_micro": 30675,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-04-direct_1": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 152529,
+      "actual_micro": 23070,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-05-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 134745,
+      "actual_micro": 46242,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-06-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 133578,
+      "actual_micro": 30030,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-07-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 134961,
+      "actual_micro": 44013,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-08-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 138114,
+      "actual_micro": 29376,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-09-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 157014,
+      "actual_micro": 39297,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wxb-10-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 133545,
+      "actual_micro": 24777,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-03-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 137433,
+      "actual_micro": 49773,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-04-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 137925,
+      "actual_micro": 35163,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-04-direct_1": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 157515,
+      "actual_micro": 25260,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-05b-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 170034,
+      "actual_micro": 35283,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-06-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 142479,
+      "actual_micro": 38073,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-07-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 138129,
+      "actual_micro": 31770,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-07-direct_1": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 157029,
+      "actual_micro": 23277,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-08-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 138390,
+      "actual_micro": 33324,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-09-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 143520,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "p2-detailed-single-01/wzq-09-direct_0/attempt-2": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 143520,
+      "actual_micro": 34329,
+      "state": "settled"
+    },
+    "p2-detailed-single-01/wzq-10-direct_0": {
+      "run_id": "p2-detailed-single-01",
+      "phase": "full",
+      "reserved_micro": 142731,
+      "actual_micro": 32889,
+      "state": "settled"
+    },
+    "p2-views-01/view-wxb-01-0": {
+      "run_id": "p2-views-01",
+      "phase": "full",
+      "reserved_micro": 125337,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "p2-views-01/view-wxb-06-0": {
+      "run_id": "p2-views-01",
+      "phase": "full",
+      "reserved_micro": 126402,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "p2-views-01/view-wxb-10-0": {
+      "run_id": "p2-views-01",
+      "phase": "full",
+      "reserved_micro": 123462,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
     }
   }
 }

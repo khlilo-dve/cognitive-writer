@@ -1,0 +1,8 @@
+{
+  "run_id": "p1-detailed-pilot-01",
+  "matplotlib": "3.10.8",
+  "script_sha256": "7d0d11935f09b277d4873a6beb2d28b8270987e2d0cd34ed8a2825b2f5c8d522",
+  "inputs": {
+    "research/style-aggregation/runs/p1-detailed-pilot-01/summary.json": "a612f930831beb50dacacaf1a03ed36ffbb3b1a8db657b387d4ba8637fa377a6"
+  }
+}

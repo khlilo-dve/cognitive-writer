@@ -5,6 +5,8 @@
 
 ## 2026-09-26 当前计划：多文章作者风格研究
 
+2026-09-29进度：20首次+8重复已完成并核验。P2后台流水线运行views→控制与pairs→figures；先读p2-pipeline-state.json判断running/stopped/complete，再决定续跑。实现不代表数据完成，数据完成不代表研究结论通过。P3–P6继续依照原协议。
+
 完整计划唯一维护在 `research/style-aggregation/plan.md`，具体方法见同目录 `protocol.md`，预算见 `budget.md`，飞书设计见 `lark-design.md`，过程与结果追加到 `journal.md`。
 
 P0/P1已完成 → P2 单篇表征比较 → P3 有证据聚合 → P4 样本量收敛 → P5 跨主题生成与可选盲测 → P6 完整结题。用户已接受100元总上限，四篇详细版试跑约0.126534元并通过零新请求复跑；24篇网页样本与飞书看板已建立。继续按v2_detailed和更新预算自主推进，不重新询问已批准事项。当前接续P2，不能把P1工程通过当作研究结论。

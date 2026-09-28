@@ -1,0 +1,8 @@
+{
+  "run_id": "p2-detailed-single-01",
+  "matplotlib": "3.10.8",
+  "script_sha256": "7d0d11935f09b277d4873a6beb2d28b8270987e2d0cd34ed8a2825b2f5c8d522",
+  "inputs": {
+    "research/style-aggregation/runs/p2-detailed-single-01/summary.json": "49c4ed5df7e385bf1e523871ca31ef59f258f6486c6ec08302fd26912607b68e"
+  }
+}

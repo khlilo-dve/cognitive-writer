@@ -1,0 +1,382 @@
+{
+  "completed_at": "2026-09-28T22:51:54.452235582+00:00",
+  "rows": [
+    {
+      "article_id": "wxb-01",
+      "artifact_id": "wxb-01",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2080,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-02",
+      "artifact_id": "wxb-02",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 1964,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-03",
+      "artifact_id": "wxb-03",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2131,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-04",
+      "artifact_id": "wxb-04",
+      "author_id": "wang_xiaobo",
+      "calls": 2,
+      "characters": 2096,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-05",
+      "artifact_id": "wxb-05",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2488,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-06",
+      "artifact_id": "wxb-06",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2231,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-07",
+      "artifact_id": "wxb-07",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2404,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-08",
+      "artifact_id": "wxb-08",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2260,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-09",
+      "artifact_id": "wxb-09",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 2240,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wxb-10",
+      "artifact_id": "wxb-10",
+      "author_id": "wang_xiaobo",
+      "calls": 1,
+      "characters": 1883,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-01",
+      "artifact_id": "wzq-01",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2034,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-02",
+      "artifact_id": "wzq-02",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2659,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-03",
+      "artifact_id": "wzq-03",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2310,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-04",
+      "artifact_id": "wzq-04",
+      "author_id": "wang_zengqi",
+      "calls": 2,
+      "characters": 2206,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-05b",
+      "artifact_id": "wzq-05b",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2684,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-06",
+      "artifact_id": "wzq-06",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2051,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-07",
+      "artifact_id": "wzq-07",
+      "author_id": "wang_zengqi",
+      "calls": 2,
+      "characters": 1901,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-08",
+      "artifact_id": "wzq-08",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2011,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-09",
+      "artifact_id": "wzq-09",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 1909,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    },
+    {
+      "article_id": "wzq-10",
+      "artifact_id": "wzq-10",
+      "author_id": "wang_zengqi",
+      "calls": 1,
+      "characters": 2105,
+      "replicate": 1,
+      "status": "complete",
+      "warnings": []
+    }
+  ],
+  "stage": "single",
+  "status": "complete",
+  "usage": {
+    "entries": {
+      "p1-detailed-pilot-01/wxb-01-direct_0": {
+        "actual_micro": 21390,
+        "phase": "pilot",
+        "reserved_micro": 130770,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wxb-02-direct_0": {
+        "actual_micro": 30774,
+        "phase": "pilot",
+        "reserved_micro": 135504,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wzq-01-direct_0": {
+        "actual_micro": 36033,
+        "phase": "pilot",
+        "reserved_micro": 142827,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wzq-02-direct_0": {
+        "actual_micro": 38337,
+        "phase": "pilot",
+        "reserved_micro": 135870,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-03-direct_0": {
+        "actual_micro": 32166,
+        "phase": "full",
+        "reserved_micro": 147435,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-04-direct_0": {
+        "actual_micro": 30675,
+        "phase": "full",
+        "reserved_micro": 132816,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-04-direct_1": {
+        "actual_micro": 23070,
+        "phase": "full",
+        "reserved_micro": 152529,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-05-direct_0": {
+        "actual_micro": 46242,
+        "phase": "full",
+        "reserved_micro": 134745,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-06-direct_0": {
+        "actual_micro": 30030,
+        "phase": "full",
+        "reserved_micro": 133578,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-07-direct_0": {
+        "actual_micro": 44013,
+        "phase": "full",
+        "reserved_micro": 134961,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-08-direct_0": {
+        "actual_micro": 29376,
+        "phase": "full",
+        "reserved_micro": 138114,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-09-direct_0": {
+        "actual_micro": 39297,
+        "phase": "full",
+        "reserved_micro": 157014,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-10-direct_0": {
+        "actual_micro": 24777,
+        "phase": "full",
+        "reserved_micro": 133545,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-03-direct_0": {
+        "actual_micro": 49773,
+        "phase": "full",
+        "reserved_micro": 137433,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-04-direct_0": {
+        "actual_micro": 35163,
+        "phase": "full",
+        "reserved_micro": 137925,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-04-direct_1": {
+        "actual_micro": 25260,
+        "phase": "full",
+        "reserved_micro": 157515,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-05b-direct_0": {
+        "actual_micro": 35283,
+        "phase": "full",
+        "reserved_micro": 170034,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-06-direct_0": {
+        "actual_micro": 38073,
+        "phase": "full",
+        "reserved_micro": 142479,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-07-direct_0": {
+        "actual_micro": 31770,
+        "phase": "full",
+        "reserved_micro": 138129,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-07-direct_1": {
+        "actual_micro": 23277,
+        "phase": "full",
+        "reserved_micro": 157029,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-08-direct_0": {
+        "actual_micro": 33324,
+        "phase": "full",
+        "reserved_micro": 138390,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-09-direct_0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 143520,
+        "run_id": "p2-detailed-single-01",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-detailed-single-01/wzq-09-direct_0/attempt-2": {
+        "actual_micro": 34329,
+        "phase": "full",
+        "reserved_micro": 143520,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-10-direct_0": {
+        "actual_micro": 32889,
+        "phase": "full",
+        "reserved_micro": 142731,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      }
+    },
+    "occupied_cny": 0.908841,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.782307
+  }
+}

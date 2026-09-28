@@ -37,6 +37,18 @@ run：p1-detailed-pilot-01。固定wxb-01/02、wzq-01/02，每篇只见本篇正
 
 Base由bot创建；用户完成过期登录重授权后，已给当前用户full_access，并用user身份base-get核验。创建Runs、Articles、Journal、Styles及概况仪表盘。CLI更新记录响应不带record_id，早期同步在第一条写入后停止；通过远端record-list找回真实ID，新增幂等回读恢复，未通过重建记录掩盖失败。Windows.cmd转发会损坏内联JSON参数，改用WSL中的node直接传argv。24篇样本已同步；后续同步严格核对字段类型与回读值。证据：lark/resources.json、last-sync.json。
 
+## E0007 · 2026-09-29 · P2断点恢复（engineering_failure）
+
+首次提取run p2-detailed-single-01在19/20完成时中断；wzq-09-direct_0只有0.143520元费用预留、没有响应检查点，不能认定未计费。保留预留并加入最多三次传输尝试的恢复；每次独立预留、成功响应绑定对应费用身份。已有响应不因恢复重采样。234项库测试通过，包含恢复后缓存与跨run复用不重复计费。逐维比较尚未完成，不能据此判断作者风格区分或聚合有效。
+
+## E0008 · 2026-09-29 · P2首次与重复提取完成（engineering_confirmed）
+
+p2-detailed-single-01的20份首次Style为1883–2684字；p2-detailed-repeat-01的8份重复Style为1776–2631字。首次有3次补充/格式修复请求，保留初次响应和修复链；不能当作23份独立样本。28份产物与31份响应SHA、模型、完成状态、字符计数及费用身份核验通过，证据validation/p2-extraction-audit.json。
+
+提取结束累计占用1.171947元，其中已结算未缓存价估算1.028427元、未知预留0.143520元。后续views请求另计，实时值见账本。重复文本长度有波动，但未完成语义比较，不提前判断风格稳定性。20份首次已同步飞书并回读，阶段云报告含图：https://www.feishu.cn/docx/MVu5dsxEho0v4GxSJ59cUNXBny0 。固定抽样顺序和生成基线已保存，不使用评分选样。
+
+接续后台P2流水线views→控制与pairs→figures；控制或阶段失败即停，检查点持续写入，不自动修改判定规则。P3–P6尚未完成。
+
 ## 新事件模板
 
 ```text

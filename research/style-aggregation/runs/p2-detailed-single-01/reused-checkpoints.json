@@ -1,0 +1,22 @@
+[
+  {
+    "source_run": "p1-detailed-pilot-01",
+    "source_sha256": "b612a271f83d1fa794695d235d99c854da13746205116388c22eea6cd140666d",
+    "task": "wxb-01-direct_0"
+  },
+  {
+    "source_run": "p1-detailed-pilot-01",
+    "source_sha256": "baa756467495000c147bc6e6d62b3e1fe8f87fca96ffb8b6f2f01cb5ae30ea14",
+    "task": "wxb-02-direct_0"
+  },
+  {
+    "source_run": "p1-detailed-pilot-01",
+    "source_sha256": "e3dcd6e5a04d0c5cd9b146ea593c5e419ae6ca33cfffd1d6c54fac312b683b54",
+    "task": "wzq-01-direct_0"
+  },
+  {
+    "source_run": "p1-detailed-pilot-01",
+    "source_sha256": "c6533c24bedbff2351a739021b005dfabb058c77183d2219fab49dc91afe1f62",
+    "task": "wzq-02-direct_0"
+  }
+]

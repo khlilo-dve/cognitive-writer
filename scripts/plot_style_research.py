@@ -89,6 +89,8 @@ def main():
         fig.suptitle("作者内与作者间：仅比较双方均有描述的维度\n点为配对，黑线为均值；配对并非独立样本",fontsize=14)
         fig.tight_layout(rect=(0,0,1,.93)); fig.savefig(out/"within-between.png",dpi=170); plt.close(fig)
         (out/"descriptive-summary.json").write_text(json.dumps(distributions,ensure_ascii=False,indent=2)+"\n")
+    for svg in out.glob("*.svg"):
+        svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
     (out/"provenance.json").write_text(json.dumps({"run_id":args.run,"matplotlib":matplotlib.__version__,
         "script_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "inputs":{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}},indent=2)+"\n")

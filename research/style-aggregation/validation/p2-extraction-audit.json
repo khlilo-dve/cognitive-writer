@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "artifacts": 28,
+  "receipts": 31,
+  "checks": [
+    "receipt SHA256",
+    "artifact equals response derivative",
+    "non-whitespace count",
+    "model and finish reason",
+    "ledger charge including recovery origin"
+  ],
+  "unknown_preserved": 143520
+}
