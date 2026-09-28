@@ -6,3 +6,4 @@ CLAUDE.md
 
 .claude/settings.local.json
 research/style-aggregation/.execution.lock
+research/style-aggregation/.plot-env/

@@ -3,16 +3,16 @@ use crate::{
     error::AppError,
     eval_store::write_json,
     llm::{post_chat, request_body},
-    research_budget::{Budget, cost},
+    research_budget::{cost, Budget},
     research_dataset::{sha256, valid_id},
+    research_receipt::{charge, parse_receipt, verify, Checkpoint},
 };
-use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::{json, Value};
 use std::{
     fs::{File, OpenOptions},
     path::{Path, PathBuf},
 };
-use tokio::sync::Mutex;
+use tokio::sync::{Mutex, Semaphore};
 
 #[derive(Clone, Copy)]
 pub(crate) enum Role {
@@ -34,21 +34,6 @@ impl Role {
     }
 }
 
-#[derive(Clone, Serialize, Deserialize)]
-struct Receipt {
-    content: String,
-    model: String,
-    finish_reason: String,
-    usage: Option<Value>,
-}
-#[derive(Serialize, Deserialize)]
-struct Checkpoint {
-    request: Value,
-    receipt: Receipt,
-    receipt_sha256: String,
-    completed_at: String,
-}
-
 pub(crate) struct ResearchStore {
     pub root: PathBuf,
     run_id: String,
@@ -56,44 +41,8 @@ pub(crate) struct ResearchStore {
     key: String,
     client: reqwest::Client,
     budget: Mutex<Budget>,
+    permits: Semaphore,
     _lock: File,
-}
-
-fn parse_receipt(raw: &str) -> Result<Receipt, AppError> {
-    let v: Value = serde_json::from_str(raw)
-        .map_err(|_| AppError::Parse("模型响应不是有效JSON；费用预留保留".into()))?;
-    Ok(Receipt {
-        content: v
-            .pointer("/choices/0/message/content")
-            .and_then(Value::as_str)
-            .unwrap_or("")
-            .into(),
-        model: v["model"].as_str().unwrap_or("").into(),
-        finish_reason: v
-            .pointer("/choices/0/finish_reason")
-            .and_then(Value::as_str)
-            .unwrap_or("")
-            .into(),
-        usage: v.get("usage").filter(|u| !u.is_null()).cloned(),
-    })
-}
-
-fn charge(model: &str, r: &Receipt) -> Result<u64, AppError> {
-    let u = r
-        .usage
-        .as_ref()
-        .ok_or_else(|| AppError::Parse("usage缺失，费用保留预留值，停止请求链".into()))?;
-    let input = u["prompt_tokens"]
-        .as_u64()
-        .ok_or_else(|| AppError::Parse("prompt_tokens无效".into()))?;
-    let output = u["completion_tokens"]
-        .as_u64()
-        .ok_or_else(|| AppError::Parse("completion_tokens无效".into()))?;
-    if input == 0 {
-        return Err(AppError::Parse("输入usage为零，不能核定费用".into()));
-    }
-    // No cache discounts assumed. Reasoning is included in completion_tokens, not added twice.
-    cost(model, input, output)
 }
 
 impl ResearchStore {
@@ -169,6 +118,7 @@ impl ResearchStore {
             key,
             client,
             budget: Mutex::new(budget),
+            permits: Semaphore::new(3),
             _lock: lock,
         })
     }
@@ -206,10 +156,13 @@ impl ResearchStore {
         body["thinking"] =
             json!({"type":if matches!(role,Role::Analysis) {"enabled"} else {"disabled"}});
         let request = json!({"schema":1,"endpoint_sha256":sha256(self.base.trim_end_matches('/').as_bytes()),"body":body});
-        let identity = format!("{}/{name}", self.run_id);
+        let mut identity = format!("{}/{name}", self.run_id);
         let path = self.root.join("requests").join(format!("{name}.json"));
-        // Held for the request: P1 is deliberately sequential and all roles share one ledger.
-        let mut budget = self.budget.lock().await;
+        let _permit = self
+            .permits
+            .acquire()
+            .await
+            .map_err(|_| AppError::Network("研究并发控制关闭".into()))?;
         let receipt = match std::fs::read(&path) {
             Ok(b) => {
                 let cached: Checkpoint = serde_json::from_slice(&b)
@@ -217,12 +170,9 @@ impl ResearchStore {
                 if cached.request != request {
                     return Err(AppError::Parse("研究请求身份变化，拒绝缓存复用".into()));
                 }
-                if sha256(
-                    &serde_json::to_vec(&cached.receipt)
-                        .map_err(|e| AppError::Parse(e.to_string()))?,
-                ) != cached.receipt_sha256
-                {
-                    return Err(AppError::Parse("响应检查点哈希不匹配".into()));
+                verify(&cached)?;
+                if let Some(origin) = cached.reused_from {
+                    identity = origin;
                 }
                 println!("[research resume] {name}");
                 cached.receipt
@@ -232,7 +182,7 @@ impl ResearchStore {
                     .map_err(|e| AppError::Parse(e.to_string()))?
                     .len() as u64
                     + 1024;
-                budget.reserve(
+                identity = self.budget.lock().await.reserve_attempt(
                     &identity,
                     cost(role.model(), input_upper, role.max_output())?,
                 )?;
@@ -257,13 +207,18 @@ impl ResearchStore {
                         receipt: receipt.clone(),
                         receipt_sha256,
                         completed_at: chrono::Utc::now().to_rfc3339(),
+                        reused_from: (identity != format!("{}/{name}", self.run_id))
+                            .then(|| identity.clone()),
                     },
                 )?;
                 receipt
             }
             Err(e) => return Err(e.into()),
         };
-        budget.settle(&identity, charge(role.model(), &receipt)?)?;
+        self.budget
+            .lock()
+            .await
+            .settle(&identity, charge(role.model(), &receipt)?)?;
         if receipt.model != role.model()
             || receipt.finish_reason != "stop"
             || receipt.content.trim().is_empty()
@@ -289,6 +244,60 @@ impl ResearchStore {
         let b = self.budget.lock().await;
         json!({"occupied_cny":b.occupied(false) as f64/1e6,"run_occupied_cny":b.occupied(true) as f64/1e6,
             "entries":b.ledger.entries,"pricing":"official domestic cache-miss upper estimate"})
+    }
+
+    pub async fn import_completed(&self, source_run: &str) -> Result<(), AppError> {
+        if !valid_id(source_run) || source_run == self.run_id {
+            return Err(AppError::Parse("复用来源run无效".into()));
+        }
+        let source = self
+            .root
+            .parent()
+            .ok_or_else(|| AppError::Parse("运行目录无效".into()))?
+            .join(source_run);
+        let summary: Value = serde_json::from_slice(&std::fs::read(source.join("summary.json"))?)
+            .map_err(|_| AppError::Parse("来源summary无效".into()))?;
+        if summary["status"] != "complete" {
+            return Err(AppError::Parse("只导入完整验证的来源run".into()));
+        }
+        let mut provenance = Vec::new();
+        for entry in std::fs::read_dir(source.join("requests"))? {
+            let path = entry?.path();
+            if path.extension().and_then(|e| e.to_str()) != Some("json") {
+                continue;
+            }
+            let bytes = std::fs::read(&path)?;
+            let mut cp: Checkpoint = serde_json::from_slice(&bytes)
+                .map_err(|_| AppError::Parse("来源检查点损坏".into()))?;
+            verify(&cp)?;
+            let model = cp.request["body"]["model"]
+                .as_str()
+                .ok_or_else(|| AppError::Parse("来源模型缺失".into()))?;
+            if cp.receipt.model != model || cp.receipt.finish_reason != "stop" {
+                return Err(AppError::Parse("来源响应未完成".into()));
+            }
+            let name = path
+                .file_stem()
+                .and_then(|s| s.to_str())
+                .ok_or_else(|| AppError::Parse("来源任务名无效".into()))?;
+            let origin = cp
+                .reused_from
+                .clone()
+                .unwrap_or(format!("{source_run}/{name}"));
+            self.budget
+                .lock()
+                .await
+                .settle(&origin, charge(model, &cp.receipt)?)?;
+            cp.reused_from = Some(origin);
+            let target = self.root.join("requests").join(path.file_name().unwrap());
+            if !target.exists() {
+                write_json(&target, &cp)?;
+            }
+            provenance
+                .push(json!({"source_run":source_run,"task":name,"source_sha256":sha256(&bytes)}));
+        }
+        provenance.sort_by_key(|v| v["task"].as_str().unwrap_or("").to_owned());
+        write_json(&self.root.join("reused-checkpoints.json"), &provenance)
     }
 }
 
@@ -347,6 +356,8 @@ mod tests {
             "TEST_SECRET".into(),
         )
         .unwrap();
+        // Simulate a killed process that reserved a request but saved no response.
+        s.budget.lock().await.reserve("test/one", 2000).unwrap();
         assert_eq!(
             s.call("one", Role::Analysis, "system", "user", true)
                 .await
@@ -359,26 +370,45 @@ mod tests {
                 .unwrap(),
             "ok"
         );
-        assert!(
-            s.call("one", Role::Writer, "system", "user", true)
-                .await
-                .is_err()
-        );
-        assert_eq!(s.budget.lock().await.occupied(false), 1500);
+        assert!(s
+            .call("one", Role::Writer, "system", "user", true)
+            .await
+            .is_err());
+        assert_eq!(s.budget.lock().await.occupied(false), 3500);
         let saved = std::fs::read_to_string(s.root.join("requests/one.json")).unwrap();
         assert!(!saved.contains("DO_NOT_PERSIST"));
         assert!(!saved.contains("TEST_SECRET"));
         thread.join().unwrap();
+        write_json(&s.root.join("summary.json"), &json!({"status":"complete"})).unwrap();
+        let base = s.base.clone();
+        drop(s);
+        let reused = ResearchStore::build(
+            d.path(),
+            "next",
+            1000000,
+            1000000,
+            base,
+            "TEST_SECRET".into(),
+        )
+        .unwrap();
+        reused.import_completed("test").await.unwrap();
+        assert_eq!(
+            reused
+                .call("one", Role::Analysis, "system", "user", true)
+                .await
+                .unwrap(),
+            "ok"
+        );
+        assert_eq!(reused.budget.lock().await.occupied(false), 3500);
+        assert_eq!(reused.budget.lock().await.occupied(true), 0);
     }
     #[test]
     fn missing_usage_and_overlapping_processes_fail_closed() {
-        assert!(
-            charge(
-                "mimo-v2.6-pro",
-                &parse_receipt(r#"{"choices":[]}"#).unwrap()
-            )
-            .is_err()
-        );
+        assert!(charge(
+            "mimo-v2.6-pro",
+            &parse_receipt(r#"{"choices":[]}"#).unwrap()
+        )
+        .is_err());
         let d = tempfile::tempdir().unwrap();
         let first = ResearchStore::build(
             d.path(),
@@ -389,28 +419,24 @@ mod tests {
             "test".into(),
         )
         .unwrap();
-        assert!(
-            ResearchStore::build(
-                d.path(),
-                "two",
-                100,
-                100,
-                "http://unused".into(),
-                "test".into()
-            )
-            .is_err()
-        );
+        assert!(ResearchStore::build(
+            d.path(),
+            "two",
+            100,
+            100,
+            "http://unused".into(),
+            "test".into()
+        )
+        .is_err());
         drop(first);
-        assert!(
-            ResearchStore::build(
-                d.path(),
-                "two",
-                100,
-                100,
-                "http://unused".into(),
-                "test".into()
-            )
-            .is_ok()
-        );
+        assert!(ResearchStore::build(
+            d.path(),
+            "two",
+            100,
+            100,
+            "http://unused".into(),
+            "test".into()
+        )
+        .is_ok());
     }
 }

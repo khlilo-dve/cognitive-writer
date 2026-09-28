@@ -108,6 +108,30 @@ impl Budget {
         Ok(())
     }
 
+    /// Recovery is bounded; every uncertain attempt remains charged at its reserve.
+    pub fn reserve_attempt(&mut self, logical_id: &str, amount: u64) -> Result<String, AppError> {
+        for attempt in 1..=3 {
+            let id = if attempt == 1 {
+                logical_id.to_owned()
+            } else {
+                format!("{logical_id}/attempt-{attempt}")
+            };
+            if let Some(prior) = self.ledger.entries.get(&id) {
+                if prior.actual_micro.is_some() {
+                    return Err(AppError::Parse(
+                        "已结算请求缺少响应文件，拒绝重新采样".into(),
+                    ));
+                }
+                continue;
+            }
+            self.reserve(&id, amount)?;
+            return Ok(id);
+        }
+        Err(AppError::Parse(
+            "请求已达到三次传输尝试上限，未知费用仍保留".into(),
+        ))
+    }
+
     fn phase_occupied(&self) -> u64 {
         self.ledger
             .entries
@@ -144,6 +168,25 @@ impl Budget {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn recovery_preserves_unknown_cost_and_is_bounded() {
+        let d = tempfile::tempdir().unwrap();
+        let p = d.path().join("ledger.json");
+        let mut b = Budget::open(p.clone(), "run", 100, 100).unwrap();
+        assert_eq!(b.reserve_attempt("run/task", 20).unwrap(), "run/task");
+        let mut b = Budget::open(p, "run", 100, 100).unwrap();
+        assert_eq!(
+            b.reserve_attempt("run/task", 20).unwrap(),
+            "run/task/attempt-2"
+        );
+        assert_eq!(b.occupied(false), 40);
+        assert!(b.reserve_attempt("run/task", 70).is_err());
+        b.reserve_attempt("run/task", 20).unwrap();
+        assert!(b.reserve_attempt("run/task", 1).is_err());
+        b.settle("run/task/attempt-2", 5).unwrap();
+        assert_eq!(b.occupied(false), 45);
+        assert!(b.reserve_attempt("run/task", 1).is_err());
+    }
     #[test]
     fn uncertain_reservations_survive_and_limit_other_runs() {
         let d = tempfile::tempdir().unwrap();

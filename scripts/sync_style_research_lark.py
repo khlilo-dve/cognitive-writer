@@ -140,16 +140,17 @@ def main():
         rid = args.run.name
         report_file = ROOT / "lark/p1-report-doc.json"
         report_url = json.loads(report_file.read_text())["data"]["doc_url"] if rid == "p1-detailed-pilot-01" and report_file.exists() else None
-        upsert("Runs", rid, {"run_id": rid, "stage": "P1 单篇试跑", "status": summary["status"],
+        stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
+        upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": "详细风格能否独立提取、准确计费并断点复用？",
-            "conclusion": f"已记录 {len(summary['rows'])} 篇；详见单篇风格表。",
-            "caveat": "这是工程试跑，不证明聚合有效，也不是跨模型质量对照。",
+            "conclusion": f"完成 {sum(r['status'] == 'complete' for r in summary['rows'])} 份，失败 {sum(r['status'] == 'failed' for r in summary['rows'])} 份；详见单篇风格表。",
+            "caveat": "字数不是质量分。费用包含未知预留、排除复用源已记费用；尚不能证明聚合有效。",
             "spent_cny": summary["usage"]["run_occupied_cny"], "report_url": report_url})
         for row in summary["rows"]:
-            ident = row["article_id"]
+            ident = row.get("artifact_id", row["article_id"])
             spec_path = args.run / "single" / f"{ident}.md"
             upsert("Styles", f"{rid}/{ident}", {"artifact_id": f"{rid}/{ident}", "run_id": rid,
-                "article_id": ident, "status": row["status"], "characters": row.get("characters"),
+                "article_id": row["article_id"], "status": row["status"], "characters": row.get("characters"),
                 "warnings": "；".join(row.get("warnings", [])), "spec": spec_path.read_text() if spec_path.exists() else ""})
     if "overview" not in state["dashboards"]:
         data = call("+dashboard-create", name="研究进展与样本概况")

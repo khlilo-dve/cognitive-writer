@@ -45,4 +45,7 @@ mod free_style_gate;
 mod research_budget;
 mod research_dataset;
 mod research_store;
+mod research_receipt;
+mod style_compare;
+mod research_compare;
 pub mod research_run;
