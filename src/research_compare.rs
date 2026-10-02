@@ -6,7 +6,7 @@ use crate::{
     style_compare::{self, Comparison, Feature, View},
 };
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::{json, Value};
 use std::{path::Path, sync::Arc};
 
 const ROOT: &str = "research/style-aggregation";
@@ -22,6 +22,87 @@ struct Item {
 struct Mapped {
     item: Item,
     view: View,
+}
+
+fn coverage(items: &[Item], rows: &[Value]) -> Result<Value, AppError> {
+    use std::collections::{BTreeMap, HashSet};
+    if items.len() != 28
+        || rows.len() != 28
+        || items.iter().filter(|i| i.replicate == 1).count() != 20
+    {
+        return Err(AppError::Parse("视图阶段尚未结束或输入覆盖不符".into()));
+    }
+    let by_id: BTreeMap<_, _> = items.iter().map(|i| (i.id.as_str(), i)).collect();
+    if by_id.len() != 28 {
+        return Err(AppError::Parse("重复视图输入ID".into()));
+    }
+    let mut seen = HashSet::new();
+    let mut complete = Vec::new();
+    let mut missing = Vec::new();
+    let mut repeat_sources = HashSet::new();
+    for row in rows {
+        let id = row["id"]
+            .as_str()
+            .ok_or_else(|| AppError::Parse("视图缺少ID".into()))?;
+        let item = by_id
+            .get(id)
+            .ok_or_else(|| AppError::Parse("未知视图结果".into()))?;
+        if !seen.insert(id) {
+            return Err(AppError::Parse("重复视图结果".into()));
+        }
+        if row["status"] == "complete" {
+            complete.push(id.to_owned());
+            if item.replicate > 1 {
+                repeat_sources.insert(
+                    id.rsplit_once("-r")
+                        .ok_or_else(|| AppError::Parse("重复ID无效".into()))?
+                        .0,
+                );
+            }
+        } else if row["status"] == "failed" && item.replicate > 1 {
+            missing.push(row.clone());
+        } else {
+            return Err(AppError::Parse(
+                "首次视图缺失或任务未终结，不运行主比较".into(),
+            ));
+        }
+    }
+    if repeat_sources.len() != 4 {
+        return Err(AppError::Parse("四篇重复来源至少各保留一次有效视图".into()));
+    }
+    complete.sort();
+    Ok(
+        json!({"status":if missing.is_empty(){"complete"}else{"accepted_with_missing_repeats"},"main_count":20,"repeat_count":complete.len()-20,"complete_ids":complete,"missing":missing,"policy":"protocol: explicitly report missing; all 20 main and all 4 repeated sources required"}),
+    )
+}
+
+pub(crate) fn view_coverage(run: &str) -> Result<Value, AppError> {
+    if !valid_id(run) {
+        return Err(AppError::Parse("视图run无效".into()));
+    }
+    let root = Path::new(ROOT).join("runs").join(run);
+    let inputs: Value = serde_json::from_slice(&std::fs::read(root.join("inputs.json"))?)
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    let summary: Value = serde_json::from_slice(&std::fs::read(root.join("summary.json"))?)
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    if !["complete", "partial"].contains(&summary["status"].as_str().unwrap_or("")) {
+        return Err(AppError::Parse("视图仍在运行，不能核定缺失".into()));
+    }
+    let items: Vec<Item> = serde_json::from_value(inputs["items"].clone())
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    let mut result = coverage(
+        &items,
+        summary["rows"]
+            .as_array()
+            .ok_or_else(|| AppError::Parse("缺少视图rows".into()))?,
+    )?;
+    // Billing snapshots change during replay; result identity excludes unrelated ledger growth.
+    result["inputs_sha256"] = json!(sha256(&std::fs::read(root.join("inputs.json"))?));
+    result["rows_sha256"] = json!(sha256(
+        &serde_json::to_vec(&summary["rows"]).map_err(|e| AppError::Parse(e.to_string()))?
+    ));
+    write_json(&root.join("coverage.json"), &result)?;
+    Ok(result)
 }
 
 fn load_items(run: &str) -> Result<Vec<Item>, AppError> {
@@ -222,11 +303,13 @@ pub(crate) async fn pairs(run: &str, views_run: &str) -> Result<(), AppError> {
         return Err(AppError::Parse("来源run无效".into()));
     }
     let source = Path::new(ROOT).join("runs").join(views_run);
-    let summary: Value = serde_json::from_slice(&std::fs::read(source.join("summary.json"))?)
-        .map_err(|e| AppError::Parse(e.to_string()))?;
-    if summary["status"] != "complete" {
-        return Err(AppError::Parse("视图尚未完成".into()));
-    }
+    let coverage = view_coverage(views_run)?;
+    let expected_ids: std::collections::HashSet<_> = coverage["complete_ids"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|v| v.as_str().unwrap().to_owned())
+        .collect();
     let mut mapped = Vec::<Mapped>::new();
     for entry in std::fs::read_dir(source.join("views"))? {
         let p = entry?.path();
@@ -235,6 +318,9 @@ pub(crate) async fn pairs(run: &str, views_run: &str) -> Result<(), AppError> {
         }
         let m: Mapped = serde_json::from_slice(&std::fs::read(p)?)
             .map_err(|e| AppError::Parse(e.to_string()))?;
+        if !expected_ids.contains(&m.item.id) {
+            return Err(AppError::Parse("视图文件与覆盖清单不一致".into()));
+        }
         style_compare::parse_view(
             &serde_json::to_string(&m.view).map_err(|e| AppError::Parse(e.to_string()))?,
             &m.item.spec,
@@ -247,12 +333,22 @@ pub(crate) async fn pairs(run: &str, views_run: &str) -> Result<(), AppError> {
         .filter(|m| m.item.replicate == 1)
         .cloned()
         .collect();
-    if main.len() != 20 || mapped.len() != 28 {
-        return Err(AppError::Parse("矩阵输入要求20首次和8重复视图".into()));
+    if main.len() != 20
+        || mapped.len() != expected_ids.len()
+        || mapped
+            .iter()
+            .map(|m| &m.item.id)
+            .collect::<std::collections::HashSet<_>>()
+            .len()
+            != expected_ids.len()
+    {
+        return Err(AppError::Parse(
+            "矩阵输入与20首次及已披露重复覆盖不一致".into(),
+        ));
     }
     let prompt = std::fs::read_to_string(format!("{ROOT}/prompts/compare-pair-v1.md"))?;
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
-    store.freeze(&json!({"suite":"style_pairs_v2_structured","source":views_run,"views_sha256":sha256(&serde_json::to_vec(&mapped).map_err(|e|AppError::Parse(e.to_string()))?),"prompt":prompt,"metric":"one_to_one_jaccard_per_axis_v1","analysis_thinking":"disabled","method_revision":1}))?;
+    store.freeze(&json!({"suite":"style_pairs_v2_structured","source":views_run,"views_sha256":sha256(&serde_json::to_vec(&mapped).map_err(|e|AppError::Parse(e.to_string()))?),"prompt":prompt,"metric":"one_to_one_jaccard_per_axis_v1","analysis_thinking":"disabled","method_revision":1,"coverage":coverage}))?;
     if let Err(e) = controls(&store, &prompt).await {
         write_json(
             &store.root.join("summary.json"),
@@ -319,4 +415,46 @@ pub(crate) async fn pairs(run: &str, views_run: &str) -> Result<(), AppError> {
         });
     }
     finish_tasks(&store, &mut tasks, "pairs").await
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn missing_repeat_is_disclosed_but_main_or_whole_repeat_source_cannot_be_dropped() {
+        let mut items: Vec<_> = (0..20)
+            .map(|i| Item {
+                id: format!("a{i:02}"),
+                author: format!("author{}", i / 10),
+                replicate: 1,
+                spec: "spec".into(),
+                source_run: "first".into(),
+            })
+            .collect();
+        for i in 0..4 {
+            for replicate in [2, 3] {
+                items.push(Item {
+                    id: format!("a{i:02}-r{replicate}"),
+                    author: "author0".into(),
+                    replicate,
+                    spec: "spec".into(),
+                    source_run: "repeat".into(),
+                });
+            }
+        }
+        let mut rows: Vec<_> = items
+            .iter()
+            .map(|i| json!({"id":i.id,"status":"complete"}))
+            .collect();
+        assert_eq!(coverage(&items, &rows).unwrap()["repeat_count"], 8);
+        rows[20]["status"] = json!("failed");
+        let c = coverage(&items, &rows).unwrap();
+        assert_eq!(c["repeat_count"], 7);
+        assert_eq!(c["missing"].as_array().unwrap().len(), 1);
+        rows[21]["status"] = json!("failed");
+        assert!(coverage(&items, &rows).is_err());
+        rows[21]["status"] = json!("complete");
+        rows[0]["status"] = json!("failed");
+        assert!(coverage(&items, &rows).is_err());
+    }
 }

@@ -23,7 +23,8 @@ def main():
     paths = sorted((run / "pairs").glob("*.json"))
     pairs = [json.loads(p.read_text()) for p in paths]
     primary = [p for p in pairs if p["kind"] == "main"]
-    assert len(primary) == 190 and len(pairs) == 208
+    n_repeats = sum(p["kind"] == "repeat_noise" for p in pairs)
+    assert len(primary) == 190 and 4 <= n_repeats <= 8 and len(pairs) == 200 + n_repeats
     by_pair = {tuple(sorted((p["left"], p["right"]))): p for p in primary}
     assert len(by_pair) == 190
     ds_path = ROOT / "datasets/authors-v1/manifest.json"
@@ -70,7 +71,7 @@ def main():
             for values in [[metric(p)["overlap"] for p in valid if p["within_author"] == within
                             and (articles[p["left"]]["topic"] == articles[p["right"]]["topic"]) == same]]]
         repeated = [metric(p)["overlap"] for p in pairs if p["kind"] == "repeat_noise" and metric(p)["coverage"] == "both"]
-        record["same_article_repeat"] = {"n_pairs": len(repeated), "mean_overlap": mean(repeated), "values": repeated}
+        record["same_article_repeat"] = {"n_pairs": len(repeated), "mean_overlap": mean(repeated), "values": repeated, "missing_pairs":8-n_repeats}
         deltas = []
         for p in pairs:
             if p["kind"] != "order_check":
@@ -88,7 +89,7 @@ def main():
     out = ROOT / "reports" / args.run
     out.mkdir(parents=True, exist_ok=True)
     result = {"schema": 1, "run": args.run, "bootstrap": {"seed": 17, "replicates": 2000, "unit": "article, within each of two fixed authors", "self_pairs": "excluded"},
-              "dimensions": output, "limitations": ["探索性文章重采样区间，不能外推作者总体", "190对不是190个独立样本", "单边缺失不计入两边都有描述的均值，覆盖另报", "同文重复只有4篇文章，8对不是8篇独立文章", "题材分层只能诊断混淆，不能证明已经排除"],
+              "dimensions": output, "limitations": ["探索性文章重采样区间，不能外推作者总体", "190对不是190个独立样本", "单边缺失不计入两边都有描述的均值，覆盖另报", f"同文重复只有4篇文章，有效{n_repeats}/8对，缺失不填零；各来源重复次数可能不等", "题材分层只能诊断混淆，不能证明已经排除"],
               "input_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths + [ds_path]},
               "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
     (out / "analysis.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")

@@ -35,11 +35,7 @@ fn load_sources(views: &str) -> Result<BTreeMap<String, (String, Source, String)
         return Err(AppError::Parse("views run无效".into()));
     }
     let dir = Path::new(ROOT).join("runs").join(views);
-    let summary: Value = serde_json::from_slice(&std::fs::read(dir.join("summary.json"))?)
-        .map_err(|e| AppError::Parse(e.to_string()))?;
-    if summary["status"] != "complete" {
-        return Err(AppError::Parse("P2视图尚未完成".into()));
-    }
+    crate::research_compare::view_coverage(views)?;
     let manifest = Path::new(ROOT).join("datasets/authors-v1/manifest.json");
     let ds = Dataset::load(&manifest)?;
     let mut result = BTreeMap::new();

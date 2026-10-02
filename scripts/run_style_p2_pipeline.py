@@ -43,6 +43,11 @@ def main():
         print(f"Starting {stage}", flush=True)
         # Inherit only stdout/stderr; model transport already removes credentials and raw errors.
         result = subprocess.run(argv, cwd=REPO)
+        if result.returncode and stage == "views":
+            # The protocol permits explicitly missing repeats, never missing main samples.
+            result = subprocess.run([binary, "research", "view-coverage", "p2-views-02"], cwd=REPO)
+            if result.returncode == 0:
+                print("View stage retained missing repeats; coverage audit accepted all 20 main views", flush=True)
         if result.returncode:
             save(status="stopped", stage=stage, exit_code=result.returncode,
                  completed=completed, **provenance)
