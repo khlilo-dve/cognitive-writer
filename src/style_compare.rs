@@ -128,8 +128,55 @@ pub(crate) fn parse_view(raw: &str, spec: &str) -> Result<View, AppError> {
 }
 
 pub(crate) fn parse_comparison(raw: &str, a: &View, b: &View) -> Result<Comparison, AppError> {
-    let c: Comparison =
+    let mut value: Value =
         serde_json::from_str(raw).map_err(|e| AppError::Parse(format!("比较JSON: {e}")))?;
+    // Lossless compatibility: the model sometimes includes an ID's dimension and reason.
+    // Preserve those explanations in notes; do not invent or remove a relation.
+    let mut explanations = Vec::new();
+    for (key, side, view) in [("uncertain_left", "A", a), ("uncertain_right", "B", b)] {
+        let list = value[key]
+            .as_array_mut()
+            .ok_or_else(|| AppError::Parse("未知项须为数组".into()))?;
+        for item in list {
+            if let Some(object) = item.as_object() {
+                if object.len() != 3
+                    || !object
+                        .keys()
+                        .all(|k| ["id", "dimension", "reason"].contains(&k.as_str()))
+                {
+                    return Err(AppError::Parse(
+                        "未知项对象只能含id/dimension/reason".into(),
+                    ));
+                }
+                let get = |key: &str| {
+                    object[key]
+                        .as_str()
+                        .filter(|v| !v.trim().is_empty())
+                        .ok_or_else(|| AppError::Parse("未知项对象字段须为非空字符串".into()))
+                };
+                let id = get("id")?;
+                let dimension = get("dimension")?;
+                let reason = get("reason")?;
+                if !view
+                    .features
+                    .iter()
+                    .any(|f| f.id == id && f.dimension == dimension)
+                {
+                    return Err(AppError::Parse("未知项对象的ID或维度与输入不符".into()));
+                }
+                explanations.push(format!("{side} {id} [{dimension}]: {reason}"));
+                *item = json!(id);
+            }
+        }
+    }
+    if !explanations.is_empty() {
+        let notes = value["notes"]
+            .as_array_mut()
+            .ok_or_else(|| AppError::Parse("notes须为数组".into()))?;
+        notes.extend(explanations.into_iter().map(Value::String));
+    }
+    let c: Comparison =
+        serde_json::from_value(value).map_err(|e| AppError::Parse(format!("比较JSON: {e}")))?;
     let left: HashMap<_, _> = a.features.iter().map(|f| (f.id.as_str(), f)).collect();
     let right: HashMap<_, _> = b.features.iter().map(|f| (f.id.as_str(), f)).collect();
     let mut used_a = HashSet::new();
@@ -180,6 +227,22 @@ pub(crate) fn metrics(a: &View, b: &View, c: &Comparison) -> Vec<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn rich_uncertainty_keeps_ids_and_reasons_without_changing_matches() {
+        let a = view();
+        let raw = r#"{"matches":[],"conflicts":[],"uncertain_left":[{"id":"f1","dimension":"voice","reason":"无法确定是否同义"}],"uncertain_right":["f1"],"notes":[]}"#;
+        let parsed = parse_comparison(raw, &a, &a).unwrap();
+        assert_eq!(parsed.uncertain_left, vec!["f1"]);
+        assert!(parsed.matches.is_empty());
+        assert!(parsed.conflicts.is_empty());
+        assert!(parsed.notes[0].contains("无法确定是否同义"));
+        assert!(parse_comparison(
+            &raw.replace("\"dimension\":\"voice\"", "\"dimension\":\"rhythm\""),
+            &a,
+            &a
+        )
+        .is_err());
+    }
     #[test]
     fn indexed_quotes_preserve_exact_words_and_reject_invalid_ranges() {
         let spec = "# 规则\n\n谈主张时像当面商量，不冒充客观公论。\n";
