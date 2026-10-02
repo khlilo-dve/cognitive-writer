@@ -1,0 +1,53 @@
+{
+  "observed_date": "2026-10-01",
+  "status": "partial",
+  "complete": 21,
+  "failed": [
+    {
+      "error": "API 响应解析失败: 返回模型/完成状态/正文无效，响应与费用已保留",
+      "id": "wxb-07",
+      "status": "failed"
+    },
+    {
+      "error": "API 响应解析失败: 返回模型/完成状态/正文无效，响应与费用已保留",
+      "id": "wxb-08",
+      "status": "failed"
+    },
+    {
+      "error": "API 响应解析失败: 返回模型/完成状态/正文无效，响应与费用已保留",
+      "id": "wxb-09",
+      "status": "failed"
+    },
+    {
+      "error": "API 响应解析失败: 特征f02重复/维度不合法/缺内容/quote无法逐字定位",
+      "id": "wzq-01-r2",
+      "status": "failed"
+    },
+    {
+      "error": "API 响应解析失败: 特征f06重复/维度不合法/缺内容/quote无法逐字定位",
+      "id": "wzq-02",
+      "status": "failed"
+    },
+    {
+      "error": "API 响应解析失败: 返回模型/完成状态/正文无效，响应与费用已保留",
+      "id": "wzq-02-r3",
+      "status": "failed"
+    },
+    {
+      "error": "API 响应解析失败: 返回模型/完成状态/正文无效，响应与费用已保留",
+      "id": "wzq-09",
+      "status": "failed"
+    }
+  ],
+  "occupied_cny": 3.898767,
+  "pipeline_state": {
+    "status": "stopped",
+    "stage": "views",
+    "exit_code": 1,
+    "completed": [],
+    "binary_sha256": "ce63a34ae240e7964eba9f36f8f24a26cab842bc67dc0806fc661f7ae73e0cb3",
+    "script_sha256": "5f73dcc7421212c8d7578c7283c79b1b35df139a6de69aa69f82f2650abc34e5",
+    "updated_at": "2026-10-01T08:10:18.739368+00:00",
+    "pid": 1615
+  }
+}

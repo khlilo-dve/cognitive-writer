@@ -17,20 +17,29 @@ use tokio::sync::{Mutex, Semaphore};
 #[derive(Clone, Copy)]
 pub(crate) enum Role {
     Analysis,
+    Structured,
     Writer,
 }
 impl Role {
     pub(crate) fn model(self) -> &'static str {
         match self {
-            Self::Analysis => "mimo-v2.6-pro",
+            Self::Analysis | Self::Structured => "mimo-v2.6-pro",
             Self::Writer => "mimo-v2.6-flash",
         }
     }
     fn max_output(self) -> u64 {
         match self {
-            Self::Analysis => 16384,
+            Self::Analysis | Self::Structured => 16384,
             Self::Writer => 4096,
         }
+    }
+    fn request(self, system: &str, user: &str, json_mode: bool) -> Result<Value, AppError> {
+        let format = json_mode.then(|| json!({"type":"json_object"}));
+        let mut body = request_body(self.model(), system, user, format.as_ref())?;
+        body["max_completion_tokens"] = json!(self.max_output());
+        body["thinking"] =
+            json!({"type":if matches!(self,Self::Analysis){"enabled"}else{"disabled"}});
+        Ok(body)
     }
 }
 
@@ -150,11 +159,7 @@ impl ResearchStore {
         if !valid_id(name) {
             return Err(AppError::Parse("研究请求名无效".into()));
         }
-        let format = json_mode.then(|| json!({"type":"json_object"}));
-        let mut body = request_body(role.model(), system, user, format.as_ref())?;
-        body["max_completion_tokens"] = json!(role.max_output());
-        body["thinking"] =
-            json!({"type":if matches!(role,Role::Analysis) {"enabled"} else {"disabled"}});
+        let body = role.request(system, user, json_mode)?;
         let request = json!({"schema":1,"endpoint_sha256":sha256(self.base.trim_end_matches('/').as_bytes()),"body":body});
         let mut identity = format!("{}/{name}", self.run_id);
         let path = self.root.join("requests").join(format!("{name}.json"));
@@ -305,6 +310,19 @@ impl ResearchStore {
 mod tests {
     use super::*;
     use std::io::{Read, Write};
+    #[test]
+    fn structured_pro_changes_only_explicit_thinking_mode() {
+        let mut old = Role::Analysis.request("system", "user", true).unwrap();
+        let structured = Role::Structured.request("system", "user", true).unwrap();
+        assert_eq!(old["thinking"]["type"], "enabled");
+        assert_eq!(structured["thinking"]["type"], "disabled");
+        old["thinking"] = structured["thinking"].clone();
+        assert_eq!(old, structured);
+        assert_eq!(
+            Role::Writer.request("s", "u", false).unwrap()["model"],
+            "mimo-v2.6-flash"
+        );
+    }
     #[tokio::test]
     async fn paid_call_is_resumable_and_preserves_metadata_without_reasoning() {
         let d = tempfile::tempdir().unwrap();

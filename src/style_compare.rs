@@ -1,7 +1,7 @@
 //! Evidence-anchored representation views and deterministic per-axis overlap.
 use crate::error::AppError;
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::{json, Value};
 use std::collections::{HashMap, HashSet};
 
 pub(crate) const DIMENSIONS: [&str; 9] = [
@@ -45,6 +45,61 @@ pub(crate) struct Comparison {
     pub uncertain_left: Vec<String>,
     pub uncertain_right: Vec<String>,
     pub notes: Vec<String>,
+}
+
+pub(crate) fn indexed_input(spec: &str) -> String {
+    json!({"lines":spec.split('\n').enumerate().map(|(i,text)|json!({"line":i+1,"text":text})).collect::<Vec<_>>()}).to_string()
+}
+
+pub(crate) fn parse_indexed_view(raw: &str, spec: &str) -> Result<View, AppError> {
+    #[derive(Deserialize)]
+    #[serde(deny_unknown_fields)]
+    struct IndexedFeature {
+        id: String,
+        dimension: String,
+        rule: String,
+        condition: String,
+        line_start: usize,
+        line_end: usize,
+    }
+    #[derive(Deserialize)]
+    #[serde(deny_unknown_fields)]
+    struct IndexedView {
+        features: Vec<IndexedFeature>,
+        uncertainties: Vec<String>,
+    }
+    let indexed: IndexedView =
+        serde_json::from_str(raw).map_err(|e| AppError::Parse(format!("行引用视图JSON: {e}")))?;
+    let lines: Vec<_> = spec.split('\n').collect();
+    let mut features = Vec::new();
+    for f in indexed.features {
+        if f.line_start == 0
+            || f.line_end < f.line_start
+            || f.line_end > lines.len()
+            || f.line_end - f.line_start > 2
+        {
+            return Err(AppError::Parse("引用行号不存在、倒序或范围超过3行".into()));
+        }
+        let quote = lines[f.line_start - 1..f.line_end]
+            .join("\n")
+            .trim()
+            .to_owned();
+        features.push(Feature {
+            id: f.id,
+            dimension: f.dimension,
+            rule: f.rule,
+            condition: f.condition,
+            quote,
+        });
+    }
+    let view = View {
+        features,
+        uncertainties: indexed.uncertainties,
+    };
+    parse_view(
+        &serde_json::to_string(&view).map_err(|e| AppError::Parse(e.to_string()))?,
+        spec,
+    )
 }
 
 pub(crate) fn parse_view(raw: &str, spec: &str) -> Result<View, AppError> {
@@ -125,6 +180,19 @@ pub(crate) fn metrics(a: &View, b: &View, c: &Comparison) -> Vec<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn indexed_quotes_preserve_exact_words_and_reject_invalid_ranges() {
+        let spec = "# 规则\n\n谈主张时像当面商量，不冒充客观公论。\n";
+        let raw = r#"{"features":[{"id":"f1","dimension":"voice","rule":"像当面商量","condition":"谈主张时","line_start":3,"line_end":3}],"uncertainties":[]}"#;
+        let v = parse_indexed_view(raw, spec).unwrap();
+        assert_eq!(v.features[0].quote, "谈主张时像当面商量，不冒充客观公论。");
+        assert!(
+            parse_indexed_view(&raw.replace("\"line_start\":3", "\"line_start\":0"), spec).is_err()
+        );
+        assert!(
+            parse_indexed_view(&raw.replace("\"line_end\":3", "\"line_end\":9"), spec).is_err()
+        );
+    }
     fn view() -> View {
         View {
             features: vec![Feature {

@@ -70,7 +70,7 @@ fn load_items(run: &str) -> Result<Vec<Item>, AppError> {
     Ok(items)
 }
 
-async fn validated<T, F>(
+pub(crate) async fn validated<T, F>(
     store: &ResearchStore,
     name: &str,
     prompt: &str,
@@ -85,7 +85,7 @@ where
         let raw = store
             .call(
                 &format!("{name}-{attempt}"),
-                Role::Analysis,
+                Role::Structured,
                 prompt,
                 &user,
                 true,
@@ -114,16 +114,16 @@ pub(crate) async fn views(run: &str, base: &str, repeats: &str) -> Result<(), Ap
     if items.iter().any(|i| !ids.insert(&i.id)) {
         return Err(AppError::Parse("重复artifact_id".into()));
     }
-    let prompt = std::fs::read_to_string(format!("{ROOT}/prompts/comparison-view-v1.md"))?;
+    let prompt = std::fs::read_to_string(format!("{ROOT}/prompts/comparison-view-v2.md"))?;
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
-    store.freeze(&json!({"suite":"comparison_view_v1","items":items,"prompt":prompt,"length_policy":"detailed-v1"}))?;
+    store.freeze(&json!({"suite":"comparison_view_v2_structured","items":items,"prompt":prompt,"length_policy":"detailed-v1","analysis_thinking":"disabled","method_revision":1}))?;
     std::fs::create_dir_all(store.root.join("views"))?;
     let mut tasks = tokio::task::JoinSet::new();
     for item in items {
         let store = Arc::clone(&store);
         let prompt = prompt.clone();
         tasks.spawn(async move{
-            let result=validated(&store,&format!("view-{}",item.id),&prompt,&item.spec,|s|style_compare::parse_view(s,&item.spec)).await;
+            let result=validated(&store,&format!("view-{}",item.id),&prompt,&style_compare::indexed_input(&item.spec),|s|style_compare::parse_indexed_view(s,&item.spec)).await;
             match result {
                 Ok(view)=>{let output=Mapped{item:item.clone(),view};write_json(&store.root.join(format!("views/{}.json",item.id)),&output)?;Ok::<_,AppError>(json!({"id":item.id,"status":"complete","features":output.view.features.len()}))},
                 Err(e)=>Ok(json!({"id":item.id,"status":"failed","error":e.to_string()})),
@@ -133,7 +133,7 @@ pub(crate) async fn views(run: &str, base: &str, repeats: &str) -> Result<(), Ap
     finish_tasks(&store, &mut tasks, "views").await
 }
 
-async fn finish_tasks(
+pub(crate) async fn finish_tasks(
     store: &ResearchStore,
     tasks: &mut tokio::task::JoinSet<Result<Value, AppError>>,
     stage: &str,
@@ -160,7 +160,7 @@ async fn finish_tasks(
     }
 }
 
-async fn compare(
+pub(crate) async fn compare(
     store: &ResearchStore,
     name: &str,
     prompt: &str,
@@ -252,7 +252,7 @@ pub(crate) async fn pairs(run: &str, views_run: &str) -> Result<(), AppError> {
     }
     let prompt = std::fs::read_to_string(format!("{ROOT}/prompts/compare-pair-v1.md"))?;
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
-    store.freeze(&json!({"suite":"style_pairs_v1","source":views_run,"views_sha256":sha256(&serde_json::to_vec(&mapped).map_err(|e|AppError::Parse(e.to_string()))?),"prompt":prompt,"metric":"one_to_one_jaccard_per_axis_v1"}))?;
+    store.freeze(&json!({"suite":"style_pairs_v2_structured","source":views_run,"views_sha256":sha256(&serde_json::to_vec(&mapped).map_err(|e|AppError::Parse(e.to_string()))?),"prompt":prompt,"metric":"one_to_one_jaccard_per_axis_v1","analysis_thinking":"disabled","method_revision":1}))?;
     if let Err(e) = controls(&store, &prompt).await {
         write_json(
             &store.root.join("summary.json"),

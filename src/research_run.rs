@@ -12,6 +12,11 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["profiles",run,views,pairs]=>crate::research_profile::run(run,views,pairs).await,
+        ["convergence",run,profiles,p2]=>crate::research_convergence::run(run,profiles,p2).await,
+        ["generate",run,profiles,single]=>crate::research_generation::run(run,profiles,single).await,
+        ["evaluate",run,generation,"reference"]=>crate::research_evaluation::run(run,generation,"reference",None).await,
+        ["evaluate",run,generation,"confirmation",reference]=>crate::research_evaluation::run(run,generation,"confirmation",Some(reference)).await,
         ["views",run,base,repeats]=>crate::research_compare::views(run,base,repeats).await,
         ["pairs",run,views]=>crate::research_compare::pairs(run,views).await,
         ["validate", path] => {
@@ -31,7 +36,7 @@ pub async fn run(args: &[&str]) -> Result<(), AppError> {
             extract(Path::new(path),run_id,"full",Some(source_run)).await
         }
         _ => Err(AppError::Parse(
-            "用法: research validate <manifest> | research extract <manifest> <run_id> pilot|full|repeat [source_run]"
+            "用法: research validate <manifest> | extract <manifest> <run> pilot|full|repeat [source] | views <run> <single> <repeat> | pairs <run> <views> | profiles <run> <views> <pairs> | convergence <run> <profiles> <pairs> | generate <run> <profiles> <single> | evaluate <run> <generation> reference|confirmation [reference_run]"
                 .into(),
         )),
     }

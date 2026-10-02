@@ -1,0 +1,22 @@
+{
+  "p2-pipeline-state.json": {
+    "status": "running",
+    "stage": "views",
+    "completed": [],
+    "binary_sha256": "cc23cbc9205f48acc530fcad0e144f2de6f32739a1c4c1dd8bde99066b22f127",
+    "script_sha256": "0d667eb6c4f06409eda4a8cf75a0694045520b40eced07f6c71fdf4b1b1c160e",
+    "updated_at": "2026-10-01T08:15:33.886933+00:00",
+    "pid": 8358
+  },
+  "followthrough-state.json": {
+    "status": "waiting",
+    "stage": "P2",
+    "binary_sha256": "cc23cbc9205f48acc530fcad0e144f2de6f32739a1c4c1dd8bde99066b22f127",
+    "pid": 8375,
+    "updated_at": "2026-10-01T08:15:44.901215+00:00"
+  },
+  "observed_date": "2026-10-02",
+  "live_processes_found": false,
+  "views_complete": 11,
+  "budget_occupied_cny": 4.548963
+}

@@ -5,6 +5,8 @@
 
 `research_run.rs`提供research validate/extract/views/pairs；`research_dataset.rs`做来源SHA与划分隔离；`research_store.rs`共用原HTTP传输并增加显式模型角色、最多3并发、跨run已验证复用；`research_budget.rs`维护全研究与试跑共享上限，失败预留不清零；`research_receipt.rs`校验响应哈希/usage；`style_compare.rs`保留未知与冲突、计算逐维一对一重合，缺失维度为NA。新数据与图表都在research目录，不覆盖eval冻结产物。飞书是可读投影，不替代本地检查点。
 
+后续研究实现（2026-10-01，尚待实际实验）：`style_profile.rs`校验原文证据并按文章计数；`research_profile.rs`独立构建冻结子集；`research_convergence.rs`做相邻/全量/重复/跨作者比较；`research_generation.rs`固定Flash生成48+12篇；`research_evaluation.rs`复用Transfer v2并分reference/confirmation解封，`research_judgment.rs`验证匿名作者匹配引用。实施细则在research目录P3-P5-implementation.md。实验控制失败即停，不把代码完成当作研究结论。
+
 当前更新（2026-09-26）：Rubric B v3采用detailed-v1长度充分度，至少1500满分、不因更长扣分，建议2000–5000；固定JSON字段conciseness保留兼容。当前自由格式发布入口登记free-release-v2-detailed，旧run与人评继续使用冻结规则。以下400–600与v2评测为历史记录；详细版尚无新的在线质量对照，见docs/2026-09-26-detailed-style-learning.md。
 
 

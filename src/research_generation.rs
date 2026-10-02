@@ -1,0 +1,237 @@
+use crate::{
+    error::AppError,
+    eval_store::write_json,
+    generate::{outline_system_prompt, render_prompt, style_system_prompt},
+    research_compare::finish_tasks,
+    research_dataset::{sha256, valid_id, Dataset},
+    research_profile::{self, ROOT},
+    research_store::{ResearchStore, Role},
+    transfer_quality::length_check,
+};
+use serde::{Deserialize, Serialize};
+use serde_json::{json, Value};
+use std::{collections::BTreeMap, path::Path, sync::Arc};
+
+#[derive(Clone, Serialize, Deserialize)]
+pub(crate) struct Job {
+    pub id: String,
+    pub author: String,
+    pub method: String,
+    pub style_id: String,
+    pub source_articles: Vec<String>,
+    pub topic_id: String,
+    pub phase: String,
+    pub replicate: usize,
+    pub spec: String,
+    pub task: String,
+}
+#[derive(Clone, Serialize, Deserialize)]
+pub(crate) struct Generated {
+    pub job: Job,
+    pub outline: String,
+    pub body: String,
+    pub length: Value,
+}
+
+pub(crate) async fn run(run: &str, profiles: &str, single: &str) -> Result<(), AppError> {
+    if !valid_id(single) {
+        return Err(AppError::Parse("首次Style run无效".into()));
+    }
+    let artifacts = research_profile::load(profiles)?;
+    let manifest = Path::new(ROOT).join("datasets/authors-v1/manifest.json");
+    let ds = Dataset::load(&manifest)?;
+    let sampling: Value =
+        serde_json::from_slice(&std::fs::read(format!("{ROOT}/datasets/sampling-v1.json"))?)
+            .map_err(|e| AppError::Parse(e.to_string()))?;
+    if sampling["manifest_sha256"] != sha256(&std::fs::read(&manifest)?) {
+        return Err(AppError::Parse("生成抽样manifest身份变化".into()));
+    }
+    let tasks: Value = serde_json::from_slice(&std::fs::read(format!(
+        "{ROOT}/datasets/generation-tasks-v1.json"
+    ))?)
+    .map_err(|e| AppError::Parse(e.to_string()))?;
+    let topics = tasks["tasks"]
+        .as_array()
+        .ok_or_else(|| AppError::Parse("生成任务缺失".into()))?;
+    if topics.len() != 3 {
+        return Err(AppError::Parse("要求3个固定主题".into()));
+    }
+    let mut styles = BTreeMap::new();
+    for full in artifacts
+        .iter()
+        .filter(|a| a.plan.mode == "primary" && a.plan.articles.len() == 10)
+    {
+        if full.spec.trim().is_empty() {
+            return Err(AppError::Parse(
+                "全量Profile无可执行Style；不将空Style冒充聚合实验".into(),
+            ));
+        }
+        let author = &full.plan.author;
+        let mut entries = vec![(
+            "aggregate".to_owned(),
+            full.plan.id.clone(),
+            full.spec.clone(),
+            full.plan.articles.clone(),
+        )];
+        let baselines = sampling["authors"][author]["generation_baselines"]
+            .as_object()
+            .ok_or_else(|| AppError::Parse("缺少冻结生成基线".into()))?;
+        if baselines.len() != 3 {
+            return Err(AppError::Parse("每作者要求3份生成基线".into()));
+        }
+        for (topic, id) in baselines {
+            let id = id
+                .as_str()
+                .ok_or_else(|| AppError::Parse("基线ID无效".into()))?;
+            if !ds
+                .selected(false)
+                .iter()
+                .any(|a| a.article_id == id && a.author_id == *author && a.topic == *topic)
+            {
+                return Err(AppError::Parse(
+                    "生成基线不是预定作者/主题的discovery".into(),
+                ));
+            }
+            let saved: Value = serde_json::from_slice(&std::fs::read(format!(
+                "{ROOT}/runs/{single}/single/{id}.json"
+            ))?)
+            .map_err(|e| AppError::Parse(e.to_string()))?;
+            let spec = std::fs::read_to_string(format!("{ROOT}/runs/{single}/single/{id}.md"))?;
+            if saved["result"]["spec"] != spec {
+                return Err(AppError::Parse("单篇基线与保存结果不同".into()));
+            }
+            entries.push(("single".into(), id.into(), spec, vec![id.into()]));
+        }
+        styles.insert(author.clone(), entries);
+    }
+    if styles.len() != 2 {
+        return Err(AppError::Parse("需要两个全量作者Profile".into()));
+    }
+    let mut jobs = Vec::new();
+    let task_text = |t: &Value| {
+        format!(
+            "{}\n{}\n主题：{}\n核心素材：{}\n必须覆盖：{}",
+            tasks["length"].as_str().unwrap_or(""),
+            tasks["permission"].as_str().unwrap_or(""),
+            t["title"].as_str().unwrap_or(""),
+            t["facts"].as_str().unwrap_or(""),
+            t["requirements"].as_str().unwrap_or("")
+        )
+    };
+    for (author, entries) in &styles {
+        for (method, style_id, spec, source_articles) in entries {
+            for t in topics {
+                for replicate in 1..=2 {
+                    jobs.push(Job {
+                        id: format!("article-{:03}", jobs.len() + 1),
+                        author: author.clone(),
+                        method: method.clone(),
+                        style_id: style_id.clone(),
+                        source_articles: source_articles.clone(),
+                        topic_id: field(t, "id")?,
+                        phase: field(t, "phase")?,
+                        replicate,
+                        spec: spec.clone(),
+                        task: task_text(t),
+                    });
+                }
+            }
+        }
+    }
+    let authors: Vec<_> = styles.keys().cloned().collect();
+    for t in topics {
+        for replicate in 1..=4 {
+            jobs.push(Job {
+                id: format!("article-{:03}", jobs.len() + 1),
+                author: authors[(replicate - 1) % 2].clone(),
+                method: "neutral".into(),
+                style_id: "none".into(),
+                source_articles: vec![],
+                topic_id: field(t, "id")?,
+                phase: field(t, "phase")?,
+                replicate,
+                spec: "未指定特定写作风格，按素材写自然连贯的中文，不模仿名家。".into(),
+                task: task_text(t),
+            });
+        }
+    }
+    if jobs.len() != 60 {
+        return Err(AppError::Parse("生成任务应为48主对照+12无风格".into()));
+    }
+    // Freeze before seeing any generated outputs or opening confirmation references.
+    let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
+    store.freeze(&json!({"suite":"style_generation_v1","profile_run":profiles,"single_run":single,"tasks":tasks,"jobs":jobs,"outline_wrapper":outline_system_prompt("STYLE"),"body_wrapper":style_system_prompt("STYLE"),"render_wrapper":render_prompt("OUTLINE","TASK"),"writer":"mimo-v2.6-flash"}))?;
+    std::fs::create_dir_all(store.root.join("articles"))?;
+    jobs.sort_by_key(|j| sha256(format!("17:{}", j.id).as_bytes()));
+    let mut pending = tokio::task::JoinSet::new();
+    for job in jobs {
+        let store = Arc::clone(&store);
+        pending.spawn(async move {
+        let result=generate(&store,job.clone()).await;
+        match result {Ok(a)=>{write_json(&store.root.join(format!("articles/{}.json",job.id)),&a)?;crate::io::write_file_atomic(&store.root.join(format!("articles/{}.md",job.id)),&a.body)?;Ok::<_,AppError>(json!({"id":job.id,"status":"complete","author":job.author,"method":job.method,"topic":job.topic_id,"phase":job.phase,"replicate":job.replicate,"length":a.length}))},Err(e)=>Ok(json!({"id":job.id,"status":"failed","error":e.to_string()}))}
+    });
+    }
+    finish_tasks(&store, &mut pending, "generation").await
+}
+
+fn field(v: &Value, key: &str) -> Result<String, AppError> {
+    v[key]
+        .as_str()
+        .map(str::to_owned)
+        .ok_or_else(|| AppError::Parse(format!("缺少任务字段{key}")))
+}
+async fn generate(store: &ResearchStore, job: Job) -> Result<Generated, AppError> {
+    let outline = store
+        .call(
+            &format!("{}-outline", job.id),
+            Role::Writer,
+            &outline_system_prompt(&job.spec),
+            &job.task,
+            false,
+        )
+        .await?;
+    let body = store
+        .call(
+            &format!("{}-body", job.id),
+            Role::Writer,
+            &style_system_prompt(&job.spec),
+            &render_prompt(&outline, &job.task),
+            false,
+        )
+        .await?;
+    let length = length_check(&body);
+    Ok(Generated {
+        job,
+        outline,
+        body,
+        length,
+    })
+}
+
+pub(crate) fn load(run: &str) -> Result<Vec<Generated>, AppError> {
+    if !valid_id(run) {
+        return Err(AppError::Parse("生成run无效".into()));
+    }
+    let root = Path::new(ROOT).join("runs").join(run);
+    let summary: Value = serde_json::from_slice(&std::fs::read(root.join("summary.json"))?)
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    if summary["status"] != "complete" || summary["rows"].as_array().is_none_or(|r| r.len() != 60) {
+        return Err(AppError::Parse(
+            "60篇生成尚未完成，确认参考保持未解封".into(),
+        ));
+    }
+    let mut result = Vec::new();
+    for i in 1..=60 {
+        let id = format!("article-{i:03}");
+        let a: Generated =
+            serde_json::from_slice(&std::fs::read(root.join(format!("articles/{id}.json")))?)
+                .map_err(|e| AppError::Parse(e.to_string()))?;
+        if a.job.id != id
+            || a.body != std::fs::read_to_string(root.join(format!("articles/{id}.md")))?
+        {
+            return Err(AppError::Parse("生成产物身份变化".into()));
+        }
+        result.push(a);
+    }
+    Ok(result)
+}

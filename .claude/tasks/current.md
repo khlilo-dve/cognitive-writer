@@ -1,5 +1,14 @@
 # 当前任务状态
 
+## 2026-10-02 最新断点（优先于下方历史状态）
+
+- P1与20首次+8重复已完成。P2 v1视图最终21/28完成、7失败（5次输出截断、2次逐字引用漏字），所有费用/响应保留；尚未运行v1主比较。
+- 使用计划允许的唯一受控修订：Pro结构化任务thinking disabled，P2/P3引用改为原始行号由程序精确提取。详见research/style-aggregation/method-revision-01.md；单篇Style与Flash生成参数不变。
+- P2当前run为p2-views-02→p2-pairs-02。10月2日续做发现两个进程都已退出，保存11份有效视图，无失败；占用4.548963元。中断留证validation/p2-interruption-2026-10-02.json，已从原run恢复，不清除旧未知费用。
+- P3–P5入口已实现但未正式运行。单次后续执行器scripts/run_style_followthrough.py等待P2完成，依次profiles/convergence/generate/reference/confirmation、报告、零新请求复跑，到P6解读入口；失败即停。状态文件running/waiting不代表活进程，每次继续必须同时核对/proc或pgrep。
+- 使用target/research-next/debug/cognitive-writer，避免覆盖已运行批次的二进制。241项库测试通过、构建通过；统计临时样本验证通过。执行器启动后不能替换其冻结二进制。
+- 仍需：完成真实P2–P5、解读证据、同步全量飞书图表与报告、可选盲测表单、P6最终报告。不能把功能实现当研究完成，不能默认切换生产配置。
+
 单篇学习追加修改（2026-09-26）：用户要求参考孙割文件，详细优先。已调整提示词、长文本保存、补充修复及新旧评测长度政策，229项库测试、构建与17项终端回归通过，历史产物核验通过；记录见docs/2026-09-26-detailed-style-learning.md。本项不替代下方多文章研究状态，不启动其付费任务。
 
 

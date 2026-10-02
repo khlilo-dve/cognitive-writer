@@ -29,11 +29,11 @@ def main():
         summary = json.loads((ROOT / "runs" / name / "summary.json").read_text())
         if summary["status"] != "complete":
             raise RuntimeError(f"Prerequisite incomplete: {name}")
-    binary = str(REPO / "target/debug/cognitive-writer")
+    binary = str(REPO / "target/research-next/debug/cognitive-writer")
     steps = [
-        ("views", [binary, "research", "views", "p2-views-01", "p2-detailed-single-01", "p2-detailed-repeat-01"]),
-        ("pairs", [binary, "research", "pairs", "p2-pairs-01", "p2-views-01"]),
-        ("figures", [str(ROOT / ".plot-env/bin/python"), "scripts/plot_style_research.py", "p2-pairs-01"]),
+        ("views", [binary, "research", "views", "p2-views-02", "p2-detailed-single-01", "p2-detailed-repeat-01"]),
+        ("pairs", [binary, "research", "pairs", "p2-pairs-02", "p2-views-02"]),
+        ("figures", [str(ROOT / ".plot-env/bin/python"), "scripts/plot_style_research.py", "p2-pairs-02"]),
     ]
     provenance = {"binary_sha256": hashlib.sha256(Path(binary).read_bytes()).hexdigest(),
                   "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
