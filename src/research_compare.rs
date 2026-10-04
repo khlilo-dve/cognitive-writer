@@ -402,15 +402,23 @@ pub(crate) async fn pairs(run: &str, views_run: &str) -> Result<(), AppError> {
         .collect();
     jobs.extend(swaps);
     let mut tasks = tokio::task::JoinSet::new();
+    let chains = Arc::new(tokio::sync::Semaphore::new(3));
+    let failures = Arc::new(std::sync::atomic::AtomicUsize::new(0));
     for (id, kind, a, b) in jobs {
         let store = Arc::clone(&store);
         let prompt = prompt.clone();
+        let chains = Arc::clone(&chains);
+        let failures = Arc::clone(&failures);
         tasks.spawn(async move{
+            let _chain=chains.acquire().await.map_err(|_|AppError::Parse("比较调度器关闭".into()))?;
+            if failures.load(std::sync::atomic::Ordering::SeqCst)>=3 {
+                return Ok(json!({"id":id,"kind":kind,"status":"deferred","error":"三项修复后仍无效，停止后续链；已有检查点保留"}));
+            }
             match compare(&store,&id,&prompt,&a.view,&b.view).await {
                 Ok(c)=>{let metrics=style_compare::metrics(&a.view,&b.view,&c);
                     write_json(&store.root.join(format!("pairs/{id}.json")),&json!({"id":id,"kind":kind,"left":a.item.id,"right":b.item.id,"left_author":a.item.author,"right_author":b.item.author,"within_author":a.item.author==b.item.author,"comparison":c,"metrics":metrics}))?;
                     Ok::<_,AppError>(json!({"id":id,"kind":kind,"status":"complete"}))},
-                Err(e)=>Ok(json!({"id":id,"kind":kind,"status":"failed","error":e.to_string()})),
+                Err(e)=>{failures.fetch_add(1,std::sync::atomic::Ordering::SeqCst);Ok(json!({"id":id,"kind":kind,"status":"failed","error":e.to_string()}))},
             }
         });
     }

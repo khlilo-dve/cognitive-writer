@@ -28,7 +28,7 @@ def ledger_identity():
 def main():
     os.chdir(REPO)
     lock=(ROOT/".followthrough.lock").open("a");fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-    binary=REPO/"target/research-next/debug/cognitive-writer"
+    binary=REPO/"target/research-followthrough/debug/cognitive-writer"
     expected_binary=hashlib.sha256(binary.read_bytes()).hexdigest()
     save(status="waiting",stage="P2",binary_sha256=expected_binary)
     while True:

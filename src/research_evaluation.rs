@@ -163,9 +163,23 @@ pub(crate) async fn run(
     std::fs::create_dir_all(store.root.join("judgments"))?;
     let authors: Vec<_> = references.keys().cloned().collect();
     let mut tasks = tokio::task::JoinSet::new();
-    for (i, g) in jobs.into_iter().enumerate() {
-        let first = &authors[i % 2];
-        let second = &authors[(i + 1) % 2];
+    let mut positions = BTreeMap::new();
+    for g in jobs {
+        let target_index = authors
+            .iter()
+            .position(|a| *a == g.job.author)
+            .ok_or_else(|| AppError::Parse("待评文章作者不在参考集合".into()))?;
+        let left_is_target = next_target_position(&mut positions, &g.job.author, &g.job.method);
+        let first = &authors[if left_is_target {
+            target_index
+        } else {
+            1 - target_index
+        }];
+        let second = &authors[if left_is_target {
+            1 - target_index
+        } else {
+            target_index
+        }];
         let a = references[first].clone();
         let b = references[second].clone();
         let target = if g.job.author == *first { "A" } else { "B" }.to_owned();
@@ -179,6 +193,35 @@ pub(crate) async fn run(
         });
     }
     finish_tasks(&store, &mut tasks, "generation_evaluation").await
+}
+
+fn next_target_position(
+    counts: &mut BTreeMap<(String, String), usize>,
+    author: &str,
+    method: &str,
+) -> bool {
+    let n = counts
+        .entry((author.to_owned(), method.to_owned()))
+        .or_default();
+    let left = *n % 2 == 0;
+    *n += 1;
+    left
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn neutral_author_assignment_cannot_force_all_targets_onto_the_same_side() {
+        let mut counts = BTreeMap::new();
+        let observed: Vec<_> = ["a", "b", "a", "b"]
+            .iter()
+            .map(|a| next_target_position(&mut counts, a, "neutral"))
+            .collect();
+        assert_eq!(observed, vec![true, true, false, false]);
+        assert!(next_target_position(&mut counts, "a", "single"));
+        assert!(!next_target_position(&mut counts, "a", "single"));
+    }
 }
 
 async fn evaluate(

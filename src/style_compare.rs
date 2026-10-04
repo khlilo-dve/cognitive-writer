@@ -139,32 +139,49 @@ pub(crate) fn parse_comparison(raw: &str, a: &View, b: &View) -> Result<Comparis
             .ok_or_else(|| AppError::Parse("未知项须为数组".into()))?;
         for item in list {
             if let Some(object) = item.as_object() {
-                if object.len() != 3
-                    || !object
-                        .keys()
-                        .all(|k| ["id", "dimension", "reason"].contains(&k.as_str()))
+                if object.len() < 2
+                    || !object.keys().all(|k| {
+                        [
+                            "id",
+                            "dimension",
+                            "reason",
+                            "left_candidate",
+                            "right_candidate",
+                        ]
+                        .contains(&k.as_str())
+                    })
                 {
                     return Err(AppError::Parse(
-                        "未知项对象只能含id/dimension/reason".into(),
+                        "未知项对象需id/reason，另可含dimension或左右候选ID".into(),
                     ));
                 }
                 let get = |key: &str| {
-                    object[key]
-                        .as_str()
+                    object
+                        .get(key)
+                        .and_then(Value::as_str)
                         .filter(|v| !v.trim().is_empty())
                         .ok_or_else(|| AppError::Parse("未知项对象字段须为非空字符串".into()))
                 };
                 let id = get("id")?;
-                let dimension = get("dimension")?;
-                let reason = get("reason")?;
-                if !view
-                    .features
-                    .iter()
-                    .any(|f| f.id == id && f.dimension == dimension)
-                {
+                get("reason")?;
+                if !view.features.iter().any(|f| {
+                    f.id == id
+                        && (!object.contains_key("dimension")
+                            || object["dimension"].as_str() == Some(f.dimension.as_str()))
+                }) {
                     return Err(AppError::Parse("未知项对象的ID或维度与输入不符".into()));
                 }
-                explanations.push(format!("{side} {id} [{dimension}]: {reason}"));
+                for (key, candidates) in [("left_candidate", a), ("right_candidate", b)] {
+                    if object.contains_key(key)
+                        && !candidates
+                            .features
+                            .iter()
+                            .any(|f| object[key].as_str() == Some(f.id.as_str()))
+                    {
+                        return Err(AppError::Parse(format!("未知项{id}的{key}不在输入中")));
+                    }
+                }
+                explanations.push(format!("{side} unknown: {}", Value::Object(object.clone())));
                 *item = json!(id);
             }
         }
@@ -181,30 +198,49 @@ pub(crate) fn parse_comparison(raw: &str, a: &View, b: &View) -> Result<Comparis
     let right: HashMap<_, _> = b.features.iter().map(|f| (f.id.as_str(), f)).collect();
     let mut used_a = HashSet::new();
     let mut used_b = HashSet::new();
+    let mut errors = Vec::new();
     for p in c.matches.iter().chain(&c.conflicts) {
-        let fa = left
-            .get(p.left.as_str())
-            .ok_or_else(|| AppError::Parse("A侧id不存在".into()))?;
-        let fb = right
-            .get(p.right.as_str())
-            .ok_or_else(|| AppError::Parse("B侧id不存在".into()))?;
-        if fa.dimension != fb.dimension
-            || !used_a.insert(p.left.as_str())
-            || !used_b.insert(p.right.as_str())
-            || p.reason.trim().is_empty()
-        {
-            return Err(AppError::Parse("关系跨维度、重复计数或缺少解释".into()));
+        let (Some(fa), Some(fb)) = (left.get(p.left.as_str()), right.get(p.right.as_str())) else {
+            errors.push(format!("关系A.{}—B.{}引用了不存在的ID", p.left, p.right));
+            continue;
+        };
+        if fa.dimension != fb.dimension {
+            errors.push(format!(
+                "关系A.{}({})—B.{}({})跨维度；输入维度不可改写",
+                p.left, fa.dimension, p.right, fb.dimension
+            ));
+        }
+        if !used_a.insert(p.left.as_str()) {
+            errors.push(format!(
+                "A.{}在关系中重复使用；每个ID只能参与一个关系",
+                p.left
+            ));
+        }
+        if !used_b.insert(p.right.as_str()) {
+            errors.push(format!(
+                "B.{}在关系中重复使用；每个ID只能参与一个关系",
+                p.right
+            ));
+        }
+        if p.reason.trim().is_empty() {
+            errors.push(format!("关系A.{}—B.{}缺少依据", p.left, p.right));
         }
     }
     for id in &c.uncertain_left {
         if !left.contains_key(id.as_str()) || !used_a.insert(id.as_str()) {
-            return Err(AppError::Parse("A侧未知项无效或重复".into()));
+            errors.push(format!("A侧未知项{id}不存在或已被使用"));
         }
     }
     for id in &c.uncertain_right {
         if !right.contains_key(id.as_str()) || !used_b.insert(id.as_str()) {
-            return Err(AppError::Parse("B侧未知项无效或重复".into()));
+            errors.push(format!("B侧未知项{id}不存在或已被使用"));
         }
+    }
+    if !errors.is_empty() {
+        return Err(AppError::Parse(format!(
+            "比较结构违规：{}",
+            errors.join("；")
+        )));
     }
     Ok(c)
 }
@@ -242,6 +278,23 @@ mod tests {
             &a
         )
         .is_err());
+        let optional = r#"{"matches":[],"conflicts":[],"uncertain_left":[{"id":"f1","right_candidate":"f1","reason":"仅作未决候选"}],"uncertain_right":[],"notes":[]}"#;
+        let parsed = parse_comparison(optional, &a, &a).unwrap();
+        assert!(parsed.matches.is_empty());
+        assert_eq!(parsed.uncertain_left, vec!["f1"]);
+        assert!(parsed.notes[0].contains("right_candidate"));
+        assert!(parse_comparison(&optional.replace("\"id\":\"f1\",", ""), &a, &a).is_err());
+    }
+    #[test]
+    fn one_repair_receives_all_structural_violations() {
+        let a = view();
+        let mut b = view();
+        b.features[0].dimension = "rhythm".into();
+        let raw = r#"{"matches":[{"left":"f1","right":"f1","reason":"假定等价"},{"left":"f1","right":"f1","reason":"重复"}],"conflicts":[],"uncertain_left":[],"uncertain_right":[],"notes":[]}"#;
+        let error = parse_comparison(raw, &a, &b).err().unwrap().to_string();
+        assert!(error.contains("跨维度"));
+        assert!(error.contains("A.f1在关系中重复"));
+        assert!(error.contains("B.f1在关系中重复"));
     }
     #[test]
     fn indexed_quotes_preserve_exact_words_and_reject_invalid_ranges() {
