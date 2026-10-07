@@ -1,0 +1,145 @@
+{
+  "passed": false,
+  "rows": [
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [
+          {
+            "left": "f1",
+            "reason": "两侧均为全文范围下保持冷静克制语气、避免夸张情绪，维度voice、条件与机制方向完全一致。",
+            "right": "f1"
+          }
+        ],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "self",
+      "passed": true
+    },
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [
+          {
+            "left": "f1",
+            "reason": "同为全文范围的voice规则，均要求克制平静、避免情绪夸饰，机制与条件一致",
+            "right": "f1"
+          }
+        ],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "synonym",
+      "passed": true
+    },
+    {
+      "comparison": {
+        "conflicts": [
+          {
+            "left": "f1",
+            "reason": "同为全文叙述的voice维度，A要求冷静克制避免夸张，B要求热烈夸张避免冷静，方向完全相反",
+            "right": "f1"
+          }
+        ],
+        "matches": [],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "opposite",
+      "passed": true
+    },
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [
+          {
+            "left": "f1",
+            "reason": "两者同属全文voice维度，均对整体语气设定笼统的正面要求；A的冷静克制与B的自然清楚在全局叙述条件下不冲突，可兼容。",
+            "right": "f1"
+          }
+        ],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "generic",
+      "passed": false
+    },
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [
+          {
+            "left": "a01",
+            "reason": "同维度language，均为使用日常词语，机制与条件一致",
+            "right": "b12"
+          },
+          {
+            "left": "a02",
+            "reason": "同维度language，均为专业术语后紧跟解释，机制一致",
+            "right": "b11"
+          },
+          {
+            "left": "a03",
+            "reason": "同维度voice，均为第一人称承认判断有限，机制一致",
+            "right": "b10"
+          },
+          {
+            "left": "a04",
+            "reason": "同维度voice，均为与读者平等商量，机制一致",
+            "right": "b09"
+          },
+          {
+            "left": "a05",
+            "reason": "同维度rhythm，均为长句后接短句停顿，机制一致",
+            "right": "b08"
+          },
+          {
+            "left": "a06",
+            "reason": "同维度rhythm，并列句长度相近，机制一致",
+            "right": "b07"
+          },
+          {
+            "left": "a07",
+            "reason": "同维度information，先事实后判断，机制一致",
+            "right": "b06"
+          },
+          {
+            "left": "a08",
+            "reason": "同维度information，转折前先承认局部成立，机制一致",
+            "right": "b05"
+          },
+          {
+            "left": "a09",
+            "reason": "同维度narration，叙述后接简短评点，机制一致",
+            "right": "b04"
+          },
+          {
+            "left": "a10",
+            "reason": "同维度narration，议论前先给可感知细节，机制一致",
+            "right": "b03"
+          },
+          {
+            "left": "a11",
+            "reason": "同维度constraints，仅事实允许时用第一人称，机制一致",
+            "right": "b02"
+          },
+          {
+            "left": "a12",
+            "reason": "同维度constraints，少量比喻且不改事实，机制一致",
+            "right": "b01"
+          }
+        ],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "mixed",
+      "passed": true
+    }
+  ]
+}

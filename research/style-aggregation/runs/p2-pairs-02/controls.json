@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [
+          {
+            "left": "f1",
+            "reason": "条件（全文叙述）、维度、机制（冷静克制语气，避免夸张情绪）完全一致",
+            "right": "f1"
+          }
+        ],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "self",
+      "passed": true
+    },
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [
+          {
+            "left": "f1",
+            "reason": "同为全文叙述下的语气基调规则，均要求保持平静克制、避免情绪夸饰，条件与方向一致。",
+            "right": "f1"
+          }
+        ],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "synonym",
+      "passed": true
+    },
+    {
+      "comparison": {
+        "conflicts": [
+          {
+            "left": "f1",
+            "reason": "同为全文叙述voice维度，A要求冷静克制、避免夸张情绪，B要求热烈夸张、避免冷静克制，条件相同且机制方向相反",
+            "right": "f1"
+          }
+        ],
+        "matches": [],
+        "notes": [],
+        "uncertain_left": [],
+        "uncertain_right": []
+      },
+      "name": "opposite",
+      "passed": true
+    },
+    {
+      "comparison": {
+        "conflicts": [],
+        "matches": [],
+        "notes": [
+          "A unknown: {\"dimension\":\"voice\",\"id\":\"f1\",\"reason\":\"A要求冷静克制、避免夸张情绪，B要求自然清楚，两者方向不同，无法确定是否等价。\"}",
+          "B unknown: {\"dimension\":\"voice\",\"id\":\"f1\",\"reason\":\"B的自然清楚与A的冷静克制无明确对应关系，条件和机制不一致。\"}"
+        ],
+        "uncertain_left": [
+          "f1"
+        ],
+        "uncertain_right": [
+          "f1"
+        ]
+      },
+      "name": "generic",
+      "passed": true
+    }
+  ]
+}

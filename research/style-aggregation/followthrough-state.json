@@ -1,0 +1,7 @@
+{
+  "status": "stopped",
+  "stage": "P2",
+  "reason": "P2 did not complete; inspect its failure before recovery",
+  "pid": 3263,
+  "updated_at": "2026-10-04T07:42:48.829148+00:00"
+}

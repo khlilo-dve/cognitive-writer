@@ -48,6 +48,8 @@ mod research_store;
 mod research_receipt;
 mod style_compare;
 mod research_compare;
+mod research_validation;
+mod research_route_pilot;
 mod style_profile;
 mod research_profile;
 mod research_convergence;

@@ -138,18 +138,20 @@ def main():
     if args.run:
         summary = json.loads((args.run / "summary.json").read_text())
         rid = args.run.name
-        report_name = {"p1-detailed-pilot-01": "p1-report-doc.json", "p2-detailed-single-01": "p2-single-report-doc.json"}.get(rid)
+        report_name = {"p1-detailed-pilot-01": "p1-report-doc.json", "p2-detailed-single-01": "p2-single-report-doc.json",
+                       "p2-pairs-02": "p2-stop-20261004.json", "p2-routing-flash-01": "p2-stop-20261004.json"}.get(rid)
         report_file = ROOT / "lark" / report_name if report_name else None
-        report_url = json.loads(report_file.read_text())["data"]["doc_url"] if report_file and report_file.exists() else None
+        report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
+        report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
-        for marker, label in [("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
+        for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label
                 break
         rows = summary.get("rows", [])
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
-            "conclusion": f"完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项。" + summary.get("error", ""),
+            "conclusion": f"本次状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + summary.get("error", ""),
             "caveat": "这是最近一次同步快照，running不保证进程仍存活。费用含未知预留；完成数量和字数都不是质量评分。",
             "spent_cny": summary["usage"]["run_occupied_cny"], "report_url": report_url})
         for row in rows if (args.run / "single").is_dir() else []:

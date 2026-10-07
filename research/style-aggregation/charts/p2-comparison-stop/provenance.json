@@ -1,0 +1,10 @@
+{
+  "source": "research/style-aggregation/reports/P2-comparison-diagnosis/candidate-diagnostic.json",
+  "source_sha256": "5f7ac1ea2231b2edceda0fa4fffdf80b9d79dac345813904c09b5f03c272b0c3",
+  "script_sha256": "1ca68e36d97de3b48d6b141c38f10ea79493f19544e51c032230370b3ff9d6e6",
+  "values": {
+    "可解析为JSON": 52,
+    "包含跨维度匹配": 42,
+    "重复使用匹配端点": 23
+  }
+}

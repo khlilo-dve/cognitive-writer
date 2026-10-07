@@ -1,0 +1,4788 @@
+{
+  "status": "proposal_only_no_model_calls",
+  "max_candidates_per_request": 24,
+  "pairs": [
+    {
+      "left": "wxb-01",
+      "right": "wxb-02",
+      "candidate_count": 161,
+      "request_chunks": 7,
+      "candidates": [
+        {
+          "id": "c001",
+          "left": "f01",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c002",
+          "left": "f01",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c003",
+          "left": "f01",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c004",
+          "left": "f01",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c005",
+          "left": "f01",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c006",
+          "left": "f01",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c007",
+          "left": "f01",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c008",
+          "left": "f01",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c009",
+          "left": "f01",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c010",
+          "left": "f02",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c011",
+          "left": "f02",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c012",
+          "left": "f02",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c013",
+          "left": "f02",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c014",
+          "left": "f02",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c015",
+          "left": "f02",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c016",
+          "left": "f02",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c017",
+          "left": "f02",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c018",
+          "left": "f02",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c019",
+          "left": "f03",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c020",
+          "left": "f03",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c021",
+          "left": "f03",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c022",
+          "left": "f03",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c023",
+          "left": "f03",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c024",
+          "left": "f03",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c025",
+          "left": "f03",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c026",
+          "left": "f03",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c027",
+          "left": "f03",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c028",
+          "left": "f04",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c029",
+          "left": "f04",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c030",
+          "left": "f04",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c031",
+          "left": "f04",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c032",
+          "left": "f04",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c033",
+          "left": "f04",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c034",
+          "left": "f04",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c035",
+          "left": "f04",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c036",
+          "left": "f04",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c037",
+          "left": "f05",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c038",
+          "left": "f05",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c039",
+          "left": "f05",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c040",
+          "left": "f05",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c041",
+          "left": "f05",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c042",
+          "left": "f05",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c043",
+          "left": "f05",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c044",
+          "left": "f05",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c045",
+          "left": "f05",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c046",
+          "left": "f06",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c047",
+          "left": "f06",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c048",
+          "left": "f06",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c049",
+          "left": "f06",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c050",
+          "left": "f06",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c051",
+          "left": "f06",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c052",
+          "left": "f06",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c053",
+          "left": "f06",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c054",
+          "left": "f06",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c055",
+          "left": "f07",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c056",
+          "left": "f07",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c057",
+          "left": "f07",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c058",
+          "left": "f07",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c059",
+          "left": "f08",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c060",
+          "left": "f08",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c061",
+          "left": "f08",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c062",
+          "left": "f08",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c063",
+          "left": "f09",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c064",
+          "left": "f09",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c065",
+          "left": "f09",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c066",
+          "left": "f09",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c067",
+          "left": "f10",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c068",
+          "left": "f10",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c069",
+          "left": "f10",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c070",
+          "left": "f10",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c071",
+          "left": "f11",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c072",
+          "left": "f11",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c073",
+          "left": "f11",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c074",
+          "left": "f11",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c075",
+          "left": "f12",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c076",
+          "left": "f12",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c077",
+          "left": "f12",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c078",
+          "left": "f12",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c079",
+          "left": "f13",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c080",
+          "left": "f13",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c081",
+          "left": "f13",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c082",
+          "left": "f13",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c083",
+          "left": "f14",
+          "right": "f23",
+          "dimension": "information"
+        },
+        {
+          "id": "c084",
+          "left": "f14",
+          "right": "f24",
+          "dimension": "information"
+        },
+        {
+          "id": "c085",
+          "left": "f14",
+          "right": "f25",
+          "dimension": "information"
+        },
+        {
+          "id": "c086",
+          "left": "f15",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c087",
+          "left": "f15",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c088",
+          "left": "f15",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c089",
+          "left": "f15",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c090",
+          "left": "f16",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c091",
+          "left": "f16",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c092",
+          "left": "f16",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c093",
+          "left": "f16",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c094",
+          "left": "f17",
+          "right": "f29",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c095",
+          "left": "f17",
+          "right": "f30",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c096",
+          "left": "f17",
+          "right": "f31",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c097",
+          "left": "f18",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c098",
+          "left": "f18",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c099",
+          "left": "f18",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c100",
+          "left": "f18",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c101",
+          "left": "f18",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c102",
+          "left": "f18",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c103",
+          "left": "f18",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c104",
+          "left": "f18",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c105",
+          "left": "f18",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c106",
+          "left": "f19",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c107",
+          "left": "f19",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c108",
+          "left": "f19",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c109",
+          "left": "f19",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c110",
+          "left": "f19",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c111",
+          "left": "f19",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c112",
+          "left": "f19",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c113",
+          "left": "f19",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c114",
+          "left": "f19",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c115",
+          "left": "f20",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c116",
+          "left": "f20",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c117",
+          "left": "f20",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c118",
+          "left": "f20",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c119",
+          "left": "f20",
+          "right": "f05",
+          "dimension": "voice"
+        },
+        {
+          "id": "c120",
+          "left": "f20",
+          "right": "f13",
+          "dimension": "voice"
+        },
+        {
+          "id": "c121",
+          "left": "f20",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c122",
+          "left": "f20",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c123",
+          "left": "f20",
+          "right": "f16",
+          "dimension": "voice"
+        },
+        {
+          "id": "c124",
+          "left": "f21",
+          "right": "f29",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c125",
+          "left": "f21",
+          "right": "f30",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c126",
+          "left": "f21",
+          "right": "f31",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c127",
+          "left": "f22",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c128",
+          "left": "f22",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c129",
+          "left": "f22",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c130",
+          "left": "f22",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c131",
+          "left": "f23",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c132",
+          "left": "f23",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c133",
+          "left": "f23",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c134",
+          "left": "f23",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c135",
+          "left": "f24",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c136",
+          "left": "f24",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c137",
+          "left": "f24",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c138",
+          "left": "f24",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c139",
+          "left": "f25",
+          "right": "f29",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c140",
+          "left": "f25",
+          "right": "f30",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c141",
+          "left": "f25",
+          "right": "f31",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c142",
+          "left": "f26",
+          "right": "f23",
+          "dimension": "information"
+        },
+        {
+          "id": "c143",
+          "left": "f26",
+          "right": "f24",
+          "dimension": "information"
+        },
+        {
+          "id": "c144",
+          "left": "f26",
+          "right": "f25",
+          "dimension": "information"
+        },
+        {
+          "id": "c145",
+          "left": "f27",
+          "right": "f29",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c146",
+          "left": "f27",
+          "right": "f30",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c147",
+          "left": "f27",
+          "right": "f31",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c148",
+          "left": "f28",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c149",
+          "left": "f28",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c150",
+          "left": "f28",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c151",
+          "left": "f28",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c152",
+          "left": "f28",
+          "right": "f22",
+          "dimension": "narration"
+        },
+        {
+          "id": "c153",
+          "left": "f29",
+          "right": "f26",
+          "dimension": "ending"
+        },
+        {
+          "id": "c154",
+          "left": "f29",
+          "right": "f27",
+          "dimension": "ending"
+        },
+        {
+          "id": "c155",
+          "left": "f29",
+          "right": "f28",
+          "dimension": "ending"
+        },
+        {
+          "id": "c156",
+          "left": "f30",
+          "right": "f26",
+          "dimension": "ending"
+        },
+        {
+          "id": "c157",
+          "left": "f30",
+          "right": "f27",
+          "dimension": "ending"
+        },
+        {
+          "id": "c158",
+          "left": "f30",
+          "right": "f28",
+          "dimension": "ending"
+        },
+        {
+          "id": "c159",
+          "left": "f31",
+          "right": "f29",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c160",
+          "left": "f31",
+          "right": "f30",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c161",
+          "left": "f31",
+          "right": "f31",
+          "dimension": "constraints"
+        }
+      ]
+    },
+    {
+      "left": "wxb-03",
+      "right": "wxb-04",
+      "candidate_count": 96,
+      "request_chunks": 4,
+      "candidates": [
+        {
+          "id": "c001",
+          "left": "f01",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c002",
+          "left": "f01",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c003",
+          "left": "f01",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c004",
+          "left": "f01",
+          "right": "f09",
+          "dimension": "voice"
+        },
+        {
+          "id": "c005",
+          "left": "f01",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c006",
+          "left": "f01",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c007",
+          "left": "f02",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c008",
+          "left": "f02",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c009",
+          "left": "f02",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c010",
+          "left": "f02",
+          "right": "f09",
+          "dimension": "voice"
+        },
+        {
+          "id": "c011",
+          "left": "f02",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c012",
+          "left": "f02",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c013",
+          "left": "f03",
+          "right": "f06",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c014",
+          "left": "f03",
+          "right": "f11",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c015",
+          "left": "f03",
+          "right": "f13",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c016",
+          "left": "f03",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c017",
+          "left": "f03",
+          "right": "f17",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c018",
+          "left": "f03",
+          "right": "f19",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c019",
+          "left": "f03",
+          "right": "f21",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c020",
+          "left": "f04",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c021",
+          "left": "f04",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c022",
+          "left": "f04",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c023",
+          "left": "f05",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c024",
+          "left": "f05",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c025",
+          "left": "f05",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c026",
+          "left": "f06",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c027",
+          "left": "f06",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c028",
+          "left": "f06",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c029",
+          "left": "f07",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c030",
+          "left": "f07",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c031",
+          "left": "f07",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c032",
+          "left": "f08",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c033",
+          "left": "f08",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c034",
+          "left": "f08",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c035",
+          "left": "f09",
+          "right": "f20",
+          "dimension": "information"
+        },
+        {
+          "id": "c036",
+          "left": "f09",
+          "right": "f24",
+          "dimension": "information"
+        },
+        {
+          "id": "c037",
+          "left": "f10",
+          "right": "f20",
+          "dimension": "information"
+        },
+        {
+          "id": "c038",
+          "left": "f10",
+          "right": "f24",
+          "dimension": "information"
+        },
+        {
+          "id": "c039",
+          "left": "f11",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c040",
+          "left": "f11",
+          "right": "f18",
+          "dimension": "language"
+        },
+        {
+          "id": "c041",
+          "left": "f11",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c042",
+          "left": "f12",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c043",
+          "left": "f12",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c044",
+          "left": "f12",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c045",
+          "left": "f13",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c046",
+          "left": "f13",
+          "right": "f18",
+          "dimension": "language"
+        },
+        {
+          "id": "c047",
+          "left": "f13",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c048",
+          "left": "f14",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c049",
+          "left": "f14",
+          "right": "f18",
+          "dimension": "language"
+        },
+        {
+          "id": "c050",
+          "left": "f14",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c051",
+          "left": "f15",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c052",
+          "left": "f15",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c053",
+          "left": "f15",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c054",
+          "left": "f15",
+          "right": "f09",
+          "dimension": "voice"
+        },
+        {
+          "id": "c055",
+          "left": "f15",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c056",
+          "left": "f15",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c057",
+          "left": "f16",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c058",
+          "left": "f16",
+          "right": "f18",
+          "dimension": "language"
+        },
+        {
+          "id": "c059",
+          "left": "f16",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c060",
+          "left": "f17",
+          "right": "f06",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c061",
+          "left": "f17",
+          "right": "f11",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c062",
+          "left": "f17",
+          "right": "f13",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c063",
+          "left": "f17",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c064",
+          "left": "f17",
+          "right": "f17",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c065",
+          "left": "f17",
+          "right": "f19",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c066",
+          "left": "f17",
+          "right": "f21",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c067",
+          "left": "f18",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c068",
+          "left": "f18",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c069",
+          "left": "f18",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c070",
+          "left": "f18",
+          "right": "f09",
+          "dimension": "voice"
+        },
+        {
+          "id": "c071",
+          "left": "f18",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c072",
+          "left": "f18",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c073",
+          "left": "f19",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c074",
+          "left": "f19",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c075",
+          "left": "f19",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c076",
+          "left": "f19",
+          "right": "f09",
+          "dimension": "voice"
+        },
+        {
+          "id": "c077",
+          "left": "f19",
+          "right": "f14",
+          "dimension": "voice"
+        },
+        {
+          "id": "c078",
+          "left": "f19",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c079",
+          "left": "f20",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c080",
+          "left": "f20",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c081",
+          "left": "f20",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c082",
+          "left": "f21",
+          "right": "f20",
+          "dimension": "information"
+        },
+        {
+          "id": "c083",
+          "left": "f21",
+          "right": "f24",
+          "dimension": "information"
+        },
+        {
+          "id": "c084",
+          "left": "f22",
+          "right": "f20",
+          "dimension": "information"
+        },
+        {
+          "id": "c085",
+          "left": "f22",
+          "right": "f24",
+          "dimension": "information"
+        },
+        {
+          "id": "c086",
+          "left": "f23",
+          "right": "f04",
+          "dimension": "narration"
+        },
+        {
+          "id": "c087",
+          "left": "f23",
+          "right": "f10",
+          "dimension": "narration"
+        },
+        {
+          "id": "c088",
+          "left": "f23",
+          "right": "f23",
+          "dimension": "narration"
+        },
+        {
+          "id": "c089",
+          "left": "f24",
+          "right": "f25",
+          "dimension": "ending"
+        },
+        {
+          "id": "c090",
+          "left": "f25",
+          "right": "f06",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c091",
+          "left": "f25",
+          "right": "f11",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c092",
+          "left": "f25",
+          "right": "f13",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c093",
+          "left": "f25",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c094",
+          "left": "f25",
+          "right": "f17",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c095",
+          "left": "f25",
+          "right": "f19",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c096",
+          "left": "f25",
+          "right": "f21",
+          "dimension": "constraints"
+        }
+      ]
+    },
+    {
+      "left": "wzq-01",
+      "right": "wzq-02",
+      "candidate_count": 134,
+      "request_chunks": 6,
+      "candidates": [
+        {
+          "id": "c001",
+          "left": "f01",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c002",
+          "left": "f01",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c003",
+          "left": "f01",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c004",
+          "left": "f01",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c005",
+          "left": "f01",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c006",
+          "left": "f02",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c007",
+          "left": "f02",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c008",
+          "left": "f02",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c009",
+          "left": "f02",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c010",
+          "left": "f02",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c011",
+          "left": "f03",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c012",
+          "left": "f03",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c013",
+          "left": "f03",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c014",
+          "left": "f03",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c015",
+          "left": "f03",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c016",
+          "left": "f04",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c017",
+          "left": "f04",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c018",
+          "left": "f04",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c019",
+          "left": "f04",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c020",
+          "left": "f05",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c021",
+          "left": "f05",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c022",
+          "left": "f05",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c023",
+          "left": "f05",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c024",
+          "left": "f06",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c025",
+          "left": "f06",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c026",
+          "left": "f06",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c027",
+          "left": "f06",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c028",
+          "left": "f07",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c029",
+          "left": "f07",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c030",
+          "left": "f07",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c031",
+          "left": "f07",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c032",
+          "left": "f08",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c033",
+          "left": "f08",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c034",
+          "left": "f08",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c035",
+          "left": "f08",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c036",
+          "left": "f08",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c037",
+          "left": "f08",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c038",
+          "left": "f08",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c039",
+          "left": "f09",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c040",
+          "left": "f09",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c041",
+          "left": "f09",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c042",
+          "left": "f09",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c043",
+          "left": "f09",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c044",
+          "left": "f09",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c045",
+          "left": "f09",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c046",
+          "left": "f10",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c047",
+          "left": "f10",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c048",
+          "left": "f10",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c049",
+          "left": "f10",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c050",
+          "left": "f10",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c051",
+          "left": "f10",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c052",
+          "left": "f10",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c053",
+          "left": "f11",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c054",
+          "left": "f11",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c055",
+          "left": "f11",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c056",
+          "left": "f11",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c057",
+          "left": "f11",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c058",
+          "left": "f11",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c059",
+          "left": "f11",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c060",
+          "left": "f12",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c061",
+          "left": "f12",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c062",
+          "left": "f12",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c063",
+          "left": "f12",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c064",
+          "left": "f12",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c065",
+          "left": "f12",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c066",
+          "left": "f12",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c067",
+          "left": "f12",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c068",
+          "left": "f12",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c069",
+          "left": "f12",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c070",
+          "left": "f13",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c071",
+          "left": "f13",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c072",
+          "left": "f13",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c073",
+          "left": "f13",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c074",
+          "left": "f13",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c075",
+          "left": "f13",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c076",
+          "left": "f13",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c077",
+          "left": "f13",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c078",
+          "left": "f13",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c079",
+          "left": "f13",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c080",
+          "left": "f14",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c081",
+          "left": "f14",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c082",
+          "left": "f14",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c083",
+          "left": "f14",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c084",
+          "left": "f14",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c085",
+          "left": "f14",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c086",
+          "left": "f14",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c087",
+          "left": "f14",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c088",
+          "left": "f14",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c089",
+          "left": "f14",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c090",
+          "left": "f15",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c091",
+          "left": "f15",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c092",
+          "left": "f15",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c093",
+          "left": "f15",
+          "right": "f34",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c094",
+          "left": "f16",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c095",
+          "left": "f16",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c096",
+          "left": "f16",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c097",
+          "left": "f16",
+          "right": "f34",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c098",
+          "left": "f18",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c099",
+          "left": "f18",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c100",
+          "left": "f18",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c101",
+          "left": "f18",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c102",
+          "left": "f18",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c103",
+          "left": "f19",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c104",
+          "left": "f19",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c105",
+          "left": "f19",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c106",
+          "left": "f19",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c107",
+          "left": "f19",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c108",
+          "left": "f20",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c109",
+          "left": "f20",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c110",
+          "left": "f20",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c111",
+          "left": "f20",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c112",
+          "left": "f20",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c113",
+          "left": "f21",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c114",
+          "left": "f21",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c115",
+          "left": "f21",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c116",
+          "left": "f21",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c117",
+          "left": "f21",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c118",
+          "left": "f21",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c119",
+          "left": "f21",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c120",
+          "left": "f21",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c121",
+          "left": "f21",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c122",
+          "left": "f21",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c123",
+          "left": "f22",
+          "right": "f27",
+          "dimension": "ending"
+        },
+        {
+          "id": "c124",
+          "left": "f22",
+          "right": "f28",
+          "dimension": "ending"
+        },
+        {
+          "id": "c125",
+          "left": "f22",
+          "right": "f29",
+          "dimension": "ending"
+        },
+        {
+          "id": "c126",
+          "left": "f22",
+          "right": "f30",
+          "dimension": "ending"
+        },
+        {
+          "id": "c127",
+          "left": "f23",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c128",
+          "left": "f23",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c129",
+          "left": "f23",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c130",
+          "left": "f23",
+          "right": "f34",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c131",
+          "left": "f24",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c132",
+          "left": "f24",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c133",
+          "left": "f24",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c134",
+          "left": "f24",
+          "right": "f34",
+          "dimension": "constraints"
+        }
+      ]
+    },
+    {
+      "left": "wzq-03",
+      "right": "wzq-04",
+      "candidate_count": 119,
+      "request_chunks": 5,
+      "candidates": [
+        {
+          "id": "c001",
+          "left": "f01",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c002",
+          "left": "f01",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c003",
+          "left": "f01",
+          "right": "f21",
+          "dimension": "voice"
+        },
+        {
+          "id": "c004",
+          "left": "f01",
+          "right": "f27",
+          "dimension": "voice"
+        },
+        {
+          "id": "c005",
+          "left": "f02",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c006",
+          "left": "f02",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c007",
+          "left": "f02",
+          "right": "f21",
+          "dimension": "voice"
+        },
+        {
+          "id": "c008",
+          "left": "f02",
+          "right": "f27",
+          "dimension": "voice"
+        },
+        {
+          "id": "c009",
+          "left": "f03",
+          "right": "f09",
+          "dimension": "language"
+        },
+        {
+          "id": "c010",
+          "left": "f03",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c011",
+          "left": "f03",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c012",
+          "left": "f03",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c013",
+          "left": "f03",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c014",
+          "left": "f04",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c015",
+          "left": "f04",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c016",
+          "left": "f04",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c017",
+          "left": "f04",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c018",
+          "left": "f05",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c019",
+          "left": "f05",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c020",
+          "left": "f05",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c021",
+          "left": "f05",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c022",
+          "left": "f06",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c023",
+          "left": "f06",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c024",
+          "left": "f06",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c025",
+          "left": "f06",
+          "right": "f15",
+          "dimension": "information"
+        },
+        {
+          "id": "c026",
+          "left": "f06",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c027",
+          "left": "f07",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c028",
+          "left": "f07",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c029",
+          "left": "f07",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c030",
+          "left": "f07",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c031",
+          "left": "f08",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c032",
+          "left": "f08",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c033",
+          "left": "f08",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c034",
+          "left": "f08",
+          "right": "f08",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c035",
+          "left": "f09",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c036",
+          "left": "f09",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c037",
+          "left": "f09",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c038",
+          "left": "f09",
+          "right": "f15",
+          "dimension": "information"
+        },
+        {
+          "id": "c039",
+          "left": "f09",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c040",
+          "left": "f10",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c041",
+          "left": "f10",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c042",
+          "left": "f10",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c043",
+          "left": "f10",
+          "right": "f15",
+          "dimension": "information"
+        },
+        {
+          "id": "c044",
+          "left": "f10",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c045",
+          "left": "f11",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c046",
+          "left": "f11",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c047",
+          "left": "f11",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c048",
+          "left": "f11",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c049",
+          "left": "f12",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c050",
+          "left": "f12",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c051",
+          "left": "f12",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c052",
+          "left": "f12",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c053",
+          "left": "f13",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c054",
+          "left": "f13",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c055",
+          "left": "f13",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c056",
+          "left": "f13",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c057",
+          "left": "f14",
+          "right": "f09",
+          "dimension": "language"
+        },
+        {
+          "id": "c058",
+          "left": "f14",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c059",
+          "left": "f14",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c060",
+          "left": "f14",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c061",
+          "left": "f14",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c062",
+          "left": "f15",
+          "right": "f09",
+          "dimension": "language"
+        },
+        {
+          "id": "c063",
+          "left": "f15",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c064",
+          "left": "f15",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c065",
+          "left": "f15",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c066",
+          "left": "f15",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c067",
+          "left": "f16",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c068",
+          "left": "f16",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c069",
+          "left": "f16",
+          "right": "f21",
+          "dimension": "voice"
+        },
+        {
+          "id": "c070",
+          "left": "f16",
+          "right": "f27",
+          "dimension": "voice"
+        },
+        {
+          "id": "c071",
+          "left": "f17",
+          "right": "f09",
+          "dimension": "language"
+        },
+        {
+          "id": "c072",
+          "left": "f17",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c073",
+          "left": "f17",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c074",
+          "left": "f17",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c075",
+          "left": "f17",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c076",
+          "left": "f18",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c077",
+          "left": "f18",
+          "right": "f04",
+          "dimension": "voice"
+        },
+        {
+          "id": "c078",
+          "left": "f18",
+          "right": "f21",
+          "dimension": "voice"
+        },
+        {
+          "id": "c079",
+          "left": "f18",
+          "right": "f27",
+          "dimension": "voice"
+        },
+        {
+          "id": "c080",
+          "left": "f19",
+          "right": "f09",
+          "dimension": "language"
+        },
+        {
+          "id": "c081",
+          "left": "f19",
+          "right": "f10",
+          "dimension": "language"
+        },
+        {
+          "id": "c082",
+          "left": "f19",
+          "right": "f11",
+          "dimension": "language"
+        },
+        {
+          "id": "c083",
+          "left": "f19",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c084",
+          "left": "f19",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c085",
+          "left": "f20",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c086",
+          "left": "f20",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c087",
+          "left": "f20",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c088",
+          "left": "f20",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c089",
+          "left": "f21",
+          "right": "f03",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c090",
+          "left": "f21",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c091",
+          "left": "f21",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c092",
+          "left": "f22",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c093",
+          "left": "f22",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c094",
+          "left": "f22",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c095",
+          "left": "f22",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c096",
+          "left": "f23",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c097",
+          "left": "f23",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c098",
+          "left": "f23",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c099",
+          "left": "f23",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c100",
+          "left": "f24",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c101",
+          "left": "f24",
+          "right": "f18",
+          "dimension": "narration"
+        },
+        {
+          "id": "c102",
+          "left": "f24",
+          "right": "f19",
+          "dimension": "narration"
+        },
+        {
+          "id": "c103",
+          "left": "f24",
+          "right": "f20",
+          "dimension": "narration"
+        },
+        {
+          "id": "c104",
+          "left": "f25",
+          "right": "f25",
+          "dimension": "ending"
+        },
+        {
+          "id": "c105",
+          "left": "f26",
+          "right": "f03",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c106",
+          "left": "f26",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c107",
+          "left": "f26",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c108",
+          "left": "f27",
+          "right": "f03",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c109",
+          "left": "f27",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c110",
+          "left": "f27",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c111",
+          "left": "f28",
+          "right": "f03",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c112",
+          "left": "f28",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c113",
+          "left": "f28",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c114",
+          "left": "f29",
+          "right": "f03",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c115",
+          "left": "f29",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c116",
+          "left": "f29",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c117",
+          "left": "f30",
+          "right": "f03",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c118",
+          "left": "f30",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c119",
+          "left": "f30",
+          "right": "f24",
+          "dimension": "constraints"
+        }
+      ]
+    },
+    {
+      "left": "wxb-01",
+      "right": "wzq-01",
+      "candidate_count": 133,
+      "request_chunks": 6,
+      "candidates": [
+        {
+          "id": "c001",
+          "left": "f01",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c002",
+          "left": "f01",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c003",
+          "left": "f01",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c004",
+          "left": "f01",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c005",
+          "left": "f01",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c006",
+          "left": "f01",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c007",
+          "left": "f02",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c008",
+          "left": "f02",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c009",
+          "left": "f02",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c010",
+          "left": "f02",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c011",
+          "left": "f02",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c012",
+          "left": "f02",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c013",
+          "left": "f03",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c014",
+          "left": "f03",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c015",
+          "left": "f03",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c016",
+          "left": "f03",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c017",
+          "left": "f03",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c018",
+          "left": "f03",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c019",
+          "left": "f04",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c020",
+          "left": "f04",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c021",
+          "left": "f04",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c022",
+          "left": "f04",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c023",
+          "left": "f04",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c024",
+          "left": "f04",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c025",
+          "left": "f05",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c026",
+          "left": "f05",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c027",
+          "left": "f05",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c028",
+          "left": "f05",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c029",
+          "left": "f05",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c030",
+          "left": "f05",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c031",
+          "left": "f06",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c032",
+          "left": "f06",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c033",
+          "left": "f06",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c034",
+          "left": "f06",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c035",
+          "left": "f06",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c036",
+          "left": "f06",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c037",
+          "left": "f07",
+          "right": "f04",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c038",
+          "left": "f07",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c039",
+          "left": "f07",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c040",
+          "left": "f07",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c041",
+          "left": "f08",
+          "right": "f04",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c042",
+          "left": "f08",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c043",
+          "left": "f08",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c044",
+          "left": "f08",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c045",
+          "left": "f09",
+          "right": "f04",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c046",
+          "left": "f09",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c047",
+          "left": "f09",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c048",
+          "left": "f09",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c049",
+          "left": "f10",
+          "right": "f04",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c050",
+          "left": "f10",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c051",
+          "left": "f10",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c052",
+          "left": "f10",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c053",
+          "left": "f11",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c054",
+          "left": "f11",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c055",
+          "left": "f11",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c056",
+          "left": "f11",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c057",
+          "left": "f12",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c058",
+          "left": "f12",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c059",
+          "left": "f12",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c060",
+          "left": "f12",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c061",
+          "left": "f13",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c062",
+          "left": "f13",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c063",
+          "left": "f13",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c064",
+          "left": "f13",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c065",
+          "left": "f14",
+          "right": "f08",
+          "dimension": "information"
+        },
+        {
+          "id": "c066",
+          "left": "f14",
+          "right": "f09",
+          "dimension": "information"
+        },
+        {
+          "id": "c067",
+          "left": "f14",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c068",
+          "left": "f14",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c069",
+          "left": "f15",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c070",
+          "left": "f15",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c071",
+          "left": "f15",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c072",
+          "left": "f15",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c073",
+          "left": "f16",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c074",
+          "left": "f16",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c075",
+          "left": "f16",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c076",
+          "left": "f16",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c077",
+          "left": "f17",
+          "right": "f15",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c078",
+          "left": "f17",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c079",
+          "left": "f17",
+          "right": "f23",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c080",
+          "left": "f17",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c081",
+          "left": "f18",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c082",
+          "left": "f18",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c083",
+          "left": "f18",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c084",
+          "left": "f18",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c085",
+          "left": "f18",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c086",
+          "left": "f18",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c087",
+          "left": "f19",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c088",
+          "left": "f19",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c089",
+          "left": "f19",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c090",
+          "left": "f19",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c091",
+          "left": "f19",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c092",
+          "left": "f19",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c093",
+          "left": "f20",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c094",
+          "left": "f20",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c095",
+          "left": "f20",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c096",
+          "left": "f20",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c097",
+          "left": "f20",
+          "right": "f19",
+          "dimension": "voice"
+        },
+        {
+          "id": "c098",
+          "left": "f20",
+          "right": "f20",
+          "dimension": "voice"
+        },
+        {
+          "id": "c099",
+          "left": "f21",
+          "right": "f15",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c100",
+          "left": "f21",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c101",
+          "left": "f21",
+          "right": "f23",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c102",
+          "left": "f21",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c103",
+          "left": "f22",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c104",
+          "left": "f22",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c105",
+          "left": "f22",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c106",
+          "left": "f22",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c107",
+          "left": "f23",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c108",
+          "left": "f23",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c109",
+          "left": "f23",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c110",
+          "left": "f23",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c111",
+          "left": "f24",
+          "right": "f12",
+          "dimension": "language"
+        },
+        {
+          "id": "c112",
+          "left": "f24",
+          "right": "f13",
+          "dimension": "language"
+        },
+        {
+          "id": "c113",
+          "left": "f24",
+          "right": "f14",
+          "dimension": "language"
+        },
+        {
+          "id": "c114",
+          "left": "f24",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c115",
+          "left": "f25",
+          "right": "f15",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c116",
+          "left": "f25",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c117",
+          "left": "f25",
+          "right": "f23",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c118",
+          "left": "f25",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c119",
+          "left": "f26",
+          "right": "f08",
+          "dimension": "information"
+        },
+        {
+          "id": "c120",
+          "left": "f26",
+          "right": "f09",
+          "dimension": "information"
+        },
+        {
+          "id": "c121",
+          "left": "f26",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c122",
+          "left": "f26",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c123",
+          "left": "f27",
+          "right": "f15",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c124",
+          "left": "f27",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c125",
+          "left": "f27",
+          "right": "f23",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c126",
+          "left": "f27",
+          "right": "f24",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c127",
+          "left": "f28",
+          "right": "f17",
+          "dimension": "narration"
+        },
+        {
+          "id": "c128",
+          "left": "f29",
+          "right": "f22",
+          "dimension": "ending"
+        },
+        {
+          "id": "c129",
+          "left": "f30",
+          "right": "f22",
+          "dimension": "ending"
+        },
+        {
+          "id": "c130",
+          "left": "f31",
+          "right": "f15",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c131",
+          "left": "f31",
+          "right": "f16",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c132",
+          "left": "f31",
+          "right": "f23",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c133",
+          "left": "f31",
+          "right": "f24",
+          "dimension": "constraints"
+        }
+      ]
+    },
+    {
+      "left": "wxb-02",
+      "right": "wzq-02",
+      "candidate_count": 146,
+      "request_chunks": 7,
+      "candidates": [
+        {
+          "id": "c001",
+          "left": "f01",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c002",
+          "left": "f01",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c003",
+          "left": "f01",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c004",
+          "left": "f01",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c005",
+          "left": "f01",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c006",
+          "left": "f02",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c007",
+          "left": "f02",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c008",
+          "left": "f02",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c009",
+          "left": "f02",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c010",
+          "left": "f02",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c011",
+          "left": "f03",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c012",
+          "left": "f03",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c013",
+          "left": "f03",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c014",
+          "left": "f03",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c015",
+          "left": "f03",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c016",
+          "left": "f04",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c017",
+          "left": "f04",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c018",
+          "left": "f04",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c019",
+          "left": "f04",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c020",
+          "left": "f04",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c021",
+          "left": "f05",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c022",
+          "left": "f05",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c023",
+          "left": "f05",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c024",
+          "left": "f05",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c025",
+          "left": "f05",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c026",
+          "left": "f06",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c027",
+          "left": "f06",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c028",
+          "left": "f06",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c029",
+          "left": "f06",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c030",
+          "left": "f07",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c031",
+          "left": "f07",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c032",
+          "left": "f07",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c033",
+          "left": "f07",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c034",
+          "left": "f08",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c035",
+          "left": "f08",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c036",
+          "left": "f08",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c037",
+          "left": "f08",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c038",
+          "left": "f09",
+          "right": "f05",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c039",
+          "left": "f09",
+          "right": "f06",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c040",
+          "left": "f09",
+          "right": "f07",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c041",
+          "left": "f09",
+          "right": "f09",
+          "dimension": "rhythm"
+        },
+        {
+          "id": "c042",
+          "left": "f10",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c043",
+          "left": "f10",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c044",
+          "left": "f10",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c045",
+          "left": "f10",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c046",
+          "left": "f10",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c047",
+          "left": "f10",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c048",
+          "left": "f10",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c049",
+          "left": "f10",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c050",
+          "left": "f10",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c051",
+          "left": "f10",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c052",
+          "left": "f11",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c053",
+          "left": "f11",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c054",
+          "left": "f11",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c055",
+          "left": "f11",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c056",
+          "left": "f11",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c057",
+          "left": "f11",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c058",
+          "left": "f11",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c059",
+          "left": "f11",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c060",
+          "left": "f11",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c061",
+          "left": "f11",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c062",
+          "left": "f12",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c063",
+          "left": "f12",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c064",
+          "left": "f12",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c065",
+          "left": "f12",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c066",
+          "left": "f12",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c067",
+          "left": "f12",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c068",
+          "left": "f12",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c069",
+          "left": "f12",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c070",
+          "left": "f12",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c071",
+          "left": "f12",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c072",
+          "left": "f13",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c073",
+          "left": "f13",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c074",
+          "left": "f13",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c075",
+          "left": "f13",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c076",
+          "left": "f13",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c077",
+          "left": "f14",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c078",
+          "left": "f14",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c079",
+          "left": "f14",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c080",
+          "left": "f14",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c081",
+          "left": "f14",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c082",
+          "left": "f15",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c083",
+          "left": "f15",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c084",
+          "left": "f15",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c085",
+          "left": "f15",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c086",
+          "left": "f15",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c087",
+          "left": "f16",
+          "right": "f01",
+          "dimension": "voice"
+        },
+        {
+          "id": "c088",
+          "left": "f16",
+          "right": "f02",
+          "dimension": "voice"
+        },
+        {
+          "id": "c089",
+          "left": "f16",
+          "right": "f03",
+          "dimension": "voice"
+        },
+        {
+          "id": "c090",
+          "left": "f16",
+          "right": "f15",
+          "dimension": "voice"
+        },
+        {
+          "id": "c091",
+          "left": "f16",
+          "right": "f18",
+          "dimension": "voice"
+        },
+        {
+          "id": "c092",
+          "left": "f21",
+          "right": "f08",
+          "dimension": "language"
+        },
+        {
+          "id": "c093",
+          "left": "f21",
+          "right": "f16",
+          "dimension": "language"
+        },
+        {
+          "id": "c094",
+          "left": "f21",
+          "right": "f17",
+          "dimension": "language"
+        },
+        {
+          "id": "c095",
+          "left": "f21",
+          "right": "f19",
+          "dimension": "language"
+        },
+        {
+          "id": "c096",
+          "left": "f21",
+          "right": "f20",
+          "dimension": "language"
+        },
+        {
+          "id": "c097",
+          "left": "f21",
+          "right": "f21",
+          "dimension": "language"
+        },
+        {
+          "id": "c098",
+          "left": "f21",
+          "right": "f22",
+          "dimension": "language"
+        },
+        {
+          "id": "c099",
+          "left": "f21",
+          "right": "f23",
+          "dimension": "language"
+        },
+        {
+          "id": "c100",
+          "left": "f21",
+          "right": "f24",
+          "dimension": "language"
+        },
+        {
+          "id": "c101",
+          "left": "f21",
+          "right": "f25",
+          "dimension": "language"
+        },
+        {
+          "id": "c102",
+          "left": "f23",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c103",
+          "left": "f23",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c104",
+          "left": "f23",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c105",
+          "left": "f23",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c106",
+          "left": "f23",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c107",
+          "left": "f23",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c108",
+          "left": "f23",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c109",
+          "left": "f24",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c110",
+          "left": "f24",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c111",
+          "left": "f24",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c112",
+          "left": "f24",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c113",
+          "left": "f24",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c114",
+          "left": "f24",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c115",
+          "left": "f24",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c116",
+          "left": "f25",
+          "right": "f10",
+          "dimension": "information"
+        },
+        {
+          "id": "c117",
+          "left": "f25",
+          "right": "f11",
+          "dimension": "information"
+        },
+        {
+          "id": "c118",
+          "left": "f25",
+          "right": "f12",
+          "dimension": "information"
+        },
+        {
+          "id": "c119",
+          "left": "f25",
+          "right": "f13",
+          "dimension": "information"
+        },
+        {
+          "id": "c120",
+          "left": "f25",
+          "right": "f14",
+          "dimension": "information"
+        },
+        {
+          "id": "c121",
+          "left": "f25",
+          "right": "f26",
+          "dimension": "information"
+        },
+        {
+          "id": "c122",
+          "left": "f25",
+          "right": "f31",
+          "dimension": "information"
+        },
+        {
+          "id": "c123",
+          "left": "f26",
+          "right": "f27",
+          "dimension": "ending"
+        },
+        {
+          "id": "c124",
+          "left": "f26",
+          "right": "f28",
+          "dimension": "ending"
+        },
+        {
+          "id": "c125",
+          "left": "f26",
+          "right": "f29",
+          "dimension": "ending"
+        },
+        {
+          "id": "c126",
+          "left": "f26",
+          "right": "f30",
+          "dimension": "ending"
+        },
+        {
+          "id": "c127",
+          "left": "f27",
+          "right": "f27",
+          "dimension": "ending"
+        },
+        {
+          "id": "c128",
+          "left": "f27",
+          "right": "f28",
+          "dimension": "ending"
+        },
+        {
+          "id": "c129",
+          "left": "f27",
+          "right": "f29",
+          "dimension": "ending"
+        },
+        {
+          "id": "c130",
+          "left": "f27",
+          "right": "f30",
+          "dimension": "ending"
+        },
+        {
+          "id": "c131",
+          "left": "f28",
+          "right": "f27",
+          "dimension": "ending"
+        },
+        {
+          "id": "c132",
+          "left": "f28",
+          "right": "f28",
+          "dimension": "ending"
+        },
+        {
+          "id": "c133",
+          "left": "f28",
+          "right": "f29",
+          "dimension": "ending"
+        },
+        {
+          "id": "c134",
+          "left": "f28",
+          "right": "f30",
+          "dimension": "ending"
+        },
+        {
+          "id": "c135",
+          "left": "f29",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c136",
+          "left": "f29",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c137",
+          "left": "f29",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c138",
+          "left": "f29",
+          "right": "f34",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c139",
+          "left": "f30",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c140",
+          "left": "f30",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c141",
+          "left": "f30",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c142",
+          "left": "f30",
+          "right": "f34",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c143",
+          "left": "f31",
+          "right": "f04",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c144",
+          "left": "f31",
+          "right": "f32",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c145",
+          "left": "f31",
+          "right": "f33",
+          "dimension": "constraints"
+        },
+        {
+          "id": "c146",
+          "left": "f31",
+          "right": "f34",
+          "dimension": "constraints"
+        }
+      ]
+    }
+  ]
+}

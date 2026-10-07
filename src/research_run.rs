@@ -12,6 +12,7 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["route-pilot",run,views]=>crate::research_route_pilot::run(run,views).await,
         ["view-coverage",run]=>{println!("{}",crate::research_compare::view_coverage(run)?);Ok(())},
         ["profiles",run,views,pairs]=>crate::research_profile::run(run,views,pairs).await,
         ["convergence",run,profiles,p2]=>crate::research_convergence::run(run,profiles,p2).await,

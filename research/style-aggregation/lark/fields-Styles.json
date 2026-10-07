@@ -2,6 +2,22 @@
   "count": 7,
   "items": [
     {
+      "field_id": "fldhhcHLye",
+      "field_name": "artifact_id",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldiZU1URE",
+      "field_name": "run_id",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
       "field_id": "fldhnWbdHf",
       "field_name": "article_id",
       "style": {
@@ -39,22 +55,6 @@
     {
       "field_id": "fldFwto2EJ",
       "field_name": "spec",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldhhcHLye",
-      "field_name": "artifact_id",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldiZU1URE",
-      "field_name": "run_id",
       "style": {
         "type": "plain"
       },

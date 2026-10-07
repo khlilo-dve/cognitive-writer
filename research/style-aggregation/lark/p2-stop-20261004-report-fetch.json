@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "D2vedWw1boFXFzx4pJgcDXwDnKh",
+    "length": 3804,
+    "log_id": "2026100416121444459FC13943C409CF15",
+    "markdown": "截至2026-10-04，已经完成两位作者20篇首次风格提取和8次重复提取。新版规则视图27/28有效，缺失的是一份重复样本；20份首次结果完整。当前不能据此判断多文章聚合是否优于单篇，也不能把比较器失败解释成作者没有稳定风格。\n## 出了什么问题\nPro通过了4项基础控制题，但在真实样本上频繁违反“同维度、一对一”的规则。对已保存的52份首轮响应做离线检查：42份包含跨维度匹配，23份重复使用匹配端点；两类可以重叠。模型会把多个特征都指向同一个特征，直接统计就会虚高重合。\n（结构问题图表附在文末）\n调度最初只限制同时发送3个请求，未限制完整任务链，导致一次修复被排在大量首次请求之后。已改为同时最多3条完整链，诊断列出具体违规。恢复验证仍有5项修复后无效，触发停止条件。该次恢复为1完成、5失败、201暂缓；目录中保留此前有效输出共3份，远不足以形成207对完整比较。失败与已接收但未继续验证的响应都保留。\n## Flash小测结果\n按照用户新增的Flash路由授权，另建独立试验，费用上限1元，实际未缓存价估算0.003932元。\n\n<lark-table rows=\"6\" cols=\"2\" header-row=\"true\" column-widths=\"350,350\">\n\n  <lark-tr>\n    <lark-td>\n      检查\n    </lark-td>\n    <lark-td>\n      结果\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      同一规则自比\n    </lark-td>\n    <lark-td>\n      通过\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      同义改写\n    </lark-td>\n    <lark-td>\n      通过\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      明确反向规则\n    </lark-td>\n    <lark-td>\n      通过\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      通用套话不能当具体风格等价\n    </lark-td>\n    <lark-td>\n      未通过\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      12条规则、6维、ID和顺序打乱\n    </lark-td>\n    <lark-td>\n      通过\n    </lark-td>\n  </lark-tr>\n</lark-table>\n\nFlash把“自然清楚”和“冷静克制”判为等价，理由是二者可兼容。**互不冲突并不等于表达机制相同。**因此没有执行预定6对真实样本，也没有将Flash评分混进Pro结果。这是当前任务的控制失败，不是两种模型的整体能力排名。Flash仍适用于既定文章生成和非判断性整理；计数、复制引用和图表直接由程序完成。\n## 费用和当前产物\n- 已结算请求按未缓存单价估算：5.891906元。\n- 中断请求的未知费用预留：1.491087元，保留不清零。\n- 合计占用：7.382993元；100元预算尚余92.617007元。\n这些数字是保守估算，不是平台账单实付。没有购买套餐或修改密钥。\n代码已具备聚合证据、收敛、48+12篇生成、分项评估和盲测材料准备入口；但P3–P5没有真实实验结论，不能将代码完成当作研究完成。当前没有继续运行的模型批次，已停在测量有效性检查处。\n## 已完成的免费验证\n对现有候选关系做了离线程序原型：程序能保证“同维度”和“一对一”，也能正确处理需要重新安排配对才能保留更多候选的例子。输出见项目研究目录中的candidate-diagnostic.json。\n这个原型仅证明组合约束可以交给程序执行；它没有证明候选语义正确，也尚未解决等价候选与反向证据之间的处理。没有生成新相似度分数，没有把原来的非法响应改成正式成功结果。\n下一步的具体建议见[P2比较器修正提案](https://www.feishu.cn/docx/N9U6dpZv7oOyObxAYPOc0Rklnyh)。\n<image token=\"XtYsbKUrFoj1ZsxWYZfcDbgunzg\" width=\"1620\" height=\"792\" align=\"center\"/>\n\n",
+    "message": "Document fetched successfully",
+    "offset": 0,
+    "title": "Cognitive Writer｜阶段报告：比较环节的失败与下一步",
+    "total_length": 1944
+  }
+}

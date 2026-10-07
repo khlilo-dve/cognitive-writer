@@ -22,6 +22,7 @@ pub(crate) struct Budget {
     pub ledger: Ledger,
     total_limit: u64,
     run_limit: u64,
+    local_limit: Option<u64>,
     run_id: String,
     phase: String,
 }
@@ -61,6 +62,7 @@ impl Budget {
             ledger,
             total_limit,
             run_limit,
+            local_limit: None,
             run_id: run_id.into(),
             phase: if run_limit < total_limit {
                 "pilot"
@@ -89,6 +91,9 @@ impl Budget {
         let phase_used = self.phase_occupied();
         if amount > self.total_limit.saturating_sub(self.occupied(false))
             || amount > self.run_limit.saturating_sub(phase_used)
+            || self
+                .local_limit
+                .is_some_and(|limit| amount > limit.saturating_sub(self.occupied(true)))
         {
             return Err(AppError::Parse("预算不足，未发送请求".into()));
         }
@@ -105,6 +110,14 @@ impl Budget {
         );
         write_json(&self.path, &next)?;
         self.ledger = next;
+        Ok(())
+    }
+
+    pub fn limit_run(&mut self, amount: u64) -> Result<(), AppError> {
+        if amount == 0 || amount > self.total_limit || self.occupied(true) > amount {
+            return Err(AppError::Parse("单次运行预算上限无效或已超出".into()));
+        }
+        self.local_limit = Some(amount);
         Ok(())
     }
 
@@ -156,7 +169,12 @@ impl Budget {
         c.state = "settled".into();
         write_json(&self.path, &next)?;
         self.ledger = next;
-        if self.occupied(false) > self.total_limit || self.phase_occupied() > self.run_limit {
+        if self.occupied(false) > self.total_limit
+            || self.phase_occupied() > self.run_limit
+            || self
+                .local_limit
+                .is_some_and(|limit| self.occupied(true) > limit)
+        {
             return Err(AppError::Parse(
                 "实际用量超出预留预算，已记账并停止后续请求".into(),
             ));
@@ -168,6 +186,19 @@ impl Budget {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn local_run_cap_counts_uncertain_and_settled_costs() {
+        let d = tempfile::tempdir().unwrap();
+        let mut b = Budget::open(d.path().join("ledger.json"), "pilot", 100, 100).unwrap();
+        b.limit_run(30).unwrap();
+        b.reserve("a", 20).unwrap();
+        assert!(b.reserve("b", 11).is_err());
+        b.reserve("b", 10).unwrap();
+        b.settle("a", 5).unwrap();
+        b.reserve("c", 15).unwrap();
+        assert_eq!(b.occupied(true), 30);
+        assert!(b.reserve("d", 1).is_err());
+    }
     #[test]
     fn recovery_preserves_unknown_cost_and_is_bounded() {
         let d = tempfile::tempdir().unwrap();

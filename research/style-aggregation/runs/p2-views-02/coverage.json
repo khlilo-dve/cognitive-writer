@@ -1,0 +1,44 @@
+{
+  "complete_ids": [
+    "wxb-01",
+    "wxb-01-r2",
+    "wxb-01-r3",
+    "wxb-02",
+    "wxb-02-r3",
+    "wxb-03",
+    "wxb-04",
+    "wxb-05",
+    "wxb-06",
+    "wxb-07",
+    "wxb-08",
+    "wxb-09",
+    "wxb-10",
+    "wzq-01",
+    "wzq-01-r2",
+    "wzq-01-r3",
+    "wzq-02",
+    "wzq-02-r2",
+    "wzq-02-r3",
+    "wzq-03",
+    "wzq-04",
+    "wzq-05b",
+    "wzq-06",
+    "wzq-07",
+    "wzq-08",
+    "wzq-09",
+    "wzq-10"
+  ],
+  "inputs_sha256": "12ead80fba13a43ee47a6b60bc2922815f32843948de3117b5718711a4a42663",
+  "main_count": 20,
+  "missing": [
+    {
+      "error": "API 响应解析失败: 引用行号不存在、倒序或范围超过3行",
+      "id": "wxb-02-r2",
+      "status": "failed"
+    }
+  ],
+  "policy": "protocol: explicitly report missing; all 20 main and all 4 repeated sources required",
+  "repeat_count": 7,
+  "rows_sha256": "724a13f41d8a789cb4050141772fbcef1eec11da604f842ebcf5314838b5fff7",
+  "status": "accepted_with_missing_repeats"
+}

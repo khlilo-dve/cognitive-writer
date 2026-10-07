@@ -2,14 +2,6 @@
   "count": 8,
   "items": [
     {
-      "field_id": "fldPgLYilD",
-      "field_name": "question",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
       "field_id": "fldRmXKsC6",
       "field_name": "spent_cny",
       "style": {
@@ -29,8 +21,8 @@
       "type": "text"
     },
     {
-      "field_id": "fldpwNxWTH",
-      "field_name": "stage",
+      "field_id": "fldPgLYilD",
+      "field_name": "question",
       "style": {
         "type": "plain"
       },
@@ -39,14 +31,6 @@
     {
       "field_id": "fld4TzrCDT",
       "field_name": "conclusion",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldwsKY9FI",
-      "field_name": "status",
       "style": {
         "type": "plain"
       },
@@ -65,6 +49,22 @@
       "field_name": "report_url",
       "style": {
         "type": "url"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldpwNxWTH",
+      "field_name": "stage",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldwsKY9FI",
+      "field_name": "status",
+      "style": {
+        "type": "plain"
       },
       "type": "text"
     }

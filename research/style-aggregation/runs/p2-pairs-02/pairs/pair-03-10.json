@@ -1,0 +1,126 @@
+{
+  "comparison": {
+    "conflicts": [],
+    "matches": [],
+    "notes": [
+      "A和B的风格特征在语义上存在显著差异：A强调平易、坦率的同行对话感和比喻机制，B侧重断语-让步结构、归谬递进和语域混搭；多数条目条件和机制不重叠，无明确匹配或冲突关系。",
+      "A的f16（缺经验不设比）与B的f21（缺素材改写陈述）条件相近但机制不同（比方边界 vs 扩编禁止），不宜匹配。",
+      "A f02 [voice]: A的f02约束第一人称指向与转述他人意见的准确概括，B无对应条目，语义不匹配",
+      "B f12 [language]: B的f12是评价性形容词控制规则，A无对应条目，无法匹配"
+    ],
+    "uncertain_left": [
+      "f02"
+    ],
+    "uncertain_right": [
+      "f12"
+    ]
+  },
+  "id": "pair-03-10",
+  "kind": "main",
+  "left": "wzq-01",
+  "left_author": "wang_zengqi",
+  "metrics": [
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "language",
+      "left_count": 4,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 3,
+      "uncertain_left": 0,
+      "uncertain_right": 1
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "voice",
+      "left_count": 6,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 6,
+      "uncertain_left": 1,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "rhythm",
+      "left_count": 4,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 3,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "information",
+      "left_count": 4,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 2,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "narration",
+      "left_count": 1,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 3,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "constraints",
+      "left_count": 4,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 7,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "neither",
+      "dimension": "title",
+      "left_count": 0,
+      "matched": 0,
+      "overlap": null,
+      "right_count": 0,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "neither",
+      "dimension": "opening",
+      "left_count": 0,
+      "matched": 0,
+      "overlap": null,
+      "right_count": 0,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "ending",
+      "left_count": 1,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 1,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    }
+  ],
+  "right": "wxb-04",
+  "right_author": "wang_xiaobo",
+  "within_author": false
+}

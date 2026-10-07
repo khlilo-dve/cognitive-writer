@@ -1,0 +1,4033 @@
+{
+  "summary": {
+    "response_count": 52,
+    "parseable": 52,
+    "responses_with_cross_dimension_matches": 42,
+    "responses_with_repeated_match_endpoints": 23,
+    "status": "offline_prototype_not_accepted_research_results",
+    "limitations": [
+      "最大匹配只证明程序能落实组合约束，不证明候选语义正确",
+      "未处理等价与冲突候选之间的仲裁",
+      "没有生成相似度分数，没有把非法响应补成正式成功结果",
+      "没有新的模型请求"
+    ],
+    "script_sha256": "5628ae840493268e452b4c6e9094d3ec50a6f9c2a3876b12ab53a9555cbec0cf"
+  },
+  "rows": [
+    {
+      "request": "pair-00-01-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 9,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f25",
+            "reason": "强度配额：A一段重刺最多一次，B反讽一段一次全篇两三次，均为防止连续讥刺变尖酸"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f24",
+            "right": "f27",
+            "reason": "具体细节按有无素材分配，无则省略不得编造"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f02"
+          ],
+          [
+            "f14",
+            "f06"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f08",
+            "f08"
+          ]
+        ],
+        "language": [
+          [
+            "f12",
+            "f12"
+          ]
+        ],
+        "ending": [
+          [
+            "f28",
+            "f29"
+          ]
+        ],
+        "constraints": [
+          [
+            "f31",
+            "f31"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f17",
+          "right": "f09",
+          "reason": "同为判断与解释的先后：A要求先事实后判断，B要求先判断后解释，方向相反"
+        },
+        {
+          "left": "f26",
+          "right": "f04",
+          "reason": "A允许直接用'你'称呼读者、发问，请读者猜；B规定不追问读者、不设问自答，读者旁听，同为读者关系定位相反"
+        }
+      ],
+      "request_sha256": "963ed3a72711652fe28ccb7d41409314272ded9535f628e02f88f254b28fc1e5"
+    },
+    {
+      "request": "pair-00-02-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 8,
+      "repeated_left": 0,
+      "repeated_right": 2,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f18",
+            "reason": "条件均为推演进行中：A推进时不提前宣布荒谬感，B只补短评不做结论式辱骂，都是让推理/对方逻辑自己生成效果、作者不提前收束。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f16",
+            "reason": "条件均为借用/使用非本文原生机制（句法/行话）时：只借句式骨架或只把话说清，不冒充完整证据或论证路线，同为借壳不越界。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f01"
+          ],
+          [
+            "f04",
+            "f02"
+          ]
+        ],
+        "language": [
+          [
+            "f13",
+            "f16"
+          ]
+        ],
+        "constraints": [
+          [
+            "f21",
+            "f03"
+          ],
+          [
+            "f31",
+            "f25"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "8905c03d6293ff8b796c3a39c0e4743708b2c1eef89c38abb6fa4e540f974374"
+    },
+    {
+      "request": "pair-00-03-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f09",
+            "right": "f08",
+            "reason": "均为节奏规则，均要求短句收束作停顿/刹车，不承担新信息或煽情，功能定位相同"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f04"
+          ],
+          [
+            "f14",
+            "f19"
+          ],
+          [
+            "f15",
+            "f20"
+          ]
+        ],
+        "constraints": [
+          [
+            "f16",
+            "f21"
+          ],
+          [
+            "f17",
+            "f27"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f10",
+          "right": "f14",
+          "reason": "均为归谬/推演机制，但A要求'从对方接受的前提出发，用接续词连成递进链，每步只挪一小步'，B要求'先认可前提或流行说法，顺逻辑推到滑稽之处'，两者在前提来源和推进方式上方向不同，A强调接续词链条，B强调逻辑推到底"
+        },
+        {
+          "left": "f11",
+          "right": "f15",
+          "reason": "均为归谬机制约束，但A要求'每一步必须字面上顺理成章，滑坡感由接续词制造'，B要求'推进时语气认真，不中途嘲笑，荒谬感由推理长出来'，两者在推进手法和语气要求上方向不同，A强调接续词连贯，B强调语气平淡"
+        }
+      ],
+      "request_sha256": "a80d9afbe1a359ca71dcd17594a4ef2326f1215ce7214d3b65f8aa50451e202a"
+    },
+    {
+      "request": "pair-00-04-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 9,
+      "repeated_left": 0,
+      "repeated_right": 2,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f01",
+            "reason": "都要求推进语气认真平淡、不中途嘲笑/不解释不笑，让荒谬由内容自现"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 8,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f02"
+          ],
+          [
+            "f02",
+            "f01"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f07",
+            "f04"
+          ],
+          [
+            "f08",
+            "f05"
+          ],
+          [
+            "f10",
+            "f07"
+          ]
+        ],
+        "constraints": [
+          [
+            "f21",
+            "f25"
+          ],
+          [
+            "f27",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "e162fda3efa6f8791b412aefd7f7a2506255a5da3cc731c5ce86c78cc6d6e358"
+    },
+    {
+      "request": "pair-00-05-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 30,
+      "repeated_left": 5,
+      "repeated_right": 8,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f02",
+            "right": "f08",
+            "reason": "均为读者距离/句长节奏：长段推演保持中距，判断、自嘲、转折处收短拉近，随后再推远/停顿"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f03",
+            "right": "f12",
+            "reason": "均为近距离插入语密度约束：A要求一篇三五处不逐段出现，B要求一段一到两处宁疏勿密，方向一致（限密防口癖）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f11",
+            "reason": "均为论证中途使用第一人称插入语表明立场归属/谦抑但不撤回结论，制造保留与视角"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f15",
+            "reason": "均为推想/推演的语气控制：明确标注为设想/认真推进不提前宣布，靠机制自身呈现而非作者定性"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f17",
+            "reason": "均为推想/推演的使用条件：A要求缓冲词标明是设想，B要求任务有立场时仅借用句法不必再造前提，均为推想/推演的条件限定"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f16",
+            "right": "f09",
+            "reason": "均为句群/段落次序：判断先行、理由随后，先态度后理由，语序机制一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f19",
+            "right": "f13",
+            "reason": "均为引述/插入语后的处理：A要求引述后立刻接自己的反应，B要求谦抑后仍须给推演依据，均为插入内容不能独立承担论证"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f21",
+            "right": "f22",
+            "reason": "均为跑题/偏离处的处理：直说承认岔开并快回收、不铺陈不道歉；B的落差留给读者不解释，同属收束与留白机制（粒度不同）"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 22,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f11",
+            "f18"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f04",
+            "f07"
+          ],
+          [
+            "f06",
+            "f08"
+          ],
+          [
+            "f17",
+            "f10"
+          ]
+        ],
+        "language": [
+          [
+            "f08",
+            "f22"
+          ],
+          [
+            "f09",
+            "f16"
+          ],
+          [
+            "f10",
+            "f12"
+          ]
+        ],
+        "constraints": [
+          [
+            "f12",
+            "f21"
+          ],
+          [
+            "f14",
+            "f27"
+          ],
+          [
+            "f24",
+            "f31"
+          ]
+        ],
+        "information": [
+          [
+            "f15",
+            "f14"
+          ]
+        ],
+        "narration": [
+          [
+            "f18",
+            "f28"
+          ]
+        ],
+        "ending": [
+          [
+            "f23",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 14,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f11",
+          "right": "f20",
+          "reason": "同为自嘲后处理：A说立场照旧不取消判断，B说立即转向一般化判断，方向相近但A保留原判断、B要求转向，若严格对比存在推进方向差异"
+        }
+      ],
+      "request_sha256": "ff8585ab5f59cf5b4681b8dd691b9d87889431e2e30bc8448612169a3aea4b3a"
+    },
+    {
+      "request": "pair-00-06-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 17,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f01",
+            "right": "f01",
+            "reason": "条件未限定；均要求语域口语化但逻辑严密、不抒情不煽情的闲谈式叙述语气，机制方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f02",
+            "right": "f02",
+            "reason": "条件未限定；均要求强烈情绪/锋利判断不用感叹、排比、程度副词、形容词堆叠渲染，锋利来自平淡措辞，机制方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f05",
+            "right": "f26",
+            "reason": "条件未限定；均要求克制指情绪不外溢/态度放入陈述句，明确克制不等于信息贫乏。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f05",
+            "reason": "条件未限定；均要求用第一人称短语/发言标记引入判断，表明看法归属个人、带保留意味。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f12",
+            "right": "f14",
+            "reason": "条件未限定；均要求插入语/机制使用节制（一到两处），防止变为口癖或节拍冲突。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f24",
+            "reason": "条件未限定/推演机制；均要求顺着前提/已有逻辑推到荒诞处再收住，并禁止把假设当真实事件。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f16",
+            "right": "f16",
+            "reason": "使用推演机制时；均要求荒谬结果用具体、夸张化措辞平淡写出，不加惊叹/渲染。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f25",
+            "reason": "条件未限定/使用反讽时；均要求用中性/客观归因或粗算累加揭示荒谬，机制方向兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f25",
+            "right": "f23",
+            "reason": "使用反讽时；均要求反讽/混排等幽默机制强度控制（一段一次、全篇有限），防止讽刺腔。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f27",
+            "right": "f21",
+            "reason": "条件未限定；均要求具体细节克制、只服务分析，不为生动扩编或铺陈。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f03"
+          ],
+          [
+            "f04",
+            "f09"
+          ],
+          [
+            "f18",
+            "f08"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f07",
+            "f10"
+          ],
+          [
+            "f08",
+            "f11"
+          ]
+        ],
+        "constraints": [
+          [
+            "f21",
+            "f27"
+          ]
+        ],
+        "information": [
+          [
+            "f26",
+            "f18"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "d1d7652b920ae547a87dbaf1c1e65ee02aef764aad8bdbb54a2e9310ea15654f"
+    },
+    {
+      "request": "pair-00-07-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 13,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f08",
+            "right": "f28",
+            "reason": "叙述后紧接评点、不另起抒情段，用连接语焊在同一段，机制一致（A强调接口词的不耐烦语气）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f09",
+            "right": "f09",
+            "reason": "均为先判断后补一小截解释，解释过长需收回，顺序与限长一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f22",
+            "reason": "引用/褒词后不加解释，落差或反问留给读者完成，不替读者总结，机制方向一致（对象措辞不同）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f19",
+            "right": "f27",
+            "reason": "细节只挑可感知物件、无素材则省略并用语序停顿维持声音、不扩编他人反应，机制完全一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 9,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f02",
+            "f19"
+          ]
+        ],
+        "constraints": [
+          [
+            "f03",
+            "f21"
+          ],
+          [
+            "f18",
+            "f25"
+          ],
+          [
+            "f24",
+            "f31"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f04",
+            "f07"
+          ],
+          [
+            "f05",
+            "f08"
+          ]
+        ],
+        "information": [
+          [
+            "f17",
+            "f14"
+          ]
+        ],
+        "ending": [
+          [
+            "f22",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 9,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "41bad17522a1c69fdc0970f57c7b484de6864f61c59ce9ac27c98c757f988b3d"
+    },
+    {
+      "request": "pair-00-08-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 12,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f03",
+            "reason": "误用纠正：自贬后须有依据、结论不软；条件为谦抑/自嘲后，检查删除后结论硬度，机制反向验证一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f12",
+            "reason": "反驳时推演对方逻辑到底显荒谬，后用短硬判断收；条件为反驳/推演时，机制方向一致（推演-冷判断）。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f12",
+            "reason": "推演中语气认真，荒谬感由推理自现不提前宣布；条件为推演时，与f12的“显出荒谬后冷判断收掉”机制兼容（不中途嘲笑）。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f22",
+            "right": "f14",
+            "reason": "用正面/客气措辞命名荒唐事制造落差出刺；条件为反讽/锋芒时，机制方向一致（措辞反差自曝）。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f31",
+            "right": "f22",
+            "reason": "删无据细节、补任务必写信息，事实不得糊；条件为成稿检查时，机制一致（事实优先）。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f01"
+          ],
+          [
+            "f03",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f07",
+            "f04"
+          ],
+          [
+            "f08",
+            "f05"
+          ]
+        ],
+        "language": [
+          [
+            "f12",
+            "f21"
+          ]
+        ],
+        "constraints": [
+          [
+            "f25",
+            "f17"
+          ],
+          [
+            "f27",
+            "f10"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "cf5ea8a1889a26fb26c403913af4ccf73fd6980269931bd347e83206d2c6d769"
+    },
+    {
+      "request": "pair-00-13-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 8,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f09",
+            "reason": "同为句群先给判断、后补解释，条件与方向一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f05",
+            "reason": "形容词与态度节制、用平实措辞收住，与B把态度放进陈述句、不必句句表态同向"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f26",
+            "right": "f31",
+            "reason": "均要求任务必写信息写全并双向核对（删无据细节、补遗漏），条件一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 5,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f08"
+          ]
+        ],
+        "language": [
+          [
+            "f22",
+            "f24"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f29"
+          ]
+        ],
+        "constraints": [
+          [
+            "f03",
+            "f21"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f12",
+          "right": "f26",
+          "reason": "同为详略安排：A主张案例成串密排、串后速给判断，B主张例证一次点到即止、不连续堆事实，条件相反"
+        }
+      ],
+      "request_sha256": "c9dc3651058a5aac091a22740aba582e9e20c13ddaf0ae55cd272e29ad687610"
+    },
+    {
+      "request": "pair-00-14-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 9,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f32",
+            "reason": "A在谦抑之后须给出推演依据；B自谦后须有仍然成立的判断；均反对以自谦代替判断或论证。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f25",
+            "right": "f31",
+            "reason": "A限制连续反讽保持平实；B限制延伸比喻只作说明；同为修辞工具的强度控制，防止工具主导段落。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f02"
+          ],
+          [
+            "f03",
+            "f21"
+          ]
+        ],
+        "language": [
+          [
+            "f24",
+            "f23"
+          ]
+        ],
+        "constraints": [
+          [
+            "f27",
+            "f18"
+          ],
+          [
+            "f31",
+            "f33"
+          ]
+        ],
+        "narration": [
+          [
+            "f28",
+            "f09"
+          ]
+        ],
+        "ending": [
+          [
+            "f30",
+            "f25"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f04",
+          "right": "f03",
+          "reason": "A明确不追问读者、不设问自答，读者旁听；B以泛指的“你”带出劝诫、建议或反问，读者对坐听讲。"
+        }
+      ],
+      "request_sha256": "5bf1c3ab07ee1ee4afb361afcf2a314d58d65a66cda57e156a6a3f9e79bbc0a8"
+    },
+    {
+      "request": "pair-00-15-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 2,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f05",
+            "right": "f21",
+            "reason": "同为“无亲历素材”条件下的禁编造与降级处理：A退到观察者位置、不把推测写成经历；B保留语气自贬但不编造亲见亲历，条件与机制方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f31",
+            "reason": "同为任务必写硬信息的实写要求（时间/数量/状态/结果必须写实写全）；A侧重写作时不得模糊遮盖，B侧重成稿阶段补全核对，条件阶段略有差异但机制方向一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 0,
+      "feasible_equivalence_subset": {},
+      "feasible_count": 0,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f06",
+          "right": "f07",
+          "reason": "基础句长机制相反：A规定主体是短句、单句成段，B规定主干是中长句、句内层层搭接，适用条件均未限定，构成同条件反向。"
+        },
+        {
+          "left": "f19",
+          "right": "f28",
+          "reason": "同为“评论接事件”条件：A要求评论单独成句、不与叙述粘连，B要求用连接语把评论与叙述焊在同一段内，机制方向相反。"
+        }
+      ],
+      "request_sha256": "15d4978881695e1e7b7cef7215d7ec8ede29dc4d03f2e4219fb8db461f0ff4d3"
+    },
+    {
+      "request": "pair-00-16-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 9,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f12",
+            "right": "f12",
+            "reason": "同为详略控制机制：A明确要求插入语宁疏勿密、一到两处、过多变口癖；B要求少数条目因有素材而展开、多数一句带过，均属密度控制防止过度使用，方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f18",
+            "reason": "同为voice维度的锋芒机制：A以动机与效果对照制造反讽落差，B以宏大断言与家常细节落差制造锋芒，均通过落差而不解释连接产生效果，方向兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f27",
+            "right": "f11",
+            "reason": "同属constraints关于具体细节使用：有素材则用少量压实、无则省略不编造，方向一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f18",
+            "f19"
+          ]
+        ],
+        "constraints": [
+          [
+            "f17",
+            "f24"
+          ],
+          [
+            "f21",
+            "f17"
+          ],
+          [
+            "f31",
+            "f27"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f02",
+          "right": "f02",
+          "reason": "同为未限定voice维度的修辞手段运用：A明确禁止感叹号、程度副词、排比等外露修辞来表达锋利，B明确要求用感叹、反问、口语叠词拉近距离、用强程度副词，同条件下修辞方向相反。"
+        },
+        {
+          "left": "f04",
+          "right": "f20",
+          "reason": "同为未限定voice维度的读者互动方式：A明确禁止追问读者、设问自答、呼吁收尾，要求并排而坐读者旁听；B要求用反问句拉近读者、问完自答，同条件下互动方向相反。"
+        },
+        {
+          "left": "f08",
+          "right": "f06",
+          "reason": "同为rhythm维度的基本句干：A要求中长句层层搭接为主干、短句仅作刹车，B要求短句为主干、单句成段常见，同条件下句长方向相反。"
+        },
+        {
+          "left": "f29",
+          "right": "f25",
+          "reason": "同为ending维度收尾语气：A要求冷淡悬停、无可奈何或轻微荒诞，不解释不劝告不总结；B允许过头断言、玩笑式夸张或轻问，可带文言感叹，同条件下收尾情绪温度方向不同。"
+        }
+      ],
+      "request_sha256": "7d69c04a56e04f5c17ec4d736f5bea556f385581b72c6b4af8320d9c977c473b"
+    },
+    {
+      "request": "pair-00-17-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 8,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f31",
+            "reason": "均要求必写事实/无据细节处理：A“存疑不伪装事实、必写事实写足”与B“删无据细节、补必写信息”同为不编造＋写足必写项，方向一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f16",
+            "right": "f21",
+            "reason": "均在无亲历时禁止虚构现场对话、动作、反应，只用转述或仅保留语气自贬，条件方向一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f04"
+          ]
+        ],
+        "information": [
+          [
+            "f04",
+            "f14"
+          ]
+        ],
+        "constraints": [
+          [
+            "f15",
+            "f31"
+          ],
+          [
+            "f19",
+            "f27"
+          ],
+          [
+            "f27",
+            "f25"
+          ]
+        ],
+        "ending": [
+          [
+            "f34",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f05",
+          "right": "f07",
+          "reason": "句长主干方向相反：A以短句为主、小句并置；B以中长句为主干、层层搭接推理链"
+        },
+        {
+          "left": "f07",
+          "right": "f10",
+          "reason": "转折连接方式相反：A用“但是/却/就”直接转折；B少用激烈转折词、用平缓让步—收束连接"
+        },
+        {
+          "left": "f20",
+          "right": "f09",
+          "reason": "叙述—判断次序相反：A先叙述现象事实、判断落段末；B先判断结论、后补解释例证"
+        }
+      ],
+      "request_sha256": "b32c24ebd760fa094689c06642e9c0ca95cc76b1ef22c47d50e8c264bbc383d5"
+    },
+    {
+      "request": "pair-01-02-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "information": [
+          [
+            "f10",
+            "f24"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f12",
+            "f07"
+          ]
+        ],
+        "language": [
+          [
+            "f14",
+            "f21"
+          ]
+        ],
+        "constraints": [
+          [
+            "f17",
+            "f31"
+          ],
+          [
+            "f25",
+            "f29"
+          ]
+        ],
+        "narration": [
+          [
+            "f23",
+            "f17"
+          ]
+        ],
+        "ending": [
+          [
+            "f24",
+            "f28"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f02",
+          "right": "f04",
+          "reason": "与读者距离A规定平视加轻微调侃，禁止居高临下训诫；B在与读者交流时规定语气冷、尖锐靠措辞褒贬错位且不煽情不请求共鸣，同为控制距离但方向与温度设定不同。"
+        }
+      ],
+      "request_sha256": "c6c54b259a361b69bb2f69abbe7029a49005d32dea294e1014cabe37a4db801f"
+    },
+    {
+      "request": "pair-01-03-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 8,
+      "repeated_left": 0,
+      "repeated_right": 3,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f07",
+            "reason": "均用破折号在主线中插入自贬/坦白或改口补话，插完语调复原；A侧重补更准确说法，B侧侧重自贬坦白，方向兼容且均有频次克制（A连续≤两处、B一节至多一两次）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f10",
+            "reason": "讥刺/锋芒来自构造性手法而非辱骂：A用褒义错位，B用归谬递进链，均避免直接开骂/辱骂，方向一致（不辱骂）且均在荒谬处点破"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f21",
+            "reason": "均要求背景/词语来历说明简短克制，A插入一两句解释出处或时代背景不扩写考据，B括号夹注交代词语来历紧跟名词，不写主要判断，方向一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f24",
+            "right": "f21",
+            "reason": "素材使用约束均区分有素材/无素材：有素材用具体数字物件感官动作，无素材则省/改写一般陈述，不编造或扩编细节"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f25",
+            "right": "f21",
+            "reason": "比喻职责受限：A比喻一句即过不引申不承担论证，B比喻只说明感受不充当证据，判断依据须另有落点，机制方向一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 3,
+      "feasible_equivalence_subset": {
+        "ending": [
+          [
+            "f27",
+            "f25"
+          ]
+        ],
+        "constraints": [
+          [
+            "f30",
+            "f16"
+          ]
+        ]
+      },
+      "feasible_count": 2,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f02",
+          "right": "f02",
+          "reason": "A允许'我觉得'等署名判断但要求克制少用，B要求断语后必接让步然后收回；A限制署名频次，B强调每个断语后加让步，方向不同（A少用标记 vs B常规追加让步）"
+        },
+        {
+          "left": "f04",
+          "right": "f03",
+          "reason": "A鼓励直接用'你'称呼读者、发问、请猜，B明确'你'基本不用而用'我们'偶用，同为读者称谓机制但方向相反"
+        }
+      ],
+      "request_sha256": "f1eeb500952e99f4aab11553e1f8fd3fad2c1774ee75d60cbd9f3605832c7d59"
+    },
+    {
+      "request": "pair-01-04-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 13,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f24",
+            "reason": "无素材不编造细节，缺则用其他手段维持，条件为素材缺失，同向。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f24",
+            "reason": "缺素材时不编造身体反应、改用语序等手段，与B无素材不编造细节同条件同向。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f19",
+            "right": "f25",
+            "reason": "比喻只承担画面不承担论证／不引申不承担证明，条件为使用比喻时，同向。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f20",
+            "right": "f22",
+            "reason": "引用他人话语后不让其保持庄重、用口语收束不解释笑点，条件为引用时，方向相容。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 9,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f01"
+          ],
+          [
+            "f03",
+            "f04"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f04",
+            "f06"
+          ],
+          [
+            "f05",
+            "f07"
+          ],
+          [
+            "f07",
+            "f08"
+          ]
+        ],
+        "constraints": [
+          [
+            "f15",
+            "f31"
+          ],
+          [
+            "f25",
+            "f30"
+          ],
+          [
+            "f29",
+            "f29"
+          ]
+        ],
+        "ending": [
+          [
+            "f30",
+            "f28"
+          ]
+        ]
+      },
+      "feasible_count": 9,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f08",
+          "right": "f15",
+          "reason": "A要求高点后接平实陈述降温（允许夸张高点存在）；B要求一段重刺最多一次其余回到平叙，且讥刺须平叙承载。方向不完全相反但强度约束不同，视作约束冲突。"
+        }
+      ],
+      "request_sha256": "17969ca382e1df38abcdfa2f62c33e217f6c7f21e6c898cae8900abddd71ee17"
+    },
+    {
+      "request": "pair-01-05-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 4,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 4,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f04",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f07",
+            "f06"
+          ]
+        ],
+        "constraints": [
+          [
+            "f29",
+            "f26"
+          ],
+          [
+            "f31",
+            "f25"
+          ]
+        ]
+      },
+      "feasible_count": 4,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "69e01847ab35fca92e5e086ff07e526323d98fcde43cb4d5d788794e2eba9f21"
+    },
+    {
+      "request": "pair-01-06-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 20,
+      "repeated_left": 0,
+      "repeated_right": 3,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f01",
+            "right": "f01",
+            "reason": "A的口语语域但句子完整、不抒情不煽情，与B第一人称冷静在场者、非抒情者的语域要求兼容，条件方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f02",
+            "right": "f14",
+            "reason": "A要求强烈情绪不用形容词堆叠、禁止感叹排比渲染，与B讥刺时不用感叹号加力、不反问连环轰炸的克制方向一致，条件均可适用于强烈情绪/讥刺表达。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f06",
+            "right": "f07",
+            "reason": "A叙述段平实、评点段改用复合句抽象词分开两层，与B堆叠后用短句落地形成落差，均在句式层级分离机制兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f05",
+            "reason": "A让步即反转先承认好处随即翻转、快不拖延，与B尖锐靠措辞褒贬错位不靠音量，均属锋芒反转控制机制，方向兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f31",
+            "reason": "A反事实假设只做判断不得写成发生过的事，与B比喻假设推论不得冒充真实事件或证据，条件与方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f19",
+            "right": "f19",
+            "reason": "A并置对比中间不下断语、断语留评点段，与B论理段收束后回叙述不替代叙事说尽结论，均在判断留白机制兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f21",
+            "right": "f25",
+            "reason": "A动作写结果与代价不写流程心理独白，与B动作荒诞过程铺开写、感受后果一笔带过，均在动作叙述详略机制方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f22",
+            "right": "f12",
+            "reason": "A段落直接跳接或一句话过渡不用小标题首先其次，与B插入不宜连续超过两处否则打散主干、需补充先列完再统一补充，均在段落衔接节制机制兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f21",
+            "reason": "A跨语域混排口语俗语与技术术语同段落差幽默，与B日常口语与论理词成语书面腔并置制造又随便又讲理腔调，机制一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 11,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f13"
+          ],
+          [
+            "f04",
+            "f04"
+          ],
+          [
+            "f08",
+            "f03"
+          ],
+          [
+            "f09",
+            "f01"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f10",
+            "f06"
+          ],
+          [
+            "f11",
+            "f08"
+          ],
+          [
+            "f15",
+            "f09"
+          ]
+        ],
+        "information": [
+          [
+            "f16",
+            "f25"
+          ]
+        ],
+        "constraints": [
+          [
+            "f27",
+            "f30"
+          ],
+          [
+            "f29",
+            "f31"
+          ]
+        ],
+        "ending": [
+          [
+            "f30",
+            "f26"
+          ]
+        ]
+      },
+      "feasible_count": 11,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f05",
+          "right": "f17",
+          "reason": "A规定评点须用显性发言标记（坦白说、我以为等）引入，B允许判断不加标记直接顶上短判断；同为判断引入条件，方向相反。"
+        }
+      ],
+      "request_sha256": "a45551d4089358fbd6e47642ef321352bca6d293f0cd0787a80aea2bd81c9006"
+    },
+    {
+      "request": "pair-01-07-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 24,
+      "repeated_left": 0,
+      "repeated_right": 6,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f02",
+            "right": "f09",
+            "reason": "双方均要求判断（A侧含署名判断）只在确需表态处/短时出现，且解释须短、立即收回，防止变成说教或过度挂名。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f05",
+            "right": "f13",
+            "reason": "双方均主张锋芒靠措辞本身（褒贬错位/降格措辞）而非音量、形容词堆砌或加力。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f14",
+            "reason": "双方均以错位/塌陷实现讥刺：A侧用郑重褒义词说不够格之事令语境反转，B侧排比末项加反常括注泄势，均属评价错位机制。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f18",
+            "reason": "双方均要求讽刺戳穿后不加议论、评价性形容或反问轰炸，把判断留给读者。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f18",
+            "reason": "双方均控制讽刺密度与强度：A侧一段重刺最多一次、回到平叙，B侧戳穿后不补议论不加评价，防止变成控诉或尖酸。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f08",
+            "reason": "双方均以叙述/情形在前、判断紧随其后接入（A侧'我觉得/由此看来'标记或直接短判断，B侧'总而言之'类接口词），评点不另起抒情段。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f22",
+            "right": "f15",
+            "reason": "双方均将他人原话/漂亮话原样引出后接一句平直收束或大白话戳穿，不再解释笑点，让反差自己生效。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 17,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f03",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f06",
+            "f04"
+          ],
+          [
+            "f08",
+            "f05"
+          ],
+          [
+            "f09",
+            "f07"
+          ]
+        ],
+        "language": [
+          [
+            "f10",
+            "f06"
+          ],
+          [
+            "f21",
+            "f11"
+          ]
+        ],
+        "narration": [
+          [
+            "f18",
+            "f10"
+          ]
+        ],
+        "information": [
+          [
+            "f24",
+            "f19"
+          ]
+        ],
+        "constraints": [
+          [
+            "f29",
+            "f24"
+          ],
+          [
+            "f30",
+            "f03"
+          ]
+        ],
+        "ending": [
+          [
+            "f28",
+            "f22"
+          ]
+        ]
+      },
+      "feasible_count": 12,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f20",
+          "right": "f09",
+          "reason": "同为'判断与解释顺序'：A侧主张先埋判断、后段统一推出结论并自我设限（判断先行、延后推出），B侧主张先出判断后立即补一小截解释或不解释，顺序方向相反。"
+        }
+      ],
+      "request_sha256": "7ea67e54de08fdcdebe5c311858ee3d4fd68d8f10da9fd43c9da56b659ffca31"
+    },
+    {
+      "request": "pair-01-08-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f16",
+            "reason": "均要求反讽/正反话须有可辨认的字面依据，并以短定调句完成翻转或定调，不得自认讽刺"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "rhythm": [
+          [
+            "f04",
+            "f06"
+          ],
+          [
+            "f05",
+            "f07"
+          ]
+        ],
+        "information": [
+          [
+            "f08",
+            "f25"
+          ]
+        ],
+        "constraints": [
+          [
+            "f10",
+            "f30"
+          ]
+        ],
+        "voice": [
+          [
+            "f15",
+            "f05"
+          ]
+        ],
+        "ending": [
+          [
+            "f24",
+            "f28"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f01",
+          "right": "f20",
+          "reason": "同为叙述与判断的先后安排：A要求判断先落地、解释随后补且顺序不可颠倒；B明确判断与解释先后交替，先埋判断后统一推结论。条件同为常规行文，方向相反"
+        }
+      ],
+      "request_sha256": "6694420ddae4eaf0c1a2de09938d5c970ef5df48717284752e6e04664b8d21dc"
+    },
+    {
+      "request": "pair-01-09-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 8,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [],
+      "same_dimension_candidate_edges": 8,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f03",
+            "f11"
+          ],
+          [
+            "f04",
+            "f02"
+          ],
+          [
+            "f13",
+            "f10"
+          ],
+          [
+            "f16",
+            "f13"
+          ]
+        ],
+        "information": [
+          [
+            "f24",
+            "f08"
+          ]
+        ],
+        "constraints": [
+          [
+            "f29",
+            "f19"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f04",
+          "right": "f02",
+          "reason": "A禁止煽情、请求共鸣、铺垫感动；B要求替读者发声、预判异议并回应，同为读者交流场景但情绪姿态相反"
+        }
+      ],
+      "request_sha256": "51dbeff4a490f9839b7e27be14bfc833c0309e60b6bca2050b4f17ab93272a5f"
+    },
+    {
+      "request": "pair-01-10-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 11,
+      "repeated_left": 0,
+      "repeated_right": 2,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f25",
+            "reason": "比方只取日常低微经验，一句即过不引申不承担论证"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f15",
+            "right": "f25",
+            "reason": "比方用后不再引申、不代替论证，无比方则平叙"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f16",
+            "right": "f25",
+            "reason": "无相称经验就不设比，宁可平叙/不写"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f20",
+            "right": "f09",
+            "reason": "克制不等于少写信息，事实判断说满"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f04"
+          ],
+          [
+            "f02",
+            "f01"
+          ],
+          [
+            "f03",
+            "f03"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f06"
+          ],
+          [
+            "f06",
+            "f07"
+          ]
+        ],
+        "constraints": [
+          [
+            "f23",
+            "f30"
+          ],
+          [
+            "f24",
+            "f31"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f08",
+          "right": "f20",
+          "reason": "A要求判断先说不藏结论，B要求先埋判断后段才推出结论，同为论理推进但先后相反"
+        }
+      ],
+      "request_sha256": "d0e92ca08aa46579b07c4671b88e7b02022ce4d3e2abec469b23b363dfb55170"
+    },
+    {
+      "request": "pair-01-11-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 11,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f15",
+            "reason": "先事实动作后接判断、短判断直接顶上，与判断短直接不给理由紧跟描述之后，均规定判断置于描述后且简短"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 10,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f02"
+          ],
+          [
+            "f03",
+            "f18"
+          ],
+          [
+            "f04",
+            "f03"
+          ]
+        ],
+        "language": [
+          [
+            "f11",
+            "f23"
+          ],
+          [
+            "f12",
+            "f21"
+          ]
+        ],
+        "information": [
+          [
+            "f23",
+            "f11"
+          ],
+          [
+            "f25",
+            "f13"
+          ]
+        ],
+        "ending": [
+          [
+            "f28",
+            "f29"
+          ]
+        ],
+        "constraints": [
+          [
+            "f29",
+            "f32"
+          ],
+          [
+            "f30",
+            "f04"
+          ]
+        ]
+      },
+      "feasible_count": 10,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "5de2f0aaa4d2f8cd079bec264a4c1f52d7d8ee126ec449b39859caaa416e2e98"
+    },
+    {
+      "request": "pair-01-12-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f14",
+            "reason": "讥刺收束条件：A说点到短处最多一句随即转开，不用感叹号排比；B说一段重刺最多一次回到平叙，不用感叹号加力、反问连环。方向一致的强度控制。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f21",
+            "right": "f24",
+            "reason": "数据依赖任务素材：A缺数据省略不填估计值；B无素材不得编造、改用程度词。都以任务素材为准，条件和方向兼容。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 5,
+      "feasible_equivalence_subset": {
+        "narration": [
+          [
+            "f11",
+            "f17"
+          ],
+          [
+            "f13",
+            "f22"
+          ]
+        ],
+        "voice": [
+          [
+            "f18",
+            "f05"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f28"
+          ]
+        ],
+        "constraints": [
+          [
+            "f30",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f03",
+          "right": "f21",
+          "reason": "口语与书面成分配置相反：A要求几乎不用比喻、口语实指基底，且情绪点才少量正式词；B明确把口语与论理词、成语、书面腔并置制造混合腔调。"
+        },
+        {
+          "left": "f05",
+          "right": "f06",
+          "reason": "长句条件相反：A限定长句仅罗列与工序，读完必须短句收束；B允许长句承载三层以上动作解释转折的铺陈堆叠。"
+        },
+        {
+          "left": "f14",
+          "right": "f12",
+          "reason": "补充位置与密度方向不同：A要修饰语少而准、宁可具体名词不堆程度副词，倾向收紧；B允许插入补话但限制连续两处，倾向插入式补充。"
+        }
+      ],
+      "request_sha256": "eb2b7257ba8e715decad7f8721a9acf055d0536fbc41e1dafad81440de742098"
+    },
+    {
+      "request": "pair-01-13-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 5,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f24",
+            "right": "f24",
+            "reason": "均规定有素材则用具体细节、无素材则省略或改用其他手段，不编造，机制与条件一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f25",
+            "right": "f22",
+            "reason": "均要求比喻朴素取自日常、一句即过、不承担论证；A另有详略与无素材不比喻部分，B略有形容词节制，核心机制兼容。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f29",
+            "right": "f26",
+            "reason": "均规定任务给定事实优先写全、成稿后双向核对删无据补遗漏，机制一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 2,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f02"
+          ]
+        ],
+        "constraints": [
+          [
+            "f30",
+            "f03"
+          ]
+        ]
+      },
+      "feasible_count": 2,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f17",
+          "right": "f17",
+          "reason": "同为叙述与判断的顺序：A是先事实动作后接判断，B是判断在前解释在后，同条件方向相反。"
+        }
+      ],
+      "request_sha256": "8ff83a99fd9d16ac08c501a80d232279666e63071fa615ab7387c715cfa0db42"
+    },
+    {
+      "request": "pair-01-14-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 16,
+      "repeated_left": 0,
+      "repeated_right": 2,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f25",
+            "reason": "A评点句短具体、时间来由因果交代全但不抒情渲染；B详略上感受后果一笔带过、比喻一句即过不引申。均为克制不抒情、细节写实信息完整但不过度渲染的机制，方向兼容"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f22",
+            "reason": "A转述他人言论保持口语鲜活、随后加自己按语；B他人发言引号加冒号独立成句、引语后不解释只补平直收束。均为引用后立即附加处理机制，但A是按语（赞同补充修正）、B是平直收束不解释笑点，具体处理不同"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f24",
+            "reason": "A细节素材有则用无则不用、绝不虚构；B任务有素材就用、无素材不用不编造。均为依据素材有无决定细节使用的机制，方向一致但A还涉及数字器物具体范围更宽"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f25",
+            "reason": "A比喻承担'让关系被看见'、一两句说完回论述不延伸；B比喻取日常低微场景、一句即过不引申不承担论证。均为比喻简短不延伸机制，具体约束（A限数量1-2、B限场景来源）略异"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f35",
+            "right": "f17",
+            "reason": "A通读听语气是否像有人对面平心静气讲话、不像论文抒情；B判断用'我觉得'等标记或直接短判断接入事实。机制不同：A为通读校准语气，B为叙述接判断的具体标记方式，粒度不同存疑"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 11,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f02"
+          ],
+          [
+            "f03",
+            "f04"
+          ],
+          [
+            "f19",
+            "f13"
+          ],
+          [
+            "f21",
+            "f03"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f06"
+          ],
+          [
+            "f07",
+            "f07"
+          ]
+        ],
+        "narration": [
+          [
+            "f10",
+            "f20"
+          ]
+        ],
+        "information": [
+          [
+            "f16",
+            "f25"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f28"
+          ]
+        ],
+        "constraints": [
+          [
+            "f27",
+            "f30"
+          ],
+          [
+            "f33",
+            "f31"
+          ]
+        ]
+      },
+      "feasible_count": 11,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "4300251f65df8d5137ed9eb442d8a361be481d8299d5ea0b6c2f45c07476d73e"
+    },
+    {
+      "request": "pair-01-17-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 0,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 0,
+      "feasible_equivalence_subset": {},
+      "feasible_count": 0,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "64ab7338b5ead8c2564b3e89714122e5ff565afded633c0c82a9573221c1f315"
+    },
+    {
+      "request": "pair-01-18-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 4,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f01",
+            "reason": "第一人称作为叙述与评点主体低频/可直说，方向一致，均允许判断、自嘲而不必事事引证据"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 3,
+      "feasible_equivalence_subset": {
+        "narration": [
+          [
+            "f15",
+            "f17"
+          ]
+        ],
+        "constraints": [
+          [
+            "f26",
+            "f30"
+          ],
+          [
+            "f32",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 3,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f05",
+          "right": "f06",
+          "reason": "同为节奏中的长句机制：A限制长句只用于层次关系或同类罗列且嵌套不超过两层即拆；B允许长句挂载动作、解释、转折并容纳三层以上附加成分，同条件反向"
+        }
+      ],
+      "request_sha256": "8e06cd6306173a8357cafb148853b48144b08702a6daa7572d189325077aa37f"
+    },
+    {
+      "request": "pair-01-19-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 28,
+      "repeated_left": 0,
+      "repeated_right": 8,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f12",
+            "right": "f09",
+            "reason": "都限制句中插入或破折号补充的数量，防止叙述割碎"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f12",
+            "reason": "都先给事实、动作或现象，再接判断或解释；判断可先出但需支撑"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f26",
+            "reason": "都防止抽象论理或判断写成格言连排，需自我打断或拆回具体叙述"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f19",
+            "right": "f12",
+            "reason": "都要求议论或解释后回到叙述或事实支撑，不替代叙事说尽"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f20",
+            "right": "f12",
+            "reason": "都交替判断与解释，判断需具体支撑或自我设限"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f22",
+            "right": "f20",
+            "reason": "都要求引语独立短小、口语，之后不解释笑点或加长段心理分析"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f10",
+            "reason": "都插入简短说明解释背景或来源，不扩写成考据或长交代"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f24",
+            "right": "f30",
+            "reason": "都按素材有无使用具体细节，无则用程度词或省略，不得编造"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 20,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f02",
+            "f02"
+          ],
+          [
+            "f03",
+            "f25"
+          ],
+          [
+            "f05",
+            "f24"
+          ],
+          [
+            "f16",
+            "f26"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f06",
+            "f06"
+          ],
+          [
+            "f07",
+            "f07"
+          ],
+          [
+            "f08",
+            "f08"
+          ]
+        ],
+        "language": [
+          [
+            "f21",
+            "f16"
+          ]
+        ],
+        "information": [
+          [
+            "f25",
+            "f11"
+          ]
+        ],
+        "ending": [
+          [
+            "f26",
+            "f27"
+          ],
+          [
+            "f27",
+            "f28"
+          ]
+        ],
+        "constraints": [
+          [
+            "f29",
+            "f29"
+          ],
+          [
+            "f30",
+            "f31"
+          ],
+          [
+            "f31",
+            "f32"
+          ]
+        ]
+      },
+      "feasible_count": 15,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "617571339cc0e33f964045a5626a031fc35945926bb511813c544733bf2160d3"
+    },
+    {
+      "request": "pair-02-03-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 14,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f02",
+            "right": "f07",
+            "reason": "两者都是断语/让步后的让步收缩机制：A要求让步只退到不损害结论、落点仍是判断；B要求让步句短、平、不带辩解，且不用于收回判断，方向与条件兼容"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f07",
+            "right": "f13",
+            "reason": "破折号用于自贬、坦白、自我修正、引出反转，插完复原/不堆叠"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f10",
+            "right": "f18",
+            "reason": "锋芒来自推演而非辱骂：让对方逻辑跑到荒谬/难堪处，作者只补短评，不做结论式辱骂"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f19",
+            "reason": "都含\"形容词少、贬抑词体积小、语气是调侃不是控诉\"的具体限制（A含归谬误用检查属附加，但共同部分机制兼容）"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 10,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f02"
+          ],
+          [
+            "f14",
+            "f01"
+          ]
+        ],
+        "narration": [
+          [
+            "f04",
+            "f23"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f12"
+          ]
+        ],
+        "constraints": [
+          [
+            "f16",
+            "f03"
+          ],
+          [
+            "f21",
+            "f17"
+          ]
+        ],
+        "language": [
+          [
+            "f18",
+            "f16"
+          ],
+          [
+            "f22",
+            "f14"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f24"
+          ]
+        ]
+      },
+      "feasible_count": 9,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f09",
+          "right": "f20",
+          "reason": "同为收束节奏方向：A要求成稿可朗读、不靠生僻词与排比堆砌；B要求长解释后接冷淡短句、热度骤降，条件不明时不构成同一语义机制，暂列冲突以示未匹配"
+        }
+      ],
+      "request_sha256": "6ea686f5c14bdc14213ec80385a2c1f9076b585c777d2c311afdd3d18374d1ec"
+    },
+    {
+      "request": "pair-02-04-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 8,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f19",
+            "reason": "比喻、假设、推论不作证据、不当作发生过的事；机制方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f22",
+            "right": "f18",
+            "reason": "无据素材不编造（A：背景/场景；B：身体反应），改用语序句式等维持声音。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "constraints": [
+          [
+            "f03",
+            "f25"
+          ],
+          [
+            "f25",
+            "f29"
+          ]
+        ],
+        "language": [
+          [
+            "f14",
+            "f09"
+          ]
+        ],
+        "voice": [
+          [
+            "f15",
+            "f23"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f20",
+            "f05"
+          ]
+        ],
+        "ending": [
+          [
+            "f24",
+            "f30"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f13",
+          "right": "f12",
+          "reason": "A要求避免每句都短句、避免连续长句不落短判断，即禁止短句密度与长段落过度；B明确允许一段只有一句短句、前面长句全是铺垫。同为节奏配置，方向相反。"
+        }
+      ],
+      "request_sha256": "71c25c17585fe859165ceadb53f4f1ac1a8a8b427fd3aa815f76ee78fb10c679"
+    },
+    {
+      "request": "pair-02-05-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 12,
+      "repeated_left": 0,
+      "repeated_right": 2,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f09",
+            "right": "f20",
+            "reason": "大段解释/渲染后：A轻收一句口语低姿态落地靠落差反讽，B接冷淡短句热度骤降成幽默，同为铺陈后短收制造落差"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f10",
+            "right": "f15",
+            "reason": "需要降温/被反驳处：A口语插入语降姿态提示活人说话，B我以为类功能词把断言降为个人立场，均在特定位置压低姿态"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f16",
+            "right": "f07",
+            "reason": "让步后收束：A让步退一小步不推翻判断最后补收束扶稳立场，B让步后作者补短评、让步短语气平，同为短让步不推翻主体判断的结构"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 9,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f02",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f07"
+          ],
+          [
+            "f06",
+            "f12"
+          ]
+        ],
+        "constraints": [
+          [
+            "f20",
+            "f03"
+          ],
+          [
+            "f26",
+            "f25"
+          ]
+        ],
+        "language": [
+          [
+            "f22",
+            "f14"
+          ]
+        ],
+        "ending": [
+          [
+            "f23",
+            "f24"
+          ]
+        ]
+      },
+      "feasible_count": 8,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f13",
+          "right": "f17",
+          "reason": "均针对推想/假设：A要求推想必须带缓冲词、明确标示为设想，B要求比喻假设推论不得当作发生过的事，同条件下A走明示标记方向、B走禁止当真方向，处理机制相反"
+        },
+        {
+          "left": "f15",
+          "right": "f08",
+          "reason": "推想/想象内容的处置相反：A要求每段推想落地到判断反问或两难、不能停在想象本身，B把想象性延展作为锋芒机制、靠煞有介事算与自承算不准的落差，同条件下一个收束想象、一个展开想象"
+        }
+      ],
+      "request_sha256": "da0dbdea0a5774d361dbe5f5759a40414864629e98aa85f04407f129aab51086"
+    },
+    {
+      "request": "pair-02-06-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 5,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f23",
+            "reason": "均为同段混排高低语域以落差产生幽默"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f25",
+            "right": "f30",
+            "reason": "均要求任务事实优先且结尾不总结、不呼吁，方向一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 3,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f03"
+          ]
+        ],
+        "constraints": [
+          [
+            "f03",
+            "f27"
+          ],
+          [
+            "f17",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 3,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f24",
+          "right": "f30",
+          "reason": "同为收束机制，A要求结尾为超短句且语气平，B要求一到两句中等长度断语，长度与形式方向相反"
+        }
+      ],
+      "request_sha256": "8e35bc73f970595b6d621c5b4b8e2afed86d261dbab5d4c9c0fd89eeb5f24643"
+    },
+    {
+      "request": "pair-02-07-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f18",
+            "reason": "归谬/让对方逻辑出丑且不宣布结论，机制一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ]
+        ],
+        "constraints": [
+          [
+            "f03",
+            "f03"
+          ],
+          [
+            "f24",
+            "f25"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f12"
+          ]
+        ],
+        "language": [
+          [
+            "f11",
+            "f14"
+          ]
+        ],
+        "ending": [
+          [
+            "f22",
+            "f24"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f04",
+          "right": "f11",
+          "reason": "A长短交错卸气势，B长句铺陈推演，同节奏维度方向不同"
+        },
+        {
+          "left": "f13",
+          "right": "f19",
+          "reason": "A体面对象用降格词戳破，B冷静平铺描述过度姿态，讽刺机制不同"
+        }
+      ],
+      "request_sha256": "2be18d4313429689fcc7d2fcfbfc3a2ecb755b6c0f1466d91e375882651df604"
+    },
+    {
+      "request": "pair-02-08-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 15,
+      "repeated_left": 0,
+      "repeated_right": 3,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f10",
+            "right": "f10",
+            "reason": "两处均约束具体素材（回忆/亲见/动作/对白/数字等）须任务有依据才写，无依据退到判断式表述，不编造细节。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f12",
+            "right": "f12",
+            "reason": "两处均为反驳时先让对方逻辑推到底显出荒谬再以冷/硬判断收掉的叙事操作，方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f15",
+            "reason": "两处均规定插入语（我以为、坦白地说等）承担语气调节与降格断言的功能，不承担信息，仅用于语气距离管理。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f16",
+            "right": "f14",
+            "reason": "两处均依赖措辞反差/语域落差制造锋芒与幽默（平实或文雅与荒唐内容并置），机制同为对比落差。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f12",
+            "reason": "两处均为讽刺操作一：让对方逻辑自己跑到难堪处，作者只补短评，不做结论式辱骂。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f21",
+            "right": "f17",
+            "reason": "两处均要求反讽由措辞与推演自然浮现，须有可辨认的字面依据（立场先出现），不强加结论。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 9,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f03"
+          ],
+          [
+            "f19",
+            "f14"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f04",
+            "f04"
+          ],
+          [
+            "f05",
+            "f05"
+          ]
+        ],
+        "information": [
+          [
+            "f22",
+            "f09"
+          ]
+        ],
+        "narration": [
+          [
+            "f23",
+            "f11"
+          ]
+        ],
+        "ending": [
+          [
+            "f24",
+            "f24"
+          ]
+        ],
+        "constraints": [
+          [
+            "f25",
+            "f23"
+          ]
+        ]
+      },
+      "feasible_count": 8,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f07",
+          "right": "f07",
+          "reason": "A的三拍骨架明确要求结尾主动让步、承认对方部分有理或自己答案不圆满（允许保留不圆满），而B的对照/排比收尾明确要求不留‘各有道理’的悬置、必须给出明确偏向，同为段落收束条件，方向相反。"
+        }
+      ],
+      "request_sha256": "9ed8d0938f38fd962664237a3353b7a579bf6ade255a23c69d0c11c850067544"
+    },
+    {
+      "request": "pair-02-09-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 13,
+      "repeated_left": 0,
+      "repeated_right": 2,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f05",
+            "right": "f05",
+            "reason": "A的转述-平白化-表态与B的第一拍复述：中性引述通行说法、压短篇幅、不替对方长篇辩护，同属引述起手操作"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f09",
+            "right": "f13",
+            "reason": "均属防失控：A防止比喻堆叠情绪加码，B防止全短句或长句连绵，退回简化保证节奏不乱"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f12",
+            "right": "f20",
+            "reason": "均在段落末用短冷评收束铺陈，强调位置与简短而非词重/热度骤降产生幽默"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f13",
+            "reason": "均要求跳跃过多时用平白转述/破折号补足让意思落地，避免留白过度"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f11",
+            "reason": "长句承担推理或铺陈、层层搭接且只推进一步、末分句落判断或冷评，机制兼容"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f23",
+            "reason": "均要求推演说尽处只简短照应或停止，不重述不冗余，保持叙述评论衔接清晰"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "constraints": [
+          [
+            "f03",
+            "f03"
+          ],
+          [
+            "f19",
+            "f25"
+          ]
+        ],
+        "information": [
+          [
+            "f06",
+            "f22"
+          ]
+        ],
+        "voice": [
+          [
+            "f10",
+            "f19"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f15",
+            "f12"
+          ]
+        ],
+        "ending": [
+          [
+            "f20",
+            "f24"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f01",
+          "right": "f01",
+          "reason": "A的从容评点者风格允许直接主观表达，B在业余推理者前提下先示弱再下判断，语气管理条件不同而方向有冲突"
+        }
+      ],
+      "request_sha256": "e211866061c7f32f67964ddcd7bd70130abd92dc0faacda3556d529c9fe2d8f1"
+    },
+    {
+      "request": "pair-02-10-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f05",
+            "reason": "两者均描述长句由多个逗号连缀的短分句搭成，承担铺陈和推演；条件和方向一致，A末分句落到判断或冷评，B破折号插入旁注。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f25",
+            "right": "f09",
+            "reason": "两者均要求任务给定的事实、身份、必写数量、地点、状态与结果优先于风格，先写全必写信息再套声音；条件和方向一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 5,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f01"
+          ]
+        ],
+        "constraints": [
+          [
+            "f03",
+            "f23"
+          ],
+          [
+            "f17",
+            "f15"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f12",
+            "f06"
+          ]
+        ],
+        "ending": [
+          [
+            "f24",
+            "f22"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "92d589c25d836af0868ab9fc00a939d7adb1a3f2ccfc43500fc05d8dc5af85de"
+    },
+    {
+      "request": "pair-03-10-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 0,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 0,
+      "feasible_equivalence_subset": {},
+      "feasible_count": 0,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "ffbfba40277c683b961eb610c077116b37ab96fde9efc2605f311a29eea04ed1"
+    },
+    {
+      "request": "pair-03-11-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 5,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f14",
+            "reason": "同为转述他人说法后接评点，评点与转述分离，方向一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f10",
+            "right": "f33",
+            "reason": "A的归谬推演链（接续词递进）与B的流水账自查（第四组细节后断一次）在“避免连续堆叠、控制递进密度”上机制同向，条件可兼容"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 3,
+      "feasible_equivalence_subset": {
+        "constraints": [
+          [
+            "f16",
+            "f04"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f05"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f29"
+          ]
+        ]
+      },
+      "feasible_count": 3,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f03",
+          "right": "f03",
+          "reason": "A明确‘你’基本不用，B允许轻声第二人称一两次拉近距离，同条件（人称使用）方向相反"
+        }
+      ],
+      "request_sha256": "a95342756f6db00b80ce604af70950a4d78f8e0c6837e19932706f626402634a"
+    },
+    {
+      "request": "pair-03-12-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 3,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 3,
+      "feasible_equivalence_subset": {
+        "narration": [
+          [
+            "f13",
+            "f23"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f25"
+          ]
+        ],
+        "language": [
+          [
+            "f14",
+            "f12"
+          ]
+        ]
+      },
+      "feasible_count": 3,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f04",
+          "right": "f05",
+          "reason": "A要求主力句式为短陈述句、少从句嵌套；B要求主干为逗号串联三到五个分句的中等流水句，句式基础方向相反"
+        },
+        {
+          "left": "f05",
+          "right": "f05",
+          "reason": "A限定长句仅用于罗列和工序两种位置，且必须回到短句；B主干即为中等流水句，长句是常态，与A的短句主导相反"
+        },
+        {
+          "left": "f02",
+          "right": "f02",
+          "reason": "A是判断后跟具体理由或动作支撑（先断后证或先证后断）；B是断语后立刻加让步再收回，A没有让步机制，支撑方向不同"
+        },
+        {
+          "left": "f16",
+          "right": "f10",
+          "reason": "A幽默来自平铺直叙与命名落差加反问收尾；B锋芒来自接续词连成的递进归谬链，幽默生成机制不同"
+        },
+        {
+          "left": "f17",
+          "right": "f10",
+          "reason": "A反讽由措辞本身产生、点到短处随即转开、不用排比；B锋芒来自推演递进链逐步逼近荒谬，生成方式相反"
+        },
+        {
+          "left": "f03",
+          "right": "f01",
+          "reason": "A几乎不用比喻、需要形容时用具体名词和可见特征；B明确允许用“类似”“可以相比”式比喻/类比并置连接抽象判断（见f20），对修辞格的取向相反"
+        },
+        {
+          "left": "f15",
+          "right": "f22",
+          "reason": "A情绪高点换用一两个正式书面词压在关键位置托住前文口语；B是高级书面语与俚俗口语在同一句对撞制造滑稽落差，语域混搭的用途与位置方向不同"
+        },
+        {
+          "left": "f18",
+          "right": "f14",
+          "reason": "A要求批评用平直短句直接说、不辩护不铺垫；B要求自嘲降格抵消自傲与说教感，对“批评/自傲”的处理方向相反"
+        },
+        {
+          "left": "f10",
+          "right": "f24",
+          "reason": "A详略由“我”的兴趣决定、方法工序材料可铺开；B详略由判断的轻重决定、说得最狠的一项多写，详略驱动条件相反"
+        },
+        {
+          "left": "f06",
+          "right": "f24",
+          "reason": "A列举是为了用具体项目填充宽断语、重心在断语本身；B列举只是铺垫、重心落在列举后的总评或推演上，列举的重心位置相反"
+        }
+      ],
+      "request_sha256": "c57022e93c8b578722e4c9df63200e15c4fadfed126bf9726fa5070ad8163e80"
+    },
+    {
+      "request": "pair-03-13-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 12,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f20",
+            "right": "f22",
+            "reason": "同为比喻只说明感受、不充当证据，判断依据在正文，方向一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 11,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f02"
+          ]
+        ],
+        "constraints": [
+          [
+            "f16",
+            "f03"
+          ],
+          [
+            "f17",
+            "f16"
+          ],
+          [
+            "f21",
+            "f24"
+          ]
+        ],
+        "language": [
+          [
+            "f12",
+            "f23"
+          ],
+          [
+            "f22",
+            "f09"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f05"
+          ],
+          [
+            "f07",
+            "f07"
+          ]
+        ],
+        "information": [
+          [
+            "f24",
+            "f15"
+          ]
+        ],
+        "narration": [
+          [
+            "f10",
+            "f20"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f25"
+          ]
+        ]
+      },
+      "feasible_count": 11,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f14",
+          "right": "f21",
+          "reason": "同为判断后紧接受限/降格，A要自认平庸做不好以抵消说教，B明确自限不削弱判断、不回避必写信息，方向相反。"
+        }
+      ],
+      "request_sha256": "869a1303d4af434428ec356ecf3266309b0aa597e5b5c0ed8d91ad1c1702b791"
+    },
+    {
+      "request": "pair-03-14-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 1,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 1,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ]
+        ]
+      },
+      "feasible_count": 1,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "1c6adcde0c7ceecf78f3847437725b9ffa61cb9453146424125c1993636e994d"
+    },
+    {
+      "request": "pair-03-15-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 3,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 3,
+      "feasible_equivalence_subset": {
+        "constraints": [
+          [
+            "f16",
+            "f04"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f31"
+          ]
+        ],
+        "narration": [
+          [
+            "f23",
+            "f21"
+          ]
+        ]
+      },
+      "feasible_count": 3,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f03",
+          "right": "f02",
+          "reason": "同为人称代词使用条件：A要求“你”基本不用、“我们”偶用后退回“我”；B要求“我们”与“你”交替点名，方向相反"
+        },
+        {
+          "left": "f05",
+          "right": "f06",
+          "reason": "同为句子节奏主干条件：A主张中等长度流水句串联分句、短句只在重处收住；B主张主体是短句、常单句成段，方向相反"
+        },
+        {
+          "left": "f06",
+          "right": "f12",
+          "reason": "段落组织同条件反向：A要求段落为论点单元、一段推进一件事；B要求段落碎片化、空行换气、不合并排比，方向相反"
+        }
+      ],
+      "request_sha256": "9c2c659985174ee71e5e4c2c19c2bcbf1b79c03da9da90f6bf39dced2b6d9935"
+    },
+    {
+      "request": "pair-03-16-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 12,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [],
+      "same_dimension_candidate_edges": 12,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f01"
+          ],
+          [
+            "f15",
+            "f15"
+          ],
+          [
+            "f19",
+            "f14"
+          ],
+          [
+            "f20",
+            "f03"
+          ]
+        ],
+        "constraints": [
+          [
+            "f05",
+            "f16"
+          ],
+          [
+            "f17",
+            "f17"
+          ],
+          [
+            "f24",
+            "f21"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f07",
+            "f07"
+          ]
+        ],
+        "information": [
+          [
+            "f12",
+            "f24"
+          ]
+        ],
+        "language": [
+          [
+            "f22",
+            "f22"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f25"
+          ]
+        ]
+      },
+      "feasible_count": 11,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "ed5900d52d33a73293931c4d8da7fa50bfa13b1444810302fea04e8199ed587e"
+    },
+    {
+      "request": "pair-03-17-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 1,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [],
+      "same_dimension_candidate_edges": 1,
+      "feasible_equivalence_subset": {
+        "rhythm": [
+          [
+            "f05",
+            "f05"
+          ]
+        ]
+      },
+      "feasible_count": 1,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f05",
+          "right": "f05",
+          "reason": "条件均为未限定的句子节奏主干：A主张中等长度流水句逗号串3-5分句，B主张几个字到十余字短句为主，方向相反"
+        },
+        {
+          "left": "f01",
+          "right": "f03",
+          "reason": "条件均未限定的判断标记：A要求'我认为/必须承认'等显眼表态标记驱动全文，B要求不反复声明'我认为'，方向相反"
+        },
+        {
+          "left": "f25",
+          "right": "f32",
+          "reason": "结尾收束：A要求压低语气的极端化感叹/短判断、说完即止，B要求语气平静收得短，B方向更收敛，条件同为结尾整体收束方向相反"
+        }
+      ],
+      "request_sha256": "40058117e1e30e43403e481e954668297a297bb953d2ab1dbf04d5a31dec0224"
+    },
+    {
+      "request": "pair-03-18-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 11,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f08",
+            "right": "f09",
+            "reason": "两者均要求转折/节奏轻处理、不靠长转折或排比堆砌撑场面（机制方向相同：以轻词或句长起伏替代修辞堆叠）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f13",
+            "reason": "两者均为成稿检查规则，判断细节/修辞是否冗余、过则删，方向一致（A针对细节服务性格气氛，B针对讥讽归谬误用）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f12",
+            "reason": "两者均要求评价性措辞少而准、由措辞本身产生效果而非堆砌或代替论证（A:形容词少而准多用状态词动词；B:评价形容词少、仅描述质地不代论证）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f20",
+            "right": "f23",
+            "reason": "两者均要求他人原话/说法直接嵌入并保留原貌，引号前后不冗长解释、转述与评点分离（A:引语即证据笑点；B:转述与评点分属不同小句）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f03",
+            "reason": "两者均规定第一人称低频使用、判断可直说不必事事引证据（A:见证者评点者；B:偶用'我们'拉近后退回'我'）"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 6,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f02",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f09",
+            "f07"
+          ]
+        ],
+        "constraints": [
+          [
+            "f14",
+            "f17"
+          ],
+          [
+            "f26",
+            "f16"
+          ]
+        ],
+        "ending": [
+          [
+            "f30",
+            "f25"
+          ]
+        ]
+      },
+      "feasible_count": 6,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f04",
+          "right": "f05",
+          "reason": "同为基本句式节奏，A要求短句与中短句为主、直陈主谓结构、一句一信息点、段末短句收口；B要求中等长度流水句、逗号串三到五分句、短句仅在语义最重处落点，条件同为基本句式时方向相反（A短句主导 vs B长流水句主导）"
+        }
+      ],
+      "request_sha256": "f685dfff8446f39d70a52123604505729918d0b03201888a40a253cbf8561745"
+    },
+    {
+      "request": "pair-03-19-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 13,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f07",
+            "right": "f09",
+            "reason": "破折号插入补充/旁注/自贬后回到主线，一节/一段至多一两次，密度限制一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f08",
+            "right": "f10",
+            "reason": "括号夹注用于外部知识/小补充、紧跟说明对象、用完即回主线，机制与条件一致（A强调不写主要判断，B未反对，方向不冲突）"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f24",
+            "reason": "推演逼近荒谬后短句点破/幽默落在意外处立即收住、不解释不点破，条件与机制兼容（B为幽默落差，A为归谬点破，均是“落到意外处收住不解释”）"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 10,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f03",
+            "f03"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f05",
+            "f06"
+          ]
+        ],
+        "language": [
+          [
+            "f12",
+            "f16"
+          ]
+        ],
+        "constraints": [
+          [
+            "f16",
+            "f31"
+          ],
+          [
+            "f17",
+            "f15"
+          ],
+          [
+            "f19",
+            "f19"
+          ],
+          [
+            "f21",
+            "f30"
+          ]
+        ],
+        "narration": [
+          [
+            "f23",
+            "f04"
+          ]
+        ],
+        "ending": [
+          [
+            "f25",
+            "f27"
+          ]
+        ]
+      },
+      "feasible_count": 10,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f02",
+          "right": "f02",
+          "reason": "同为判断后的语气控制：A要求断语后立刻让步再收回、落点仍是判断；B要求判断始终带自知有限语气但不退让，方向有张力（A的让步是修辞步骤，B的自知有限是语气基底），尚非严格反向，倾向uncertain——但按同条件语气收放方向不同，暂记conflicts需复核"
+        }
+      ],
+      "request_sha256": "22c79adf22edfbd072634fd7b4cbee48bc1820605e843f1950c4dc38137be169"
+    },
+    {
+      "request": "pair-05-06-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 12,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f01",
+            "right": "f01",
+            "reason": "两者都是未限定条件下描述说话人姿态：口语但完整严密/熟悉行当边想边说、不训诫不讨好，方向一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f02",
+            "right": "f02",
+            "reason": "A要求强烈情绪用平实短句不用渲染，B要求判断/自嘲/转折处拉近、不用全程贴脸板脸，都是通过克制措辞控制情绪距离的机制。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f05",
+            "right": "f10",
+            "reason": "A要求评点由显性发言标记引入且不在每件事后插嘴，B要求口语插入语只在需要降温处用不能满篇，都是控制评价性插入语位置和密度的机制。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f09",
+            "right": "f12",
+            "reason": "A要求保持第一人称在场不改成旁观第三人称，B要求任务无素材时只用\"我\"做不在场判断不得编造身份，都是维持第一人称声音但不虚构的约束。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f23",
+            "right": "f08",
+            "reason": "A要求跨语域混排用术语落差产生幽默，B要求词域错位用事务性与感受性词落差制造反讽，都是通过语域混搭产生幽默效果的机制。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 7,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f03"
+          ],
+          [
+            "f08",
+            "f11"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f11",
+            "f06"
+          ],
+          [
+            "f13",
+            "f17"
+          ]
+        ],
+        "constraints": [
+          [
+            "f27",
+            "f20"
+          ],
+          [
+            "f29",
+            "f14"
+          ]
+        ],
+        "ending": [
+          [
+            "f30",
+            "f23"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f06",
+          "right": "f18",
+          "reason": "A要求叙述段与评点段在段落尺度上分开不在句内混装，B要求评点不另起评价段而是夹在事件中间用插入成分挂上判断，同为叙述-评点关系但要求相反：分段vs句内混合。"
+        }
+      ],
+      "request_sha256": "e59bb613cebe5921acdc1706d9062dcf6beb2a732da894711ff1dfe9fd675cc6"
+    },
+    {
+      "request": "pair-05-07-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 10,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f03",
+            "right": "f05",
+            "reason": "都规定短句密度低、过密变格言/警句堆砌，条件与机制一致。"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f18",
+            "right": "f08",
+            "reason": "都规定评点/判断以插入方式紧跟叙述、不另起评价段落，机制一致。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 8,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f06",
+            "f05"
+          ]
+        ],
+        "language": [
+          [
+            "f08",
+            "f11"
+          ]
+        ],
+        "constraints": [
+          [
+            "f12",
+            "f03"
+          ],
+          [
+            "f24",
+            "f24"
+          ]
+        ],
+        "information": [
+          [
+            "f16",
+            "f09"
+          ]
+        ],
+        "narration": [
+          [
+            "f21",
+            "f10"
+          ]
+        ],
+        "ending": [
+          [
+            "f23",
+            "f22"
+          ]
+        ]
+      },
+      "feasible_count": 8,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f02",
+          "right": "f02",
+          "reason": "A要求长句推演时拉远、判断自嘲处才拉近且限制频次；B用\"我们\"\"大家\"总体拉近读者并保持饭桌闲聊距离。同为控制读者距离，A强调分层推拉，B强调持续贴近，方向不同。"
+        },
+        {
+          "left": "f10",
+          "right": "f06",
+          "reason": "A的口语插入语是降温、降姿态、限量使用；B的破折号插入语要求密度一两句一处、常态化使用。同为插入语装置，条件同为叙述中间，频次机制相反。"
+        }
+      ],
+      "request_sha256": "c5be614b280e0a4225a36f8ca9b0fdf25881f9ed0ea7beef4d90401865b39391"
+    },
+    {
+      "request": "pair-05-08-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 13,
+      "repeated_left": 0,
+      "repeated_right": 4,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f06",
+            "right": "f22",
+            "reason": "同为排比句式对称、槽位同换关键词，限一组内或至多三个后收束；条件（排比/强调时）与机制方向一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f11",
+            "right": "f19",
+            "reason": "同为转述第三方命题一句带过后立刻给短评价，引述作支点不作结论；条件（引用第三方说法时）一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f14",
+            "right": "f08",
+            "reason": "同为靠字面/语域反差使不合理自曝、不加直接评价词造锋芒；条件（制造锋芒或反讽时）一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 10,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f02",
+            "f11"
+          ]
+        ],
+        "narration": [
+          [
+            "f13",
+            "f21"
+          ]
+        ],
+        "language": [
+          [
+            "f21",
+            "f10"
+          ],
+          [
+            "f22",
+            "f22"
+          ]
+        ],
+        "constraints": [
+          [
+            "f23",
+            "f26"
+          ]
+        ],
+        "ending": [
+          [
+            "f24",
+            "f23"
+          ]
+        ],
+        "information": [
+          [
+            "f26",
+            "f16"
+          ]
+        ]
+      },
+      "feasible_count": 7,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f05",
+          "right": "f06",
+          "reason": "同为短句功能：A要求短句只收束结论、不解释不举例；B要求短句停在问题处、不宣布道理；条件（短句使用时）方向相反"
+        },
+        {
+          "left": "f24",
+          "right": "f23",
+          "reason": "同为结尾：A明确不抛问句给读者；B允许收在未解决的问句上；条件（结尾处理）方向相反"
+        }
+      ],
+      "request_sha256": "b4f1b5bf299be8b489af2def50cc44d16c954b43ffadc3d157958e279ec00df4"
+    },
+    {
+      "request": "pair-05-09-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 7,
+      "repeated_left": 0,
+      "repeated_right": 1,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f13",
+            "right": "f19",
+            "reason": "推想/假想必须带缓冲词或标明是假想、不得冒充史实或证据，机制方向一致"
+          },
+          "reason": "cross_dimension"
+        },
+        {
+          "edge": {
+            "left": "f24",
+            "right": "f06",
+            "reason": "留白不能牺牲必写事实/信息完整性，任务必写项必须交代完毕，方向一致"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 5,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f01",
+            "f01"
+          ],
+          [
+            "f11",
+            "f11"
+          ]
+        ],
+        "constraints": [
+          [
+            "f12",
+            "f03"
+          ],
+          [
+            "f26",
+            "f19"
+          ]
+        ],
+        "ending": [
+          [
+            "f23",
+            "f20"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [],
+      "request_sha256": "5255aaa7a19dd259b12cb68b586655b047b21c30ecf790c414af13b580beb31b"
+    },
+    {
+      "request": "pair-05-10-0",
+      "status": "diagnostic_only",
+      "proposed_matches": 6,
+      "repeated_left": 0,
+      "repeated_right": 0,
+      "rejected": [
+        {
+          "edge": {
+            "left": "f17",
+            "right": "f15",
+            "reason": "A的反问自答/留未决口子，与B的段落落到判断/反问/两难、可插例外放气，均以反问/未决收束段落而非停在展开本身。"
+          },
+          "reason": "cross_dimension"
+        }
+      ],
+      "same_dimension_candidate_edges": 5,
+      "feasible_equivalence_subset": {
+        "voice": [
+          [
+            "f03",
+            "f02"
+          ]
+        ],
+        "rhythm": [
+          [
+            "f06",
+            "f06"
+          ]
+        ],
+        "information": [
+          [
+            "f08",
+            "f16"
+          ],
+          [
+            "f10",
+            "f19"
+          ]
+        ],
+        "ending": [
+          [
+            "f22",
+            "f23"
+          ]
+        ]
+      },
+      "feasible_count": 5,
+      "conflicts_not_adjudicated": [
+        {
+          "left": "f16",
+          "right": "f14",
+          "reason": "素材不足时的取舍：A主张宁可无比方也要用限定句和自我修正顶上，B主张依赖素材的写法无则整段省略、改用语序节奏——A保留占位与修正，B倾向整段略去，方向不同。"
+        }
+      ],
+      "request_sha256": "4bef14a989dad1cd7d63839cfc7d00de8aa19f79900681b7b745fb8c27b2ffeb"
+    }
+  ]
+}

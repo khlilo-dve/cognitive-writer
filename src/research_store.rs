@@ -18,18 +18,19 @@ use tokio::sync::{Mutex, Semaphore};
 pub(crate) enum Role {
     Analysis,
     Structured,
+    FlashAnalysis,
     Writer,
 }
 impl Role {
     pub(crate) fn model(self) -> &'static str {
         match self {
             Self::Analysis | Self::Structured => "mimo-v2.6-pro",
-            Self::Writer => "mimo-v2.6-flash",
+            Self::Writer | Self::FlashAnalysis => "mimo-v2.6-flash",
         }
     }
     fn max_output(self) -> u64 {
         match self {
-            Self::Analysis | Self::Structured => 16384,
+            Self::Analysis | Self::Structured | Self::FlashAnalysis => 16384,
             Self::Writer => 4096,
         }
     }
@@ -249,6 +250,10 @@ impl ResearchStore {
         let b = self.budget.lock().await;
         json!({"occupied_cny":b.occupied(false) as f64/1e6,"run_occupied_cny":b.occupied(true) as f64/1e6,
             "entries":b.ledger.entries,"pricing":"official domestic cache-miss upper estimate"})
+    }
+
+    pub async fn limit_run(&self, micro_cny: u64) -> Result<(), AppError> {
+        self.budget.lock().await.limit_run(micro_cny)
     }
 
     pub async fn import_completed(&self, source_run: &str) -> Result<(), AppError> {

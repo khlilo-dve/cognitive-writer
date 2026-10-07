@@ -1,9 +1,12 @@
 {
-  "status": "running",
-  "stage": "views",
-  "completed": [],
-  "binary_sha256": "b295084d5f20539fb9c2d035713be36607aa8f055f17f2181760d01322429333",
-  "script_sha256": "5f73dcc7421212c8d7578c7283c79b1b35df139a6de69aa69f82f2650abc34e5",
-  "updated_at": "2026-09-28T23:00:12.843708+00:00",
-  "pid": 5808
+  "status": "stopped",
+  "stage": "pairs",
+  "exit_code": 1,
+  "completed": [
+    "views"
+  ],
+  "binary_sha256": "5935edd7d94fcc90c289785cb077f4c74773d9ef95dce838055629a6903d7592",
+  "script_sha256": "fde754756624dab83e1055a0d235321806d2389b058e08ab6492a0a2a0ac4d49",
+  "updated_at": "2026-10-04T07:42:38.896891+00:00",
+  "pid": 3233
 }

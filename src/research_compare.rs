@@ -2,7 +2,7 @@ use crate::{
     error::AppError,
     eval_store::write_json,
     research_dataset::{sha256, valid_id},
-    research_store::{ResearchStore, Role},
+    research_store::ResearchStore,
     style_compare::{self, Comparison, Feature, View},
 };
 use serde::{Deserialize, Serialize};
@@ -151,39 +151,7 @@ fn load_items(run: &str) -> Result<Vec<Item>, AppError> {
     Ok(items)
 }
 
-pub(crate) async fn validated<T, F>(
-    store: &ResearchStore,
-    name: &str,
-    prompt: &str,
-    input: &str,
-    parse: F,
-) -> Result<T, AppError>
-where
-    F: Fn(&str) -> Result<T, AppError>,
-{
-    let mut user = input.to_string();
-    for attempt in 0..2 {
-        let raw = store
-            .call(
-                &format!("{name}-{attempt}"),
-                Role::Structured,
-                prompt,
-                &user,
-                true,
-            )
-            .await?;
-        match parse(&raw) {
-            Ok(v) => return Ok(v),
-            Err(e) if attempt == 0 => {
-                user = format!(
-                    "原始输入：{input}\n上次响应：{raw}\n结构/证据诊断：{e}\n只修复格式或证据定位，返回完整JSON，不改变判定标准。"
-                );
-            }
-            Err(e) => return Err(e),
-        }
-    }
-    Err(AppError::Parse("结构修复耗尽".into()))
-}
+pub(crate) use crate::research_validation::validated;
 
 pub(crate) async fn views(run: &str, base: &str, repeats: &str) -> Result<(), AppError> {
     let mut items = load_items(base)?;

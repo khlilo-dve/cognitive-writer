@@ -1,0 +1,252 @@
+{
+  "comparison": {
+    "conflicts": [
+      {
+        "left": "f10",
+        "reason": "同为让步连接处：A要求平缓让步—收束、语气圆回来；B要求让步后立即反转翻成更糟、不拖延不辩护，同条件下方向相反。",
+        "right": "f13"
+      },
+      {
+        "left": "f29",
+        "reason": "同为结尾收束：A要求一到两个短句冷淡悬停、与长推演形成节拍反差；B要求中等长度断语、可做并列或对照，节拍与长度机制方向相反。",
+        "right": "f30"
+      }
+    ],
+    "matches": [
+      {
+        "left": "f03",
+        "reason": "条件未限定；均要求自信/锋利的判断与自我贬抑（谦抑、自嘲）并存，互为平衡机制，机制方向一致。",
+        "right": "f03"
+      },
+      {
+        "left": "f04",
+        "reason": "条件未限定；均要求保持第一人称在场、不退到旁观第三人称，维持作者自言自语的在场感，机制方向兼容。",
+        "right": "f09"
+      },
+      {
+        "left": "f07",
+        "reason": "条件未限定；均要求用因果/转折/让步等复句搭出中长推理链条，允许结构松散但逻辑清楚，机制方向一致。",
+        "right": "f10"
+      },
+      {
+        "left": "f08",
+        "reason": "条件未限定；均要求长句推进后用极短句停住作判断/转折，一段不超过一到两处，短句功能非煽情，机制方向一致。",
+        "right": "f11"
+      },
+      {
+        "left": "f18",
+        "reason": "条件未限定；均要求以冷静、第三人称式眼光审视自身短处，自嘲干脆不抒情不辩解，机制方向兼容。",
+        "right": "f08"
+      },
+      {
+        "left": "f21",
+        "reason": "无亲历素材时；均要求缺素材不得编造亲见/亲历/对话/他人反应，只能使用任务给定信息，条件与机制一致。",
+        "right": "f27"
+      }
+    ],
+    "notes": [
+      "A unknown: {\"id\":\"f01\",\"reason\":\"A为voice维度整体语态定位，B最接近的f01是language维度语域描述，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f02\",\"reason\":\"A为voice维度锋利源于措辞的机制，B最接近的f02是language维度情绪表达，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f05\",\"reason\":\"A为voice维度克制机制，B的f26为narration维度幽默克制区分，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f06\",\"reason\":\"误用纠正规则涉及两处双向纠正，B无对应条件下的独立规则。\"}",
+      "A unknown: {\"id\":\"f09\",\"reason\":\"判断先行、解释随后的句群次序，B的f07是评点停止机制，条件与次序机制不同。\"}",
+      "A unknown: {\"id\":\"f11\",\"reason\":\"A为language维度插入语分类，B的f05是voice维度发言标记，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f12\",\"reason\":\"A为language维度插入语使用节制，B的f14是rhythm维度节拍配合，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f13\",\"reason\":\"谦抑后仍须给理由的误用提醒，B无对应条件下的独立规则。\"}",
+      "A unknown: {\"id\":\"f14\",\"reason\":\"A为information维度推演操作，B的f24是narration维度假设推演，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f15\",\"reason\":\"推演语气认真、不中途嘲笑的规则，B无对应推演语气条款。\"}",
+      "A unknown: {\"id\":\"f16\",\"reason\":\"A为language维度荒谬措辞处理，B的f16是information维度开篇结构，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f17\",\"reason\":\"推演作为语气机制而非必用路线的条件限定，B无对应定义性说明。\"}",
+      "A unknown: {\"id\":\"f19\",\"reason\":\"自嘲落在可核实自我评价的具体限制，B无对应同类粒度规则。\"}",
+      "A unknown: {\"id\":\"f20\",\"reason\":\"自嘲后转向一般化判断的规则，B无对应要求。\"}",
+      "A unknown: {\"id\":\"f22\",\"reason\":\"用正面/中性词命名不佳行为的反讽机制，B无同机制规则。\"}",
+      "A unknown: {\"id\":\"f23\",\"reason\":\"A为language维度动机—效果对照归因，B的f25是narration维度伪算账，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f24\",\"reason\":\"段落末日常化比喻收束的具体规则，B无对应比喻收束机制。\"}",
+      "A unknown: {\"id\":\"f25\",\"reason\":\"A为constraints维度反讽强度控制，B的f23是narration维度跨语域混排，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f26\",\"reason\":\"A为information维度推演详例证略，B的f18是information维度反事实定性，机制不同。\"}",
+      "A unknown: {\"id\":\"f27\",\"reason\":\"A为constraints维度细节取舍，B的f21是narration维度动作描写，维度不同无法配对。\"}",
+      "A unknown: {\"id\":\"f28\",\"reason\":\"评论与叙述焊接在同段的规则，B无同层级机制。\"}",
+      "A unknown: {\"id\":\"f30\",\"reason\":\"收尾方向由任务决定、不预设落点的条件，B的f30已参与conflicts，不再重复匹配。\"}",
+      "A unknown: {\"id\":\"f31\",\"reason\":\"成稿阶段删无据细节、补必写信息双向核对的规则，B无对应编辑阶段条款。\"}",
+      "B unknown: {\"id\":\"f01\",\"reason\":\"B为language维度语域描述，A最接近的f01是voice维度整体语态，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f02\",\"reason\":\"B为language维度情绪表达，A最接近的f02是voice维度锋利措辞，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f04\",\"reason\":\"强判断前必须有垫底的强制要求，A无对应机制。\"}",
+      "B unknown: {\"id\":\"f05\",\"reason\":\"B为voice维度发言标记，A的f11是language维度插入语分类，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f06\",\"reason\":\"叙述段与评点段在段落尺度分开的规则，A无对应分段机制。\"}",
+      "B unknown: {\"id\":\"f07\",\"reason\":\"评点推远后要停、不逐格论证的规则，A无同条件停止机制。\"}",
+      "B unknown: {\"id\":\"f12\",\"reason\":\"反问打断叙述的规则，与A的f04禁止设问反问方向相反但对象不同（B指叙述打断，A指voice关系），条件不完全对应，列不确定。\"}",
+      "B unknown: {\"id\":\"f14\",\"reason\":\"B为rhythm维度节拍配合，A的f12是language维度插入语节制，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f15\",\"reason\":\"停顿位置在高密度段末留短句喘息，A无对应位置条件规则。\"}",
+      "B unknown: {\"id\":\"f16\",\"reason\":\"B为information维度开篇结构，A的f16是language维度荒谬措辞，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f17\",\"reason\":\"按连接关系推进、交代缺失后果的规则，A无对应描写结构规则。\"}",
+      "B unknown: {\"id\":\"f18\",\"reason\":\"B为information维度反事实定性，A的f26是information维度详略安排，机制不同。\"}",
+      "B unknown: {\"id\":\"f19\",\"reason\":\"并置对比、中间不下断语的规则，A无对应对比机制。\"}",
+      "B unknown: {\"id\":\"f20\",\"reason\":\"场景只留功能性定场的规则，A无对应场景功能限定。\"}",
+      "B unknown: {\"id\":\"f21\",\"reason\":\"B为narration维度动作描写，A的f27是constraints维度细节取舍，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f22\",\"reason\":\"段落间跳接、不用小标题的规则，A无对应段落衔接规则。\"}",
+      "B unknown: {\"id\":\"f23\",\"reason\":\"B为narration维度跨语域混排，A的f23是language维度归因对照，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f24\",\"reason\":\"B为narration维度假设性推演，A的f14是information维度前提推演，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f25\",\"reason\":\"B为narration维度伪算账，A的f25是constraints维度反讽强度控制，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f26\",\"reason\":\"B为narration维度幽默与克制区分，A的f05是voice维度克制机制，维度不同无法配对。\"}",
+      "B unknown: {\"id\":\"f28\",\"reason\":\"资历陈述有依据的规则，A无对应资历陈述条件。\"}",
+      "B unknown: {\"id\":\"f29\",\"reason\":\"比喻、假设、推论不作证据的规则，A无对应证据属性条款。\"}"
+    ],
+    "uncertain_left": [
+      "f01",
+      "f02",
+      "f05",
+      "f06",
+      "f09",
+      "f11",
+      "f12",
+      "f13",
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f19",
+      "f20",
+      "f22",
+      "f23",
+      "f24",
+      "f25",
+      "f26",
+      "f27",
+      "f28",
+      "f30",
+      "f31"
+    ],
+    "uncertain_right": [
+      "f01",
+      "f02",
+      "f04",
+      "f05",
+      "f06",
+      "f07",
+      "f12",
+      "f14",
+      "f15",
+      "f16",
+      "f17",
+      "f18",
+      "f19",
+      "f20",
+      "f21",
+      "f22",
+      "f23",
+      "f24",
+      "f25",
+      "f26",
+      "f28",
+      "f29"
+    ]
+  },
+  "id": "pair-00-06",
+  "kind": "main",
+  "left": "wxb-01",
+  "left_author": "wang_xiaobo",
+  "metrics": [
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "language",
+      "left_count": 8,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 2,
+      "uncertain_left": 8,
+      "uncertain_right": 2
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "voice",
+      "left_count": 9,
+      "matched": 3,
+      "overlap": 0.23076923076923078,
+      "right_count": 7,
+      "uncertain_left": 6,
+      "uncertain_right": 4
+    },
+    {
+      "conflicts": 1,
+      "coverage": "both",
+      "dimension": "rhythm",
+      "left_count": 4,
+      "matched": 2,
+      "overlap": 0.25,
+      "right_count": 6,
+      "uncertain_left": 1,
+      "uncertain_right": 3
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "information",
+      "left_count": 2,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 4,
+      "uncertain_left": 2,
+      "uncertain_right": 4
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "narration",
+      "left_count": 1,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 7,
+      "uncertain_left": 1,
+      "uncertain_right": 7
+    },
+    {
+      "conflicts": 0,
+      "coverage": "both",
+      "dimension": "constraints",
+      "left_count": 5,
+      "matched": 1,
+      "overlap": 0.14285714285714285,
+      "right_count": 3,
+      "uncertain_left": 4,
+      "uncertain_right": 2
+    },
+    {
+      "conflicts": 0,
+      "coverage": "neither",
+      "dimension": "title",
+      "left_count": 0,
+      "matched": 0,
+      "overlap": null,
+      "right_count": 0,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 0,
+      "coverage": "neither",
+      "dimension": "opening",
+      "left_count": 0,
+      "matched": 0,
+      "overlap": null,
+      "right_count": 0,
+      "uncertain_left": 0,
+      "uncertain_right": 0
+    },
+    {
+      "conflicts": 1,
+      "coverage": "both",
+      "dimension": "ending",
+      "left_count": 2,
+      "matched": 0,
+      "overlap": 0.0,
+      "right_count": 1,
+      "uncertain_left": 1,
+      "uncertain_right": 0
+    }
+  ],
+  "right": "wxb-07",
+  "right_author": "wang_xiaobo",
+  "within_author": true
+}
