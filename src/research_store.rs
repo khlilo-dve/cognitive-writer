@@ -19,12 +19,13 @@ pub(crate) enum Role {
     Analysis,
     Structured,
     FlashAnalysis,
+    CandidateAnalysis,
     Writer,
 }
 impl Role {
     pub(crate) fn model(self) -> &'static str {
         match self {
-            Self::Analysis | Self::Structured => "mimo-v2.6-pro",
+            Self::Analysis | Self::Structured | Self::CandidateAnalysis => "mimo-v2.6-pro",
             Self::Writer | Self::FlashAnalysis => "mimo-v2.6-flash",
         }
     }
@@ -32,6 +33,7 @@ impl Role {
         match self {
             Self::Analysis | Self::Structured | Self::FlashAnalysis => 16384,
             Self::Writer => 4096,
+            Self::CandidateAnalysis => 32768,
         }
     }
     fn request(self, system: &str, user: &str, json_mode: bool) -> Result<Value, AppError> {
@@ -39,7 +41,7 @@ impl Role {
         let mut body = request_body(self.model(), system, user, format.as_ref())?;
         body["max_completion_tokens"] = json!(self.max_output());
         body["thinking"] =
-            json!({"type":if matches!(self,Self::Analysis){"enabled"}else{"disabled"}});
+            json!({"type":if matches!(self,Self::Analysis|Self::CandidateAnalysis){"enabled"}else{"disabled"}});
         Ok(body)
     }
 }

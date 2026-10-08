@@ -12,6 +12,11 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["candidate-pilot-v4",run,views]=>crate::research_candidates::run(run,views,4).await,
+        ["candidate-cases",run,file]=>crate::research_candidate_cases::run(run,file).await,
+        ["candidate-matrix",run,views,pilot]=>crate::research_candidate_matrix::run(run,views,pilot).await,
+        ["candidate-pilot",run,views]=>crate::research_candidates::run(run,views,2).await,
+        ["candidate-pilot-v3",run,views]=>crate::research_candidates::run(run,views,3).await,
         ["route-pilot",run,views]=>crate::research_route_pilot::run(run,views).await,
         ["view-coverage",run]=>{println!("{}",crate::research_compare::view_coverage(run)?);Ok(())},
         ["profiles",run,views,pairs]=>crate::research_profile::run(run,views,pairs).await,

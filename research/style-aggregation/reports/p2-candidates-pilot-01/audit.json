@@ -1,0 +1,88 @@
+{
+  "run": "p2-candidates-pilot-01",
+  "receipts": [
+    {
+      "name": "control-generic-batch-00-0",
+      "usage": {
+        "completion_tokens": 162,
+        "completion_tokens_details": {
+          "reasoning_tokens": 80
+        },
+        "prompt_tokens": 444,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 606
+      },
+      "finish_reason": "stop",
+      "sha256": "c34b2abcdd3f710214d74fbfe8d5b24fc5ea6ffb20791cfcb5fb390742636c84"
+    },
+    {
+      "name": "control-mixed-batch-00-0",
+      "usage": {
+        "completion_tokens": 5191,
+        "completion_tokens_details": {
+          "reasoning_tokens": 4239
+        },
+        "prompt_tokens": 2350,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7541
+      },
+      "finish_reason": "stop",
+      "sha256": "ef55915289acc9cea997cd20a9c50bb11344f7874a681a17fb69f6d5b6a50d98"
+    },
+    {
+      "name": "control-opposite-batch-00-0",
+      "usage": {
+        "completion_tokens": 105,
+        "completion_tokens_details": {
+          "reasoning_tokens": 42
+        },
+        "prompt_tokens": 456,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 561
+      },
+      "finish_reason": "stop",
+      "sha256": "f68e51e29007a101cb92f7ff2c5ee025a993884cc2b56053dca5a85da76ff809"
+    },
+    {
+      "name": "control-self-batch-00-0",
+      "usage": {
+        "completion_tokens": 75,
+        "completion_tokens_details": {
+          "reasoning_tokens": 15
+        },
+        "prompt_tokens": 456,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 531
+      },
+      "finish_reason": "stop",
+      "sha256": "f55b493ad59527d6c882a14072bb501a4b896ac505511aaa5f1a120c4859cb30"
+    },
+    {
+      "name": "control-synonym-batch-00-0",
+      "usage": {
+        "completion_tokens": 107,
+        "completion_tokens_details": {
+          "reasoning_tokens": 25
+        },
+        "prompt_tokens": 456,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 563
+      },
+      "finish_reason": "stop",
+      "sha256": "d6f59795c2fa3cd0ad15c986394018848830692965fb36aae3fd947e41023b0c"
+    }
+  ],
+  "pairs": [],
+  "review": [],
+  "limitation": "开发数据的实现者复核，不是人工盲测或独立确认；结构有效不等于语义正确"
+}

@@ -1,0 +1,772 @@
+{
+  "run": "p2-candidates-pilot-02",
+  "receipts": [
+    {
+      "name": "control-compatible-batch-00-0",
+      "usage": {
+        "completion_tokens": 76,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 508,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 584
+      },
+      "finish_reason": "stop",
+      "sha256": "898da40cfc92b534586896d2b3010003a37e39ad26925a8521bab20aa92e95a3"
+    },
+    {
+      "name": "control-different-condition-batch-00-0",
+      "usage": {
+        "completion_tokens": 63,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 498,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 561
+      },
+      "finish_reason": "stop",
+      "sha256": "1c1747dd1668ebc1f9dd824074d1faddad20db5e3fd2eb819fd5d9b0b5262346"
+    },
+    {
+      "name": "control-generic-batch-00-0",
+      "usage": {
+        "completion_tokens": 81,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 514,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 595
+      },
+      "finish_reason": "stop",
+      "sha256": "7d9c025987d6981c5da96f2933be324eb02b2d5396e18124ffc7ca7f6f14d286"
+    },
+    {
+      "name": "control-mixed-batch-00-0",
+      "usage": {
+        "completion_tokens": 867,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 2420,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3287
+      },
+      "finish_reason": "stop",
+      "sha256": "23f28bdf98702cb4e2d88850174f39c460059d957e1907162554344090f39c25"
+    },
+    {
+      "name": "control-opposite-batch-00-0",
+      "usage": {
+        "completion_tokens": 54,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 526,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 580
+      },
+      "finish_reason": "stop",
+      "sha256": "b35df2d90c6bd8d4799e5acf8fa7f21d5511de213a0c1c04d4d35761d1b154b1"
+    },
+    {
+      "name": "control-opposite-ending-batch-00-0",
+      "usage": {
+        "completion_tokens": 59,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 504,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 563
+      },
+      "finish_reason": "stop",
+      "sha256": "03ed3b3bd3c63e96a1d2761685f289402d8e18c935fccfb5821e2ddea7639c77"
+    },
+    {
+      "name": "control-partial-batch-00-0",
+      "usage": {
+        "completion_tokens": 67,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 508,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 575
+      },
+      "finish_reason": "stop",
+      "sha256": "6b2bc364c79896a2f2a037ae5bfc9b9bb0144bc280144dbab25f8aaca310b61e"
+    },
+    {
+      "name": "control-self-batch-00-0",
+      "usage": {
+        "completion_tokens": 46,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 526,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 572
+      },
+      "finish_reason": "stop",
+      "sha256": "8ace8abb0864b2daa1455a86f8b2cd3a6c581fa0a28d64ac89a89f06cd051c0e"
+    },
+    {
+      "name": "control-synonym-batch-00-0",
+      "usage": {
+        "completion_tokens": 55,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 526,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 581
+      },
+      "finish_reason": "stop",
+      "sha256": "f0e9879a07b3c455f9a12741824977a564c885007a947d53c02ef424af64d672"
+    },
+    {
+      "name": "control-synonym-batch-00-1",
+      "usage": {
+        "completion_tokens": 54,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 631,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 685
+      },
+      "finish_reason": "stop",
+      "sha256": "05f802fc9b6df3728ff54146c08e2939333ed48e60d0d17ba0fa8ecc3342fbdb"
+    },
+    {
+      "name": "control-synonym-facts-batch-00-0",
+      "usage": {
+        "completion_tokens": 60,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 516,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 576
+      },
+      "finish_reason": "stop",
+      "sha256": "d36f00b89b97486a75fd4b70354d25bede2b216f2e992a32607bc56a88e2bed4"
+    },
+    {
+      "name": "pilot-00-batch-00-0",
+      "usage": {
+        "completion_tokens": 1750,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6587,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 8337
+      },
+      "finish_reason": "stop",
+      "sha256": "ea8202245d13f49f00b5086638716c71e294b8e03354c072ea0f4fc0633b67b1"
+    },
+    {
+      "name": "pilot-00-batch-01-0",
+      "usage": {
+        "completion_tokens": 1486,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6221,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7707
+      },
+      "finish_reason": "stop",
+      "sha256": "1acf36a15f0a2549c16a1bd1e5c08d68cc1b5454a79180a85d756366d1db6abd"
+    },
+    {
+      "name": "pilot-00-batch-02-0",
+      "usage": {
+        "completion_tokens": 2004,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6014,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 8018
+      },
+      "finish_reason": "stop",
+      "sha256": "00399a927e95eaa300bfda6cf2042de4411e56177b73cd916c2ea4b89bdb7030"
+    },
+    {
+      "name": "pilot-00-batch-03-0",
+      "usage": {
+        "completion_tokens": 1667,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 5838,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7505
+      },
+      "finish_reason": "stop",
+      "sha256": "0ad136c60dfeebb25ad88c265e143128c1735f8c5add055e3ac59016909202f5"
+    },
+    {
+      "name": "pilot-00-batch-04-0",
+      "usage": {
+        "completion_tokens": 1269,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6029,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7298
+      },
+      "finish_reason": "stop",
+      "sha256": "a5b891e4f3222d9c10d56388f3ae3379ebb9834fcd45908bb84cbd21d8455bbe"
+    },
+    {
+      "name": "pilot-00-batch-05-0",
+      "usage": {
+        "completion_tokens": 1367,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6092,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7459
+      },
+      "finish_reason": "stop",
+      "sha256": "cf80217facfa49819ac5ee732e6706e737a08b41c00f1fecd26569b14566b678"
+    },
+    {
+      "name": "pilot-00-batch-06-0",
+      "usage": {
+        "completion_tokens": 1292,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 5170,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 6462
+      },
+      "finish_reason": "stop",
+      "sha256": "de025d1dd742100a603d70e9c539b4957df76378f423c1fcf1fd885578b027d9"
+    },
+    {
+      "name": "pilot-01-batch-00-0",
+      "usage": {
+        "completion_tokens": 138,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 7706,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7844
+      },
+      "finish_reason": "stop",
+      "sha256": "5be15cd950853e1c786bf33bd3df291790ef5b6532e1581aa7a36395fc14bf3e"
+    },
+    {
+      "name": "pilot-01-batch-00-1",
+      "usage": {
+        "completion_tokens": 1210,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 8036,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 9246
+      },
+      "finish_reason": "stop",
+      "sha256": "4974f2e2314f2112416903bccd9a3a7a326d403f2e0b63e52bd7f6b0c41a3655"
+    },
+    {
+      "name": "pilot-01-batch-01-0",
+      "usage": {
+        "completion_tokens": 552,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 8033,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 8585
+      },
+      "finish_reason": "stop",
+      "sha256": "b71d4cc5d4648ad45badb1fa38d141ec228b4bc1ee9a3e83705a9dea9d380a15"
+    },
+    {
+      "name": "pilot-01-batch-01-1",
+      "usage": {
+        "completion_tokens": 1316,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 8729,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 10045
+      },
+      "finish_reason": "stop",
+      "sha256": "2cc033a1390f62ee67d047147706d002ec850ab75971898667d8ac29eb22ffe8"
+    },
+    {
+      "name": "pilot-01-batch-02-0",
+      "usage": {
+        "completion_tokens": 1519,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 7210,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 8729
+      },
+      "finish_reason": "stop",
+      "sha256": "a924453c3b3ae15c258ba19c0e377f13e85cd4fa1aff150e22d5deedd590d0b4"
+    },
+    {
+      "name": "pilot-01-batch-03-0",
+      "usage": {
+        "completion_tokens": 1824,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 7775,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 9599
+      },
+      "finish_reason": "stop",
+      "sha256": "43ac75f8762e888d0058467f671501eaeecae2bf028f1f4efb99dc4a504750fa"
+    },
+    {
+      "name": "pilot-02-batch-00-0",
+      "usage": {
+        "completion_tokens": 1395,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6183,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7578
+      },
+      "finish_reason": "stop",
+      "sha256": "ce09e049337e3a2d8611e4a7e77a0eca70e6143fe80c139c5decd5dbe2e57366"
+    },
+    {
+      "name": "pilot-02-batch-01-0",
+      "usage": {
+        "completion_tokens": 802,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6088,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 6890
+      },
+      "finish_reason": "stop",
+      "sha256": "039503c7d4b02bd6ad66e475f8f52e44f3ce53477f7f7ff307f81b92f475bd8f"
+    },
+    {
+      "name": "pilot-02-batch-01-1",
+      "usage": {
+        "completion_tokens": 796,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens": 6941,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7737
+      },
+      "finish_reason": "stop",
+      "sha256": "e6770497176686c9f37d786f74e4c1af6eb1609513fd808c4a922db667ed7f01"
+    }
+  ],
+  "pairs": [
+    {
+      "id": "pilot-00",
+      "left": "wxb-01",
+      "right": "wxb-02",
+      "candidates": 161,
+      "labels": {
+        "distinct": 159,
+        "opposite": 2
+      },
+      "selected": 0
+    },
+    {
+      "id": "pilot-01",
+      "left": "wxb-03",
+      "right": "wxb-04",
+      "candidates": 96,
+      "labels": {
+        "distinct": 92,
+        "equivalent": 4
+      },
+      "selected": 3
+    }
+  ],
+  "review": [
+    {
+      "pair": "pilot-00",
+      "candidate": "c0000",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "严肃判断用闲谈口气说出，作者站在读者旁边，不宣言、不煽动、不摆教导姿态，但句句带明确判断",
+      "left_condition": "未限定",
+      "right": "以第一人称\"我\"作为叙述与判断主体，是冷静的在场者与评语者，不是抒情者",
+      "right_condition": "未限定",
+      "reason": "f01规定整体姿态：闲谈口气说严肃判断、不摆教导姿态；f01(右)规定以第一人称“我”为判断主体及署名判断的出现条件。对象和机制不同：谈论人称立场，右谈声音语气，仅部分重叠于“作者位置”。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0010",
+      "label": "opposite",
+      "dimension": "voice",
+      "left": "允许第一人称判断随时出场，判断可以锋利，但锋利只来自措辞，语气平淡；不靠感叹号、程度副词或排比",
+      "left_condition": "未限定",
+      "right": "允许\"我觉得\"\"说句实在话\"\"我怀疑\"这类署名判断，但只在判断确需立此存照时出现，不必每段挂名",
+      "right_condition": "署名判断仅在确需立此存照时",
+      "reason": "左侧f02允许第一人称判断“随时出场”；右侧f02限定署名判断“只在确需立此存照时出现，不必每段挂名”。相同场景下，前者允许任意频率，后者限制出现频率，方向相反且互相排斥。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0012",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "允许第一人称判断随时出场，判断可以锋利，但锋利只来自措辞，语气平淡；不靠感叹号、程度副词或排比",
+      "left_condition": "未限定",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "左侧f02是判断出场与锋利来源（措辞、不靠程度副词）；右侧f04是与读者交流时的称呼与语气（不煽情、不求共鸣）。机制不同：左侧管锋利生成，右侧管交互姿态，条件也不同。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0024",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "谦抑词（自认所知有限、自认无能为力）与自信判断可并存且常相邻出现：先自我削一刀，再照样把话说完",
+      "left_condition": "未限定",
+      "right": "不直接开骂，不用感叹号加力，不用反问连环轰炸",
+      "right_condition": "讥刺时",
+      "reason": "f03讲谦抑词与自信判断可并存的语气结构，f14讲讥刺时不直接开骂、不用感叹号反问的禁用手段；机制与适用条件均不同，仅同属冷调风格。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0030",
+      "label": "opposite",
+      "dimension": "voice",
+      "left": "与读者并排而非对面：不追问读者、不设问自答、不用呼吁收尾；作者自言自语，读者旁听",
+      "left_condition": "未限定",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "同为与读者交流姿态：f04明确'不追问读者、不设问自答'、作者自言自语读者旁听；f04右侧明确'可以直接用你称呼、可以直接发问、可以请读者猜'。两者对是否直接向读者发问给出相反要求，且相互排斥，虽都要求不煽情，但互动方式直接冲突。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0036",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "克制是把态度放进陈述句；每段可以有判断，但不必每句都表态",
+      "left_condition": "未限定",
+      "right": "以第一人称\"我\"作为叙述与判断主体，是冷静的在场者与评语者，不是抒情者",
+      "right_condition": "未限定",
+      "reason": "f05是克制＝把态度放进陈述句、每段可有判断不必句句表态的表达密度规则，f01是第一人称主体身份与评语者定位；机制不同，仅部分相容（都涉及判断表达）。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0048",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "误用提醒：写成口号、宣言、连续反问属距离太近、情绪太外露，需收回修辞；通篇无判断、只有事实罗列属把克制误当信息贫乏，需补回判断",
+      "left_condition": "出现口号式/无判断写法时纠正",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "f06是误用纠正：写成口号/连续反问时收回修辞，通篇无判断时补回判断；f04是常态设定：对熟人读者可直接发问、请读者猜，但不煽情。f06否定的是口号式写法和连续反问轰炸，f04允许的是与读者对话发问、请读者猜，二者机制和适用条件不同，只是不绝对排斥共存。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0060",
+      "label": "distinct",
+      "dimension": "rhythm",
+      "left": "长句推进后用极短句猛然停下作判断或转向，短句是刹车和换挡不是煽情；一段至多停一两次，过多变断句腔",
+      "left_condition": "未限定",
+      "right": "一段内铺陈若干长句后至少一处短落点；短句密集处要有稍长的句子重新铺开，避免整段像电报",
+      "right_condition": "段落内部节奏安排",
+      "reason": "f08（左）规定长句后极短句刹车、一段至多停一两次，f08（右）规定段内长句后至少一处短落点、短句密集处补长句。后者含双向节奏要求且无次数上限，前者限定停顿次数与功能，机制和约束条件不完全一致，不等价但可兼容。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0072",
+      "label": "distinct",
+      "dimension": "language",
+      "left": "论述中间随时插入第一人称短语，分判断类（表明看法归属个人、带保留意味）与谦抑类（自认无知无能、降姿态但不撤回结论）",
+      "left_condition": "未限定",
+      "right": "插入不宜连续超过两处，否则主干被打散；需要多次补充时改为先列完再统一补充",
+      "right_condition": "句中插入时",
+      "reason": "左规则规定第一人称插入的两种功能（判断归属、谦抑降姿态）与可用方式；右规则规定插入的数量上限与连续插入的替代方案。两者机制不同，一个管插入的内容类型，一个管插入的频率与位置，可共存但不可互换。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0084",
+      "label": "distinct",
+      "dimension": "information",
+      "left": "先认可某前提或流行说法，顺其逻辑一路推到结果滑稽、过分或无法收拾之处，再用一句短判断指出荒谬",
+      "left_condition": "未限定",
+      "right": "动作和荒诞过程铺开写，感受和后果一笔带过；比喻取自日常低微场景，一句即过、不再引申、不承担论证；无合适素材就不比喻，宁可平叙",
+      "right_condition": "未限定",
+      "reason": "左规则是归谬推演机制；右规则是详略原则（动作铺开、感受一笔带过、比喻克制）。虽然归谬过程中可能运用详略处理，但两者是不同层面的规则，一个管论证路径，一个管篇幅分配。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0096",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "可把作者自己当论述对象，用第三人称式冷静眼光审视过去的自己，说自己的短处同样不带情绪",
+      "left_condition": "未限定",
+      "right": "以第一人称\"我\"作为叙述与判断主体，是冷静的在场者与评语者，不是抒情者",
+      "right_condition": "未限定",
+      "reason": "f18允许作者自作论述对象、以第三人称式眼光审视过去的自己；f01规定以第一人称'我'为叙述与判断主体。两者视角机制不同（第三人称式审视 vs 第一人称叙述），虽都要求冷静不抒情，但不等价。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0108",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "自嘲落在可核实的自我评价（资历、能力、处境一类），用具体而短的措辞点破，不用抒情",
+      "left_condition": "未限定",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "f19关于自嘲内容与措辞，f04关于与读者交流的称呼与语气，机制与条件不同。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0120",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "自嘲之后立即转向一般化判断：把个人经历抽成可迁移的观察，避免沉溺自怜",
+      "left_condition": "自嘲之后",
+      "right": "不直接开骂，不用感叹号加力，不用反问连环轰炸",
+      "right_condition": "讥刺时",
+      "reason": "左侧规定自嘲之后要转向一般化判断，右侧规定讥刺的表达方式（不直接开骂等），两者机制和适用条件不同，无明确冲突。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0132",
+      "label": "distinct",
+      "dimension": "language",
+      "left": "把行为归因于“好的动机”再陈述后果，让动机与效果形成对照；归因句要写得像客观陈述",
+      "left_condition": "未限定",
+      "right": "插入不宜连续超过两处，否则主干被打散；需要多次补充时改为先列完再统一补充",
+      "right_condition": "句中插入时",
+      "reason": "左侧是动机与后果对照，右侧是插入数量控制，机制不同，无冲突。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0144",
+      "label": "distinct",
+      "dimension": "constraints",
+      "left": "具体细节（数字、物件、感官、动作）有则用一两处压实抽象判断，无则省略，靠语序、停顿、照应维持质感；绝不可为“生动”扩编工具、场景或他人反应",
+      "left_condition": "未限定",
+      "right": "任务给定的事实、必写数量、身份、地点、状态与结果优先于任何风格偏好，必须写全写准",
+      "right_condition": "任务给出必写事实时",
+      "reason": "f27约束具体细节的使用与禁止扩编，f29规定任务必写事实优先并须写全写准；机制不同（细节节制vs事实完整性），虽兼容但非同一机制，且f29条件为任务给定必写事实时。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0156",
+      "label": "distinct",
+      "dimension": "ending",
+      "left": "收尾方向由本篇任务决定，不预设怀念、批评或讽刺的固定落点",
+      "left_condition": "未限定",
+      "right": "也可以在推论将要展开时主动收住，把话说一半就停",
+      "right_condition": "推论将要展开时",
+      "reason": "f30规定收尾方向由任务决定不预设固定落点，f27允许推论将展开时主动收住话说一半；机制不同（方向来源vs收束时机），条件不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0000",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "说话人自置于业余位置，先承认不够格甚至预告冒犯内行，然后照样把话说完且说得不软；自嘲只用于降姿态、管理情绪，不用于收回判断，判断保持清晰带锋芒。",
+      "left_condition": "未限定",
+      "right": "第一人称判断驱动全文，好恶轻重取舍直接说出，判断词常用“我认为”“必须承认”“我相信”等显眼表态标记，读者与作者如当面交谈，不刻意讨好",
+      "right_condition": "未限定",
+      "reason": "左规则是业余姿态+自嘲限用+判断锋芒的完整人格设定；右规则是第一人称判断驱动+显眼表态标记的写作机制。两者都涉及不讨好与判断清晰，但机制不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0012",
+      "label": "distinct",
+      "dimension": "constraints",
+      "left": "第一人称的判断、反感、自嘲、事后评点可自由使用不需亲历许可；但具体回忆、亲见、亲手操作、现场对白、确切数字仅在任务给出依据时写，无依据时靠语序停顿照应措辞维持声音，不扩编人物动作感官细节。",
+      "left_condition": "无任务依据时",
+      "right": "句子短不等于段落短；段落是论点单元，一个段落里通常只推进一件事",
+      "right_condition": "未限定",
+      "reason": "左规则是无依据时禁止扩编具体经验的内容约束；右规则是段落与句子节奏的结构要求，机制不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0015",
+      "label": "equivalent",
+      "dimension": "constraints",
+      "left": "第一人称的判断、反感、自嘲、事后评点可自由使用不需亲历许可；但具体回忆、亲见、亲手操作、现场对白、确切数字仅在任务给出依据时写，无依据时靠语序停顿照应措辞维持声音，不扩编人物动作感官细节。",
+      "left_condition": "无任务依据时",
+      "right": "“我”的判断、好恶、评点不需要亲历许可，缺素材也可照写；但具体回忆、亲见场景、亲手动作、现场对白必须有任务依据或明确允许虚构，缺则整段省略，不得编造细节填充",
+      "right_condition": "涉及判断/评点与具体经验时分别适用",
+      "reason": "双方都区分自由写的判断/评点与需依据的具体回忆/亲见/动作/对白，缺依据时不扩编、靠语序停顿措辞维持声音，机制与条件实质相同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0024",
+      "label": "distinct",
+      "dimension": "rhythm",
+      "left": "第一拍用中性略带敬意的短篇幅复述通行说法或权威判断，不替对方长篇辩护。",
+      "left_condition": "三拍中的第一拍",
+      "right": "括号夹注用于交代词语来历或外部知识，紧跟被说明的名词，读完回到主线；括号不写主要判断，判断必须在正文句子里完成",
+      "right_condition": "使用括号夹注时",
+      "reason": "左规则规定三拍第一拍复述通行说法的语调与篇幅（中性略带敬意、短篇幅），右规则规定括号夹注的用途、位置与限制（交代词语来历、紧跟名词、不写主要判断），机制与条件均不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0036",
+      "label": "distinct",
+      "dimension": "information",
+      "left": "伪量化全篇一到两次即可；任务无数字素材时保留权衡折算比较取舍等动词与相对量说法，不编造具体比值或统计；拆台句要紧跟精确化之后。",
+      "left_condition": "任务没有数字与量的素材时",
+      "right": "把审美、伦理等抽象判断落到一个门槛很低、略带尴尬的身体经验或日常遭遇上，用“类似”“可以相比”“与此相当”等并置关系连接两件事，分寸留给读者体会；并置后可加一句坦白（承认说法古怪或因此做错），语气随之压低",
+      "right_condition": "抽象判断需要具体支撑时",
+      "reason": "左规则规定伪量化的强度控制与无数字素材时的替代说法，右规则规定抽象判断落到身体经验并置，机制不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0048",
+      "label": "distinct",
+      "dimension": "language",
+      "left": "同段并置文雅/学术语域（引述、术语、分项）、口语粗直语域（俚语、粗率形容、市井动词）、技术行话语域，用落差产生幽默和锋芒。",
+      "left_condition": "未限定",
+      "right": "遇可归类的现象，先起一个口语化、略带滑稽的戏称，再用一两句界定清楚；戏称负责态度，界定负责准确，两者紧贴出现；命名后立刻说明边界或例外",
+      "right_condition": "遇可归类的现象时",
+      "reason": "f14要求同段并置三种语域（含技术行话）以落差生幽默；f18要求遇可归类现象起口语戏称并紧接界定，是命名—界定机制，条件和操作对象不同，仅部分重叠于口语元素。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0060",
+      "label": "distinct",
+      "dimension": "constraints",
+      "left": "比喻、假设和推论基于已有信息，不得当作发生过的事。",
+      "left_condition": "未限定",
+      "right": "链条每一步必须字面上顺理成章，滑坡感由接续词连续推进制造；某一步跳得太远会显得硬扣帽子",
+      "right_condition": "构造归谬论证时",
+      "reason": "左规则是信息来源的真实性约束（推论不得当作发生过的事）；右规则是归谬链条的接续连贯性约束，条件为构造归谬时，机制不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0062",
+      "label": "equivalent",
+      "dimension": "constraints",
+      "left": "比喻、假设和推论基于已有信息，不得当作发生过的事。",
+      "left_condition": "未限定",
+      "right": "“我”的判断、好恶、评点不需要亲历许可，缺素材也可照写；但具体回忆、亲见场景、亲手动作、现场对白必须有任务依据或明确允许虚构，缺则整段省略，不得编造细节填充",
+      "right_condition": "涉及判断/评点与具体经验时分别适用",
+      "reason": "两条规则实质相同：具体回忆/亲见/动作/对白必须有依据或明确允许虚构，缺则省略、不得编造细节填充；左规则的‘比喻、假设和推论基于已有信息，不得当作发生过的事’是同一禁止虚构机制的另一表述，替换不丢失主要约束。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0065",
+      "label": "equivalent",
+      "dimension": "constraints",
+      "left": "比喻、假设和推论基于已有信息，不得当作发生过的事。",
+      "left_condition": "未限定",
+      "right": "这类经验须有素材依据，无则改写为一般性陈述，不用空洞比喻填位；比喻只说明感受不充当证据，判断依据仍须在正文另有落点；凡依赖数字、物件、感官、动作的写法，有素材则用、无则省，不为维持风格扩编人物反应或场景",
+      "right_condition": "使用具体经验/比喻/数字等写法时",
+      "reason": "两条规则同机制：经验/比喻/数字/感官/动作类写法须有素材依据，缺则省略或改写，不得编造、扩编细节，比喻不充当证据；替换不丢失主要约束。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0072",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "讽刺操作二：平铺直叙地描述过度合规、过度精确、过度讲究的姿态，越冷静越有效；形容词少用，贬抑词体积小、位置靠句尾，语气是调侃不是控诉。",
+      "left_condition": "未限定",
+      "right": "第一人称判断驱动全文，好恶轻重取舍直接说出，判断词常用“我认为”“必须承认”“我相信”等显眼表态标记，读者与作者如当面交谈，不刻意讨好",
+      "right_condition": "未限定",
+      "reason": "f19是讽刺操作：冷静描述过度姿态、贬抑词小且靠句尾、调侃语气；f01是第一人称判断驱动全文、显眼表态标记、当面交谈姿态。机制不同（讽刺手法 vs 人称表态模式），无明确排斥，仅方向不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0084",
+      "label": "distinct",
+      "dimension": "information",
+      "left": "详略安排：推演、假设延展、针对漏洞的挑剔三处展开写足；背景交代、引述来源来历、场景环境压缩到一句带过，不为营造氛围编场景。",
+      "left_condition": "未限定",
+      "right": "铺陈同类对象时先并列给出，再逐个一两句点断式简评，简评节奏快、长短不一，不必每项等量展开；详略由判断轻重决定，说得最狠的一项可多留一两句，其余一带而过；列举只是铺垫，重心落在其后的总评或推演上",
+      "right_condition": "需要铺陈同类对象时",
+      "reason": "f22详略安排（哪些内容展开/压缩），f24铺陈同类对象时的列举与简评结构、详略由判断轻重决定，两者都涉及详略但对象和机制不同（全局详略 vs 列举内部分配），不等价。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0088",
+      "label": "equivalent",
+      "dimension": "ending",
+      "left": "结尾落在短句上，语气平，不解释、不升华、不总结全文、不号召行动；可为立场坦白、自我定位或带钝感的冷评，说完就停留白，不要求固定情绪方向。",
+      "left_condition": "未限定",
+      "right": "结尾通常是句长递减的一句短判断，或一次压低语气的极端化感叹，说完即止：不总结全文、不劝告、不升华、不补充说明；解释性内容在前文完成，结尾只留语气与停顿；结尾具体倾向（感慨、反讽、留白）随题材而定，不预设固定方向",
+      "right_condition": "写作结尾时",
+      "reason": "f24与f25都要求结尾落在短句、语气平，不解释、不升华、不总结、不号召、不补充说明，说完即止留白，且都明确不要求固定情绪/倾向方向（随题材而定）。表述略有差异（f25强调句长递减）但主要约束相同，可互相替换。"
+    }
+  ],
+  "limitation": "开发数据的实现者复核，不是人工盲测或独立确认；结构有效不等于语义正确"
+}

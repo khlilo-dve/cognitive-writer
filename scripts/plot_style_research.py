@@ -46,6 +46,12 @@ def main():
         pairs = []
         for p in sorted((run / "pairs").glob("*.json")):
             sources.append(p); pairs.append(json.loads(p.read_text()))
+        candidate_mode = all(isinstance(p["metrics"], dict) for p in pairs)
+        assert candidate_mode or all(isinstance(p["metrics"], list) for p in pairs), "Mixed metric versions"
+        if candidate_mode:
+            for p in pairs:
+                assert p["metrics"]["metric_version"] == "candidate_maximum_overlap_v2"
+                p["metrics"] = p["metrics"]["overlap_only"]
         main_pairs = [p for p in pairs if p["kind"] == "main"]
         if len(main_pairs) != 190:
             raise ValueError("Expected all 190 distinct main pairs")

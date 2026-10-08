@@ -44,6 +44,17 @@ def main():
         assert result["difference_article_bootstrap_interval"]==[1.0,1.0]
         assert result["within"]["n_pairs"]==90 and result["between"]["n_pairs"]==100
         assert result["left_right_swap"]["mean_absolute_difference"]==0
+        for p in pairs:
+            converted={**p,"metrics":{"metric_version":"candidate_maximum_overlap_v2","overlap_only":p["metrics"],
+                "candidate_conflicts_and_uncertainty":[dict(dimension="voice",opposite_edges=2,uncertain_edges=1)]}}
+            put(run/"pairs"/(p["id"]+".json"),converted)
+        sys.argv=["analysis","pairs"]
+        try:analysis.main()
+        finally:sys.argv=old
+        result=json.loads((root/"reports/pairs/analysis.json").read_text())["dimensions"][0]
+        assert result["difference_article_bootstrap_interval"]==[1.0,1.0]
+        assert result["opposite_candidate_edges"]==380 and result["undecided_candidate_share"]==1
+        assert "conflicts" not in result and "undecided_feature_share" not in result
         plans=[];comparisons=[]
         for author in ["a","b"]:
             for k in [1,2,3,5,7,10]:

@@ -1,0 +1,2735 @@
+{
+  "controls": [
+    {
+      "id": "self",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            }
+          }
+        ],
+        "id": "control-self",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "equivalent",
+            "reason": "两条规则在适用条件（全文叙述）、维度（voice）和内容上完全相同，均要求冷静克制、避免夸张情绪，替换无任何约束丢失。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 1,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 1,
+              "overlap": 1.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "f1",
+              "f1"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "synonym",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "叙述始终平静节制，不用情绪夸饰。",
+              "rule": "叙述始终平静节制，不用情绪夸饰。"
+            }
+          }
+        ],
+        "id": "control-synonym",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "equivalent",
+            "reason": "两者适用条件均为全文叙述，机制同为保持平静克制的语气并避免情绪夸饰，'冷静克制'与'平静节制'、'夸张情绪'与'情绪夸饰'为同义改写，互换不丢失任何约束。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 1,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 1,
+              "overlap": 1.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "f1",
+              "f1"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "opposite",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文采用热烈夸张的情绪表达，避免冷静克制。",
+              "rule": "全文采用热烈夸张的情绪表达，避免冷静克制。"
+            }
+          }
+        ],
+        "id": "control-opposite",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "opposite",
+            "reason": "同为全文叙述、voice维度：左要求冷静克制、避免夸张情绪，右要求热烈夸张、明确避免冷静克制，适用条件相同而表达机制方向完全相反。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 1,
+              "opposite_left_features": 1,
+              "opposite_right_features": 1,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "generic",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文表达自然清楚。",
+              "rule": "全文表达自然清楚。"
+            }
+          }
+        ],
+        "id": "control-generic",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "左规则约束语气情绪层面（冷静克制、不夸张），右规则约束表达清晰自然层面（可读性/流畅度）。两者机制不同且可同时满足，情绪克制不等于表达自然清楚，方向与着力点仅部分相关，属不同维度要求。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "mixed",
+      "passed": false,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a01",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b11",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            }
+          },
+          {
+            "candidate_id": "c0001",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a01",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b12",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            }
+          },
+          {
+            "candidate_id": "c0002",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a02",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b11",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            }
+          },
+          {
+            "candidate_id": "c0003",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a02",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b12",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            }
+          },
+          {
+            "candidate_id": "c0004",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a03",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b09",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            }
+          },
+          {
+            "candidate_id": "c0005",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a03",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b10",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            }
+          },
+          {
+            "candidate_id": "c0006",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a04",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b09",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            }
+          },
+          {
+            "candidate_id": "c0007",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a04",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b10",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            }
+          },
+          {
+            "candidate_id": "c0008",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a05",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b07",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            }
+          },
+          {
+            "candidate_id": "c0009",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a05",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b08",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            }
+          },
+          {
+            "candidate_id": "c0010",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a06",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b07",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            }
+          },
+          {
+            "candidate_id": "c0011",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a06",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b08",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            }
+          },
+          {
+            "candidate_id": "c0012",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a07",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b05",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            }
+          },
+          {
+            "candidate_id": "c0013",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a07",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b06",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            }
+          },
+          {
+            "candidate_id": "c0014",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a08",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b05",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            }
+          },
+          {
+            "candidate_id": "c0015",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a08",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b06",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            }
+          },
+          {
+            "candidate_id": "c0016",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a09",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b03",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            }
+          },
+          {
+            "candidate_id": "c0017",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a09",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b04",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            }
+          },
+          {
+            "candidate_id": "c0018",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a10",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b03",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            }
+          },
+          {
+            "candidate_id": "c0019",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a10",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b04",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            }
+          },
+          {
+            "candidate_id": "c0020",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a11",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b01",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            }
+          },
+          {
+            "candidate_id": "c0021",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a11",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b02",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            }
+          },
+          {
+            "candidate_id": "c0022",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a12",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b01",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            }
+          },
+          {
+            "candidate_id": "c0023",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a12",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b02",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            }
+          }
+        ],
+        "id": "control-mixed",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "opposite",
+            "reason": "同条件（适用时）、同为词语选择机制：左要求使用日常词语，右要求使用专业术语并紧接解释，二者在同一词汇语体维度上取向相反，采用一方机制即与另一方要求冲突。"
+          },
+          {
+            "candidate_id": "c0001",
+            "label": "equivalent",
+            "reason": "两条均为“使用日常词语”，表达机制、方向和适用条件完全相同，可互相替换。"
+          },
+          {
+            "candidate_id": "c0002",
+            "label": "equivalent",
+            "reason": "两条均为“使用专业术语并紧接解释”，机制与条件一致，可互相替换。"
+          },
+          {
+            "candidate_id": "c0003",
+            "label": "opposite",
+            "reason": "同条件、同为词语选择机制：左要求专业术语并解释，右要求日常词语，词汇语体方向明确相反。"
+          },
+          {
+            "candidate_id": "c0004",
+            "label": "distinct",
+            "reason": "左是第一人称自我限定判断范围（承认判断有限），右是以平等姿态与读者商量（关系立场），机制不同，可同时成立但不可互换。"
+          },
+          {
+            "candidate_id": "c0005",
+            "label": "equivalent",
+            "reason": "两条规则文字与条件均相同，表达机制一致。"
+          },
+          {
+            "candidate_id": "c0006",
+            "label": "equivalent",
+            "reason": "两条均为“与读者平等商量”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0007",
+            "label": "distinct",
+            "reason": "平等商量是对话姿态，承认判断有限是自我限定的谦抑表达，机制不同、仅部分重叠。"
+          },
+          {
+            "candidate_id": "c0008",
+            "label": "distinct",
+            "reason": "左是长短句对比制造停顿，右是并列句长度相近求平衡，节奏机制不同，可共存但不等同。"
+          },
+          {
+            "candidate_id": "c0009",
+            "label": "equivalent",
+            "reason": "两条均为“长句之后以短句停顿”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0010",
+            "label": "equivalent",
+            "reason": "两条均为“并列句保持相近长度”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0011",
+            "label": "distinct",
+            "reason": "并列句长度均衡与长后接短的停顿是不同的节奏手段，方向不冲突但机制有别。"
+          },
+          {
+            "candidate_id": "c0012",
+            "label": "distinct",
+            "reason": "左是事实在前、判断在后的信息顺序，右是转折前先承认对方局部成立的让步结构，作用对象与机制不同。"
+          },
+          {
+            "candidate_id": "c0013",
+            "label": "equivalent",
+            "reason": "两条均为“先给具体事实再给判断”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0014",
+            "label": "equivalent",
+            "reason": "两条均为“转折前先承认局部成立”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0015",
+            "label": "distinct",
+            "reason": "事实先行的顺序安排与转折前的让步承认是不同表达机制，仅都涉及信息组织。"
+          },
+          {
+            "candidate_id": "c0016",
+            "label": "distinct",
+            "reason": "左是叙述后附简短评点（后置点评），右是议论前先铺可感知细节（前置铺垫），机制位置与作用不同。"
+          },
+          {
+            "candidate_id": "c0017",
+            "label": "equivalent",
+            "reason": "两条均为“叙述后接一句简短评点”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0018",
+            "label": "equivalent",
+            "reason": "两条均为“议论前先交代可感知细节”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0019",
+            "label": "distinct",
+            "reason": "议论前置细节与叙述后置评点是不同的叙事—议论衔接机制。"
+          },
+          {
+            "candidate_id": "c0020",
+            "label": "distinct",
+            "reason": "左约束第一人称使用的事实依据，右约束比喻的用量与事实保真，限制对象与机制不同，可同时遵守。"
+          },
+          {
+            "candidate_id": "c0021",
+            "label": "equivalent",
+            "reason": "两条均为“只在事实允许时使用第一人称”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0022",
+            "label": "equivalent",
+            "reason": "两条均为“少量使用比喻且不改变事实”，机制与条件相同。"
+          },
+          {
+            "candidate_id": "c0023",
+            "label": "distinct",
+            "reason": "比喻用量限制与第一人称事实限定是不同约束机制，仅同属限制类要求。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 2,
+              "opposite_left_features": 2,
+              "opposite_right_features": 2,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 12,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "both",
+              "dimension": "language",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "rhythm",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "information",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "narration",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "constraints",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "a01",
+              "b12"
+            ],
+            [
+              "a02",
+              "b11"
+            ],
+            [
+              "a03",
+              "b10"
+            ],
+            [
+              "a04",
+              "b09"
+            ],
+            [
+              "a05",
+              "b08"
+            ],
+            [
+              "a06",
+              "b07"
+            ],
+            [
+              "a07",
+              "b06"
+            ],
+            [
+              "a08",
+              "b05"
+            ],
+            [
+              "a09",
+              "b04"
+            ],
+            [
+              "a10",
+              "b03"
+            ],
+            [
+              "a11",
+              "b02"
+            ],
+            [
+              "a12",
+              "b01"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "rows": [],
+  "status": "evaluation_invalid",
+  "usage": {
+    "entries": {
+      "p1-detailed-pilot-01/wxb-01-direct_0": {
+        "actual_micro": 21390,
+        "phase": "pilot",
+        "reserved_micro": 130770,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wxb-02-direct_0": {
+        "actual_micro": 30774,
+        "phase": "pilot",
+        "reserved_micro": 135504,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wzq-01-direct_0": {
+        "actual_micro": 36033,
+        "phase": "pilot",
+        "reserved_micro": 142827,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p1-detailed-pilot-01/wzq-02-direct_0": {
+        "actual_micro": 38337,
+        "phase": "pilot",
+        "reserved_micro": 135870,
+        "run_id": "p1-detailed-pilot-01",
+        "state": "settled"
+      },
+      "p2-candidates-pilot-01/control-generic-batch-00-0": {
+        "actual_micro": 2304,
+        "phase": "full",
+        "reserved_micro": 206337,
+        "run_id": "p2-candidates-pilot-01",
+        "state": "settled"
+      },
+      "p2-candidates-pilot-01/control-mixed-batch-00-0": {
+        "actual_micro": 38196,
+        "phase": "full",
+        "reserved_micro": 231633,
+        "run_id": "p2-candidates-pilot-01",
+        "state": "settled"
+      },
+      "p2-candidates-pilot-01/control-opposite-batch-00-0": {
+        "actual_micro": 1998,
+        "phase": "full",
+        "reserved_micro": 206553,
+        "run_id": "p2-candidates-pilot-01",
+        "state": "settled"
+      },
+      "p2-candidates-pilot-01/control-self-batch-00-0": {
+        "actual_micro": 1818,
+        "phase": "full",
+        "reserved_micro": 206517,
+        "run_id": "p2-candidates-pilot-01",
+        "state": "settled"
+      },
+      "p2-candidates-pilot-01/control-synonym-batch-00-0": {
+        "actual_micro": 2010,
+        "phase": "full",
+        "reserved_micro": 206463,
+        "run_id": "p2-candidates-pilot-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wxb-01-r2-direct_0": {
+        "actual_micro": 30606,
+        "phase": "full",
+        "reserved_micro": 130770,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wxb-01-r3-direct_0": {
+        "actual_micro": 27612,
+        "phase": "full",
+        "reserved_micro": 130770,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wxb-02-r2-direct_0": {
+        "actual_micro": 39432,
+        "phase": "full",
+        "reserved_micro": 135504,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wxb-02-r3-direct_0": {
+        "actual_micro": 31962,
+        "phase": "full",
+        "reserved_micro": 135504,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wzq-01-r2-direct_0": {
+        "actual_micro": 30705,
+        "phase": "full",
+        "reserved_micro": 142827,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wzq-01-r3-direct_0": {
+        "actual_micro": 37431,
+        "phase": "full",
+        "reserved_micro": 142827,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wzq-02-r2-direct_0": {
+        "actual_micro": 33963,
+        "phase": "full",
+        "reserved_micro": 135870,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-repeat-01/wzq-02-r3-direct_0": {
+        "actual_micro": 31395,
+        "phase": "full",
+        "reserved_micro": 135870,
+        "run_id": "p2-detailed-repeat-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-03-direct_0": {
+        "actual_micro": 32166,
+        "phase": "full",
+        "reserved_micro": 147435,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-04-direct_0": {
+        "actual_micro": 30675,
+        "phase": "full",
+        "reserved_micro": 132816,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-04-direct_1": {
+        "actual_micro": 23070,
+        "phase": "full",
+        "reserved_micro": 152529,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-05-direct_0": {
+        "actual_micro": 46242,
+        "phase": "full",
+        "reserved_micro": 134745,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-06-direct_0": {
+        "actual_micro": 30030,
+        "phase": "full",
+        "reserved_micro": 133578,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-07-direct_0": {
+        "actual_micro": 44013,
+        "phase": "full",
+        "reserved_micro": 134961,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-08-direct_0": {
+        "actual_micro": 29376,
+        "phase": "full",
+        "reserved_micro": 138114,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-09-direct_0": {
+        "actual_micro": 39297,
+        "phase": "full",
+        "reserved_micro": 157014,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wxb-10-direct_0": {
+        "actual_micro": 24777,
+        "phase": "full",
+        "reserved_micro": 133545,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-03-direct_0": {
+        "actual_micro": 49773,
+        "phase": "full",
+        "reserved_micro": 137433,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-04-direct_0": {
+        "actual_micro": 35163,
+        "phase": "full",
+        "reserved_micro": 137925,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-04-direct_1": {
+        "actual_micro": 25260,
+        "phase": "full",
+        "reserved_micro": 157515,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-05b-direct_0": {
+        "actual_micro": 35283,
+        "phase": "full",
+        "reserved_micro": 170034,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-06-direct_0": {
+        "actual_micro": 38073,
+        "phase": "full",
+        "reserved_micro": 142479,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-07-direct_0": {
+        "actual_micro": 31770,
+        "phase": "full",
+        "reserved_micro": 138129,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-07-direct_1": {
+        "actual_micro": 23277,
+        "phase": "full",
+        "reserved_micro": 157029,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-08-direct_0": {
+        "actual_micro": 33324,
+        "phase": "full",
+        "reserved_micro": 138390,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-09-direct_0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 143520,
+        "run_id": "p2-detailed-single-01",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-detailed-single-01/wzq-09-direct_0/attempt-2": {
+        "actual_micro": 34329,
+        "phase": "full",
+        "reserved_micro": 143520,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-detailed-single-01/wzq-10-direct_0": {
+        "actual_micro": 32889,
+        "phase": "full",
+        "reserved_micro": 142731,
+        "run_id": "p2-detailed-single-01",
+        "state": "settled"
+      },
+      "p2-pairs-02/control-generic-0": {
+        "actual_micro": 1686,
+        "phase": "full",
+        "reserved_micro": 106923,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/control-generic-1": {
+        "actual_micro": 2127,
+        "phase": "full",
+        "reserved_micro": 108801,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/control-opposite-0": {
+        "actual_micro": 1644,
+        "phase": "full",
+        "reserved_micro": 107139,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/control-self-0": {
+        "actual_micro": 1518,
+        "phase": "full",
+        "reserved_micro": 107103,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/control-synonym-0": {
+        "actual_micro": 1548,
+        "phase": "full",
+        "reserved_micro": 107049,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-01-0": {
+        "actual_micro": 34356,
+        "phase": "full",
+        "reserved_micro": 194823,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-01-1": {
+        "actual_micro": 40311,
+        "phase": "full",
+        "reserved_micro": 216132,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-02-0": {
+        "actual_micro": 31782,
+        "phase": "full",
+        "reserved_micro": 190602,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-03-0": {
+        "actual_micro": 27831,
+        "phase": "full",
+        "reserved_micro": 190815,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-04-0": {
+        "actual_micro": 25770,
+        "phase": "full",
+        "reserved_micro": 194874,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-05-0": {
+        "actual_micro": 30780,
+        "phase": "full",
+        "reserved_micro": 192084,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-06-0": {
+        "actual_micro": 33558,
+        "phase": "full",
+        "reserved_micro": 187707,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-06-1": {
+        "actual_micro": 39900,
+        "phase": "full",
+        "reserved_micro": 215037,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-07-0": {
+        "actual_micro": 28359,
+        "phase": "full",
+        "reserved_micro": 185130,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-08-0": {
+        "actual_micro": 24486,
+        "phase": "full",
+        "reserved_micro": 183048,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-09-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 176250,
+        "run_id": "p2-pairs-02",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-pairs-02/pair-00-13-0": {
+        "actual_micro": 31560,
+        "phase": "full",
+        "reserved_micro": 187740,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-14-0": {
+        "actual_micro": 32127,
+        "phase": "full",
+        "reserved_micro": 198552,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-14-1": {
+        "actual_micro": 44394,
+        "phase": "full",
+        "reserved_micro": 216081,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-15-0": {
+        "actual_micro": 30744,
+        "phase": "full",
+        "reserved_micro": 193686,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-16-0": {
+        "actual_micro": 33486,
+        "phase": "full",
+        "reserved_micro": 187212,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-00-17-0": {
+        "actual_micro": 36303,
+        "phase": "full",
+        "reserved_micro": 184710,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-02-0": {
+        "actual_micro": 28698,
+        "phase": "full",
+        "reserved_micro": 199872,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-03-0": {
+        "actual_micro": 33609,
+        "phase": "full",
+        "reserved_micro": 200085,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-04-0": {
+        "actual_micro": 30216,
+        "phase": "full",
+        "reserved_micro": 204144,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-05-0": {
+        "actual_micro": 27636,
+        "phase": "full",
+        "reserved_micro": 201354,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-06-0": {
+        "actual_micro": 36312,
+        "phase": "full",
+        "reserved_micro": 196977,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-07-0": {
+        "actual_micro": 34137,
+        "phase": "full",
+        "reserved_micro": 194400,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-08-0": {
+        "actual_micro": 26364,
+        "phase": "full",
+        "reserved_micro": 192318,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-09-0": {
+        "actual_micro": 27939,
+        "phase": "full",
+        "reserved_micro": 185520,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-10-0": {
+        "actual_micro": 25383,
+        "phase": "full",
+        "reserved_micro": 189663,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-11-0": {
+        "actual_micro": 30327,
+        "phase": "full",
+        "reserved_micro": 201516,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-12-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 206289,
+        "run_id": "p2-pairs-02",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-pairs-02/pair-01-12-0/attempt-2": {
+        "actual_micro": 31002,
+        "phase": "full",
+        "reserved_micro": 206289,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-12-1": {
+        "actual_micro": 33147,
+        "phase": "full",
+        "reserved_micro": 216489,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-13-0": {
+        "actual_micro": 27558,
+        "phase": "full",
+        "reserved_micro": 197010,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-13-1": {
+        "actual_micro": 30042,
+        "phase": "full",
+        "reserved_micro": 205440,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-14-0": {
+        "actual_micro": 34923,
+        "phase": "full",
+        "reserved_micro": 207822,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-14-1": {
+        "actual_micro": 39333,
+        "phase": "full",
+        "reserved_micro": 226467,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-17-0": {
+        "actual_micro": 31527,
+        "phase": "full",
+        "reserved_micro": 193980,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-18-0": {
+        "actual_micro": 27270,
+        "phase": "full",
+        "reserved_micro": 196533,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-01-19-0": {
+        "actual_micro": 31125,
+        "phase": "full",
+        "reserved_micro": 198723,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-03-0": {
+        "actual_micro": 33207,
+        "phase": "full",
+        "reserved_micro": 195864,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-04-0": {
+        "actual_micro": 27264,
+        "phase": "full",
+        "reserved_micro": 199923,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-05-0": {
+        "actual_micro": 35340,
+        "phase": "full",
+        "reserved_micro": 197133,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-06-0": {
+        "actual_micro": 26550,
+        "phase": "full",
+        "reserved_micro": 192756,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-07-0": {
+        "actual_micro": 27237,
+        "phase": "full",
+        "reserved_micro": 190179,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-08-0": {
+        "actual_micro": 30828,
+        "phase": "full",
+        "reserved_micro": 188097,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-09-0": {
+        "actual_micro": 27045,
+        "phase": "full",
+        "reserved_micro": 181299,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-10-0": {
+        "actual_micro": 26199,
+        "phase": "full",
+        "reserved_micro": 185442,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-02-11-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 197295,
+        "run_id": "p2-pairs-02",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-pairs-02/pair-03-10-0": {
+        "actual_micro": 21828,
+        "phase": "full",
+        "reserved_micro": 185655,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-11-0": {
+        "actual_micro": 27618,
+        "phase": "full",
+        "reserved_micro": 197508,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-12-0": {
+        "actual_micro": 31701,
+        "phase": "full",
+        "reserved_micro": 202281,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-13-0": {
+        "actual_micro": 31947,
+        "phase": "full",
+        "reserved_micro": 193002,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-14-0": {
+        "actual_micro": 25026,
+        "phase": "full",
+        "reserved_micro": 203814,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-15-0": {
+        "actual_micro": 31809,
+        "phase": "full",
+        "reserved_micro": 198948,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-16-0": {
+        "actual_micro": 27111,
+        "phase": "full",
+        "reserved_micro": 192474,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-17-0": {
+        "actual_micro": 32394,
+        "phase": "full",
+        "reserved_micro": 189972,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-18-0": {
+        "actual_micro": 34521,
+        "phase": "full",
+        "reserved_micro": 192525,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-03-19-0": {
+        "actual_micro": 36624,
+        "phase": "full",
+        "reserved_micro": 194715,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-05-06-0": {
+        "actual_micro": 35874,
+        "phase": "full",
+        "reserved_micro": 194238,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-05-07-0": {
+        "actual_micro": 27291,
+        "phase": "full",
+        "reserved_micro": 191661,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-05-08-0": {
+        "actual_micro": 33510,
+        "phase": "full",
+        "reserved_micro": 189579,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-05-09-0": {
+        "actual_micro": 29583,
+        "phase": "full",
+        "reserved_micro": 182781,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-pairs-02/pair-05-10-0": {
+        "actual_micro": 32097,
+        "phase": "full",
+        "reserved_micro": 186924,
+        "run_id": "p2-pairs-02",
+        "state": "settled"
+      },
+      "p2-routing-flash-01/control-generic-0": {
+        "actual_micro": 526,
+        "phase": "full",
+        "reserved_micro": 35643,
+        "run_id": "p2-routing-flash-01",
+        "state": "settled"
+      },
+      "p2-routing-flash-01/control-mixed-0": {
+        "actual_micro": 1872,
+        "phase": "full",
+        "reserved_micro": 39123,
+        "run_id": "p2-routing-flash-01",
+        "state": "settled"
+      },
+      "p2-routing-flash-01/control-opposite-0": {
+        "actual_micro": 514,
+        "phase": "full",
+        "reserved_micro": 35715,
+        "run_id": "p2-routing-flash-01",
+        "state": "settled"
+      },
+      "p2-routing-flash-01/control-self-0": {
+        "actual_micro": 512,
+        "phase": "full",
+        "reserved_micro": 35703,
+        "run_id": "p2-routing-flash-01",
+        "state": "settled"
+      },
+      "p2-routing-flash-01/control-synonym-0": {
+        "actual_micro": 508,
+        "phase": "full",
+        "reserved_micro": 35685,
+        "run_id": "p2-routing-flash-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-01-0": {
+        "actual_micro": 66303,
+        "phase": "full",
+        "reserved_micro": 125337,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-01-1": {
+        "actual_micro": 34572,
+        "phase": "full",
+        "reserved_micro": 163305,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-01-r2-0": {
+        "actual_micro": 40995,
+        "phase": "full",
+        "reserved_micro": 125610,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-01-r3-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 123591,
+        "run_id": "p2-views-01",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-views-01/view-wxb-01-r3-0/attempt-2": {
+        "actual_micro": 43542,
+        "phase": "full",
+        "reserved_micro": 123591,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-02-0": {
+        "actual_micro": 63513,
+        "phase": "full",
+        "reserved_micro": 124056,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-02-r2-0": {
+        "actual_micro": 73638,
+        "phase": "full",
+        "reserved_micro": 125391,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-02-r2-1": {
+        "actual_micro": 36792,
+        "phase": "full",
+        "reserved_micro": 162621,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-02-r3-0": {
+        "actual_micro": 31986,
+        "phase": "full",
+        "reserved_micro": 122472,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-03-0": {
+        "actual_micro": 41427,
+        "phase": "full",
+        "reserved_micro": 125835,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-04-0": {
+        "actual_micro": 54138,
+        "phase": "full",
+        "reserved_micro": 125415,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-05-0": {
+        "actual_micro": 77856,
+        "phase": "full",
+        "reserved_micro": 129033,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-06-0": {
+        "actual_micro": 91353,
+        "phase": "full",
+        "reserved_micro": 126402,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-06-1": {
+        "actual_micro": 37434,
+        "phase": "full",
+        "reserved_micro": 166920,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-07-0": {
+        "actual_micro": 104916,
+        "phase": "full",
+        "reserved_micro": 127896,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-08-0": {
+        "actual_micro": 104475,
+        "phase": "full",
+        "reserved_micro": 126918,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-09-0": {
+        "actual_micro": 104415,
+        "phase": "full",
+        "reserved_micro": 126795,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wxb-10-0": {
+        "actual_micro": 67857,
+        "phase": "full",
+        "reserved_micro": 123462,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-01-0": {
+        "actual_micro": 79365,
+        "phase": "full",
+        "reserved_micro": 124551,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-01-r2-0": {
+        "actual_micro": 95328,
+        "phase": "full",
+        "reserved_micro": 123939,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-01-r2-1": {
+        "actual_micro": 43464,
+        "phase": "full",
+        "reserved_micro": 163263,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-01-r3-0": {
+        "actual_micro": 89505,
+        "phase": "full",
+        "reserved_micro": 126426,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-02-0": {
+        "actual_micro": 102816,
+        "phase": "full",
+        "reserved_micro": 130308,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-02-1": {
+        "actual_micro": 49929,
+        "phase": "full",
+        "reserved_micro": 174129,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-02-r2-0": {
+        "actual_micro": 73701,
+        "phase": "full",
+        "reserved_micro": 124107,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-02-r3-0": {
+        "actual_micro": 105366,
+        "phase": "full",
+        "reserved_micro": 130119,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-03-0": {
+        "actual_micro": 92769,
+        "phase": "full",
+        "reserved_micro": 127443,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-04-0": {
+        "actual_micro": 74505,
+        "phase": "full",
+        "reserved_micro": 126156,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-05b-0": {
+        "actual_micro": 75528,
+        "phase": "full",
+        "reserved_micro": 130545,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-06-0": {
+        "actual_micro": 95643,
+        "phase": "full",
+        "reserved_micro": 125082,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-07-0": {
+        "actual_micro": 73425,
+        "phase": "full",
+        "reserved_micro": 123873,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-08-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 124638,
+        "run_id": "p2-views-01",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-views-01/view-wzq-08-0/attempt-2": {
+        "actual_micro": 42525,
+        "phase": "full",
+        "reserved_micro": 124638,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-09-0": {
+        "actual_micro": 103860,
+        "phase": "full",
+        "reserved_micro": 123705,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-10-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 125508,
+        "run_id": "p2-views-01",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-views-01/view-wzq-10-0/attempt-2": {
+        "actual_micro": 40026,
+        "phase": "full",
+        "reserved_micro": 125508,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-01/view-wzq-10-1": {
+        "actual_micro": 40116,
+        "phase": "full",
+        "reserved_micro": 158481,
+        "run_id": "p2-views-01",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-01-0": {
+        "actual_micro": 20406,
+        "phase": "full",
+        "reserved_micro": 131499,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-01-r2-0": {
+        "actual_micro": 18162,
+        "phase": "full",
+        "reserved_micro": 129462,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-01-r3-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 129159,
+        "run_id": "p2-views-02",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-views-02/view-wxb-01-r3-0/attempt-2": {
+        "actual_micro": 20229,
+        "phase": "full",
+        "reserved_micro": 129159,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-02-0": {
+        "actual_micro": 19269,
+        "phase": "full",
+        "reserved_micro": 128256,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-02-1": {
+        "actual_micro": 25449,
+        "phase": "full",
+        "reserved_micro": 154023,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-02-r2-0": {
+        "actual_micro": 20139,
+        "phase": "full",
+        "reserved_micro": 130101,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-02-r2-1": {
+        "actual_micro": 26778,
+        "phase": "full",
+        "reserved_micro": 156729,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-02-r3-0": {
+        "actual_micro": 18447,
+        "phase": "full",
+        "reserved_micro": 126480,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-03-0": {
+        "actual_micro": 19479,
+        "phase": "full",
+        "reserved_micro": 131637,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-04-0": {
+        "actual_micro": 19761,
+        "phase": "full",
+        "reserved_micro": 129423,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-05-0": {
+        "actual_micro": 22860,
+        "phase": "full",
+        "reserved_micro": 135147,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-06-0": {
+        "actual_micro": 19872,
+        "phase": "full",
+        "reserved_micro": 132162,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-07-0": {
+        "actual_micro": 21084,
+        "phase": "full",
+        "reserved_micro": 134244,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-08-0": {
+        "actual_micro": 20106,
+        "phase": "full",
+        "reserved_micro": 133020,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-09-0": {
+        "actual_micro": 18207,
+        "phase": "full",
+        "reserved_micro": 132597,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wxb-10-0": {
+        "actual_micro": 15720,
+        "phase": "full",
+        "reserved_micro": 128406,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-01-0": {
+        "actual_micro": 18303,
+        "phase": "full",
+        "reserved_micro": 129963,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-01-r2-0": {
+        "actual_micro": 18255,
+        "phase": "full",
+        "reserved_micro": 128727,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-01-r2-1": {
+        "actual_micro": 24153,
+        "phase": "full",
+        "reserved_micro": 151860,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-01-r3-0": {
+        "actual_micro": 20220,
+        "phase": "full",
+        "reserved_micro": 130668,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-02-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 136500,
+        "run_id": "p2-views-02",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-views-02/view-wzq-02-0/attempt-2": {
+        "actual_micro": 22620,
+        "phase": "full",
+        "reserved_micro": 136500,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-02-r2-0": {
+        "actual_micro": 18312,
+        "phase": "full",
+        "reserved_micro": 129675,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-02-r3-0": {
+        "actual_micro": 22728,
+        "phase": "full",
+        "reserved_micro": 136233,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-03-0": {
+        "actual_micro": 21831,
+        "phase": "full",
+        "reserved_micro": 132933,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-04-0": {
+        "actual_micro": 18843,
+        "phase": "full",
+        "reserved_micro": 131178,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-05b-0": {
+        "actual_micro": 22320,
+        "phase": "full",
+        "reserved_micro": 136581,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-05b-1": {
+        "actual_micro": 30975,
+        "phase": "full",
+        "reserved_micro": 163860,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-06-0": {
+        "actual_micro": 19407,
+        "phase": "full",
+        "reserved_micro": 130494,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-07-0": {
+        "actual_micro": 19986,
+        "phase": "full",
+        "reserved_micro": 129519,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-07-1": {
+        "actual_micro": 26520,
+        "phase": "full",
+        "reserved_micro": 155385,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-08-0": {
+        "actual_micro": 20727,
+        "phase": "full",
+        "reserved_micro": 130362,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-09-0": {
+        "actual_micro": null,
+        "phase": "full",
+        "reserved_micro": 128337,
+        "run_id": "p2-views-02",
+        "state": "reserved_or_uncertain"
+      },
+      "p2-views-02/view-wzq-09-0/attempt-2": {
+        "actual_micro": 20610,
+        "phase": "full",
+        "reserved_micro": 128337,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      },
+      "p2-views-02/view-wzq-10-0": {
+        "actual_micro": 21264,
+        "phase": "full",
+        "reserved_micro": 130764,
+        "run_id": "p2-views-02",
+        "state": "settled"
+      }
+    },
+    "occupied_cny": 7.429319,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.046326
+  }
+}

@@ -156,9 +156,11 @@ pub(crate) async fn run(run: &str, views: &str, comparison_run: &str) -> Result<
         serde_json::from_slice(&std::fs::read(previous.join(name))?)
             .map_err(|e| AppError::Parse(e.to_string()))
     };
-    if read_gate("summary.json")?["status"] != "complete"
+    let gate_inputs=read_gate("inputs.json")?;
+    if !["style_pairs_v2_structured","candidate_matrix_v3"].contains(&gate_inputs["suite"].as_str().unwrap_or(""))
+        || read_gate("summary.json")?["status"] != "complete"
         || read_gate("controls.json")?["passed"] != true
-        || read_gate("inputs.json")?["source"] != views
+        || gate_inputs["source"] != views
     {
         return Err(AppError::Parse(
             "P2比较尚未完成、控制未过或视图来源不一致".into(),

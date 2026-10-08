@@ -22,6 +22,13 @@ def main():
     assert summary["status"] == "complete", "Incomplete comparisons cannot be reported as complete"
     paths = sorted((run / "pairs").glob("*.json"))
     pairs = [json.loads(p.read_text()) for p in paths]
+    candidate_mode = all(isinstance(p["metrics"], dict) for p in pairs)
+    assert candidate_mode or all(isinstance(p["metrics"], list) for p in pairs), "Mixed metric versions"
+    if candidate_mode:
+        for p in pairs:
+            assert p["metrics"]["metric_version"] == "candidate_maximum_overlap_v2"
+            p["candidate_diagnostics"] = p["metrics"]["candidate_conflicts_and_uncertainty"]
+            p["metrics"] = p["metrics"]["overlap_only"]
     primary = [p for p in pairs if p["kind"] == "main"]
     n_repeats = sum(p["kind"] == "repeat_noise" for p in pairs)
     assert len(primary) == 190 and 4 <= n_repeats <= 8 and len(pairs) == 200 + n_repeats
@@ -81,10 +88,18 @@ def main():
             if x is not None and y is not None:
                 deltas.append(abs(x-y))
         record["left_right_swap"] = {"n_pairs": len(deltas), "mean_absolute_difference": mean(deltas), "values": deltas}
-        record["conflicts"] = sum(metric(p)["conflicts"] for p in primary)
-        total = sum(metric(p)["left_count"] + metric(p)["right_count"] for p in primary)
-        unknown = sum(metric(p)["uncertain_left"] + metric(p)["uncertain_right"] for p in primary)
-        record["undecided_feature_share"] = unknown / total if total else None
+        if candidate_mode:
+            diagnostics = [next(m for m in p["candidate_diagnostics"] if m["dimension"] == dim) for p in primary]
+            record["opposite_candidate_edges"] = sum(d["opposite_edges"] for d in diagnostics)
+            record["uncertain_candidate_edges"] = sum(d["uncertain_edges"] for d in diagnostics)
+            total = sum(metric(p)["left_count"] * metric(p)["right_count"] for p in primary)
+            record["candidate_count"] = total
+            record["undecided_candidate_share"] = record["uncertain_candidate_edges"] / total if total else None
+        else:
+            record["conflicts"] = sum(metric(p)["conflicts"] for p in primary)
+            total = sum(metric(p)["left_count"] + metric(p)["right_count"] for p in primary)
+            unknown = sum(metric(p)["uncertain_left"] + metric(p)["uncertain_right"] for p in primary)
+            record["undecided_feature_share"] = unknown / total if total else None
         output.append(record)
     out = ROOT / "reports" / args.run
     out.mkdir(parents=True, exist_ok=True)
@@ -92,6 +107,9 @@ def main():
               "dimensions": output, "limitations": ["探索性文章重采样区间，不能外推作者总体", "190对不是190个独立样本", "单边缺失不计入两边都有描述的均值，覆盖另报", f"同文重复只有4篇文章，有效{n_repeats}/8对，缺失不填零；各来源重复次数可能不等", "题材分层只能诊断混淆，不能证明已经排除"],
               "input_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths + [ds_path]},
               "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+    result["metric_version"] = "candidate_maximum_overlap_v2" if candidate_mode else "one_to_one_jaccard_per_axis_v1"
+    if candidate_mode:
+        result["limitations"].append("新版冲突/未知按候选边计数，不能与旧一对一关系或特征未知率混用")
     (out / "analysis.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     lines = ["# P2逐维比较结果", "", "以下为当前两位作者、20篇文章的探索性结果。原始点、覆盖、重复波动与位置敏感性分开报告，不把表征区分当作生成保真。", "", "|维度|作者内均值|作者间均值|可比较配对|同文重复均值|左右交换平均变化|", "|---|---:|---:|---:|---:|---:|"]
     fmt = lambda v: "NA" if v is None else f"{v:.3f}"
