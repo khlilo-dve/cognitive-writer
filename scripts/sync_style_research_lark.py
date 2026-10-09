@@ -22,6 +22,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest", type=Path)
     ap.add_argument("--run", type=Path)
+    ap.add_argument("--runs", nargs="*", type=Path, default=[])
     args = ap.parse_args()
     state = json.loads(STATE.read_text())
     base = state["base_token"]
@@ -114,13 +115,17 @@ def main():
             raise ValueError("Record response missing ID; stop before duplicate writes")
         state["records"][identity] = rid
         save(state)
-        verified = call("+record-get", table_id=state["tables"][table], record_id=rid)["record"]
-        # Base normalizes an empty text cell to null; nonempty text remains exact.
-        if any(verified.get(k) != v and not (stored_fields[k] == "text" and v == "" and verified.get(k) is None)
-               and not (k in url_fields and v and verified.get(k) == f"[{v}]({v})")
-               for k, v in fields.items()):
-            raise ValueError(f"Remote record differs after write: {identity}")
-        return verified
+        # A successful write may become visible after the first read. Retry reads only.
+        for delay in (0, 0.5, 1, 2, 4):
+            if delay:
+                time.sleep(delay)
+            verified = call("+record-get", table_id=state["tables"][table], record_id=rid)["record"]
+            # Base normalizes empty text to null and styled URLs to Markdown links.
+            if not any(verified.get(k) != v and not (stored_fields[k] == "text" and v == "" and verified.get(k) is None)
+                       and not (k in url_fields and v and verified.get(k) == f"[{v}]({v})")
+                       for k, v in fields.items()):
+                return verified
+        raise ValueError(f"Remote record differs after bounded readback: {identity}")
 
     if args.manifest:
         ds = json.loads(args.manifest.read_text())
@@ -135,28 +140,40 @@ def main():
     if events.exists():
         for row in json.loads(events.read_text()):
             upsert("Journal", row["event_id"], row)
-    if args.run:
-        summary = json.loads((args.run / "summary.json").read_text())
-        rid = args.run.name
+    runs = args.runs + ([args.run] if args.run else [])
+    for run in runs:
+        summary = json.loads((run / "summary.json").read_text())
+        rid = run.name
         report_name = {"p1-detailed-pilot-01": "p1-report-doc.json", "p2-detailed-single-01": "p2-single-report-doc.json",
                        "p2-pairs-02": "p2-stop-20261004.json", "p2-routing-flash-01": "p2-stop-20261004.json"}.get(rid)
         report_file = ROOT / "lark" / report_name if report_name else None
+        if rid.startswith("p2-candidate"):
+            report_file = ROOT / "lark/candidate-progress-20261009.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
+        if rid.startswith("p2-candidate"):
+            stage = "P2 候选比较方法验证"
         for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label
                 break
         rows = summary.get("rows", [])
+        checks = ""
+        control_file = run / "controls.json"
+        control_rows = json.loads(control_file.read_text()).get("rows", []) if control_file.exists() else []
+        if control_rows:
+            checks = f" 控制题通过 {sum(r.get('passed') is True for r in control_rows)}/{len(control_rows)}。"
+        elif any("passed" in r for r in rows):
+            checks = f" 开发预期一致 {sum(r.get('passed') is True for r in rows)}/{len(rows)}，不等于人评。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
-            "conclusion": f"本次状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + summary.get("error", ""),
+            "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + checks + summary.get("error", ""),
             "caveat": "这是最近一次同步快照，running不保证进程仍存活。费用含未知预留；完成数量和字数都不是质量评分。",
             "spent_cny": summary["usage"]["run_occupied_cny"], "report_url": report_url})
-        for row in rows if (args.run / "single").is_dir() else []:
+        for row in rows if (run / "single").is_dir() else []:
             ident = row.get("artifact_id", row["article_id"])
-            spec_path = args.run / "single" / f"{ident}.md"
+            spec_path = run / "single" / f"{ident}.md"
             upsert("Styles", f"{rid}/{ident}", {"artifact_id": f"{rid}/{ident}", "run_id": rid,
                 "article_id": row["article_id"], "status": row["status"], "characters": row.get("characters"),
                 "warnings": "；".join(row.get("warnings", [])), "spec": spec_path.read_text() if spec_path.exists() else ""})
@@ -165,7 +182,7 @@ def main():
         state["dashboards"]["overview"] = data
         save(state)
     (ROOT / "lark/last-sync.json").write_text(json.dumps({"status":"complete", "base":base,
-        "manifest":str(args.manifest), "run":str(args.run), "record_count":len(state["records"])}, indent=2))
+        "manifest":str(args.manifest), "run":str(args.run), "runs":[str(r) for r in runs], "record_count":len(state["records"])}, indent=2))
     print("sync complete", state["url"], flush=True)
 
 

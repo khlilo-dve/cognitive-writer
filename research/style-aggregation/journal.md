@@ -129,6 +129,18 @@ p2-candidates-pilot-02控制10/10通过；真实2对完成，第3对在一次修
 
 ## 事件填写模板
 
+## E0023 · 2026-10-09 · 网络中断恢复与单次收尾（engineering_failure / recovery）
+
+恢复前确认没有模型进程，p2-candidates-pilot-03为partial：2完成、1网络失败、3暂缓，49份响应，13项前置控制通过。该run占用0.930144元；全研究8.881298元，未知预留1.711107元。保存validation/candidate-interruption-2026-10-09.json，保留未知费用并从原run有界恢复，仍限3元，不重跑有效检查点。
+
+此前仅口头说明收尾流程，尚未创建实际跟进进程；本次补齐单次执行器，核对PID身份、最多再恢复一次网络中断、离线审计、报告图表、飞书回读与本地定向提交。不能把它称作无人值守完成全研究；最终候选含义仍需执行者判断，无需用户确认。新一轮核心样本仍6对，未扩作者/题目或解封确认集。
+
+## 后续记录格式
+
+### E0023 补充：飞书回读差异
+
+本次Runs/p2-candidates-pilot-03写入后的首次回读校验失败，随后单独回读得到预期状态、13/13控制及1.369809元快照费用。首次差异值未落盘，因此只能确认后来读到了预期内容，不能断言服务端故障原因。同步脚本增加0/0.5/1/2/4秒有界回读，仍只写一次，不放宽字段一致性；最终同步结果由last-sync.json记录。
+
 ```text
 event_id / 日期 / 类型：discovery | confirmed | negative | engineering_failure | evaluation_invalid | method_change
 run_id / dataset_id / protocol_version：

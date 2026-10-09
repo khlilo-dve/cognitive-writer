@@ -117,6 +117,15 @@ pub(crate) async fn compare(
     compare_configured(store, id, prompt, role, a, b, 24, false).await
 }
 
+fn candidate_input(chunk: &[sc::Candidate], rule_only: bool) -> String {
+    if rule_only {
+        let feature = |f: &Feature| json!({"id":f.id,"dimension":f.dimension,"rule":f.rule,"condition":f.condition});
+        json!({"candidates":chunk.iter().map(|c|json!({"candidate_id":c.candidate_id,"left":feature(&c.left),"right":feature(&c.right)})).collect::<Vec<_>>()}).to_string()
+    } else {
+        json!({"candidates":chunk}).to_string()
+    }
+}
+
 pub(crate) async fn compare_configured(
     store: &ResearchStore,
     id: &str,
@@ -130,12 +139,7 @@ pub(crate) async fn compare_configured(
     let candidates = sc::candidates(a, b);
     let mut judgments = Vec::<Judgment>::new();
     for (batch, chunk) in candidates.chunks(batch_size).enumerate() {
-        let input = if rule_only {
-            let feature = |f: &Feature| json!({"id":f.id,"dimension":f.dimension,"rule":f.rule,"condition":f.condition});
-            json!({"candidates":chunk.iter().map(|c|json!({"candidate_id":c.candidate_id,"left":feature(&c.left),"right":feature(&c.right)})).collect::<Vec<_>>()}).to_string()
-        } else {
-            json!({"candidates":chunk}).to_string()
-        };
+        let input = candidate_input(chunk, rule_only);
         let mut result = validated_as(
             store,
             &format!("{id}-batch-{batch:02}"),
@@ -366,4 +370,22 @@ pub(crate) async fn run(run: &str, views: &str, revision: u8) -> Result<(), AppE
         &store.root.join("summary.json"),
         &json!({"status":"complete","rows":rows,"controls":control_rows,"decision":"requires_semantic_review_not_matrix_adoption","usage":store.usage().await}),
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn rule_only_request_keeps_conditions_and_excludes_broader_evidence() {
+        let mut a = one("短句结尾");
+        a.features[0].quote = "UNRELATED BROADER EVIDENCE".into();
+        let candidates = sc::candidates(&a, &a);
+        let input = candidate_input(&candidates, true);
+        assert!(!input.contains("UNRELATED"));
+        assert!(!input.contains("quote"));
+        let parsed: Value = serde_json::from_str(&input).unwrap();
+        assert_eq!(parsed["candidates"][0]["left"]["condition"], "全文叙述");
+        assert_eq!(candidates[0].left.quote, "UNRELATED BROADER EVIDENCE");
+        assert!(candidate_input(&candidates, false).contains("UNRELATED"));
+    }
 }

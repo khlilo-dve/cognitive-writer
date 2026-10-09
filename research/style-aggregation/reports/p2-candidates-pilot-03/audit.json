@@ -1,0 +1,1080 @@
+{
+  "run": "p2-candidates-pilot-03",
+  "receipts": [
+    {
+      "name": "control-compatible-batch-00-0",
+      "usage": {
+        "completion_tokens": 127,
+        "completion_tokens_details": {
+          "reasoning_tokens": 43
+        },
+        "prompt_tokens": 540,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 667
+      },
+      "finish_reason": "stop",
+      "sha256": "e5c95a18a78af50a2b202497288d3505f5025eddeca6f2804bcf3895479550bb"
+    },
+    {
+      "name": "control-different-condition-batch-00-0",
+      "usage": {
+        "completion_tokens": 199,
+        "completion_tokens_details": {
+          "reasoning_tokens": 122
+        },
+        "prompt_tokens": 537,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 736
+      },
+      "finish_reason": "stop",
+      "sha256": "570dbc99b9c13ac56387b9c93257635cba649e73b7eb9ce3b3acee6af0f3ce01"
+    },
+    {
+      "name": "control-generic-batch-00-0",
+      "usage": {
+        "completion_tokens": 141,
+        "completion_tokens_details": {
+          "reasoning_tokens": 47
+        },
+        "prompt_tokens": 543,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 684
+      },
+      "finish_reason": "stop",
+      "sha256": "9b55129349eebac1ed0d1ef3b03dfa570568b5d5fc5564b9632774c48d7d6a2c"
+    },
+    {
+      "name": "control-mixed-batch-00-0",
+      "usage": {
+        "completion_tokens": 1549,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1055
+        },
+        "prompt_tokens": 959,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 2508
+      },
+      "finish_reason": "stop",
+      "sha256": "97d28a5826dcfb8502ffb8d3a2508b85a14d3d058d1102135dd021c949dc9c54"
+    },
+    {
+      "name": "control-mixed-batch-01-0",
+      "usage": {
+        "completion_tokens": 618,
+        "completion_tokens_details": {
+          "reasoning_tokens": 206
+        },
+        "prompt_tokens": 995,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1613
+      },
+      "finish_reason": "stop",
+      "sha256": "5103e04224311e20d434d363c2c2a5f556e62f7ac784498303ac02bd4095ad9f"
+    },
+    {
+      "name": "control-mixed-batch-02-0",
+      "usage": {
+        "completion_tokens": 1065,
+        "completion_tokens_details": {
+          "reasoning_tokens": 612
+        },
+        "prompt_tokens": 1019,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 2084
+      },
+      "finish_reason": "stop",
+      "sha256": "bcf66c6b5bfe490fc1501891cf35643d5aa30bab6dd9938a9c2e52500cc59035"
+    },
+    {
+      "name": "control-opposite-batch-00-0",
+      "usage": {
+        "completion_tokens": 99,
+        "completion_tokens_details": {
+          "reasoning_tokens": 29
+        },
+        "prompt_tokens": 549,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 648
+      },
+      "finish_reason": "stop",
+      "sha256": "f1215a568e096e1c91aa23b9aa06ba547cfed7cc8fb546c2567c80a702755fbc"
+    },
+    {
+      "name": "control-opposite-ending-batch-00-0",
+      "usage": {
+        "completion_tokens": 102,
+        "completion_tokens_details": {
+          "reasoning_tokens": 37
+        },
+        "prompt_tokens": 538,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 640
+      },
+      "finish_reason": "stop",
+      "sha256": "932ec3dd0a81d04671a50bd32b8177168198da3ceeb259341b7084ef85c0c102"
+    },
+    {
+      "name": "control-partial-batch-00-0",
+      "usage": {
+        "completion_tokens": 235,
+        "completion_tokens_details": {
+          "reasoning_tokens": 142
+        },
+        "prompt_tokens": 540,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 775
+      },
+      "finish_reason": "stop",
+      "sha256": "d51c9f5ba9c36c0407ce8593118b268f70f34da225ea1af39dfae5a7342e9aff"
+    },
+    {
+      "name": "control-real-c0015-batch-00-0",
+      "usage": {
+        "completion_tokens": 603,
+        "completion_tokens_details": {
+          "reasoning_tokens": 447
+        },
+        "prompt_tokens": 666,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 1269
+      },
+      "finish_reason": "stop",
+      "sha256": "0bb360b0ca3588f85b1e25984dc8fb02e1c6cb3ccf87fd8ab1c947353cb25eeb"
+    },
+    {
+      "name": "control-real-c0062-batch-00-0",
+      "usage": {
+        "completion_tokens": 480,
+        "completion_tokens_details": {
+          "reasoning_tokens": 322
+        },
+        "prompt_tokens": 610,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 1090
+      },
+      "finish_reason": "stop",
+      "sha256": "0384bdc97a5c2684a5e73ed447a3e2a0eac0dacd3ec1f9257e9363b0b135cb3f"
+    },
+    {
+      "name": "control-real-c0065-batch-00-0",
+      "usage": {
+        "completion_tokens": 741,
+        "completion_tokens_details": {
+          "reasoning_tokens": 528
+        },
+        "prompt_tokens": 627,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "total_tokens": 1368
+      },
+      "finish_reason": "stop",
+      "sha256": "1a52866c471f29cf59421306f3edab878d34b520cda11d60344328aeaff1f7a4"
+    },
+    {
+      "name": "control-self-batch-00-0",
+      "usage": {
+        "completion_tokens": 81,
+        "completion_tokens_details": {
+          "reasoning_tokens": 12
+        },
+        "prompt_tokens": 549,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 630
+      },
+      "finish_reason": "stop",
+      "sha256": "9fd0cafa997b64248ac1d064a9acc573266035037c8deb4b2b84eba05a65eacb"
+    },
+    {
+      "name": "control-synonym-batch-00-0",
+      "usage": {
+        "completion_tokens": 113,
+        "completion_tokens_details": {
+          "reasoning_tokens": 41
+        },
+        "prompt_tokens": 549,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 662
+      },
+      "finish_reason": "stop",
+      "sha256": "389cd6d47f844581880d349343242cfe8641ba9da3a790be45278f9e29304e8d"
+    },
+    {
+      "name": "control-synonym-facts-batch-00-0",
+      "usage": {
+        "completion_tokens": 109,
+        "completion_tokens_details": {
+          "reasoning_tokens": 36
+        },
+        "prompt_tokens": 544,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 653
+      },
+      "finish_reason": "stop",
+      "sha256": "d293d2f276a7c254149b4764dc47b38f10b2e9127f229d0c3f15a842bb89c48d"
+    },
+    {
+      "name": "pilot-00-batch-00-0",
+      "usage": {
+        "completion_tokens": 2052,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1279
+        },
+        "prompt_tokens": 1385,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3437
+      },
+      "finish_reason": "stop",
+      "sha256": "01057d9fb9cd68f910b767fbfa6d9e7ae56c6f021110b0c21d246ac97c3d4503"
+    },
+    {
+      "name": "pilot-00-batch-01-0",
+      "usage": {
+        "completion_tokens": 2755,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1914
+        },
+        "prompt_tokens": 1421,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4176
+      },
+      "finish_reason": "stop",
+      "sha256": "db02f9dec28ac79ec219462193b2b3ff358875f555ebb239154c1f61c758801d"
+    },
+    {
+      "name": "pilot-00-batch-02-0",
+      "usage": {
+        "completion_tokens": 2219,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1480
+        },
+        "prompt_tokens": 1448,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3667
+      },
+      "finish_reason": "stop",
+      "sha256": "3c00ab87dae3d1260f5852864d21f54813e05ecf947eaf760c4fafd3179992ed"
+    },
+    {
+      "name": "pilot-00-batch-03-0",
+      "usage": {
+        "completion_tokens": 4347,
+        "completion_tokens_details": {
+          "reasoning_tokens": 3436
+        },
+        "prompt_tokens": 1387,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 5734
+      },
+      "finish_reason": "stop",
+      "sha256": "a3d89451212215e4ca24b4e23b80a83a8ae1a15f34f5fdcca237fd52326c0954"
+    },
+    {
+      "name": "pilot-00-batch-04-0",
+      "usage": {
+        "completion_tokens": 2292,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1389
+        },
+        "prompt_tokens": 1356,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3648
+      },
+      "finish_reason": "stop",
+      "sha256": "e62bda7ecb84e3dec4be96206cdcd9197dbf544a7a08698f7a3a0efd81623a97"
+    },
+    {
+      "name": "pilot-00-batch-05-0",
+      "usage": {
+        "completion_tokens": 1697,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1037
+        },
+        "prompt_tokens": 1401,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3098
+      },
+      "finish_reason": "stop",
+      "sha256": "61082fe81a2b0874cd9261a825dc62497e09003e8b362f79e8a9e8ee38c5c189"
+    },
+    {
+      "name": "pilot-00-batch-06-0",
+      "usage": {
+        "completion_tokens": 2728,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1853
+        },
+        "prompt_tokens": 1579,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4307
+      },
+      "finish_reason": "stop",
+      "sha256": "f7e6fedbecf4961d12818b90525e4fde0f150084991cca59522af84088a70ddb"
+    },
+    {
+      "name": "pilot-00-batch-07-0",
+      "usage": {
+        "completion_tokens": 5538,
+        "completion_tokens_details": {
+          "reasoning_tokens": 4819
+        },
+        "prompt_tokens": 1473,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7011
+      },
+      "finish_reason": "stop",
+      "sha256": "d0ffd0547bfb43ca00fcd8138fed286397d1073b74f26fa3ec120dcdaa6c9bf2"
+    },
+    {
+      "name": "pilot-00-batch-08-0",
+      "usage": {
+        "completion_tokens": 1556,
+        "completion_tokens_details": {
+          "reasoning_tokens": 826
+        },
+        "prompt_tokens": 1421,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2977
+      },
+      "finish_reason": "stop",
+      "sha256": "bddbe3b3e6d8c2225a8fa1f94db17b93ce10a4c735379e4bafc5316df0fcd2a7"
+    },
+    {
+      "name": "pilot-00-batch-09-0",
+      "usage": {
+        "completion_tokens": 1821,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1088
+        },
+        "prompt_tokens": 1457,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3278
+      },
+      "finish_reason": "stop",
+      "sha256": "788fb414ec5509eb7f53c4eb6093f5c207249833d0f81a173ead1fc2d140f535"
+    },
+    {
+      "name": "pilot-00-batch-10-0",
+      "usage": {
+        "completion_tokens": 1374,
+        "completion_tokens_details": {
+          "reasoning_tokens": 686
+        },
+        "prompt_tokens": 1399,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2773
+      },
+      "finish_reason": "stop",
+      "sha256": "4c20c7c4ed50316e31b08e81662867e0447b28d06a91cb00f5ce03cf4fdeffaa"
+    },
+    {
+      "name": "pilot-00-batch-11-0",
+      "usage": {
+        "completion_tokens": 1978,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1109
+        },
+        "prompt_tokens": 1420,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3398
+      },
+      "finish_reason": "stop",
+      "sha256": "2c0f538c7950ff7b1be191f77c7cf0eb162068b2c99135a3b253422aa3a86a8b"
+    },
+    {
+      "name": "pilot-00-batch-12-0",
+      "usage": {
+        "completion_tokens": 2620,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1811
+        },
+        "prompt_tokens": 1345,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3965
+      },
+      "finish_reason": "stop",
+      "sha256": "892af8af4dfc645d4e8b4da5a291bfb392e2ca754a206bb4a50966d1c4b19a23"
+    },
+    {
+      "name": "pilot-00-batch-13-0",
+      "usage": {
+        "completion_tokens": 2286,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1460
+        },
+        "prompt_tokens": 1381,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3667
+      },
+      "finish_reason": "stop",
+      "sha256": "f6708025518d84b47db49813c8370437e11b032603891a65054b020348d8d5ff"
+    },
+    {
+      "name": "pilot-00-batch-14-0",
+      "usage": {
+        "completion_tokens": 1469,
+        "completion_tokens_details": {
+          "reasoning_tokens": 636
+        },
+        "prompt_tokens": 1360,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2829
+      },
+      "finish_reason": "stop",
+      "sha256": "e058c380c3f0b0414818f1f5bdbffb62b70794fcf70f85423b8ea64235db44c0"
+    },
+    {
+      "name": "pilot-00-batch-15-0",
+      "usage": {
+        "completion_tokens": 3121,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2392
+        },
+        "prompt_tokens": 1445,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4566
+      },
+      "finish_reason": "stop",
+      "sha256": "6ccd63b5841b56dfa7a0bb072d26cb4e2fc92452e163b14008c9513ba9768bad"
+    },
+    {
+      "name": "pilot-00-batch-16-0",
+      "usage": {
+        "completion_tokens": 1017,
+        "completion_tokens_details": {
+          "reasoning_tokens": 303
+        },
+        "prompt_tokens": 1411,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2428
+      },
+      "finish_reason": "stop",
+      "sha256": "1f1218232361be360103685d776939cacb7c4bee2fce6c6c6c5f2d2835068f1a"
+    },
+    {
+      "name": "pilot-00-batch-17-0",
+      "usage": {
+        "completion_tokens": 1241,
+        "completion_tokens_details": {
+          "reasoning_tokens": 568
+        },
+        "prompt_tokens": 1470,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2711
+      },
+      "finish_reason": "stop",
+      "sha256": "7b33cf017dc31f0010bf58d5d4aa8c516f1648da02c161a516adbb470d5dfdb7"
+    },
+    {
+      "name": "pilot-00-batch-18-0",
+      "usage": {
+        "completion_tokens": 1382,
+        "completion_tokens_details": {
+          "reasoning_tokens": 809
+        },
+        "prompt_tokens": 1532,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2914
+      },
+      "finish_reason": "stop",
+      "sha256": "43b82ccfa7c8ff4f59558d84edb52ef60901fda2045910dcb655ecbe9475376c"
+    },
+    {
+      "name": "pilot-00-batch-19-0",
+      "usage": {
+        "completion_tokens": 2970,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2093
+        },
+        "prompt_tokens": 1426,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4396
+      },
+      "finish_reason": "stop",
+      "sha256": "e43624cb8f08d4e2142f79c9097c62d5315b76f5894386a7800620af8e3d32e6"
+    },
+    {
+      "name": "pilot-00-batch-20-0",
+      "usage": {
+        "completion_tokens": 910,
+        "completion_tokens_details": {
+          "reasoning_tokens": 744
+        },
+        "prompt_tokens": 602,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1512
+      },
+      "finish_reason": "stop",
+      "sha256": "2323b14ee6aec0a620293f1ac8d392b97af598faa21bbb9bffdab879839cb1f1"
+    },
+    {
+      "name": "pilot-01-batch-00-0",
+      "usage": {
+        "completion_tokens": 3532,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2812
+        },
+        "prompt_tokens": 1709,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 5241
+      },
+      "finish_reason": "stop",
+      "sha256": "e041729b9e8bb825df0a27b48bce66bb091c551d00efa4a8d55293c9888fe515"
+    },
+    {
+      "name": "pilot-01-batch-01-0",
+      "usage": {
+        "completion_tokens": 1860,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1131
+        },
+        "prompt_tokens": 1749,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3609
+      },
+      "finish_reason": "stop",
+      "sha256": "07efd15d5daa742eca9c90c1e44f96457fb54949904b3264079c4b5f0f53123f"
+    },
+    {
+      "name": "pilot-01-batch-02-0",
+      "usage": {
+        "completion_tokens": 2814,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2072
+        },
+        "prompt_tokens": 1626,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4440
+      },
+      "finish_reason": "stop",
+      "sha256": "7ab3b10555259b5dadea6d8b2e4294920bebc73f8ee245ae8e71ee2a669ad59f"
+    },
+    {
+      "name": "pilot-01-batch-03-0",
+      "usage": {
+        "completion_tokens": 2593,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1792
+        },
+        "prompt_tokens": 1584,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4177
+      },
+      "finish_reason": "stop",
+      "sha256": "491ea96f41485258bc1e984ca8b5547eeb661daafe59422198d9d08988ee8633"
+    },
+    {
+      "name": "pilot-01-batch-04-0",
+      "usage": {
+        "completion_tokens": 1125,
+        "completion_tokens_details": {
+          "reasoning_tokens": 475
+        },
+        "prompt_tokens": 1795,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2920
+      },
+      "finish_reason": "stop",
+      "sha256": "5ad65d09bdaaa6c4b24d95b384d8f479354045074cf40fbf78edad975176e893"
+    },
+    {
+      "name": "pilot-01-batch-05-0",
+      "usage": {
+        "completion_tokens": 2381,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1455
+        },
+        "prompt_tokens": 1598,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3979
+      },
+      "finish_reason": "stop",
+      "sha256": "422f059c88b88f41a2b74f71f08908c8037dcb2d60908edd5211da1441cf19ce"
+    },
+    {
+      "name": "pilot-01-batch-06-0",
+      "usage": {
+        "completion_tokens": 2328,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1436
+        },
+        "prompt_tokens": 1867,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4195
+      },
+      "finish_reason": "stop",
+      "sha256": "c36c6a116eb4186f344cc90a8ba983e05536ec4b319472a2d3ae73b372ed71fd"
+    },
+    {
+      "name": "pilot-01-batch-07-0",
+      "usage": {
+        "completion_tokens": 2427,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1637
+        },
+        "prompt_tokens": 1417,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3844
+      },
+      "finish_reason": "stop",
+      "sha256": "f2be140ca47895d2b0f74236de90b95f98ee70bc5cfcf8284832ca3d70c8b75b"
+    },
+    {
+      "name": "pilot-01-batch-08-0",
+      "usage": {
+        "completion_tokens": 2243,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1538
+        },
+        "prompt_tokens": 1488,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3731
+      },
+      "finish_reason": "stop",
+      "sha256": "3f15f42b55b6ebbce5c614c7ee0bb0da627bdf0749ae0b00ab4779e7cbdc613c"
+    },
+    {
+      "name": "pilot-01-batch-08-1",
+      "usage": {
+        "completion_tokens": 810,
+        "completion_tokens_details": {
+          "reasoning_tokens": 42
+        },
+        "prompt_tokens": 2242,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3052
+      },
+      "finish_reason": "stop",
+      "sha256": "11b9368627a4a0c8ab4348cd30806900feb36069de4b4b4194aa5ce8ceacb47a"
+    },
+    {
+      "name": "pilot-01-batch-09-0",
+      "usage": {
+        "completion_tokens": 2669,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1747
+        },
+        "prompt_tokens": 1611,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4280
+      },
+      "finish_reason": "stop",
+      "sha256": "f93eeea25bdc2b07603999eff32861dfea27ade0b8c089b67e4c4821c12d3669"
+    },
+    {
+      "name": "pilot-01-batch-10-0",
+      "usage": {
+        "completion_tokens": 3781,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2831
+        },
+        "prompt_tokens": 1730,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 5511
+      },
+      "finish_reason": "stop",
+      "sha256": "eec43b6e299872c5c5eb5ee2290569700fb1283116ed012949be786085c2c7f0"
+    },
+    {
+      "name": "pilot-01-batch-11-0",
+      "usage": {
+        "completion_tokens": 5601,
+        "completion_tokens_details": {
+          "reasoning_tokens": 4861
+        },
+        "prompt_tokens": 1810,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 7411
+      },
+      "finish_reason": "stop",
+      "sha256": "af36a5d25a9810963990d4ce6c9c5154d3f92bc91146152110adcffa139f9f83"
+    }
+  ],
+  "pairs": [
+    {
+      "id": "pilot-00",
+      "left": "wxb-01",
+      "right": "wxb-02",
+      "candidates": 161,
+      "labels": {
+        "distinct": 159,
+        "equivalent": 2
+      },
+      "selected": 1
+    },
+    {
+      "id": "pilot-01",
+      "left": "wxb-03",
+      "right": "wxb-04",
+      "candidates": 96,
+      "labels": {
+        "distinct": 95,
+        "equivalent": 1
+      },
+      "selected": 1
+    }
+  ],
+  "review": [
+    {
+      "pair": "pilot-00",
+      "candidate": "c0000",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "严肃判断用闲谈口气说出，作者站在读者旁边，不宣言、不煽动、不摆教导姿态，但句句带明确判断",
+      "left_condition": "未限定",
+      "right": "以第一人称\"我\"作为叙述与判断主体，是冷静的在场者与评语者，不是抒情者",
+      "right_condition": "未限定",
+      "reason": "左规则规定的是与读者的相对位置与口气：闲谈、不宣言不煽动不教导，但每句有判断；右规则规定的是叙述主体与情绪控制：第一人称'我'作冷静的在场评语者、不抒情。二者都含'在场''有判断'的成分，但一个约束语域与姿态、不限定人称，一个限定叙述人称与非抒情、不涉及闲谈口气，机制不相同。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0012",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "允许第一人称判断随时出场，判断可以锋利，但锋利只来自措辞，语气平淡；不靠感叹号、程度副词或排比",
+      "left_condition": "未限定",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "f02管第一人称判断的强度来源与句式禁忌；f04管与读者直接交流时的关系设定（把读者当熟人、可用“你”、可发问），并禁止煽情求共鸣。一个针对“我”的判断语气，一个针对读者关系与互动方式，条件与机制不同。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0024",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "谦抑词（自认所知有限、自认无能为力）与自信判断可并存且常相邻出现：先自我削一刀，再照样把话说完",
+      "left_condition": "未限定",
+      "right": "不直接开骂，不用感叹号加力，不用反问连环轰炸",
+      "right_condition": "讥刺时",
+      "reason": "f03（未限定）讲的是自谦语与自信判断可相邻共存的自我呈现机制（先削一刀再把话说完）；f14（讥刺时）讲的是讥刺场合的表达禁令（不直接开骂、不用感叹号、不用反问连环）。一为谦抑与断言的配伍，一为讥刺方式的克制手段，条件与机制都不同，且互不排斥。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0036",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "克制是把态度放进陈述句；每段可以有判断，但不必每句都表态",
+      "left_condition": "未限定",
+      "right": "以第一人称\"我\"作为叙述与判断主体，是冷静的在场者与评语者，不是抒情者",
+      "right_condition": "未限定",
+      "reason": "f05的机制是把态度嵌入陈述句并控制表态密度（每段可有判断、不必每句表态）；f01的机制是选定第一人称“我”为冷静的在场评语者而非抒情者。前者约束表态的形式与频率，后者约束判断主体与情态，可并存但互不覆盖（f05不要求第一人称，f01不含密度限制），故不等价也无排斥。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0048",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "误用提醒：写成口号、宣言、连续反问属距离太近、情绪太外露，需收回修辞；通篇无判断、只有事实罗列属把克制误当信息贫乏，需补回判断",
+      "left_condition": "出现口号式/无判断写法时纠正",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "f06是误用纠正：口号/宣言/连续反问属情绪太外露需收回，通篇无判断需补判断，双向校准距离；f04规定与读者交流时的熟人口吻（可用\"你\"、直接发问、请读者猜）并禁煽情。二者只在克制外露上部分重叠，机制（修辞校准 vs 读者关系设定）与条件（误用出现时 vs 直接交流时）不同，且f04允许发问不等于f06禁止的连续反问，不构成互斥。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0059",
+      "label": "equivalent",
+      "dimension": "rhythm",
+      "left": "长句推进后用极短句猛然停下作判断或转向，短句是刹车和换挡不是煽情；一段至多停一两次，过多变断句腔",
+      "left_condition": "未限定",
+      "right": "堆叠之后收一句字数少、语气硬的判断、后果或事实，形成落差；短句尤其放在读者期待长篇解释的位置上",
+      "right_condition": "堆叠之后",
+      "reason": "两者机制同为：铺陈/堆叠之后收一句字数少、语气硬的判断或事实，形成落差（左称刹车换挡，右强调放在读者期待解释处）。方向与条件一致，左的停顿次数限制与右的“收一句”相容，替换不丢主要约束。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0060",
+      "label": "equivalent",
+      "dimension": "rhythm",
+      "left": "长句推进后用极短句猛然停下作判断或转向，短句是刹车和换挡不是煽情；一段至多停一两次，过多变断句腔",
+      "left_condition": "未限定",
+      "right": "一段内铺陈若干长句后至少一处短落点；短句密集处要有稍长的句子重新铺开，避免整段像电报",
+      "right_condition": "段落内部节奏安排",
+      "reason": "两者都要求段落内长句铺陈后设短句落点，并限制短句过多（左：至多停一两次、避免断句腔；右：短句密集处须再铺长句、避免电报感），机制、方向与适用范围实质相同，细节互补而不冲突。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0072",
+      "label": "distinct",
+      "dimension": "language",
+      "left": "论述中间随时插入第一人称短语，分判断类（表明看法归属个人、带保留意味）与谦抑类（自认无知无能、降姿态但不撤回结论）",
+      "left_condition": "未限定",
+      "right": "插入不宜连续超过两处，否则主干被打散；需要多次补充时改为先列完再统一补充",
+      "right_condition": "句中插入时",
+      "reason": "左规则限定第一人称短语的语义分工（判断类/谦抑类）与可插入位置的自由度（随时插入），右规则限定句中插入的数量密度与超过后的改写办法。二者只在'插入语'话题上重叠，机制分别是内容类型与数量控制，条件也不同（未限定 vs 句中插入），不可互换。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0084",
+      "label": "distinct",
+      "dimension": "information",
+      "left": "先认可某前提或流行说法，顺其逻辑一路推到结果滑稽、过分或无法收拾之处，再用一句短判断指出荒谬",
+      "left_condition": "未限定",
+      "right": "动作和荒诞过程铺开写，感受和后果一笔带过；比喻取自日常低微场景，一句即过、不再引申、不承担论证；无合适素材就不比喻，宁可平叙",
+      "right_condition": "未限定",
+      "reason": "f14是先认可再顺推至荒谬并以短判断点破的论证结构；f25是铺写与略写的篇幅分配及比喻的取材与不引申规则。两者都涉及'荒诞'内容但一个管论证推进，一个管详略与比喻使用，机制不同。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0096",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "可把作者自己当论述对象，用第三人称式冷静眼光审视过去的自己，说自己的短处同样不带情绪",
+      "left_condition": "未限定",
+      "right": "以第一人称\"我\"作为叙述与判断主体，是冷静的在场者与评语者，不是抒情者",
+      "right_condition": "未限定",
+      "reason": "f18讲把自己当论述对象、以第三人称式眼光审视过去的自己并平静承认短处；f01讲谁在说与说什么角色——第一人称'我'作为冷静的在场评语者而非抒情者。两者只是都要求冷静，对象与机制不同（自我描述视角 vs 叙述主体身份），且第一人称叙述者完全可对过去的自己施以第三人称式目光，可并存无排斥。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0108",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "自嘲落在可核实的自我评价（资历、能力、处境一类），用具体而短的措辞点破，不用抒情",
+      "left_condition": "未限定",
+      "right": "读者被当作通情达理的熟人，可用\"你\"称呼、直接发问、请读者猜，但不煽情、不请求共鸣、不铺垫感动",
+      "right_condition": "与读者直接交流时",
+      "reason": "f19讲自嘲的内容与措辞（可核实、具体而短、不抒情）；f04在与读者直接交流的条件下讲如何称呼和对待读者（用\"你\"、发问、请读者猜，但不煽情不求共鸣）。一个是自我评价写法，一个是读者关系处理，条件与机制均不同。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0120",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "自嘲之后立即转向一般化判断：把个人经历抽成可迁移的观察，避免沉溺自怜",
+      "left_condition": "自嘲之后",
+      "right": "不直接开骂，不用感叹号加力，不用反问连环轰炸",
+      "right_condition": "讥刺时",
+      "reason": "f20规定自嘲之后的结构动作（立即一般化、避免自怜），f14规定讥刺时的手法禁区（不骂、不用感叹号、不连环反问）。条件与机制均不同，一为转场去向，一为语气工具的禁用，可并存但互不涵盖。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0132",
+      "label": "distinct",
+      "dimension": "language",
+      "left": "把行为归因于“好的动机”再陈述后果，让动机与效果形成对照；归因句要写得像客观陈述",
+      "left_condition": "未限定",
+      "right": "插入不宜连续超过两处，否则主干被打散；需要多次补充时改为先列完再统一补充",
+      "right_condition": "句中插入时",
+      "reason": "f23规定动机归因与后果对照的写法；f12规定插入语数量上限与多补充时的布局。一个是内容对照构造，一个是句法插入管理，适用条件也不同（未限定 vs 句中插入时）。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0144",
+      "label": "distinct",
+      "dimension": "constraints",
+      "left": "具体细节（数字、物件、感官、动作）有则用一两处压实抽象判断，无则省略，靠语序、停顿、照应维持质感；绝不可为“生动”扩编工具、场景或他人反应",
+      "left_condition": "未限定",
+      "right": "任务给定的事实、必写数量、身份、地点、状态与结果优先于任何风格偏好，必须写全写准",
+      "right_condition": "任务给出必写事实时",
+      "reason": "f27约束具体细节的取舍与禁止为生动扩编，f29约束任务必写事实须写全写准并优先于风格；一个管细节的克制使用，一个管给定事实的完整呈现，机制不同且可并存。"
+    },
+    {
+      "pair": "pilot-00",
+      "candidate": "c0156",
+      "label": "distinct",
+      "dimension": "ending",
+      "left": "收尾方向由本篇任务决定，不预设怀念、批评或讽刺的固定落点",
+      "left_condition": "未限定",
+      "right": "也可以在推论将要展开时主动收住，把话说一半就停",
+      "right_condition": "推论将要展开时",
+      "reason": "f30约束结尾的取向由任务决定、不预设固定落点；f27约束在推论将展开时截断、说一半即停。前者是方向来源，后者是停笔时机与截断手法，适用条件（未限定 vs 推论将展开时）与机制均不同，无反向要求。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0000",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "说话人自置于业余位置，先承认不够格甚至预告冒犯内行，然后照样把话说完且说得不软；自嘲只用于降姿态、管理情绪，不用于收回判断，判断保持清晰带锋芒。",
+      "left_condition": "未限定",
+      "right": "第一人称判断驱动全文，好恶轻重取舍直接说出，判断词常用“我认为”“必须承认”“我相信”等显眼表态标记，读者与作者如当面交谈，不刻意讨好",
+      "right_condition": "未限定",
+      "reason": "左规则是身份姿态机制：开局自置业余、自嘲降姿态但不撤判断，判断带锋芒；右规则是表态标记机制：以第一人称显眼判断词驱动全文、如当面交谈不讨好。二者仅共享“直说判断”的宽泛取向，手段与落点不同，且无排斥。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0012",
+      "label": "distinct",
+      "dimension": "constraints",
+      "left": "第一人称的判断、反感、自嘲、事后评点可自由使用不需亲历许可；但具体回忆、亲见、亲手操作、现场对白、确切数字仅在任务给出依据时写，无依据时靠语序停顿照应措辞维持声音，不扩编人物动作感官细节。",
+      "left_condition": "无任务依据时",
+      "right": "句子短不等于段落短；段落是论点单元，一个段落里通常只推进一件事",
+      "right_condition": "未限定",
+      "reason": "f03约束无依据时可写什么（判断自由、具体经验需任务依据、不得编造）；f06约束段落组织（段落是论点单元、一段推进一件事）。机制与适用条件完全不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0024",
+      "label": "distinct",
+      "dimension": "rhythm",
+      "left": "第一拍用中性略带敬意的短篇幅复述通行说法或权威判断，不替对方长篇辩护。",
+      "left_condition": "三拍中的第一拍",
+      "right": "括号夹注用于交代词语来历或外部知识，紧跟被说明的名词，读完回到主线；括号不写主要判断，判断必须在正文句子里完成",
+      "right_condition": "使用括号夹注时",
+      "reason": "左规则（三拍第一拍）规定开拍内容机制：中性短篇幅复述通行说法或权威判断；右规则（使用括号夹注时）规定括号的语法位置与内容分工：交代词语来历、不写主要判断。一个是段落三拍结构的起拍写法，一个是括号用法，机制与适用条件均不同，也无互斥。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0036",
+      "label": "distinct",
+      "dimension": "information",
+      "left": "伪量化全篇一到两次即可；任务无数字素材时保留权衡折算比较取舍等动词与相对量说法，不编造具体比值或统计；拆台句要紧跟精确化之后。",
+      "left_condition": "任务没有数字与量的素材时",
+      "right": "把审美、伦理等抽象判断落到一个门槛很低、略带尴尬的身体经验或日常遭遇上，用“类似”“可以相比”“与此相当”等并置关系连接两件事，分寸留给读者体会；并置后可加一句坦白（承认说法古怪或因此做错），语气随之压低",
+      "right_condition": "抽象判断需要具体支撑时",
+      "reason": "左限定伪量化频次、无数字素材时不编比值、拆台句紧跟精确化；右为抽象判断落到身体经验的并置类比加坦白。一个是伪量化的频次与禁忌条件，一个是具体化支撑的并置机制，不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0048",
+      "label": "distinct",
+      "dimension": "language",
+      "left": "同段并置文雅/学术语域（引述、术语、分项）、口语粗直语域（俚语、粗率形容、市井动词）、技术行话语域，用落差产生幽默和锋芒。",
+      "left_condition": "未限定",
+      "right": "遇可归类的现象，先起一个口语化、略带滑稽的戏称，再用一两句界定清楚；戏称负责态度，界定负责准确，两者紧贴出现；命名后立刻说明边界或例外",
+      "right_condition": "遇可归类的现象时",
+      "reason": "f14是同段并置三类语域（文雅/学术、口语粗直、技术行话）以落差取幽默与锋芒；f18是遇可归类现象时先起口语化戏称再紧贴界定边界，机制是命名加界定分工。一个是语域并置落差，一个是戏称＋定义结构，仅在口语化和幽默感上部分重叠，条件与作用面不同，无相互排斥。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0060",
+      "label": "distinct",
+      "dimension": "constraints",
+      "left": "比喻、假设和推论基于已有信息，不得当作发生过的事。",
+      "left_condition": "未限定",
+      "right": "链条每一步必须字面上顺理成章，滑坡感由接续词连续推进制造；某一步跳得太远会显得硬扣帽子",
+      "right_condition": "构造归谬论证时",
+      "reason": "f17限定比喻、假设、推论不得被当作已发生的事实（本体标注）；f11限定归谬链条每步须字面顺理成章、靠接续词推进、不得跳跃（构造归谬时）。一个管内容的地位标注，一个管推演步骤的连贯性，条件与机制均不同。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0072",
+      "label": "distinct",
+      "dimension": "voice",
+      "left": "讽刺操作二：平铺直叙地描述过度合规、过度精确、过度讲究的姿态，越冷静越有效；形容词少用，贬抑词体积小、位置靠句尾，语气是调侃不是控诉。",
+      "left_condition": "未限定",
+      "right": "第一人称判断驱动全文，好恶轻重取舍直接说出，判断词常用“我认为”“必须承认”“我相信”等显眼表态标记，读者与作者如当面交谈，不刻意讨好",
+      "right_condition": "未限定",
+      "reason": "f19是讽刺白描机制：冷静描述过度合规姿态，贬抑词缩小并移至句尾，语气调侃；f01是立场表达机制：以第一人称和显眼判断标记（我认为/必须承认）直接说出好恶。二者一个要求贬抑低调轻放、一个要求判断显眼直说，处理对象不同（被讽刺对象的姿态与作者本人的立场），可并存但机制与手段不同，不等价也无明确互斥。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0084",
+      "label": "distinct",
+      "dimension": "information",
+      "left": "详略安排：推演、假设延展、针对漏洞的挑剔三处展开写足；背景交代、引述来源来历、场景环境压缩到一句带过，不为营造氛围编场景。",
+      "left_condition": "未限定",
+      "right": "铺陈同类对象时先并列给出，再逐个一两句点断式简评，简评节奏快、长短不一，不必每项等量展开；详略由判断轻重决定，说得最狠的一项可多留一两句，其余一带而过；列举只是铺垫，重心落在其后的总评或推演上",
+      "right_condition": "需要铺陈同类对象时",
+      "reason": "f22按内容类型分配篇幅（推演等展开、背景来源场景压缩）；f24规定同类对象列举时的详略与节奏（逐项一两句点断简评、详略由判断轻重决定、重心在总评或推演）。两者都提到推演要重，但机制与适用条件不同：一个是全局内容取舍，一个是列举场景的展开方式。"
+    },
+    {
+      "pair": "pilot-01",
+      "candidate": "c0088",
+      "label": "equivalent",
+      "dimension": "ending",
+      "left": "结尾落在短句上，语气平，不解释、不升华、不总结全文、不号召行动；可为立场坦白、自我定位或带钝感的冷评，说完就停留白，不要求固定情绪方向。",
+      "left_condition": "未限定",
+      "right": "结尾通常是句长递减的一句短判断，或一次压低语气的极端化感叹，说完即止：不总结全文、不劝告、不升华、不补充说明；解释性内容在前文完成，结尾只留语气与停顿；结尾具体倾向（感慨、反讽、留白）随题材而定，不预设固定方向",
+      "right_condition": "写作结尾时",
+      "reason": "两条同为结尾机制：都要求以短句收束、说完即止留白，不解释、不总结全文、不升华、不劝告/号召，且不预设固定情绪方向。f25 的句长递减与压低语气感叹、f24 的语气平与立场坦白/冷评只是可选形式描述（“通常是”“可为”均非排他），互换不丢失主要约束。"
+    }
+  ],
+  "limitation": "开发数据的实现者复核，不是人工盲测或独立确认；结构有效不等于语义正确"
+}

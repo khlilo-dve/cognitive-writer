@@ -2,14 +2,6 @@
   "count": 5,
   "items": [
     {
-      "field_id": "fldOfck7mX",
-      "field_name": "next_step",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
       "field_id": "fldCYvupkQ",
       "field_name": "event_id",
       "style": {
@@ -36,6 +28,14 @@
     {
       "field_id": "fldbsENWNU",
       "field_name": "meaning",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldOfck7mX",
+      "field_name": "next_step",
       "style": {
         "type": "plain"
       },

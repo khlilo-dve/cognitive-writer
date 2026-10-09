@@ -1,0 +1,8 @@
+{
+  "status": "waiting",
+  "run": "p2-candidates-pilot-03",
+  "wait_pid": 1218,
+  "binary_sha256": "f96e6ed91ea62453a3c4b1af5c7d115262fb0f3b8bbddd5b3db96b6146677143",
+  "pid": 2278,
+  "updated_at": "2026-10-09T05:59:32.007854+00:00"
+}

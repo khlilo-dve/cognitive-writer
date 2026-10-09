@@ -52,4 +52,6 @@ research/style-aggregation/
 
 ## 当前下一步
 
+2026-10-09最新：候选比较器已推进到method-revision-04。13项控制通过，p2-candidates-pilot-03网络中断后已从49份响应恢复；原3元run上限与全研究100元总额保持。当前活进程和自动收尾状态见candidate-followup-state.json、run summary和实际PID，不能只据running文本判断。新小试完成后需执行者复核语义，不自动进入正式矩阵。用户已授权方法改进自主执行，无需逐步确认。下段为P1结束时的历史入口。
+
 进入P2，复用四份有效检查点，补齐单篇提取和重复实验。预算已批准，不再询问同一额度；样本来源等级和拒收案例见datasets/review-v1.md。P1工程结果不等于多文章研究结论。飞书Base：https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe ，用户已获得管理员权限并经user身份回读验证；P1报告：https://www.feishu.cn/docx/CxWidCey8oFsTFxr8GVc8pVzntc 。

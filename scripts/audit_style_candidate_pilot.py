@@ -39,7 +39,7 @@ def main():
     for r in review:
         lines += [f"## {r['pair']} / {r['candidate']} / {r['label']} / {r['dimension']}",
                   f"A：{r['left']}（条件：{r['left_condition']}）",f"B：{r['right']}（条件：{r['right_condition']}）",f"模型理由：{r['reason']}",""]
-    (out/"review-material.md").write_text("\n".join(lines)+"\n")
+    (out/"review-material.md").write_text("\n".join(lines).rstrip()+"\n")
     print(json.dumps(dict(receipts=len(receipts),pairs=pairs,review_items=len(review)),ensure_ascii=False))
 
 if __name__=="__main__":main()
