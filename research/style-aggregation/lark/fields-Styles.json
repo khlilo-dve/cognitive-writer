@@ -2,22 +2,6 @@
   "count": 7,
   "items": [
     {
-      "field_id": "fldFwto2EJ",
-      "field_name": "spec",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldhhcHLye",
-      "field_name": "artifact_id",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
       "field_id": "fldiZU1URE",
       "field_name": "run_id",
       "style": {
@@ -55,6 +39,22 @@
     {
       "field_id": "fldSkcr783",
       "field_name": "warnings",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldFwto2EJ",
+      "field_name": "spec",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldhhcHLye",
+      "field_name": "artifact_id",
       "style": {
         "type": "plain"
       },

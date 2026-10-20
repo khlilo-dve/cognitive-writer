@@ -1,0 +1,24 @@
+{
+  "decision": "reject_for_generation",
+  "scope": "Reviewed all 33 support rationales and selected source counterexamples; not human gold labels",
+  "inputs_sha256": "bb61ec057dd25257935ff7834917339f58810deb0eb1d859a3ae570a0c1327a9",
+  "issues": [
+    {
+      "article": "wzq-05b",
+      "rule": "p06",
+      "issue": "把所以我建议你们…来训练他们的语感称为全文最后一句，但原文其后还有语言学上有个词叫语感…语感也不好。结尾定位仍错误。"
+    },
+    {
+      "article": "wzq-07",
+      "rule": "p05",
+      "issue": "理由明确承认感叹号与否定项冲突，却返回unknown而不是本协议counter；简单控制通过未迁移到真实样本。"
+    }
+  ],
+  "partial_success": "wzq-05b/p03不再把莎士比亚算作作者自嘲支持；这里只记录案例变化，不报准确率。",
+  "missing_articles": [
+    "wxb-09",
+    "wzq-03",
+    "wzq-06",
+    "wzq-09"
+  ]
+}

@@ -155,7 +155,7 @@ pub(crate) async fn compare_configured(
     Ok(json!({"id":id,"candidates":candidates,"judgments":judgments,"metrics":metrics}))
 }
 
-fn control_passed(id: &str, result: &Value) -> Result<bool, AppError> {
+pub(crate) fn control_passed(id: &str, result: &Value) -> Result<bool, AppError> {
     let js: Vec<Judgment> = serde_json::from_value(result["judgments"].clone())
         .map_err(|e| AppError::Parse(e.to_string()))?;
     if id == "mixed" {

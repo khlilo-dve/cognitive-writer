@@ -1,0 +1,30 @@
+{
+  "status": "views_reviewed",
+  "rows": [
+    {
+      "id": "wxb-01",
+      "status": "complete"
+    },
+    {
+      "id": "wxb-01-r2",
+      "status": "complete"
+    },
+    {
+      "id": "wxb-02",
+      "status": "complete"
+    },
+    {
+      "id": "wzq-01",
+      "status": "complete"
+    },
+    {
+      "id": "wzq-01-r2",
+      "status": "complete"
+    },
+    {
+      "id": "wzq-02",
+      "status": "complete"
+    }
+  ],
+  "not_a_comparison_run": true
+}

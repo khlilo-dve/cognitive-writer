@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-11",
+  "decision": "reject_for_full_matrix",
+  "reviewer": "implementation_agent_not_human_gold",
+  "inputs_sha256": "2614e8723346c62144bbc7d57d0d3bf1c7bc4136871a2edda799357b711c43b5",
+  "pair_sha256": {
+    "pilot-05": "011722ee194b5958eaab52fcb9c6a256fba952d55fade2715054407b6476d7fa",
+    "pilot-04": "cf40409c012356e9881a64245401a8e5239554c7525823b8691e9d7ef24267f1",
+    "pilot-02": "9053b1915d654fe0bf0b521a57db1642afa95bd75a02e7241599d78a1c5f019d",
+    "pilot-03": "01866cf9c027b903d444facb1d83e02b2e1f3085efe1bd0138cfd46ec84a5225",
+    "pilot-00": "de71b275f10baffb3bcbb799642edcc1e81811a5660ab8e48eb93a1f3c715fd7",
+    "pilot-01": "e76cf975516a22d1a9e8be5dd4a5bdfd36438bf70aecdf22fd60ec33abdafa9c"
+  },
+  "coverage": "All 10 equivalent and 3 opposite relations; first and median distinct candidate per pair (12)",
+  "issues": [
+    {
+      "pair": "pilot-00",
+      "candidate": "c0060",
+      "issue": "理由以细节互补不冲突作为等价依据，未保留最多一两次和动态调整的差异。"
+    },
+    {
+      "pair": "pilot-03",
+      "candidate": "c0103",
+      "issue": "理由把右侧必写信息须在结尾前落实的要求补到左侧。"
+    },
+    {
+      "pair": "pilot-03",
+      "candidate": "c0113",
+      "issue": "忽略明确允许虚构与仅有依据许可的差异。"
+    },
+    {
+      "pair": "pilot-04",
+      "candidate": "c0042",
+      "issue": "每段限频与每次长句后必须短停顿不能视为整条同义。"
+    },
+    {
+      "pair": "pilot-05",
+      "candidate": "c0025",
+      "issue": "把可容纳附加成分强化为必须嵌套，据此断言互斥。"
+    }
+  ],
+  "limitations": [
+    "不是人工评分，不据此计算分类准确率",
+    "结尾c0088仍有主次约束解释分歧",
+    "泛化的事实许可政策不应作为作者辨识的主要证据"
+  ],
+  "next": "method-revision-05 atomic features with repeat controls; preserve original detailed Styles"
+}

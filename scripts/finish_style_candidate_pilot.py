@@ -77,8 +77,8 @@ def main():
         # Commit only this research follow-up's artifacts; never stage source or unrelated user work.
         owned=[f"research/style-aggregation/runs/{RUN}","research/style-aggregation/usage-ledger.json",
             "research/style-aggregation/journal.md","research/style-aggregation/lark","research/style-aggregation/candidate-followup-state.json",
-            "research/style-aggregation/reports/p2-candidates-pilot-03","research/style-aggregation/reports/candidate-progress-2026-10-09",
-            "research/style-aggregation/charts/candidate-progress-2026-10-09",".claude/tasks/current.md"]
+            "research/style-aggregation/reports/p2-candidates-pilot-03","research/style-aggregation/reports/candidate-progress-2026-10-11",
+            "research/style-aggregation/charts/candidate-progress-2026-10-11",".claude/tasks/current.md"]
         execute(["git","add","--",*owned]);execute(["git","diff","--cached","--check"])
         staged=subprocess.check_output(["git","diff","--cached","--name-only"],cwd=REPO,text=True).splitlines()
         if any(not any(p==a or p.startswith(a+"/") for a in owned) for p in staged):

@@ -1,0 +1,50 @@
+{
+  "decision": "approved_for_feasibility_only",
+  "corrections": [
+    {
+      "article": "wxb-01-r2",
+      "feature": "f01",
+      "field": "condition",
+      "before": "任务无亲历依据时只作在场判断与评点",
+      "after": "未限定",
+      "reason": "原文全篇用我判断；错误的在场条件来自通用事实许可。按v2预定规则移出voice条件，原文正确的不在场许可保留在排除记录。",
+      "quote": "全篇由一个明确的“我”支撑：我做判断、我承认局限、我自嘲，也由我把话替读者挑明。第一人称是声音要素，不等于要求文章有亲历回忆；具体回忆、亲见、现场对白须任务有依据或明确允许虚构，无则只作不在场的判断与评点。读者被当作听得懂玩笑、跟得上推理的同辈：不必铺垫常识，不必安慰，也不奉承。距离是平视的半步之内，但不做亲密倾诉——说理指向读者的判断力，不指向读者的情绪。"
+    },
+    {
+      "article": "wzq-02",
+      "feature": "f19",
+      "field": "dimension",
+      "before": "language",
+      "after": "opening",
+      "reason": "该条明确限定篇首或题记，按冻结优先级属于opening。",
+      "quote": "- 允许在篇首或题记位置出现一小段紧凑的半文言：字数短，四字节奏，“之、亦、可见”一类虚字撑起书面腔，信息密度高，不带语气词。"
+    },
+    {
+      "article": "wzq-02",
+      "feature": "f17",
+      "field": "dimension",
+      "before": "narration",
+      "after": "information",
+      "reason": "该条仅谈判断后的自我修正，不含事件/引语与评论的接续，依操作定义属于information。",
+      "quote": "- **自我修正**：先下一个判断，随即自己拆掉或掉转方向，用口语的转折词把话拉回（“不过话又说回来”这类方式）。这是本声音的重要机制——它显示说话人在现场动脑子，而不是背稿。一篇中自我修正一次为宜，两次以上会显得游移。"
+    },
+    {
+      "article": "wxb-01",
+      "feature": "f17",
+      "field": "dimension",
+      "before": "narration",
+      "after": "voice",
+      "reason": "该条谈审视自身的人称与态度，依操作定义属于voice。",
+      "quote": "允许作者把自己当作论述对象，用第三人称式的冷静眼光审视过去的自己，说自己的短处时同样不带情绪。规则："
+    }
+  ],
+  "inputs_sha256": "f935b6347013a7d5be0659ee83074e04eb7997b69c5ba44fb46aa027846dfc8c",
+  "view_sha256": {
+    "wxb-01": "a7ab1c0f02320064cd37c0ddefddf150111fe84595e361e4b83b618a84ff7524",
+    "wxb-01-r2": "bd43089cf51cd53b068e58d343e7a1914383a691d4dbae2424fe15db9b3557e8",
+    "wxb-02": "a726960f5e3d2fad32c2a31c00c3514f073012705bf1cc855185e5c1fdb4352c",
+    "wzq-01": "58ed5e0ea5130c18ee6304df881d130d7becf1762c6e7b5de2e2391661a262a9",
+    "wzq-01-r2": "28eaf29174a2aa5bc58b17080a1d4e0959088b9594dc65861622dedc5ded24de",
+    "wzq-02": "741bd061012bd3d6dc6931d75abb18a91fbf9e851654b5658c3e9948b05091ee"
+  }
+}

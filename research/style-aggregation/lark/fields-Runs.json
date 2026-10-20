@@ -2,22 +2,6 @@
   "count": 8,
   "items": [
     {
-      "field_id": "fldY13u9HD",
-      "field_name": "run_id",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldikq8kaf",
-      "field_name": "report_url",
-      "style": {
-        "type": "url"
-      },
-      "type": "text"
-    },
-    {
       "field_id": "fld4TzrCDT",
       "field_name": "conclusion",
       "style": {
@@ -26,32 +10,8 @@
       "type": "text"
     },
     {
-      "field_id": "fld4WRkmUr",
-      "field_name": "caveat",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldPgLYilD",
-      "field_name": "question",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldwsKY9FI",
-      "field_name": "status",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldpwNxWTH",
-      "field_name": "stage",
+      "field_id": "fldY13u9HD",
+      "field_name": "run_id",
       "style": {
         "type": "plain"
       },
@@ -67,6 +27,46 @@
         "type": "plain"
       },
       "type": "number"
+    },
+    {
+      "field_id": "fld4WRkmUr",
+      "field_name": "caveat",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldwsKY9FI",
+      "field_name": "status",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldikq8kaf",
+      "field_name": "report_url",
+      "style": {
+        "type": "url"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldPgLYilD",
+      "field_name": "question",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
+      "field_id": "fldpwNxWTH",
+      "field_name": "stage",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
     }
   ],
   "limit": 100,

@@ -2,9 +2,9 @@
   "status": "complete",
   "base": "Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
   "manifest": "None",
-  "run": "research/style-aggregation/runs/p2-candidates-pilot-03",
+  "run": "None",
   "runs": [
-    "research/style-aggregation/runs/p2-candidates-pilot-03"
+    "research/style-aggregation/runs/p3-evidence-audit-01"
   ],
-  "record_count": 89
+  "record_count": 105
 }

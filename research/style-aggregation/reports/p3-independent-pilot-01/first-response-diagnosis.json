@@ -1,0 +1,688 @@
+[
+  {
+    "author": "wang_zengqi",
+    "request": "profile-95a8f188fa16d060-merge-0.json",
+    "cross_dimension_or_missing": 48,
+    "issues": [
+      {
+        "rule": "p02",
+        "article": "a02",
+        "feature": "f19",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p02",
+        "article": "a03",
+        "feature": "f17",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p02",
+        "article": "a04",
+        "feature": "f09",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p02",
+        "article": "a04",
+        "feature": "f10",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p02",
+        "article": "a04",
+        "feature": "f19",
+        "expected_dimension": "voice",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p02",
+        "article": "a06",
+        "feature": "f22",
+        "expected_dimension": "voice",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p04",
+        "article": "a03",
+        "feature": "f02",
+        "expected_dimension": "information",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p04",
+        "article": "a05",
+        "feature": "f09",
+        "expected_dimension": "information",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p04",
+        "article": "a05",
+        "feature": "f11",
+        "expected_dimension": "information",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p04",
+        "article": "a07",
+        "feature": "f14",
+        "expected_dimension": "information",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p04",
+        "article": "a08",
+        "feature": "f20",
+        "expected_dimension": "information",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p04",
+        "article": "a09",
+        "feature": "f15",
+        "expected_dimension": "information",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p05",
+        "article": "a01",
+        "feature": "f15",
+        "expected_dimension": "language",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p05",
+        "article": "a06",
+        "feature": "f27",
+        "expected_dimension": "language",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p05",
+        "article": "a08",
+        "feature": "f10",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p05",
+        "article": "a09",
+        "feature": "f10",
+        "expected_dimension": "language",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p05",
+        "article": "a09",
+        "feature": "f13",
+        "expected_dimension": "language",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p06",
+        "article": "a01",
+        "feature": "f11",
+        "expected_dimension": "language",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p06",
+        "article": "a08",
+        "feature": "f16",
+        "expected_dimension": "language",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p06",
+        "article": "a09",
+        "feature": "f22",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p07",
+        "article": "a01",
+        "feature": "f10",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p07",
+        "article": "a02",
+        "feature": "f14",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p07",
+        "article": "a04",
+        "feature": "f14",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p07",
+        "article": "a05",
+        "feature": "f14",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p07",
+        "article": "a07",
+        "feature": "f16",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p07",
+        "article": "a09",
+        "feature": "f20",
+        "expected_dimension": "narration",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p07",
+        "article": "a10",
+        "feature": "f21",
+        "expected_dimension": "narration",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p08",
+        "article": "a01",
+        "feature": "f23",
+        "expected_dimension": "information",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a01",
+        "feature": "f24",
+        "expected_dimension": "information",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a03",
+        "feature": "f21",
+        "expected_dimension": "information",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a04",
+        "feature": "f03",
+        "expected_dimension": "information",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a05",
+        "feature": "f15",
+        "expected_dimension": "information",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a07",
+        "feature": "f05",
+        "expected_dimension": "information",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a09",
+        "feature": "f24",
+        "expected_dimension": "information",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p09",
+        "article": "a01",
+        "feature": "f09",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a01",
+        "feature": "f20",
+        "expected_dimension": "constraints",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p09",
+        "article": "a02",
+        "feature": "f07",
+        "expected_dimension": "constraints",
+        "source_dimension": "rhythm"
+      },
+      {
+        "rule": "p09",
+        "article": "a03",
+        "feature": "f10",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a04",
+        "feature": "f26",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a05",
+        "feature": "f11",
+        "expected_dimension": "constraints",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p09",
+        "article": "a06",
+        "feature": "f18",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a07",
+        "feature": "f26",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a08",
+        "feature": "f31",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a09",
+        "feature": "f12",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a10",
+        "feature": "f11",
+        "expected_dimension": "constraints",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p12",
+        "article": "a01",
+        "feature": "f04",
+        "expected_dimension": "opening",
+        "source_dimension": "rhythm"
+      },
+      {
+        "rule": "p12",
+        "article": "a09",
+        "feature": "f28",
+        "expected_dimension": "opening",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p12",
+        "article": "a10",
+        "feature": "f04",
+        "expected_dimension": "opening",
+        "source_dimension": "narration"
+      }
+    ]
+  },
+  {
+    "author": "wang_xiaobo",
+    "request": "profile-968be6b59520fb35-merge-0.json",
+    "cross_dimension_or_missing": 48,
+    "issues": [
+      {
+        "rule": "p01",
+        "article": "a07",
+        "feature": "f01",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p02",
+        "article": "a02",
+        "feature": "f29",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a02",
+        "feature": "f30",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a03",
+        "feature": "f03",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a03",
+        "feature": "f25",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a04",
+        "feature": "f16",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a04",
+        "feature": "f17",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a05",
+        "feature": "f25",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a06",
+        "feature": "f12",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a06",
+        "feature": "f20",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a07",
+        "feature": "f27",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a07",
+        "feature": "f28",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a08",
+        "feature": "f03",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a08",
+        "feature": "f21",
+        "expected_dimension": "voice",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p02",
+        "article": "a09",
+        "feature": "f10",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p02",
+        "article": "a10",
+        "feature": "f03",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p03",
+        "article": "a03",
+        "feature": "f11",
+        "expected_dimension": "rhythm",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p04",
+        "article": "a04",
+        "feature": "f02",
+        "expected_dimension": "rhythm",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p04",
+        "article": "a06",
+        "feature": "f16",
+        "expected_dimension": "rhythm",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p04",
+        "article": "a08",
+        "feature": "f09",
+        "expected_dimension": "rhythm",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p04",
+        "article": "a09",
+        "feature": "f01",
+        "expected_dimension": "rhythm",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p04",
+        "article": "a10",
+        "feature": "f04",
+        "expected_dimension": "rhythm",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p05",
+        "article": "a03",
+        "feature": "f15",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p05",
+        "article": "a04",
+        "feature": "f01",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p05",
+        "article": "a04",
+        "feature": "f07",
+        "expected_dimension": "language",
+        "source_dimension": "rhythm"
+      },
+      {
+        "rule": "p05",
+        "article": "a06",
+        "feature": "f02",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p05",
+        "article": "a06",
+        "feature": "f03",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p05",
+        "article": "a07",
+        "feature": "f05",
+        "expected_dimension": "language",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p05",
+        "article": "a08",
+        "feature": "f08",
+        "expected_dimension": "language",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p06",
+        "article": "a07",
+        "feature": "f23",
+        "expected_dimension": "language",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p07",
+        "article": "a01",
+        "feature": "f22",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p07",
+        "article": "a01",
+        "feature": "f25",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p07",
+        "article": "a04",
+        "feature": "f10",
+        "expected_dimension": "voice",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p07",
+        "article": "a04",
+        "feature": "f13",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p07",
+        "article": "a06",
+        "feature": "f09",
+        "expected_dimension": "voice",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p07",
+        "article": "a08",
+        "feature": "f15",
+        "expected_dimension": "voice",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p07",
+        "article": "a08",
+        "feature": "f18",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p07",
+        "article": "a09",
+        "feature": "f12",
+        "expected_dimension": "voice",
+        "source_dimension": "narration"
+      },
+      {
+        "rule": "p07",
+        "article": "a09",
+        "feature": "f17",
+        "expected_dimension": "voice",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a01",
+        "feature": "f14",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p08",
+        "article": "a01",
+        "feature": "f15",
+        "expected_dimension": "narration",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p08",
+        "article": "a01",
+        "feature": "f16",
+        "expected_dimension": "narration",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p08",
+        "article": "a04",
+        "feature": "f11",
+        "expected_dimension": "narration",
+        "source_dimension": "constraints"
+      },
+      {
+        "rule": "p08",
+        "article": "a08",
+        "feature": "f17",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p08",
+        "article": "a10",
+        "feature": "f07",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      },
+      {
+        "rule": "p09",
+        "article": "a06",
+        "feature": "f22",
+        "expected_dimension": "information",
+        "source_dimension": "language"
+      },
+      {
+        "rule": "p10",
+        "article": "a01",
+        "feature": "f05",
+        "expected_dimension": "narration",
+        "source_dimension": "voice"
+      },
+      {
+        "rule": "p10",
+        "article": "a08",
+        "feature": "f08",
+        "expected_dimension": "narration",
+        "source_dimension": "information"
+      }
+    ]
+  }
+]

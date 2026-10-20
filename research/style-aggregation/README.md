@@ -1,6 +1,6 @@
 # 多文章作者风格研究
 
-状态：100元预算已批准，P1已完成，接续P2；24篇网页样本清单、四篇独立提取试跑、费用与缓存核验、飞书Base及阶段报告已落地。创建日期：2026-09-26。当前协议v2_detailed适配用户的详细风格要求，费用新估算见budget.md顶部。
+状态（2026-10-19）：100元预算已批准，累计占用14.527641元（含不确定预留）。P1与单篇提取已完成；P2语义度量未通过；P3独立聚合与逐篇核验已实际试验，最新16/20篇有效，但语义复核仍拒绝采用。P4/P5尚无真实结果。24篇样本、费用、失败与飞书报告均已留证。创建日期：2026-09-26；当前详细度协议v2_detailed，方法变更见method-revision文档。
 
 本项目要回答：多篇文章能否比单篇文章更可靠地表示作者风格？增加样本后是否趋于稳定？这种稳定是否仍保留作者差异，并改善新主题写作？
 
@@ -52,6 +52,11 @@ research/style-aggregation/
 
 ## 当前下一步
 
-2026-10-09最新：候选比较器已推进到method-revision-04。13项控制通过，p2-candidates-pilot-03网络中断后已从49份响应恢复；原3元run上限与全研究100元总额保持。当前活进程和自动收尾状态见candidate-followup-state.json、run summary和实际PID，不能只据running文本判断。新小试完成后需执行者复核语义，不自动进入正式矩阵。用户已授权方法改进自主执行，无需逐步确认。下段为P1结束时的历史入口。
+## 2026-10-19 最新事实（本批次已结束）
 
-进入P2，复用四份有效检查点，补齐单篇提取和重复实验。预算已批准，不再询问同一额度；样本来源等级和拒收案例见datasets/review-v1.md。P1工程结果不等于多文章研究结论。飞书Base：https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe ，用户已获得管理员权限并经user身份回读验证；P1报告：https://www.feishu.cn/docx/CxWidCey8oFsTFxr8GVc8pVzntc 。
+- p3-evidence-audit-01：4/4控制、16/20篇有效、37响应；4失败见summary，16有效共33支持/54未知，23项缺失单列；语义复核拒绝生成，不能把小试完整性或控制通过当作者结论。
+- 全研究占用14.527641元，含未知预留3.128379元，100元尚余85.472359元；没有活模型任务。本轮小试不是整个研究完成，P4/P5仍无真实结果。
+- 两轮聚合及逐篇核验全部保留。report_profile_evidence_audit.py支持partial报告，不填补失败。prepare_profile_evidence_anchors.py已生成20篇准确偏移的末尾片段，0API。
+- 252库测试通过、二进制构建通过；目标模块与脚本已核验。下一步从源头区分可验证的位置/频率与解释性语义，缩小复合规则；保持原文证据、不复活旧比较器、不从失效支持票直接编译生成。
+
+最新图文报告：https://www.feishu.cn/docx/Qi7kdtsFEoXlH1x1NqBcf2AZnOd 。研究Base：https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe 。阶段变更与完整失败史见journal.md。

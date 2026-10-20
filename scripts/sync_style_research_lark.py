@@ -148,12 +148,22 @@ def main():
                        "p2-pairs-02": "p2-stop-20261004.json", "p2-routing-flash-01": "p2-stop-20261004.json"}.get(rid)
         report_file = ROOT / "lark" / report_name if report_name else None
         if rid.startswith("p2-candidate"):
-            report_file = ROOT / "lark/candidate-progress-20261009.json"
+            report_file = ROOT / "lark/candidate-progress-20261011.json"
+        if rid.startswith("p3-independent"):
+            report_file = ROOT / "lark/p3-progress-20261018.json"
+        if rid.startswith("p3-evidence-audit"):
+            report_file = ROOT / "lark/p3-evidence-audit-20261019.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
         if rid.startswith("p2-candidate"):
             stage = "P2 候选比较方法验证"
+        if rid.startswith("p2-atomic"):
+            stage = "P2 原子特征整理（尚未比较）" if summary.get("stage") == "atomic_views" else "P2 原子特征小样本比较"
+        if rid.startswith("p3-independent"):
+            stage = "P3 独立原文证据聚合小试"
+        if rid.startswith("p3-evidence-audit"):
+            stage = "P3 固定候选逐篇证据核验"
         for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label
@@ -163,9 +173,16 @@ def main():
         control_file = run / "controls.json"
         control_rows = json.loads(control_file.read_text()).get("rows", []) if control_file.exists() else []
         if control_rows:
-            checks = f" 控制题通过 {sum(r.get('passed') is True for r in control_rows)}/{len(control_rows)}。"
+            checks = f" 已执行控制题通过 {sum(r.get('passed') is True for r in control_rows)}/{len(control_rows)}（未执行项不计入分母）。"
         elif any("passed" in r for r in rows):
             checks = f" 开发预期一致 {sum(r.get('passed') is True for r in rows)}/{len(rows)}，不等于人评。"
+        review_path = run / "semantic-review.json"
+        if review_path.exists():
+            review = json.loads(review_path.read_text())
+            if review.get("decision") == "reject_for_full_matrix":
+                checks += " 语义复核未通过，不扩大正式矩阵；工程完成不等于方法采用。"
+            elif review.get("decision", "").startswith("reject"):
+                checks += " 复核拒绝采用；详见阶段报告，完成数量不表示质量通过。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + checks + summary.get("error", ""),

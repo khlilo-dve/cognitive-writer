@@ -1,0 +1,145 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "长句用逗号加连接成分层层累加、承载铺陈或推理，在累加到顶或推理结束处落到一个短句上作判断、收束或转折，短句后不再补修饰。",
+        "condition": "适用于句群与段落的内部节拍安排",
+        "evidence": [
+          {
+            "article": "wxb-01",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f07/f08只给出长句层层搭接+短句刹车的节奏规则，未规定'短句后不再补修饰'这一收尾约束；原文第3、5、7、11行的短句后常有补充句（如'但是这样做的结果却很不幸'后仍接推演），只有部分满足，不构成完整机制支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-01"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "voice",
+        "rule": "判断先落地、理由随后补上，第一人称判断直接署名或直说，解释在一两句内收完。",
+        "condition": "适用于论证与评点段落的推进",
+        "evidence": [
+          {
+            "article": "wxb-01",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "同维度voice特征中无'先判断后解释'的句群次序规则（该机制在f09但属rhythm维度，不可跨维度引用）；候选额外要求'第一人称判断直接署名或直说'且'解释在一两句内收完'，原文解释常远超一两句（如第3、11行的长推演），多项限制未同时满足。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-01"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "先承认自己的资格不足、无知或处境尴尬（自嘲），随后照旧把判断说完，判断的硬度不被自嘲撤回。",
+        "condition": "适用于第一人称自嘲与判断并置处",
+        "evidence": [
+          {
+            "article": "wxb-01",
+            "status": "support",
+            "feature_ids": [
+              "f03",
+              "f19",
+              "f20"
+            ],
+            "quote": "据说罗素提出这一命题时，遭到了好多人的诘难。我对逻辑知道得不多，但我是罗素先生热烈的拥护者。这是因为除了写小说，我还有其他的生活经验。比方说，做几何题。做题时，有时你会发现各种千奇百怪的结果不断地涌现，这就是说，你已经出了一个错，正在假的前提上推理。在这种情况下，你不仅可以推出三角形的内角之和超过了一百八十度，还可以把现有的几何学知识全部推翻。从做题的角度出发，你应该停止推论，从头检查全部过程，找到出错的地方，把那以后的推论全部放弃。这种事谁都不喜欢。所以我选择了与真伪无关的职业--写小说。凭良心说，我喜欢千奇百怪的结果——我把这叫做浪漫。但这不等于我就没有能力明辨是非了。",
+            "reason": "第3行'我对逻辑知道得不多，但我是罗素先生热烈的拥护者'先自认所知有限（谦抑、可核实的自我评价），随即紧接自信判断'热烈的拥护者'，不撤回结论；f03明示'先自我削一刀，再照样把话说完'，f19/f20同维度补充自嘲落点与随后转向，完整匹配。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-01"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "language",
+        "rule": "在同一句或相邻句内并置高低两种语域（书面/术语/庄重词与口语/粗俗词），靠词汇落差产生幽默或反讽，不加解释点破。",
+        "condition": "适用于需要幽默或讽刺落差的句段",
+        "evidence": [
+          {
+            "article": "wxb-01",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "同维度language特征中f22/f23是褒词贬用、动机与效果对照的反讽机制，不是高低语域并置；原文'知识青年，青年是很够格的，知识却不知在哪里''对\"知识\"二字的污蔑'属于词义落差而非书面/术语与口语/粗俗两种语域的并置，机制不完全等同，不能支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-01"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "ending",
+        "rule": "结尾收在一两个短句的判断或冷评上，说完即止，不再解释、总结、劝告或升华。",
+        "condition": "适用于全文结尾",
+        "evidence": [
+          {
+            "article": "wxb-01",
+            "status": "support",
+            "feature_ids": [
+              "f29"
+            ],
+            "quote": "现在的人不大看小说了，专喜欢看纪实文学。这说明我们的生活很有趣味，带有千奇百怪的特征。不管怎么说，有趣的事多少都带点毛病，不信你看有趣的纪实文学，总是和犯罪之类的事有关系。假如这些纪实文学纪的都是外国，那倒是无所谓，否则不是好现象。至于小说越来越不好看，则有另外的原因。这是因为有人要求它带有正确性、合理性、激励人们向上等等，这样的小说肯定无趣。换言之，那些人用现实所应有的性质来要求小说、电影等等。我听人说，这样做的原因是小说和电影比现实世界容易管理，如此说来，这是出于善良的动机，正如堂·吉诃德挑风车也是出于善良的动机。但是这样做的结果却很不幸。因为现实世界的合理性里就包括有有趣的小说和电影，故而这样做的结果是使现实世界更加不合理了。由于这些人士的努力，世界越来越不像世界，小说越来越不像小说。我们的处境正如老美说的，在middle of nowhere。这是小说发生的地方，却不是写小说的地方。",
+            "reason": "第11行末'这是小说发生的地方，却不是写小说的地方'是全文最后一个句子，由两个短句构成冷评收束，说完即止，其后无解释、总结、劝告或升华；f29同维度结尾规则要求一到两个短句冷淡收住、不再解释，完整匹配。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-01"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    }
+  ],
+  "omissions": []
+}

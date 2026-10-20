@@ -1,0 +1,31 @@
+{
+  "decision": "reject_for_generation",
+  "review_type": "implementation_semantic_review_not_human_blind_test",
+  "scope": "Reviewed all six rule statements and all non-unknown rationales; checked selected contradictory quotations. Not exhaustive literary gold labels.",
+  "inputs_sha256": "b0dcb7f217fb2c76636fc2f1a77ea136f80ead4ae136995861474bb31227d98d",
+  "evidence_sha256": "4d5fe7f6f5a7972a8e0e4d5fe893105275763c378a79abbc9c17ea17322d1c1f",
+  "examples": [
+    {
+      "rule": "p01",
+      "article": "a05",
+      "issue": "规则要求铺排之后用短句收束，证据却用开头短断语后接长说明，顺序相反。"
+    },
+    {
+      "rule": "p03",
+      "article": "a05",
+      "issue": "谈莎士比亚本人说不清，不是作者对自己的自嘲；不能计为完整支持。"
+    },
+    {
+      "rule": "p05",
+      "article": "a07",
+      "issue": "规则说不靠感叹号，支持理由却直接引用两个感叹号及夸张措辞，没有处理同条件冲突。"
+    },
+    {
+      "rule": "p06",
+      "article": "a03",
+      "issue": "理由将段中说不准来源当作结尾，实际末句是这种风格我还没有见过，落点定位失真。"
+    }
+  ],
+  "meaning": "五条stable与一条weak只是程序按模型标注计算；已发现错误支持，不能宣称作者稳定特征。王小波结构失败；两作者生成比较不具备输入。",
+  "next_step": "将候选提出与逐文证据判定分开；给修复明确文章/规则/特征诊断，独立审查主体、先后、否定和句末定位。不手改旧分数、不让原失败run自动进入P5。"
+}

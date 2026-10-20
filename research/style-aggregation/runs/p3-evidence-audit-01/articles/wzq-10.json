@@ -1,0 +1,161 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "短句在铺排或叙述之后落地收束，落在判断、感叹或自嘲上，以短句作节拍重音，不靠短句堆砌成格言。",
+        "condition": "段落内已有长句、铺排或细节叙述，需要用停顿落地判断时",
+        "evidence": [
+          {
+            "article": "wzq-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "节奏特征有f07短句收束，但原文未见铺排/长句后短句落在判断、感叹或自嘲上的完整实例，多为叙述或引语收尾。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "narration",
+        "rule": "判断或评点紧贴在具体叙述之后，以短句落定，不另起理论段落展开论证。",
+        "condition": "叙述完具体事实、动作或细节后需要给判断时",
+        "evidence": [
+          {
+            "article": "wzq-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "narration维度无此判断紧贴具体叙述短句落定的特征，且f12要求判断后有支撑，与候选条件不完全对应。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "自嘲落在自己、自己的局限或自己见识不足上，短而真切，说罢即收。",
+        "condition": "需要承认自身局限、见识不足或自嘲时",
+        "evidence": [
+          {
+            "article": "wzq-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f25确实说明自嘲落在自己见识有限处，但原文只说“我对金先生所知甚少”，未明显体现自嘲语气或说罢即收的完整机制。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "information",
+        "rule": "信息存疑或来源不明时，用口语化的含混词或明说不确定标出边界，不用精确数字或含糊肯定代替。",
+        "condition": "涉及来源、词义、年代、数量等不确定信息时",
+        "evidence": [
+          {
+            "article": "wzq-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f13、f14强调标出处、不把传闻写成定论，原文也有“他的眼睛有什么病，我不知道”“其余还有什么，我不清楚”，但未呈现完整口语化含混词机制与具体条件。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "voice",
+        "rule": "锋芒由平实措辞、事实并置或轻描淡写承担，不靠形容词加码、感叹号或论证堆叠。",
+        "condition": "需要下批评、反讽或锋利判断时",
+        "evidence": [
+          {
+            "article": "wzq-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "voice维度有f24说明反讽由平实措辞和事实并置产生，但候选要求不靠形容词加码等完整限制，原文未提供可逐项核对的批评或反讽实例。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p06",
+        "dimension": "ending",
+        "rule": "结尾用一两个短句收住，不再解释、不总结全文、不升华，语气保持平静或停在一个具体落点上。",
+        "condition": "文章收束时",
+        "evidence": [
+          {
+            "article": "wzq-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "有f27、f28结尾特征，原文末尾“联大的许多教授都应该有人好好地写一写”是短句，但不完全满足不总结、不解释且语气平静的全部条件。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    }
+  ],
+  "omissions": []
+}

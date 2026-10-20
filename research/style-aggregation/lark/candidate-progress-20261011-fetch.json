@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "ShZYdivjmoK7shxAPYZca8ICnoh",
+    "length": 3694,
+    "log_id": "202610111337392D5C6C49DB2488A94B92",
+    "markdown": "日期：2026-10-11。\n最初目标没有改变：检验多文章聚合是否更稳定、保留作者辨识度，并改善新主题写作。当前仍在检验测量工具，尚未得出聚合优劣结论。\n## 这次做了什么\n将模型的含义判断与程序的一对一配对分开；失败后缩小任务、补充控制、复核具体错误，全部保留旧数据。\n\n<lark-table rows=\"5\" cols=\"4\" header-row=\"true\" column-widths=\"183,183,183,183\">\n\n  <lark-tr>\n    <lark-td>\n      试验\n    </lark-td>\n    <lark-td>\n      控制或开发预期一致 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      真实样本状态\n    </lark-td>\n    <lark-td>\n      预算占用 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      24项一批，开启推理\n    </lark-td>\n    <lark-td>\n      4/5 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0/6完成，0失败，0暂缓；未启动的其余项不算完成\n    </lark-td>\n    <lark-td>\n      0.046326元 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      24项一批，关闭推理\n    </lark-td>\n    <lark-td>\n      10/10 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      2/6完成，1失败，0暂缓；未启动的其余项不算完成\n    </lark-td>\n    <lark-td>\n      0.480201元 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      逐对复杂规则诊断\n    </lark-td>\n    <lark-td>\n      9/10 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      10项开发诊断，不是文章配对\n    </lark-td>\n    <lark-td>\n      0.041634元 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      8项一批，规则正文，开启推理\n    </lark-td>\n    <lark-td>\n      13/13 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      6/6完成，0失败，0暂缓；未启动的其余项不算完成\n    </lark-td>\n    <lark-td>\n      2.666835元 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n</lark-table>\n\n## 看到了什么\n1. 简单控制通过并不保证真实规则判断可靠。第二轮控制全部通过，但真实样本既有漏答，也有把部分重叠误作整条等价的情况。\n1. 逐对判断修正了三个明显误判，但一个结尾规则仍有解释分歧。开发预期不是人工黄金答案，不能为了显示通过而改掉旧预期。\n1. 一条规则的引用段落可能包含其他规则。最新版只把规则正文与条件送去比较，原始引用仍随本地产物保留。\n1. 最新轮状态为complete，真实样本6/6完成。2026-10-11复核全部10项等价与3项冲突，并抽查12项不同机制；仍发现丢失限制条件、补入另一侧没有的要求等问题，因此不采用完整矩阵。该复核是实现者审查，不是人工黄金评分。\n## 费用\n全研究累计占用 **10.794770元**，其中用量按未缓存单价估算8.512067元、未知预留2.282703元。100元总额尚余89.205230元。没有购买套餐或修改密钥。\n## 下一步\n按用户授权自主改进并执行，无需重复确认。已转向原子特征小试：一条只表达一个写法机制，通用事实政策另记，加入同文重复对照；原详细风格说明保持不变。新小试上限3元，仍包含在100元总额中。完整主矩阵、聚合与生成质量仍未完成，不把工程进展当作研究完成。\n模型分层保持：困难判断使用Pro，既定大纲与正文使用Flash；计数、证据定位、配对、图表、预算由程序完成。\n明细见飞书实验总览及项目research/style-aggregation/下各run、method-revision文档、journal.md与usage-ledger.json。\n<image token=\"RtGLb1IbboSBVFxwZ5UcO5cQneg\" width=\"1530\" height=\"781\" align=\"center\"/>\n\n",
+    "message": "Document fetched successfully",
+    "offset": 0,
+    "title": "Cognitive Writer｜比较方法改进与失败记录（10月11日）",
+    "total_length": 2206
+  }
+}

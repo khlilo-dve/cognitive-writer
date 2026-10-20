@@ -1,0 +1,139 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "长句用逗号加连接成分层层累加、承载铺陈或推理，在累加到顶或推理结束处落到一个短句上作判断、收束或转折，短句后不再补修饰。",
+        "condition": "适用于句群与段落的内部节拍安排",
+        "evidence": [
+          {
+            "article": "wxb-05",
+            "status": "support",
+            "feature_ids": [
+              "f05"
+            ],
+            "quote": "有个美国外交官，二三十年代在莫斯科呆了十年。他在回忆录里写道：他看过三百遍《天鹅湖》。即使在芭蕾舞剧中《天鹅湖》是无可争辩的经典之作，看三百遍也太多了，但身为外交官，有些应酬是推不掉的，所以这个戏他只能一遍又一遍地看，看到后来很有点吃不消。我猜想，头几十次去看《天鹅湖》，这个美国人听到的是柴科夫斯基优美的音乐，看到的是前苏联艺术家优美的表演，此人认真地欣赏着，不时热烈地鼓掌。看到一百遍之后，观感就会有所不同，此时他只能听到一些乐器在响着，看到一些人在舞台上跑动，自己也变成木木痴痴的了。看到二百遍之后，观感又会有所不同。音乐一响，大幕拉开，他眼前是一片白色的虚空--他被这个戏魇住了。此时他两眼发直，脸上挂着呆滞的傻笑，像一条冬眠的鳄鱼--松弛的肌肉支持不住下巴，就像冲上沙滩的登陆艇那样，他的嘴打开了，大滴大滴的哈喇子从嘴角滚落，掉在膝头。就这样如痴如醉，直到全剧演完，演员谢幕已毕，有人把舞台的电闸拉掉，他才觉得眼前一黑。这时他赶紧一个大嘴巴把自己打醒，回家去了。后来他拿到调令离开苏联时，如释重负地说道：这回可好了，可以不看《天鹅湖》了。",
+            "reason": "原文多处长句逗号累加铺陈（如「他眼前是一片白色的虚空--他被这个戏魇住了」句前层层递进描写），在累加顶点落到「他才觉得眼前一黑」「回家去了」等短句收束，短句后不再补修饰，节奏安排符合规则且f05同维度存在。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-05"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "voice",
+        "rule": "判断先落地、理由随后补上，第一人称判断直接署名或直说，解释在一两句内收完。",
+        "condition": "适用于论证与评点段落的推进",
+        "evidence": [
+          {
+            "article": "wxb-05",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文虽有「我认为」「但我以为」等直说判断，但理由常在同一句内前置或跨越多句展开（如「根据这种情形，我认为……」前有长篇铺垫），未稳定呈现判断先落地、理由一两句内收完的完整顺序，只部分符合。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-05"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "先承认自己的资格不足、无知或处境尴尬（自嘲），随后照旧把判断说完，判断的硬度不被自嘲撤回。",
+        "condition": "适用于第一人称自嘲与判断并置处",
+        "evidence": [
+          {
+            "article": "wxb-05",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有自嘲（「我对八个样板戏的欣赏早已到了第三个阶段」「我确实是不知道」）但多为判断与自嘲交错、或自嘲后接不确定而非硬判断（如「这对我倒是种安慰……我也有点怀疑」），未稳定呈现先自嘲再把判断说完且不撤回硬度的完整机制，只部分符合。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-05"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "language",
+        "rule": "在同一句或相邻句内并置高低两种语域（书面/术语/庄重词与口语/粗俗词），靠词汇落差产生幽默或反讽，不加解释点破。",
+        "condition": "适用于需要幽默或讽刺落差的句段",
+        "evidence": [
+          {
+            "article": "wxb-05",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有高低语域并置（如「上升到了哲学的高度」「不过是物质存在的形式」与「哈喇子」「蠢物」「饮驴」并置），但多处撞击后接解释（如「从艺术到科学再到哲学，这是个返璞归真的过程」）或点破比喻含义，未完全做到不加解释点破，只部分符合，同维度f09仅作参考不判support。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-05"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "ending",
+        "rule": "结尾收在一两个短句的判断或冷评上，说完即止，不再解释、总结、劝告或升华。",
+        "condition": "适用于全文结尾",
+        "evidence": [
+          {
+            "article": "wxb-05",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "全文结尾（第9行末）「你也无法反对，因为对这些戏我早就失去了评判能力」是短句冷评且不再解释，但同一行前半段已有大量判断与怀疑展开，结尾并非只落在一两个短句上、说完即止的收束方式，与f30所述「松开一格」「承认无力判断」机制也仅部分重合，不足以完整支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-05"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    }
+  ],
+  "omissions": []
+}

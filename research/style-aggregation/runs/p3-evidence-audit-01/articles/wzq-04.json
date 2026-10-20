@@ -1,0 +1,166 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "短句在铺排或叙述之后落地收束，落在判断、感叹或自嘲上，以短句作节拍重音，不靠短句堆砌成格言。",
+        "condition": "段落内已有长句、铺排或细节叙述，需要用停顿落地判断时",
+        "evidence": [
+          {
+            "article": "wzq-04",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有铺排后短句判断（如line7“这简直是：胡闹！”），但收在非本人的感叹上，未见作者自己自嘲的真实实例；f05、f07同维度仅部分吻合，不能作为该机制完整支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-04"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "narration",
+        "rule": "判断或评点紧贴在具体叙述之后，以短句落定，不另起理论段落展开论证。",
+        "condition": "叙述完具体事实、动作或细节后需要给判断时",
+        "evidence": [
+          {
+            "article": "wzq-04",
+            "status": "support",
+            "feature_ids": [
+              "f17",
+              "f19"
+            ],
+            "quote": "中国烹饪的现状到底如何？有人说中国的烹饪艺术出现危机。我看这不无道理。时常听到：什么什么东西现在没有了，什么什么菜不是从前那个味儿了。原因何在？很多。一是没有以前的材料。前几年，我到昆明，吃了汽锅鸡，索然无味；吃过桥米线，也一样。一问，才知道以前的汽锅鸡用的是武定壮鸡(武定特产，阉了的母鸡)，现在买不到。过桥米线本来也应该是武定壮鸡的汤。我到武定，吃汽锅鸡，也不是\"壮鸡\"！北京现在的\"光鸡\"只有人工饲养的\"西装鸡\"和\"华都肉鸡\"，怎么做也是不好吃的。二是赔不起那功夫。过去北京的谭家菜要几天前预定，因为谭家菜是火候菜，不能嗟咄立办。张大千做一碗清炖吕宋黄翅，要用十四天。吃安徽菜，要能等。现在大家都等不及。镇江的肴肉过去精肉肥肉都是实在的，现在的肴肉是软趴趴的，切不成片，我看是卤渍和石压的时间不够。淮扬一带的狮子头，过去讲究\"细切粗斩\"，先把肥瘦各半的硬肋肉切成石榴米大，再略剁几刀。现在是一塌刮子放进绞肉机里一绞，求其鲜嫩，势不可能。再有，我看是经营管理和烹制的思想有问题。过去的饭馆都有些老主顾，他们甚至常坐的座位都是固定的。菜品稍有逊色，便会挑剔。现在大中城市活动人口多，采购员、倒爷，吃了就走。馆子里不指望做回头生意，于是萝卜快了不洗泥，偷工减料，马马虎虎。近年来大餐馆的名厨都致力于\"创新菜\"。菜本来是应该不断创新的。我们现在不会回到把整牛放在毛公鼎里熬得稀烂的时代。看看《梦粱录》、《东京梦华录》，宋朝的菜的做法比现在似乎简单得多。但是创新要在色香味上下功夫，现在的创新菜却多在形上做文章。有一类菜叫做\"工艺菜\"。这本来是古已有之的。晋人雕卵而食，可以算是工艺菜。宋朝有一位厨娘能用菜肴在盘子里摆出\"辋川小景\"，这可真是工艺。不过就是雕卵、\"辋川小景\"，也没有多大意思。鸡蛋上雕有花，吃起来还不是鸡蛋的味道么？\"辋川小景\"没法吃。王维死后有知，一定会摇头：辋川怎么能吃呢？现在常见的工艺菜，是用鸡片、腰片、黄瓜、山楂糕、小樱桃、罐头豌豆……摆弄出来的龙、凤、鹤，华而不实。用鸡茸捏出一个一个椭圆的球球，安上尾巴，是金鱼，实在叫人恶心。有的工艺菜在大盘子里装成一座架空的桥，真是匪夷所思。还有在工艺菜上装上彩色小灯泡的，闪闪烁烁，这简直是：胡闹！中国烹饪确是有些问题。如何继承和发扬传统，使中国的烹饪艺术走上一条健康的正路，需要造一点舆论。此亦弘扬民族文化之一端。而作家在这方面是可以尽一点力的：多写一点文章。看来《知味集》有出续集、三集的必要。然而有什么出版社会出呢？吁。",
+            "reason": "“王维死后有知，一定会摇头：辋川怎么能吃呢？”等处在具体叙述后紧跟短判断；f17“判断在前、解释在后”与f19“锋芒落在短句、感叹、语气词或停顿上”为narration同维度，符合叙述后紧贴短判断机制。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-04"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "自嘲落在自己、自己的局限或自己见识不足上，短而真切，说罢即收。",
+        "condition": "需要承认自身局限、见识不足或自嘲时",
+        "evidence": [
+          {
+            "article": "wzq-04",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文未见作者对自己局限或见识不足的自嘲，只有对他人、出版方的反讽；f07、f21同维度为规则描述，非实证，不能支撑自嘲机制。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-04"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "information",
+        "rule": "信息存疑或来源不明时，用口语化的含混词或明说不确定标出边界，不用精确数字或含糊肯定代替。",
+        "condition": "涉及来源、词义、年代、数量等不确定信息时",
+        "evidence": [
+          {
+            "article": "wzq-04",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文对不确信息用“大概”“我看”等口语判断词，但未见“明说不确定”或边界标示的完整机制；f12-f15为information维度但主题是案例串、来源、详略，与存疑标界不同，不能支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-04"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "voice",
+        "rule": "锋芒由平实措辞、事实并置或轻描淡写承担，不靠形容词加码、感叹号或论证堆叠。",
+        "condition": "需要下批评、反讽或锋利判断时",
+        "evidence": [
+          {
+            "article": "wzq-04",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有“真是叫人恶心”等形容词加码，也有“吁”“胡闹！”感叹加重，且有“名贵的东西…走门子行贿”这类信息加码论证，锋芒并未全靠平实措辞承担；f19、f23同维度规则与原文表现不完全吻合，不能支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-04"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p06",
+        "dimension": "ending",
+        "rule": "结尾用一两个短句收住，不再解释、不总结全文、不升华，语气保持平静或停在一个具体落点上。",
+        "condition": "文章收束时",
+        "evidence": [
+          {
+            "article": "wzq-04",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "结尾“然而有什么出版社会出呢？吁。”是问句加叹词收束，但前一句“看来《知味集》有出续集、三集的必要”带有必要性判断和号召意味，与“不总结、不升华”不完全一致；f25同维度但机制未完整呈现，取unknown。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-04"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    }
+  ],
+  "omissions": []
+}

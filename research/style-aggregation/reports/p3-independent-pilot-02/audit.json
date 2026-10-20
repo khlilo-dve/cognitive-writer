@@ -1,0 +1,41 @@
+{
+  "run": "p3-independent-pilot-02",
+  "inputs_sha256": "b0dcb7f217fb2c76636fc2f1a77ea136f80ead4ae136995861474bb31227d98d",
+  "receipts": [
+    {
+      "file": "profile-95a8f188fa16d060-compile-0.json",
+      "sha256": "ccfb8d4e3357242a1e4fca0718cd7befe5b667aa6d960354365b29109670d368",
+      "finish_reason": "length"
+    },
+    {
+      "file": "profile-95a8f188fa16d060-merge-0.json",
+      "sha256": "84a7e7bfeb717e744348820fa4e51f86a5ad64b43421aef395e3364c000da654",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "profile-95a8f188fa16d060-merge-1.json",
+      "sha256": "7f7aff2c3da60f445d3962bb6920d27eda1601b873a5b49a277c2530de5f58fa",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "profile-968be6b59520fb35-merge-0.json",
+      "sha256": "0fdaad3af873f3b67e2d6c1888e74debe5a6098b84ace80d0c3af17be2007f57",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "profile-968be6b59520fb35-merge-1.json",
+      "sha256": "c1e0ac59000c8ab3f14eb258a09c05c6fd9a4eb2172aa72b1fa8133e4819e7a0",
+      "finish_reason": "stop"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "profile-95a8f188fa16d060",
+      "author": "wang_zengqi",
+      "rules": 6,
+      "sha256": "4d5fe7f6f5a7972a8e0e4d5fe893105275763c378a79abbc9c17ea17322d1c1f",
+      "compiled": false
+    }
+  ],
+  "semantic_acceptance": "not_assessed_by_this_script"
+}

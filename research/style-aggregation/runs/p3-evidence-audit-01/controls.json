@@ -1,0 +1,157 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "expected": "support",
+      "id": "positive",
+      "passed": true,
+      "result": {
+        "omissions": [],
+        "rules": [
+          {
+            "applicable_n": 1,
+            "candidate": {
+              "condition": "提及记忆中的时间时",
+              "dimension": "voice",
+              "evidence": [
+                {
+                  "article": "a01",
+                  "feature_ids": [
+                    "f01"
+                  ],
+                  "quote": "我记不清当时是星期几，只记得天很冷。",
+                  "reason": "原文第1行以第一人称\"我记不清当时是星期几\"明说记不清具体时间，主体、条件、方式与候选规则一致，且该篇存在同维度同条件的Style特征f01。",
+                  "status": "support"
+                }
+              ],
+              "id": "p01",
+              "rule": "以第一人称明说记不清具体时间"
+            },
+            "classification": "unknown",
+            "counter_articles": [],
+            "support_articles": [
+              "synthetic"
+            ],
+            "support_ratio": 1.0,
+            "support_topics": [
+              "control"
+            ],
+            "unknown_articles": []
+          }
+        ]
+      }
+    },
+    {
+      "expected": "unknown",
+      "id": "subject",
+      "passed": true,
+      "result": {
+        "omissions": [],
+        "rules": [
+          {
+            "applicable_n": 0,
+            "candidate": {
+              "condition": "谈论自己的认识时",
+              "dimension": "voice",
+              "evidence": [
+                {
+                  "article": "a01",
+                  "feature_ids": [],
+                  "quote": "",
+                  "reason": "原文只有一句谈论莎士比亚，未出现第一人称（我）承认自己的无知，主体不同且无同维度真实特征可引。",
+                  "status": "unknown"
+                }
+              ],
+              "id": "p01",
+              "rule": "作者以第一人称承认自己的无知"
+            },
+            "classification": "unknown",
+            "counter_articles": [],
+            "support_articles": [],
+            "support_ratio": null,
+            "support_topics": [],
+            "unknown_articles": [
+              "synthetic"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "expected": "counter",
+      "id": "order",
+      "passed": true,
+      "result": {
+        "omissions": [],
+        "rules": [
+          {
+            "applicable_n": 1,
+            "candidate": {
+              "condition": "这一段的叙述与评价排列",
+              "dimension": "voice",
+              "evidence": [
+                {
+                  "article": "a01",
+                  "feature_ids": [
+                    "f01"
+                  ],
+                  "quote": "这真是荒唐。我推开门，走进空荡荡的屋子。",
+                  "reason": "引用先呈现评价短句\"这真是荒唐\"，随后叙述\"推开门、走进\"动作，与候选\"先叙述动作，随后以短句作评价\"顺序明确相反，构成同条件反例。",
+                  "status": "counter"
+                }
+              ],
+              "id": "p01",
+              "rule": "先叙述动作，随后以短句作评价"
+            },
+            "classification": "conflict",
+            "counter_articles": [
+              "synthetic"
+            ],
+            "support_articles": [],
+            "support_ratio": 0.0,
+            "support_topics": [],
+            "unknown_articles": []
+          }
+        ]
+      }
+    },
+    {
+      "expected": "counter",
+      "id": "negation",
+      "passed": true,
+      "result": {
+        "omissions": [],
+        "rules": [
+          {
+            "applicable_n": 1,
+            "candidate": {
+              "condition": "表达不满时",
+              "dimension": "voice",
+              "evidence": [
+                {
+                  "article": "a01",
+                  "feature_ids": [
+                    "f01"
+                  ],
+                  "quote": "这样的办法真是胡闹！",
+                  "reason": "原文表达不满时明确使用感叹号，与候选规则相反。",
+                  "status": "counter"
+                }
+              ],
+              "id": "p01",
+              "rule": "表达不满时不用感叹号"
+            },
+            "classification": "conflict",
+            "counter_articles": [
+              "synthetic"
+            ],
+            "support_articles": [],
+            "support_ratio": 0.0,
+            "support_topics": [],
+            "unknown_articles": []
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "M17DdWWreojgzrxwFY1cdnkMn4I",
+    "length": 2374,
+    "log_id": "2026101801205435B63602F4E1AAD58B04",
+    "markdown": "只检查文字用法是否接近，不代表原作者风格是否学对。20份首次说明拟合，8份重复仅用于检查。未读取留出正文。\n\n<lark-table rows=\"8\" cols=\"3\" header-row=\"true\" column-widths=\"244,244,244\">\n\n  <lark-tr>\n    <lark-td>\n      比较组\n    </lark-td>\n    <lark-td>\n      配对数 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      平均文字相似度 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      不同作者\n    </lark-td>\n    <lark-td>\n      100 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.0501 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      between_authors/different_topic\n    </lark-td>\n    <lark-td>\n      66 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.0498 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      between_authors/same_topic\n    </lark-td>\n    <lark-td>\n      34 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.0507 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      同文章重复提取\n    </lark-td>\n    <lark-td>\n      8 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.1320 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      同作者不同文章\n    </lark-td>\n    <lark-td>\n      90 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.0544 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      within_author/different_topic\n    </lark-td>\n    <lark-td>\n      66 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.0545 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      within_author/same_topic\n    </lark-td>\n    <lark-td>\n      24 {align=\"right\"}\n    </lark-td>\n    <lark-td>\n      0.0543 {align=\"right\"}\n    </lark-td>\n  </lark-tr>\n</lark-table>\n\n同一篇文章出现在多个配对中，配对不是独立样本；这里没有统计显著性或采用门槛。共同标题、事实约束、题材词汇和提取模型的惯用表达都能抬高相似度。shared-grams.json保存每对贡献最大的片段，不能把这些片段自动认作作者特征。\n后续聚合必须单独对照原文证据；本诊断不能恢复已失效的语义比较，也不能回答增加文章数量后的风格收敛。\n<image token=\"ORmBbwf97owZhHxGTQDcuZRqny8\" width=\"1530\" height=\"816\" align=\"center\"/>\n\n",
+    "message": "Document fetched successfully",
+    "offset": 0,
+    "title": "Cognitive Writer｜文字相似度诊断：能看出什么，不能证明什么",
+    "total_length": 1918
+  }
+}

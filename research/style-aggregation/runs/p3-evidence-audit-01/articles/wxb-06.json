@@ -1,0 +1,135 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "长句用逗号加连接成分层层累加、承载铺陈或推理，在累加到顶或推理结束处落到一个短句上作判断、收束或转折，短句后不再补修饰。",
+        "condition": "适用于句群与段落的内部节拍安排",
+        "evidence": [
+          {
+            "article": "wxb-06",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f04/f05只支持累加后用破折号或降调补充成分收尾，不是落短句作判断且不再补修饰；短句落点见f06是'累加终点/转弯处/问题'，无同维度特征匹配该完整机制。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-06"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "voice",
+        "rule": "判断先落地、理由随后补上，第一人称判断直接署名或直说，解释在一两句内收完。",
+        "condition": "适用于论证与评点段落的推进",
+        "evidence": [
+          {
+            "article": "wxb-06",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f16是'判断先行、理由随后、让步压尾、补收束'的叙述顺序特征，不等于候选要求的第一人称直接署名直说、解释一两句内收完；虽line 7、9有'我讨厌''我宁愿'，但与f16不同维度匹配不足，条件无完整同维度特征支撑。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-06"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "先承认自己的资格不足、无知或处境尴尬（自嘲），随后照旧把判断说完，判断的硬度不被自嘲撤回。",
+        "condition": "适用于第一人称自嘲与判断并置处",
+        "evidence": [
+          {
+            "article": "wxb-06",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f11支持自嘲后立场照旧，但原文line 3'作为学食品科技的人'只是身份陈述非自嘲，line 9'扯得这样远'是跑题自述（f21），非资格不足/无知自嘲后接硬判断，无完整同维度证据。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-06"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "language",
+        "rule": "在同一句或相邻句内并置高低两种语域（书面/术语/庄重词与口语/粗俗词），靠词汇落差产生幽默或反讽，不加解释点破。",
+        "condition": "适用于需要幽默或讽刺落差的句段",
+        "evidence": [
+          {
+            "article": "wxb-06",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f08支持词域错位制造反讽，但line 5'生产初级产品''地位很低'是隐喻非书面/术语与口语/粗俗并置，line 3'大耳刮子'是口语但无高低语域同句并置落差，部分满足不足以支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-06"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "ending",
+        "rule": "结尾收在一两个短句的判断或冷评上，说完即止，不再解释、总结、劝告或升华。",
+        "condition": "适用于全文结尾",
+        "evidence": [
+          {
+            "article": "wxb-06",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "f23支持结尾收短句轻落不再解释，但line 9末'这个结论使我满意，既不羡慕电影的镜头，也不羡慕比尔·盖茨的紧身衣'是并列陈述式收尾非一两个短句判断/冷评，结尾特征不完全匹配。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-06"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    }
+  ],
+  "omissions": []
+}

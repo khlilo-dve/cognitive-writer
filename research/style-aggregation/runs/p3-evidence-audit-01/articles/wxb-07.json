@@ -1,0 +1,140 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "长句用逗号加连接成分层层累加、承载铺陈或推理，在累加到顶或推理结束处落到一个短句上作判断、收束或转折，短句后不再补修饰。",
+        "condition": "适用于句群与段落的内部节拍安排",
+        "evidence": [
+          {
+            "article": "wxb-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文多见长句累加落到短句判断，但候选要求「短句后不再补修饰」这一附加条件未全满足（如line11短句后继续追加）。多条件未全成立，且不能凭同维度特征推定。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "voice",
+        "rule": "判断先落地、理由随后补上，第一人称判断直接署名或直说，解释在一两句内收完。",
+        "condition": "适用于论证与评点段落的推进",
+        "evidence": [
+          {
+            "article": "wxb-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "有第一人称直说判断+显性标记（如line7「坦白地说」），但候选要求「解释在一两句内收完」，line7解释跨多句展开（「这道理是这样的……」一直到「有效功不过是送上去一些土」），条件不完整。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "先承认自己的资格不足、无知或处境尴尬（自嘲），随后照旧把判断说完，判断的硬度不被自嘲撤回。",
+        "condition": "适用于第一人称自嘲与判断并置处",
+        "evidence": [
+          {
+            "article": "wxb-07",
+            "status": "support",
+            "feature_ids": [
+              "f03",
+              "f08"
+            ],
+            "quote": "坦白地说，我自己绝不可能把一车粪推上山--坡道太陡，空手走都有点喘。实际上山边上有人在接应：小车推到坡道上，就有人用绳子套住，在前面拉，和两人之力，才能把车弄上山去。这省了我的劲儿，但从另一个角度来说就更笨了。这道理是这样的：这一车粪有一百公斤，我和小车加起来，也快有一百公斤了，为了送一百公斤的粪，饶上我这一百公斤已经很笨，现在又来了一个人，这就不止是一百公斤。刨去做无效功不算，有效功不过是送上去一些土，其中肥料的成分本属虚无缥缈……好在这些蠢事猪是看不到的；假如看到的话，不知它会怎么想：土里只要含有微量它老人家的粪尿，人就要不惜劳力送上高山--它会因此变成自大狂，甚至提出应该谁吃谁的问题……",
+            "reason": "line7先承认自己无力（「我自己绝不可能把一车粪推上山--坡道太陡，空手走都有点喘」），随即照旧把判断说完（「从另一个角度来说就更笨了」「饶上我这一百公斤已经很笨」），自嘲未撤回判断硬度，与f03「锋芒与自嘲同在」、f08「自嘲收在干脆自我揭短」同维度契合。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-07"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "language",
+        "rule": "在同一句或相邻句内并置高低两种语域（书面/术语/庄重词与口语/粗俗词），靠词汇落差产生幽默或反讽，不加解释点破。",
+        "condition": "适用于需要幽默或讽刺落差的句段",
+        "evidence": [
+          {
+            "article": "wxb-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "候选维度为language，该篇同维度可用ID仅f01、f02，无「跨语域混排/落差幽默」同维度特征；所引line5、line7的语域落差现象不能仅凭narration维度的f23来佐证，故不支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "ending",
+        "rule": "结尾收在一两个短句的判断或冷评上，说完即止，不再解释、总结、劝告或升华。",
+        "condition": "适用于全文结尾",
+        "evidence": [
+          {
+            "article": "wxb-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "全文结尾line11「对于个人来说，这种选择不存在，但对于一个民族来说，它不仅存在，而且还是正途」是中等长度带对照与价值定性的完整判断，不是一两个短句的冷评，且含把个人拉开到民族的升华式总结，与p05「不再解释、总结、劝告或升华」不完全匹配。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    }
+  ],
+  "omissions": []
+}

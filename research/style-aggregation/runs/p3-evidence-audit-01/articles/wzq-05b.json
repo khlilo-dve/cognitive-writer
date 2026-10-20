@@ -1,0 +1,173 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "短句在铺排或叙述之后落地收束，落在判断、感叹或自嘲上，以短句作节拍重音，不靠短句堆砌成格言。",
+        "condition": "段落内已有长句、铺排或细节叙述，需要用停顿落地判断时",
+        "evidence": [
+          {
+            "article": "wzq-05b",
+            "status": "support",
+            "feature_ids": [
+              "f06"
+            ],
+            "quote": "我觉得研究语言首先应从字句入手，遣词造句，更重要的是研究字与字之间的关系，句与句之间的关系，段与段之间的关系。好的语言是不能拆开的，拆开了它就没有生命了。好的书法家写字，不是一个一个的写出来的，不是像小学生临帖，也不像一般不高明的书法家写字，一个一个地写出来。他是一行一行地写出来，一篇一篇地写出来的。中国人写字讲究行气，“字怕挂”，因为它没有行气。王献之写字是一笔书，不是说真的是一笔，而是指一篇字一气贯穿，所以他的字可以形成一种“气”。气就是内在的运动。写文章就要讲究“文气”。“文气说”大概从《文心雕龙》起，一直讲到桐城派，我觉得是很有道理的。讲“文气说”讲得比较具体，比较容易懂，也比较深刻的是韩愈。他打个比喻说：“气犹水也，言浮物也，水大则物之轻重者皆浮；气盛，则言之长短与声之高下者皆宜。”",
+            "reason": "长铺排（王献之一笔书、文气说、韩愈比喻）后用“气就是内在的运动。”短句落判断；同段群体现出f06“长叙述—短点破”机制，否定项（不堆砌格言）未违反。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-05b"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "narration",
+        "rule": "判断或评点紧贴在具体叙述之后，以短句落定，不另起理论段落展开论证。",
+        "condition": "叙述完具体事实、动作或细节后需要给判断时",
+        "evidence": [
+          {
+            "article": "wzq-05b",
+            "status": "support",
+            "feature_ids": [
+              "f09"
+            ],
+            "quote": "我写过一组小说，其中一篇叫《珠子灯》，写的是姑娘出嫁第一年的元宵节，娘家得给她送一盏灯的习俗。这家少奶奶，娘家给她送的灯里有一盏是绿玻璃珠子穿起来的灯。这灯应该每年点一回，可她这盏灯就只点过一次，因为她丈夫很快就死了。我写她的玻璃珠子穿的灯有的地方脱线了，珠子就掉下来了，掉在地板上，她的女佣人去扫地，有时就可以扫出一些珠子，她也习惯了珠子散线时掉下来的声音。后来她死了，她的房子关起来，屋子里什么东西都没动，可在房门外有时候能听到珠子脱线嘀嘀嗒嗒地掉到地板上的声音。这写的就是封建贞操观念的零落。我的作品还是有主题的。",
+            "reason": "珠子灯、散线、嘀嘀嗒嗒声等具体叙述后紧跟“这写的就是封建贞操观念的零落。”“我的作品还是有主题的。”两句短评点，未另起理论段，完全符合f09。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-05b"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "自嘲落在自己、自己的局限或自己见识不足上，短而真切，说罢即收。",
+        "condition": "需要承认自身局限、见识不足或自嘲时",
+        "evidence": [
+          {
+            "article": "wzq-05b",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "文中自谦（如“也许是这样”“我说句不大恭敬的话”）承认观点可能被推到极致或带歉意，但均非落在自身局限、见识不足或真切自嘲上，同维度voice特征中也无对应自嘲规则。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-05b"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "information",
+        "rule": "信息存疑或来源不明时，用口语化的含混词或明说不确定标出边界，不用精确数字或含糊肯定代替。",
+        "condition": "涉及来源、词义、年代、数量等不确定信息时",
+        "evidence": [
+          {
+            "article": "wzq-05b",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "“确实有这种情况，一个作者写完了以后，自己也不大明白”涉及主题模糊性的不确定承认，但候选维度为information（来源、词义、年代、数量等不确定信息），该句属于主题解释层面而非信息存疑标边界，同维度information可用特征（f12/f14/f16/f17/f24/f30）均无对应机制，不能用voice维度f22替代。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-05b"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "voice",
+        "rule": "锋芒由平实措辞、事实并置或轻描淡写承担，不靠形容词加码、感叹号或论证堆叠。",
+        "condition": "需要下批评、反讽或锋利判断时",
+        "evidence": [
+          {
+            "article": "wzq-05b",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "批评处（如语言说不能成立、文化积淀少）多带直言性形容词和论证推进，未见平实措辞、事实并置或轻描淡写承担锋芒的完整机制；voice维度也无对应特征。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-05b"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p06",
+        "dimension": "ending",
+        "rule": "结尾用一两个短句收住，不再解释、不总结全文、不升华，语气保持平静或停在一个具体落点上。",
+        "condition": "文章收束时",
+        "evidence": [
+          {
+            "article": "wzq-05b",
+            "status": "support",
+            "feature_ids": [
+              "f25"
+            ],
+            "quote": "我在京剧团工作时，有一个老演员对我说，有一出老戏，老旦的一句词没法唱：“你不该在外面散淡浪荡”。“在外面散淡浪荡”，连着七个去声字，他说这个怎么安腔呢？还有一个例子，过去的样板戏《智取威虎山》里有一句词，杨子荣“打虎上山”唱的，原来是“迎来春天换人间”，后来毛主席给改了，把“春天”改成“春色”。为什么要改呢？当然“春色”要比“春天”具体，这是一；另外这完全出于诗人对声音的敏感。你想，如果是“迎来春天换人间”，基本上是平声字。“迎来”“春天”“人间”，就一个“换”字是去声，如果安上腔是飘的，都是高音区，怎么唱呢？没法唱。换个“色”呢，把整个的音扳下来了，平衡了。平仄的关系就是平仄产生矛盾，然后推动语言的声韵。外国没有这个东西，但是外国也有类似中国的双声叠韵。太多的韵母相似的音也不好听。高尔基就曾经批评一个人的作品，他说“你这篇作品用‘S’这个音太多了，好像是蛇叫”。这证明外国人也有音韵感。中国既然有这个语言特点，那么就应该了解、掌握、利用它。所以我建议你们在对学生讲创作时，也让他们读一点、会一点，而且讲一点平仄声的道理，来训练他们的语感。语言学上有个词叫语感，语言感觉，语言好就是这个作家的语感；语言不好，这个作家的语感也不好。",
+            "reason": "全文最后一句“所以我建议你们在对学生讲创作时，也让他们读一点、会一点，而且讲一点平仄声的道理，来训练他们的语感。”是句长收短、停在具体落点、不再解释总结的短收束，符合f25。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-05b"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    }
+  ],
+  "omissions": []
+}

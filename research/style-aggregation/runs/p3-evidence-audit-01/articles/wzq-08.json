@@ -1,0 +1,173 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "短句在铺排或叙述之后落地收束，落在判断、感叹或自嘲上，以短句作节拍重音，不靠短句堆砌成格言。",
+        "condition": "段落内已有长句、铺排或细节叙述，需要用停顿落地判断时",
+        "evidence": [
+          {
+            "article": "wzq-08",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "短句确实大量存在，但未见明确以短句在铺排或叙述后落地收束作节拍重音的完整机制；短句多为叙述/列举本体，非专门的收束重音模式。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-08"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "narration",
+        "rule": "判断或评点紧贴在具体叙述之后，以短句落定，不另起理论段落展开论证。",
+        "condition": "叙述完具体事实、动作或细节后需要给判断时",
+        "evidence": [
+          {
+            "article": "wzq-08",
+            "status": "support",
+            "feature_ids": [
+              "f20"
+            ],
+            "quote": "北京人爱瞧热闹，但是不爱管闲事。他们总是置身事外，冷眼旁观。北京是民主运动的策源地，\"民国\"以来，常有学生运动，北京人管学生运动叫做\"闹学生\"。学生示威游行，叫做\"过学生\"。与他们无关。",
+            "reason": "先叙述学生运动等具体现象，末尾以短句“与他们无关。”落定判断，不另起论证段；主体为作者客观叙述，顺序、位置、强度均符合。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-08"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "society"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "自嘲落在自己、自己的局限或自己见识不足上，短而真切，说罢即收。",
+        "condition": "需要承认自身局限、见识不足或自嘲时",
+        "evidence": [
+          {
+            "article": "wzq-08",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "文中“我至今考查不出来”“说不出什么道理”确属自认局限，但均不短，紧跟解释或继续叙述，不是“短而真切、说罢即收”的完整机制。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-08"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "information",
+        "rule": "信息存疑或来源不明时，用口语化的含混词或明说不确定标出边界，不用精确数字或含糊肯定代替。",
+        "condition": "涉及来源、词义、年代、数量等不确定信息时",
+        "evidence": [
+          {
+            "article": "wzq-08",
+            "status": "support",
+            "feature_ids": [
+              "f04"
+            ],
+            "quote": "胡同原是蒙古语，据说原意是水井，未知确否。胡同的取名，有各种来源。有的是计数的，如东单三条、东四十条。有的原是皇家储存物件的地方，如皮库胡同、惜薪司胡同(存放柴炭的地方)，有的是这条胡同里曾住过一个有名的人物，如无量大人胡同、石老娘(老娘是接生婆)胡同。大雅宝胡同原名大哑巴胡同，大概胡同里曾住过一个哑巴。王皮胡同是因为有一个姓王的皮匠。王广福胡同原名王寡妇胡同。有的是某种行业集中的地方。手帕胡同大概是卖手帕的。羊肉胡同当初想必是卖羊肉的。有的胡同是像其形状的。高义伯胡同原名狗尾巴胡同。小羊宜宾胡同原名羊尾巴胡同。大概是因为这两条胡同的样子有点像羊尾巴、狗尾巴。有些胡同则不知道何所取义，如大绿纱帽胡同。",
+            "reason": "“据说原意是水井，未知确否”“大概是因为……”对词义、年代类不确定信息明说或用口语含混词标边界，未用精确数字或含糊肯定代替。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-08"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "society"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "voice",
+        "rule": "锋芒由平实措辞、事实并置或轻描淡写承担，不靠形容词加码、感叹号或论证堆叠。",
+        "condition": "需要下批评、反讽或锋利判断时",
+        "evidence": [
+          {
+            "article": "wzq-08",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "文中锋芒多由“嘿！”“实在太精彩了！”“真有你的！”等感叹号承担，与该规则所述方式相反；但同篇没有明确禁止感叹号的同维度特征（f27属constraints维度），无法判counter，故unknown。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-08"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p06",
+        "dimension": "ending",
+        "rule": "结尾用一两个短句收住，不再解释、不总结全文、不升华，语气保持平静或停在一个具体落点上。",
+        "condition": "文章收束时",
+        "evidence": [
+          {
+            "article": "wzq-08",
+            "status": "support",
+            "feature_ids": [
+              "f32"
+            ],
+            "quote": "再见吧，胡同。",
+            "reason": "全文结尾为独立成段短句“再见吧，胡同。”，语气平静具体，不再解释、不总结全文、不升华。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-08"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "society"
+      ]
+    }
+  ],
+  "omissions": []
+}

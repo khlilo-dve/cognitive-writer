@@ -1,0 +1,18 @@
+{
+  "decision": "reject_no_valid_profiles",
+  "run": "p3-independent-pilot-01",
+  "reason": "Both profiles fail unchanged feature identity/dimension validation after one repair; first-response policy claims also lack valid source inference.",
+  "review_type": "implementation_review_not_human_blind_evaluation",
+  "examples": [
+    {
+      "author": "wang_zengqi",
+      "rule": "p09",
+      "issue": "正文写出数字不能证明外部任务事实完整；任务约束不是作者风格。"
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule": "p02",
+      "issue": "原文亲历叙述不能证明具有任务许可或没有扩编。"
+    }
+  ]
+}

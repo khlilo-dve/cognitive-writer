@@ -2,7 +2,7 @@
 use crate::{
     error::AppError,
     research_dataset::valid_id,
-    style_compare::{Feature, View, DIMENSIONS},
+    style_compare::{DIMENSIONS, Feature, View},
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
@@ -149,7 +149,24 @@ pub(crate) fn parse(raw: &str, sources: &[Source]) -> Result<Profile, AppError> 
                         .iter()
                         .any(|f| f.id == *id && f.dimension == rule.dimension)
                 {
-                    return Err(AppError::Parse("证据feature_id不存在/重复/跨维度".into()));
+                    let actual = s
+                        .view
+                        .features
+                        .iter()
+                        .find(|f| f.id == *id)
+                        .map(|f| f.dimension.as_str())
+                        .unwrap_or("missing");
+                    let allowed: Vec<_> = s
+                        .view
+                        .features
+                        .iter()
+                        .filter(|f| f.dimension == rule.dimension)
+                        .map(|f| f.id.as_str())
+                        .collect();
+                    return Err(AppError::Parse(format!(
+                        "规则{} / 文章{} / feature_id={id}不存在、重复或跨维度；规则维度={}，原特征维度={actual}，该篇同维度可用ID={allowed:?}。仅在语义确实支持时引用；没有依据应记unknown，不修改来源维度。",
+                        rule.id, e.article, rule.dimension
+                    )));
                 }
             }
             if e.status != "unknown" && (e.quote.chars().count() < 6 || !s.text.contains(&e.quote))
@@ -166,7 +183,7 @@ pub(crate) fn parse(raw: &str, sources: &[Source]) -> Result<Profile, AppError> 
                 _ => {
                     return Err(AppError::Parse(
                         "证据状态无效，support须有Style依据，unknown不伪造引用".into(),
-                    ))
+                    ));
                 }
             }
         }
@@ -341,6 +358,23 @@ mod tests {
         );
         value["rules"][0]["evidence"][0]["line_end"] = json!(999);
         assert!(parse_indexed(&value.to_string(), &sources).is_err());
+    }
+    #[test]
+    fn cross_dimension_repair_identifies_article_feature_and_valid_alternatives() {
+        let mut s = sources();
+        s[2].view.features[0].dimension = "language".into();
+        let error = parse(&model().to_string(), &s).err().unwrap().to_string();
+        for expected in [
+            "规则p1",
+            "文章a2",
+            "feature_id=f1",
+            "规则维度=voice",
+            "原特征维度=language",
+            "可用ID=[]",
+            "unknown",
+        ] {
+            assert!(error.contains(expected), "missing {expected}: {error}");
+        }
     }
     #[test]
     fn rejects_fabricated_quotes_duplicate_votes_and_unsupported_compilation() {

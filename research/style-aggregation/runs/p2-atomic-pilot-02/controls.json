@@ -1,0 +1,2889 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "id": "self",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            }
+          }
+        ],
+        "id": "control-self",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "equivalent",
+            "reason": "两条规则的条件（全文叙述）、维度（voice）与表述完全一致：均要求全文保持冷静克制语气并避免夸张情绪，机制、方向和适用条件相同，可无损互换。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 1,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 1,
+              "overlap": 1.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "f1",
+              "f1"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "synonym",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "叙述始终平静节制，不用情绪夸饰。",
+              "rule": "叙述始终平静节制，不用情绪夸饰。"
+            }
+          }
+        ],
+        "id": "control-synonym",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "equivalent",
+            "reason": "两规则适用条件相同（全文叙述），机制一致：均为全文保持冷静克制/平静节制的语气，避免夸张情绪/情绪夸饰，属同义改写，互换不丢失任何主要约束。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 1,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 1,
+              "overlap": 1.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "f1",
+              "f1"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "opposite",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文采用热烈夸张的情绪表达，避免冷静克制。",
+              "rule": "全文采用热烈夸张的情绪表达，避免冷静克制。"
+            }
+          }
+        ],
+        "id": "control-opposite",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "opposite",
+            "reason": "两条规则的适用条件相同（全文叙述、语气维度），但要求互相排斥：左要求冷静克制并避免夸张情绪，右要求热烈夸张并避免冷静克制，方向明确相反，无法同时执行。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 1,
+              "opposite_left_features": 1,
+              "opposite_right_features": 1,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "generic",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文保持冷静克制的语气，避免夸张情绪。",
+              "rule": "全文保持冷静克制的语气，避免夸张情绪。"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "全文表达自然清楚。",
+              "rule": "全文表达自然清楚。"
+            }
+          }
+        ],
+        "id": "control-generic",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "左规则约束全文语气的情绪克制程度，要求避免夸张情绪；右规则约束表达的自然与清楚程度，关注可读性。两者同为全文适用但机制不同：冷静克制的文本未必自然清楚，清楚的表达也不以克制情绪为要件，不存在相互排斥，只是部分场景下可同时满足。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "mixed",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a01",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b11",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            }
+          },
+          {
+            "candidate_id": "c0001",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a01",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b12",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            }
+          },
+          {
+            "candidate_id": "c0002",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a02",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b11",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            }
+          },
+          {
+            "candidate_id": "c0003",
+            "left": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "a02",
+              "quote": "使用专业术语并紧接解释",
+              "rule": "使用专业术语并紧接解释"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "language",
+              "id": "b12",
+              "quote": "使用日常词语",
+              "rule": "使用日常词语"
+            }
+          },
+          {
+            "candidate_id": "c0004",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a03",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b09",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            }
+          },
+          {
+            "candidate_id": "c0005",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a03",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b10",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            }
+          },
+          {
+            "candidate_id": "c0006",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a04",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b09",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            }
+          },
+          {
+            "candidate_id": "c0007",
+            "left": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "a04",
+              "quote": "与读者平等商量",
+              "rule": "与读者平等商量"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "voice",
+              "id": "b10",
+              "quote": "第一人称承认判断有限",
+              "rule": "第一人称承认判断有限"
+            }
+          },
+          {
+            "candidate_id": "c0008",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a05",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b07",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            }
+          },
+          {
+            "candidate_id": "c0009",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a05",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b08",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            }
+          },
+          {
+            "candidate_id": "c0010",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a06",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b07",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            }
+          },
+          {
+            "candidate_id": "c0011",
+            "left": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "a06",
+              "quote": "并列句保持相近长度",
+              "rule": "并列句保持相近长度"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "rhythm",
+              "id": "b08",
+              "quote": "长句之后以短句停顿",
+              "rule": "长句之后以短句停顿"
+            }
+          },
+          {
+            "candidate_id": "c0012",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a07",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b05",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            }
+          },
+          {
+            "candidate_id": "c0013",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a07",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b06",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            }
+          },
+          {
+            "candidate_id": "c0014",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a08",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b05",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            }
+          },
+          {
+            "candidate_id": "c0015",
+            "left": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "a08",
+              "quote": "转折前先承认局部成立",
+              "rule": "转折前先承认局部成立"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "information",
+              "id": "b06",
+              "quote": "先给具体事实再给判断",
+              "rule": "先给具体事实再给判断"
+            }
+          },
+          {
+            "candidate_id": "c0016",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a09",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b03",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            }
+          },
+          {
+            "candidate_id": "c0017",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a09",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b04",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            }
+          },
+          {
+            "candidate_id": "c0018",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a10",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b03",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            }
+          },
+          {
+            "candidate_id": "c0019",
+            "left": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "a10",
+              "quote": "议论前先交代可感知细节",
+              "rule": "议论前先交代可感知细节"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "narration",
+              "id": "b04",
+              "quote": "叙述后接一句简短评点",
+              "rule": "叙述后接一句简短评点"
+            }
+          },
+          {
+            "candidate_id": "c0020",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a11",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b01",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            }
+          },
+          {
+            "candidate_id": "c0021",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a11",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b02",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            }
+          },
+          {
+            "candidate_id": "c0022",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a12",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b01",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            }
+          },
+          {
+            "candidate_id": "c0023",
+            "left": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "a12",
+              "quote": "少量使用比喻且不改变事实",
+              "rule": "少量使用比喻且不改变事实"
+            },
+            "right": {
+              "condition": "适用时",
+              "dimension": "constraints",
+              "id": "b02",
+              "quote": "只在事实允许时使用第一人称",
+              "rule": "只在事实允许时使用第一人称"
+            }
+          }
+        ],
+        "id": "control-mixed",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "同为language维度且条件相同，但a01要求以日常词语为措辞，b11要求用专业术语并紧接解释；二者是措辞取向不同的两种机制，双方均未要求避免另一方向，未构成明确排斥，仅部分重叠、可共存调整比例，故非等价也非对立。"
+          },
+          {
+            "candidate_id": "c0001",
+            "label": "equivalent",
+            "reason": "a01与b12在相同条件、同一language维度下措辞实质相同（使用日常词语），方向与适用条件一致，可互换不丢失约束。"
+          },
+          {
+            "candidate_id": "c0002",
+            "label": "equivalent",
+            "reason": "a02与b11均为'使用专业术语并紧接解释'，条件与方向完全相同，互相替换不丢失任何约束。"
+          },
+          {
+            "candidate_id": "c0003",
+            "label": "distinct",
+            "reason": "a02要求专业术语后紧接解释，b12要求日常词语，属language维度下不同措辞机制；虽方向不同，但无'禁止/避免/仅限'类排斥词，未到明确互斥，故归distinct。"
+          },
+          {
+            "candidate_id": "c0004",
+            "label": "distinct",
+            "reason": "a03以第一人称限定自我判断的有限性，b09以平等姿态与读者商量；同属voice维度但表达机制与着力点不同，可同时采用，亦无排斥要求，故不等价、不对立。"
+          },
+          {
+            "candidate_id": "c0005",
+            "label": "equivalent",
+            "reason": "a03与b10内容相同（第一人称承认判断有限），条件与机制完全一致，可互换。"
+          },
+          {
+            "candidate_id": "c0006",
+            "label": "equivalent",
+            "reason": "a04与b09均为'与读者平等商量'，同条件同维度同方向，实质相同。"
+          },
+          {
+            "candidate_id": "c0007",
+            "label": "distinct",
+            "reason": "b10要求以第一人称承认判断有限，a04要求与读者平等商量；两者机制不同（自我限定语气 vs 平等商议姿态），可共存但不构成同一机制，也无反向排斥要求。"
+          },
+          {
+            "candidate_id": "c0008",
+            "label": "distinct",
+            "reason": "a05要求长句后接短句形成停顿，关注句长对比的节奏；b07要求并列成分句长相近，关注平行结构的整齐。两者机制不同（对比变化 vs 保持相近），且适用场景不同，无明确排斥。"
+          },
+          {
+            "candidate_id": "c0009",
+            "label": "equivalent",
+            "reason": "两条规则文字与方向完全一致，均为长句之后以短句停顿，适用条件相同。"
+          },
+          {
+            "candidate_id": "c0010",
+            "label": "equivalent",
+            "reason": "两条规则文字与方向完全一致，均为并列句保持相近长度，适用条件相同。"
+          },
+          {
+            "candidate_id": "c0011",
+            "label": "distinct",
+            "reason": "a06要求并列句句长相近（平行结构），b08要求长句后接短句（对比停顿），机制与适用对象不同，不存在明确互相排斥的要求。"
+          },
+          {
+            "candidate_id": "c0012",
+            "label": "distinct",
+            "reason": "a07规定信息顺序为先事实后判断，b05规定转折前先承认对方局部成立，两者处理的顺序对象不同（事实/判断 vs 让步/转折），机制不同且无明确排斥。"
+          },
+          {
+            "candidate_id": "c0013",
+            "label": "equivalent",
+            "reason": "两条规则文字与方向完全一致，均为先给具体事实再给判断，适用条件相同。"
+          },
+          {
+            "candidate_id": "c0014",
+            "label": "equivalent",
+            "reason": "两条规则文字与方向完全一致，均为转折前先承认局部成立，适用条件相同。"
+          },
+          {
+            "candidate_id": "c0015",
+            "label": "distinct",
+            "reason": "a08要求转折前先承认局部成立（让步顺序），b06要求先给事实再给判断（论证顺序），机制与适用场景不同，无明确互相排斥要求。"
+          },
+          {
+            "candidate_id": "c0016",
+            "label": "distinct",
+            "reason": "a09要求叙述后必须接一句简短评点（限制评点长度并强制其出现）；b03要求议论前先交代可感知细节（限制细节性质并强制其在议论之先）。二者都是细节/叙述在前、评点在后的顺序，但各自强制的对象与附加约束不同，只部分重叠。"
+          },
+          {
+            "candidate_id": "c0017",
+            "label": "equivalent",
+            "reason": "两侧规则文字与条件完全相同，均为叙述后接一句简短评点，机制、方向、适用条件一致。"
+          },
+          {
+            "candidate_id": "c0018",
+            "label": "equivalent",
+            "reason": "两侧规则文字与条件完全相同，均为议论前先交代可感知细节，机制、方向、适用条件一致。"
+          },
+          {
+            "candidate_id": "c0019",
+            "label": "distinct",
+            "reason": "a10强制议论前先有可感知细节（约束细节性质与位置）；b04强制叙述后接简短评点（约束评点出现与长度）。方向可并存但强制对象和附加条件不同，属部分重叠的不同机制。"
+          },
+          {
+            "candidate_id": "c0020",
+            "label": "distinct",
+            "reason": "a11约束第一人称的使用条件（仅在事实允许时），b01约束比喻的使用量与事实不变性。二者对象不同（人称 vs 比喻），只是都带事实约束，不存在同机制或反向排斥。"
+          },
+          {
+            "candidate_id": "c0021",
+            "label": "equivalent",
+            "reason": "两侧规则与条件完全相同，均为只在事实允许时使用第一人称。"
+          },
+          {
+            "candidate_id": "c0022",
+            "label": "equivalent",
+            "reason": "两侧规则与条件完全相同，均为少量使用比喻且不改变事实。"
+          },
+          {
+            "candidate_id": "c0023",
+            "label": "distinct",
+            "reason": "a12针对比喻的少量使用与不改事实，b02针对第一人称的事实条件限制，适用对象与约束机制不同，仅共享事实约束这一宽泛要求。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 12,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "both",
+              "dimension": "language",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "rhythm",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "information",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "narration",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "both",
+              "dimension": "constraints",
+              "left_count": 2,
+              "matched": 2,
+              "overlap": 1.0,
+              "right_count": 2
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "a01",
+              "b12"
+            ],
+            [
+              "a02",
+              "b11"
+            ],
+            [
+              "a03",
+              "b10"
+            ],
+            [
+              "a04",
+              "b09"
+            ],
+            [
+              "a05",
+              "b08"
+            ],
+            [
+              "a06",
+              "b07"
+            ],
+            [
+              "a07",
+              "b06"
+            ],
+            [
+              "a08",
+              "b05"
+            ],
+            [
+              "a09",
+              "b04"
+            ],
+            [
+              "a10",
+              "b03"
+            ],
+            [
+              "a11",
+              "b02"
+            ],
+            [
+              "a12",
+              "b01"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "compatible",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "叙述中允许偶尔使用比喻",
+              "rule": "叙述中允许偶尔使用比喻"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "叙述中多用可感知细节",
+              "rule": "叙述中多用可感知细节"
+            }
+          }
+        ],
+        "id": "control-compatible",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "左规则调节的是比喻这类修辞手段的使用频度（允许偶尔使用），右规则要求叙述多呈现可感知的感官细节；一个是修辞许可，一个是细节呈现方式，机制与约束对象不同，只是都服务于叙述质感，无相互排斥也非同一要求。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "partial",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "以短句为主，关键处补充解释",
+              "rule": "以短句为主，关键处补充解释"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "以短句为主",
+              "rule": "以短句为主"
+            }
+          }
+        ],
+        "id": "control-partial",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "两者在'以短句为主'这一机制上一致，但左规则额外要求'关键处补充解释'，即包含解释补充的位置与触发条件；右规则未涉及该要求，属于较细规则附加重要限制，因此不等价。右规则也未禁止补充解释，故无反向排斥。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "opposite-ending",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "结尾必须提出明确行动建议",
+              "rule": "结尾必须提出明确行动建议"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "结尾禁止提出行动建议",
+              "rule": "结尾禁止提出行动建议"
+            }
+          }
+        ],
+        "id": "control-opposite-ending",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "opposite",
+            "reason": "两规则适用条件相同（全文叙述结尾），左规则要求必须提出明确行动建议，右规则禁止提出行动建议，属同一位置上互相排斥的相反要求，无法同时执行。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 1,
+              "opposite_left_features": 1,
+              "opposite_right_features": 1,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "synonym-facts",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "讲述自身经历时不编造亲历",
+              "rule": "讲述自身经历时不编造亲历"
+            },
+            "right": {
+              "condition": "全文叙述",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "叙述个人经历时不得虚构自己的见闻",
+              "rule": "叙述个人经历时不得虚构自己的见闻"
+            }
+          }
+        ],
+        "id": "control-synonym-facts",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "equivalent",
+            "reason": "两条规则条件均为全文叙述，机制相同：叙述个人经历/自身经历时禁止虚构亲历内容（不编造亲历 vs 不得虚构自己的见闻），属同义改写，方向和约束完全一致。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 1,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 1,
+              "overlap": 1.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": [
+            [
+              "f1",
+              "f1"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "different-condition",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "写争议话题时",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "以疑问开头",
+              "rule": "以疑问开头"
+            },
+            "right": {
+              "condition": "写个人回忆时",
+              "dimension": "voice",
+              "id": "f1",
+              "quote": "以疑问开头",
+              "rule": "以疑问开头"
+            }
+          }
+        ],
+        "id": "control-different-condition",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "两条规则的操作要求同为“以疑问开头”，但适用条件分别为写争议话题与写个人回忆，属于不同写作场景且无包含关系，机制作用的触发条件实质不同，故不等价；同时两者并无相互排斥的要求方向。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "voice",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "constraints",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "real-c0015",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "无任务依据时",
+              "dimension": "constraints",
+              "id": "f03",
+              "quote": "第一人称的判断、反感、自嘲、事后评点可以自由使用，不需要亲历许可。但具体回忆、亲见、亲手动过的东西、现场对白、确切数字，只有任务给到依据时才写；没有依据时，就用已有信息的语序、停顿、照应和措辞维持声音，不扩编人物、动作或感官细节。",
+              "rule": "第一人称的判断、反感、自嘲、事后评点可自由使用不需亲历许可；但具体回忆、亲见、亲手操作、现场对白、确切数字仅在任务给出依据时写，无依据时靠语序停顿照应措辞维持声音，不扩编人物动作感官细节。"
+            },
+            "right": {
+              "condition": "涉及判断/评点与具体经验时分别适用",
+              "dimension": "constraints",
+              "id": "f16",
+              "quote": "“我”的判断、好恶、评点不需要亲历许可，缺素材也可照写；但具体回忆、亲见场景、亲手动作、现场对白必须有任务依据或明确允许虚构，缺则整段省略，不得编造细节填充。缺素材时依靠既有信息的语序、停顿、照应和措辞维持声音。",
+              "rule": "“我”的判断、好恶、评点不需要亲历许可，缺素材也可照写；但具体回忆、亲见场景、亲手动作、现场对白必须有任务依据或明确允许虚构，缺则整段省略，不得编造细节填充"
+            }
+          }
+        ],
+        "id": "control-real-c0015",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "两规则核心方向一致（判断/评点免亲历许可，具体回忆、亲见、亲手动作、现场对白须任务依据），但范围与缺素材时的处置不同：左规则把'确切数字'列入受限项，右规则未列；右规则允许'明确允许虚构'作为另一种合法依据并要求缺则整段省略，左规则则要求无依据时靠语序停顿照应措辞维持声音、不扩编细节，保留写作而非整段略去。两者条件宽度与兜底机制实质有别，不构成明确互相排斥，故判distinct。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "voice",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "constraints",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "real-c0062",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "未限定",
+              "dimension": "constraints",
+              "id": "f17",
+              "quote": "行话借用要带自知之明：先说这番话会让内行不适，再用它分析下去；行话只负责把问题说清楚或说荒谬，不要用它冒充证据。比喻、假设和推论基于已有信息，不得当作发生过的事。",
+              "rule": "比喻、假设和推论基于已有信息，不得当作发生过的事。"
+            },
+            "right": {
+              "condition": "涉及判断/评点与具体经验时分别适用",
+              "dimension": "constraints",
+              "id": "f16",
+              "quote": "“我”的判断、好恶、评点不需要亲历许可，缺素材也可照写；但具体回忆、亲见场景、亲手动作、现场对白必须有任务依据或明确允许虚构，缺则整段省略，不得编造细节填充。缺素材时依靠既有信息的语序、停顿、照应和措辞维持声音。",
+              "rule": "“我”的判断、好恶、评点不需要亲历许可，缺素材也可照写；但具体回忆、亲见场景、亲手动作、现场对白必须有任务依据或明确允许虚构，缺则整段省略，不得编造细节填充"
+            }
+          }
+        ],
+        "id": "control-real-c0062",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "f17约束的是比喻/假设/推论这类非实指内容的模态标注：须基于已有信息且不得写成已发生事实；f16约束的是'我'的主观判断与具体经验两类内容的许可门槛——判断可照写，回忆/亲见/亲手/现场对白必须有依据否则整段省略。两者机制不同（模态标注 vs 许可与省略规则），适用对象不同（非实指表达 vs 判断与亲历类内容），仅在'不得编造事件'上有部分重叠，不构成等价也无反向排斥。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "voice",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "constraints",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    },
+    {
+      "id": "real-c0065",
+      "passed": true,
+      "result": {
+        "candidates": [
+          {
+            "candidate_id": "c0000",
+            "left": {
+              "condition": "未限定",
+              "dimension": "constraints",
+              "id": "f17",
+              "quote": "行话借用要带自知之明：先说这番话会让内行不适，再用它分析下去；行话只负责把问题说清楚或说荒谬，不要用它冒充证据。比喻、假设和推论基于已有信息，不得当作发生过的事。",
+              "rule": "比喻、假设和推论基于已有信息，不得当作发生过的事。"
+            },
+            "right": {
+              "condition": "使用具体经验/比喻/数字等写法时",
+              "dimension": "constraints",
+              "id": "f21",
+              "quote": "这类经验须有素材依据，无则改写为一般性陈述，不用空洞比喻填位。比喻只说明感受，不充当证据；判断的依据仍须在正文里另有落点。同理，凡依赖数字、物件、感官、动作的写法，有素材则用、无则省，不为维持风格扩编人物反应或场景。",
+              "rule": "这类经验须有素材依据，无则改写为一般性陈述，不用空洞比喻填位；比喻只说明感受不充当证据，判断依据仍须在正文另有落点；凡依赖数字、物件、感官、动作的写法，有素材则用、无则省，不为维持风格扩编人物反应或场景"
+            }
+          }
+        ],
+        "id": "control-real-c0065",
+        "judgments": [
+          {
+            "candidate_id": "c0000",
+            "label": "distinct",
+            "reason": "两条规则共享'须基于已有素材、不得凭空编造'的核心（f17的'基于已有信息'对应f21的'有素材依据'），但机制范围不相当：f17只规定比喻/假设/推论不得被当作已发生的事实呈现，是真实性与叙事层级的约束；f21除素材依据外还附加了f17没有的重要限制——比喻只说明感受不得充当证据、判断依据须在正文另有落点、无素材则省略而非扩编人物反应或场景以维持风格。f21把'不用空洞比喻填位'落实为改写/省略的执行方式，而f17的'不得当作发生过的事'并未被f21的比喻-证据条款完全覆盖。两者方向一致、可并存，但不互为等价替代，故判distinct。"
+          }
+        ],
+        "metrics": {
+          "candidate_conflicts_and_uncertainty": [
+            {
+              "dimension": "language",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "voice",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "rhythm",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "information",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "narration",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "constraints",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "title",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "opening",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            },
+            {
+              "dimension": "ending",
+              "opposite_edges": 0,
+              "opposite_left_features": 0,
+              "opposite_right_features": 0,
+              "uncertain_edges": 0
+            }
+          ],
+          "equivalent_candidate_count": 0,
+          "metric_version": "candidate_maximum_overlap_v2",
+          "note": "候选冲突和未知独立报告；未选边保留在judgments；不混用旧版冲突计数",
+          "overlap_only": [
+            {
+              "coverage": "neither",
+              "dimension": "language",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "voice",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "rhythm",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "information",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "narration",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "both",
+              "dimension": "constraints",
+              "left_count": 1,
+              "matched": 0,
+              "overlap": 0.0,
+              "right_count": 1
+            },
+            {
+              "coverage": "neither",
+              "dimension": "title",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "opening",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            },
+            {
+              "coverage": "neither",
+              "dimension": "ending",
+              "left_count": 0,
+              "matched": 0,
+              "overlap": null,
+              "right_count": 0
+            }
+          ],
+          "selected_equivalent_edges": []
+        }
+      }
+    }
+  ]
+}

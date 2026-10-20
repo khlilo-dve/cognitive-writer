@@ -1,0 +1,173 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "短句在铺排或叙述之后落地收束，落在判断、感叹或自嘲上，以短句作节拍重音，不靠短句堆砌成格言。",
+        "condition": "段落内已有长句、铺排或细节叙述，需要用停顿落地判断时",
+        "evidence": [
+          {
+            "article": "wzq-02",
+            "status": "support",
+            "feature_ids": [
+              "f09"
+            ],
+            "quote": "昆明菌子极多。雨季逛菜市场，随时可以看到各种菌子。最多，也最便宜的是牛肝菌。牛肝菌下来的时候，家家饭馆卖炒牛肝菌，连西南联大食堂的桌子上都可以有一碗。牛肝菌色如牛肝，滑，嫩，鲜，香，很好吃。炒牛肝菌须多放蒜，否则容易使人晕倒。青头菌比牛肝菌略贵。这种菌子炒熟了也还是浅绿色的，格调比牛肝菌高。菌中之王是鸡，味道鲜浓，无可方比。鸡是名贵的山珍，但并不真的贵得惊人。一盘红烧鸡的价钱和一碗黄焖鸡不相上下，因为这东西在云南并不难得。有一个笑话：有人从昆明坐火车到呈贡，在车上看到地上有一棵鸡，他跳下去把鸡捡了，紧赶两步，还能爬上火车。这笑话用意在说明昆明到呈贡的火车之慢，但也说明鸡随处可见。有一种菌子，中吃不中看，叫做干巴菌。乍一看那样子，真叫人怀疑：这种东西也能吃？！颜色深褐带绿，有点像一堆半干的牛粪或一个被踩破了的马蜂窝。里头还有许多草茎、松毛，乱七八糟！可是下点工夫，把草茎松毛择净，撕成蟹腿肉粗细的丝，和青辣椒同炒，入口便会使你张目结舌：这东西这么好吃？！还有一种菌子，中看不中吃，叫鸡油菌。都是一般大小，有一块银元那样大，的溜圆，颜色浅黄，恰似鸡油一样。这种菌子只有做菜时配色用，没甚味道。",
+            "reason": "第15行干巴菌段先铺排'草茎、松毛，乱七八糟！'与'入口便会使你张目结舌：'，随即以'这东西这么好吃？！'短句落地在感叹判断上；同段'色如牛肝，滑，嫩，鲜，香'后用'很好吃'短句收束，符合f09'细节后用独立短句压一下'的节奏机制，主体、顺序、位置、强度均一致。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-02"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "narration",
+        "rule": "判断或评点紧贴在具体叙述之后，以短句落定，不另起理论段落展开论证。",
+        "condition": "叙述完具体事实、动作或细节后需要给判断时",
+        "evidence": [
+          {
+            "article": "wzq-02",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "候选维度为narration，但该篇同维度（narration）可用特征ID为空；voice维度的f15属于不同维度不能引用。原文确有'仙人掌多，且极肥大'等判断紧贴叙述的实例，但缺同维度Style特征，故记unknown。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-02"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "自嘲落在自己、自己的局限或自己见识不足上，短而真切，说罢即收。",
+        "condition": "需要承认自身局限、见识不足或自嘲时",
+        "evidence": [
+          {
+            "article": "wzq-02",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文无作者自嘲或承认自身局限/见识不足的表达（'这个名字真不好听'是对名称的挑剔，属f18维度的挑剔而非对自身的自嘲），且voice维度无'自嘲落在自身局限'的同维度特征，故不成立。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-02"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "information",
+        "rule": "信息存疑或来源不明时，用口语化的含混词或明说不确定标出边界，不用精确数字或含糊肯定代替。",
+        "condition": "涉及来源、词义、年代、数量等不确定信息时",
+        "evidence": [
+          {
+            "article": "wzq-02",
+            "status": "support",
+            "feature_ids": [
+              "f12"
+            ],
+            "quote": "我不记得昆明的雨季有多长，从几月到几月，好像是相当长的。但是并不使人厌烦。因为是下下停停、停停下下，不是连绵不断，下起来没完。而且并不使人气闷。我觉得昆明雨季气压不低，人很舒服。",
+            "reason": "第9行'我不记得昆明的雨季有多长，从几月到几月，好像是相当长的'在时长、日期两处不确定信息上用'我不记得''好像是'明说不确定并口头含混标出边界，未给精确数字也未含糊肯定，与f12'不确定就承认不确定、宁含混不造精确数字'同维度且机制完整对应。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-02"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "voice",
+        "rule": "锋芒由平实措辞、事实并置或轻描淡写承担，不靠形容词加码、感叹号或论证堆叠。",
+        "condition": "需要下批评、反讽或锋利判断时",
+        "evidence": [
+          {
+            "article": "wzq-02",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文'这个名字真不好听'接近轻挑剔但非明确的批评、反讽或锋利判断场景，且voice维度无'锋芒由平实措辞/事实并置承担、不靠感叹号'的同维度特征可比，条件不完全适用，故记unknown。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-02"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p06",
+        "dimension": "ending",
+        "rule": "结尾用一两个短句收住，不再解释、不总结全文、不升华，语气保持平静或停在一个具体落点上。",
+        "condition": "文章收束时",
+        "evidence": [
+          {
+            "article": "wzq-02",
+            "status": "support",
+            "feature_ids": [
+              "f29"
+            ],
+            "quote": "我想念昆明的雨。",
+            "reason": "第31行'我想念昆明的雨。'位于全文末尾（第32行为空行），是独立短句陈述，不再解释、不总结全文、不升华，语气平静停在具体落点，且与第5行同句呼应，与f29'结尾是一句简短陈述、独立成行、不解释不总结不升华'同维度且完全一致。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-02"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    }
+  ],
+  "omissions": []
+}

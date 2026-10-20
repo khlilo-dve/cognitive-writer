@@ -1,0 +1,139 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "长句用逗号加连接成分层层累加、承载铺陈或推理，在累加到顶或推理结束处落到一个短句上作判断、收束或转折，短句后不再补修饰。",
+        "condition": "适用于句群与段落的内部节拍安排",
+        "evidence": [
+          {
+            "article": "wxb-10",
+            "status": "support",
+            "feature_ids": [
+              "f14"
+            ],
+            "quote": "二十多年前，我在云南插队。当地气候炎热，出产各种热带水果，就是没有椰子。整个云南都不长椰子，根据野史记载，这其中有个缘故。据说，在三国以前，云南到处都是椰子，树下住着幸福的少数民族。众所周知，椰子有很多用处，椰茸可以当饭吃，椰子油也可食用。椰子树叶里的纤维可以织粗糙的衣裙，椰子树干是木材。这种树木可以满足人的大部分需要，当地人也就不事农耕，过着悠闲的生活。忽一比诸葛亮南征来到此地，他要教化当地人，让他们遵从我们的生活方式：干我们的活，穿我们的衣服，服从我们的制度。这件事起初不大成功，当地人没看出我们的生活方式有什么优越之处。首先，秋收春种，活得很累，起码比摘椰子要累；其次，汉族人的衣着在当地也不适用。就以诸葛先生为例，那身道袍料子虽好，穿在身上除了捂汗和捂痱子，捂不出别的来；至于那顶道冠，既不遮阳，也不挡雨，只能招马蜂进去做窝。当地天热，搞两片椰树叶把羞处遮遮就可以了。至于汉朝的政治制度，对当地的少数民族来说，未免太过烦琐。诸葛先生磨破了嘴皮子，言必称孔孟，但也没人听。他不觉得自己的道理不对，却把账算在了椰子树身上：下了一道命令，一夜之间就把云南的椰树砍了个精光；免得这些蛮夷之人听不进圣贤的道理。没了这些树，他说话就有人听了--对此，我的解释是，诸葛亮他老人家南征，可不是一个人去的，还带了好多的兵，砍树用的刀斧也可以用来砍人，砍树这件事说明他手下的人手够用，刀斧也够用。当地人明白了这个意思，就怕了诸葛先生。我这种看法你尽可以不同意--我知道你会说，诸葛亮乃古之贤人，不会这样赤裸裸地用武力威胁别人；所以，我也不想坚持这种观点。",
+            "reason": "第一行“砍树这件事说明他手下的人手够用，刀斧也够用。当地人明白了这个意思，就怕了诸葛先生。”长句逗号累加推理后落到短判断句收束，短句后不再补修饰；与f14密—疏节奏同维度。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-10"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "society"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "voice",
+        "rule": "判断先落地、理由随后补上，第一人称判断直接署名或直说，解释在一两句内收完。",
+        "condition": "适用于论证与评点段落的推进",
+        "evidence": [
+          {
+            "article": "wxb-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "同维度特征多为f02/f04，但原文中“我这种看法你尽可以不同意——我知道你会说……所以，我也不想坚持这种观点”先说观点、后补让步和解释，与“判断先落地、理由一两句内收完、第一人称直接署名”的完整机制不一致，仅部分吻合，故不支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "先承认自己的资格不足、无知或处境尴尬（自嘲），随后照旧把判断说完，判断的硬度不被自嘲撤回。",
+        "condition": "适用于第一人称自嘲与判断并置处",
+        "evidence": [
+          {
+            "article": "wxb-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有“我总觉得这种说法有点太过惊世骇俗”“我也不想坚持这种观点”，但没有先承认资格不足/无知/处境尴尬（自嘲）随后照旧完成判断的完整结构；f11同维度只说明自嘲是收束用语，不能替代此机制。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "language",
+        "rule": "在同一句或相邻句内并置高低两种语域（书面/术语/庄重词与口语/粗俗词），靠词汇落差产生幽默或反讽，不加解释点破。",
+        "condition": "适用于需要幽默或讽刺落差的句段",
+        "evidence": [
+          {
+            "article": "wxb-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有“挂羊头卖狗肉”“头上一问棍”等口语与书面语并置，但同维度可对应的f10要求对象称谓客气、行为平实、每段一次，原文没有该条件下的完整机制；“诸葛先生”语域落差不等于f04所要求的高低语域同句/相邻句并置且无解释。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "ending",
+        "rule": "结尾收在一两个短句的判断或冷评上，说完即止，不再解释、总结、劝告或升华。",
+        "condition": "适用于全文结尾",
+        "evidence": [
+          {
+            "article": "wxb-10",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "同维度f20存在，但全文结尾是“这种法子现在正用着呢”，为一般性陈述而非短句冷评，且结尾后无同维度完整收束机制，故不支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-10"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    }
+  ],
+  "omissions": []
+}

@@ -2,13 +2,13 @@ use crate::{
     error::AppError,
     eval_store::write_json,
     research_compare::{finish_tasks, validated},
-    research_dataset::{sha256, valid_id, Dataset},
+    research_dataset::{Dataset, sha256, valid_id},
     research_store::ResearchStore,
     style_compare::{self, View},
     style_profile::{self, Profile, Source},
 };
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::{collections::BTreeMap, path::Path, sync::Arc};
 
 pub(crate) const ROOT: &str = "research/style-aggregation";
@@ -30,7 +30,7 @@ pub(crate) struct Artifact {
     pub warnings: Vec<String>,
 }
 
-fn load_sources(views: &str) -> Result<BTreeMap<String, (String, Source, String)>, AppError> {
+pub(crate) fn load_sources(views: &str) -> Result<BTreeMap<String, (String, Source, String)>, AppError> {
     if !valid_id(views) {
         return Err(AppError::Parse("views run无效".into()));
     }
@@ -156,8 +156,9 @@ pub(crate) async fn run(run: &str, views: &str, comparison_run: &str) -> Result<
         serde_json::from_slice(&std::fs::read(previous.join(name))?)
             .map_err(|e| AppError::Parse(e.to_string()))
     };
-    let gate_inputs=read_gate("inputs.json")?;
-    if !["style_pairs_v2_structured","candidate_matrix_v3"].contains(&gate_inputs["suite"].as_str().unwrap_or(""))
+    let gate_inputs = read_gate("inputs.json")?;
+    if !["style_pairs_v2_structured", "candidate_matrix_v3"]
+        .contains(&gate_inputs["suite"].as_str().unwrap_or(""))
         || read_gate("summary.json")?["status"] != "complete"
         || read_gate("controls.json")?["passed"] != true
         || gate_inputs["source"] != views
@@ -166,6 +167,20 @@ pub(crate) async fn run(run: &str, views: &str, comparison_run: &str) -> Result<
             "P2比较尚未完成、控制未过或视图来源不一致".into(),
         ));
     }
+    execute(run, views, Some(comparison_run), 1).await
+}
+
+/// Independent source-grounded feasibility experiment; does not certify P2.
+pub(crate) async fn pilot(run: &str, views: &str, version: u8) -> Result<(), AppError> {
+    execute(run, views, None, version).await
+}
+
+async fn execute(
+    run: &str,
+    views: &str,
+    comparison_run: Option<&str>,
+    version: u8,
+) -> Result<(), AppError> {
     let source_map = load_sources(views)?;
     let sampling: Value =
         serde_json::from_slice(&std::fs::read(format!("{ROOT}/datasets/sampling-v1.json"))?)
@@ -174,11 +189,35 @@ pub(crate) async fn run(run: &str, views: &str, comparison_run: &str) -> Result<
     if sampling["manifest_sha256"] != sha256(&manifest) {
         return Err(AppError::Parse("冻结抽样与manifest不一致".into()));
     }
-    let plans = make_plans(&sampling, &source_map)?;
-    let aggregate = std::fs::read_to_string(format!("{ROOT}/prompts/aggregate-profile-v2.md"))?;
+    let mut plans = make_plans(&sampling, &source_map)?;
+    if comparison_run.is_none() {
+        plans.retain(|p| p.mode == "primary" && p.articles.len() == 10);
+        if plans.len() != 2 {
+            return Err(AppError::Parse("独立小试要求两份全量主Profile".into()));
+        }
+    }
+    let prompt_version = if version == 2 { 3 } else { 2 };
+    let aggregate = std::fs::read_to_string(format!(
+        "{ROOT}/prompts/aggregate-profile-v{prompt_version}.md"
+    ))?;
     let compile = std::fs::read_to_string(format!("{ROOT}/prompts/compile-profile-v1.md"))?;
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
-    store.freeze(&json!({"suite":"evidence_profile_v2_structured","analysis_thinking":"disabled","method_revision":1,"sources":source_map,"sampling":sampling,"plans":plans,"aggregate_prompt":aggregate,"compile_prompt":compile,"rule_cap":12,"classification":"protocol_v2_detailed","comparison_gate":comparison_run}))?;
+    let mut frozen = json!({"suite":"evidence_profile_v2_structured","analysis_thinking":"disabled","method_revision":1,"sources":source_map,"sampling":sampling,"plans":plans,"aggregate_prompt":aggregate,"compile_prompt":compile,"rule_cap":12,"classification":"protocol_v2_detailed","comparison_gate":comparison_run});
+    if comparison_run.is_none() {
+        store.limit_run(4_000_000).await?;
+        frozen["suite"] = json!(format!("independent_profile_pilot_v{version}"));
+        frozen["method_revision"] = json!(6 + version);
+        if version == 2 {
+            frozen["rule_cap"] = json!(6);
+        }
+        frozen["p2_status"] = json!("measurement_invalid_no_author_similarity_conclusion");
+        frozen["run_cap_micro_cny"] = json!(4_000_000);
+        frozen["protocol_sha256"] = json!(sha256(&std::fs::read(format!(
+            "{ROOT}/method-revision-{:02}.md",
+            6 + version
+        ))?));
+    }
+    store.freeze(&frozen)?;
     std::fs::create_dir_all(store.root.join("profiles"))?;
     write_json(&store.root.join("plans.json"), &plans)?;
     let mut jobs = tokio::task::JoinSet::new();
@@ -205,7 +244,7 @@ pub(crate) async fn run(run: &str, views: &str, comparison_run: &str) -> Result<
         let compile = compile.clone();
         jobs.spawn(async move{
             let id=plan.id.clone();
-            let result=build(&store,plan,sources,single_spec,&aggregate,&compile).await;
+            let result=build(&store,plan,sources,single_spec,&aggregate,&compile,if version == 2 { 6 } else { 12 }).await;
             match result {
                 Ok(a)=>{write_json(&store.root.join(format!("profiles/{id}.json")),&a)?;
                     crate::io::write_file_atomic(&store.root.join(format!("profiles/{id}.md")),&a.spec)?;
@@ -224,6 +263,7 @@ async fn build(
     single_spec: String,
     aggregate: &str,
     compile: &str,
+    rule_cap: usize,
 ) -> Result<Artifact, AppError> {
     let source_sha256 =
         sha256(&serde_json::to_vec(&sources).map_err(|e| AppError::Parse(e.to_string()))?);
@@ -246,7 +286,13 @@ async fn build(
         &format!("{}-merge", plan.id),
         aggregate,
         &json!({"articles":anonymous}).to_string(),
-        |raw| style_profile::parse_indexed(raw, &sources),
+        |raw| {
+            let profile = style_profile::parse_indexed(raw, &sources)?;
+            if profile.rules.len() > rule_cap {
+                return Err(AppError::Parse(format!("当前聚合最多{rule_cap}条机制")));
+            }
+            Ok(profile)
+        },
     )
     .await?;
     // Save verified evidence even if the later compilation fails.
@@ -359,14 +405,18 @@ mod tests {
         let plans = make_plans(&sampling, &sources).unwrap();
         assert_eq!(plans.len(), 18); // Six unique subsets per author, plus six robustness checks.
         assert_eq!(plans.iter().filter(|p| p.mode != "primary").count(), 6);
-        assert!(plans
-            .iter()
-            .filter(|p| p.mode == "primary")
-            .all(|p| p.references.len() == 5));
-        assert!(plans
-            .iter()
-            .filter(|p| p.articles.len() == 1)
-            .all(|p| p.articles[0].ends_with("00")));
+        assert!(
+            plans
+                .iter()
+                .filter(|p| p.mode == "primary")
+                .all(|p| p.references.len() == 5)
+        );
+        assert!(
+            plans
+                .iter()
+                .filter(|p| p.articles.len() == 1)
+                .all(|p| p.articles[0].ends_with("00"))
+        );
         sampling["authors"]["alpha"]["orders"][0]["subsets"]["1"] = json!(["confirmation-article"]);
         assert!(make_plans(&sampling, &sources).is_err());
     }

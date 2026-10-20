@@ -1,0 +1,28 @@
+{
+  "run": "p3-independent-pilot-01",
+  "inputs_sha256": "3e4f8c65839870bde5ea00044b16ed1411c9997fd972ed9b2a4cc70c68407f62",
+  "receipts": [
+    {
+      "file": "profile-95a8f188fa16d060-merge-0.json",
+      "sha256": "80b98c81ae54acce5e0d224ef06320149fb4df98371b5c2f96a01b803b74269f",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "profile-95a8f188fa16d060-merge-1.json",
+      "sha256": "f69206b2f16c1e13a5e0254505765dfb1ba580a9d8dcd52662be950447d87610",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "profile-968be6b59520fb35-merge-0.json",
+      "sha256": "532efe54707e4c6abef64cf19ad23ce53bc16708b9eadaa20c960fce3f94fc4a",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "profile-968be6b59520fb35-merge-1.json",
+      "sha256": "12f50a5d1dd6170f5bedf7fcb6c7239b4db27e9f471e0d6381f920f7e0f72922",
+      "finish_reason": "stop"
+    }
+  ],
+  "profiles": [],
+  "semantic_acceptance": "not_assessed_by_this_script"
+}

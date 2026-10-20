@@ -1,0 +1,57 @@
+{
+  "records": [
+    {
+      "run": "p2-candidates-pilot-01",
+      "label": "24项一批，开启推理",
+      "status": "evaluation_invalid",
+      "checks_passed": 4,
+      "checks_total": 5,
+      "completed": 0,
+      "failed": 0,
+      "deferred": 0,
+      "spent": 0.046326
+    },
+    {
+      "run": "p2-candidates-pilot-02",
+      "label": "24项一批，关闭推理",
+      "status": "partial",
+      "checks_passed": 10,
+      "checks_total": 10,
+      "completed": 2,
+      "failed": 1,
+      "deferred": 0,
+      "spent": 0.480201
+    },
+    {
+      "run": "p2-candidate-cases-01",
+      "label": "逐对复杂规则诊断",
+      "status": "evaluation_invalid",
+      "checks_passed": 9,
+      "checks_total": 10,
+      "completed": 10,
+      "failed": 0,
+      "deferred": 0,
+      "spent": 0.041634
+    },
+    {
+      "run": "p2-candidates-pilot-03",
+      "label": "8项一批，规则正文，开启推理",
+      "status": "complete",
+      "checks_passed": 13,
+      "checks_total": 13,
+      "completed": 6,
+      "failed": 0,
+      "deferred": 0,
+      "spent": 2.666835
+    }
+  ],
+  "occupied_cny": 10.79477,
+  "settled_estimate": 8.512067,
+  "uncertain": 2.282703,
+  "inputs": {
+    "research/style-aggregation/runs/p2-candidates-pilot-01/summary.json": "4965f334572e2539d393dc22fb216fb7e7a955cf86903edb0006176287862af6",
+    "research/style-aggregation/runs/p2-candidates-pilot-02/summary.json": "f0ad9036683e6d503b60a7288e465d2a6b2f0413a6e10c1063d6682de36c131f",
+    "research/style-aggregation/runs/p2-candidate-cases-01/summary.json": "3e5bcfffa8af3af003459819f2db98fabf2d33d52265b85a74738242e04f1ab0",
+    "research/style-aggregation/runs/p2-candidates-pilot-03/summary.json": "256082f49b76da2abfb66b6db1d12d81e2fea67e7bb586ba51139d585eea9cbd"
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "短句在铺排或叙述之后落地收束，落在判断、感叹或自嘲上，以短句作节拍重音，不靠短句堆砌成格言。",
+        "condition": "段落内已有长句、铺排或细节叙述，需要用停顿落地判断时",
+        "evidence": [
+          {
+            "article": "wzq-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有铺排后的短句落地，如「北京人在口味上开放了！」，但该短句落在感叹而非判断或自嘲，与规则要求的判断/自嘲落点不符；部分实例与条件不能完全对应，故不作支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "narration",
+        "rule": "判断或评点紧贴在具体叙述之后，以短句落定，不另起理论段落展开论证。",
+        "condition": "叙述完具体事实、动作或细节后需要给判断时",
+        "evidence": [
+          {
+            "article": "wzq-07",
+            "status": "support",
+            "feature_ids": [
+              "f04",
+              "f14"
+            ],
+            "quote": "北京人过去就知道吃大白菜。由此可见，大白菜主义是可以被打倒的。",
+            "reason": "「北京人过去就知道吃大白菜。由此可见，大白菜主义是可以被打倒的。」在具体叙述之后以短句落定判断，未另起理论段落；f14、f04同为narration维度。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-07"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "自嘲落在自己、自己的局限或自己见识不足上，短而真切，说罢即收。",
+        "condition": "需要承认自身局限、见识不足或自嘲时",
+        "evidence": [
+          {
+            "article": "wzq-07",
+            "status": "support",
+            "feature_ids": [
+              "f19",
+              "f03"
+            ],
+            "quote": "四川夹沙肉用大片肥猪肉夹了洗沙蒸，广西芋头扣肉用大片肥猪肉夹芋泥蒸，都极甜，很好吃，但我最多只能吃两片。",
+            "reason": "「都极甜，很好吃，但我最多只能吃两片。」自嘲落在自身局限（只能吃两片），短而真切、说罢即收；f19、f03同为voice维度。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-07"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "information",
+        "rule": "信息存疑或来源不明时，用口语化的含混词或明说不确定标出边界，不用精确数字或含糊肯定代替。",
+        "condition": "涉及来源、词义、年代、数量等不确定信息时",
+        "evidence": [
+          {
+            "article": "wzq-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文有含混词「大概」「据说」，但未见与信息不确定相关的同维度Style特征（information维度特征为组织法和具象落点），故不作支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "voice",
+        "rule": "锋芒由平实措辞、事实并置或轻描淡写承担，不靠形容词加码、感叹号或论证堆叠。",
+        "condition": "需要下批评、反讽或锋利判断时",
+        "evidence": [
+          {
+            "article": "wzq-07",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文确有平实措辞、事实并置承担锋芒的例子，但也多处使用感叹号加重（如「山西人真能吃醋！」「放那么多糖！」），与「不靠感叹号」的否定项冲突，条件不能同时满足。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wzq-07"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p06",
+        "dimension": "ending",
+        "rule": "结尾用一两个短句收住，不再解释、不总结全文、不升华，语气保持平静或停在一个具体落点上。",
+        "condition": "文章收束时",
+        "evidence": [
+          {
+            "article": "wzq-07",
+            "status": "support",
+            "feature_ids": [
+              "f25"
+            ],
+            "quote": "甚矣，中国人口味之杂也，敢说堪为世界之冠。",
+            "reason": "全文末尾「甚矣，中国人口味之杂也，敢说堪为世界之冠。」为一两个短句收住，不再解释、不总结全文、不升华，落在具体落点上；f25为ending维度。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wzq-07"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "daily"
+      ]
+    }
+  ],
+  "omissions": []
+}

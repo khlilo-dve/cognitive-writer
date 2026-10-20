@@ -1,0 +1,143 @@
+{
+  "rules": [
+    {
+      "candidate": {
+        "id": "p01",
+        "dimension": "rhythm",
+        "rule": "长句用逗号加连接成分层层累加、承载铺陈或推理，在累加到顶或推理结束处落到一个短句上作判断、收束或转折，短句后不再补修饰。",
+        "condition": "适用于句群与段落的内部节拍安排",
+        "evidence": [
+          {
+            "article": "wxb-03",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文多处有长句累加后落短句（如第15行末），但‘短句后不再补修饰/不再补内容’这一完整收束条件缺少同维度（rhythm）特征的明确对应，部分满足不足以支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-03"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p02",
+        "dimension": "voice",
+        "rule": "判断先落地、理由随后补上，第一人称判断直接署名或直说，解释在一两句内收完。",
+        "condition": "适用于论证与评点段落的推进",
+        "evidence": [
+          {
+            "article": "wxb-03",
+            "status": "support",
+            "feature_ids": [
+              "f15"
+            ],
+            "quote": "现在可以谈谈为什么别人说我的作品格调低--这是因为其中写到了性。因为书中人物不是按顺序干完了格调高的事才来干这件格调低的事，所以它得分就不高。好在评论界没有按礼与色一百比一的比例来算它的格调，所以在真正的文学圈子里对它的评价不低，在海外还得过奖。假如说，这些人数学不好，不会算格调，我是不能承认的。不说别人，我自己的数学相当好，任何一种格调公式我都能掌握、我写这些作品是有所追求的，但这些追求在格调之外。除此之外，我还怀疑，人得到太多的格调分，除了使别人诧异之外，没有实际的用处。",
+            "reason": "同维度voice特征f15存在；第17行‘我是不能承认的’第一人称直接判断先落地，随后同行内‘不说别人，我自己的数学相当好……’在一两句内把解释收完，主体为作者本人，先后顺序、强度、收束均明确满足。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-03"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "p03",
+        "dimension": "voice",
+        "rule": "先承认自己的资格不足、无知或处境尴尬（自嘲），随后照旧把判断说完，判断的硬度不被自嘲撤回。",
+        "condition": "适用于第一人称自嘲与判断并置处",
+        "evidence": [
+          {
+            "article": "wxb-03",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "第7行有第一人称自嘲（前理科学生、混账想法），但随后是分类陈述而非紧接硬度不减的判断；第19行自嘲与判断未在同一处并置，整条机制不完整，缺同维度对应特征引用支撑。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-03"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p04",
+        "dimension": "language",
+        "rule": "在同一句或相邻句内并置高低两种语域（书面/术语/庄重词与口语/粗俗词），靠词汇落差产生幽默或反讽，不加解释点破。",
+        "condition": "适用于需要幽默或讽刺落差的句段",
+        "evidence": [
+          {
+            "article": "wxb-03",
+            "status": "unknown",
+            "feature_ids": [],
+            "quote": "",
+            "reason": "原文存在语域落差的幽默（如‘礼’‘色’与‘小命根’等），但未定位到在同一句或相邻句内并置高低语域且不点破的完整同维度（language）特征证据，主体与条件对应不充分，部分满足不足以支持。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [],
+      "counter_articles": [],
+      "unknown_articles": [
+        "wxb-03"
+      ],
+      "applicable_n": 0,
+      "support_ratio": null,
+      "support_topics": []
+    },
+    {
+      "candidate": {
+        "id": "p05",
+        "dimension": "ending",
+        "rule": "结尾收在一两个短句的判断或冷评上，说完即止，不再解释、总结、劝告或升华。",
+        "condition": "适用于全文结尾",
+        "evidence": [
+          {
+            "article": "wxb-03",
+            "status": "support",
+            "feature_ids": [
+              "f24"
+            ],
+            "quote": "维多利亚时期的英国人和\"文革\"时的中国人一样，性心理都不正常。正常的性心理是把性当作生活中一件重要的事，但不是全部。不正常则要么不承认有这么回事，要么除此什么都不想。假如一个社会的性心理不正常，那就会两样全占。这是因为这个社会里有这样一种格调，使一部分人不肯提到此事，另一部分人则事急从权，总而言之，没有一个人有平常心。作为作者，我知道怎么把作品写得格调极高，但是不肯写。对于一件愚蠢的事，你只能唱唱反调。",
+            "reason": "同维度ending特征f24存在；全文结尾第21行末‘对于一件愚蠢的事，你只能唱唱反调。’落在短句冷评上，说完即止，全文其后无解释、总结、劝告或升华，主体、位置（全文结尾）、强度与否定条件均满足。"
+          }
+        ]
+      },
+      "classification": "unknown",
+      "support_articles": [
+        "wxb-03"
+      ],
+      "counter_articles": [],
+      "unknown_articles": [],
+      "applicable_n": 1,
+      "support_ratio": 1.0,
+      "support_topics": [
+        "reading"
+      ]
+    }
+  ],
+  "omissions": []
+}

@@ -2,6 +2,14 @@
   "count": 7,
   "items": [
     {
+      "field_id": "fldUj1ucdM",
+      "field_name": "title",
+      "style": {
+        "type": "plain"
+      },
+      "type": "text"
+    },
+    {
       "field_id": "fldhC9JllD",
       "field_name": "topic",
       "style": {
@@ -47,14 +55,6 @@
     {
       "field_id": "fldlCABiWS",
       "field_name": "author",
-      "style": {
-        "type": "plain"
-      },
-      "type": "text"
-    },
-    {
-      "field_id": "fldUj1ucdM",
-      "field_name": "title",
       "style": {
         "type": "plain"
       },
