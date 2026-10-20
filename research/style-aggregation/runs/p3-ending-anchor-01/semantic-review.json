@@ -1,0 +1,21 @@
+{
+  "decision": "reject_for_generation",
+  "position_validation": {
+    "passed": 4,
+    "total": 4,
+    "source_quotes_program_owned": true
+  },
+  "semantic_scope": "All four judgments inspected by implementer; no human gold labels or independent confirmation",
+  "issues": [
+    {
+      "article": "wzq-05b",
+      "issue": "判定counter的进一步解释依据与原文对应，但理由额外加入原候选不存在的不劝告要求；不能把解释整体称为严格符合候选。"
+    },
+    {
+      "article": "wzq-02",
+      "issue": "end-1实际只含诗的后两行，理由却称四行；位置正确不保证解释计数正确。"
+    }
+  ],
+  "partial_success": "wzq-05b引用真正末句并识别进一步解释，wzq-07识别总结限制；只作开发案例记录。",
+  "inputs_sha256": "b9a48528c6f246dabce314816ceb77ea1255a59fbb6ff2e3d21e60961bf1fd10"
+}

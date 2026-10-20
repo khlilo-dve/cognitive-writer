@@ -2625,6 +2625,34 @@
       "actual_micro": 21264,
       "state": "settled"
     },
+    "p3-ending-anchor-01/ending-wxb-03-0": {
+      "run_id": "p3-ending-anchor-01",
+      "phase": "full",
+      "reserved_micro": 137091,
+      "actual_micro": 8508,
+      "state": "settled"
+    },
+    "p3-ending-anchor-01/ending-wzq-02-0": {
+      "run_id": "p3-ending-anchor-01",
+      "phase": "full",
+      "reserved_micro": 125340,
+      "actual_micro": 6516,
+      "state": "settled"
+    },
+    "p3-ending-anchor-01/ending-wzq-05b-0": {
+      "run_id": "p3-ending-anchor-01",
+      "phase": "full",
+      "reserved_micro": 160158,
+      "actual_micro": 13356,
+      "state": "settled"
+    },
+    "p3-ending-anchor-01/ending-wzq-07-0": {
+      "run_id": "p3-ending-anchor-01",
+      "phase": "full",
+      "reserved_micro": 128244,
+      "actual_micro": 7128,
+      "state": "settled"
+    },
     "p3-evidence-audit-01/audit-wxb-01-0": {
       "run_id": "p3-evidence-audit-01",
       "phase": "full",

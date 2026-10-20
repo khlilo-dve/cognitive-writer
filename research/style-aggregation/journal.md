@@ -206,3 +206,11 @@ method-revision-09与profile-evidence-audit-v1已冻结。原样使用两作者�
 ## E0034 · 2026-10-19 · 逐篇核验部分完成，语义仍不采用（evaluation_invalid）
 
 p3-evidence-audit-01结束，4/4控制通过、16/20篇有效、37响应；4失败含content_filter/usage缺失、跨维度、未知非零行号与漏答。有效部分33支持、54未知；23项缺失单列，不计算稳定标签。同16篇旧自报支持62→新33，但仍有结尾定位与冲突标签错误，semantic-review拒绝进入生成。新增0.926919元，全研究14.527641元，含未知3.128379元。20篇程序结尾定位片段已零调用生成。
+
+## E0035 · 2026-10-20 · 结尾位置由程序决定（method_change）
+
+上批次代码与证据已提交903bad0。method-revision-10预登记固定wxb-03/wzq-02/wzq-05b/wzq-07四例，候选结尾规则不改；程序验证原文SHA与Unicode偏移，support/counter必须含实际最后片段，模型不选择行号、不重抄引文。253库测试与构建通过后启动p3-ending-anchor-01，上限1元计入100元；困难语义仍Pro，不借位置正确宣称语义有效。
+
+## E0036 · 2026-10-20 · 定位约束验证成功，语义未采用（confirmed / evaluation_invalid）
+
+p3-ending-anchor-01四例完成，4/4引文位置通过程序SHA/Unicode偏移校验，模型2支持2反例；真正末句已取代段中误定位。语义复核仍发现新增不劝告条件、诗句行数误称，不进入生成。4响应哈希通过，缓存复跑4命中/0新请求/账本不变。本run0.035508元，全研究14.563149元（含未知预留），253库测试与构建通过。报告https://www.feishu.cn/docx/Hbm2d9fs1oTWjFx6ISqcIODunv8 已回读。

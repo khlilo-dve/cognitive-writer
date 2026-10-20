@@ -1,0 +1,12 @@
+{
+  "run": "p3-ending-anchor-01",
+  "cache_hits": 4,
+  "new_requests": 0,
+  "ledger_unchanged": true,
+  "request_hashes": {
+    "ending-wzq-02-0.json": "38e0a1475cf0ec06e3b2cb4efac6e5a3db324e4f11ba599f02648ea27f651858",
+    "ending-wxb-03-0.json": "6f40962afd10ddec6768db28604c06cc65bcd27b07cd715c99d74b0bc81a1e24",
+    "ending-wzq-05b-0.json": "1a7d9446536049a1a76a59be0f322f77eb77d4b20d4a5c906f8e00cc08dd89c7",
+    "ending-wzq-07-0.json": "fc8651da4975dbee6657e73a850698a553849aada1989b9d5b8a588aece703f0"
+  }
+}

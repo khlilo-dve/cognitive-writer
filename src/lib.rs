@@ -59,6 +59,7 @@ mod research_atomic_route;
 mod style_profile;
 mod research_profile;
 mod research_profile_audit;
+mod research_ending_audit;
 mod research_convergence;
 mod research_generation;
 mod research_judgment;

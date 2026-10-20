@@ -12,6 +12,7 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["ending-audit",run]=>crate::research_ending_audit::run(run).await,
         ["profile-audit",run]=>crate::research_profile_audit::run(run).await,
         ["profiles-pilot",run,views]=>crate::research_profile::pilot(run,views,1).await,
         ["profiles-pilot-v2",run,views]=>crate::research_profile::pilot(run,views,2).await,

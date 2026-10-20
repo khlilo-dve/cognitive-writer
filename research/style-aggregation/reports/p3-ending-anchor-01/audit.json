@@ -1,0 +1,50 @@
+{
+  "rows": [
+    {
+      "article": "wxb-03",
+      "status": "support",
+      "ending": "对于一件愚蠢的事，你只能唱唱反调。",
+      "reason": "最后两个含文字的片段都是短句判断式收束：end-1以“但是不肯写”作出冷评，end-2“对于一件愚蠢的事，你只能唱唱反调”同样属于简短判断并戛然而止。两片之后没有解释、总结、劝告或升华，符合候选的完整条件。"
+    },
+    {
+      "article": "wzq-02",
+      "status": "support",
+      "ending": "我想念昆明的雨。",
+      "reason": "末尾片段end-1以四行诗句呈现具体午后场景落点，紧接的end-2为一个简短抒情句，共同收束，不解释、不总结全文、不升华，语气平静并停在对昆明的雨的具体想念上。"
+    },
+    {
+      "article": "wzq-05b",
+      "status": "counter",
+      "ending": "语言学上有个词叫语感，语言感觉，语言好就是这个作家的语感；语言不好，这个作家的语感也不好。",
+      "reason": "最后片段（end-2）是解释语感含义的判断句，且紧接其前的end-1以“所以我建议你们……”给出明确劝告；两片段连用既非一两个短句收住，也包含劝告和进一步解释，与不总结、不劝告、不升华且停在具体落点的限制相反。"
+    },
+    {
+      "article": "wzq-07",
+      "status": "counter",
+      "ending": "甚矣，中国人口味之杂也，敢说堪为世界之冠。",
+      "reason": "结尾片段是感叹判断并使用\"堪为世界之冠\"作高度概括评价，属于对全文口味之杂的总结和升华，与不总结、不升华的限制相反，虽句式较短且语气落定，但完整机制未满足。"
+    }
+  ],
+  "review": {
+    "decision": "reject_for_generation",
+    "position_validation": {
+      "passed": 4,
+      "total": 4,
+      "source_quotes_program_owned": true
+    },
+    "semantic_scope": "All four judgments inspected by implementer; no human gold labels or independent confirmation",
+    "issues": [
+      {
+        "article": "wzq-05b",
+        "issue": "判定counter的进一步解释依据与原文对应，但理由额外加入原候选不存在的不劝告要求；不能把解释整体称为严格符合候选。"
+      },
+      {
+        "article": "wzq-02",
+        "issue": "end-1实际只含诗的后两行，理由却称四行；位置正确不保证解释计数正确。"
+      }
+    ],
+    "partial_success": "wzq-05b引用真正末句并识别进一步解释，wzq-07识别总结限制；只作开发案例记录。",
+    "inputs_sha256": "b9a48528c6f246dabce314816ceb77ea1255a59fbb6ff2e3d21e60961bf1fd10"
+  },
+  "cache_replay_new_requests": 0
+}
