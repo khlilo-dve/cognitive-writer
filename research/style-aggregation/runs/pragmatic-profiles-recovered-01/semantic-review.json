@@ -1,0 +1,16 @@
+{
+  "decision": "exploratory_only",
+  "artifacts_sha256": "8acc575f4ccf843925794a996bd84a7c9b4462e4eb7f25a23a08e4bd7ed0ce5c",
+  "review_scope": "All twelve mechanisms and writer instructions reviewed for obvious topic-route and task-policy risks; not a human blind gold label or validated author profile",
+  "source_run": "pragmatic-profiles-01",
+  "source_status": "partial",
+  "rules_retained": 12,
+  "evidence_diagnostic_sha256": "64bc100156053e1f5b7db1f4b76b51ffb5be7904ac45ef00c20ad225c9fb33c4",
+  "limitations": [
+    "4/30 short evidence excerpts do not exactly match the source; two mechanisms cover only one topic; these claims are not treated as proven author-stable features.",
+    "Both executable descriptions have 1288/1348 non-whitespace characters, below the 1500 completeness reference and shorter than single-style baselines; length can confound comparison.",
+    "Some instructions propose numbers, invented extreme scenarios or physical experiences, potentially conflicting with strict task facts; retain and report factual violations independently.",
+    "Writers may inherit source-specific ideas from short examples in instructions; use independent source-leakage assessment."
+  ],
+  "next_step": "Run frozen Flash generation and five-dimensional comparison as exploratory development without changing these twelve rules."
+}

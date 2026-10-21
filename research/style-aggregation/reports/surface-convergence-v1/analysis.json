@@ -1,0 +1,571 @@
+{
+  "suite": "surface_convergence_v1",
+  "dataset_manifest_sha256": "09b6c0357d411737479684966d1b36b29cddf8292375ce4ccdbc108692180214",
+  "sampling_sha256": "38dacd5645cfa6fc69e1bd8a9d8e4186f3868a51c082ee49560c64c4a24b5706",
+  "source_description_sha256": "4f6ff0c4e2a7f3fd4dd37748054678feccc8f4ad1d9c4900be147ca591334d1a",
+  "api_calls": 0,
+  "full10": {
+    "wang_xiaobo": {
+      "sentence_median": 29.6,
+      "paragraph_median": 335.3,
+      "first_person_per_1000": 15.58691,
+      "question_per_1000": 0.90408,
+      "exclamation_per_1000": 0.52596
+    },
+    "wang_zengqi": {
+      "sentence_median": 19.4,
+      "paragraph_median": 163.25,
+      "first_person_per_1000": 9.72979,
+      "question_per_1000": 1.80224,
+      "exclamation_per_1000": 2.43568
+    }
+  },
+  "rows": [
+    {
+      "author": "wang_xiaobo",
+      "metric": "exclamation_per_1000",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 0.0913,
+      "min_gap": 0.0057,
+      "max_gap": 0.526
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "exclamation_per_1000",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 0.2658,
+      "min_gap": 0.1011,
+      "max_gap": 1.5748
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "exclamation_per_1000",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 0.3202,
+      "min_gap": 0.2427,
+      "max_gap": 0.8745
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "exclamation_per_1000",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 0.3608,
+      "min_gap": 0.2374,
+      "max_gap": 0.4649
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "exclamation_per_1000",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 0.1818,
+      "min_gap": 0.104,
+      "max_gap": 0.1922
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "exclamation_per_1000",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "first_person_per_1000",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 4.1662,
+      "min_gap": 4.1662,
+      "max_gap": 5.2248
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "first_person_per_1000",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 1.2341,
+      "min_gap": 1.0063,
+      "max_gap": 4.5322
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "first_person_per_1000",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 1.9508,
+      "min_gap": 1.5145,
+      "max_gap": 2.4555
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "first_person_per_1000",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 0.7464,
+      "min_gap": 0.0584,
+      "max_gap": 2.7742
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "first_person_per_1000",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 1.1374,
+      "min_gap": 0.6583,
+      "max_gap": 1.1781
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "first_person_per_1000",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "paragraph_median",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 91.3,
+      "min_gap": 0.8,
+      "max_gap": 91.3
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "paragraph_median",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 46.05,
+      "min_gap": 10.45,
+      "max_gap": 50.45
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "paragraph_median",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 12.4667,
+      "min_gap": 3.8667,
+      "max_gap": 23.4667
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "paragraph_median",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 17.8,
+      "min_gap": 9.3,
+      "max_gap": 32.3
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "paragraph_median",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 19.4143,
+      "min_gap": 2.1286,
+      "max_gap": 30.7
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "paragraph_median",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "question_per_1000",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 0.2868,
+      "min_gap": 0.1365,
+      "max_gap": 0.2868
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "question_per_1000",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 0.3071,
+      "min_gap": 0.0563,
+      "max_gap": 0.3838
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "question_per_1000",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 0.1546,
+      "min_gap": 0.1091,
+      "max_gap": 0.3537
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "question_per_1000",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 0.0811,
+      "min_gap": 0.005,
+      "max_gap": 0.2348
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "question_per_1000",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 0.234,
+      "min_gap": 0.1462,
+      "max_gap": 0.3002
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "question_per_1000",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "sentence_median",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 5.6,
+      "min_gap": 2.4,
+      "max_gap": 5.6
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "sentence_median",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 3.35,
+      "min_gap": 0.4,
+      "max_gap": 4.6
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "sentence_median",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 3.1,
+      "min_gap": 1.0667,
+      "max_gap": 3.2667
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "sentence_median",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 2.1,
+      "min_gap": 0.7,
+      "max_gap": 2.1
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "sentence_median",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 0.2571,
+      "min_gap": 0.1143,
+      "max_gap": 1.5429
+    },
+    {
+      "author": "wang_xiaobo",
+      "metric": "sentence_median",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "exclamation_per_1000",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 0.6134,
+      "min_gap": 0.6134,
+      "max_gap": 1.2357
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "exclamation_per_1000",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 0.3112,
+      "min_gap": 0.2561,
+      "max_gap": 1.6222
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "exclamation_per_1000",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 0.877,
+      "min_gap": 0.0045,
+      "max_gap": 0.8873
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "exclamation_per_1000",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 0.5207,
+      "min_gap": 0.1562,
+      "max_gap": 0.9851
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "exclamation_per_1000",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 0.2153,
+      "min_gap": 0.12,
+      "max_gap": 0.6628
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "exclamation_per_1000",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "first_person_per_1000",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 5.6296,
+      "min_gap": 0.9759,
+      "max_gap": 5.6296
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "first_person_per_1000",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 4.2377,
+      "min_gap": 1.5165,
+      "max_gap": 5.4575
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "first_person_per_1000",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 4.587,
+      "min_gap": 0.1545,
+      "max_gap": 5.4448
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "first_person_per_1000",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 2.299,
+      "min_gap": 0.3767,
+      "max_gap": 3.7537
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "first_person_per_1000",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 1.4392,
+      "min_gap": 0.2009,
+      "max_gap": 3.0251
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "first_person_per_1000",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "paragraph_median",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 400.75,
+      "min_gap": 87.75,
+      "max_gap": 400.75
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "paragraph_median",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 147.75,
+      "min_gap": 46.5,
+      "max_gap": 191.0
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "paragraph_median",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 79.4167,
+      "min_gap": 56.9167,
+      "max_gap": 96.75
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "paragraph_median",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 28.35,
+      "min_gap": 24.95,
+      "max_gap": 71.85
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "paragraph_median",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 21.1786,
+      "min_gap": 0.3214,
+      "max_gap": 66.1071
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "paragraph_median",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "question_per_1000",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 1.3869,
+      "min_gap": 0.7723,
+      "max_gap": 1.3869
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "question_per_1000",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 0.2322,
+      "min_gap": 0.0296,
+      "max_gap": 0.9034
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "question_per_1000",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 0.3075,
+      "min_gap": 0.111,
+      "max_gap": 0.5707
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "question_per_1000",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 0.3132,
+      "min_gap": 0.2419,
+      "max_gap": 0.3707
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "question_per_1000",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 0.1615,
+      "min_gap": 0.0818,
+      "max_gap": 0.2606
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "question_per_1000",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "sentence_median",
+      "k": 1,
+      "paths": 5,
+      "median_absolute_gap": 0.4,
+      "min_gap": 0.4,
+      "max_gap": 0.9
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "sentence_median",
+      "k": 2,
+      "paths": 5,
+      "median_absolute_gap": 0.65,
+      "min_gap": 0.1,
+      "max_gap": 2.15
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "sentence_median",
+      "k": 3,
+      "paths": 5,
+      "median_absolute_gap": 1.5667,
+      "min_gap": 0.2667,
+      "max_gap": 2.2333
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "sentence_median",
+      "k": 5,
+      "paths": 5,
+      "median_absolute_gap": 0.9,
+      "min_gap": 0.1,
+      "max_gap": 1.9
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "sentence_median",
+      "k": 7,
+      "paths": 5,
+      "median_absolute_gap": 0.2571,
+      "min_gap": 0.0429,
+      "max_gap": 0.5429
+    },
+    {
+      "author": "wang_zengqi",
+      "metric": "sentence_median",
+      "k": 10,
+      "paths": 5,
+      "median_absolute_gap": 0.0,
+      "min_gap": 0.0,
+      "max_gap": 0.0
+    }
+  ],
+  "scope": "within the frozen ten articles per author",
+  "caveats": [
+    "k10 gap equals zero by definition",
+    "Five orders share articles and are not independent author samples",
+    "These surface measures do not validate semantic Style rules or generated fidelity"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "suite": "pragmatic_profile_salvage_v1",
+  "source_run": "pragmatic-profiles-01",
+  "source_inputs_sha256": "2874e7826e4265905b14e2e724e15379df2ffba3457fb67f8e8153190b5c22e9",
+  "protocol_sha256": "48c73e5748022cffef55428c9e856bbc64df99e2cb7ea5e1121ac53677033b0d",
+  "plans": [
+    {
+      "id": "profile-95a8f188fa16d060",
+      "author": "wang_zengqi",
+      "articles": [
+        "wzq-01",
+        "wzq-02",
+        "wzq-03",
+        "wzq-04",
+        "wzq-05b",
+        "wzq-06",
+        "wzq-07",
+        "wzq-08",
+        "wzq-09",
+        "wzq-10"
+      ],
+      "mode": "primary",
+      "references": [
+        {
+          "k": 10,
+          "seed": 17
+        },
+        {
+          "k": 10,
+          "seed": 29
+        },
+        {
+          "k": 10,
+          "seed": 43
+        },
+        {
+          "k": 10,
+          "seed": 71
+        },
+        {
+          "k": 10,
+          "seed": 101
+        }
+      ]
+    },
+    {
+      "id": "profile-968be6b59520fb35",
+      "author": "wang_xiaobo",
+      "articles": [
+        "wxb-01",
+        "wxb-02",
+        "wxb-03",
+        "wxb-04",
+        "wxb-05",
+        "wxb-06",
+        "wxb-07",
+        "wxb-08",
+        "wxb-09",
+        "wxb-10"
+      ],
+      "mode": "primary",
+      "references": [
+        {
+          "k": 10,
+          "seed": 17
+        },
+        {
+          "k": 10,
+          "seed": 29
+        },
+        {
+          "k": 10,
+          "seed": 43
+        },
+        {
+          "k": 10,
+          "seed": 71
+        },
+        {
+          "k": 10,
+          "seed": 101
+        }
+      ]
+    }
+  ],
+  "source_receipts": [
+    {
+      "author": "wang_zengqi",
+      "source_receipt_sha256": "8dcd6bc5571f189c9430321798431149b1e19552516c26e4ae2f954bfdb65efe"
+    },
+    {
+      "author": "wang_xiaobo",
+      "source_receipt_sha256": "a7c6ff697623f799b3ecd6212c30b17a00c9b4fae832f8ce5e4d9c2acbf49df7"
+    }
+  ],
+  "derivation": "all six parsed mechanisms per author retained verbatim; source quotes omitted from writer Spec"
+}

@@ -2,14 +2,15 @@ use crate::{
     error::AppError,
     eval_store::write_json,
     research_compare::{finish_tasks, validated},
-    research_dataset::{sha256, valid_id, Dataset},
+    research_dataset::{Dataset, sha256, valid_id},
     research_generation::{self, Generated},
     research_judgment,
     research_profile::ROOT,
+    research_receipt::{self, Checkpoint},
     research_store::ResearchStore,
     transfer_quality::{self, Judgment},
 };
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::{collections::BTreeMap, path::Path, sync::Arc};
 
 async fn grade(
@@ -28,9 +29,9 @@ async fn grade(
 }
 
 async fn controls(store: &ResearchStore, transfer: &str, author: &str) -> Result<Value, AppError> {
-    let source="我给规矩写了一张请假条。它说批准，转头把自己的名字填进了出勤表。规矩没有腿，走得却比人快。";
+    let source = "我给规矩写了一张请假条。它说批准，转头把自己的名字填进了出勤表。规矩没有腿，走得却比人快。";
     let reference_b = "雨落在屋檐上。院里的叶子湿了。傍晚，窗子透出一点灯光。";
-    let task="严格素材：活动室设工具柜，居民登记借还。涵盖工具柜和登记借还，不得增添数据、人物对话或其他事件。";
+    let task = "严格素材：活动室设工具柜，居民登记借还。涵盖工具柜和登记借还，不得增添数据、人物对话或其他事件。";
     let base = "活动室设了工具柜，居民登记后借用，归还时也需要登记。";
     let mut rows = Vec::new();
     for (name, body) in [
@@ -85,6 +86,93 @@ pub(crate) async fn run(
     phase: &str,
     reference_run: Option<&str>,
 ) -> Result<(), AppError> {
+    run_with_context(run, generation, phase, reference_run, false, false).await
+}
+
+pub(crate) async fn run_compact(
+    run: &str,
+    generation: &str,
+    phase: &str,
+    reference_run: Option<&str>,
+) -> Result<(), AppError> {
+    run_with_context(run, generation, phase, reference_run, true, false).await
+}
+
+pub(crate) async fn run_compact_reuse(
+    run: &str,
+    generation: &str,
+    phase: &str,
+    reference_run: Option<&str>,
+) -> Result<(), AppError> {
+    run_with_context(run, generation, phase, reference_run, true, true).await
+}
+
+fn reused_controls(
+    generation_sha: &str,
+    transfer: &str,
+    author: &str,
+) -> Result<(Value, Value), AppError> {
+    let source = Path::new(ROOT).join("runs/pragmatic-reference-01");
+    let inputs: Value = serde_json::from_slice(&std::fs::read(source.join("inputs.json"))?)
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    let control_bytes = std::fs::read(source.join("controls.json"))?;
+    let controls: Value =
+        serde_json::from_slice(&control_bytes).map_err(|e| AppError::Parse(e.to_string()))?;
+    if inputs["generation_sha256"] != generation_sha
+        || inputs["transfer_prompt"] != transfer
+        || inputs["author_prompt"] != author
+        || controls["passed"] != true
+    {
+        return Err(AppError::Parse(
+            "旧控制快照生成身份、Prompt或通过状态不一致".into(),
+        ));
+    }
+    let rows = controls["rows"]
+        .as_array()
+        .ok_or_else(|| AppError::Parse("旧控制记录缺失".into()))?;
+    if rows.len() != 4
+        || ["clean", "fabrication", "leak", "author-self"]
+            .iter()
+            .any(|name| {
+                !rows
+                    .iter()
+                    .any(|r| r["name"] == *name && r["passed"] == true)
+            })
+    {
+        return Err(AppError::Parse("旧控制未完整通过".into()));
+    }
+    for name in ["clean", "fabrication", "leak", "author-self"] {
+        let prefix = format!("control-{name}");
+        let path = [1, 0]
+            .into_iter()
+            .map(|attempt| source.join(format!("requests/{prefix}-{attempt}.json")))
+            .find(|p| p.exists())
+            .ok_or_else(|| AppError::Parse("旧控制缺少响应检查点".into()))?;
+        let cp: Checkpoint = serde_json::from_slice(&std::fs::read(path)?)
+            .map_err(|e| AppError::Parse(e.to_string()))?;
+        research_receipt::verify(&cp)?;
+        if cp.receipt.model != "mimo-v2.6-pro"
+            || cp.receipt.finish_reason != "stop"
+            || cp.receipt.content.trim().is_empty()
+        {
+            return Err(AppError::Parse("旧控制响应模型/完成状态无效".into()));
+        }
+    }
+    Ok((
+        controls,
+        json!({"source_run":"pragmatic-reference-01","controls_sha256":sha256(&control_bytes),
+        "caveat":"same controls passed once and failed on a later rerun; exploratory judge only"}),
+    ))
+}
+
+async fn run_with_context(
+    run: &str,
+    generation: &str,
+    phase: &str,
+    reference_run: Option<&str>,
+    compact: bool,
+    reuse: bool,
+) -> Result<(), AppError> {
     if !["reference", "confirmation"].contains(&phase) {
         return Err(AppError::Parse("评估阶段必须reference/confirmation".into()));
     }
@@ -94,6 +182,7 @@ pub(crate) async fn run(
     let transfer = std::fs::read_to_string("prompts/eval_judge_transfer_v2.md")?;
     let author = std::fs::read_to_string(format!("{ROOT}/prompts/author-match-v1.md"))?;
     let mut inherited = Value::Null;
+    let mut prior_inputs = Value::Null;
     if phase == "confirmation" {
         let previous = reference_run
             .filter(|s| valid_id(s))
@@ -107,6 +196,14 @@ pub(crate) async fn run(
             .map_err(|e| AppError::Parse(e.to_string()))?;
         if summary["status"] != "complete"
             || inherited["passed"] != true
+            || inputs["suite"]
+                != if reuse {
+                    "style_generation_eval_v2_compact_reuse"
+                } else if compact {
+                    "style_generation_eval_v2_compact"
+                } else {
+                    "style_generation_eval_v2_structured"
+                }
             || inputs["generation_sha256"] != generation_sha
             || inputs["transfer_prompt"] != transfer
             || inputs["author_prompt"] != author
@@ -115,12 +212,63 @@ pub(crate) async fn run(
                 "开发未完成/控制未过/生成或评分方法变化，拒绝解封确认材料".into(),
             ));
         }
+        prior_inputs = inputs;
     }
     let manifest = Path::new(ROOT).join("datasets/authors-v1/manifest.json");
     let ds = Dataset::load(&manifest)?;
     let mut sources = BTreeMap::<String, String>::new();
     let mut references = BTreeMap::new();
+    let mut selection = Value::Null;
+    let mut selected_ids = BTreeMap::<String, Vec<String>>::new();
+    if compact {
+        let sampling: Value =
+            serde_json::from_slice(&std::fs::read(format!("{ROOT}/datasets/sampling-v1.json"))?)
+                .map_err(|e| AppError::Parse(e.to_string()))?;
+        if sampling["manifest_sha256"] != sha256(&std::fs::read(&manifest)?) {
+            return Err(AppError::Parse("评分的预定单篇基线与资料身份变化".into()));
+        }
+        for (author, data) in sampling["authors"]
+            .as_object()
+            .ok_or_else(|| AppError::Parse("缺少冻结作者清单".into()))?
+        {
+            let baselines = data["generation_baselines"]
+                .as_object()
+                .ok_or_else(|| AppError::Parse("缺少预定三篇参照".into()))?;
+            if baselines.len() != 3 {
+                return Err(AppError::Parse("每位作者需要三个题材参照".into()));
+            }
+            let mut ids = Vec::new();
+            for topic in ["daily", "reading", "society"] {
+                let id = baselines[topic]
+                    .as_str()
+                    .ok_or_else(|| AppError::Parse("基线文章ID无效".into()))?;
+                if !ds
+                    .selected(false)
+                    .iter()
+                    .any(|a| a.article_id == id && a.author_id == *author && a.topic == topic)
+                {
+                    return Err(AppError::Parse("评分参考不是冻结作者/主题discovery".into()));
+                }
+                ids.push(id.to_owned());
+            }
+            selected_ids.insert(author.clone(), ids);
+        }
+        if selected_ids.len() != 2 {
+            return Err(AppError::Parse("评分需要两位作者参照".into()));
+        }
+        selection = json!(selected_ids);
+        if phase == "confirmation" && prior_inputs["source_selection"] != selection {
+            return Err(AppError::Parse("确认评分参考清单与开发阶段不同".into()));
+        }
+    }
     for a in ds.selected(false) {
+        if compact
+            && !selected_ids
+                .get(&a.author_id)
+                .is_some_and(|ids| ids.contains(&a.article_id))
+        {
+            continue;
+        }
         sources
             .entry(a.author_id.clone())
             .or_default()
@@ -148,9 +296,55 @@ pub(crate) async fn run(
         return Err(AppError::Parse("评估阶段篇数与预登记不符".into()));
     }
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
-    store.freeze(&json!({"suite":"style_generation_eval_v2_structured","analysis_thinking":"disabled","method_revision":1,"phase":phase,"generation_run":generation,"generation_sha256":generation_sha,"transfer_prompt":transfer,"author_prompt":author,"source_context":"same ten discovery sources per author for every method; no Spec shown","sources":sources,"references":references,"jobs":jobs,"reference_run":reference_run}))?;
+    if compact {
+        store
+            .limit_run(if phase == "reference" {
+                15_000_000
+            } else {
+                30_000_000
+            })
+            .await?;
+    }
+    let (control_snapshot, control_source) = if reuse {
+        if phase == "reference" {
+            let (controls, source) = reused_controls(&generation_sha, &transfer, &author)?;
+            (Some(controls), source)
+        } else {
+            (None, prior_inputs["control_source"].clone())
+        }
+    } else {
+        (None, Value::Null)
+    };
+    let mut frozen = json!({"suite":"style_generation_eval_v2_structured","analysis_thinking":"disabled","method_revision":1,"phase":phase,"generation_run":generation,"generation_sha256":generation_sha,"transfer_prompt":transfer,"author_prompt":author,"source_context":"same ten discovery sources per author for every method; no Spec shown","sources":sources,"references":references,"jobs":jobs,"reference_run":reference_run});
+    if compact {
+        frozen["suite"] = json!(if reuse {
+            "style_generation_eval_v2_compact_reuse"
+        } else {
+            "style_generation_eval_v2_compact"
+        });
+        frozen["method_revision"] = json!(if reuse { 15 } else { 14 });
+        frozen["source_context"] = json!(
+            "same three preregistered discovery baseline articles per author for every method; no Spec shown"
+        );
+        frozen["source_selection"] = selection;
+        frozen["run_cap_micro_cny"] = json!(if phase == "reference" {
+            15_000_000
+        } else {
+            30_000_000
+        });
+        frozen["protocol_sha256"] = json!(sha256(&std::fs::read(format!(
+            "{ROOT}/method-revision-{}.md",
+            if reuse { 15 } else { 14 }
+        ))?));
+        if reuse {
+            frozen["control_source"] = control_source;
+        }
+    }
+    store.freeze(&frozen)?;
     if phase == "reference" {
-        if let Err(e) = controls(&store, &transfer, &author).await {
+        if let Some(controls) = control_snapshot {
+            write_json(&store.root.join("controls.json"), &controls)?;
+        } else if let Err(e) = controls(&store, &transfer, &author).await {
             write_json(
                 &store.root.join("summary.json"),
                 &json!({"status":"evaluation_invalid","error":e.to_string(),"usage":store.usage().await}),

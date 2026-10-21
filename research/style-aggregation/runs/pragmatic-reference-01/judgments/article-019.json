@@ -1,0 +1,53 @@
+{
+  "author": "wang_xiaobo",
+  "author_match": {
+    "choice": "neither",
+    "confidence": "medium",
+    "evidence": [],
+    "fidelity_a": 1.0,
+    "fidelity_b": 1.0,
+    "reason": "新文章是短小、克制的规则评议，采用'两码事得分开说''便利是实的/可用性是虚的/责任是空的'这类并置判语，与A的论辩式科学辩护、大量引述大师并自嘲的机制无关；也与B的私人回忆散文、日常细节缀连、人物性情描摹的机制无关。句式、人称距离、信息展开方式均无对应机制，仅有中文通用书面语的表面共通。",
+    "uncertainties": [
+      "仅各一篇参考，可能有未覆盖的共同风格面；通用流畅的短评语体容易造成虚假相似，故不做倾向判断"
+    ]
+  },
+  "body_sha256": "ad754696610964565df7d79dfc16a32fc1132b2f9f65c79f2ac7679d311421f9",
+  "id": "article-019",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 757,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "method": "single",
+  "other_fidelity": 1.0,
+  "phase": "reference",
+  "replicate": 1,
+  "style_id": "wxb-09",
+  "target_fidelity": 1.0,
+  "target_label": "A",
+  "topic": "tools",
+  "transfer": {
+    "fact_violations": [],
+    "reasons": {
+      "factual_compliance": "严格模式下未见新增人物履历、精确时间数字、具体物件、独立事件、对话或外部引用。'用完还回来，由值班人员核对是否齐全''现行规则不允许提前预约''工作人员正在收集意见'等均可在核心素材中找到依据；'可以被用，但不该被依赖'为逻辑解释性收束，非新事实。",
+      "naturalness": "排比与格言式收束使用自然，无明显拼贴痕迹；仅少数句（'碰运气的意思是……'）稍显说理腔，但不致机械重复。",
+      "source_independence": "未发现参考样文的具体内容、结论、人物、事件迁移。借鉴仅为共享的人称、分账式论证操作和短功能词（'比方说'式举例、'不管怎么说'式过渡），不构成内容污染。",
+      "style_fidelity": "保留了参考样文的关键机制：第一人称观察者提出反驳式判断（'这件事本身没什么可争的……但我得说'）、'这话听着别扭，好处归好处，规矩归规矩，两码事得分开说'式的分账类比、排比拆解（'便利是实的/可用性是虚的/责任是空的'）、'你说……我同意，前提是……'的对话式让步反驳、格言式短收尾（'柜子已经开了，规则还在路上'），信息展开也沿用'提出议题—拆解—举反例—收束'的动作。但缺少样文特有的掌故/数字类比和自嘲腔调，语气更收。",
+      "task_completion": "覆盖了登记借还流程、临时借用省去购买的好处、急用时无货的可用性不确定、损坏遗失责任未定、便利与规则边界的讨论，未编造已解决争议或效果数据。"
+    },
+    "scores": {
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "source_independence": 5.0,
+      "style_fidelity": 4.0,
+      "task_completion": 5.0
+    },
+    "source_leakage": [],
+    "task_issues": [],
+    "uncertainties": []
+  }
+}

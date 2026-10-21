@@ -1,5 +1,25 @@
 # 当前任务状态
 
+## 2026-10-21 最新评分断点
+
+- pragmatic-generation-01的60篇/120响应已完整保存；P4表层5指标图和P5字数图已发布飞书。旧pragmatic-reference-01因10篇原文上下文，5完成/3失败/12暂缓，累计占用18.033171元（含未知预留）时封存。
+- pragmatic-reference-compact-01使用冻结三篇参照，但fabrication控制响应自相矛盾，0正式评分，run占用0.016623元，状态evaluation_invalid。
+- method-revision-15预登记：旧run的4项控制输入与本实验身份/Prompt完全一致，旧响应SHA核验且4项通过；同时承认新run相同控制失败，评分只作探索性。pragmatic-reference-reuse-01正在运行20篇开发评分，三篇参考对全部方法相同；禁止拼接旧真实分数，预算单run限15元。实际状态请核对进程/summary/账本。
+
+## 2026-10-21 当前断点
+
+- 用户要求先在适当范围完成、再迭代。method-revision-11至14按此推进；原P2语义测量与严格P3失败没有改写成通过。
+- pragmatic-profiles-01两份Pro JSON均被严格引用/题材校验拒绝，费用0.251445元；免费派生pragmatic-profiles-recovered-01保留12条机制原样及全部缺口，供exploratory_only生成。两份执行说明1288/1348字符。
+- pragmatic-generation-01的48篇主对照+12篇无风格，共60篇/120响应全部Flash完成；本run占用0.317655元。P4只完成原文表层统计，非语义Profile收敛，图表与报告已发布。
+- 原开发评分pragmatic-reference-01因10篇原文裁判上下文出现两次content_filter及一次length而停，5完成/3失败/12暂缓，费用2.900922元；全研究停止时18.033171元含未知预留。method-revision-14冻结三篇参照后，新pragmatic-reference-compact-01正在运行，单run限15元。不能拼接两run评分。
+- 下一步：完成开发题目五维+作者匹配，再核对控制/缺失与代表文章；符合方法条件后跑40篇确认题目评分、分项报告及飞书留证。若模型渠道再失败，保留真实缺口，自主转向可验证的人工盲测，不伪称模型分数完整。最新运行必须同时核对实际进程、summary和usage-ledger，不能只信running字样。
+
+## 2026-10-21 当前执行
+
+- 用户要求在适当范围先完成写作对照再迭代；method-revision-11/12已冻结。pragmatic-profiles-01双作者各6规则但严格引文/题材校验失败，0.251445元、累计14.814594元（生成开始前）。失败run保留；pragmatic-profiles-recovered-01是0API派生，两位作者12条原样保留、4处短引文不匹配/2条单题材/说明1288和1348非空白字符有明示限制。
+- pragmatic-generation-01运行中：48风格对照+12中性对照，Flash生成且相同固定任务；上限15元计入100元。检查实际进程、summary、原run请求检查点，不重抽已完成正文。二进制target/research-p3/debug/cognitive-writer，最新254库测试及构建通过。
+- 后续先完成60篇与离线身份/字数/费用检查，再进行已规划的reference Pro分项评分与作者匹配；只有开发阶段结论可信才按冻结方法进入confirmation。P4语义收敛仍未完成，不把这轮探索性生成说成聚合稳定。
+
 ## 2026-10-20 最新结果
 
 - p3-ending-anchor-01已完成4/4，程序保证实际末尾引文位置；模型2支持/2反例，语义理由仍有附加条件/行数错误，不进入P5。

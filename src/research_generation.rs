@@ -3,13 +3,13 @@ use crate::{
     eval_store::write_json,
     generate::{outline_system_prompt, render_prompt, style_system_prompt},
     research_compare::finish_tasks,
-    research_dataset::{sha256, valid_id, Dataset},
+    research_dataset::{Dataset, sha256, valid_id},
     research_profile::{self, ROOT},
     research_store::{ResearchStore, Role},
     transfer_quality::length_check,
 };
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::{collections::BTreeMap, path::Path, sync::Arc};
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -38,6 +38,35 @@ pub(crate) async fn run(run: &str, profiles: &str, single: &str) -> Result<(), A
         return Err(AppError::Parse("首次Style run无效".into()));
     }
     let artifacts = research_profile::load(profiles)?;
+    let profile_root = Path::new(ROOT).join("runs").join(profiles);
+    let profile_inputs: Value =
+        serde_json::from_slice(&std::fs::read(profile_root.join("inputs.json"))?)
+            .map_err(|e| AppError::Parse(e.to_string()))?;
+    let exploratory = ["pragmatic_profile_v1", "pragmatic_profile_salvage_v1"]
+        .contains(&profile_inputs["suite"].as_str().unwrap_or(""));
+    let mut profile_review = Value::Null;
+    if exploratory {
+        profile_review =
+            serde_json::from_slice(&std::fs::read(profile_root.join("semantic-review.json"))?)
+                .map_err(|e| AppError::Parse(e.to_string()))?;
+        let mut identities = Vec::new();
+        for artifact in &artifacts {
+            let path = profile_root.join(format!("profiles/{}.json", artifact.plan.id));
+            identities.push(format!(
+                "{}:{}",
+                artifact.plan.id,
+                sha256(&std::fs::read(path)?)
+            ));
+        }
+        let hash = sha256(identities.join("|").as_bytes());
+        if profile_review["decision"] != "exploratory_only"
+            || profile_review["artifacts_sha256"] != hash
+        {
+            return Err(AppError::Parse(
+                "探索性Profile尚未逐条复核或输入身份变化".into(),
+            ));
+        }
+    }
     let manifest = Path::new(ROOT).join("datasets/authors-v1/manifest.json");
     let ds = Dataset::load(&manifest)?;
     let sampling: Value =
@@ -160,7 +189,16 @@ pub(crate) async fn run(run: &str, profiles: &str, single: &str) -> Result<(), A
     }
     // Freeze before seeing any generated outputs or opening confirmation references.
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
-    store.freeze(&json!({"suite":"style_generation_v1","profile_run":profiles,"single_run":single,"tasks":tasks,"jobs":jobs,"outline_wrapper":outline_system_prompt("STYLE"),"body_wrapper":style_system_prompt("STYLE"),"render_wrapper":render_prompt("OUTLINE","TASK"),"writer":"mimo-v2.6-flash"}))?;
+    if exploratory {
+        store.limit_run(15_000_000).await?;
+    }
+    let mut frozen = json!({"suite":"style_generation_v1","profile_run":profiles,"single_run":single,"tasks":tasks,"jobs":jobs,"outline_wrapper":outline_system_prompt("STYLE"),"body_wrapper":style_system_prompt("STYLE"),"render_wrapper":render_prompt("OUTLINE","TASK"),"writer":"mimo-v2.6-flash"});
+    if exploratory {
+        frozen["suite"] = json!("style_generation_v1_exploratory");
+        frozen["exploratory_profile_review"] = profile_review;
+        frozen["run_cap_micro_cny"] = json!(15_000_000);
+    }
+    store.freeze(&frozen)?;
     std::fs::create_dir_all(store.root.join("articles"))?;
     jobs.sort_by_key(|j| sha256(format!("17:{}", j.id).as_bytes()));
     let mut pending = tokio::task::JoinSet::new();

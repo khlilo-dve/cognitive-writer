@@ -12,6 +12,7 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["pragmatic-profiles",run]=>crate::research_pragmatic_profile::run(run).await,
         ["ending-audit",run]=>crate::research_ending_audit::run(run).await,
         ["profile-audit",run]=>crate::research_profile_audit::run(run).await,
         ["profiles-pilot",run,views]=>crate::research_profile::pilot(run,views,1).await,
@@ -31,6 +32,10 @@ pub async fn run(args: &[&str]) -> Result<(), AppError> {
         ["generate",run,profiles,single]=>crate::research_generation::run(run,profiles,single).await,
         ["evaluate",run,generation,"reference"]=>crate::research_evaluation::run(run,generation,"reference",None).await,
         ["evaluate",run,generation,"confirmation",reference]=>crate::research_evaluation::run(run,generation,"confirmation",Some(reference)).await,
+        ["evaluate-compact",run,generation,"reference"]=>crate::research_evaluation::run_compact(run,generation,"reference",None).await,
+        ["evaluate-compact",run,generation,"confirmation",reference]=>crate::research_evaluation::run_compact(run,generation,"confirmation",Some(reference)).await,
+        ["evaluate-compact-reuse",run,generation,"reference"]=>crate::research_evaluation::run_compact_reuse(run,generation,"reference",None).await,
+        ["evaluate-compact-reuse",run,generation,"confirmation",reference]=>crate::research_evaluation::run_compact_reuse(run,generation,"confirmation",Some(reference)).await,
         ["views",run,base,repeats]=>crate::research_compare::views(run,base,repeats).await,
         ["pairs",run,views]=>crate::research_compare::pairs(run,views).await,
         ["validate", path] => {

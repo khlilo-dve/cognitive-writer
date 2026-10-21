@@ -1,0 +1,2 @@
+# Profile Markdown is byte-identical to the frozen JSON spec, including its final blank line.
+runs/*/profiles/*.md whitespace=-blank-at-eof

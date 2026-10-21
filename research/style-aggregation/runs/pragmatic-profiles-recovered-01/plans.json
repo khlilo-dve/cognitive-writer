@@ -1,0 +1,80 @@
+[
+  {
+    "id": "profile-95a8f188fa16d060",
+    "author": "wang_zengqi",
+    "articles": [
+      "wzq-01",
+      "wzq-02",
+      "wzq-03",
+      "wzq-04",
+      "wzq-05b",
+      "wzq-06",
+      "wzq-07",
+      "wzq-08",
+      "wzq-09",
+      "wzq-10"
+    ],
+    "mode": "primary",
+    "references": [
+      {
+        "k": 10,
+        "seed": 17
+      },
+      {
+        "k": 10,
+        "seed": 29
+      },
+      {
+        "k": 10,
+        "seed": 43
+      },
+      {
+        "k": 10,
+        "seed": 71
+      },
+      {
+        "k": 10,
+        "seed": 101
+      }
+    ]
+  },
+  {
+    "id": "profile-968be6b59520fb35",
+    "author": "wang_xiaobo",
+    "articles": [
+      "wxb-01",
+      "wxb-02",
+      "wxb-03",
+      "wxb-04",
+      "wxb-05",
+      "wxb-06",
+      "wxb-07",
+      "wxb-08",
+      "wxb-09",
+      "wxb-10"
+    ],
+    "mode": "primary",
+    "references": [
+      {
+        "k": 10,
+        "seed": 17
+      },
+      {
+        "k": 10,
+        "seed": 29
+      },
+      {
+        "k": 10,
+        "seed": 43
+      },
+      {
+        "k": 10,
+        "seed": 71
+      },
+      {
+        "k": 10,
+        "seed": 101
+      }
+    ]
+  }
+]

@@ -1,0 +1,783 @@
+{
+  "run": "pragmatic-generation-01",
+  "status": "complete",
+  "frozen_jobs": 60,
+  "saved_articles": 60,
+  "receipt_count": 120,
+  "receipt_manifest": [
+    {
+      "file": "article-001-body.json",
+      "sha256": "4505851092afb81dcc0a1217dd93f4e1d0befdb55d795e82cb58bae51a24a79f",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-001-outline.json",
+      "sha256": "f33e361cb35802a12c3d4e4a6b5f7bca62feb74ab25bdc0eb53a05c0430000a9",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-002-body.json",
+      "sha256": "57248ab8a73dbff76da978eb6286c5ec4124802fde191ef420b922687a313287",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-002-outline.json",
+      "sha256": "28e197f6995ea3105ea6b143ded1a5c09a71d94fc5612e13737caae208c630e8",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-003-body.json",
+      "sha256": "5878282544fda03ce4edd5b0a5b89e407dd6fc0ba29d9ac7d1b78dc49c5c1ddd",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-003-outline.json",
+      "sha256": "cf2b5d2c7fb87224e4dbc059046130665fae3a7deed53a3bdc356dd1f9c7fe98",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-004-body.json",
+      "sha256": "35d5002c2295d600e398b6eca02a7fa1bab0c500dae676b8f3d5a5aba4b89628",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-004-outline.json",
+      "sha256": "ad2c16a7fbf9b26d58d2ffd446b01a470aa67d4811e9e79e434f484ed786c77d",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-005-body.json",
+      "sha256": "c86e32d444b0d90b80c8fc166dc3626bb8e33bab7796a01e9f8d921a1d7047a8",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-005-outline.json",
+      "sha256": "305872032d17dba37094a30501090715345f685ab2c2e1230b62ef7128926fdd",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-006-body.json",
+      "sha256": "4863d5865b337e1cba4cb12f336ca8232e29b403506a84bb26c20dc040e76721",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-006-outline.json",
+      "sha256": "fe741dd8a83f50447ff835e00e2a81718e518b588603bfcf8bbaf6983ce6dc2f",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-007-body.json",
+      "sha256": "844c6538a032dfe3494c09861b9bc115fca70e2196dcf613823168d005d8a176",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-007-outline.json",
+      "sha256": "90fb837445980d8d1e7d91cbf62866a12e9487fedf5a8b4889b1be6d67825790",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-008-body.json",
+      "sha256": "66da47aba98f91e269d8e2e446ff2418b4c6f905f63e8fc244e1f2ae10f89106",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-008-outline.json",
+      "sha256": "573ba0283a27fc4656916556e7d73e6d7c4391814dfa3e01e80e4b5170b2b79e",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-009-body.json",
+      "sha256": "8fc60cdbdbd9d9b8913c04052c00f77ec714d53b37da45ed2d62ce758b5fb115",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-009-outline.json",
+      "sha256": "edd1eee8f3985afe13e0f7dac10bd463ba8387e067029c8b7998e6c044abc165",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-010-body.json",
+      "sha256": "9b8a2a780ff836f26cf82dcafc6bddc9ee28857c9249ca915af4243bf33b79aa",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-010-outline.json",
+      "sha256": "93bc085a266bdf172985d2a69cd88fa6a4d12534e82b6dcb4c02cce03450fec9",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-011-body.json",
+      "sha256": "b9e0e656d618775bd478ed33c9ccfe356415234f9d688e9b332b444d2fae5d88",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-011-outline.json",
+      "sha256": "1b2939545ec2e68b1b51a7edbc260aea2efedcf19b77e3eff76dd9b9c1ad5b39",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-012-body.json",
+      "sha256": "25ee60a0fe067f7a4646ee091a57b81796e2bc50538c35c85ce7dd75ebcabbd0",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-012-outline.json",
+      "sha256": "c7c40f7b336d1d486b612b19c8263ee8acc02ed9d61c9701b5d15cc93e5947e4",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-013-body.json",
+      "sha256": "6ef2e4ff3cbb1eb6f5109671ec6ea191c830066e16ef8fbb5e1883098f888b89",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-013-outline.json",
+      "sha256": "4fef8a7e7195d3457506196e000d1d14615d98a9f7f25674f9dce4b08ab50d33",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-014-body.json",
+      "sha256": "90eade501df52ef33bf085665530eb88bcd83c429e535c2269813ab4e924ec4d",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-014-outline.json",
+      "sha256": "7f8fb0e98d7c6b7cf795c46a91df8cf91b71c9af0c568d59283920a49a85005f",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-015-body.json",
+      "sha256": "a7dcfc0af49a29b1cca2ca7bbd1d8a5d7035e309fd1a9dc02caecb942b888d07",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-015-outline.json",
+      "sha256": "9ae84449a824a64c8e7b624e7186df8c2459ef60629014764c66b1463d33305d",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-016-body.json",
+      "sha256": "219312fb56fdee6e9d0a797502e6b47a400991f367317e1b02bebc47fe5e2119",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-016-outline.json",
+      "sha256": "2245508348e978103613dbb65291c6f27ac8fa4d3812ef97d1bcbe018b9bb5dc",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-017-body.json",
+      "sha256": "77e06e2d09fdd5f79119d21553d7302c4e5cba37d59c6914b578f61ab1502c46",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-017-outline.json",
+      "sha256": "9baf8c8e3917602d2fafd590bc3ccdb0ac6302638682fe471a93c5e831c2efb2",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-018-body.json",
+      "sha256": "42c2386a89ce2f35503024e4d63e406c72b543c62c55e8309acaef1ad141ee38",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-018-outline.json",
+      "sha256": "c6eba88b29f496cad0941b62c27db9bb1a558cdd86b155449a7bd38e9e3110c1",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-019-body.json",
+      "sha256": "a6da4ad2766a5cbfc960b16f23e24223bbd0da0ba18e57d3b592f9f055059bf9",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-019-outline.json",
+      "sha256": "e8b08588590ce1dfe1772aa5ad4023fd61e334801987737c9072e1435757c5f4",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-020-body.json",
+      "sha256": "f510a37a435a4cdaa4bc2685219f3f5d8395245ee76f786bd5521868956d2f1e",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-020-outline.json",
+      "sha256": "ad70df3ef84c699b0332b5b48005a5b9c3b738d0145c454a659c7aab7aaf91ee",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-021-body.json",
+      "sha256": "ccb5dd6341eeebc7624791f97d071e37fb771c2b208443b64464237eddc85a51",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-021-outline.json",
+      "sha256": "3870c16d9b6cd6b433fba6ce2a38c7bbf0f5adde8f491b99a491bee4e474ffbf",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-022-body.json",
+      "sha256": "c8ebd51aa772616fa4f6a7a1b9f3545d2c169bcf819135bba2caa6a919460d19",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-022-outline.json",
+      "sha256": "9c7d5a067000e2155b91078bc0c6d6d04491e45fc9a82905e09df3903c92090c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-023-body.json",
+      "sha256": "57b8749c4365372b4c40869287c9d70e5f9d3d54783986254fb41110ab32a142",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-023-outline.json",
+      "sha256": "6db9f455d10b45aea355c3f3354e8bbec618009441da832a6607474b3b245224",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-024-body.json",
+      "sha256": "0c69b745401c21f4523751491f4c3bf54c57ce51fff78027d1958c834f9d8468",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-024-outline.json",
+      "sha256": "7c4f40b601f8b0b8f773d2911aaffb3f238c675a69ac72fa533c8ad83c800054",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-025-body.json",
+      "sha256": "56bf0c06dd15dfda8cfe77d333e0a3a523196b27f6138542a09bb4db0413c718",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-025-outline.json",
+      "sha256": "5606b6cbb5d02d49c749ab7a483bdffdc979ce246ec6275460b39a50f941be60",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-026-body.json",
+      "sha256": "37b93ff94e52d464599dc9a2497a8eec7e362628e64ff4acc1458684ba944be1",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-026-outline.json",
+      "sha256": "9477d4d0a4ab4c673ecaf9dfc8ac4a228431c90051bfdd7f5b8189748c526c58",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-027-body.json",
+      "sha256": "f71517dbc9b296dc6924b94d066703cf1aa714a8ab17db9593677bd80bd851b2",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-027-outline.json",
+      "sha256": "8c59b97d2f70cbff59212ba9117c18b7a9d51da56813348c89fa6889653e6d0c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-028-body.json",
+      "sha256": "f8c6cb8f533c078addef7bf98a70e9d9fd56785089f06a624634c831156242ab",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-028-outline.json",
+      "sha256": "3a86062cc2cbf0d7d57893060c07a747c74b9546b0c9c87d688673668b926123",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-029-body.json",
+      "sha256": "16260babf78d60688d599942995022e7f3e50945fa5b6067234fcdfb3d578607",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-029-outline.json",
+      "sha256": "4cc153728ff902f32dd0515197d3c5c7739b15d7791e1925b8227bb6f186053c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-030-body.json",
+      "sha256": "43d236825d8ae0549349da4ff11760fb3b1e46891487bf771c10a378a7bcb60e",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-030-outline.json",
+      "sha256": "7f35a1fc9c9fd7611d72cb5dff7561c5fc3541263dbe344cf4d0767293ad56fa",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-031-body.json",
+      "sha256": "563ccfc300bccb9791f71b6980a989cbcc49330cfc1159d9930e0d0eb17f927c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-031-outline.json",
+      "sha256": "b5d6b809e4a650e2a939059db5a631a60703887b87c1cecbb35c58857d6ca3cc",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-032-body.json",
+      "sha256": "0c92ba9d982564b120a7f93a003bd2fbb2f4535f25705352c960bcdf5bd91d9e",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-032-outline.json",
+      "sha256": "36d7741a29783234e3c92dec6b77f5f3b8fe4e43bf473782ad12bddac71aff55",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-033-body.json",
+      "sha256": "0d3277fdf06d474948cd3b16c635c103765183620d9103971fba4d5939992638",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-033-outline.json",
+      "sha256": "a29393d014fe892e59e3ce76aad45b07eb6ac84a9dea1842dc14ea0c1a8550bb",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-034-body.json",
+      "sha256": "4a44fa2710897555e71947317da492227ecccb4f154d0141816add3a97ad12ec",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-034-outline.json",
+      "sha256": "56d79053cc34aa57dae5c7171f7a9f84e16503ace414d6ab7c3abbc2e45e37c6",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-035-body.json",
+      "sha256": "2354a0678b55461d501060e04ff28c695c47bd3c4957fba332edce7b4aae3f38",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-035-outline.json",
+      "sha256": "86090d4b358f8a6d03f8b3f97321e18395129a94db871a9260332d25ba26cf12",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-036-body.json",
+      "sha256": "1dd3b011eef270bc398aad24e64c6b065dbb712102303e8c07c8ba0382f14ea8",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-036-outline.json",
+      "sha256": "0681e341a69b7c5efc921e19d1c750cbfdb0f2955444e4df59af24d6623c7361",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-037-body.json",
+      "sha256": "23c884db5989a2240c443cec40e89e6f637c469f89d286f4d5d396abc78fc15c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-037-outline.json",
+      "sha256": "fc79e6f0d2fa897e8777d66b4003ef45e1fc258b9a0c558d0a12e1edc31f3ef5",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-038-body.json",
+      "sha256": "41ba7b5cb1d880598bc258e8f0dba294a8d6d7ad2abf1f9a41ed9db82bc4a22f",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-038-outline.json",
+      "sha256": "244c77e19a54d71f7d0d0bf5819f9e251f986898560aa3dac2f3ae4adab8f3a3",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-039-body.json",
+      "sha256": "9a3da116f7f2c879a25452398c913585b8771ba15ac15a1dadf865e256956a29",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-039-outline.json",
+      "sha256": "a57b6ed4f0e04da132117d88cab562d8eab2a14a9e614b4fc01cc0d20c3a18c2",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-040-body.json",
+      "sha256": "2d24f5dfe0f12bfa29c8b8b326dbacd3fff86b78c3e8c78c60b9ad2d38844d9d",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-040-outline.json",
+      "sha256": "f8712edb03619a789ad6e35df0bcaa86304cfbd8f714095a66edf8aebe6e1c82",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-041-body.json",
+      "sha256": "c63c7882cba53e4242779f98622df2ca3559aefbf5b33d215a1a522bd2e0c8d5",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-041-outline.json",
+      "sha256": "ca31c1320cce2d5847f2586375a5c97ac8c2efd0fe2f83293e9678f1556372fa",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-042-body.json",
+      "sha256": "48d118d0c5155f83b8532e4a95518588bcc681dc2904eb7b72d982ba5bc24d20",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-042-outline.json",
+      "sha256": "dde50307a99bd1be22e98bcfffe7e33619fd4685ba5e638177870cf6c2538a2d",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-043-body.json",
+      "sha256": "47e87be31512bf608dd6378d64e968b923e8260fd72de7dd702e2a23499dc78c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-043-outline.json",
+      "sha256": "0aabda678a895f50778dc255f52962c7059abd5ce88de8901f8d9f198af4a54b",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-044-body.json",
+      "sha256": "4d26844d6887d448bedfc1c0a10d7c54259771cef25fce0174bffdfc9ee5e382",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-044-outline.json",
+      "sha256": "5d86abb17649c4095e7c78148476e183a9bb7a39b7d883cbbc553e800eccb2c7",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-045-body.json",
+      "sha256": "d13c19bc98484be45572faf62843b650630422ad8cc522f61fdef5d5ab4e0998",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-045-outline.json",
+      "sha256": "758250831dd5c64b56bfe58de9846e4af9d123589c876be59a31d27c46a9c080",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-046-body.json",
+      "sha256": "17e9e5977ebcd2e4696f1aecebdb265940f8a80f82933687206f9f424ee19603",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-046-outline.json",
+      "sha256": "12d754d0a89d308b4325f651b79a5faf4a9e47ad0bfc86afaabdf19822f31082",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-047-body.json",
+      "sha256": "dbc3d8422d5bb3ad66a16c914ea5dd26729c9aa6e2ce45fea8384f01325c97f6",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-047-outline.json",
+      "sha256": "e9086612ac9be1f3619b59c4a0a11df25d03c6ae5c3b1a1e7f13741312267463",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-048-body.json",
+      "sha256": "da193ee6e034c6ea139064185a3464eed87dab7d30e0703087d1e8a007f116ae",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-048-outline.json",
+      "sha256": "7bffd3bff1904b0fcbaa1eaf4c4351174a9c5f5c419de7defd2544661a526e13",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-049-body.json",
+      "sha256": "b7b0d3b61b22b5d45c1acf4ee3010cc810b767ab3bce98bc500f1dddeb5a6524",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-049-outline.json",
+      "sha256": "aadbebbd6d4aa0a4ada5b792e461b6c6f040ca317082004cda158dcdfd864831",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-050-body.json",
+      "sha256": "8565fe1a5e34648e2567f42cfbb3b62628e9adeb8bca25e9d343d521241eec78",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-050-outline.json",
+      "sha256": "6930ba80f418141c24bc2a89c9547f33c7610f110b227872aa93dbbebf6e51e5",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-051-body.json",
+      "sha256": "77bbfbe0fd155835043bb2148d4ee36a5d0aaebcf53840a0ab3b91808d2d9ddd",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-051-outline.json",
+      "sha256": "e5decf86f0ca17cda913d43e1e053d1b6b300ec663c450ae390595d8c8dd784c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-052-body.json",
+      "sha256": "df3cbaf78c61ad94fd74f384a3db092519dc08a9d1f19fbb54bcc643ddbb5d77",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-052-outline.json",
+      "sha256": "c46f365cc26555b81e2b558ebf8a96a5fb866c1668338e2a75cc170ebab6f529",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-053-body.json",
+      "sha256": "9b76a161a97837ddac842c4ab2ba266ba54c1aa33499c01b334c53458ee73782",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-053-outline.json",
+      "sha256": "4326a92832899ca71465d9e7abc2313403cb99df7606245eea447e0f95f47099",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-054-body.json",
+      "sha256": "abc87d2b84da5dfdf88c07f9ffe298533fac385d7f909b12b2dbfe7b70876187",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-054-outline.json",
+      "sha256": "84803c0cf987298fd98a15615b328d10e5c5abb1818a4da5c1d482753bcfd99a",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-055-body.json",
+      "sha256": "d7945d4fbcd3fc537b2d339263c4075ba4ac4fb4f62436d1f418319a9a58ebee",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-055-outline.json",
+      "sha256": "c5a2d188819d8032c67eaac59ed5cd37025b66fceca7812800e8401c8cbf426c",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-056-body.json",
+      "sha256": "86092ff890b8eb77772b5a10890eca332f2b4cf642125ae1d05ecd42f4c7219f",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-056-outline.json",
+      "sha256": "bad8f9fe88a4f4863805bb095c160709df6dda7790676ca4815b7efe305161c2",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-057-body.json",
+      "sha256": "551412d08d36d69813f9b2d301d5bbf3a6ac7b091b4241176b49fc7f5569d311",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-057-outline.json",
+      "sha256": "1ba318a69e79370d5c6096bec7802010cdcf99a9844c670868ee80fd4a43b157",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-058-body.json",
+      "sha256": "4fc22df668e12345cd398181c90e151ae2483a3e8839b8257e47e650c9a85618",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-058-outline.json",
+      "sha256": "f9c65064dbf56f0fe01d3a7e2173964055dcf0d67d1768b5878b0d363c061448",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-059-body.json",
+      "sha256": "5aa3c636464755f1d4c4d9f7da9e37a3f84c90ed4cb3f2508eaeaf7f8bd8bf80",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-059-outline.json",
+      "sha256": "027db3e02248f6c60ef7f896d7421071a0de6713b9c9df757afe33f5195f8b9b",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-060-body.json",
+      "sha256": "02f208ee349f59065d7b76bf76c71d033a7f870a10efd8dced5d3eebff2cce7e",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    },
+    {
+      "file": "article-060-outline.json",
+      "sha256": "cd6aa36dbc0a413e3461feb9eeee3f4ba8274f5b7d2b43dfc8c866bc4f3648d4",
+      "model": "mimo-v2.6-flash",
+      "finish_reason": "stop"
+    }
+  ],
+  "groups": [
+    {
+      "phase": "confirmation",
+      "method": "aggregate",
+      "n": 8,
+      "mean_characters": 644.8,
+      "length_pass": 1,
+      "literal_flags": 0
+    },
+    {
+      "phase": "confirmation",
+      "method": "neutral",
+      "n": 8,
+      "mean_characters": 639.4,
+      "length_pass": 3,
+      "literal_flags": 0
+    },
+    {
+      "phase": "confirmation",
+      "method": "single",
+      "n": 24,
+      "mean_characters": 514.6,
+      "length_pass": 9,
+      "literal_flags": 0
+    },
+    {
+      "phase": "reference",
+      "method": "aggregate",
+      "n": 4,
+      "mean_characters": 741.8,
+      "length_pass": 2,
+      "literal_flags": 0
+    },
+    {
+      "phase": "reference",
+      "method": "neutral",
+      "n": 4,
+      "mean_characters": 693.0,
+      "length_pass": 3,
+      "literal_flags": 0
+    },
+    {
+      "phase": "reference",
+      "method": "single",
+      "n": 12,
+      "mean_characters": 551.3,
+      "length_pass": 4,
+      "literal_flags": 0
+    }
+  ],
+  "limitations": [
+    "Length is deterministic. Literal phrase flags are only leads for review, not factual or style scores.",
+    "Do not compare methods as quality until the same task and author are paired and assessed independently."
+  ]
+}

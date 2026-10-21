@@ -1,0 +1,67 @@
+{
+  "author": "wang_xiaobo",
+  "author_match": {
+    "choice": "neither",
+    "confidence": "high",
+    "evidence": [
+      {
+        "article_quote": "先把借用的正当性摆出来。",
+        "reason": "新文章以抽象命题开宗明义，A则以具体人物身体特征起笔进入轶事；A的展开靠叙事实例，与新文章的定义式开篇是两种机制。",
+        "reference": "A",
+        "reference_quote": "沈先生的血管里有少数民族的血液。"
+      },
+      {
+        "article_quote": "有人担心急用时柜内恰好没有所需工具，这份担心并非多虑，而是从规则本身推出的必然结论。",
+        "reason": "B的论证多靠类比和推理转折并夹带锋利措辞，语气带争辩和嘲讽；新文章虽也推理，但停在中性结论，无反讽、无笑话、无人称让步的戏剧化表达。",
+        "reference": "B",
+        "reference_quote": "敏感的读者会发现，对于个人来说，这后一种认定，是个有罪推定。"
+      }
+    ],
+    "fidelity_a": 1.0,
+    "fidelity_b": 1.0,
+    "reason": "参考A是忆人散文，通过具体轶事、直接引语和私人关系逐步勾勒人物，句子短、跳接多，口语化；参考B是论辩随笔，借他人名言层层推进论点，好用反讽、类比笑话和口语化的狠话收束。新文章是分节的抽象说理文，通篇没有人物轶事、直接引语或反讽类比，而是用概念命名小标题（临时性/不确定性/责任空缺），沿定义-反驳-收束的结构推演，句式工整而克制。三者的展开机制与语气均不重合。",
+    "uncertainties": [
+      "各仅一篇参考，A为忆人散文、B为论辩随笔，题材与体裁差异大，无法排除作者在其他题材下的变体。",
+      "新文章无任何直接引语或轶事细节，缺少可与A对比的强区分特征；同时缺少B标志性的反讽与拟人收束，仅凭语域中性难以定位。"
+    ]
+  },
+  "body_sha256": "dfa92ef0a6d8c24767bac4da2db3761e62c289690c0167f6dcfba21571fc1844",
+  "id": "article-002",
+  "length": {
+    "above": 142,
+    "below": 0,
+    "characters": 1042,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "method": "aggregate",
+  "other_fidelity": 1.0,
+  "phase": "reference",
+  "replicate": 2,
+  "style_id": "profile-968be6b59520fb35",
+  "target_fidelity": 1.0,
+  "target_label": "B",
+  "topic": "tools",
+  "transfer": {
+    "fact_violations": [],
+    "reasons": {
+      "factual_compliance": "正文全部内容均在给定素材范围内（登记借还、螺丝刀/卷尺/钳子、值班核对、临时借用好处、可用性不确定、不允许预约、遗失损坏未定、收集意见未宣布新规），未新增人物、事件、数据或引用。",
+      "naturalness": "行文流畅连贯，逻辑层次清晰，无明显拼贴或机械重复，只有少量模板化的分节标题痕迹。",
+      "source_independence": "正文未出现参考样文中可指认的内容、结论或素材绑定，工具借用柜的主题与素材均来自任务给定。",
+      "style_fidelity": "参考样文的核心机制是第一人称的个人经历叙事、随笔式的自我调侃与插入性议论（如\"凭良心说\"\"我猜想\"\"长话短说\"），以及用具体生活轶事展开抽象论点的展开方式。正文通篇是第三人称的分析性论述，用\"先把借用的正当性摆出来\"这类纲目式推进，没有借鉴样文的任何具体论证/叙事动作，只有主题先行的分节形式这种表面相似，关联极弱。",
+      "task_completion": "完整覆盖了登记借还、临时借用好处、可用性不确定、损坏责任未定等核心素材，并讨论了便利与规则边界，未编造已解决争议或使用效果数据。"
+    },
+    "scores": {
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "source_independence": 5.0,
+      "style_fidelity": 2.0,
+      "task_completion": 5.0
+    },
+    "source_leakage": [],
+    "task_issues": [],
+    "uncertainties": []
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "run": "pragmatic-profiles-recovered-01",
+  "source_run": "pragmatic-profiles-01",
+  "source_status": "partial",
+  "artifacts": 2,
+  "rules": 12,
+  "model_calls": 0,
+  "diagnostics": [
+    {
+      "author": "wang_zengqi",
+      "rule_index": 1,
+      "mechanism": "用具体物件或场景动作落实抽象判断",
+      "topic_count": 3,
+      "evidence": [
+        {
+          "article": "a03",
+          "exact": true,
+          "quote_sha256": "606cab4945abaf809f76c03bcffaa4d47ffab691d0fff6116f06a7613d873649",
+          "characters": 34
+        },
+        {
+          "article": "a09",
+          "exact": true,
+          "quote_sha256": "ab5c211af07058095361e794a0eb716f949829e241290a5ec0d83155128abd29",
+          "characters": 33
+        },
+        {
+          "article": "a07",
+          "exact": false,
+          "quote_sha256": "b996d4c96281627748238d6ca0314a8c75a019aacbfc638270d352809ea4ba43",
+          "characters": 57
+        }
+      ]
+    },
+    {
+      "author": "wang_zengqi",
+      "rule_index": 2,
+      "mechanism": "短句起笔，再用长句做密度填充",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a06",
+          "exact": true,
+          "quote_sha256": "85f4f636fdf8876b22c99498788c3a006184513049bd8ea789928f571c5da868",
+          "characters": 44
+        },
+        {
+          "article": "a01",
+          "exact": true,
+          "quote_sha256": "6cdf8bdd9cc51df0ef31e7ade0ec65f51e5da6c54bbcb4e95cf4e5511e5b2527",
+          "characters": 26
+        },
+        {
+          "article": "a07",
+          "exact": true,
+          "quote_sha256": "f4f3d445402888810364c11c78bdd2128933bf799087be4fc2696db7e6e8a5c4",
+          "characters": 41
+        }
+      ]
+    },
+    {
+      "author": "wang_zengqi",
+      "rule_index": 3,
+      "mechanism": "插一句自我设问或自答，转进新角度",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a06",
+          "exact": true,
+          "quote_sha256": "9269842a6335c76aca155ec66edf0c9535c7b00b5bb6667492271ae39ae0ab91",
+          "characters": 19
+        },
+        {
+          "article": "a08",
+          "exact": true,
+          "quote_sha256": "fcd83633a71bc2242f3875c5b5b96158dedc2df91d9e91401bfe8f78886e16ad",
+          "characters": 33
+        },
+        {
+          "article": "a02",
+          "exact": true,
+          "quote_sha256": "93d5b44abc579418792078d3f370769f538965d9a62a4a4444ee37a3ba5b6f7f",
+          "characters": 28
+        }
+      ]
+    },
+    {
+      "author": "wang_zengqi",
+      "rule_index": 4,
+      "mechanism": "以一个动作、画面或一句话收住，不总结主题",
+      "topic_count": 3,
+      "evidence": [
+        {
+          "article": "a08",
+          "exact": false,
+          "quote_sha256": "a1358c975061acda66553fb3dfa9c6f0392e662c76950c9f98263ce0ea1de2e8",
+          "characters": 7
+        },
+        {
+          "article": "a02",
+          "exact": true,
+          "quote_sha256": "b3455c1850cbfd36d2320546c3bf3518a63e107bfcf8404698ff8087301506c2",
+          "characters": 16
+        },
+        {
+          "article": "a01",
+          "exact": true,
+          "quote_sha256": "bb31b56ecb0b246dd8daa3ffce7c23e445f61bb68822374e79b9fd52ad8e2f60",
+          "characters": 51
+        }
+      ]
+    },
+    {
+      "author": "wang_zengqi",
+      "rule_index": 5,
+      "mechanism": "先用一句口语或比喻收住，再用一句拆解它",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a01",
+          "exact": true,
+          "quote_sha256": "f46e90f7543607564c09b4d2487797c56f77ab2f7b34b7d34bf9510b37db5b17",
+          "characters": 47
+        },
+        {
+          "article": "a04",
+          "exact": true,
+          "quote_sha256": "f0872ee91e6cb3c4a0ee12dd88d11fc5bdc0d765dccbd0e65f1fc6d45e1e1e99",
+          "characters": 40
+        },
+        {
+          "article": "a10",
+          "exact": true,
+          "quote_sha256": "126bf25504804d7770ad10bc1e626f0a3c44c5d3a1c0c47785bb5ed66d53e0e1",
+          "characters": 16
+        }
+      ]
+    },
+    {
+      "author": "wang_zengqi",
+      "rule_index": 6,
+      "mechanism": "资料分类与分类本身的偏差并置",
+      "topic_count": 3,
+      "evidence": [
+        {
+          "article": "a07",
+          "exact": true,
+          "quote_sha256": "a66bb5ada0ccc0f15cf4117c3ed3f47badf07782c18f34506d6ff317cf7eab6d",
+          "characters": 24
+        },
+        {
+          "article": "a08",
+          "exact": false,
+          "quote_sha256": "5465cd03f03a6e35f0f82315d77c36551ce90ca5013f4a3c484271f3795e98c5",
+          "characters": 51
+        },
+        {
+          "article": "a04",
+          "exact": true,
+          "quote_sha256": "5b546b4a92f98c0cdd4b50d495afdce8f8cd4babe1d591a059cbde2add3ecc57",
+          "characters": 15
+        }
+      ]
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule_index": 1,
+      "mechanism": "以假命题或失效前提作为叙事起点",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a01",
+          "exact": true,
+          "quote_sha256": "e856d494cadab3a3c3326544fb58e5b3e735fb1daeebc2b140b150e1ee6a09ae",
+          "characters": 38
+        },
+        {
+          "article": "a09",
+          "exact": true,
+          "quote_sha256": "f18e7ad0fa87682845f948738216f798485dc82f57981840ab25125ee4b8020d",
+          "characters": 52
+        }
+      ]
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule_index": 2,
+      "mechanism": "先建构计量式论证再自我否定",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a03",
+          "exact": true,
+          "quote_sha256": "e68c3142a4b960e9877b7d77865c4101967716e0fdbf0f0cbff15b0333e365c7",
+          "characters": 34
+        },
+        {
+          "article": "a10",
+          "exact": true,
+          "quote_sha256": "b113d6543c7a6e00aff2f0e92a077fe9215764175f38c3bf9c5c48de972f396e",
+          "characters": 39
+        }
+      ]
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule_index": 3,
+      "mechanism": "用身体经验或具体劳作落地抽象判断",
+      "topic_count": 1,
+      "evidence": [
+        {
+          "article": "a07",
+          "exact": true,
+          "quote_sha256": "f4a9682705756f34087b32d6e398a379213d3d39ddbb8f4d089e439835c35289",
+          "characters": 43
+        },
+        {
+          "article": "a02",
+          "exact": true,
+          "quote_sha256": "1ff18969447a0acc923babd8ec38e8949cd6a21c0ec5c410a338a523c41b9597",
+          "characters": 22
+        }
+      ]
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule_index": 4,
+      "mechanism": "引入一个可笑的极端场景，用细节把荒唐推到底",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a05",
+          "exact": true,
+          "quote_sha256": "16ce9cff8833344c067d02cba16c49b8c71f468ee724bc1efd41a1378538b95e",
+          "characters": 48
+        },
+        {
+          "article": "a08",
+          "exact": false,
+          "quote_sha256": "d04b3013254a172a8751ce100cc0242a9f24430891e9f14bca874c757df21bc1",
+          "characters": 48
+        }
+      ]
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule_index": 5,
+      "mechanism": "以题外话、自我打断或坦白维持叙述姿态",
+      "topic_count": 1,
+      "evidence": [
+        {
+          "article": "a06",
+          "exact": true,
+          "quote_sha256": "9a1c8bfc9820ae74a27cfcdd11a7d4106aec5a6910246c2d6a4dab3991032300",
+          "characters": 44
+        },
+        {
+          "article": "a02",
+          "exact": true,
+          "quote_sha256": "59624bd704983221a1a163ee1c2a55a1ae1bfc3ac8907547be4b7d59bce2db20",
+          "characters": 32
+        }
+      ]
+    },
+    {
+      "author": "wang_xiaobo",
+      "rule_index": 6,
+      "mechanism": "用平行对照结构让两种方案并置比较",
+      "topic_count": 2,
+      "evidence": [
+        {
+          "article": "a09",
+          "exact": true,
+          "quote_sha256": "c251be6dbf14f114a2ac1fb68f1fc40ddd56bd2ab302188b91ac37c8215f66f1",
+          "characters": 42
+        },
+        {
+          "article": "a05",
+          "exact": true,
+          "quote_sha256": "426b3e6f4989ef9b4a1f213fce50e2265ff85f24f2aec6704cfaf9ca0e76a207",
+          "characters": 59
+        }
+      ]
+    }
+  ],
+  "caveat": "Quotes are not used in the writer Spec; exact-match failures and topic gaps remain explicit, not repaired"
+}

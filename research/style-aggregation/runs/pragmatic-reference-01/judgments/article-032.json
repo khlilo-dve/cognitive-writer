@@ -1,0 +1,68 @@
+{
+  "author": "wang_zengqi",
+  "author_match": {
+    "choice": "neither",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "article_quote": "这事儿妙就妙在\"共享\"二字，尴尬也尴尬在这俩字——方便是真的，不确定也是真的。",
+        "reason": "都是先肯定后转折的对举评点，但新文章尺度小得多，无A的整体论辩推进与说理收束。",
+        "reference": "A",
+        "reference_quote": "从表面上看，科学只认理不认人，仿佛它是个开放的领域，谁都能来弄一把，但在实际上，它又是最困难的事业，不是谁都能懂，所以它又最为封闭。"
+      },
+      {
+        "article_quote": "更硬的疙瘩在后头：借出去容易，弄坏了算谁的？没人说得清。遗失或损坏如何处理，至今悬着。",
+        "reason": "都是由具体规则过渡到设问/评断的说理插话，但新文章不展开论证，缺少A的引经据典与层层推进机制。",
+        "reference": "A",
+        "reference_quote": "敏感的读者会发现，对于个人来说，这后一种认定，是个有罪推定。"
+      }
+    ],
+    "fidelity_a": 2.0,
+    "fidelity_b": 1.0,
+    "reason": "新文章是简短的社区随笔，采用口语化短句和客观陈述，缺少A的论辩框架、设问引导、寓言类比和收束式议论，也缺少B的回忆性轶事细节、引语链条和温情描摹。仅在\"这事儿妙就妙在…尴尬也尴尬在…\"这类对举评点上与A的\"从表面上看…在实际上…\"句式有微弱相似，B的机制几乎无对应。",
+    "uncertainties": [
+      "参考文本各仅一篇，无法判断是否存在其他题材下的变体风格",
+      "新文章篇幅短，可区分机制样本有限",
+      "未发现与B在轶事堆叠、引语链条、闲笔细节上的对应证据"
+    ]
+  },
+  "body_sha256": "dc0cee688e030cc6f1588a944402fb71af38eca1eb955dfcecb4fdc7886bda7a",
+  "id": "article-032",
+  "length": {
+    "above": 0,
+    "below": 308,
+    "characters": 292,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "method": "single",
+  "other_fidelity": 2.0,
+  "phase": "reference",
+  "replicate": 2,
+  "style_id": "wzq-07",
+  "target_fidelity": 1.0,
+  "target_label": "B",
+  "topic": "tools",
+  "transfer": {
+    "fact_violations": [],
+    "reasons": {
+      "factual_compliance": "严格模式下正文全部内容可在给定核心素材中找到对应：登记借还流程、工具清单、免于一次性购买的好处、急用时柜内无工具、禁止预约、损坏遗失责任未定、收集意见未宣布新规则，均无新增事件、数字、人物或引语。",
+      "naturalness": "行文短促有节拍，议论与叙述衔接自然，仅'这事儿妙就妙在…尴尬也尴尬在…'一处略显对仗模板痕迹，整体流畅。",
+      "source_independence": "正文围绕社区工具借用柜全新主题展开，无参考文中任何具体内容、结论或素材迁移，仅共享散文式短句和夹叙夹议的论证操作，属风格机制而非内容搬运。",
+      "style_fidelity": "参考文以短句、夹叙夹议、适度克制的议论收束、口语化比喻（'那才叫浪费''抓瞎'对应'嘿，这正是我希望写成的那样'等感叹节拍）为特征，正文保留了短句节拍、",
+      "task_completion": "覆盖登记借还、临时借用好处、可用性不确定性、损坏责任未定、便利与规则边界讨论，未编造已解决争议或使用效果数据，主题与核心素材完整。"
+    },
+    "scores": {
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "source_independence": 5.0,
+      "style_fidelity": 4.0,
+      "task_completion": 5.0
+    },
+    "source_leakage": [],
+    "task_issues": [],
+    "uncertainties": []
+  }
+}

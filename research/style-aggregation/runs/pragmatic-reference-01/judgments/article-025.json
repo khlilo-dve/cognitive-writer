@@ -1,0 +1,72 @@
+{
+  "author": "wang_zengqi",
+  "author_match": {
+    "choice": "neither",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "article_quote": "有人临时要拧一颗松掉的螺丝，不必为这一次使用抱回一整套工具。便利来自\"一次使用\"与\"一次购买\"的错位——借用一次，用完还回去，账只算这一次。",
+        "reason": "两者都用短促判断句引出一个抽象概念，再接生活化释义，但A有具体人物口述作支撑，新文只有概念化断言，机制不完整。",
+        "reference": "A",
+        "reference_quote": "沈先生很爱用一个别人不常用的词：\"耐烦\"。他说自己不是天才(他应当算是个天才)，只是耐烦。"
+      },
+      {
+        "article_quote": "登记簿摊在柜面上，笔搁在旁边，柜门虚掩。",
+        "reason": "结尾都以具体静物收束全篇，A由此引出人物情感记忆，新文止于场景画面，缺少情感注解，仅保留收尾形式。",
+        "reference": "A",
+        "reference_quote": "沈先生家有一盆虎耳草，种在一个椭圆形的小小钧窑盆里。"
+      }
+    ],
+    "fidelity_a": 2.0,
+    "fidelity_b": 1.0,
+    "reason": "新文章采用短句、留白式结尾和克制的细节铺陈，与A的散文化随笔在句式松散、生活细节罗列上有表面相似，但缺少A的回忆性第一人称、引用人物对话和持续的议论-叙事交融；与B几乎无关联，B的论证推进、引用名人和反讽语调在新文章中完全缺失。",
+    "uncertainties": [
+      "A中大量个人回忆、对话引语和评价性议论在新文里无对应，难以判定是同一声音的题材适应还是巧合",
+      "B为论辩随笔，与新文体裁差异过大，几乎无可比的句式或叙述机制证据",
+      "仅各一篇参考，不足以建立稳定的作者风格基线"
+    ]
+  },
+  "body_sha256": "05e5c1385813659219b91460cc2cfb665ecf608f71984f5b97291a69d4601ed5",
+  "id": "article-025",
+  "length": {
+    "above": 0,
+    "below": 175,
+    "characters": 425,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": false
+  },
+  "method": "aggregate",
+  "other_fidelity": 1.0,
+  "phase": "reference",
+  "replicate": 1,
+  "style_id": "profile-95a8f188fa16d060",
+  "target_fidelity": 2.0,
+  "target_label": "A",
+  "topic": "tools",
+  "transfer": {
+    "fact_violations": [],
+    "reasons": {
+      "factual_compliance": "严格模式下未新增人物履历、精确时间数字、具体新物件、独立事件、对话或外部引用；仅用同义转述和连接性描写（如\"笔搁在旁边\"属轻微场景连接，不确定是否越界），未编造已解决争议或使用效果数据。",
+      "naturalness": "整体连贯，但句式略显模板化：\"不必为这一次使用抱回一整套工具\"\"便利以柜内恰好有货为条件\"等说明性句子重复同一论证节奏，缺少样文那种从容的口语弹性和细节呼吸感。",
+      "source_independence": "正文围绕社区工具柜写作，未见样文中任何可指认的内容、结论或特定素材迁移。",
+      "style_fidelity": "正文保留了样文的若干明显机制：以具体物件/场景开场（\"工具进了柜子\"类似样文的短句起笔）、夹叙夹议的展开方式（借还事实+对便利的解释）、白话短句节奏，以及对\"边界未定\"的淡然收束感。但样文典型的第一人称自述口吻（\"我出过的书\"\"我以为\"）与自谦式议论、设问自答的叙事动作未体现，整体以第三人称说明为主，与样文声音关联度中等。",
+      "task_completion": "登记借还流程、临时借用好处、急用时可能空缺且不可预约、遗失损坏责任未定、工作人员收集意见待新规则均覆盖；末段略偏场景抒写，对便利与规则边界的讨论基本到位，仅较简略。"
+    },
+    "scores": {
+      "factual_compliance": 5.0,
+      "naturalness": 3.0,
+      "source_independence": 5.0,
+      "style_fidelity": 3.0,
+      "task_completion": 4.0
+    },
+    "source_leakage": [],
+    "task_issues": [
+      "便利与规则边界的讨论有覆盖但展开较浅，主要以结论式句子给出，缺乏进一步的具体论证。"
+    ],
+    "uncertainties": [
+      "\"笔搁在旁边，柜门虚掩\"属轻微场景连接性描写，非独立事件，未确认是否超出strict模式允许范围。"
+    ]
+  }
+}

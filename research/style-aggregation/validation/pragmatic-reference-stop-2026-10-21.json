@@ -1,0 +1,9 @@
+{
+  "run": "pragmatic-reference-01",
+  "before_sha256": "dcbf4148dd4ee758786d096b4326897f0c5784ac3d5bce4d541d803d0b088d6f",
+  "partial_completed": 5,
+  "failed": 3,
+  "deferred": 12,
+  "reason": "同作者10篇原文裁判输入出现输出长度耗尽和content_filter；停止旧配置，保留完成链与未知预留",
+  "run_occupied_cny": 2.900922
+}

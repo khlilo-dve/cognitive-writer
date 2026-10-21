@@ -76,7 +76,7 @@ pub(crate) fn load_sources(views: &str) -> Result<BTreeMap<String, (String, Sour
     Ok(result)
 }
 
-fn make_plans(
+pub(crate) fn make_plans(
     sampling: &Value,
     sources: &BTreeMap<String, (String, Source, String)>,
 ) -> Result<Vec<Plan>, AppError> {

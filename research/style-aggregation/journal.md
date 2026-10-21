@@ -214,3 +214,23 @@ p3-evidence-audit-01结束，4/4控制通过、16/20篇有效、37响应；4失�
 ## E0036 · 2026-10-20 · 定位约束验证成功，语义未采用（confirmed / evaluation_invalid）
 
 p3-ending-anchor-01四例完成，4/4引文位置通过程序SHA/Unicode偏移校验，模型2支持2反例；真正末句已取代段中误定位。语义复核仍发现新增不劝告条件、诗句行数误称，不进入生成。4响应哈希通过，缓存复跑4命中/0新请求/账本不变。本run0.035508元，全研究14.563149元（含未知预留），253库测试与构建通过。报告https://www.feishu.cn/docx/Hbm2d9fs1oTWjFx6ISqcIODunv8 已回读。
+
+## E0037 · 2026-10-21 · 用户要求先完成再优化，启动探索性写作对照（method_change）
+
+用户要求勿过于钻牛角尖，适当范围先完成再迭代。method-revision-11在新Pro请求前登记，两份10篇原文直接归纳各6条机制；pragmatic-profiles-01付费0.251445元、全研究14.814594元时结束，两份JSON仍因严格引文/题材规则失败，原run标partial。method-revision-12记录免费派生：保留全部12条原始机制，4处引文不完全匹配、2条只有单题材与说明1288/1348字均留诊断；独立run pragmatic-profiles-recovered-01不冒充原run成功。实现者以exploratory_only允许查看生成对照，事实冲突风险另报。Flash run pragmatic-generation-01已开始，预定60篇、限15元，当前运行状态以summary与真实进程共同核对，不让早期输出修改Style。
+
+## E0037 · 2026-10-21 · 用户要求先完成再迭代，探索性聚合（method_change / evaluation_invalid）
+
+用户明确要求不过度钻牛角尖，适当范围先完成再优化。method-revision-11在请求前冻结每位作者10篇匿名原文直接归纳。pragmatic-profiles-01两份JSON各6条候选，但引文/题材校验未过，原run标partial、本run0.251445元，不能冒充严格聚合成功。method-revision-12免费派生pragmatic-profiles-recovered-01，全部12条机制原样保留；4处短引文不完全匹配、2条仅单题材、执行说明1288/1348字符均留诊断。实现者标exploratory_only，明确新增事实和原文内容污染风险，仅供开发写作对照。
+
+## E0038 · 2026-10-21 · P4表层统计与P5 Flash生成完整（confirmed / limited）
+
+method-revision-13预登记在冻结五顺序和k1/2/3/5/7/10上免费统计句长、段长、人称与标点；300条指标记录及图表已存，k10距离0是定义，不能称语义Profile收敛。云报告：https://www.feishu.cn/docx/LjgJdwnH9oXphQxAWxJc4MZbn1g 。P5 pragmatic-generation-01全部60篇（48主对照+12中性）、120响应完成，无请求失败；Flash run占用0.317655元，结束时全研究15.132249元。单篇稿多有不足600字，聚合确认题目仅1/8达目标长度，事实合规待另评。云报告：https://www.feishu.cn/docx/OyWud2YpGoQ4xvxX7Owch5bvnBf 。
+
+## E0039 · 2026-10-21 · 原评分上下文过大，改为预定三篇（evaluation_invalid / method_change）
+
+pragmatic-reference-01原裁判见同作者10篇原文，4控制过，但前8项中3失败：两次content_filter无usage、一次16,384输出token耗尽。精确核对进程后主动终止，原摘要与原始请求保留；状态evaluation_invalid，5完成/3失败/12暂缓，本run占用2.900922元，全研究18.033171元（含未知预留）。不得和新评分混算。method-revision-14在重评前登记：选sampling-v1已有generation_baselines每作者按daily/reading/society各一篇，全部方法共享同参考；保留Transfer v2五维与原4控制。独立pragmatic-reference-compact-01已启动，上限15元；原60正文不变。
+
+## E0040 · 2026-10-21 · 评分控制不稳定，冻结旧通过快照继续开发评分（evaluation_invalid / method_change）
+
+pragmatic-reference-compact-01以预定三篇为参考，但fabrication控制两次响应仍缺少与分数一致的证据；0正式评分，0.016623元，原run保留evaluation_invalid。旧pragmatic-reference-01四控制曾过，控制输入/Prompt/生成身份与新run完全一致；同题一过一败反映裁判不稳定，不冒充可靠人评。method-revision-15在新模型请求前登记，程序核对旧四控制记录、请求SHA/模型和冻结身份，新pragmatic-reference-reuse-01继承该通过快照但仅作探索性，所有20篇开发正文用同一三篇参照重新评分；任何实际失效保留，不混旧分。单run限15元。

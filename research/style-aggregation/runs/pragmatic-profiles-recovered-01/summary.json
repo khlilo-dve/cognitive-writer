@@ -1,0 +1,35 @@
+{
+  "status": "complete",
+  "stage": "profiles",
+  "rows": [
+    {
+      "id": "profile-95a8f188fa16d060",
+      "author": "wang_zengqi",
+      "status": "complete",
+      "rules": 6,
+      "characters": 1348,
+      "warnings": [
+        "探索性派生：原严格聚合run仍为partial，引用与题材限制见独立诊断；不证明稳定作者风格",
+        "执行说明1348非空白字符，低于1500完整度参考；按原样保留"
+      ]
+    },
+    {
+      "id": "profile-968be6b59520fb35",
+      "author": "wang_xiaobo",
+      "status": "complete",
+      "rules": 6,
+      "characters": 1288,
+      "warnings": [
+        "探索性派生：原严格聚合run仍为partial，引用与题材限制见独立诊断；不证明稳定作者风格",
+        "执行说明1288非空白字符，低于1500完整度参考；按原样保留"
+      ]
+    }
+  ],
+  "source_status": "partial",
+  "semantic_status": "exploratory_only",
+  "usage": {
+    "run_occupied_cny": 0,
+    "occupied_cny": 14.814594,
+    "pricing": "offline derivation; original calls charged to source run"
+  }
+}
