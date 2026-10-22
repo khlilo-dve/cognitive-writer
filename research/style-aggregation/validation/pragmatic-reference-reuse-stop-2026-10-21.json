@@ -1,0 +1,10 @@
+{
+  "run": "pragmatic-reference-reuse-01",
+  "before_sha256": "29c9391bef8aec60018f247ce2b23fcc760147e6fb165571f227e862b84733c5",
+  "completed": 3,
+  "failed": 3,
+  "deferred": 14,
+  "reason": "同一Pro裁判真实稿连续出现证据/分数矛盾、理由缺失与结构字段错误；保留旧控制复用信息和所有响应",
+  "run_occupied_cny": 1.378536,
+  "occupied_cny": 19.42833
+}

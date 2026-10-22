@@ -1,0 +1,327 @@
+{
+  "table_create": {
+    "table": {
+      "fields": [
+        {
+          "name": "ID",
+          "style": {
+            "rules": [
+              {
+                "text": "NO.",
+                "type": "text"
+              },
+              {
+                "length": 3,
+                "type": "incremental_number"
+              }
+            ]
+          },
+          "type": "auto_number"
+        }
+      ],
+      "id": "tblpcxZHCJvZONra",
+      "name": "盲测反馈｜AB-v1",
+      "views": [
+        {
+          "_meta": {
+            "filter": null,
+            "group": [],
+            "sort": [],
+            "visible_fields": "1 field"
+          },
+          "id": "vewpVuN0AV",
+          "name": "表格",
+          "type": "grid"
+        }
+      ]
+    }
+  },
+  "table_id": "tblpcxZHCJvZONra",
+  "form_create": {
+    "description": "先阅读匿名题包：https://www.feishu.cn/docx/KTqtd2mXFoxv79xN1KEchbXlnfc。每组看 A/B 两稿，不需填写姓名。约 8–12 位独立读者即可。",
+    "id": "vewDmj5m4c",
+    "name": "写作声音匿名 A/B 小问卷｜四组",
+    "type": "form"
+  },
+  "form_id": "vewDmj5m4c",
+  "questions_create": {
+    "questions": [
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldFq2TypQ",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第一组｜更接近作者短片段的写法",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldZIS8XY4",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第一组｜读起来更自然",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldbUdzjfc",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第二组｜更接近作者短片段的写法",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldTNFzpVL",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第二组｜读起来更自然",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldhI7M7TX",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第三组｜更接近作者短片段的写法",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldgN2CpOy",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第三组｜读起来更自然",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldBF9mAtR",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第四组｜更接近作者短片段的写法",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "请依据匿名阅读材料选择；四选一。",
+        "id": "fldfzOmXRx",
+        "input_range_limit": null,
+        "multiple": false,
+        "option_display_mode": 1,
+        "options": [
+          {
+            "hue": "Blue",
+            "lightness": "Lighter",
+            "name": "A稿"
+          },
+          {
+            "hue": "Green",
+            "lightness": "Lighter",
+            "name": "B稿"
+          },
+          {
+            "hue": "Yellow",
+            "lightness": "Lighter",
+            "name": "差不多"
+          },
+          {
+            "hue": "Gray",
+            "lightness": "Lighter",
+            "name": "都不理想"
+          }
+        ],
+        "required": true,
+        "title": "第四组｜读起来更自然",
+        "type": "select"
+      },
+      {
+        "default_value": null,
+        "description": "如发现新增事实，请写组别、A/B 与具体句子。",
+        "id": "fldlQkRP5X",
+        "input_range_limit": null,
+        "required": false,
+        "style": {
+          "type": "plain"
+        },
+        "title": "具体事实错误或其他说明（可选）",
+        "type": "text"
+      }
+    ]
+  }
+}

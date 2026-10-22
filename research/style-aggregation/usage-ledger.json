@@ -2974,6 +2974,1350 @@
       "reserved_micro": 783345,
       "actual_micro": 185832,
       "state": "settled"
+    },
+    "pragmatic-generation-01/article-001-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17947,
+      "actual_micro": 3019,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-001-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15141,
+      "actual_micro": 2441,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-002-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17537,
+      "actual_micro": 3220,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-002-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15141,
+      "actual_micro": 2331,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-003-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 16850,
+      "actual_micro": 2461,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-003-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15141,
+      "actual_micro": 2035,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-004-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17341,
+      "actual_micro": 2730,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-004-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15141,
+      "actual_micro": 2303,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-005-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 16719,
+      "actual_micro": 3377,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-005-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15189,
+      "actual_micro": 2053,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-006-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 16943,
+      "actual_micro": 3135,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-006-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15189,
+      "actual_micro": 2109,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-007-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20415,
+      "actual_micro": 3444,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-007-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18403,
+      "actual_micro": 3197,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-008-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20608,
+      "actual_micro": 3681,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-008-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18403,
+      "actual_micro": 3289,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-009-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20550,
+      "actual_micro": 3921,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-009-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18403,
+      "actual_micro": 3371,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-010-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 21192,
+      "actual_micro": 3807,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-010-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18403,
+      "actual_micro": 3511,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-011-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20097,
+      "actual_micro": 3354,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-011-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18451,
+      "actual_micro": 2995,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-012-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20391,
+      "actual_micro": 3739,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-012-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18451,
+      "actual_micro": 3113,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-013-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20758,
+      "actual_micro": 3910,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-013-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18782,
+      "actual_micro": 3275,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-014-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 21132,
+      "actual_micro": 3857,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-014-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18782,
+      "actual_micro": 3433,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-015-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20835,
+      "actual_micro": 3566,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-015-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18782,
+      "actual_micro": 3283,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-016-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20844,
+      "actual_micro": 3739,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-016-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18782,
+      "actual_micro": 3263,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-017-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19884,
+      "actual_micro": 3152,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-017-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18830,
+      "actual_micro": 2805,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-018-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20025,
+      "actual_micro": 3494,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-018-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18830,
+      "actual_micro": 2817,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-019-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20251,
+      "actual_micro": 3642,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-019-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18036,
+      "actual_micro": 3090,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-020-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20455,
+      "actual_micro": 3404,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-020-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18036,
+      "actual_micro": 3194,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-021-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19144,
+      "actual_micro": 3072,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-021-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18036,
+      "actual_micro": 2598,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-022-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19509,
+      "actual_micro": 3008,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-022-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18036,
+      "actual_micro": 2706,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-023-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19482,
+      "actual_micro": 3013,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-023-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18084,
+      "actual_micro": 2696,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-024-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19980,
+      "actual_micro": 3313,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-024-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18084,
+      "actual_micro": 2912,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-025-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17164,
+      "actual_micro": 2413,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-025-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15295,
+      "actual_micro": 2226,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-026-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17321,
+      "actual_micro": 2795,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-026-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15295,
+      "actual_micro": 2312,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-027-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17072,
+      "actual_micro": 2372,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-027-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15295,
+      "actual_micro": 2144,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-028-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 16573,
+      "actual_micro": 2360,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-028-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15295,
+      "actual_micro": 1938,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-029-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 16610,
+      "actual_micro": 2302,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-029-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15343,
+      "actual_micro": 1906,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-030-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 16655,
+      "actual_micro": 2288,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-030-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 15343,
+      "actual_micro": 1958,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-031-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18213,
+      "actual_micro": 2976,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-031-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17062,
+      "actual_micro": 2404,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-032-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19050,
+      "actual_micro": 2836,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-032-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17062,
+      "actual_micro": 2864,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-033-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18122,
+      "actual_micro": 2590,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-033-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17062,
+      "actual_micro": 2384,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-034-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18278,
+      "actual_micro": 2685,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-034-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17062,
+      "actual_micro": 2450,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-035-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18332,
+      "actual_micro": 2738,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-035-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17110,
+      "actual_micro": 2444,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-036-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18375,
+      "actual_micro": 2803,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-036-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17110,
+      "actual_micro": 2454,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-037-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20764,
+      "actual_micro": 3445,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-037-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19286,
+      "actual_micro": 3169,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-038-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20733,
+      "actual_micro": 3607,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-038-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19286,
+      "actual_micro": 3077,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-039-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 21151,
+      "actual_micro": 3933,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-039-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19286,
+      "actual_micro": 3361,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-040-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 21274,
+      "actual_micro": 3919,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-040-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19286,
+      "actual_micro": 3367,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-041-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 20806,
+      "actual_micro": 3661,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-041-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19334,
+      "actual_micro": 3081,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-042-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 21554,
+      "actual_micro": 3854,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-042-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 19334,
+      "actual_micro": 3391,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-043-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18614,
+      "actual_micro": 2954,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-043-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17006,
+      "actual_micro": 2611,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-044-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18503,
+      "actual_micro": 2873,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-044-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17006,
+      "actual_micro": 2553,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-045-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18009,
+      "actual_micro": 2618,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-045-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17006,
+      "actual_micro": 2351,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-046-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18692,
+      "actual_micro": 2697,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-046-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17006,
+      "actual_micro": 2693,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-047-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18136,
+      "actual_micro": 2797,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-047-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17054,
+      "actual_micro": 2337,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-048-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 18280,
+      "actual_micro": 2690,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-048-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 17054,
+      "actual_micro": 2427,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-049-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13279,
+      "actual_micro": 1548,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-049-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1262,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-050-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13040,
+      "actual_micro": 1830,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-050-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1194,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-051-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13605,
+      "actual_micro": 2078,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-051-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1470,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-052-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13092,
+      "actual_micro": 1661,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-052-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1178,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-053-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13246,
+      "actual_micro": 1729,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-053-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1200,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-054-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13411,
+      "actual_micro": 1923,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-054-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1312,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-055-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13524,
+      "actual_micro": 2318,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-055-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1426,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-056-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13081,
+      "actual_micro": 1480,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-056-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11316,
+      "actual_micro": 1130,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-057-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13628,
+      "actual_micro": 1804,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-057-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11364,
+      "actual_micro": 1442,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-058-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13057,
+      "actual_micro": 1378,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-058-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11364,
+      "actual_micro": 1138,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-059-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 13742,
+      "actual_micro": 1648,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-059-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11364,
+      "actual_micro": 1386,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-060-body": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 12630,
+      "actual_micro": 1204,
+      "state": "settled"
+    },
+    "pragmatic-generation-01/article-060-outline": {
+      "run_id": "pragmatic-generation-01",
+      "phase": "full",
+      "reserved_micro": 11364,
+      "actual_micro": 930,
+      "state": "settled"
+    },
+    "pragmatic-profiles-01/profile-95a8f188fa16d060-synthesis-0": {
+      "run_id": "pragmatic-profiles-01",
+      "phase": "full",
+      "reserved_micro": 359667,
+      "actual_micro": 71844,
+      "state": "settled"
+    },
+    "pragmatic-profiles-01/profile-95a8f188fa16d060-synthesis-1": {
+      "run_id": "pragmatic-profiles-01",
+      "phase": "full",
+      "reserved_micro": 380115,
+      "actual_micro": 76734,
+      "state": "settled"
+    },
+    "pragmatic-profiles-01/profile-968be6b59520fb35-synthesis-0": {
+      "run_id": "pragmatic-profiles-01",
+      "phase": "full",
+      "reserved_micro": 306417,
+      "actual_micro": 47703,
+      "state": "settled"
+    },
+    "pragmatic-profiles-01/profile-968be6b59520fb35-synthesis-1": {
+      "run_id": "pragmatic-profiles-01",
+      "phase": "full",
+      "reserved_micro": 310407,
+      "actual_micro": 55164,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-001-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 324591,
+      "actual_micro": 148578,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-002-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 202728,
+      "actual_micro": 26673,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-002-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 326169,
+      "actual_micro": 52746,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-007-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 197703,
+      "actual_micro": 27735,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-007-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 321141,
+      "actual_micro": 53661,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-008-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 322122,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-01/article-013-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 200157,
+      "actual_micro": 27297,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-013-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 323586,
+      "actual_micro": 55197,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-014-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 199479,
+      "actual_micro": 25707,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-014-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 322908,
+      "actual_micro": 52167,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-019-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 200139,
+      "actual_micro": 24471,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-019-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 323568,
+      "actual_micro": 52839,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-020-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 321774,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-01/article-025-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 197127,
+      "actual_micro": 25269,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-025-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 373815,
+      "actual_micro": 68550,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-026-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 199137,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-01/article-026-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 375816,
+      "actual_micro": 70044,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-031-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 375006,
+      "actual_micro": 68934,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-031-transfer-1": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 382071,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-01/article-032-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 195942,
+      "actual_micro": 25011,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-032-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 372630,
+      "actual_micro": 67524,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-037-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 373836,
+      "actual_micro": 125025,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-038-author-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 198795,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-01/article-038-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 375474,
+      "actual_micro": 69657,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-043-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 374244,
+      "actual_micro": 69384,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-044-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 373941,
+      "actual_micro": 67476,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-049-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 321435,
+      "actual_micro": 54282,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-050-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 376926,
+      "actual_micro": 69864,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-051-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 324438,
+      "actual_micro": 51993,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/article-052-transfer-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 375678,
+      "actual_micro": 69741,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/control-author-self-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 107814,
+      "actual_micro": 2724,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/control-clean-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 117234,
+      "actual_micro": 5256,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/control-fabrication-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 117414,
+      "actual_micro": 5610,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/control-fabrication-1": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 122700,
+      "actual_micro": 6981,
+      "state": "settled"
+    },
+    "pragmatic-reference-01/control-leak-0": {
+      "run_id": "pragmatic-reference-01",
+      "phase": "full",
+      "reserved_micro": 117522,
+      "actual_micro": 6627,
+      "state": "settled"
+    },
+    "pragmatic-reference-compact-01/control-clean-0": {
+      "run_id": "pragmatic-reference-compact-01",
+      "phase": "full",
+      "reserved_micro": 117234,
+      "actual_micro": 4986,
+      "state": "settled"
+    },
+    "pragmatic-reference-compact-01/control-fabrication-0": {
+      "run_id": "pragmatic-reference-compact-01",
+      "phase": "full",
+      "reserved_micro": 117414,
+      "actual_micro": 5280,
+      "state": "settled"
+    },
+    "pragmatic-reference-compact-01/control-fabrication-1": {
+      "run_id": "pragmatic-reference-compact-01",
+      "phase": "full",
+      "reserved_micro": 121890,
+      "actual_micro": 6357,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-001-author-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 201162,
+      "actual_micro": 26448,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-001-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 199743,
+      "actual_micro": 25305,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-002-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 201321,
+      "actual_micro": 26181,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-007-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 196293,
+      "actual_micro": 22038,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-007-transfer-1": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 198522,
+      "actual_micro": 24777,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-008-author-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 198690,
+      "actual_micro": 25839,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-008-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 197274,
+      "actual_micro": 25002,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-013-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 198738,
+      "actual_micro": 27342,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-013-transfer-1": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 205500,
+      "actual_micro": 23625,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-014-author-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 199479,
+      "actual_micro": 26325,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-014-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 198060,
+      "actual_micro": 24516,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-019-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 198720,
+      "actual_micro": 24786,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-020-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 196926,
+      "actual_micro": 24090,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-020-transfer-1": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 203820,
+      "actual_micro": 26253,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-025-author-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 197127,
+      "actual_micro": 25959,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-025-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 221526,
+      "actual_micro": 30045,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-026-author-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 199137,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-reuse-01/article-026-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 223527,
+      "actual_micro": 32559,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-031-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 222717,
+      "actual_micro": 30825,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-031-transfer-1": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 229134,
+      "actual_micro": 32001,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-032-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 220341,
+      "actual_micro": 28845,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-032-transfer-1": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 223941,
+      "actual_micro": 29547,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-037-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 221547,
+      "actual_micro": 30300,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-038-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 223185,
+      "actual_micro": 29334,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-043-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 221955,
+      "actual_micro": 31227,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-044-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 221652,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-reuse-01/article-049-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 196587,
+      "actual_micro": 24183,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-050-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 224637,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "pragmatic-reference-reuse-01/article-051-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 199590,
+      "actual_micro": 25038,
+      "state": "settled"
+    },
+    "pragmatic-reference-reuse-01/article-052-transfer-0": {
+      "run_id": "pragmatic-reference-reuse-01",
+      "phase": "full",
+      "reserved_micro": 223389,
+      "actual_micro": 30720,
+      "state": "settled"
     }
   }
 }

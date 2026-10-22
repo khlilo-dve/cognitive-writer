@@ -1,0 +1,81 @@
+{
+  "author": "wang_xiaobo",
+  "author_match": {
+    "choice": "B",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "article_quote": "这套流程的实质是把\"谁在用\"和\"用完没有\"两件事固定下来，让一件公共物品不至于在流动中消失。",
+        "reason": "都是先给出一句定义式的收束，用平实短句概括机制/性格，不展开论辩",
+        "reference": "B",
+        "reference_quote": "他的\"耐烦\"，意思就是锲而不舍，不怕费劲。"
+      },
+      {
+        "article_quote": "这是它最实在的用处。",
+        "reason": "短促独立成句的判断收尾，与B文中点评性短句节奏一致",
+        "reference": "B",
+        "reference_quote": "这全是记实。"
+      },
+      {
+        "article_quote": "核对本身不解决损坏，只解决缺失；这是它能做到的全部，也是它边界开始的地方。",
+        "reason": "先区分两个相近概念，再用简短补语给出取舍判断，信息展开方式相似",
+        "reference": "B",
+        "reference_quote": "结构\"过于理智，\"组织\"更带感情，较多作者的主观。"
+      },
+      {
+        "article_quote": "这个担心和上一条好处其实是同一件事的两面：正因为不必拥有，才可能在需要的时刻空手而归。",
+        "reason": "正反两面并置后用转折/因果点出本质，与B的对照式短评衔接一致",
+        "reference": "B",
+        "reference_quote": "他的作品看起来很轻松自如，若不经意，但都是苦心刻琢出来的。"
+      }
+    ],
+    "fidelity_a": 1.0,
+    "fidelity_b": 4.0,
+    "reason": "新文用短段落、破折号转折、第一人称轻介入、对同一事实正反两面的并置和收束性判断，节奏与汪曾祺写人写物的克制短句接近；A的论辩式长句、反问驳斥、引经据典展开未在新文出现。",
+    "uncertainties": [
+      "参考各仅一篇，且A为论说文、B为怀人散文，题材差异大，新文为说明性随笔，相似度判断可能受文体通用惯例影响",
+      "新文缺少B中典型的第一人称亲历回忆场景，与B的接近更多体现在句式节奏和点评衔接上，故confidence为medium"
+    ]
+  },
+  "body_sha256": "d79f22b0357f94f5c84bd8627159b84335bf866e9348fd44eef7bdb8fa0b3666",
+  "id": "article-001",
+  "length": {
+    "above": 0,
+    "below": 0,
+    "characters": 861,
+    "max": 900,
+    "min": 600,
+    "policy": "non-whitespace Unicode scalars including title, punctuation and Markdown; diagnostic only",
+    "within_range": true
+  },
+  "method": "aggregate",
+  "other_fidelity": 4.0,
+  "phase": "reference",
+  "replicate": 1,
+  "style_id": "profile-968be6b59520fb35",
+  "target_fidelity": 1.0,
+  "target_label": "A",
+  "topic": "tools",
+  "transfer": {
+    "fact_violations": [],
+    "reasons": {
+      "factual_compliance": "严格遵循任务素材：螺丝刀、卷尺、钳子三件工具、登记借用、值班人员核对齐全、免除一次性购买、担心急用时缺失、不允许预约、损坏责任未定、工作人员收集意见未宣布新规则，均有素材依据。未新增独立事件、人物履历、精确数字或外部引用。'为拧一颗螺丝而买一整套螺丝刀'属于对'为一次使用专门购买'的同义举例说明，未新增独立事实主张；其余连接性推论均为逻辑解释，符合strict模式要求。",
+      "naturalness": "行文连贯、衔接自然，比喻与抽象化处理（如'半开半掩的状态'）不显生硬，未见机械重复或模板化痕迹。",
+      "source_independence": "未发现参考文内容或结论迁移。工具借用柜的主题、素材和论点全部来自当前任务设定，与三篇参考文讨论的经典欣赏、荷兰牧场与送粪、崇高与吃苦等议题无内容重合。句式结构（如'区别在于''本质是'）和论证动作不属于污染范围。",
+      "style_fidelity": "继承了样文的多项核心机制：从一个明确命题或判断切入并展开论证（如开头用'从一件尚未定论的事出发…'的对举式立论），分节推进并把具体情形抽到抽象概念层面（如把登记流程归结为'把使用权从所有权中剥离'），使用克制的口语化思辨和反讽式收束（如'谁也说不准，包括此刻正在收集意见的人'）。信息展开方式以'这一点值得说清楚''这个担心和上一条好处其实是同一件事的两面'这类递进辨析展开，接近样文的论证节奏。主要不足是未完全复制样文中那种更长的自我暴露式叙事段落和幽默的比喻式段落。",
+      "task_completion": "完整覆盖登记借还、临时借用好处、可用性不确定、损坏责任未定四项核心素材，并以'便利与规则的边界'小节收束，讨论便利与规则边界，未编造争议已解决或使用效果数据。"
+    },
+    "scores": {
+      "factual_compliance": 5.0,
+      "naturalness": 4.0,
+      "source_independence": 5.0,
+      "style_fidelity": 4.0,
+      "task_completion": 5.0
+    },
+    "source_leakage": [],
+    "task_issues": [],
+    "uncertainties": [
+      "'为拧一颗螺丝而买一整套螺丝刀'是否严格属于strict模式允许的同义转述/举例说明而非具体物件新增，存在轻微界定模糊，未据此扣分。"
+    ]
+  }
+}

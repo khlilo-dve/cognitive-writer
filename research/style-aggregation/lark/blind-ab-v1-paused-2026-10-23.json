@@ -1,0 +1,14 @@
+{
+  "reason": "Original A/B packet used exploratory profiles that did not meet the revised goal of a detailed executable style file. Form was not distributed and has no claimed responses.",
+  "readback_status": "questions-create returned nine questions, but script readback assertion failed; respondent usability not verified",
+  "form_update": {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "description": "旧题包基于未成熟的聚合风格文件。研究方向已于2026-10-23修订，本表单暂停收集；请勿填写或转发。",
+      "id": "vewDmj5m4c",
+      "name": "旧版探索性问卷｜暂停使用",
+      "type": "form"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "run": "pragmatic-generation-01",
+  "protocol": "method-revision-16",
+  "references": {
+    "作者一": {
+      "article_id": "wxb-07",
+      "source_sha256": "29778615b989585e619ffe87deb55118df9b6ceda6027b0d78bc2ab458a1a5e8",
+      "excerpt_sha256": "b946859af893eb1d3785a7b8c1286ce8e68984fbd60a2251ae5df06a73ed7859"
+    },
+    "作者二": {
+      "article_id": "wzq-07",
+      "source_sha256": "338668c8a603fa5399d2007d7c872e2debc2980357241d00c39aec1948628542",
+      "excerpt_sha256": "c984a8120613687877d1cf43a2202bf3f029ba959351ebb8bcf50f1b79a39625"
+    }
+  },
+  "pairs": [
+    {
+      "label": "一",
+      "author": "wang_xiaobo",
+      "topic": "tools",
+      "phase": "reference",
+      "sides": {
+        "A": {
+          "method": "aggregate",
+          "article_id": "article-001",
+          "style_id": "profile-968be6b59520fb35",
+          "body_sha256": "d79f22b0357f94f5c84bd8627159b84335bf866e9348fd44eef7bdb8fa0b3666"
+        },
+        "B": {
+          "method": "single",
+          "article_id": "article-007",
+          "style_id": "wxb-07",
+          "body_sha256": "4e63728405ff06f8c39929be00847836f7f827f339f751b24935c87a12e1ab88"
+        }
+      }
+    },
+    {
+      "label": "二",
+      "author": "wang_xiaobo",
+      "topic": "repair",
+      "phase": "confirmation",
+      "sides": {
+        "A": {
+          "method": "single",
+          "article_id": "article-023",
+          "style_id": "wxb-09",
+          "body_sha256": "6e939c69ea7ae4504ca4ee5d79db7aa3809fc55f29201a69457d7b6b1405de27"
+        },
+        "B": {
+          "method": "aggregate",
+          "article_id": "article-005",
+          "style_id": "profile-968be6b59520fb35",
+          "body_sha256": "e9f7f667936c7861cc27c754a8a09e50e832e8e1e8a1a5914c19f0c7af89062b"
+        }
+      }
+    },
+    {
+      "label": "三",
+      "author": "wang_zengqi",
+      "topic": "tools",
+      "phase": "reference",
+      "sides": {
+        "A": {
+          "method": "single",
+          "article_id": "article-031",
+          "style_id": "wzq-07",
+          "body_sha256": "9e02564355a265b126395dbfb219444d7a6c4797995830cad4c8509e8b8b6dbf"
+        },
+        "B": {
+          "method": "aggregate",
+          "article_id": "article-025",
+          "style_id": "profile-95a8f188fa16d060",
+          "body_sha256": "05e5c1385813659219b91460cc2cfb665ecf608f71984f5b97291a69d4601ed5"
+        }
+      }
+    },
+    {
+      "label": "四",
+      "author": "wang_zengqi",
+      "topic": "repair",
+      "phase": "confirmation",
+      "sides": {
+        "A": {
+          "method": "aggregate",
+          "article_id": "article-029",
+          "style_id": "profile-95a8f188fa16d060",
+          "body_sha256": "94ed51c8a6790974c71f143db2efb9ebfb774bc8135ab6f28f74fa18d680d44e"
+        },
+        "B": {
+          "method": "single",
+          "article_id": "article-047",
+          "style_id": "wzq-09",
+          "body_sha256": "8097bf68397d13087ad5c6324aeaad263278794ad0da64d7243c772d2a64ea50"
+        }
+      }
+    }
+  ],
+  "packet_sha256": "ec4ccd93f33591b6287bf9363ed8a35dbdc75c3d56ef8f47cd1857c44025b8a8"
+}

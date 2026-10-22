@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "judgment": {
+        "fact_violations": [],
+        "reasons": {
+          "factual_compliance": "正文仅陈述活动室设工具柜、居民登记借用、归还登记，均在严格素材范围内，未新增数据、人物对话或其他事件。",
+          "naturalness": "句子通顺自然，虽简短但无机械重复或拼贴痕迹，只是篇幅极短、略显单薄。",
+          "source_independence": "正文内容完全围绕任务给定的活动室工具柜和登记借还，未迁移参考样文的'请假条''出勤表''规矩'等内容或结论。无可证实的内容迁移。",
+          "style_fidelity": "参考样文的核心机制是拟人化和悖论式收尾（'规矩'有名字、会批准、会走），带寓言/超现实的节拍。正文只是平实陈述'活动室设了工具柜，居民登记后借用，归还时也需要登记'，仅保留了一句陈述的表面形式，未体现拟人、转折、悖论等主要机制。",
+          "task_completion": "完整涵盖工具柜和登记借还两项核心素材，无缺失。"
+        },
+        "scores": {
+          "factual_compliance": 5.0,
+          "naturalness": 3.0,
+          "source_independence": 5.0,
+          "style_fidelity": 2.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "name": "clean",
+      "passed": true
+    },
+    {
+      "judgment": {
+        "fact_violations": [
+          {
+            "article_quote": "已有九百人借用，节约了三万元",
+            "reason": "任务明确禁止增添数据，strict模式不允许新增精确数字；此两组统计数据在给定素材（活动室设工具柜，居民登记借还）中不存在，属于凭空新增的具体数据。"
+          }
+        ],
+        "reasons": {
+          "factual_compliance": "任务明确限定'不得增添数据、人物对话或其他事件'，且为strict模式。正文新增了'九百人借用'、'节约了三万元'两个具体统计数据，这些数字在给定素材（活动室设工具柜，居民登记借还）中不存在，构成可证实的越界，见fact_violations。",
+          "naturalness": "文字流畅自然，说明清楚，无明显拼贴或机械重复痕迹。",
+          "source_independence": "正文内容与样文无任何可指认的具体内容、结论或素材迁移，二者主题、意象、句子均不同，无确定违规。",
+          "style_fidelity": "样文的核心机制是拟人化、比喻性的短促议论句式和讽刺性叙事动作（如规矩请假、填出勤表），正文只是平实的说明性陈述，未体现拟人、讽刺或比喻等任何主要机制，仅有短句的表面形式相似。",
+          "task_completion": "完整涵盖任务指定的两项核心素材：工具柜与登记借还，围绕主题展开，无核心素材缺失，见task_issues为空。字数与事实问题不在此维度重复扣分。"
+        },
+        "scores": {
+          "factual_compliance": 1.0,
+          "naturalness": 4.0,
+          "source_independence": 5.0,
+          "style_fidelity": 2.0,
+          "task_completion": 5.0
+        },
+        "source_leakage": [],
+        "task_issues": [],
+        "uncertainties": []
+      },
+      "name": "fabrication",
+      "passed": true
+    },
+    {
+      "judgment": {
+        "fact_violations": [
+          {
+            "article_quote": "归还时也需要登记。",
+            "reason": "任务为strict模式且明确要求不得增添其他事件或数据；材料只给出居民登记借还，正文新增了归还时也需要登记这一具体规则主张，超出给定素材。"
+          }
+        ],
+        "reasons": {
+          "factual_compliance": "任务为strict模式，不得增添数据、人物对话或其他事件。正文首句增加了未提供的归还时也需要登记这一独立规则动作，属于对给定核心素材的新增信息，超出登记借还的最小表述。",
+          "naturalness": "首句平实描述与第二句突然的拟人化语句之间衔接生硬，且第二句系直接复制，读感突兀，但文字本身通顺。",
+          "source_independence": "正文第二句几乎逐字复制了参考样文的两个完整句子，属于核心内容（拟人化规矩的荒诞动作）的直接迁移，构成多处核心内容/结论迁移。",
+          "style_fidelity": "参考样文的核心机制是拟人化的规矩与超现实荒诞动作（请假条批准、填出勤表、没腿却比人快），正文保留了完全相同的拟人化规矩语句作为结尾，但前半部分切换为平实的设施描述语句，节拍和荒诞递进机制只保留了一段，未做新主题下的完整适应性展开。",
+          "task_completion": "覆盖了工具柜与登记借还两个核心要素，但对要素的展开很薄弱，且结尾偏离严格素材要求的纪实性内容。"
+        },
+        "scores": {
+          "factual_compliance": 3.0,
+          "naturalness": 3.0,
+          "source_independence": 2.0,
+          "style_fidelity": 3.0,
+          "task_completion": 4.0
+        },
+        "source_leakage": [
+          {
+            "article_quote": "我给规矩写了一张请假条。它说批准，转头把自己的名字填进了出勤表。",
+            "reason": "正文逐字复制了参考样文的两个完整句子，包括拟人化请假条的全部具体荒诞动作与结局，属于核心叙事内容的直接迁移。",
+            "source_quote": "我给规矩写了一张请假条。它说批准，转头把自己的名字填进了出勤表。"
+          }
+        ],
+        "task_issues": [
+          "结尾完全脱离工具柜与登记借还主题，转向参考样文中的拟人化规矩情节，未围绕指定核心素材展开。"
+        ],
+        "uncertainties": []
+      },
+      "name": "leak",
+      "passed": true
+    },
+    {
+      "judgment": {
+        "choice": "A",
+        "confidence": "high",
+        "evidence": [
+          {
+            "article_quote": "我给规矩写了一张请假条。它说批准，转头把自己的名字填进了出勤表。规矩没有腿，走得却比人快。",
+            "reason": "逐字一致，短句连缀、拟人悖论收束的机制完全保留。",
+            "reference": "A",
+            "reference_quote": "我给规矩写了一张请假条。它说批准，转头把自己的名字填进了出勤表。规矩没有腿，走得却比人快。"
+          }
+        ],
+        "fidelity_a": 5.0,
+        "fidelity_b": 1.0,
+        "reason": "新文完全复现A的段落，逐字一致，保留了A中拟人化矛盾修辞（规矩请假却填出勤表、没有腿却走得快）的全部具体机制；B是平实的景物白描句式，无议论转折，与新文无关联。",
+        "uncertainties": [
+          "新文与A文本完全相同，无法排除直接复制而非风格趋同的可能，但机制层面确属A。"
+        ]
+      },
+      "name": "author-self",
+      "passed": true
+    }
+  ]
+}
