@@ -30,6 +30,7 @@ pub async fn run(args: &[&str]) -> Result<(), AppError> {
         ["profiles",run,views,pairs]=>crate::research_profile::run(run,views,pairs).await,
         ["convergence",run,profiles,p2]=>crate::research_convergence::run(run,profiles,p2).await,
         ["generate",run,profiles,single]=>crate::research_generation::run(run,profiles,single).await,
+        ["generate-frozen",run,plan]=>crate::research_generation::run_frozen(run,plan).await,
         ["evaluate",run,generation,"reference"]=>crate::research_evaluation::run(run,generation,"reference",None).await,
         ["evaluate",run,generation,"confirmation",reference]=>crate::research_evaluation::run(run,generation,"confirmation",Some(reference)).await,
         ["evaluate-compact",run,generation,"reference"]=>crate::research_evaluation::run_compact(run,generation,"reference",None).await,

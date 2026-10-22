@@ -242,3 +242,13 @@ pragmatic-reference-reuse-01在真实稿件上出现理由缺失、分数/违规
 ## E0042 · 2026-10-23 · 风格文件目标纠偏（method_change / negative）
 
 用户明确指出过度比较风格与成稿字数，偏离“让AI读风格文件学会写法”的目标。复核两份聚合候选、两份单篇说明和P5报告后确认：聚合候选每人只有六条机制，整体声音、读者距离、叙述/评点衔接、材料不足时的可执行替代和内部变体没有系统描述；部分频率/句长写法会把风格误作配方。P5报告的长度主图只说明文字长度，不提供模仿成功证据。纠偏方案见direction-correction-2026-10-23.md：先补两份经原文审阅的详细可执行Style，再少量同条件Flash试写与质性评审，人工盲测后置。原20篇单篇Style和60篇生成数据保留，旧图表改为历史诊断；暂不新增API费用、不给生产Style或默认路由改值。飞书通俗纠偏报告已回读：https://www.feishu.cn/docx/Aa22d75Q8oxUG7xs61EcSm9fnvg 。
+
+## E0043 · 2026-10-23 · 两份详细可执行风格候选（discovery / draft）
+
+按用户补充，`styles/孙割.md`只作说明密度参照，不套格式与内容。实现者读完两作者各10篇discovery原文，写出`detailed-executable-style-01`两份详细Markdown，并另存跨篇证据、题材变体、反例和未审问题。Style说明现在把整体声音、操作、条件、误用、素材不足时的写法连起来，不给每篇规定句数/段数，也不向Writer文件搬运源文故事。无新模型费用。该候选仍是同一执行者编写与审读的开发稿，未独立验收，不能说聚合已优于单篇。
+
+两份候选与阶段状态已发布并回读：https://www.feishu.cn/docx/IuP6d5X7oo8Ojix6FYDcD8zcnph 。
+
+## E0044 · 2026-10-23 · 新题材Flash试写未接通（engineering_failure）
+
+method-revision-17在调用前冻结12稿/两题、相同Writer、无文章字数区间，run上限1元。`detailed-transfer-pilot-01`首次12个outline请求全部网络中断，0篇正文、0有效回执；无密钥TLS探针出现`SSL_ERROR_SYSCALL`。本run未知预留0.196609元，全研究账本占用19.624939元含未知预留，非实付账单。原summary、输入及诊断保留；不把传输失败算Style失败，不盲目反复重试。先完成离线审阅，端点可达后再有界恢复同一run。

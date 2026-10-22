@@ -10,7 +10,7 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
-use std::{collections::BTreeMap, path::Path, sync::Arc};
+use std::{collections::{BTreeMap, BTreeSet}, path::Path, sync::Arc};
 
 #[derive(Clone, Serialize, Deserialize)]
 pub(crate) struct Job {
@@ -212,6 +212,77 @@ pub(crate) async fn run(run: &str, profiles: &str, single: &str) -> Result<(), A
     finish_tasks(&store, &mut pending, "generation").await
 }
 
+/// Run a small, preregistered transfer pilot using the same Flash writer path.
+pub(crate) async fn run_frozen(run: &str, plan_path: &str) -> Result<(), AppError> {
+    let frozen: Value = serde_json::from_slice(&std::fs::read(plan_path)?)
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    if frozen["suite"] != "detailed_style_transfer_pilot_v1"
+        || frozen["writer"] != Role::Writer.model()
+        || frozen["run_cap_micro_cny"] != 1_000_000
+    {
+        return Err(AppError::Parse("详细风格试写计划版本、模型或费用上限无效".into()));
+    }
+    let jobs: Vec<Job> = serde_json::from_value(frozen["jobs"].clone())
+        .map_err(|e| AppError::Parse(e.to_string()))?;
+    validate_frozen_jobs(&jobs)?;
+    let store = Arc::new(ResearchStore::open(Path::new(ROOT), run, false)?);
+    store.limit_run(1_000_000).await?;
+    store.freeze(&frozen)?;
+    std::fs::create_dir_all(store.root.join("articles"))?;
+    let mut pending = tokio::task::JoinSet::new();
+    for job in jobs {
+        let store = Arc::clone(&store);
+        pending.spawn(async move {
+            let result = generate(&store, job.clone()).await;
+            match result {
+                Ok(article) => {
+                    write_json(&store.root.join(format!("articles/{}.json", job.id)), &article)?;
+                    crate::io::write_file_atomic(
+                        &store.root.join(format!("articles/{}.md", job.id)),
+                        &article.body,
+                    )?;
+                    Ok::<_, AppError>(json!({"id":job.id,"status":"complete","author":job.author,
+                        "method":job.method,"topic":job.topic_id,"phase":job.phase}))
+                }
+                Err(error) => Ok(json!({"id":job.id,"status":"failed","error":error.to_string()})),
+            }
+        });
+    }
+    finish_tasks(&store, &mut pending, "detailed_style_transfer_pilot").await
+}
+
+fn validate_frozen_jobs(jobs: &[Job]) -> Result<(), AppError> {
+    let mut identities = BTreeSet::new();
+    let mut ids = BTreeSet::new();
+    let mut tasks = BTreeMap::new();
+    for job in jobs {
+        let identity = (job.author.as_str(), job.topic_id.as_str(), job.method.as_str());
+        if !valid_id(&job.id)
+            || !ids.insert(job.id.as_str())
+            || !["wang_xiaobo", "wang_zengqi"].contains(&job.author.as_str())
+            || !["lost_cards", "seed_box"].contains(&job.topic_id.as_str())
+            || !["aggregate", "single", "neutral"].contains(&job.method.as_str())
+            || job.phase != "development"
+            || job.replicate != 1
+            || job.spec.trim().is_empty()
+            || job.task.trim().is_empty()
+            || job.task.contains("600–900")
+            || !identities.insert(identity)
+        {
+            return Err(AppError::Parse("详细风格试写身份或任务无效".into()));
+        }
+        if let Some(prior) = tasks.insert(job.topic_id.as_str(), job.task.as_str()) {
+            if prior != job.task {
+                return Err(AppError::Parse("同题各方法的任务素材不一致".into()));
+            }
+        }
+    }
+    if jobs.len() != 12 || ids.len() != 12 || identities.len() != 12 || tasks.len() != 2 {
+        return Err(AppError::Parse("详细风格试写须两作者×两题×三方法".into()));
+    }
+    Ok(())
+}
+
 fn field(v: &Value, key: &str) -> Result<String, AppError> {
     v[key]
         .as_str()
@@ -272,4 +343,27 @@ pub(crate) fn load(run: &str) -> Result<Vec<Generated>, AppError> {
         result.push(a);
     }
     Ok(result)
+}
+
+#[cfg(test)]
+mod frozen_tests {
+    use super::*;
+
+    #[test]
+    fn rejects_unmatched_task_in_paid_transfer_matrix() {
+        let mut jobs = Vec::new();
+        for author in ["wang_xiaobo", "wang_zengqi"] {
+            for topic in ["lost_cards", "seed_box"] {
+                for method in ["aggregate", "single", "neutral"] {
+                    jobs.push(Job { id: format!("article-{:03}", jobs.len() + 1),
+                        author: author.into(), method: method.into(), style_id: method.into(),
+                        source_articles: vec![], topic_id: topic.into(), phase: "development".into(),
+                        replicate: 1, spec: "写作说明".into(), task: format!("共同素材：{topic}") });
+                }
+            }
+        }
+        assert!(validate_frozen_jobs(&jobs).is_ok());
+        jobs[1].task.push_str("另加事实");
+        assert!(validate_frozen_jobs(&jobs).is_err());
+    }
 }

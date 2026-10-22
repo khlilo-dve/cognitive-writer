@@ -1,5 +1,12 @@
 # 当前任务状态
 
+## 2026-10-23 两份详细候选与新题材小试
+
+- 已读两作者各10篇discovery原文，参考`styles/孙割.md`的说明颗粒度但不复刻格式/写法，写出`runs/detailed-executable-style-01/profiles/`两份可给Writer直接使用的详细候选；证据、变体和未独立审阅事项见同run的`evidence-review.md`，状态`draft_pending_independent_review`。没有新付费模型参与提取，生产`styles/`不变。
+- 两份候选的飞书文档及清晰阶段报告已创建、回读：https://www.feishu.cn/docx/IuP6d5X7oo8Ojix6FYDcD8zcnph 。
+- method-revision-17冻结两新题材、两作者×详细聚合/单篇/中性各一稿共12项，同一Flash流程、无文章字数区间、run上限1元。`detailed-transfer-pilot-01`首次12个大纲请求均TLS/网络层中断，0篇正文；本run未知费用预留0.196609元，累计账本占用19.624939元（非实付）。已停自动重试，不得把缺失解释成风格质量。诊断见该run的`transport-diagnosis.md`。
+- 下一步先离线复核候选Style中的证据、条件与可执行性，并供用户阅读；待端点无密钥TLS探针可达后，才用同一冻结run有界恢复试写，不换模型或输入。旧版盲测继续暂停。
+
 ## 2026-10-23 方向纠偏（优先于下方历史断点）
 
 - 用户指出风格文件是给 AI 学写法用的，要求详尽而非围绕字数做机械统计。当前主线改为 `research/style-aggregation/direction-correction-2026-10-23.md`：先审原文与单篇Style，补两份可执行的详细聚合候选，再以小规模同条件新题材成稿做质性验证。

@@ -2,6 +2,11 @@
 
 **2026-10-23 方向纠偏：先读 [direction-correction-2026-10-23.md](direction-correction-2026-10-23.md)，[飞书通俗报告](https://www.feishu.cn/docx/Aa22d75Q8oxUG7xs61EcSm9fnvg)已发布并回读。** 风格文件的用途是给 Writer 一份详尽、可信、能迁移到新题材的写法说明。字数、句长、规则条数仅作诊断，不是质量目标或阶段通过条件。原 P2/P3 严格语义核验未过，探索性两份聚合文件尚不能作为可靠 Style；基于它们的 60 篇生成稿只证明流程运行并提供失败案例。旧版匿名问卷暂停分发。接下来先补好、审好两份详细风格文件，再做少量直接迁移验证；暂不新增 API 花费。
 
+方向纠偏后的两份**开发候选**已在 `runs/detailed-executable-style-01/profiles/`，逐篇依据与待审问题在同run的`evidence-review.md`。新题材Flash试写冻结于`runs/detailed-transfer-pilot-01/inputs.json`，首次全部因网络/TLS失败，0篇正文；本run未知费用预留0.196609元。候选还没有经过独立审阅或有效Writer迁移验证，不进入生产风格库。此前“暂不新增API花费”指纠偏文档/编写阶段；本次小试已按method-revision-17启动并在网络故障后停止。
+
+[详细候选阶段报告](https://www.feishu.cn/docx/IuP6d5X7oo8Ojix6FYDcD8zcnph)已发布并回读；内含两份可阅读的候选文档和本次传输失败说明。
+原文依据、题材变体和仍待修正的问题另见[飞书证据清单](https://www.feishu.cn/docx/D1UrdxE3xogLeoxsUjIc0qKonke)。
+
 状态（2026-10-21）：100元预算已批准。P1及P2单篇提取已完成，P2严格语义测量/P3严格证据聚合仍未通过。探索性P3候选已用于完成P5 60篇Flash生成；P4有20篇原文表层统计，语义收敛未证明。旧评分方法停止时全研究占用18.033171元含未知预留；新compact评分费用以账本为准。来源、失败、图表及飞书报告保留。
 
 本项目要回答：多篇文章能否比单篇文章更可靠地表示作者风格？增加样本后是否趋于稳定？这种稳定是否仍保留作者差异，并改善新主题写作？
