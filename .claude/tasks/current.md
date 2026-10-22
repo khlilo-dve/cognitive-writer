@@ -2,6 +2,7 @@
 
 ## 2026-10-23 两份详细候选与新题材小试
 
+- 本次续做先做无密钥探针：MiMo端点在WSL和Windows均TLS握手失败；WSL到飞书可达。无新增模型请求/费用。`runs/detailed-transfer-pilot-01/interpretation-plan.md`已在0篇正文状态下冻结读稿口径；见`validation/endpoint-probe-2026-10-23.json`与journal E0045。当前继续做离线审阅，端点连通后才有界恢复，不重复试错付费调用。
 - 已读两作者各10篇discovery原文，参考`styles/孙割.md`的说明颗粒度但不复刻格式/写法，写出`runs/detailed-executable-style-01/profiles/`两份可给Writer直接使用的详细候选；证据、变体和未独立审阅事项见同run的`evidence-review.md`，状态`draft_pending_independent_review`。没有新付费模型参与提取，生产`styles/`不变。
 - 两份候选的飞书文档及清晰阶段报告已创建、回读：https://www.feishu.cn/docx/IuP6d5X7oo8Ojix6FYDcD8zcnph 。
 - method-revision-17冻结两新题材、两作者×详细聚合/单篇/中性各一稿共12项，同一Flash流程、无文章字数区间、run上限1元。`detailed-transfer-pilot-01`首次12个大纲请求均TLS/网络层中断，0篇正文；本run未知费用预留0.196609元，累计账本占用19.624939元（非实付）。已停自动重试，不得把缺失解释成风格质量。诊断见该run的`transport-diagnosis.md`。

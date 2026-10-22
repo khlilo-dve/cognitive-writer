@@ -1,0 +1,31 @@
+{
+  "date_local": "2026-10-23",
+  "context": "Read-only connectivity check before any paid resume of detailed-transfer-pilot-01",
+  "checks": [
+    {
+      "environment": "WSL Ubuntu",
+      "target": "https://api.xiaomimimo.com/v1/chat/completions",
+      "method": "unauthenticated HEAD",
+      "result": "curl exit 35: OpenSSL SSL_connect: SSL_ERROR_SYSCALL"
+    },
+    {
+      "environment": "Windows host",
+      "target": "https://api.xiaomimimo.com/v1/chat/completions",
+      "method": "unauthenticated HEAD",
+      "result": "curl.exe exit 35: schannel failed to receive handshake"
+    },
+    {
+      "environment": "WSL Ubuntu",
+      "target": "https://www.feishu.cn",
+      "method": "unauthenticated HEAD",
+      "result": "HTTP 302, TLS connection succeeded"
+    }
+  ],
+  "model_requests": 0,
+  "usage_ledger_change": 0,
+  "official_documentation_check": {
+    "url": "https://mimo.mi.com/docs/zh-CN/quick-start/summary/first-api-call",
+    "observed": "Official quick start still lists https://api.xiaomimimo.com/v1 for pay-as-you-go OpenAI-compatible requests; Token Plan uses a separate URL and key. This check does not explain the local TLS failure."
+  },
+  "inference_limit": "The MiMo endpoint was unreachable from both local environments during these checks; this does not identify the provider, network, or device as the cause."
+}

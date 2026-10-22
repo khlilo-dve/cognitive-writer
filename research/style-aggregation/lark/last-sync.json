@@ -3,8 +3,6 @@
   "base": "Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
   "manifest": "None",
   "run": "None",
-  "runs": [
-    "research/style-aggregation/runs/detailed-transfer-pilot-01"
-  ],
-  "record_count": 118
+  "runs": [],
+  "record_count": 119
 }

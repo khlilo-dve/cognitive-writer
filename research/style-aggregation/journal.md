@@ -252,3 +252,11 @@ pragmatic-reference-reuse-01在真实稿件上出现理由缺失、分数/违规
 ## E0044 · 2026-10-23 · 新题材Flash试写未接通（engineering_failure）
 
 method-revision-17在调用前冻结12稿/两题、相同Writer、无文章字数区间，run上限1元。`detailed-transfer-pilot-01`首次12个outline请求全部网络中断，0篇正文、0有效回执；无密钥TLS探针出现`SSL_ERROR_SYSCALL`。本run未知预留0.196609元，全研究账本占用19.624939元含未知预留，非实付账单。原summary、输入及诊断保留；不把传输失败算Style失败，不盲目反复重试。先完成离线审阅，端点可达后再有界恢复同一run。
+
+## E0045 · 2026-10-23 · 续做时端点仍不可达，先冻结读稿口径（engineering_failure / method_change）
+
+续做前只做无密钥HEAD：WSL到MiMo端点OpenSSL握手失败，Windows主机Schannel也失败；WSL到飞书HTTP 302成功。证据见`validation/endpoint-probe-2026-10-23.json`。这说明当前本地访问MiMo端点仍不可用，具体原因未确定；本次没有模型请求、账本没有新增占用。`detailed-transfer-pilot-01/interpretation-plan.md`在0篇正文状态下冻结：逐稿看任务事实、表达机制、模仿失真和自然完整度，写明两位作者在两题上的条件性预期与误用；不使用字数达标率和自动裁判总分。待端点可达再有界恢复原run。
+
+官方MiMo快速接入文档仍列出按量API的同一`api.xiaomimimo.com/v1`地址，并说明Token Plan另用专属URL与Key；所以没有依据把研究请求改到套餐端点。文档链接与本地探针见validation记录，TLS失败的具体原因仍未确定。
+
+离线核对生成产物结构时发现共用生成函数仍会附历史600–900区间诊断；本run无字数目标，故仅对新试写产物将该字段置为null。模型请求和冻结输入不变，尚无成功正文受影响。该修正让旧长度政策不再在新实验里被误读成质量门槛。

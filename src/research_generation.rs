@@ -235,7 +235,9 @@ pub(crate) async fn run_frozen(run: &str, plan_path: &str) -> Result<(), AppErro
         pending.spawn(async move {
             let result = generate(&store, job.clone()).await;
             match result {
-                Ok(article) => {
+                Ok(mut article) => {
+                    // This pilot has no target length; the historical 600–900 check is inapplicable.
+                    article.length = Value::Null;
                     write_json(&store.root.join(format!("articles/{}.json", job.id)), &article)?;
                     crate::io::write_file_atomic(
                         &store.root.join(format!("articles/{}.md", job.id)),
