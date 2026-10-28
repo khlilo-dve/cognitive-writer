@@ -1,11 +1,32 @@
 {
   "entries": {
+    "detailed-transfer-pilot-01/article-001-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 22782,
+      "actual_micro": 4589,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-001-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
       "reserved_micro": 20366,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "detailed-transfer-pilot-01/article-001-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 20366,
+      "actual_micro": 3506,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-002-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 20330,
+      "actual_micro": 3892,
+      "state": "settled"
     },
     "detailed-transfer-pilot-01/article-002-outline": {
       "run_id": "detailed-transfer-pilot-01",
@@ -14,12 +35,40 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "detailed-transfer-pilot-01/article-002-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 17914,
+      "actual_micro": 3134,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-003-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 13684,
+      "actual_micro": 2851,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-003-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
       "reserved_micro": 11188,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "detailed-transfer-pilot-01/article-003-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 11188,
+      "actual_micro": 1515,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-004-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 24527,
+      "actual_micro": 5380,
+      "state": "settled"
     },
     "detailed-transfer-pilot-01/article-004-outline": {
       "run_id": "detailed-transfer-pilot-01",
@@ -28,12 +77,40 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "detailed-transfer-pilot-01/article-004-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 20402,
+      "actual_micro": 4273,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-005-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 20494,
+      "actual_micro": 3620,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-005-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
       "reserved_micro": 18317,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "detailed-transfer-pilot-01/article-005-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 18317,
+      "actual_micro": 3152,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-006-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 13729,
+      "actual_micro": 1936,
+      "state": "settled"
     },
     "detailed-transfer-pilot-01/article-006-outline": {
       "run_id": "detailed-transfer-pilot-01",
@@ -42,12 +119,40 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "detailed-transfer-pilot-01/article-006-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 11224,
+      "actual_micro": 1414,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-007-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 22921,
+      "actual_micro": 4845,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-007-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
       "reserved_micro": 20445,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "detailed-transfer-pilot-01/article-007-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 20445,
+      "actual_micro": 3634,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-008-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 18594,
+      "actual_micro": 3239,
+      "state": "settled"
     },
     "detailed-transfer-pilot-01/article-008-outline": {
       "run_id": "detailed-transfer-pilot-01",
@@ -56,12 +161,40 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "detailed-transfer-pilot-01/article-008-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 16884,
+      "actual_micro": 2705,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-009-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 13398,
+      "actual_micro": 2189,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-009-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
       "reserved_micro": 11188,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "detailed-transfer-pilot-01/article-009-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 11188,
+      "actual_micro": 1427,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-010-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 22451,
+      "actual_micro": 3683,
+      "state": "settled"
     },
     "detailed-transfer-pilot-01/article-010-outline": {
       "run_id": "detailed-transfer-pilot-01",
@@ -70,6 +203,20 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "detailed-transfer-pilot-01/article-010-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 20481,
+      "actual_micro": 3271,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-011-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 19236,
+      "actual_micro": 3042,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-011-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
@@ -77,12 +224,33 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "detailed-transfer-pilot-01/article-011-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 16976,
+      "actual_micro": 2941,
+      "state": "settled"
+    },
+    "detailed-transfer-pilot-01/article-012-body": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 13496,
+      "actual_micro": 1726,
+      "state": "settled"
+    },
     "detailed-transfer-pilot-01/article-012-outline": {
       "run_id": "detailed-transfer-pilot-01",
       "phase": "full",
       "reserved_micro": 11224,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "detailed-transfer-pilot-01/article-012-outline/attempt-2": {
+      "run_id": "detailed-transfer-pilot-01",
+      "phase": "full",
+      "reserved_micro": 11224,
+      "actual_micro": 1286,
+      "state": "settled"
     },
     "p1-detailed-pilot-01/wxb-01-direct_0": {
       "run_id": "p1-detailed-pilot-01",
@@ -4401,6 +4569,279 @@
       "phase": "full",
       "reserved_micro": 223389,
       "actual_micro": 30720,
+      "state": "settled"
+    },
+    "voice-learning-editor-01/wxb-k1-0": {
+      "run_id": "voice-learning-editor-01",
+      "phase": "full",
+      "reserved_micro": 136377,
+      "actual_micro": 21057,
+      "state": "settled"
+    },
+    "voice-learning-editor-01/wxb-k2-0": {
+      "run_id": "voice-learning-editor-01",
+      "phase": "full",
+      "reserved_micro": 163644,
+      "actual_micro": 35118,
+      "state": "settled"
+    },
+    "voice-learning-editor-01/wxb-k2-1": {
+      "run_id": "voice-learning-editor-01",
+      "phase": "full",
+      "reserved_micro": 205320,
+      "actual_micro": 45546,
+      "state": "settled"
+    },
+    "voice-learning-editor-01/wzq-k1-0": {
+      "run_id": "voice-learning-editor-01",
+      "phase": "full",
+      "reserved_micro": 131160,
+      "actual_micro": 18039,
+      "state": "settled"
+    },
+    "voice-learning-editor-01/wzq-k2-0": {
+      "run_id": "voice-learning-editor-01",
+      "phase": "full",
+      "reserved_micro": 152610,
+      "actual_micro": 30897,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wxb-02-0": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 123249,
+      "actual_micro": 16299,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wxb-03-0": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 135360,
+      "actual_micro": 15705,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wxb-03-1": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 154617,
+      "actual_micro": 19929,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wxb-08-0": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 125871,
+      "actual_micro": 8172,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wxb-08-1": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 131883,
+      "actual_micro": 11502,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wzq-02-0": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 123717,
+      "actual_micro": 6510,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wzq-02-1": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 126291,
+      "actual_micro": 16308,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wzq-04-0": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 125880,
+      "actual_micro": 10662,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wzq-04-1": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 136692,
+      "actual_micro": 13413,
+      "state": "settled"
+    },
+    "voice-learning-incremental-01/wzq-09-0": {
+      "run_id": "voice-learning-incremental-01",
+      "phase": "full",
+      "reserved_micro": 131655,
+      "actual_micro": 18813,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wxb-k1-0": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 127551,
+      "actual_micro": 16176,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wxb-k1-1": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 148623,
+      "actual_micro": 22326,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wxb-k2-0": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 157035,
+      "actual_micro": 25176,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wxb-k2-1": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 184032,
+      "actual_micro": 31557,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wxb-k3-0": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 177030,
+      "actual_micro": 37059,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wzq-k1-0": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 128019,
+      "actual_micro": 20577,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wzq-k1-1": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 157419,
+      "actual_micro": 27885,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wzq-k2-0": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 148023,
+      "actual_micro": 26850,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wzq-k2-1": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 179097,
+      "actual_micro": 34569,
+      "state": "settled"
+    },
+    "voice-learning-pilot-01/wzq-k3-0": {
+      "run_id": "voice-learning-pilot-01",
+      "phase": "full",
+      "reserved_micro": 173802,
+      "actual_micro": 30102,
+      "state": "settled"
+    },
+    "voice-learning-prose-01/wxb-k1-0": {
+      "run_id": "voice-learning-prose-01",
+      "phase": "full",
+      "reserved_micro": 125289,
+      "actual_micro": 13266,
+      "state": "settled"
+    },
+    "voice-learning-prose-01/wxb-k2-0": {
+      "run_id": "voice-learning-prose-01",
+      "phase": "full",
+      "reserved_micro": 154773,
+      "actual_micro": 20958,
+      "state": "settled"
+    },
+    "voice-learning-prose-01/wxb-k2-1": {
+      "run_id": "voice-learning-prose-01",
+      "phase": "full",
+      "reserved_micro": 174972,
+      "actual_micro": 24495,
+      "state": "settled"
+    },
+    "voice-learning-prose-01/wzq-k1-0": {
+      "run_id": "voice-learning-prose-01",
+      "phase": "full",
+      "reserved_micro": 125757,
+      "actual_micro": 12537,
+      "state": "settled"
+    },
+    "voice-learning-prose-01/wzq-k2-0": {
+      "run_id": "voice-learning-prose-01",
+      "phase": "full",
+      "reserved_micro": 145761,
+      "actual_micro": 18858,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wxb-02-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 122244,
+      "actual_micro": 7116,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wxb-03-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 134355,
+      "actual_micro": 9918,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wxb-k1-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 116181,
+      "actual_micro": 30672,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wxb-k2-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 154101,
+      "actual_micro": 88563,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wzq-02-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 122712,
+      "actual_micro": 6489,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wzq-02-1": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 125553,
+      "actual_micro": 7260,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wzq-04-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 124875,
+      "actual_micro": 7647,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wzq-k1-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 112593,
+      "actual_micro": 30645,
+      "state": "settled"
+    },
+    "voice-learning-vertical-01/wzq-k2-0": {
+      "run_id": "voice-learning-vertical-01",
+      "phase": "full",
+      "reserved_micro": 143436,
+      "actual_micro": 68580,
       "state": "settled"
     }
   }

@@ -1,0 +1,14 @@
+{
+  "decision": "requires_content_separation_before_writer",
+  "review_type": "implementer_qualitative_review_not_independent_human_review",
+  "structural_complete": 4,
+  "run_occupied_cny": 0.090114,
+  "reason": "直接读原文的长篇说明比卡片目录更能保留长段、推理和题材差异；两篇版出现有用的组织路线。但单篇版把医院、手术及源文短语、物件例子带入Writer说明，短词及语义改写绕过了连续片段检查。",
+  "examples": [
+    {"artifact":"wxb-k1","issue":"把病人、手术室、围观和原文类比具体写入说明；把样文事件链写成可迁移固定路径。"},
+    {"artifact":"wzq-k1","issue":"保留原文抒情短句和带雨水的花等内容例子；整体上正确指出长段铺陈，仍须剥离源文内容。"},
+    {"artifact":"wxb-k2","progress":"区分亲历叙事与概念论证，允许长句长段与反例推演；仍含源文短语和局部量化路线。"},
+    {"artifact":"wzq-k2","progress":"区分记忆观察与工作论证两条组织路线，未强压成短句；工作与编辑的条件仍需抽象。"}
+  ],
+  "next_step":"把全文分析当内部材料，以独立编译步骤剥离源文案例、保留条件机制，再对四条单篇/两篇路径做新题材写作验证。"
+}

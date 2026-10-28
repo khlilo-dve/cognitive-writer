@@ -12,6 +12,11 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["voice-learning-pilot",run]=>crate::research_voice_learning::run(run).await,
+        ["voice-learning-incremental",run]=>crate::research_voice_learning_v2::run(run).await,
+        ["voice-learning-vertical",run]=>crate::research_voice_learning_v3::run(run).await,
+        ["voice-editor",run]=>crate::research_voice_editor::run(run).await,
+        ["voice-prose",run]=>crate::research_voice_prose::run(run).await,
         ["pragmatic-profiles",run]=>crate::research_pragmatic_profile::run(run).await,
         ["ending-audit",run]=>crate::research_ending_audit::run(run).await,
         ["profile-audit",run]=>crate::research_profile_audit::run(run).await,

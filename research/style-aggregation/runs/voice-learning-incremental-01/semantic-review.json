@@ -1,0 +1,9 @@
+{
+  "decision": "reject_for_merge_dependency",
+  "review_type": "structural_failure_before_semantic_review",
+  "local_complete": 4,
+  "local_failed": 2,
+  "merge_started": false,
+  "reason": "逐篇卡片阶段的复杂JSON仍不稳定；两篇在一次修复后分别出现重复quote字段和无法逐字定位的引文，按依赖规则未进入增量综合。",
+  "next_step": "缩小逐篇输出，只保留抽象操作与一段短引文；先做两作者各两篇的完整增量竖切，成功后再扩。"
+}

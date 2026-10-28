@@ -2,76 +2,133 @@
   "expected": 12,
   "rows": [
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_xiaobo",
       "id": "article-001",
-      "status": "failed"
+      "method": "aggregate",
+      "phase": "development",
+      "status": "complete",
+      "topic": "lost_cards"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_xiaobo",
       "id": "article-002",
-      "status": "failed"
+      "method": "single",
+      "phase": "development",
+      "status": "complete",
+      "topic": "lost_cards"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_xiaobo",
       "id": "article-003",
-      "status": "failed"
+      "method": "neutral",
+      "phase": "development",
+      "status": "complete",
+      "topic": "lost_cards"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_xiaobo",
       "id": "article-004",
-      "status": "failed"
+      "method": "aggregate",
+      "phase": "development",
+      "status": "complete",
+      "topic": "seed_box"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_xiaobo",
       "id": "article-005",
-      "status": "failed"
+      "method": "single",
+      "phase": "development",
+      "status": "complete",
+      "topic": "seed_box"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_xiaobo",
       "id": "article-006",
-      "status": "failed"
+      "method": "neutral",
+      "phase": "development",
+      "status": "complete",
+      "topic": "seed_box"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_zengqi",
       "id": "article-007",
-      "status": "failed"
+      "method": "aggregate",
+      "phase": "development",
+      "status": "complete",
+      "topic": "lost_cards"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_zengqi",
       "id": "article-008",
-      "status": "failed"
+      "method": "single",
+      "phase": "development",
+      "status": "complete",
+      "topic": "lost_cards"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_zengqi",
       "id": "article-009",
-      "status": "failed"
+      "method": "neutral",
+      "phase": "development",
+      "status": "complete",
+      "topic": "lost_cards"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_zengqi",
       "id": "article-010",
-      "status": "failed"
+      "method": "aggregate",
+      "phase": "development",
+      "status": "complete",
+      "topic": "seed_box"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_zengqi",
       "id": "article-011",
-      "status": "failed"
+      "method": "single",
+      "phase": "development",
+      "status": "complete",
+      "topic": "seed_box"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
+      "author": "wang_zengqi",
       "id": "article-012",
-      "status": "failed"
+      "method": "neutral",
+      "phase": "development",
+      "status": "complete",
+      "topic": "seed_box"
     }
   ],
   "stage": "detailed_style_transfer_pilot",
-  "status": "partial",
+  "status": "complete",
   "usage": {
     "entries": {
+      "detailed-transfer-pilot-01/article-001-body": {
+        "actual_micro": 4589,
+        "phase": "full",
+        "reserved_micro": 22782,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-001-outline": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 20366,
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
+      },
+      "detailed-transfer-pilot-01/article-001-outline/attempt-2": {
+        "actual_micro": 3506,
+        "phase": "full",
+        "reserved_micro": 20366,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-002-body": {
+        "actual_micro": 3892,
+        "phase": "full",
+        "reserved_micro": 20330,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
       },
       "detailed-transfer-pilot-01/article-002-outline": {
         "actual_micro": null,
@@ -80,12 +137,40 @@
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
       },
+      "detailed-transfer-pilot-01/article-002-outline/attempt-2": {
+        "actual_micro": 3134,
+        "phase": "full",
+        "reserved_micro": 17914,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-003-body": {
+        "actual_micro": 2851,
+        "phase": "full",
+        "reserved_micro": 13684,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-003-outline": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 11188,
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
+      },
+      "detailed-transfer-pilot-01/article-003-outline/attempt-2": {
+        "actual_micro": 1515,
+        "phase": "full",
+        "reserved_micro": 11188,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-004-body": {
+        "actual_micro": 5380,
+        "phase": "full",
+        "reserved_micro": 24527,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
       },
       "detailed-transfer-pilot-01/article-004-outline": {
         "actual_micro": null,
@@ -94,12 +179,40 @@
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
       },
+      "detailed-transfer-pilot-01/article-004-outline/attempt-2": {
+        "actual_micro": 4273,
+        "phase": "full",
+        "reserved_micro": 20402,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-005-body": {
+        "actual_micro": 3620,
+        "phase": "full",
+        "reserved_micro": 20494,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-005-outline": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 18317,
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
+      },
+      "detailed-transfer-pilot-01/article-005-outline/attempt-2": {
+        "actual_micro": 3152,
+        "phase": "full",
+        "reserved_micro": 18317,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-006-body": {
+        "actual_micro": 1936,
+        "phase": "full",
+        "reserved_micro": 13729,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
       },
       "detailed-transfer-pilot-01/article-006-outline": {
         "actual_micro": null,
@@ -108,12 +221,40 @@
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
       },
+      "detailed-transfer-pilot-01/article-006-outline/attempt-2": {
+        "actual_micro": 1414,
+        "phase": "full",
+        "reserved_micro": 11224,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-007-body": {
+        "actual_micro": 4845,
+        "phase": "full",
+        "reserved_micro": 22921,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-007-outline": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 20445,
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
+      },
+      "detailed-transfer-pilot-01/article-007-outline/attempt-2": {
+        "actual_micro": 3634,
+        "phase": "full",
+        "reserved_micro": 20445,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-008-body": {
+        "actual_micro": 3239,
+        "phase": "full",
+        "reserved_micro": 18594,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
       },
       "detailed-transfer-pilot-01/article-008-outline": {
         "actual_micro": null,
@@ -122,12 +263,40 @@
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
       },
+      "detailed-transfer-pilot-01/article-008-outline/attempt-2": {
+        "actual_micro": 2705,
+        "phase": "full",
+        "reserved_micro": 16884,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-009-body": {
+        "actual_micro": 2189,
+        "phase": "full",
+        "reserved_micro": 13398,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-009-outline": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 11188,
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
+      },
+      "detailed-transfer-pilot-01/article-009-outline/attempt-2": {
+        "actual_micro": 1427,
+        "phase": "full",
+        "reserved_micro": 11188,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-010-body": {
+        "actual_micro": 3683,
+        "phase": "full",
+        "reserved_micro": 22451,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
       },
       "detailed-transfer-pilot-01/article-010-outline": {
         "actual_micro": null,
@@ -136,6 +305,20 @@
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
       },
+      "detailed-transfer-pilot-01/article-010-outline/attempt-2": {
+        "actual_micro": 3271,
+        "phase": "full",
+        "reserved_micro": 20481,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-011-body": {
+        "actual_micro": 3042,
+        "phase": "full",
+        "reserved_micro": 19236,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-011-outline": {
         "actual_micro": null,
         "phase": "full",
@@ -143,12 +326,33 @@
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
       },
+      "detailed-transfer-pilot-01/article-011-outline/attempt-2": {
+        "actual_micro": 2941,
+        "phase": "full",
+        "reserved_micro": 16976,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
+      "detailed-transfer-pilot-01/article-012-body": {
+        "actual_micro": 1726,
+        "phase": "full",
+        "reserved_micro": 13496,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
+      },
       "detailed-transfer-pilot-01/article-012-outline": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 11224,
         "run_id": "detailed-transfer-pilot-01",
         "state": "reserved_or_uncertain"
+      },
+      "detailed-transfer-pilot-01/article-012-outline/attempt-2": {
+        "actual_micro": 1286,
+        "phase": "full",
+        "reserved_micro": 11224,
+        "run_id": "detailed-transfer-pilot-01",
+        "state": "settled"
       },
       "p1-detailed-pilot-01/wxb-01-direct_0": {
         "actual_micro": 21390,
@@ -4470,8 +4674,8 @@
         "state": "settled"
       }
     },
-    "occupied_cny": 19.624939,
+    "occupied_cny": 19.698189,
     "pricing": "official domestic cache-miss upper estimate",
-    "run_occupied_cny": 0.196609
+    "run_occupied_cny": 0.269859
   }
 }

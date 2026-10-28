@@ -1,0 +1,14 @@
+{
+  "decision": "reject_for_product_keep_editor_candidates",
+  "review_type": "implementer_qualitative_review_not_independent_human_review",
+  "structural_complete": 3,
+  "structural_failed": 1,
+  "run_occupied_cny": 0.150657,
+  "reason": "编辑阶段把部分微动作组织成上位机制，但王小波两篇稿在一次修复后仍写出无依据的每篇使用次数；王小波单篇稿把单篇观察称为最稳定底轴。汪曾祺两篇稿有更清楚的整体组织及一条暂缓规则，但仍未独立审查原文语义或新题材执行。",
+  "examples": [
+    {"artifact": "wxb-k1", "issue": "结构完成、7条规则归入4组，但单篇观察被称为最稳定底轴，仍有一篇出现一次就够定调的无依据强度建议。"},
+    {"artifact": "wxb-k2", "issue": "首次响应含一到两次使用配额，修复后仍未通过Writer文件的原文泄漏/作者标签/配额综合门槛；原始响应保留。"},
+    {"artifact": "wzq-k2", "issue": "10条旧规则归为5组，1条明确暂缓；文档比原稿更可读，但仍需核对短句/感叹等概括是否代表两篇共同声音。"}
+  ],
+  "next_step": "停止把结构通过等同采用；独立核查整体声音与原文语义，再用最小新题材写作检验是否自然且守住事实。"
+}

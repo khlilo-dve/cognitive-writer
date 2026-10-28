@@ -1,6 +1,6 @@
 # 多文章风格研究：过程与结果日志
 
-当前产品目标以 [单篇与多篇稳定学习合同](product-goal-2026-10-23.md) 为准；E0001 的“哪条路径更好”是当时的历史问题，不是今天的成功标准。最新修正见 E0046。
+当前产品目标以 [单篇与多篇稳定学习合同](product-goal-2026-10-23.md) 为准；E0001 的“哪条路径更好”是当时的历史问题，不是今天的成功标准。最新事件在文末，方法与运行状态须以对应run核对。
 
 按事件追加，旧结论保留；被后续证据推翻时增加更正条目并互相链接，不静默改写。突破、失败和没有改善使用相同记录粒度。日常读文件、git 操作不用逐条记。
 
@@ -266,3 +266,39 @@ method-revision-17在调用前冻结12稿/两题、相同Writer、无文章字�
 ## E0046 · 2026-10-23 · 目标改为稳定的单篇与多篇风格学习系统（product_goal_change）
 
 用户进一步明确：实验是为风格学习功能服务，功能同时包括单篇和多篇文章；目的不是找出哪个更好，而是研究并实现稳定系统。核对产品代码后，单篇已有 URL 提取、命名保存与 Writer 读取的部分流程，多篇仍主要是研究候选，没有正式学习入口、增量版本与回看。新产品合同见 `product-goal-2026-10-23.md`，飞书阅读版已回读：https://www.feishu.cn/docx/DjKVdwu91onhHRxQ0tEc3lAhnCg 。分别检验流程稳定、表征可信、增量合理及新题材执行；S1 单篇合同、S2 两篇 URL 最小多篇链与追加、S3 各自用稿纠错、S4 CLI/REPL 整链验收。同题对照仅用于诊断帮助与误伤，旧 P0–P6 胜负问题留历史。冻结 12 稿输入和 0 篇有效正文事实不变；本次无模型请求、无新增费用，账本仍占用 19.624939 元含未知预留。下一步先做单篇入口的质量与流程核查，并把多篇竖切具体化。
+
+## E0047 · 2026-10-23至24 · 冻结12稿恢复成功，事实扩编仍严重（limited / negative）
+
+无密钥端点探针从TLS失败恢复为HTTP401后，原样恢复 `detailed-transfer-pilot-01`；12/12篇成稿、同Flash流程，无新方法改动。账本本run占用0.269859元、全研究19.698189元，含历史未知预留。逐稿质性报告见 `reports/detailed-transfer-pilot-01-readout.md`：详细多篇稿能体现部分写作动作，但多篇与无风格稿都出现未提供场景、物件与处理步骤；中性种子稿还把可选留下纸袋改成必须交换。不能将网络恢复等同风格学习通过，也不能把所有事实失真归咎于Style。
+
+## E0048 · 2026-10-24 · 直接综合1→2→3篇失败（evaluation_invalid）
+
+`method-revision-18.md` 首次让同一Pro提示词处理两作者各1/2/3篇冻结原文，5组结构通过、王小波2篇组修复后仍有引文无法逐字定位；run占用0.272277元、全研究19.970466元含未知预留。更重要的是通过组的Writer文件直接搬入原文故事、短句与口头词，新增文章后的旧规则去留不明。审阅记录 `voice-learning-pilot-01/semantic-review.json` 判定 `reject_for_product_and_writer`，新旧原始产物全保留；见 `reports/voice-learning-v1-2026-10-24.md`。引文存在不等于规则语义成立。
+
+## E0049 · 2026-10-24 · 逐篇卡片与增量综合v2启动（method_change / running）
+
+用户要求优先做稳学习核心；上传文件、URL、1–10篇选择及异常追问后置，届时可单独委派。`method-revision-19.md` 先逐篇获取准确引文与局部操作，再按1→2→3篇编写Style，并强制逐条说明旧规则保留/修正/撤销；明显原文片段不得进入Writer文件。新run `voice-learning-incremental-01` 使用Pro、单run上限6元，属于开发实验，尚无质量结论。需核对run结果和人工语义审读，再决定修订或扩大。
+
+## E0050 · 2026-10-24 · v2卡片结构失败，未启动综合（evaluation_invalid）
+
+`voice-learning-incremental-01` 六篇逐篇观察中四篇完成、两篇一次修复后仍失败：`wxb-08` 重复 JSON `quote` 字段，`wzq-04` 卡片c5引文无法定位。按依赖规则0次综合、0份Style；run占用0.137313元、全研究20.107779元含未知预留。`semantic-review.json` 判定 `reject_for_merge_dependency`，四篇有效卡片保留但未语义验收。原因与下一版方案见 `reports/voice-learning-v2-2026-10-24.md`：缩小逐篇输出，再以两作者各两篇先做完整竖切。
+
+## E0051 · 2026-10-26 · 两篇增量链工程完整但Writer文件机械化（limited / evaluation_invalid）
+
+`voice-learning-vertical-01` 两作者各两篇，4/4逐篇短引文、4/4单篇/两篇Style均结构完成，旧规则有显式去留；run占用0.256890元、全研究20.364669元含未知预留。实现者审读发现Writer说明把局部卡片逐条展开：王小波7→14项，汪曾祺5→10项，并出现“一篇一到两次”“一次左右”等无依据配额。`semantic-review.json` 判定 `reject_for_writer_use_keep_evidence_lineage`：审阅层可复用，Writer文件不可采用。通俗报告见 `reports/voice-learning-v3-2026-10-26.md`。
+
+## E0052 · 2026-10-26 · 上位声音编辑实验启动（method_change / running）
+
+`method-revision-21.md` 在v3全部终稿出现前冻结：不再让Writer文件逐条复述证据卡，编辑层提炼能组织全文的机制；每条旧规则仍须在审阅记录里说明归宿，原文片段与无依据配额继续拦截。`voice-learning-editor-01` 使用Pro结构化模式、run最高2元，已启动；尚无质量结论。正式学习默认值和生产`styles/`不变。
+
+## E0053 · 2026-10-26 · 编辑层局部改善但未过产品门槛（evaluation_invalid / limited）
+
+`voice-learning-editor-01` 四任务3结构完成、1失败，本run占用0.150657元、全研究20.515326元含未知预留。王小波单篇稿由7条归为4组却把单篇说成“最稳定”，两篇稿对“一到两次”无依据配额修复后仍失败；汪曾祺两篇稿将10条归5组、1条暂缓，可读性改善但未独立原文语义审阅。`semantic-review.json`判定`reject_for_product_keep_editor_candidates`，通俗报告见`reports/voice-editor-2026-10-26.md`。下一步转向原文语义与Writer执行，不继续把结构通过当采用。
+
+## E0054 · 2026-10-26 · 回原文发现上位概括仍失真（semantic_failure / method_change）
+
+直接核对两作者各两篇原文与v3/editor候选，发现短句和短议论概括不适用于汪曾祺的长段风物描写与文化评论；把王小波说成“不追求严密论证”也无法涵盖《格调》的量表、分类、比例推演。单篇“最稳定底轴”证据语气越界。具体支持、反例及收窄方向见`reports/voice-learning-semantic-audit-2026-10-26.md`。这说明把卡片分组仍不等于学到声音；下一方法必须在发布Writer文件前主动寻找原文反例和题材条件，不扩大文章数或宣布功能完成。本次离线审读0API费用。面向用户的完整阶段报告已发布并回读：https://www.feishu.cn/docx/ZhK0dW1GfoW61Sxxt9lc7bgxnFe 。
+
+## E0055 · 2026-10-28 · 长篇分析保留整体声音但泄漏源文（limited / discovery）
+
+method-revision-22对应`voice-learning-prose-01`已4/4完成，run占用0.090114元、全研究20.605440元含未知预留。两篇稿开始保留叙事/论证与题材变体，避免短句短议论的一刀切；单篇稿仍把源文场景、物件、短句和事件链写入说明，绕过长连续片段检查。语义状态`requires_content_separation_before_writer`，报告见`reports/voice-prose-2026-10-28.md`。下一步独立剥离内容再验证Writer执行，不把本轮长篇分析直接当执行Style。

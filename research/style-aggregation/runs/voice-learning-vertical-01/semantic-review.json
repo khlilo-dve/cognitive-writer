@@ -1,0 +1,15 @@
+{
+  "decision": "reject_for_writer_use_keep_evidence_lineage",
+  "review_type": "implementer_qualitative_review_not_independent_human_review",
+  "structural_status": "complete",
+  "local_observations": "4/4",
+  "style_versions": "4/4",
+  "run_occupied_cny": 0.25689,
+  "reason": "逐篇短引文、原文片段拦截和旧规则变更链已可复核，但给Writer的Style把观察卡逐条扩成动作清单；增加第二篇时王小波7项变14项、汪曾祺5项变10项，还出现没有原文依据的每篇使用次数建议。整体声音和机制层次不够清楚。",
+  "examples": [
+    {"artifact": "wxb-k1", "issue": "单篇说明列出七项微动作，并建议现场设问一篇使用一到两次，属于未证明的配额。"},
+    {"artifact": "wxb-k2", "issue": "第二篇使规则增至十四项；七条旧规则都有保留/修正理由，但多数局部卡片仍进入Writer正文。"},
+    {"artifact": "wzq-k2", "issue": "两篇说明列十项动作，并建议括号玩笑一篇用一次左右；这种配额不是稳定风格机制。"}
+  ],
+  "next_step": "证据与旧规则去留保存在审阅层，另做上位声音编辑；编辑稿仍须原文审读与新题材验证。"
+}

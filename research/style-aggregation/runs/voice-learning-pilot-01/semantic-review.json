@@ -1,0 +1,14 @@
+{
+  "decision": "reject_for_product_and_writer",
+  "review_type": "implementation_readout_not_independent_human_review",
+  "completed": 5,
+  "failed": 1,
+  "reason": "逐字证据存在不等于规则语义正确；一轮直接综合把原文例子和口头词放入 Writer 文件，并在增加样本后出现更短、更窄的概括。",
+  "examples": [
+    {"artifact": "wxb-k2", "issue": "两次响应后机制4的引文仍无法在对应原文逐字定位，结构验证失败。"},
+    {"artifact": "wxb-k3", "issue": "Writer 文件直接搬入原文中的病房、猪大肠、学习班等情节和多句原文；并要求开头必须给具体我的场景、至少一次对话或反问。"},
+    {"artifact": "wzq-k3", "issue": "Writer 文件直接列出原文口头语、物名和短句，还把判断接入方式写成固定连接词。"},
+    {"artifact": "wzq-k2-to-k3", "issue": "新增第三篇后输出变短，部分早先的具体观察没有解释去留；仅凭这次字数变化不能判断质量，但缺少可审阅的增量变化理由。"}
+  ],
+  "next_step": "新 run 先逐篇核引文，再增量综合并逐条解释旧规则去留；Writer 文件做原文片段泄漏检查，最后仍须人工语义审读。"
+}
