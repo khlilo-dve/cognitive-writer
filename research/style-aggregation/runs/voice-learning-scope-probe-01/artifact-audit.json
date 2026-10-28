@@ -1,0 +1,79 @@
+{
+  "status": "artifact_identity_verified",
+  "same_writer_fact_policy": true,
+  "semantic_quality": "separate_qualitative_review",
+  "rows": [
+    {
+      "id": "wxb-k1-before-map_drawer",
+      "body_sha256": "0d6c7cf92607472bf5c5e522596e79be8d8061885a7dd155cd4724115032389a"
+    },
+    {
+      "id": "wxb-k1-before-read_later",
+      "body_sha256": "0e0b4cb5fe07c405e115c664b8bcd6931e4734b0804ac266090167b16b9234b5"
+    },
+    {
+      "id": "wxb-k1-after-map_drawer",
+      "body_sha256": "34387686ed13bcf033538ba4edbcf40b9ff20a27eb97ddc7905d888e0cad3927"
+    },
+    {
+      "id": "wxb-k1-after-read_later",
+      "body_sha256": "96ca5947b130e1a2f65ffc9cd793cedc0cb32acae74dc877b3ec86f8718adf3e"
+    },
+    {
+      "id": "wxb-k10-before-map_drawer",
+      "body_sha256": "c7582197f3542ab7963ef4dd4392bf2401f4a79316f137139f13489906875680"
+    },
+    {
+      "id": "wxb-k10-before-read_later",
+      "body_sha256": "34745e7044e1a9605e42ac9823150e6d99d12a765caef26a5732a3a85b25f216"
+    },
+    {
+      "id": "wxb-k10-after-map_drawer",
+      "body_sha256": "a4113bbb4c504913dc36136b29f844554504e66f36d3c1fd0c9624a795a77101"
+    },
+    {
+      "id": "wxb-k10-after-read_later",
+      "body_sha256": "b54e23cd5d779549e94517e28dab4d08e37d6584fbd69171652ac4044b8566b0"
+    },
+    {
+      "id": "wzq-k1-before-map_drawer",
+      "body_sha256": "1b62918551b4567e1d93f74719b24aee93ed39b6819612770803d3c003823e29"
+    },
+    {
+      "id": "wzq-k1-before-read_later",
+      "body_sha256": "f7c83a11e859c8666fe566558968ae416b962a8b863d2c117064c0a6f0dd7f7c"
+    },
+    {
+      "id": "wzq-k1-after-map_drawer",
+      "body_sha256": "cc1b1af1d711007f0b586ab355f8e4254673ca0bad706760d12a1f3aac3d7ff9"
+    },
+    {
+      "id": "wzq-k1-after-read_later",
+      "body_sha256": "be8c611dc851569ed8fb70d51f8d8ee705d9712c697b63e1211d5a8742f2c8c2"
+    },
+    {
+      "id": "wzq-k10-before-map_drawer",
+      "body_sha256": "350ac36a2c8d788aa04c035898c222dde7564d200b3cca5b2d1da1065a8b25e6"
+    },
+    {
+      "id": "wzq-k10-before-read_later",
+      "body_sha256": "07b4e0341ffade4f77bd57da35bba9ba935f42b158428420b918abad11d5fe19"
+    },
+    {
+      "id": "wzq-k10-after-map_drawer",
+      "body_sha256": "8c045ea3ce124cf8bd8cf0d3e574c62ea9487daa122bd47b915b548d0d4dce59"
+    },
+    {
+      "id": "wzq-k10-after-read_later",
+      "body_sha256": "3a169908a28d22754dcab6aeed2f20c4e137486c05dccd3bd20d51d604de75df"
+    },
+    {
+      "id": "neutral-control-map_drawer",
+      "body_sha256": "57619fb723831b849a8398afdaffa9b09db4854813f973986768c8531501f930"
+    },
+    {
+      "id": "neutral-control-read_later",
+      "body_sha256": "670878afb636a0e98d3e959d38e5801b9d56e2db6674c2fcbb9a449a1c577b02"
+    }
+  ]
+}

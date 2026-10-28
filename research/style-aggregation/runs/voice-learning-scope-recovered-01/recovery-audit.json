@@ -1,0 +1,56 @@
+{
+  "ledger_after_sha256": "6874a519515ca74172e97e09969421988278faae685434b9beb6a7cf8d56f067",
+  "ledger_before_sha256": "6874a519515ca74172e97e09969421988278faae685434b9beb6a7cf8d56f067",
+  "new_requests": 0,
+  "reused": [
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wxb-k1-review.json",
+      "source_file_sha256": "54f77de77efe91b3ee604244e67ac704573d3d0872b57ae831f77a828dc4862a"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wxb-k1-revise-0.json",
+      "source_file_sha256": "fee0dbc1eee74594ef1f7e96dc3a4b31f7dea72b6e269f35568fde0e1493ab48"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wxb-k3-review.json",
+      "source_file_sha256": "74619b47a0cfe9a9924c322111bed7d9389ab4b6e252904b4840c1bc1cc5ad54"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wxb-k3-revise-0.json",
+      "source_file_sha256": "f3c3d2bf4b969a99c4e1d56cda0dfbd2ba7ffe141c6cf390fff4df5efaa7fdab"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wxb-k10-review.json",
+      "source_file_sha256": "1be978d11729f5301270f0019b4fcb55237f7f1e3c19c7156effa140c681a444"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wxb-k10-revise-0.json",
+      "source_file_sha256": "91dcfa2ca95ebf73e4a2128a5ef6a6bca49e493fe668584e7dfa6ef21fdb2d6b"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wzq-k1-review.json",
+      "source_file_sha256": "0c66f4204282b12a9a90f03f39f3ac7f11458e3d2edc75f3f0abffb6b4601e71"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wzq-k1-revise-0.json",
+      "source_file_sha256": "9f3524ae005b64e7717babdd03cf5db46056fcf173e0cf18c406ee829f8cf38f"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wzq-k3-review.json",
+      "source_file_sha256": "48bf137de64741b4060714ef5708b7c7ea1c617a65946a87de8c1ab12ab0822f"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wzq-k3-revise-0.json",
+      "source_file_sha256": "a6018dfc1f85d2c150d098e86bf9eec3e5b1e88100427ab356039ace076115ee"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wzq-k10-review.json",
+      "source_file_sha256": "09b7df0d7efbb1aeed56908559b4a8217e02179b94bf4e5d727615aaf0e5d1d9"
+    },
+    {
+      "source": "research/style-aggregation/runs/voice-learning-scope-01/requests/wzq-k10-revise-0.json",
+      "source_file_sha256": "b641c74f9565adca11488259313bf45f2b286ed795f369a884b6692df1e2a62d"
+    }
+  ],
+  "status": "passed"
+}

@@ -1,0 +1,2079 @@
+{
+  "status": "artifact_identity_verified",
+  "review_context": "sources_and_candidate_only",
+  "quote_note": "Unmatched spans can be suggestions, abbreviated or erroneous quotes; inspect in context.",
+  "semantic_quality": "requires_separate_reading",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "style_sha256": "7b93ea3517166eca7e5947012c08d174d1714e431a8d85838f95e46158d272a8",
+      "review_sha256": "5502258c45d5e561d3fa9b9d81520b1a1f290b869254d045362587f662ca888b",
+      "quotes": [
+        {
+          "text": "段落末尾几乎都以极短的句子收束",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "段末是否用短句落地",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我觉得有件事情最可恶……我必须说他们一句好话……但所有的刀口都开在了肚子上，这实属难能可贵",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "这位兄弟是个很豪迈的人，如果不是这样，也不会拿自己的内脏给别人学习战争",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我的病就是这么治的",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "再也不想吃了",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "在讽刺或结论需要落地的节点可使用极短句",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "按事件密度变化",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "背景性说明应以插入语、短括注的形式嵌在句中或句末……不展开",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "北京的大夫说，上一次虽把阑尾割掉了……人就完蛋了",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "现在的年轻人可能不知道，这后半句是毛主席语录",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "比喻要取自底层日常经验",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "像隔夜的茶水",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "卖炒肝、烩肠……洗猪大肠",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "必须来自底层/日常具体经验",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "本篇观察到的比喻取自市井饮食与劳作场景",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "具体、可感、不用抽象领域作比",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "最严肃的结论处是否有自我打断或自我设限",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "作为杂文的作者，把推论都写了出来，未免有直露之嫌，所以到此打住",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不管社会怎样，个人要为自己的行为负责",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "但我怀疑这么理解是不对的",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这个阶段几乎不给判断，只让事实自己呈现",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "判断要等事件讲完再出现",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "人的肠子和战争不是一码事，但这话就没人说了",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这实属难能可贵",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "说句实在话，住院对我的病情毫无帮助",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我觉得有件事情最可恶",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "怎么也比医院里这些大夫强",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "三种语用姿态可在句内叠加",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "必须用明确的标记句表明这是推断……'我认为''多半是''我不信他不知道'这类措辞，不得伪装成现场观察",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "必须用标记句",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "这就是说，他明知道自己在胡闹，但还要闹下去",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "必须在语言上把推断呈现为推断（标记句、并列推理或自反句皆可），不得写成感官目击",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我不信他不知道",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "埋下若干可被后文重新调用的细节……两个不同位置使用",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "总吃不饱，原来都漏掉了",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "哥们……人也越来越瘦",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "选择1–3个高辨识度意象做回扣",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "读者被设定为没有经历过那个情境、但能理解荒诞感的人",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "当时的年轻人可能不知道",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "部队骡马卫生员出身",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "蜜枣，其实是椰枣",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "需要被照顾背景信息",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "叙事句可以在某个时刻突然落到一句比喻性的描写上",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "像隔夜的茶水一样的颜色",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "用日常具体经验翻译非常规场景，兼带笑点与认知功能",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "比喻可在并置中生成笑点或不适感",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "一切人间的荒唐事……那个闹事的人是在借酒撒疯",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "原来都漏掉了",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "但作为杂文的作者，把推论都写了出来，未免有直露之嫌，所以到此打住",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不介入事件、只在语言层面标注自己的行文手法",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "把推论都写了出来",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "越乱，句子越长越密",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "上下一通紧倒",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "但我必须说他们一句好话……这实属难能可贵",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "语言上呈现为推断",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "允许长段、严密推理、明确情绪判断，不要为了'平衡'削平",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "有前文材料才做推理、不虚构来源",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "三种说话身份及其分工",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "铺垫与回扣是让长叙事不散的关键手段",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "读者……不需要被说教",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不管社会怎样，个人要为自己的行为负责",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不摆教导姿态",
+          "source_matches": [],
+          "candidate_match": false
+        }
+      ]
+    },
+    {
+      "id": "wxb-k3",
+      "style_sha256": "8fed15bd61833733cc97c1d5cd33ca7bb8056248dcde87219612d185fc88ecdb",
+      "review_sha256": "6b3e7082bcb4cc697881d240d44776665a379f4db78632ead73ee7f89dbcb9a6",
+      "quotes": [
+        {
+          "text": "不预设普遍成立",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "必须提炼出判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "共同要求：不停留在材料本身，必须提炼出判断。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "真不真的不要紧，要紧的是要有教育意义",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "把推论都写了出来，未免有直露之嫌，所以到此打住",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这三篇可见文本都以判断收束，若任务的材料与基调允许，宜提炼判断；若任务要求更开放的收束，不必强加结论",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不渲染恐怖或悲情",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不渲染恐怖或悲情。即便材料本身惊悚，也转为幽默或机制分析，不表廉价同情。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "必须指出，在非礼和豺狼之中做一选择是痛苦的",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "怪不得总吃不饱，原来都漏掉了",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这位兄弟是个很豪迈的人",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不表廉价同情",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "即便材料本身惊悚，也转为幽默或机制分析",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "悲情不铺陈渲染，可被幽默或机制分析接住，但不禁止克制的关切",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "口语、粗话、俏皮话用在判断或吐槽处，份量要少而准，不铺陈。",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "长段、直白、粗话、反讽都按需要出现一次或多次，也可不出现",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不铺陈、不堆砌",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "最低标准反过来夸",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "常识戳破：用最低标准反过来夸，或用最朴素的常识反问。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "但所有的刀口都开在了肚子上，这实属难能可贵",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "本篇个别手法，按材料需要时使用",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "可归纳统计的量度",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "解释要给出机制、原因或逻辑断裂处。可以技术化、分类化，甚至量化；越精确，反讽越强。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "大致可以有三到四种不同的说法",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "越精确，反讽越强",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "部分篇目会引入分类或尺度概念；是否使用取决于材料是否容许这种分析",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "荒唐或矛盾的材料 + 情理化的解释 + 越推越严的判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "亲历或阅历在文中是论点的引子，不是自传",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "一旦推论开始，叙事让位",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "时隔近三十年，忽然间我想起了住院看别人手术的事",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不得编造回忆、编造来源、假装听说过什么、补写对白来维持声音",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "判断之后故意回转叙事",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "住医院的事我还没写完呢",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "Where is the beef",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "可以包含自嘲、分类、量化、推演、举例、再解释，一气呵成",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "复述 + 评点",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "评点篇幅视材料而定",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "情绪是否克制而存在？有无失控成控诉、抒情、渲染？",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我是不能承认的",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "失控的抒情或控诉",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "是否给出了常识性的解释或机制分析，而非只讲故事",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "必须提炼出判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "材料可信度可疑",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "但这只适用于任务已经提供的材料本身；不能据此主张任何来源都可虚构",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "允许读者最终不被说服",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "读者可以反驳",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "第一人称仅用于观点自我限定",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "没有亲历资料时第一人称只用于观点与自我限定",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "可见文本归纳",
+          "source_matches": [],
+          "candidate_match": true
+        }
+      ]
+    },
+    {
+      "id": "wxb-k10",
+      "style_sha256": "28faeb81f0f86936806739d028c2443fe6a212071d19106dea7e3e3b4fb466ef",
+      "review_sha256": "ead390ddbbb21a43b75ef48925fbf00a6f4fed236cf0a020854df15ef3e02ea8",
+      "quotes": [
+        {
+          "text": "判断的三种写法",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "认真推理出荒唐结论",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "先落到具体材料，再上升到可推广的判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "幸福能力的差异",
+          "source_matches": [
+            "a06"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "个人要为自己的行为负责",
+          "source_matches": [
+            "a07"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "把一个具体事实不断翻译成更一般的命题。每次换算都要把前面的具体物象继续带着走，不丢掉细节",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "一份礼大致等于一百份色",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "必要时当场质疑或调侃",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我讨厌这个说法，因为好像这世界上没有了音乐，就说不出小说该像什么了",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "可能会让真正的人文知识分子看了身上长鸡皮疙瘩",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我的数学相当好",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我自己写得怎样，当然要另说",
+          "source_matches": [
+            "a09"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "把自我也摆进被审视的位置",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "对于一个民族来说……还是正途",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "你只能唱唱反调",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "必须有改变物质生活的原动力",
+          "source_matches": [
+            "a05"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "篇末判断更重",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "肯定会问问我：抽什么疯呢？",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "怀疑对它有所不利",
+          "source_matches": [
+            "a08"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "情绪不直接抒发，转写为判断。情感浓度高的地方，写法是立刻进入概念辨析或自我限定，情绪强度藏在判断的锋利度和比喻的密度里，不藏在感叹词里。",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我就站下来看，然后被震惊了",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "被猪看成笨蛋，这是不能忍受的",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我靠写作为生，现在该作出何种决定呢？",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "想清楚了这些事，我们再来谈谈崇高的问题",
+          "source_matches": [
+            "a05"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "妈的，怪不得总吃不饱",
+          "source_matches": [
+            "a07"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "阅读优美的文字会给我带来极大的快感",
+          "source_matches": [
+            "a09"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "诸葛先生采取的是向下拉平之道，结果就害得我吃不上椰子",
+          "source_matches": [
+            "a06"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "立刻进入概念辨析",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "作为作者，我知道怎么把作品写得格调极高，但是不肯写。对于一件愚蠢的事，你只能唱唱反调",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "简直是在发疯",
+          "source_matches": [
+            "a07"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "假如我不识字，感觉可能会更好",
+          "source_matches": [
+            "a09"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "概念辨析或自我限定",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不藏在感叹词里",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不靠感叹词堆砌来抬情绪强度",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "而非感叹词直抒",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "情绪是否主要经由判断/比喻落地，而非靠感叹词堆砌",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "短句承担结论与反转，长句承担铺陈与换算。",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "短句是否用于结论和反转，长句是否用于铺陈与换算？",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "消除这种优越的方法之一就是给聪明人头上一问棍，把他打笨些",
+          "source_matches": [
+            "a06"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这种想法不仅有害，而且是有病",
+          "source_matches": [
+            "a05"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "只有书写文本能使她获得叙事艺术的精髓",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "整双鞋像新的一样，只是后跟豁开了",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我看到的几个手术没有一次在一小时之内找着阑尾的",
+          "source_matches": [
+            "a07"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "你只能唱唱反调",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "篇末落点常以一句独立短句收束；正文句长随内容密度变化，长短句的分工不是固定的",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "篇末落点是否以短句或独立句收束",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "判断常由一个转折词把刚刚铺开的感性材料收进理性结论。'''但是''''可是''''话说回来''一类的转折是关键节拍。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "但不管怎么说，一个理论里只要有了'从权'这种说法，总是有点欠严谨",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "根据我的人生经验",
+          "source_matches": [
+            "a08"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "常用节拍之一",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "根据我的人生经验",
+          "source_matches": [
+            "a08"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "重复号举例是必经顺序",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "常见链条是：具体场景 → 解释背后的机制 → 一个一般化的理解 → 一个推广的判断。",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "是否至少完成一次换算，把具体事实对应到抽象命题",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "具体事实→抽象命题",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "最好的文体都是翻译家创造出来的",
+          "source_matches": [
+            "a09"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "至少完成一次",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "是否完成了与议题复杂度相称的换算（材料需要换算时）",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "篇幅短的文本……直接用命题开场",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "没有这样的过程，第一人称只能用于观点表达和自我限定，不得编造回忆、虚构来源、假装听说，或补写对白来维持声音。",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不得编造回忆、虚构来源、假装听说",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "比喻可以更野、更具体",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "第一人称只能用于观点表达和自我限定",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "材料与事实边界",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不得把未经历的事写成亲历、不得虚构来源或引语；这是任务约束，与风格无关。第一人称在此时用于观点、转述、推测与自我限定",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "篇幅短的文本压缩铺陈，直接用命题开场、两三个具体比喻、一句落点；篇幅长的文本允许更多轮的'提出说法—反驳—再解释—再反驳'，情绪积累更久，结尾判断更重。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "两三个具体比喻",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "材料量跟着'要换算多少层'决定，不是固定配额",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "两三个具体比喻",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "篇幅短的文本压缩铺陈、减少反驳轮次；篇幅长的文本允许多轮'提出—反驳—再解释'",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "结尾判断更重",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "完整推理出荒唐结论",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "幽默来自'认真推理出荒唐结论'，不来自俏皮话。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "牛肉在哪儿？（顺便说一句，'Where is the beef！'是句成语……）",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "所有的刀口都开在了肚子上，这实属难能可贵",
+          "source_matches": [
+            "a07"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "心绞痛也该可以形成一种文体",
+          "source_matches": [
+            "a09"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "精确描述荒唐",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "以及归谬、反语、插入注释等变体",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "明码标价的主观性",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "说话人不预设共识，也不要求读者先站在自己这边。",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我坚定不移地认为，前一种想法就叫做聪明，后一种想法就叫做愚蠢",
+          "source_matches": [
+            "a05"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "照我看这就是小说的实质",
+          "source_matches": [
+            "a10"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这种想法不仅有害，而且是有病",
+          "source_matches": [
+            "a05"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "你只能唱唱反调",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "是否给过读者保留异议的空间，又没有因此撤回判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "判断是否建立在先行的材料上，而非直接训示",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "也许你会不同意",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "显式引出结论……多数落在段末或篇末，形成落点",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "结论句常以短句收束，独立成段更有力",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "书面材料也要被还原到可感知的层面再用",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "发丝从你面颊上滑过",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "转述他人材料时，先声明对其可靠性的判断，再讲述，最后自己下判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我对它的真实性有一点怀疑",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "真不真的不要紧，要紧的是要有教育意义",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "理论或评论性题材里，第一人称可以退后",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "对照不是并列陈列，必须有明确的裁决方向",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不藏在感叹词里",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "短句承担结论与反转",
+          "source_matches": [],
+          "candidate_match": true
+        }
+      ]
+    },
+    {
+      "id": "wzq-k1",
+      "style_sha256": "cc33af12b67976c9325cce4eceb4df1a0c614525faa0611f134ca5ce51399c65",
+      "review_sha256": "0ac9bcf623b07b15ecb6d8183ed8c3955df20e09717a4cec91f927051561ba2c",
+      "quotes": [
+        {
+          "text": "本声音最稳定的结构",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "本声音最稳定的结构是从一个具体物象或场景出发，经过解说或叙述，收于一句带情感色彩的判断",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "体物／解说／抒情收束",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "通常是一个明确的评价、一次心动、或一次回溯性的感慨",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "这种菌子只有做菜时配色用，没甚味道",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这东西这么好吃？！",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "带着雨珠的缅桂花使我的心软软的",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我吃过苏州洞庭山的杨梅、井冈山的杨梅，好像都比不上昆明的火炭梅",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "昆明菌子极多……",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "否则容易使人晕倒",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "四十年后，我还忘不了那天的情味，写了一首诗",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "描写—知识—一句抒情",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "最稳定的结构",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "常见的一种推进方式",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "一个核心命题",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "推进方式是主题发散式而非时间顺序式：围绕一个核心命题，从多个具体材料展开",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "积雨少住的早晨",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "一直坐到午后",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "宁坤要我给他画一张画",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "在物类罗列型材料（品类、风物、风俗汇编）中常呈主题发散式；同一文本内部的时间叙述段仍按过程推进，两种组织可共存",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "确有推翻、补充或自嘲的判断依据",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "适用于确有推翻、补充或自嘲的判断依据，不宜为制造效果而虚设",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "——不过话又说回来，别处叫它白兰、把儿兰，它和兰花也挨不上呀",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "旧日昆明人家门头上用以辟邪的多是这样一些东西：一面小镜子……下面便是一片仙人掌，——在仙人掌上扎一个洞",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "和青辣椒同炒，入口便会使你张目结舌：这东西这么好吃？！还有一种菌子",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "推翻、补充、自嘲、转入具体细节，或条目之间的突转",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "有实际功能、不为效果虚设",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "否定中的克制",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "否定中的克制：用连续否定悬置读者的抒情预期",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "带着雨珠的缅桂花使我的心软软的，不是怀人，不是思乡",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "情感收束的一种限定方式",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "本篇仅见一例，属偶用手段，不宜常备",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "三种句长须配合使用",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "让句长随内容变化，而非追求统一的克制",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "一点都不酸！",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "若材料天然适合密集列举，就不要为了'克制'而削平",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "材料本身丰富时……铺陈段可以显著加密；材料单薄时，则应收敛",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "既说明现象又带出地方性或人情味的幽默",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "这笑话用意在说明昆明到呈贡的火车之慢，但也说明鸡随处可见",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "以不相称的参照物形容对象，形成审美落差，再以一句正面评价完成反转",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "一堆半干的牛粪或一个被踩破了的马蜂窝",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这东西这么好吃？！",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不编造回忆、虚构来源、假装听说或补对白",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不必把采用这一声音的前提一律设为必须亲历",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "以上机制适用于记忆性、体物性强的题材……论说性、事件性或强推理性结构，则须重新判断",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "本声音最稳定的结构是……",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "三种句长须配合使用",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "在本篇这类物类罗列材料中……",
+          "source_matches": [],
+          "candidate_match": false
+        }
+      ]
+    },
+    {
+      "id": "wzq-k3",
+      "style_sha256": "26416ee967abf6d00451dd1867c750920a595dc86f02b7d94c0aaf11393b0d84",
+      "review_sha256": "3eaf45a587adaa68b0e01285934970d623cee3e384b6410326805fe33ce64a6d",
+      "quotes": [
+        {
+          "text": "任务与材料前提",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "材料的真实来源分三种情况",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "两者皆无的领域，保持沉默或以判断加限定收束，不得编造回忆、传闻、对白、感官细节或来源",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不可核查的事实是否标注了记忆或传闻边界",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "我所知道的……大都是从老舍先生那里听来的",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我到武定，吃汽锅鸡，也不是'壮鸡'！",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "原文中可见作者在印象性判断处偶用'据我的印象'一类标记，此类标记当由任务约束与叙述需要自然带出，不设逐条标注义务。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "默认单元：判断句 + 佐证 + 收尾或岔开",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "先给一个可以被反驳的结论，再接具体支撑……最后或顺势收束，或转进下一话题",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "一是大菜、名菜很不好写",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "昆明菌子极多",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "可被反驳的审美判断",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "雨季的果子，是杨梅",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "客人被让进了北屋当中的客厅",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "支撑优先用具体名词而非形容词堆积",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "在评价、论断性段落中，常见'判断句+佐证+收尾或岔开'的推进方式",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "停顿点放在段落收尾、情绪峰值、引语入口和话题切换处",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "不过话又说回来",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": true
+        },
+        {
+          "text": "放在引语入口",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "老舍先生说：'老人是认真的。'",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "四个位置+四类手段",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "需要停顿、需要拍板、需要让他人声音进出时",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "短句不是全篇的基本单位，而是节奏的关节",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "通篇短句短段",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "短促只在需要停顿、需要拍板、需要让他人声音进出的地方出现",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "生的生，烂的烂",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "只在……的地方",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "长段落是合法的……不要为了统一节奏削短",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "引语的前提是任务确实提供了可靠原话",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "引语与叙述的比例随任务变化",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "引语须有任务材料依据",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "平生不解藏人善，到处逢人说项斯",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "别！他这么着惯了",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "抒情性回环／论证性重复",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我想念昆明的雨",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "只能说是……",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不可混淆使用",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "选哪一种由任务的语气和材料的分量决定",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "真是像一球烧得炽红的火炭",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "这简直是：胡闹！",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "三种都可用，也可以是复合的……结尾不必追求警句，材料用尽处自然收住",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "回扣开篇意象",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "听说他有时还提到我",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "不要因为三篇里未见某些手法……就断定这些手法禁用",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "没有观察到不等于反例",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不可核查的事实是否标注了记忆或传闻边界",
+          "source_matches": [],
+          "candidate_match": true
+        }
+      ]
+    },
+    {
+      "id": "wzq-k10",
+      "style_sha256": "be54e806f2601a4dc61c53a4abb117946a618a5cb3811e72fd3294e2eefbeaf7",
+      "review_sha256": "956d775a5aeb2eb25407a1baac3a954e5e67d98846fe757cd21ea5195fad87d6",
+      "quotes": [
+        {
+          "text": "从具体长出抽象",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "这是一条单向通道：具体在前，判断在后",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "有没有先抛结论再补例子的段落？改成从具体长出判断",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "具体在前、判断在后",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "这真是一年的冬景了",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "北京胡同文化的精义是'忍'",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "这本书还是值得看看的",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "书名起得有点冒失了",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "乡间人争舐其眼",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "小说里边最重要的是思想",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我也不知道世界上还有什么国家的人爱吃臭",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我想的时间很长",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "判断的落脚点应可辨认：或由具体升起，或先行提出后立即用可核验材料承载",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "判断与例子之间是否有可辨认的支撑关系",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "判断不居高临下，是'从中体会到'而不是'由此可见'",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "若干年后，我才体会到管又萍的署名后面所挹注的画工的辛酸",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "若干年后，我才体会到",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "回忆与技艺题材中延迟判断的写法",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "真正的停顿——空白、单句成段——放在情感或意义的转折处……停顿不是随手断句，要少而重。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "一月，下大雪",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "葡萄装上车，走了。",
+          "source_matches": [
+            "a04"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "节奏骨架性的短段（可高频）",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "情感转折处的孤立停顿（宜克制）",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "描写性段落可以短，几乎一句一段；论证性段落可以长……",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "下过大雨，你来看看葡萄园吧……",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "段长由该段所承载的材料密度决定；月令骨架可短，密度描写可长",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "可辨认的相接路径",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "抒情不长段直抒，而是先精确命名情感质地，再用否定式排除掉不想要的感伤方向",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "带着雨珠的缅桂花使我的心软软的，不是怀人，不是思乡。",
+          "source_matches": [
+            "a06"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "雨，有时是会引起人一点淡淡的乡愁的。",
+          "source_matches": [
+            "a06"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "描写积累、幽默介入、判断降落……再滑向荒诞一步，最后落在一个短促、精确的判断词上",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "这是简直是：胡闹！",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "前提是引语真实可靠，来源可查",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "引语是否真实可靠、来源清楚？",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "千里莼羹，末下盐豉",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "大概是陈蕴珍，即萧珊",
+          "source_matches": [
+            "a08"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "'S'这个音太多了",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我到现在还说不准他的字的来源",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "引语须真实，来源按实际确定程度标注：可查则示来处，转述则用'据说''据我的印象'，不冒充可查来源。",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "论点、论据、结论的清楚结构",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "论点、论据、结论的清楚结构",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "抽象概念始终拉回到可见的文本和行为中",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "最重要的是思想",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "主题有它一定的模糊性",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "论点可先行提出，但须由实例、类比与让步承载",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "我到现在还说不准",
+          "source_matches": [
+            "a03"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "迎来春天换人间",
+          "source_matches": [
+            "a02"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "注意平仄交替与声调搭配",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "细密过程+从中升起的体会",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "谁家会在在家里挂一张'鸡巴图'？",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "鸡蛋上雕有花，吃起来还不是鸡蛋的味道么？",
+          "source_matches": [
+            "a01"
+          ],
+          "candidate_match": false
+        },
+        {
+          "text": "我所知道的……大都是从老舍先生那里听来的",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "《当皮箱》和'燕乐'的下文如何，我就不知道了",
+          "source_matches": [],
+          "candidate_match": false
+        },
+        {
+          "text": "不要为了统一而压缩或拉伸",
+          "source_matches": [],
+          "candidate_match": true
+        },
+        {
+          "text": "未覆盖小说文本",
+          "source_matches": [],
+          "candidate_match": true
+        }
+      ]
+    }
+  ]
+}

@@ -4,11 +4,11 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/voice-learning-core-01",
-    "research/style-aggregation/runs/voice-learning-clean-01",
-    "research/style-aggregation/runs/voice-learning-clean-pro-01",
-    "research/style-aggregation/runs/voice-learning-probe-01",
-    "research/style-aggregation/runs/voice-learning-prose-01"
+    "research/style-aggregation/runs/voice-learning-scope-01",
+    "research/style-aggregation/runs/voice-learning-scope-recovered-01",
+    "research/style-aggregation/runs/voice-learning-scope-probe-01",
+    "research/style-aggregation/runs/voice-learning-scope-reviewed-01"
   ],
-  "record_count": 139
+  "journal_from": "E0061",
+  "record_count": 148
 }

@@ -1,0 +1,8 @@
+{
+  "decision": "reject_auto_adoption_keep_partial_original",
+  "complete": 5,
+  "failed": 1,
+  "reason": "最后一组修复后仍有完整Markdown代码围栏；原run保持partial，15响应与费用保留。",
+  "review_type": "model_review_and_implementer_reading_not_independent_human_review",
+  "next": "方法27只规范化完整Markdown包装，验证原请求缓存复放，不新采样。"
+}

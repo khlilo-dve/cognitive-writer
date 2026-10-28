@@ -2,6 +2,7 @@
 """Idempotent, sequential CLI projection of local research artifacts into the user's Base."""
 import argparse
 import json
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -23,7 +24,10 @@ def main():
     ap.add_argument("--manifest", type=Path)
     ap.add_argument("--run", type=Path)
     ap.add_argument("--runs", nargs="*", type=Path, default=[])
+    ap.add_argument("--journal-from", help="Sync journal events from this inclusive E0000 ID")
     args = ap.parse_args()
+    if args.journal_from and not re.fullmatch(r"E[0-9]{4}", args.journal_from):
+        ap.error("--journal-from requires an E0000 event ID")
     state = json.loads(STATE.read_text())
     base = state["base_token"]
     state.setdefault("records", {})
@@ -139,6 +143,8 @@ def main():
     events = ROOT / "lark/journal-records.json"
     if events.exists():
         for row in json.loads(events.read_text()):
+            if args.journal_from and row["event_id"] < args.journal_from:
+                continue
             upsert("Journal", row["event_id"], row)
     runs = args.runs + ([args.run] if args.run else [])
     for run in runs:
@@ -159,6 +165,8 @@ def main():
             report_file = ROOT / "lark/detailed-style-stage-a-20261023.json"
         if rid.startswith("voice-learning-"):
             report_file = ROOT / "lark/learning-core-stage-20261028.json"
+        if rid.startswith("voice-learning-scope"):
+            report_file = ROOT / "lark/voice-scope-stage-20261029.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
@@ -175,6 +183,10 @@ def main():
         if rid.startswith("detailed-transfer"):
             stage = "详细Style新题材试写"
         voice_stages = {
+            "voice-learning-scope-reviewed": "原文复读｜实现者有限定点修订",
+            "voice-learning-scope-recovered": "原文复读｜Markdown包装零请求恢复",
+            "voice-learning-scope-probe": "范围修订｜同条件前后与中性试写",
+            "voice-learning-scope": "原文复读与范围修订",
             "voice-learning-core": "通用正文学习核心｜1/3/10篇",
             "voice-learning-clean-pro": "Pro执行说明内容编译",
             "voice-learning-clean": "Flash内容剥离小试",
@@ -228,7 +240,8 @@ def main():
         state["dashboards"]["overview"] = data
         save(state)
     (ROOT / "lark/last-sync.json").write_text(json.dumps({"status":"complete", "base":base,
-        "manifest":str(args.manifest), "run":str(args.run), "runs":[str(r) for r in runs], "record_count":len(state["records"])}, indent=2))
+        "manifest":str(args.manifest), "run":str(args.run), "runs":[str(r) for r in runs],
+        "journal_from":args.journal_from, "record_count":len(state["records"])}, indent=2))
     print("sync complete", state["url"], flush=True)
 
 

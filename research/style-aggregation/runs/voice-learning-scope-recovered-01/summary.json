@@ -1,0 +1,46 @@
+{
+  "new_requests": 0,
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "revision_calls": 2,
+      "sources": 1,
+      "status": "complete"
+    },
+    {
+      "id": "wxb-k3",
+      "revision_calls": 2,
+      "sources": 3,
+      "status": "complete"
+    },
+    {
+      "id": "wxb-k10",
+      "revision_calls": 2,
+      "sources": 10,
+      "status": "complete"
+    },
+    {
+      "id": "wzq-k1",
+      "revision_calls": 2,
+      "sources": 1,
+      "status": "complete"
+    },
+    {
+      "id": "wzq-k3",
+      "revision_calls": 2,
+      "sources": 3,
+      "status": "complete"
+    },
+    {
+      "id": "wzq-k10",
+      "revision_calls": 2,
+      "sources": 10,
+      "status": "complete"
+    }
+  ],
+  "stage": "voice_scope_recovery",
+  "status": "complete",
+  "usage": {
+    "run_occupied_cny": 0.0
+  }
+}

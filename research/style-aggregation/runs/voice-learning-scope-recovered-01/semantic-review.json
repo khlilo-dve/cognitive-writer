@@ -1,0 +1,16 @@
+{
+  "decision": "development_core_workflow_verified_partial_scope_improvement",
+  "review_type": "implementer_reading_not_independent_human_review",
+  "progress": [
+    "允许叙事中插入判断，情节解释可成段。",
+    "十篇稿允许命题先行或判断后置，撤掉至少一次换算等配额。",
+    "完整Markdown外包装兼容后，12缓存复放/0新请求，6组恢复。"
+  ],
+  "remaining_issues": [
+    "三篇稿的源文体裁分类仍限制新任务。",
+    "单篇稿三段式在局部仍被重复设为每项必走。",
+    "十篇稿正文与自检仍有起笔、句长或判断次序矛盾。",
+    "复读也会提出新配额或弱化来源边界，不能自动采信。"
+  ],
+  "adopted": false
+}

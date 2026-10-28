@@ -25,3 +25,5 @@
 MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习启用原生JSON模式，legacy纯Markdown保持普通文本。阶段审计记录response_format。长度修复仅补充过短说明，仍最多一次；不压缩有效长规则。自由格式不代表免除格式、长度、素材与事实边界校验。
 
 详细版需求与实际验证：docs/2026-09-26-detailed-style-learning.md。参考孙割文件的说明颗粒度，不复制其题材或固定栏目。
+
+2026-10-29开发核心（不替换上述默认入口）：`voice_learning::learn_voice_with`接受1–10篇正文，规范排序、去重、完整分析与执行说明分层；`voice_revision::revise_voice_with`核对原文身份，再用原文复读与范围修订输出待审草稿。内部分析和复读不注入Writer；方法不依赖固定栏目、字数或规则数量。模型调用和留证由调用方注入，暂无正式多篇CLI/REPL输入和版本管理。接口、外包装兼容、缓存恢复和仍有的语义/事实缺口见`docs/2026-10-29-voice-scope-revision.md`与研究报告；不要把候选生成/恢复成功当作自动采用。

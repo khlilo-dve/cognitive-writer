@@ -7,7 +7,7 @@ use std::{collections::HashSet, future::Future};
 
 pub const METHOD: &str = "voice-core-v1";
 
-fn sha256(bytes: &[u8]) -> String {
+pub(crate) fn sha256(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
 
@@ -26,7 +26,7 @@ impl VoicePrompts {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SourceIdentity {
     pub article: String,
     pub text_sha256: String,
@@ -34,12 +34,12 @@ pub struct SourceIdentity {
 }
 
 #[derive(Clone, Serialize)]
-struct Source {
-    identity: SourceIdentity,
-    text: String,
+pub(crate) struct Source {
+    pub(crate) identity: SourceIdentity,
+    pub(crate) text: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VoiceDraft {
     pub status: String,
     pub method: String,
@@ -52,7 +52,7 @@ pub struct VoiceDraft {
     pub calls: usize,
 }
 
-fn sources(articles: &[String]) -> Result<Vec<Source>, AppError> {
+pub(crate) fn sources(articles: &[String]) -> Result<Vec<Source>, AppError> {
     if !(1..=10).contains(&articles.len()) {
         return Err(AppError::Parse("风格学习需要1–10篇正文".into()));
     }
@@ -90,7 +90,7 @@ fn sources(articles: &[String]) -> Result<Vec<Source>, AppError> {
     Ok(result)
 }
 
-fn validate(spec: &str, sources: &[Source]) -> Result<(), AppError> {
+pub(crate) fn validate(spec: &str, sources: &[Source]) -> Result<(), AppError> {
     validate_execution_spec(spec)?;
     let chars = spec.chars().collect::<Vec<_>>();
     if chars.windows(16).any(|window| {

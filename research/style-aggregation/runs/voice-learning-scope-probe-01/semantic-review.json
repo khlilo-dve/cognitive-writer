@@ -1,0 +1,28 @@
+{
+  "decision": "reject_writer_factual_readiness_keep_style_diagnostics",
+  "review_type": "implementer_qualitative_reading_not_independent_human_review",
+  "articles": 18,
+  "source_style_run": "voice-learning-scope-recovered-01",
+  "exact_issue_quotes": {
+    "wxb-k1-before-read_later": "这套保存目前只在这台设备上",
+    "wxb-k1-after-read_later": "这个按钮目前只在这台设备上有效",
+    "wxb-k10-before-read_later": "在这台机器上按下，就是在这台机器上记下",
+    "wxb-k10-after-read_later": "它不是云端的清单",
+    "wzq-k1-before-read_later": "这个列表目前只存在于你按下它的那台设备上",
+    "wzq-k1-after-read_later": "它们各自记着各自的那份清单",
+    "wzq-k10-before-read_later": "我把它理解为一种存放方式，而不是一种账号服务",
+    "wzq-k10-after-read_later": "存下的清单是跟着单个设备走的",
+    "wzq-k1-before-map_drawer": "每月一查",
+    "wzq-k1-after-map_drawer": "边角已经磨得发白",
+    "wxb-k1-after-map_drawer": "章是蓝色的",
+    "neutral-control-map_drawer": "校园图那一格似乎变化更慢"
+  },
+  "button_finding": "八份有风格按钮稿都扩展到设备内存放/本地清单；中性按钮稿未观察到同类存放断言。",
+  "map_finding": "多数地图稿增加物件状态、规则或读者行为；一稿每周五误为每月，中性稿也补写流量变化。",
+  "style_finding": "部分判断、对照、细密描写机制可见，不足以确证作者风格或排名。",
+  "limits": [
+    "单次成稿、两题，无独立人评。",
+    "事实约束与旧probe不同，不作跨run因果归因。",
+    "没有验证定点修订后的reviewed-01说明。"
+  ]
+}

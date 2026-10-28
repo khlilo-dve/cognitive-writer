@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "new_requests": 0,
+  "ledger_sha256": "93af26d4424ab3911e21ff1323b00ca1798c203bd2a219abcb9e4470acf4787a",
+  "review_type": "implementer_reading_not_independent_human_review",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "status": "complete",
+      "edits": 3,
+      "spec_sha256": "b3199a02f17a813f1b248eb9c64b7045e6542264571316c5937a341c2cdef252"
+    },
+    {
+      "id": "wxb-k3",
+      "status": "complete",
+      "edits": 0,
+      "spec_sha256": "8fed15bd61833733cc97c1d5cd33ca7bb8056248dcde87219612d185fc88ecdb"
+    },
+    {
+      "id": "wxb-k10",
+      "status": "complete",
+      "edits": 2,
+      "spec_sha256": "a41f3e1face25b13df35db048b1daa7ce4832784bacc7b12634ddc572d7d55ca"
+    },
+    {
+      "id": "wzq-k1",
+      "status": "complete",
+      "edits": 2,
+      "spec_sha256": "a0c39a601a59492732a8a864396eeb40475fe7b0a79d85002e32e7014042d97a"
+    },
+    {
+      "id": "wzq-k3",
+      "status": "complete",
+      "edits": 2,
+      "spec_sha256": "0d2a250e2603ff2e3f1281a8ed128dac3e3e4465996deae5a507f0b1f2b05f86"
+    },
+    {
+      "id": "wzq-k10",
+      "status": "complete",
+      "edits": 2,
+      "spec_sha256": "11ddc40d43f6f4da7b6360d04e5166eb48782f05192e3d65c56c5f485691c8fb"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "development_core_workflow_verified_draft_for_preview_with_implementer_edits",
+  "review_type": "implementer_reading_not_independent_human_review",
+  "explicit_edits": 11,
+  "edited_profiles": 5,
+  "preserved_profiles": 6,
+  "new_model_requests": 0,
+  "adopted": false,
+  "writer_validation": "not_yet_generated_with_this_derived_edit_set",
+  "limits": "修正具体遗漏，不证明全自动提取/复读已可靠；原模型稿和所有差异留存。"
+}
