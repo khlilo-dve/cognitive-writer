@@ -1,0 +1,30 @@
+{
+  "status": "artifact_identity_verified",
+  "semantic_quality": "requires_review",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "analysis_sha256": "d15e5d8383d8f2a3e27c5ad61089e07d3dc9a09663215cc64f600e5769c03eec",
+      "style_sha256": "9dac6ef0f8d61b721f82547df42b4ab66d488e8ada6e93cbcab0dffb4f660639",
+      "diff_path": "transformation-diffs/wxb-k1.diff"
+    },
+    {
+      "id": "wxb-k2",
+      "analysis_sha256": "0d9395acc700542b403891ac4aec078c779ed96970cfaffb251505d6ba1d0ab6",
+      "style_sha256": "6537a1f7f95bb3b1a50f9b6ce89a0c66bcab0c87d07be4c4d86bee4db8f3415b",
+      "diff_path": "transformation-diffs/wxb-k2.diff"
+    },
+    {
+      "id": "wzq-k1",
+      "analysis_sha256": "f3fd305d1fb4876dbfafc99a8dad4ef782d69442c0d7d06d3467e95682dfd9a6",
+      "style_sha256": "32ba1fe632cef97107e89de530aa8c5ddfa87963444714c4f7318c9127ae6985",
+      "diff_path": "transformation-diffs/wzq-k1.diff"
+    },
+    {
+      "id": "wzq-k2",
+      "analysis_sha256": "cbad6d64f1baacd8d571e13bac9138cdc08a326b7aae3fe77d701f3d9cea7a6f",
+      "style_sha256": "665c4c10663b1913e8b2fd8fb8bee1112741bd203cc95963f3c831fe54d93af9",
+      "diff_path": "transformation-diffs/wzq-k2.diff"
+    }
+  ]
+}

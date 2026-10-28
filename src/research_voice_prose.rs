@@ -17,13 +17,13 @@ const ROOT: &str = "research/style-aggregation";
 const SETS: [(&str, [&str; 2]); 2] = [("wxb", ["wxb-02", "wxb-03"]), ("wzq", ["wzq-02", "wzq-04"])];
 
 #[derive(Clone, Serialize)]
-struct Job {
-    id: String,
-    sources: Vec<Source>,
-    cards: HashMap<String, Local>,
+pub(crate) struct Job {
+    pub id: String,
+    pub sources: Vec<Source>,
+    pub cards: HashMap<String, Local>,
 }
 
-fn jobs() -> Result<Vec<Job>, AppError> {
+pub(crate) fn jobs() -> Result<Vec<Job>, AppError> {
     let manifest = Path::new(ROOT).join("datasets/authors-v1/manifest.json");
     let dataset = Dataset::load(&manifest)?;
     let card_root = Path::new(ROOT).join("runs/voice-learning-vertical-01/cards");
@@ -83,7 +83,7 @@ fn jobs() -> Result<Vec<Job>, AppError> {
     Ok(jobs)
 }
 
-fn validate(spec: &str, job: &Job) -> Result<(), AppError> {
+pub(crate) fn validate(spec: &str, job: &Job) -> Result<(), AppError> {
     validate_execution_spec(spec)?;
     let quota = [
         "一到两次",

@@ -157,6 +157,8 @@ def main():
             report_file = ROOT / "lark/ending-anchor-20261020.json"
         if rid.startswith("detailed-transfer"):
             report_file = ROOT / "lark/detailed-style-stage-a-20261023.json"
+        if rid.startswith("voice-learning-"):
+            report_file = ROOT / "lark/learning-core-stage-20261028.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
@@ -172,6 +174,21 @@ def main():
             stage = "P3 程序固定结尾位置核验"
         if rid.startswith("detailed-transfer"):
             stage = "详细Style新题材试写"
+        voice_stages = {
+            "voice-learning-core": "通用正文学习核心｜1/3/10篇",
+            "voice-learning-clean-pro": "Pro执行说明内容编译",
+            "voice-learning-clean": "Flash内容剥离小试",
+            "voice-learning-probe": "单篇与多篇新题材执行诊断",
+            "voice-learning-prose": "完整原文长篇声音分析",
+            "voice-learning-editor": "上位声音编辑小试",
+            "voice-learning-vertical": "两篇增量学习竖切",
+            "voice-learning-incremental": "逐篇卡片与增量综合小试",
+            "voice-learning-pilot": "单轮综合1/2/3篇小试",
+        }
+        for prefix, label in voice_stages.items():
+            if rid.startswith(prefix):
+                stage = label
+                break
         for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label
@@ -191,6 +208,10 @@ def main():
                 checks += " 语义复核未通过，不扩大正式矩阵；工程完成不等于方法采用。"
             elif review.get("decision", "").startswith("reject"):
                 checks += " 复核拒绝采用；详见阶段报告，完成数量不表示质量通过。"
+            elif review.get("decision", "").startswith("development_core_workflow_verified"):
+                checks += " 核心流程与来源/复跑已验证，Style仍是待审草稿，语义与Writer事实未全部通过。"
+            elif review.get("decision"):
+                checks += " 仅开发候选或探索性诊断，尚未产品采用；具体边界见阶段报告。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + checks + summary.get("error", ""),

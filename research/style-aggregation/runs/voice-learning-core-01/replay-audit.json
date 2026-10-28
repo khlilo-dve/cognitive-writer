@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "new_requests": 0,
+  "cache_resumes": 13,
+  "checkpoint_count": 13,
+  "ledger_sha256_before": "b39f650f25f55972fcf3f5be0ce561ea7a3b2fa0e856f3cbe150cc6fba230d0a",
+  "ledger_sha256_after": "b39f650f25f55972fcf3f5be0ce561ea7a3b2fa0e856f3cbe150cc6fba230d0a"
+}

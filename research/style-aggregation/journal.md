@@ -302,3 +302,23 @@ method-revision-17在调用前冻结12稿/两题、相同Writer、无文章字�
 ## E0055 · 2026-10-28 · 长篇分析保留整体声音但泄漏源文（limited / discovery）
 
 method-revision-22对应`voice-learning-prose-01`已4/4完成，run占用0.090114元、全研究20.605440元含未知预留。两篇稿开始保留叙事/论证与题材变体，避免短句短议论的一刀切；单篇稿仍把源文场景、物件、短句和事件链写入说明，绕过长连续片段检查。语义状态`requires_content_separation_before_writer`，报告见`reports/voice-prose-2026-10-28.md`。下一步独立剥离内容再验证Writer执行，不把本轮长篇分析直接当执行Style。
+
+## E0056 · 2026-10-28 · Flash内容剥离失败，改为Pro输出与程序差异（negative / method_change）
+
+既有研究已提交0574aa4，260库测试通过。method23的`voice-learning-clean-01`四项均一次修复后失败，0份Style/0次Writer，本run0.047067元、累计20.652507元含未知预留。既有真实源文短语残留，也有删除记录未逐字回查这一额外结构问题。method24将内容隔离按困难任务交给Pro，仅输出Markdown，程序另记差异；原文内容哨点作为人工诊断发送，不冒充通用产品词表。新run`voice-learning-clean-pro-01`已启动，上限2元；完成且审读后才启动两题八稿、上限1元的Flash新题材试写。
+
+## E0057 · 2026-10-28 · Pro内容编译四份完成（limited / engineering_success）
+
+`voice-learning-clean-pro-01`4/4完成，run占用0.051651元、累计20.704158元含未知预留。实现者审读未见先前明显源文案例/引句，保留题材差异和长段；程序保存四份真实前后diff。仍有单篇亲历路线和工作现场过拟合问题；人工哨点并非通用产品检测器，只允许探索性Writer试写，不采用到生产。
+
+## E0058 · 2026-10-28 · 八稿完成但事实遵守未通过（negative / limited）
+
+`voice-learning-probe-01`两题八稿Flash单次成稿完整，run0.020126元、累计20.724284元含未知预留。可见部分声音机制，但地图稿均补出位置、磨损、柜体或读者行为等未给事实；按钮稿有无同步推成仅本地保存，王小波单篇虚构亲历取图。判定`reject_factual_readiness_keep_style_diagnostics`，见`reports/voice-probe-2026-10-28.md`。不同问题分别定位，不做单/多篇胜负结论。
+
+## E0059 · 2026-10-28 · 通用正文核心与1/3/10篇验证启动（implementation / running）
+
+新增`voice_learning::learn_voice_with`正文核心：1–10篇、空文/重复/超限零请求拒绝、同集合哈希规范排序、Pro分析→Pro内容编译、最多一次损坏/长片段修复、来源/提示词指纹、草稿状态且不自动入库。264库测试通过、10忽略。method25冻结`voice-learning-core-01`两作者各1/3/10篇共六组，无人工词表，单run上限4元；真实模型调用已启动，结果与语义质量尚待核对。输入层继续后置。
+
+## E0060 · 2026-10-28 · 正文核心六组完整与零请求复跑（engineering_success / draft）
+
+`voice-learning-core-01`两作者各1/3/10篇六组全部完成，汪曾祺十篇一次长片段修复，其余两调用；13个检查点复跑13命中、0新请求、账本SHA不变。六份spec/analysis副本、来源哈希和规范顺序均核对。run占用0.409197元、累计21.133481元含未知预留；本次续做新增0.528041元，100元余额78.866519元。核心可调用并返回待审草稿，不等于语义和Writer事实全部通过；单篇固定路线、三篇题材限制与十篇单向规则/配额仍需修订，详见semantic-review。飞书报告与两份十篇草稿已回读：https://www.feishu.cn/docx/ElDZdfVRloFdtlx21bMcMsSknMg 。下一阶段基于这条已实现核心做有证据的范围修订与独立读稿，再接用户输入和预览保存。

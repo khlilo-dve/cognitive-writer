@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "semantic_quality": "separate_review_required",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "source_count": 1,
+      "spec_sha256": "be1fd5da07c782788bd1ff7ff1a1548debb54e3e40918d624a6eb262da3552f6",
+      "fingerprint": "615c8f2db4ab1d34f2e29c180c76f4214958860ca376f21f0ab01e56f6c2f889"
+    },
+    {
+      "id": "wxb-k3",
+      "source_count": 3,
+      "spec_sha256": "6ddf33f484142abbdce69ac2c35836f49b947cd7dea5e62c26a8e871d638014b",
+      "fingerprint": "f9dbfe5376a24814c0b8f86187606a2880e9f27630486e07b3708418f49642c8"
+    },
+    {
+      "id": "wxb-k10",
+      "source_count": 10,
+      "spec_sha256": "087066fabd396385a25ac630d21c5c7831e3936ccc32ac6e2182cf98b500ab72",
+      "fingerprint": "e6397c56f0268c1bdc7fa141482cb96982b369f416ef3e1ddb3b4fbb8128f04d"
+    },
+    {
+      "id": "wzq-k1",
+      "source_count": 1,
+      "spec_sha256": "47e596c4c18971c7e40fd105e6d46c8383a3609306dd3099b6acb5284b63df6b",
+      "fingerprint": "b062f79398f43f0b5350294cb01c31b04ee3ef483338418705168bc0532179dc"
+    },
+    {
+      "id": "wzq-k3",
+      "source_count": 3,
+      "spec_sha256": "4f9064ad44df5433b1609aeca4773580d6500dfd34bdffbb5d7d52f182135485",
+      "fingerprint": "988cba9cdb9fbbd095ca045f6248e29bec06ddb216b32e3860ed31475aba7984"
+    },
+    {
+      "id": "wzq-k10",
+      "source_count": 10,
+      "spec_sha256": "15d5fc24221df6d892eb4033374cfc085b7d95d135a87b4be701f5f700a3f7cc",
+      "fingerprint": "159dc6c2a2edd60977926acf57301bb2c07854e1fb31e23ca0ddb0cfa568f95e"
+    }
+  ],
+  "zero_new_request_replay": true
+}

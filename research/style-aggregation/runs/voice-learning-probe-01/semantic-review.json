@@ -1,0 +1,9 @@
+{
+  "decision":"reject_factual_readiness_keep_style_diagnostics",
+  "review_type":"implementer_qualitative_readout_not_independent_human_review",
+  "responses_complete":8,
+  "run_occupied_cny":0.020126,
+  "reason":"四条路径均能呈现部分说明机制，但地图稿补出未给的物理细节和行为，按钮稿出现同步限制到本地存储的无依据推断，王小波单篇还虚构亲历回忆。",
+  "scope":"此结果不评价单篇/多篇胜负，也不把所有通用Writer事实问题归给Style。",
+  "next_step":"核心提示词区分观点人称与真实在场身份；先验证无人工词表的1/3/10篇分析编译，Writer事实遵守另行处理。"
+}

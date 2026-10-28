@@ -1,0 +1,9 @@
+{
+  "decision":"reject_no_valid_styles",
+  "structural_complete":0,
+  "structural_failed":4,
+  "writer_started":false,
+  "run_occupied_cny":0.047067,
+  "reason":"Flash一次修复后仍保留部分源文短语，或自报删除片段与分析稿不逐字对应；复杂删除记录混入了风格质量门槛。",
+  "next_step":"Pro只输出执行Markdown，由程序记录差异；原文泄漏与样本范围继续验证。"
+}
