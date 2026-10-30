@@ -15,6 +15,8 @@ pub enum AppError {
     Network(String),
     #[error("API 响应解析失败: {0}")]
     Parse(String),
+    #[error("学习草稿错误: {0}")]
+    LearningWorkspace(String),
     #[error("API 返回空 choices")]
     EmptyChoices,
     #[error("剪贴板不可用: {0}")]

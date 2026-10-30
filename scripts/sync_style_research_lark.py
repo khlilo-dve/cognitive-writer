@@ -167,6 +167,8 @@ def main():
             report_file = ROOT / "lark/learning-core-stage-20261028.json"
         if rid.startswith("voice-learning-scope"):
             report_file = ROOT / "lark/voice-scope-stage-20261029.json"
+        if rid.startswith("learning-workspace"):
+            report_file = ROOT / "lark/learning-workspace-stage-20261031.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
@@ -201,6 +203,8 @@ def main():
             if rid.startswith(prefix):
                 stage = label
                 break
+        if rid.startswith("learning-workspace"):
+            stage = "风格草稿工作区｜预览、版本与导出本地验证"
         for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label

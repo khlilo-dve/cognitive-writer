@@ -1,0 +1,31 @@
+{
+  "status": "complete",
+  "stage": "learning_workspace_local",
+  "rows": [
+    {
+      "id": "both_authors_1_3_10_preview_restart_save_history_diff_and_spec_only_export",
+      "status": "complete"
+    },
+    {
+      "id": "reject_source_removal_duplicates_over10_mismatch_and_path_escape",
+      "status": "complete"
+    },
+    {
+      "id": "concurrent_stale_and_duplicate_name_saves_never_overwrite",
+      "status": "complete"
+    },
+    {
+      "id": "ignore_unpublished_pending_files_reject_corruption_and_keep_saved_snapshot",
+      "status": "complete"
+    },
+    {
+      "id": "failed_save_retains_candidate_for_recovery",
+      "status": "complete"
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0.0,
+    "occupied_cny": 21.755316
+  },
+  "new_model_requests": 0
+}

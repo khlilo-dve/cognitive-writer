@@ -26,4 +26,6 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 
 详细版需求与实际验证：docs/2026-09-26-detailed-style-learning.md。参考孙割文件的说明颗粒度，不复制其题材或固定栏目。
 
-2026-10-29开发核心（不替换上述默认入口）：`voice_learning::learn_voice_with`接受1–10篇正文，规范排序、去重、完整分析与执行说明分层；`voice_revision::revise_voice_with`核对原文身份，再用原文复读与范围修订输出待审草稿。内部分析和复读不注入Writer；方法不依赖固定栏目、字数或规则数量。模型调用和留证由调用方注入，暂无正式多篇CLI/REPL输入和版本管理。接口、外包装兼容、缓存恢复和仍有的语义/事实缺口见`docs/2026-10-29-voice-scope-revision.md`与研究报告；不要把候选生成/恢复成功当作自动采用。
+2026-10-29开发核心（不替换上述默认入口）：`voice_learning::learn_voice_with`接受1–10篇正文，规范排序、去重、完整分析与执行说明分层；`voice_revision::revise_voice_with`核对原文身份，再用原文复读与范围修订输出待审草稿。内部分析和复读不注入Writer；方法不依赖固定栏目、字数或规则数量。模型调用和留证由调用方注入，当时尚无正式多篇CLI/REPL输入和版本管理。接口、外包装兼容、缓存恢复和仍有的语义/事实缺口见`docs/2026-10-29-voice-scope-revision.md`与研究报告；不要把候选生成/恢复成功当作自动采用。
+
+2026-10-31新增`LearningWorkspace`与`style-draft`开发入口，接已有核心的正文/候选包，不发模型请求。支持import、preview、candidates、list、diff、save、versions、show、export；默认用户目录`.cognitive-writer/learning`，可显式--root。候选与命名版本分开，保存状态仍非质量认证；追加须引用准确旧版本并保留旧正文，过期候选不能覆盖新版。只显式export指定版本spec到新.md文件，拒绝覆盖，不把分析、复读或原文注入Writer。存储、来源/版本身份与并发写入分别在`learning_candidate.rs`、`learning_workspace.rs`、`learning_workspace_store.rs`；逐行差异在`learning_diff.rs`，CLI在`learning_workspace_cli.rs`。使用与验收见`docs/2026-10-31-learning-workspace.md`。多篇真实模型交互与文件/URL取得正文仍未接入旧learn/REPL，10-29的质量缺口保留。

@@ -1,0 +1,26 @@
+{
+  "attempts": [
+    {
+      "status": "harness_failure",
+      "cause": "候选包夹具复用了jobs中的可变文章列表，负例追加修改了后续夹具；产品正确拒绝了重复输入。",
+      "correction": "每个候选包复制正文数组，隔离负例变动，不改产品校验。",
+      "new_model_requests": 0
+    },
+    {
+      "status": "passed",
+      "evidence": "cli-audit.json",
+      "new_model_requests": 0
+    }
+  ],
+  "publication": [
+    {
+      "status": "readback_check_corrected",
+      "cause": "首轮飞书回读断言包含报告原文没有的待审字样，文档已创建；改为核对原文真实存在的末段说明，没有重复创建文档。"
+    },
+    {
+      "status": "passed",
+      "url": "https://www.feishu.cn/docx/VHFrdk9HYol2urxefHscBpOQnqR",
+      "readback": "核对275、费用、并发保护和末段保存非质量验收说明。"
+    }
+  ]
+}

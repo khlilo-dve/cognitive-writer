@@ -1,5 +1,9 @@
 # 当前任务状态
 
+## 2026-10-31 当前断点
+
+新增LearningWorkspace与style-draft离线开发入口：import/preview/candidates/list/diff/save/versions/show/export，正文快照和候选身份核对、不可覆盖版本、追加保留来源、过期/并发保护与纯spec导出。两作者六份真实历史候选各1→3→10的CLI链通过，含坏记录、重复超限、来源减少、同名/旧基准、并发和写入失败；初次夹具共享列表误报已隔离修复。275库测试通过/10忽略，构建和17项既有终端回归通过（本地模拟HTTP）；所有可变测试工作区已清理，run为learning-workspace-local-01。0新增付费请求，累计账本21.755316元含未知预留，SHA不变。飞书报告已回读：https://www.feishu.cn/docx/VHFrdk9HYol2urxefHscBpOQnqR ，Base运行与E0066已同步；下一步把工作区接到正式多篇学习和来源交互。此入口接核心产出的候选包，不负责文件/URL抓取，不宣称学习质量或Writer事实已通过。
+
 ## 2026-10-29 当前断点
 
 原文复读与范围修订API完成；原scope-01保留5完成/1包装失败、15响应、¥0.563487。方法27完整Markdown包装兼容后，scope-recovered-01用12份同请求缓存恢复六组、0新请求/账本不变；来源、审阅输入隔离、阅读副本和diff通过。scope-probe-01的18稿Flash全部完成，¥0.058348，事实仍越界（包括设备存放推断、地图现场补写、每周误每月），不宣布Writer就绪。scope-reviewed-01另存11处实现者修订/6份稿，未在该18稿中直接验证，不冒充全自动或独立人评。全库267通过/10忽略；累计¥21.755316含未知预留，无活模型任务。飞书报告和四份单/十篇待审稿已回读：https://www.feishu.cn/docx/HOIddv77aooXTsxQUMZcSZcXnde 。Base本轮五项事件与四轮运行同步完成、回读通过；下一阶段实现正文候选预览、命名保存、版本回看和追加差异；文件/URL后置，Writer事实核对单独追踪，不继续追加大矩阵。

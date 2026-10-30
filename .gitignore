@@ -11,3 +11,4 @@ research/style-aggregation/.pipeline.lock
 research/style-aggregation/.followthrough.lock
 research/style-aggregation/.candidate-followup.lock
 research/style-aggregation/candidate-followup.log
+.workspace.lock

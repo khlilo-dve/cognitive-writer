@@ -1,0 +1,13 @@
+{
+  "suite": "learning_workspace_local_v1",
+  "source_run": "voice-learning-core-01",
+  "source_inputs_sha256": "7cad1ca07ec12f7b95d00ffac9d57a324a690aa4c809dcfd495559a423fb3d17",
+  "source_counts": [
+    1,
+    3,
+    10
+  ],
+  "authors": 2,
+  "network_policy": "offline_cli_or_local_stub_only",
+  "budget_new_requests": 0
+}

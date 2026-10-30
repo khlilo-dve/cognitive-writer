@@ -31,6 +31,12 @@ fn run_cli_mode(args: Vec<String>) {
     let rt = tokio::runtime::Runtime::new().expect("无法创建 tokio runtime");
     rt.block_on(async {
         match subcommand {
+            Some("style-draft") => {
+                if let Err(e) = cognitive_writer::learning_workspace_cli::run(&remaining) {
+                    eprintln!("[error] {e}");
+                    std::process::exit(1);
+                }
+            }
             Some("research") => {
                 if let Err(e) = cognitive_writer::research_run::run(&remaining).await {
                     eprintln!("[error] {e}");
@@ -80,7 +86,7 @@ fn run_cli_mode(args: Vec<String>) {
             _ => {
                 let cmd = subcommand.unwrap_or("");
                 eprintln!("未知命令: {}", cmd);
-                eprintln!("用法: cog [generate|learn|refine|update|research] [...]");
+                eprintln!("用法: cog [generate|learn|style-draft|refine|update|research] [...]");
                 std::process::exit(1);
             }
         }

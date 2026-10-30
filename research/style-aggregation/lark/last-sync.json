@@ -2,13 +2,10 @@
   "status": "complete",
   "base": "Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
   "manifest": "None",
-  "run": "None",
+  "run": "research/style-aggregation/runs/learning-workspace-local-01",
   "runs": [
-    "research/style-aggregation/runs/voice-learning-scope-01",
-    "research/style-aggregation/runs/voice-learning-scope-recovered-01",
-    "research/style-aggregation/runs/voice-learning-scope-probe-01",
-    "research/style-aggregation/runs/voice-learning-scope-reviewed-01"
+    "research/style-aggregation/runs/learning-workspace-local-01"
   ],
-  "journal_from": "E0061",
-  "record_count": 148
+  "journal_from": "E0066",
+  "record_count": 150
 }
