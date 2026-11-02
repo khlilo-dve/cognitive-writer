@@ -1,0 +1,52 @@
+{
+  "id": "wxb-k2",
+  "status": "complete",
+  "origin": "implementer_edit",
+  "source_count": 2,
+  "parent_candidate_id": "c59761ec6da4a06148b8aac69800b249a787a8898e090bd70c95c15c2d39c26e",
+  "parent_spec_sha256": "06492e752b20a589d8489ead6c63f275ddae449fc06361a0756564c8e615dda6",
+  "spec_sha256": "6ce9c74272df2722a2b9c9f5dcdbaf82433090dc530c8b0a1bdffe3b7bcd2f5f",
+  "edits": [
+    {
+      "id": "wxb-k2",
+      "before": "不要直接抒情。情绪通过反讽和荒诞感间接表达，具体落点见下。",
+      "after": "这组文本中，情绪往往随着推演、反讽及明确判断显露；平静语调与尖锐态度可以并存。这里的材料不足以支持禁止直接情感表达，使用时看任务需要及前文如何承载态度。",
+      "reason": "未观察到某种抒情形式不等于可以普遍禁止它。",
+      "evidence": {
+        "source_id": "wxb-02",
+        "source_text_sha256": "29d3b409cb8d668de6ad424909defcdc4676ffd29dd9b5ee9d0225db518be239",
+        "quote": "我觉得有件事情最可恶",
+        "start_codepoint": 811,
+        "end_codepoint": 821
+      }
+    },
+    {
+      "id": "wxb-k2",
+      "before": "这需要说话人在推进到漂亮结论后主动自我怀疑，让读者与作者共同怀疑。",
+      "after": "当这个结论掩盖了材料里的矛盾时，可以让说话人追问它是否成立，带读者重新检查；没有这样的矛盾，就无需人为搭出再拆掉一个漂亮结论。",
+      "reason": "自我怀疑依真实张力发生，不强制每次搭建再拆解。",
+      "evidence": {
+        "source_id": "wxb-02",
+        "source_text_sha256": "29d3b409cb8d668de6ad424909defcdc4676ffd29dd9b5ee9d0225db518be239",
+        "quote": "但我怀疑这么理解是不对的",
+        "start_codepoint": 1411,
+        "end_codepoint": 1423
+      }
+    },
+    {
+      "id": "wxb-k2",
+      "before": "纯粹抒情段落未在可见材料中出现，不要为了统一情感浓度而自行添加抒情段落，也不要为了统一理性风格而削平已有的长论证和明确情绪。",
+      "after": "这组材料对其他抒情形态提供的依据有限，无法据此判定其一律不适用。保留当前材料实际需要的长论证与明确情绪，不为统一标签删减表达。",
+      "reason": "未知写成证据范围，不用未知继续设立风格禁令。",
+      "evidence": {
+        "source_id": "wxb-03",
+        "source_text_sha256": "d8772f9eff9dae70ba1de98c25288b5db71b5aa7cd3b778accf29f734a226f74",
+        "quote": "对于一件愚蠢的事，你只能唱唱反调。",
+        "start_codepoint": 3284,
+        "end_codepoint": 3301
+      }
+    }
+  ],
+  "status_quality": "draft_pending_semantic_review",
+  "independent_evaluation": false
+}

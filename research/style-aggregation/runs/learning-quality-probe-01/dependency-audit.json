@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "incomplete_source_rejected_before_model_or_budget_mutation": true,
+  "ledger_before_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "ledger_after_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e"
+}

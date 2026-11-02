@@ -217,13 +217,6 @@ where
 {
     let job = load(ws, id)?;
     let _lock = store::lock(&directory(ws, id)?)?;
-    if job.learning_method != voice_learning::METHOD
-        || job.revision_method != voice_revision::METHOD
-    {
-        return Err(AppError::LearningWorkspace(
-            "学习方法已变化，不能悄悄复用旧任务；请保留旧记录并新建任务".into(),
-        ));
-    }
     // Completed output is immutable and can be recovered after later versions were saved.
     let prior = state(ws, id)?;
     if prior.status == "complete" {
@@ -233,6 +226,13 @@ where
                 .as_deref()
                 .ok_or_else(|| AppError::LearningWorkspace("完整任务缺少候选".into()))?,
         );
+    }
+    if job.learning_method != voice_learning::METHOD
+        || job.revision_method != voice_revision::METHOD
+    {
+        return Err(AppError::LearningWorkspace(
+            "学习方法已变化，不能悄悄复用旧任务；请保留旧记录并新建任务".into(),
+        ));
     }
     current_base(ws, &job.base, &job.articles)?;
     set_state(ws, id, "running", None)?;
@@ -352,5 +352,50 @@ mod tests {
         assert!(result.is_err());
         assert_eq!(state(&ws, &update.id).unwrap().status, "failed");
         assert_eq!(ws.versions("样例").unwrap().len(), 1);
+    }
+    #[tokio::test]
+    async fn completed_old_method_is_readable_but_unfinished_old_method_cannot_send() {
+        let temp = tempfile::tempdir().unwrap();
+        let ws = LearningWorkspace::open(temp.path()).unwrap();
+        let job = prepare(
+            &ws,
+            vec!["用于兼容验证的独特原文".into()],
+            "首次学习".into(),
+            None,
+            profile(),
+            prompts(),
+        )
+        .unwrap();
+        let candidate = run_with(&ws, &job.id, |_, _, _| async {
+            Ok("依照有据材料组织细节和判断。".into())
+        })
+        .await
+        .unwrap();
+        let mut historical = job.clone();
+        historical.revision_method = "historical-method".into();
+        historical.id = identity(&historical).unwrap();
+        store::publish_json(
+            &directory(&ws, &historical.id).unwrap().join("plan.json"),
+            &historical,
+        )
+        .unwrap();
+        set_state(&ws, &historical.id, "complete", Some(candidate.id.clone())).unwrap();
+        assert_eq!(
+            run_with(&ws, &historical.id, |_, _, _| async {
+                panic!("完整任务不可重发")
+            })
+            .await
+            .unwrap()
+            .id,
+            candidate.id
+        );
+        set_state(&ws, &historical.id, "failed", None).unwrap();
+        assert!(
+            run_with(&ws, &historical.id, |_, _, _| async {
+                panic!("旧方法未完成任务不可重发")
+            })
+            .await
+            .is_err()
+        );
     }
 }

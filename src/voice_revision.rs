@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::future::Future;
 
-pub const METHOD: &str = "voice-reviewed-v2";
+pub const METHOD: &str = "voice-reviewed-v3";
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct RevisionPrompts {
@@ -66,7 +66,9 @@ where
     if review.trim().is_empty() {
         return Err(AppError::Parse("原文范围审阅为空".into()));
     }
-    let original = json!({"article_count":sources.len(),"candidate":draft.spec,
+    let original = json!({"article_count":sources.len(),
+        "articles":sources.iter().map(|source|json!({"article":source.identity.article,"text":source.text})).collect::<Vec<_>>(),
+        "candidate":draft.spec,
         "source_review":review})
     .to_string();
     let mut user = original.clone();
@@ -213,7 +215,8 @@ mod tests {
         let captured = seen.lock().unwrap();
         assert!(!captured[0].1.contains("不应传给复读者的内部分析"));
         assert!(captured[0].1.contains("甲篇独特正文"));
-        assert!(!captured[1].1.contains("甲篇独特正文"));
+        assert!(captured[1].1.contains("甲篇独特正文"));
+        assert!(!captured[1].1.contains("不应传给复读者的内部分析"));
         assert_eq!(original.spec, "先说明有据的细节，再表达判断。");
         assert_eq!(revision.result.sources, original.sources);
         assert_eq!(revision.result.status, "draft_pending_semantic_review");

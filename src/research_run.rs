@@ -12,6 +12,7 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["learning-quality-probe",run,source]=>crate::research_learning_quality::run(run,source).await,
         ["learning-jobs",run]=>crate::research_learning_jobs::run(run,false).await,
         ["learning-jobs",run,"retry-uncertain"]=>crate::research_learning_jobs::run(run,true).await,
         ["voice-learning-pilot",run]=>crate::research_voice_learning::run(run).await,

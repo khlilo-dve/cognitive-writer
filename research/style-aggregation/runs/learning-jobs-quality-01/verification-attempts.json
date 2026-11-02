@@ -1,0 +1,21 @@
+{
+  "attempts": [
+    {
+      "kind": "transport",
+      "status": "preserved_uncertain",
+      "details": "Two first-stage calls failed; zero receipts; reserve 0.251340 CNY retained."
+    },
+    {
+      "kind": "local_fixture",
+      "status": "corrected_and_passed",
+      "details": "Old fixture expected prior prompt wording; updated to check full sources in revision payload and analysis isolation. No production assertion weakened."
+    },
+    {
+      "kind": "artifact_diff_format",
+      "status": "corrected",
+      "details": "Unified diff context-only blank lines triggered git whitespace checks; regenerated zero-context diffs from unchanged parent/derived specs. No model output or spec altered."
+    }
+  ],
+  "new_method_model_result": "not_available",
+  "local_http_final": "passed"
+}

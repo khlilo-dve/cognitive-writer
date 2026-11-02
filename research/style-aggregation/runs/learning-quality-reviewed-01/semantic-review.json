@@ -1,0 +1,12 @@
+{
+  "decision": "implementer_derived_drafts_only",
+  "edit_count": 21,
+  "original_model_outputs_preserved": true,
+  "new_automatic_method_evidence": "unavailable_due_to_TLS_failure",
+  "writer_execution": "not_started",
+  "independent_human_evaluation": false,
+  "limitations": [
+    "Only targeted known issues reviewed; no exhaustive semantic correctness claim.",
+    "Conditional mechanisms still require new-topic execution."
+  ]
+}

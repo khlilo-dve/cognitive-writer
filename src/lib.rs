@@ -18,6 +18,7 @@ pub mod learning_workspace_cli;
 pub mod learning_job;
 mod learning_transport;
 mod research_learning_jobs;
+mod research_learning_quality;
 mod learning_workspace_store;
 mod learning_diff;
 pub mod llm;

@@ -57,7 +57,12 @@ def main():
                 assert "内部分析专用标记" not in body["messages"][1]["content"]
                 text = "内部复读专用标记：说明只描述可见机制，不给手法设配额。"
             else:
-                assert "根据候选风格说明与原文复读意见" in system
+                assert "完整原文" in system and "复读意见" in system
+                user = json.loads(body["messages"][1]["content"])
+                assert set(user) == {"article_count", "articles", "candidate", "source_review"}
+                assert len(user["articles"]) == user["article_count"]
+                assert {a["text"] for a in user["articles"]} <= {"SOURCE_A：第一篇独特正文，记录真实的材料甲。", "SOURCE_B：第二篇不同正文，记录另外的材料乙。"}
+                assert "内部分析专用标记" not in body["messages"][1]["content"]
                 text = f"```md\n{SPEC}\n```"
             payload = json.dumps({"model": "mimo-v2.6-pro", "choices": [
                 {"message": {"content": text}, "finish_reason": "stop"}],

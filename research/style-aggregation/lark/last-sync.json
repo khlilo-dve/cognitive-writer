@@ -4,9 +4,10 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/learning-jobs-live-01",
-    "research/style-aggregation/runs/learning-jobs-live-02"
+    "research/style-aggregation/runs/learning-jobs-quality-01",
+    "research/style-aggregation/runs/learning-quality-reviewed-01",
+    "research/style-aggregation/runs/learning-quality-probe-01"
   ],
-  "journal_from": "E0067",
-  "record_count": 155
+  "journal_from": "E0070",
+  "record_count": 161
 }

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "fresh_pro_learning_bounded_explicit_retry_frozen_inputs_and_keyless_completed_resume",
+    "append_reads_parent_sources_relearns_without_old_style_and_saves_only_explicitly",
+    "endpoint_drift_and_corrupted_response_block_before_network",
+    "ctrl_c_retains_task_and_unknown_intent_without_changing_saved_versions"
+  ],
+  "local_http_requests": 10,
+  "paid_model_requests": 0,
+  "ledger_before_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "ledger_after_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "temporary_workspaces_cleaned": true
+}

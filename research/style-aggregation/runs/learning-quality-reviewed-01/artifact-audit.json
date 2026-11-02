@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "origin_visible": true,
+      "unchanged_source_count": 1,
+      "parent_version_unchanged": true,
+      "pure_spec_export": true
+    },
+    {
+      "id": "wxb-k2",
+      "origin_visible": true,
+      "unchanged_source_count": 2,
+      "parent_version_unchanged": true,
+      "pure_spec_export": true
+    },
+    {
+      "id": "wzq-k1",
+      "origin_visible": true,
+      "unchanged_source_count": 1,
+      "parent_version_unchanged": true,
+      "pure_spec_export": true
+    },
+    {
+      "id": "wzq-k2",
+      "origin_visible": true,
+      "unchanged_source_count": 2,
+      "parent_version_unchanged": true,
+      "pure_spec_export": true
+    }
+  ],
+  "historical_complete_jobs_recovered_without_key": 4,
+  "old_json_artifacts_unchanged": true,
+  "temporary_workspaces_cleaned": true,
+  "new_model_requests": 0,
+  "ledger_before_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "ledger_after_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "quality": "implementer_edits_not_independent_acceptance"
+}

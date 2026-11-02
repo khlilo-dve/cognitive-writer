@@ -1,0 +1,17 @@
+{"case": "failed_write_is_atomic", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "idle_ctrl_c", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "naming_ctrl_c", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "delete_ctrl_c", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "restore_prompt_ctrl_c", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "naming_eof", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "delete_eof", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "restored_naming_is_local", "status": "passed", "exit_seconds": 0.02, "api_calls": 0}
+{"case": "classification_ctrl_c", "status": "passed", "exit_seconds": 0.02, "api_calls": 1}
+{"case": "rendering_ctrl_c", "status": "passed", "exit_seconds": 0.02, "api_calls": 1}
+{"case": "old_outline_render", "status": "passed", "exit_seconds": 0.02, "api_calls": 1}
+{"case": "restore_corrupt_preserves_original", "status": "passed", "exit_seconds": 0.02}
+{"case": "restore_invalid_utf8_preserves_original", "status": "passed", "exit_seconds": 0.02}
+{"case": "restore_unreadable_preserves_original", "status": "passed", "exit_seconds": 0.02}
+{"case": "draft_local_failure_preserves_and_restores", "status": "passed", "exit_seconds": 0.02}
+{"case": "draft_html_failure_preserves_and_restores", "status": "passed", "exit_seconds": 0.02}
+{"case": "draft_website_failure_preserves_and_restores", "status": "passed", "exit_seconds": 0.02}

@@ -1,5 +1,13 @@
 # 当前任务状态
 
+## 2026-11-02 方法28收尾：实现与离线修订完成，真实验证待恢复
+
+voice-reviewed-v3已把完整原文传给修订者，四份开发提示词改进当篇缘由/表达关系/末尾条件一致性；旧完整任务跨方法仍可无密钥找回，旧未完成任务拒绝静默升级。279库测试/10忽略、构建、17终端回归与本地HTTP链通过。learning-jobs-quality-01两个首阶段Pro调用TLS中断，0响应/0自动候选，保留0.251340元未知预留，累计占用22.359375元，余额77.640625元；Windows/WSL和最终无密钥探针均TLS失败，无活模型进程、没有继续付费重试。learning-quality-probe-01的10篇Flash因来源缺失暂缓，不能用旧/人工稿冒充结果。learning-quality-reviewed-01另存四份旧稿的21处实现者有据修订，原句/改法/精确原文定位/diff保留，临时导入/版本/导出审计通过，0模型请求。报告及两份单/双篇阅读文档已回读：https://www.feishu.cn/docx/WkPRd6xaRoNvzxxm1B8c4xy9n15 。下一步先无密钥探针确认可达，显式有界恢复原冻结学习run，四任务完整后执行冻结10稿并分别读声音与事实；文件URL与正式默认替换继续后置。 Base已同步三个run和E0070–E0072并回读。
+
+## 2026-11-02 方法28执行断点
+
+新增完整原文直达修订者和四提示词范围表达改进，voice-reviewed-v3。learning-jobs-quality-01四任务Pro上限3元；后续learning-quality-probe-01两新题材共10稿Flash上限1元，均纳入100元。当前结果必须核对进程/summary/账本；未完成不宣称通过，method-revision-28.md冻结目的。文件URL和正式默认替换仍后置。
+
 ## 2026-11-02 正文学习任务完成核对
 
 style-draft新增learn/append/jobs/job/resume，已接完整正文到待审候选与显式保存版本。learning-jobs-live-02两作者各1→2篇四任务全部完成、16个Pro响应、无未知请求；四候选/版本/来源身份核对及无密钥产品CLI恢复通过，研究入口整轮复跑0新请求、账本SHA及保存版本不变。278库测试通过/10忽略，17既有终端回归及本地HTTP/工作区回归通过。live-01锁竞争0请求失败与验证并发账本误报均保留，未放宽产品保护。run0.352719元，累计22.108035元含未知预留，100元内余额77.891965元，无活模型任务。报告research/style-aggregation/reports/learning-jobs-2026-11-02.md；semantic-review有具体身份泛化/段落禁令/固定自检缺口，未宣布质量或Writer事实通过。下一步有限语义改进和少量跨题材执行，文件URL与旧learn/REPL默认替换继续后置。 飞书报告https://www.feishu.cn/docx/UnXOd4a4Kozd14x92MfcHL8fngc已回读，Base两run及E0067–E0069同步回读完成。

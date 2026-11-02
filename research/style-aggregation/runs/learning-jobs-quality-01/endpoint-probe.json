@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-02",
+  "endpoint": "https://api.xiaomimimo.com/v1/models",
+  "authentication_sent": false,
+  "wsl_default": "TLS failed: SSL_ERROR_SYSCALL; HTTP 000",
+  "windows_default": "TLS failed: schannel handshake; HTTP 000",
+  "wsl_no_proxy_tls12": "TLS failed: SSL_ERROR_SYSCALL; HTTP 000",
+  "conclusion": "Connection failed before an HTTP response; does not identify provider, ISP or local root cause.",
+  "final_read_only_recheck": "TLS SSL_ERROR_SYSCALL; HTTP 000; no authenticated retry"
+}

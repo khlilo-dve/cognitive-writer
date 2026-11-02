@@ -1,0 +1,59 @@
+{
+  "status": "complete",
+  "stage": "implementer_grounded_revision",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "status": "complete",
+      "origin": "implementer_edit",
+      "source_count": 1,
+      "parent_candidate_id": "b02fa62492b414c865679a7720b2f007d190e861e298c3c73f2ea6db4393e91e",
+      "parent_spec_sha256": "4e7226d61036f7fb65f18bddf9ced71d2943b747d9fa692d48fc73a9c5c0b9a5",
+      "spec_sha256": "7aea048fb7cb98a121d195ff1d524534aa17505179eed346f9c1a233a2f9b050",
+      "status_quality": "draft_pending_semantic_review",
+      "independent_evaluation": false
+    },
+    {
+      "id": "wxb-k2",
+      "status": "complete",
+      "origin": "implementer_edit",
+      "source_count": 2,
+      "parent_candidate_id": "c59761ec6da4a06148b8aac69800b249a787a8898e090bd70c95c15c2d39c26e",
+      "parent_spec_sha256": "06492e752b20a589d8489ead6c63f275ddae449fc06361a0756564c8e615dda6",
+      "spec_sha256": "6ce9c74272df2722a2b9c9f5dcdbaf82433090dc530c8b0a1bdffe3b7bcd2f5f",
+      "status_quality": "draft_pending_semantic_review",
+      "independent_evaluation": false
+    },
+    {
+      "id": "wzq-k1",
+      "status": "complete",
+      "origin": "implementer_edit",
+      "source_count": 1,
+      "parent_candidate_id": "6a2c1ab7613401fbfb22e983a2e53d77526ae6f5cf552f649ba45fa41c832558",
+      "parent_spec_sha256": "0e3ab70aad81f33f752c94c3dd3bcd49209d155f157a43367ecd86c659b2dd04",
+      "spec_sha256": "549a2feb252445fc549bb5ff9b9b6358e33a951de7b94a922ec453be098a7fb8",
+      "status_quality": "draft_pending_semantic_review",
+      "independent_evaluation": false
+    },
+    {
+      "id": "wzq-k2",
+      "status": "complete",
+      "origin": "implementer_edit",
+      "source_count": 2,
+      "parent_candidate_id": "28e18e1a642c9772abfb5e0b7696708fbbae71011eec78eac7fdaebda0a555f3",
+      "parent_spec_sha256": "3bdd65697c80e0bb051b29fe0b84a010e7b1ef6867664eb9c6a987a289bab540",
+      "spec_sha256": "2d9822928f36722e82e03a89f92012e00b2396bd04b2fbf26f3497327a1febd9",
+      "status_quality": "draft_pending_semantic_review",
+      "independent_evaluation": false
+    }
+  ],
+  "edit_count": 21,
+  "model_requests": 0,
+  "usage": {
+    "run_occupied_cny": 0,
+    "occupied_cny": 22.359375
+  },
+  "ledger_before_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "ledger_after_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "scope": "Derived examples for review, not output of the new automatic learner or a Writer validation."
+}
