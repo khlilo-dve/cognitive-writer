@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "id": "wxb-k1-tool_board",
+      "body_sha256": "702f8e01ff7f8d2095a75ef15e9f9d58c43fa92615dd0aed1af47e8dea663001",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wxb-k1-photo_numbers",
+      "body_sha256": "e72339dee4a59b6a15591dc46bf898758cf1e295876899aeb0741ae623aa605e",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wxb-k2-tool_board",
+      "body_sha256": "3de71199b50e133f68009eba76a116f3818898d87677940001261f608fa74235",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wxb-k2-photo_numbers",
+      "body_sha256": "39ab6c45248647c155eaa7fdbe5552ca930dee0adc587228e389d549c2d7fcc6",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wzq-k1-tool_board",
+      "body_sha256": "00c8e664c72450896c38d8c0385d22620995b8c48a8c6776e50bba72f296bfb2",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wzq-k1-photo_numbers",
+      "body_sha256": "9f16d107ae86e447cd81b6e25d473366ad503645da8acdd25065282cbfd63eb9",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wzq-k2-tool_board",
+      "body_sha256": "c2bab63e86828cf6fdb1423863cd26e4d6cea7fafb882651bbcaa6fae2a269f0",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wzq-k2-photo_numbers",
+      "body_sha256": "8a234e5e62da23c6718317aaa4833facd37dcb70e38709436e708085f09b4e29",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "neutral-tool_board",
+      "body_sha256": "a0f28867a0b9745429e8120f6f03e9d6e8e248dea539f93c8e3a5dad25efc246",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "neutral-photo_numbers",
+      "body_sha256": "f6f5c45a45b0a24e89f11e260418b4f59777e2602640f2e1d2f967b99bccca18",
+      "model": "mimo-v2.6-flash"
+    }
+  ],
+  "new_model_requests": 0,
+  "same_tasks_and_fact_policy": true,
+  "new_automatic_candidate_identity_verified": true,
+  "analysis_and_review_excluded_from_writer": true,
+  "ledger_before_sha256": "eeb49288d33f0e708b61140c868223b6241e9e1f8280066ae74ce683c2fc7623",
+  "ledger_after_sha256": "eeb49288d33f0e708b61140c868223b6241e9e1f8280066ae74ce683c2fc7623",
+  "semantic_and_factual_quality": "separate_implementer_readout_required"
+}

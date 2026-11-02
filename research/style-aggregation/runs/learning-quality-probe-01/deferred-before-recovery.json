@@ -1,0 +1,62 @@
+{
+  "status": "deferred",
+  "stage": "learning_quality_writer_probe",
+  "expected": 10,
+  "rows": [
+    {
+      "id": "wxb-k1-tool_board",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wxb-k1-photo_numbers",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wxb-k2-tool_board",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wxb-k2-photo_numbers",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wzq-k1-tool_board",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wzq-k1-photo_numbers",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wzq-k2-tool_board",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "wzq-k2-photo_numbers",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "neutral-tool_board",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    },
+    {
+      "id": "neutral-photo_numbers",
+      "status": "deferred",
+      "reason": "new automatic source candidates unavailable after TLS failure"
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0,
+    "occupied_cny": 22.359375
+  },
+  "model_requests": 0
+}

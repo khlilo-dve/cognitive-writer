@@ -33,3 +33,5 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 2026-11-02正文任务接入（10-31启动）：`style-draft learn/append/jobs/job/resume`接真实Pro学习与复读，旧import等命令仍离线。`learning_job.rs`冻结来源/提示词/方法/基准，`learning_transport.rs`保留逐阶段意图/响应及usage，未知请求仅显式最多三次；成功仅返回候选，不自动保存版本。append取回旧原文整体重学。研究适配器`research_learning_jobs.rs`共用产品编排和留证，真实四任务/16响应完成、无密钥恢复和0新请求复跑通过；278库测试通过/10忽略。`voice-core-v2`只增加完整Markdown外包装兼容，旧run不能覆盖。说明仍有身份泛化、条件路线变硬禁令等问题；保存不等于质量通过，文件URL和默认learn/REPL替换仍后置。详见docs/2026-10-31-learning-jobs.md与research/style-aggregation/reports/learning-jobs-2026-11-02.md。
 
 2026-11-02方法28：`voice-reviewed-v3`将规范排序完整原文加入修订输入，仍隔离旧analysis；四份学习提示词增强当篇缘由/表达关系/自检一致性。完整旧任务先找回不可变候选，未完成旧方法仍拒绝静默切换。279库测试通过/10忽略，本地HTTP与17终端回归通过。真实新任务因TLS失败0响应，10稿依赖暂缓；四份旧稿的21处实现者有据派生不冒充自动质量验证。新研究入口`research learning-quality-probe <run> <source-run>`来源未完整则拒绝发请求；资料与恢复顺序见docs/2026-11-02-source-grounded-revision.md。
+
+2026-11-02方法28后续真实恢复：原冻结四任务16份Pro响应及10篇Flash用稿已完整，来源/版本和纯spec输入审计与零请求复跑通过。说明部分条件化改善，但单篇第一人称功能/身体细节范围误判仍在；10稿有具体事实越界且中性也有，不能据此宣布Writer就绪。见research/style-aggregation/reports/learning-quality-recovered-2026-11-02.md；不把前一条TLS失败当当前结果，也不改写历史失败。

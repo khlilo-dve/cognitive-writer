@@ -173,6 +173,8 @@ def main():
             report_file = ROOT / "lark/learning-jobs-stage-20261102.json"
         if rid.startswith(("learning-jobs-quality", "learning-quality-")):
             report_file = ROOT / "lark/learning-quality-stage-20261102.json"
+        if rid in ("learning-jobs-quality-01", "learning-quality-probe-01"):
+            report_file = ROOT / "lark/learning-quality-recovery-stage-20261102.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
@@ -212,11 +214,11 @@ def main():
         if rid.startswith("learning-jobs"):
             stage = "正文学习任务｜真实1→2篇链与恢复"
         if rid.startswith("learning-jobs-quality"):
-            stage = "学习质量改进｜真实调用传输中断"
+            stage = "学习质量改进｜恢复后四任务核查" if summary["status"] == "complete" else "学习质量改进｜真实调用传输中断"
         if rid.startswith("learning-quality-reviewed"):
             stage = "来源范围修订｜实现者派生阅读稿"
         if rid.startswith("learning-quality-probe"):
-            stage = "新题材执行检查｜依赖未完成暂缓"
+            stage = "新题材执行检查｜10稿完成与事实核查" if summary["status"] == "complete" else "新题材执行检查｜依赖未完成暂缓"
         for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label
@@ -230,6 +232,9 @@ def main():
         elif any("passed" in r for r in rows):
             checks = f" 开发预期一致 {sum(r.get('passed') is True for r in rows)}/{len(rows)}，不等于人评。"
         review_path = run / "semantic-review.json"
+        recovered_review = run / "semantic-review-recovered.json"
+        if recovered_review.exists():
+            review_path = recovered_review
         if review_path.exists():
             review = json.loads(review_path.read_text())
             if review.get("decision") == "reject_for_full_matrix":
@@ -245,6 +250,8 @@ def main():
             checks += f" {len(rows)}条作者链内共{len(jobs)}个已产出结果的学习任务，完成{sum(j.get('status') == 'complete' for j in jobs)}个；保存仅在研究工作区，Style仍待审。"
         if rid.startswith("learning-quality-reviewed"):
             checks += " 四份是旧模型稿上的21处实现者派生修改，0模型请求，不代表新自动方法产物或Writer验收。"
+        if rid == "learning-quality-probe-01" and (run / "qualitative-readout.json").exists():
+            checks += " 已逐稿读10篇并记录具体事实问题，中性稿也有越界；不是可发布成稿或质量通过。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + checks + summary.get("error", ""),

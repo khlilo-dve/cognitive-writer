@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Verify real development jobs and recover completed candidates through the product CLI, offline."""
+import argparse
 import hashlib
+import re
 import json
 import os
 import subprocess
@@ -20,7 +22,9 @@ def identity(record):
                              ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode())
 
 
-def main():
+def main(run_id="learning-jobs-live-02"):
+    assert re.fullmatch(r"[A-Za-z0-9_-]+", run_id)
+    RUN = ROOT / "research/style-aggregation/runs" / run_id
     summary = json.loads((RUN / "summary.json").read_text())
     assert summary["status"] == "complete" and len(summary["rows"]) == 2
     ledger = ROOT / "research/style-aggregation/usage-ledger.json"
@@ -95,4 +99,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", default="learning-jobs-live-02")
+    main(parser.parse_args().run)

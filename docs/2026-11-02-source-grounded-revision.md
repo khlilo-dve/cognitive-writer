@@ -23,3 +23,7 @@
 ## 恢复
 
 先对官方端点进行不带密钥的TLS探针。只有可达后，使用同一冻结run的`research learning-jobs learning-jobs-quality-01 retry-uncertain`，已有请求意图/未知预留继续保留，不覆盖原记录；每阶段最多三次。任务完整后使用`research learning-quality-probe learning-quality-probe-01 learning-jobs-quality-01`完成冻结10稿，再质性读稿。若传输仍失败，保持缺失，不改模型或拿人工稿充当自动结果。
+
+## 同日后续：真实恢复已完成
+
+此前失败为历史状态，失败/暂缓和验证摘要都另存。连接恢复后，同冻结四任务实际完成16份Pro响应，10篇Flash用稿也全部完成；来源/版本/纯spec及响应审计、无密钥找回和两轮零请求复跑通过。新增usage估算0.376723元，旧未知预留0.251340元保留，累计占用22.736098元。新方法条件表达局部改善但仍有原文可证的概括错误，10稿事实越界单列，未通过全面质量验收。详情见research/style-aggregation/reports/learning-quality-recovered-2026-11-02.md。

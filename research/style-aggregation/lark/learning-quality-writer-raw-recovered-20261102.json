@@ -1,0 +1,13 @@
+{
+  "source_sha256": "52d34b757589061640f57195c7da2fb03ae83dc71bff0261ce206aff94634d9e",
+  "response": {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "CDuMdEzyHonqLhxsr02ctnqXngb",
+      "doc_url": "https://www.feishu.cn/docx/CDuMdEzyHonqLhxsr02ctnqXngb",
+      "log_id": "20261102161104C9D82C10FFB85563F5C8",
+      "message": "文档创建成功"
+    }
+  }
+}

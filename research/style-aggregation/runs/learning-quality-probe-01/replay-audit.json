@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "new_model_requests": 0,
+  "cached_responses": 10,
+  "ledger_before_sha256": "eeb49288d33f0e708b61140c868223b6241e9e1f8280066ae74ce683c2fc7623",
+  "ledger_after_sha256": "eeb49288d33f0e708b61140c868223b6241e9e1f8280066ae74ce683c2fc7623"
+}

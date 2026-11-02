@@ -371,12 +371,194 @@
       "actual_micro": null,
       "state": "reserved_or_uncertain"
     },
+    "learning-jobs-quality-01/wxb-k1-learn-analysis/attempt-2": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 125436,
+      "actual_micro": 18063,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k1-learn-compile-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 135735,
+      "actual_micro": 14970,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k1-scope-review": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 140076,
+      "actual_micro": 19716,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k1-scope-revise-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 164046,
+      "actual_micro": 23355,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k2-learn-analysis": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 154920,
+      "actual_micro": 12753,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k2-learn-compile-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 110505,
+      "actual_micro": 9708,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k2-scope-review": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 170925,
+      "actual_micro": 24360,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wxb-k2-scope-revise-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 189417,
+      "actual_micro": 31476,
+      "state": "settled"
+    },
     "learning-jobs-quality-01/wzq-k1-learn-analysis": {
       "run_id": "learning-jobs-quality-01",
       "phase": "full",
       "reserved_micro": 125904,
       "actual_micro": null,
       "state": "reserved_or_uncertain"
+    },
+    "learning-jobs-quality-01/wzq-k1-learn-analysis/attempt-2": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 125904,
+      "actual_micro": 21972,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k1-learn-compile-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 142614,
+      "actual_micro": 21009,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k1-scope-review": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 148833,
+      "actual_micro": 26925,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k1-scope-revise-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 182805,
+      "actual_micro": 33549,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k2-learn-analysis": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 145908,
+      "actual_micro": 11583,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k2-learn-compile-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 110217,
+      "actual_micro": 8334,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k2-scope-review": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 160608,
+      "actual_micro": 26682,
+      "state": "settled"
+    },
+    "learning-jobs-quality-01/wzq-k2-scope-revise-0": {
+      "run_id": "learning-jobs-quality-01",
+      "phase": "full",
+      "reserved_micro": 189777,
+      "actual_micro": 28815,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/neutral-photo_numbers": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 11985,
+      "actual_micro": 2670,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/neutral-tool_board": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 12015,
+      "actual_micro": 2695,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wxb-k1-photo_numbers": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 18091,
+      "actual_micro": 3886,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wxb-k1-tool_board": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 18121,
+      "actual_micro": 4183,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wxb-k2-photo_numbers": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 19533,
+      "actual_micro": 6282,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wxb-k2-tool_board": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 19563,
+      "actual_micro": 5553,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wzq-k1-photo_numbers": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 21591,
+      "actual_micro": 5194,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wzq-k1-tool_board": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 21621,
+      "actual_micro": 4791,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wzq-k2-photo_numbers": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 17859,
+      "actual_micro": 4307,
+      "state": "settled"
+    },
+    "learning-quality-probe-01/wzq-k2-tool_board": {
+      "run_id": "learning-quality-probe-01",
+      "phase": "full",
+      "reserved_micro": 17889,
+      "actual_micro": 3892,
+      "state": "settled"
     },
     "p1-detailed-pilot-01/wxb-01-direct_0": {
       "run_id": "p1-detailed-pilot-01",

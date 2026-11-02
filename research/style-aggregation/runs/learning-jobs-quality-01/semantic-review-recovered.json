@@ -1,0 +1,105 @@
+{
+  "reviewer": "implementer_source_grounded_reading_not_independent_human_evaluation",
+  "decision": "partial_semantic_improvement_with_known_misgeneralization",
+  "rows": [
+    {
+      "id": "wxb-k1",
+      "improvement": "取消四/五步硬顺序和语体不得同句混用，保留精密比较、平静叙述与判断落差。",
+      "limitation": "仍把来源中身体性过程提升为证据场景的必要条件；面对无此类材料的任务可能诱导扩编。",
+      "evidence_source": "wxb-02",
+      "keep_anchor": {
+        "quote": "两层可以在同一句内完成切换",
+        "start_codepoint": 1626,
+        "end_codepoint": 1639,
+        "text_sha256": "f50c0632c4d11bb3f113530d6d3264a575432f3c73f3b52558e67589850c531c"
+      },
+      "limitation_anchor": {
+        "quote": "充当证据的核心场景必须展开到身体与感官细节",
+        "start_codepoint": 357,
+        "end_codepoint": 378,
+        "text_sha256": "f50c0632c4d11bb3f113530d6d3264a575432f3c73f3b52558e67589850c531c"
+      },
+      "source_anchor": {
+        "quote": "我觉得有件事情最可恶",
+        "start_codepoint": 811,
+        "end_codepoint": 821,
+        "text_sha256": "29d3b409cb8d668de6ad424909defcdc4676ffd29dd9b5ee9d0225db518be239"
+      }
+    },
+    {
+      "id": "wxb-k2",
+      "improvement": "同时解释日常材料、抽象框架和条件推演，允许直接判断和明确情绪，不要求同一收尾路线。",
+      "limitation": "这一上位概括与允许直接判断之间仍需明确范围；原文存在明确结论，不能把未定推理作为全部声音。",
+      "evidence_source": "wxb-03",
+      "keep_anchor": {
+        "quote": "情绪允许明确、允许强烈",
+        "start_codepoint": 2108,
+        "end_codepoint": 2119,
+        "text_sha256": "90c8c800d09214c583ecc44efe33bc3fb3990ffe5f9fd9782bf56bed98f16a2f"
+      },
+      "limitation_anchor": {
+        "quote": "核心姿态不是给出定论",
+        "start_codepoint": 210,
+        "end_codepoint": 220,
+        "text_sha256": "90c8c800d09214c583ecc44efe33bc3fb3990ffe5f9fd9782bf56bed98f16a2f"
+      },
+      "source_anchor": {
+        "quote": "对于一件愚蠢的事，你只能唱唱反调。",
+        "start_codepoint": 3284,
+        "end_codepoint": 3301,
+        "text_sha256": "d8772f9eff9dae70ba1de98c25288b5db71b5aa7cd3b778accf29f734a226f74"
+      }
+    },
+    {
+      "id": "wzq-k1",
+      "improvement": "写作缘由与持续身份分开；情绪可以直接落下、限定或否定排除，括号不再等同压低判断。",
+      "limitation": "仍与原文直接的第一人称思念句冲突；复读者错误赞同该句，修订者虽收到原文仍保留。当前说明内的感受陈述与该禁断也矛盾。",
+      "evidence_source": "wzq-02",
+      "keep_anchor": {
+        "quote": "三种方式可以在同一篇里出现",
+        "start_codepoint": 1373,
+        "end_codepoint": 1386,
+        "text_sha256": "737761def604176e4170ea3d53c0553dbd190e21ea3f9deaff2c358632a2662a"
+      },
+      "limitation_anchor": {
+        "quote": "第一人称是可信度工具，不是抒情工具。",
+        "start_codepoint": 2308,
+        "end_codepoint": 2326,
+        "text_sha256": "737761def604176e4170ea3d53c0553dbd190e21ea3f9deaff2c358632a2662a"
+      },
+      "source_anchor": {
+        "quote": "我想念昆明的雨。",
+        "start_codepoint": 164,
+        "end_codepoint": 172,
+        "text_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+      }
+    },
+    {
+      "id": "wzq-k2",
+      "improvement": "判断与材料互相照应；公共事实与个人感受可以交错，不继承当篇身份或要求固定收尾。",
+      "limitation": "作为宏观描述有解释力，但不应被理解成禁止先判断后说明；本文件后文也允许先给直接评价。尚未证明所有条件表达都稳定。",
+      "evidence_source": "wzq-04",
+      "keep_anchor": {
+        "quote": "两类材料可以交错使用。",
+        "start_codepoint": 538,
+        "end_codepoint": 549,
+        "text_sha256": "09708f1df9d67526b69e243ac633a2aae0f8e8138ad02b2ba8ec06e3c6cca3fa"
+      },
+      "limitation_anchor": {
+        "quote": "这类声音不先立一个明确观点，再拿叙述去证明",
+        "start_codepoint": 206,
+        "end_codepoint": 227,
+        "text_sha256": "09708f1df9d67526b69e243ac633a2aae0f8e8138ad02b2ba8ec06e3c6cca3fa"
+      },
+      "source_anchor": {
+        "quote": "这本书还是值得看看的。",
+        "start_codepoint": 24,
+        "end_codepoint": 35,
+        "text_sha256": "2764050f13fc60ca60d15daa29823e29a571b5a5bda3d11e3674e284f1ce3ab5"
+      }
+    }
+  ],
+  "production_adoption": false,
+  "causal_limit": "Four prompts and source-aware revision changed together; do not attribute improvements to one change alone.",
+  "next_step": "Keep exact counterexamples; fix first-person function and remaining scope contradictions in the learner without reopening a large matrix. Writer fact verification remains a separate issue."
+}

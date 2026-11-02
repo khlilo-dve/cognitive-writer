@@ -13,11 +13,16 @@
   "terminal_regression_cases": 17,
   "source_revision_payload": "complete_canonical_sources_without_old_analysis",
   "historical_completed_jobs_keyless_recovery": 4,
-  "real_new_method_receipts": 0,
-  "real_new_method_pending_tasks": 4,
-  "downstream_drafts_deferred": 10,
+  "real_new_method_receipts": 16,
+  "real_new_method_pending_tasks": 0,
+  "downstream_drafts_deferred": 0,
   "implementer_derived_profiles": 4,
   "source_grounded_implementer_edits": 21,
   "production_env_styles_and_default_learning_changed": false,
-  "ledger_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e"
+  "ledger_sha256": "eeb49288d33f0e708b61140c868223b6241e9e1f8280066ae74ce683c2fc7623",
+  "downstream_flash_drafts_complete": 10,
+  "new_automatic_artifact_audit": "passed",
+  "new_writer_artifact_audit": "passed",
+  "zero_request_replay_both_runs": "passed",
+  "quality": "partial_improvement_known_scope_and_writer_fact_failures"
 }

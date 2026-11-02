@@ -1,0 +1,280 @@
+{
+  "reviewer": "implementer_not_independent_human_evaluation",
+  "rows": [
+    {
+      "id": "neutral-tool_board",
+      "body_sha256": "a0f28867a0b9745429e8120f6f03e9d6e8e248dea539f93c8e3a5dad25efc246",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "这不是排名造成的",
+          "start_codepoint": 734,
+          "end_codepoint": 742,
+          "text_sha256": "a0f28867a0b9745429e8120f6f03e9d6e8e248dea539f93c8e3a5dad25efc246"
+        },
+        "reason": "没有提供两笔状态未知与排名之间的因果信息，不能断言不存在因果。",
+        "given_facts": "一个社区设有共享工具柜，工具包括两把电钻、三套螺丝刀和一架折叠梯。居民用纸质登记簿记录借出与归还。柜门旁原来贴着按月借用次数排列的名单。有人借一次梯子用于更换家中窗帘，有人一个月借多次螺丝刀；次数没有记录用途、借用时长或任务难度。登记簿有两笔只写了借出日期，暂时无法确认是否归还。管理员决定撤下次数排名，保留原始登记；以后另记损坏和缺失，方便核查。没有调查居民是否喜欢排名，也没有资料证明排名改变了工具使用或归还行为。",
+        "required_information_observed": "两笔状态未明、用途/时长/难度缺失仍被说明。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "把不同任务的借用放进同一个计数序列",
+          "start_codepoint": 379,
+          "end_codepoint": 396,
+          "text_sha256": "a0f28867a0b9745429e8120f6f03e9d6e8e248dea539f93c8e3a5dad25efc246"
+        },
+        "observation": "中性稿也有比较与类比，不能把这些通用写法单独归因于风格。",
+        "rating": null
+      }
+    },
+    {
+      "id": "neutral-photo_numbers",
+      "body_sha256": "f6f5c45a45b0a24e89f11e260418b4f59777e2602640f2e1d2f967b99bccca18",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "另一本在另一本相册的另一页",
+          "start_codepoint": 784,
+          "end_codepoint": 797,
+          "text_sha256": "f6f5c45a45b0a24e89f11e260418b4f59777e2602640f2e1d2f967b99bccca18"
+        },
+        "reason": "只知三本中有两张同内容照片，不能推出它们分属不同相册。",
+        "given_facts": "一位资料整理员接手了家里留下的三本旧相册。照片原来夹在透明页中，有的背面写着年份，有的没有日期。整理员给每张照片编了编号，在一张纸表上分别记下原相册、原页码、背面已有文字；没有补写不知道的日期和人物关系。三本相册里有两张内容相同的合照，它们都有自己的编号，纸表注明内容重复并保留原位置。整理尚未完成，目前只编完第一本。家人提出以后想按人物找照片，但尚未决定怎样建人物索引，扫描也未开始。",
+        "required_information_observed": "明确两张是不同实体，保留人物索引未定及扫描未开始。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "空着不是遗漏，是如实记下",
+          "start_codepoint": 1230,
+          "end_codepoint": 1242,
+          "text_sha256": "f6f5c45a45b0a24e89f11e260418b4f59777e2602640f2e1d2f967b99bccca18"
+        },
+        "observation": "中性稿也使用短判断和对照，作者辨识度未独立验证。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wxb-k1-tool_board",
+      "body_sha256": "702f8e01ff7f8d2095a75ef15e9f9d58c43fa92615dd0aed1af47e8dea663001",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "取决于登记簿上的先后",
+          "start_codepoint": 1198,
+          "end_codepoint": 1208,
+          "text_sha256": "702f8e01ff7f8d2095a75ef15e9f9d58c43fa92615dd0aed1af47e8dea663001"
+        },
+        "reason": "材料没有提供按登记先后分配工具的规则，文中补了管理机制。",
+        "given_facts": "一个社区设有共享工具柜，工具包括两把电钻、三套螺丝刀和一架折叠梯。居民用纸质登记簿记录借出与归还。柜门旁原来贴着按月借用次数排列的名单。有人借一次梯子用于更换家中窗帘，有人一个月借多次螺丝刀；次数没有记录用途、借用时长或任务难度。登记簿有两笔只写了借出日期，暂时无法确认是否归还。管理员决定撤下次数排名，保留原始登记；以后另记损坏和缺失，方便核查。没有调查居民是否喜欢排名，也没有资料证明排名改变了工具使用或归还行为。",
+        "required_information_observed": "两笔归还状态未明和排名效果无证据被提及。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "这里可以做一个有条件的推算",
+          "start_codepoint": 400,
+          "end_codepoint": 413,
+          "text_sha256": "702f8e01ff7f8d2095a75ef15e9f9d58c43fa92615dd0aed1af47e8dea663001"
+        },
+        "observation": "使用了有条件的计数比较，但也补写了真实动作和流程。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wxb-k1-photo_numbers",
+      "body_sha256": "e72339dee4a59b6a15591dc46bf898758cf1e295876899aeb0741ae623aa605e",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "有的什么也没有",
+          "start_codepoint": 125,
+          "end_codepoint": 132,
+          "text_sha256": "e72339dee4a59b6a15591dc46bf898758cf1e295876899aeb0741ae623aa605e"
+        },
+        "reason": "没有日期不等于背面没有任何文字；额外断言认人未做也缺少依据。",
+        "given_facts": "一位资料整理员接手了家里留下的三本旧相册。照片原来夹在透明页中，有的背面写着年份，有的没有日期。整理员给每张照片编了编号，在一张纸表上分别记下原相册、原页码、背面已有文字；没有补写不知道的日期和人物关系。三本相册里有两张内容相同的合照，它们都有自己的编号，纸表注明内容重复并保留原位置。整理尚未完成，目前只编完第一本。家人提出以后想按人物找照片，但尚未决定怎样建人物索引，扫描也未开始。",
+        "required_information_observed": "只完成第一本、两张是不同实体、人物索引未定、扫描未开始均提及。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "纸表替它们互相点了个头",
+          "start_codepoint": 479,
+          "end_codepoint": 490,
+          "text_sha256": "e72339dee4a59b6a15591dc46bf898758cf1e295876899aeb0741ae623aa605e"
+        },
+        "observation": "有轻微幽默和生活化比喻，尚不足以证明稳定执行全部声音关系。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wxb-k2-tool_board",
+      "body_sha256": "3de71199b50e133f68009eba76a116f3818898d87677940001261f608fa74235",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "工具的分配仍然取决于谁先登记、谁后登记",
+          "start_codepoint": 1808,
+          "end_codepoint": 1827,
+          "text_sha256": "3de71199b50e133f68009eba76a116f3818898d87677940001261f608fa74235"
+        },
+        "reason": "新增未提供的分配规则；篇中也有现成步骤和后果断言超出素材。",
+        "given_facts": "一个社区设有共享工具柜，工具包括两把电钻、三套螺丝刀和一架折叠梯。居民用纸质登记簿记录借出与归还。柜门旁原来贴着按月借用次数排列的名单。有人借一次梯子用于更换家中窗帘，有人一个月借多次螺丝刀；次数没有记录用途、借用时长或任务难度。登记簿有两笔只写了借出日期，暂时无法确认是否归还。管理员决定撤下次数排名，保留原始登记；以后另记损坏和缺失，方便核查。没有调查居民是否喜欢排名，也没有资料证明排名改变了工具使用或归还行为。",
+        "required_information_observed": "两笔未知和无行为效果数据均保留。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "从次数到贡献，中间缺的是一次换算",
+          "start_codepoint": 1035,
+          "end_codepoint": 1051,
+          "text_sha256": "3de71199b50e133f68009eba76a116f3818898d87677940001261f608fa74235"
+        },
+        "observation": "框架、换算和类比与该说明机制对应；部分具体步骤写成现实，事实另判。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wxb-k2-photo_numbers",
+      "body_sha256": "39ab6c45248647c155eaa7fdbe5552ca930dee0adc587228e389d549c2d7fcc6",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "没有日期的照片，这一栏就是空的",
+          "start_codepoint": 2257,
+          "end_codepoint": 2272,
+          "text_sha256": "39ab6c45248647c155eaa7fdbe5552ca930dee0adc587228e389d549c2d7fcc6"
+        },
+        "reason": "没有日期不能推出背面已有文字栏为空，可能还有非日期文字。",
+        "given_facts": "一位资料整理员接手了家里留下的三本旧相册。照片原来夹在透明页中，有的背面写着年份，有的没有日期。整理员给每张照片编了编号，在一张纸表上分别记下原相册、原页码、背面已有文字；没有补写不知道的日期和人物关系。三本相册里有两张内容相同的合照，它们都有自己的编号，纸表注明内容重复并保留原位置。整理尚未完成，目前只编完第一本。家人提出以后想按人物找照片，但尚未决定怎样建人物索引，扫描也未开始。",
+        "required_information_observed": "只完成第一本、两张独立照片、索引与扫描未完成均提及。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "接口空着，和接口里有东西，是两回事",
+          "start_codepoint": 1442,
+          "end_codepoint": 1459,
+          "text_sha256": "39ab6c45248647c155eaa7fdbe5552ca930dee0adc587228e389d549c2d7fcc6"
+        },
+        "observation": "有概念区分和条件推演；章节骨架也来自题目要求，不能单凭结构认定作者声音。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wzq-k1-tool_board",
+      "body_sha256": "00c8e664c72450896c38d8c0385d22620995b8c48a8c6776e50bba72f296bfb2",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "梯子一借就是半天",
+          "start_codepoint": 280,
+          "end_codepoint": 288,
+          "text_sha256": "00c8e664c72450896c38d8c0385d22620995b8c48a8c6776e50bba72f296bfb2"
+        },
+        "reason": "素材没有给借用时长，此处无条件补成半天；开头还补了柜子位于社区门口。",
+        "given_facts": "一个社区设有共享工具柜，工具包括两把电钻、三套螺丝刀和一架折叠梯。居民用纸质登记簿记录借出与归还。柜门旁原来贴着按月借用次数排列的名单。有人借一次梯子用于更换家中窗帘，有人一个月借多次螺丝刀；次数没有记录用途、借用时长或任务难度。登记簿有两笔只写了借出日期，暂时无法确认是否归还。管理员决定撤下次数排名，保留原始登记；以后另记损坏和缺失，方便核查。没有调查居民是否喜欢排名，也没有资料证明排名改变了工具使用或归还行为。",
+        "required_information_observed": "两笔归还状态未知和无排名行为证据均保留。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "贡献不是次数，次数只是次数。",
+          "start_codepoint": 607,
+          "end_codepoint": 621,
+          "text_sha256": "00c8e664c72450896c38d8c0385d22620995b8c48a8c6776e50bba72f296bfb2"
+        },
+        "observation": "短判断落地可见，整体仍偏说明性议论，不能因一处短句宣称声音稳定。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wzq-k1-photo_numbers",
+      "body_sha256": "9f16d107ae86e447cd81b6e25d473366ad503645da8acdd25065282cbfd63eb9",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "目前没有任何电子副本",
+          "start_codepoint": 1713,
+          "end_codepoint": 1723,
+          "text_sha256": "9f16d107ae86e447cd81b6e25d473366ad503645da8acdd25065282cbfd63eb9"
+        },
+        "reason": "扫描未开始不能推出不存在任何电子副本；纸表填一半也无依据。",
+        "given_facts": "一位资料整理员接手了家里留下的三本旧相册。照片原来夹在透明页中，有的背面写着年份，有的没有日期。整理员给每张照片编了编号，在一张纸表上分别记下原相册、原页码、背面已有文字；没有补写不知道的日期和人物关系。三本相册里有两张内容相同的合照，它们都有自己的编号，纸表注明内容重复并保留原位置。整理尚未完成，目前只编完第一本。家人提出以后想按人物找照片，但尚未决定怎样建人物索引，扫描也未开始。",
+        "required_information_observed": "两张是独立实体及人物索引未定被强调。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "（这里要特别说一句",
+          "start_codepoint": 768,
+          "end_codepoint": 777,
+          "text_sha256": "9f16d107ae86e447cd81b6e25d473366ad503645da8acdd25065282cbfd63eb9"
+        },
+        "observation": "旁注插入判断与说明对应；原有资料状态被过度推断。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wzq-k2-tool_board",
+      "body_sha256": "c2bab63e86828cf6fdb1423863cd26e4d6cea7fafb882651bbcaa6fae2a269f0",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "照常等待借用",
+          "start_codepoint": 1533,
+          "end_codepoint": 1539,
+          "text_sha256": "c2bab63e86828cf6fdb1423863cd26e4d6cea7fafb882651bbcaa6fae2a269f0"
+        },
+        "reason": "材料无法确认两笔是否归还，不能补出全部工具在柜、可照常借用的现状场景。",
+        "given_facts": "一个社区设有共享工具柜，工具包括两把电钻、三套螺丝刀和一架折叠梯。居民用纸质登记簿记录借出与归还。柜门旁原来贴着按月借用次数排列的名单。有人借一次梯子用于更换家中窗帘，有人一个月借多次螺丝刀；次数没有记录用途、借用时长或任务难度。登记簿有两笔只写了借出日期，暂时无法确认是否归还。管理员决定撤下次数排名，保留原始登记；以后另记损坏和缺失，方便核查。没有调查居民是否喜欢排名，也没有资料证明排名改变了工具使用或归还行为。",
+        "required_information_observed": "正文明确两笔既不能判为已还也不能判为丢失，未知有保留。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "次数不是贡献",
+          "start_codepoint": 2,
+          "end_codepoint": 8,
+          "text_sha256": "c2bab63e86828cf6fdb1423863cd26e4d6cea7fafb882651bbcaa6fae2a269f0"
+        },
+        "observation": "判断贴着材料展开，结尾场景又越过正文的未知边界。",
+        "rating": null
+      }
+    },
+    {
+      "id": "wzq-k2-photo_numbers",
+      "body_sha256": "8a234e5e62da23c6718317aaa4833facd37dcb70e38709436e708085f09b4e29",
+      "facts": {
+        "status": "requires_correction",
+        "anchor": {
+          "quote": "另外两本尚未开始",
+          "start_codepoint": 150,
+          "end_codepoint": 158,
+          "text_sha256": "8a234e5e62da23c6718317aaa4833facd37dcb70e38709436e708085f09b4e29"
+        },
+        "reason": "只编完第一本不等于另两本完全未开始；文中还有从无日期推到本来没信息。",
+        "given_facts": "一位资料整理员接手了家里留下的三本旧相册。照片原来夹在透明页中，有的背面写着年份，有的没有日期。整理员给每张照片编了编号，在一张纸表上分别记下原相册、原页码、背面已有文字；没有补写不知道的日期和人物关系。三本相册里有两张内容相同的合照，它们都有自己的编号，纸表注明内容重复并保留原位置。整理尚未完成，目前只编完第一本。家人提出以后想按人物找照片，但尚未决定怎样建人物索引，扫描也未开始。",
+        "required_information_observed": "两张独立照片、人物索引未决定、扫描未开始均提及。",
+        "review_scope": "targeted_reading_not_exhaustive"
+      },
+      "voice": {
+        "anchor": {
+          "quote": "可指认",
+          "start_codepoint": 911,
+          "end_codepoint": 914,
+          "text_sha256": "8a234e5e62da23c6718317aaa4833facd37dcb70e38709436e708085f09b4e29"
+        },
+        "observation": "有指认/理解的判断区分和材料呼应，但整体与其他稿共享题目要求的说明结构。",
+        "rating": null
+      }
+    }
+  ],
+  "decision": "voice_mechanisms_partly_observed_writer_facts_not_ready",
+  "fact_case_count": 10,
+  "caveat": "Counts are implementer-flagged cases, not automated detection or calibrated scores. Hypotheses and explicit analogies were not automatically treated as factual inventions.",
+  "comparison_purpose": "diagnose only; no single/multi winner",
+  "new_generation_requests_after_readout": 0
+}

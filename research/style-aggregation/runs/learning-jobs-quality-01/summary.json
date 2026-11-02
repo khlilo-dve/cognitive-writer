@@ -2,20 +2,72 @@
   "expected": 2,
   "rows": [
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
       "id": "wxb",
-      "jobs": [],
-      "status": "failed"
+      "jobs": [
+        {
+          "candidate_id": "1190c273ccf96b7cf76aa2cbd3e306b17f60a9e0b49798d2118618a0461c4d3e",
+          "job_id": "4d6cd8b08e1bf6098237102bbd6341245102653625c532349993b8ee47e6db0f",
+          "requests": {
+            "known_completion_tokens": 6441,
+            "known_prompt_tokens": 12486,
+            "responses": 4,
+            "uncertain_attempts": 1
+          },
+          "sources": 1,
+          "status": "complete",
+          "version": 1
+        },
+        {
+          "candidate_id": "85f3469e932ad15ccf31f06734a1997a5701b0e877138047d22fbe8fd66ccc1d",
+          "job_id": "ba0ebea1a504a99a9bb3ff011635d4940be86614ac7df08b288977ee957567fc",
+          "requests": {
+            "known_completion_tokens": 4543,
+            "known_prompt_tokens": 17013,
+            "responses": 4,
+            "uncertain_attempts": 0
+          },
+          "sources": 2,
+          "status": "complete",
+          "version": 2
+        }
+      ],
+      "status": "complete"
     },
     {
-      "error": "网络请求失败: 研究请求中断，费用预留保留",
       "id": "wzq",
-      "jobs": [],
-      "status": "failed"
+      "jobs": [
+        {
+          "candidate_id": "8a6ada68e0518c49f664d36e59ca36e9d9830f39dab9387332dca061e1153b77",
+          "job_id": "34c119ee5386b1dd1d46bf62e45af17f62a937259b7aeae649a33fb08939feb6",
+          "requests": {
+            "known_completion_tokens": 9237,
+            "known_prompt_tokens": 16011,
+            "responses": 4,
+            "uncertain_attempts": 1
+          },
+          "sources": 1,
+          "status": "complete",
+          "version": 1
+        },
+        {
+          "candidate_id": "9e7295a038bb01b97b833dd2fdf57b2478666113032d721b36b7e86a52a9cce7",
+          "job_id": "c3b98e02c7724a5c604e01127e1c1452042496a1cea4e55bbcf5bb682af2dc2a",
+          "requests": {
+            "known_completion_tokens": 4504,
+            "known_prompt_tokens": 16130,
+            "responses": 4,
+            "uncertain_attempts": 0
+          },
+          "sources": 2,
+          "status": "complete",
+          "version": 2
+        }
+      ],
+      "status": "complete"
     }
   ],
   "stage": "product_learning_jobs_live",
-  "status": "partial",
+  "status": "complete",
   "usage": {
     "entries": {
       "detailed-transfer-pilot-01/article-001-body": {
@@ -389,12 +441,124 @@
         "run_id": "learning-jobs-quality-01",
         "state": "reserved_or_uncertain"
       },
+      "learning-jobs-quality-01/wxb-k1-learn-analysis/attempt-2": {
+        "actual_micro": 18063,
+        "phase": "full",
+        "reserved_micro": 125436,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k1-learn-compile-0": {
+        "actual_micro": 14970,
+        "phase": "full",
+        "reserved_micro": 135735,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k1-scope-review": {
+        "actual_micro": 19716,
+        "phase": "full",
+        "reserved_micro": 140076,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k1-scope-revise-0": {
+        "actual_micro": 23355,
+        "phase": "full",
+        "reserved_micro": 164046,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k2-learn-analysis": {
+        "actual_micro": 12753,
+        "phase": "full",
+        "reserved_micro": 154920,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k2-learn-compile-0": {
+        "actual_micro": 9708,
+        "phase": "full",
+        "reserved_micro": 110505,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k2-scope-review": {
+        "actual_micro": 24360,
+        "phase": "full",
+        "reserved_micro": 170925,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wxb-k2-scope-revise-0": {
+        "actual_micro": 31476,
+        "phase": "full",
+        "reserved_micro": 189417,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
       "learning-jobs-quality-01/wzq-k1-learn-analysis": {
         "actual_micro": null,
         "phase": "full",
         "reserved_micro": 125904,
         "run_id": "learning-jobs-quality-01",
         "state": "reserved_or_uncertain"
+      },
+      "learning-jobs-quality-01/wzq-k1-learn-analysis/attempt-2": {
+        "actual_micro": 21972,
+        "phase": "full",
+        "reserved_micro": 125904,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k1-learn-compile-0": {
+        "actual_micro": 21009,
+        "phase": "full",
+        "reserved_micro": 142614,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k1-scope-review": {
+        "actual_micro": 26925,
+        "phase": "full",
+        "reserved_micro": 148833,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k1-scope-revise-0": {
+        "actual_micro": 33549,
+        "phase": "full",
+        "reserved_micro": 182805,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k2-learn-analysis": {
+        "actual_micro": 11583,
+        "phase": "full",
+        "reserved_micro": 145908,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k2-learn-compile-0": {
+        "actual_micro": 8334,
+        "phase": "full",
+        "reserved_micro": 110217,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k2-scope-review": {
+        "actual_micro": 26682,
+        "phase": "full",
+        "reserved_micro": 160608,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
+      },
+      "learning-jobs-quality-01/wzq-k2-scope-revise-0": {
+        "actual_micro": 28815,
+        "phase": "full",
+        "reserved_micro": 189777,
+        "run_id": "learning-jobs-quality-01",
+        "state": "settled"
       },
       "p1-detailed-pilot-01/wxb-01-direct_0": {
         "actual_micro": 21390,
@@ -5451,8 +5615,8 @@
         "state": "settled"
       }
     },
-    "occupied_cny": 22.359375,
+    "occupied_cny": 22.692645,
     "pricing": "official domestic cache-miss upper estimate",
-    "run_occupied_cny": 0.25134
+    "run_occupied_cny": 0.58461
   }
 }

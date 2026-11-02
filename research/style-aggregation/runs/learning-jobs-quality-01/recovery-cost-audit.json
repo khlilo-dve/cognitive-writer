@@ -1,0 +1,11 @@
+{
+  "verified_at": "2026-11-02T08:11:47.639635+00:00",
+  "successful_model_receipts": 26,
+  "known_usage_estimated_cny": 0.376723,
+  "prior_unknown_reserved_cny": 0.25134,
+  "phase_occupied_cny": 0.628063,
+  "total_research_occupied_cny": 22.736098,
+  "total_budget_cny": 100,
+  "remaining_cny": 77.263902,
+  "caveat": "Estimates from recorded usage and retained reserves, not provider invoice."
+}

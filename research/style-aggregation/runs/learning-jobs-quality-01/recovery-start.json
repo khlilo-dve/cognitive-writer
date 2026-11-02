@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-11-02T07:04:16.273264+00:00",
+  "preflight": {
+    "authentication_sent": false,
+    "http_status": 401,
+    "tls_verified": true
+  },
+  "prior_ledger_sha256": "92547fdd4b0cf175e450bde8b7d278daba1ca2b829561d7a9f2dd1dbccde513e",
+  "action": "explicit bounded retry with same frozen inputs, prompts and model",
+  "prior_uncertain_cost_retained": true,
+  "root_cause_status": "Current route works; exact cause of prior TLS failure not established."
+}
