@@ -16,6 +16,9 @@ pub struct LearningWorkspace {
 }
 
 impl LearningWorkspace {
+    pub(crate) fn root(&self) -> &Path {
+        &self.root
+    }
     pub fn open(root: &Path) -> Result<Self, AppError> {
         if root.as_os_str().is_empty() {
             return Err(AppError::FileRead("工作区目录为空".into()));

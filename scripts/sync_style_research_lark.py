@@ -169,6 +169,8 @@ def main():
             report_file = ROOT / "lark/voice-scope-stage-20261029.json"
         if rid.startswith("learning-workspace"):
             report_file = ROOT / "lark/learning-workspace-stage-20261031.json"
+        if rid.startswith("learning-jobs"):
+            report_file = ROOT / "lark/learning-jobs-stage-20261102.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
@@ -205,6 +207,8 @@ def main():
                 break
         if rid.startswith("learning-workspace"):
             stage = "风格草稿工作区｜预览、版本与导出本地验证"
+        if rid.startswith("learning-jobs"):
+            stage = "正文学习任务｜真实1→2篇链与恢复"
         for marker, label in [("routing", "Flash路由小样本验证"), ("views", "P2 逐维规则整理"), ("pairs", "P2 成对比较"), ("profiles", "P3 作者规则聚合"), ("convergence", "P4 样本量收敛"), ("generation", "P5 生成对照"), ("reference", "P5 开发评估"), ("confirmation", "P5 确认评估")]:
             if marker in rid:
                 stage = label
@@ -228,6 +232,9 @@ def main():
                 checks += " 核心流程与来源/复跑已验证，Style仍是待审草稿，语义与Writer事实未全部通过。"
             elif review.get("decision"):
                 checks += " 仅开发候选或探索性诊断，尚未产品采用；具体边界见阶段报告。"
+        if rid.startswith("learning-jobs") and rows and all("jobs" in r for r in rows):
+            jobs = [job for row in rows for job in row["jobs"]]
+            checks += f" {len(rows)}条作者链内共{len(jobs)}个正文学习任务，完成{sum(j.get('status') == 'complete' for j in jobs)}个；保存仅在研究工作区，Style仍待审。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + checks + summary.get("error", ""),

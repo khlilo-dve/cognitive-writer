@@ -5,13 +5,13 @@ use serde_json::json;
 use sha2::{Digest, Sha256};
 use std::{collections::HashSet, future::Future};
 
-pub const METHOD: &str = "voice-core-v1";
+pub const METHOD: &str = "voice-core-v2";
 
 pub(crate) fn sha256(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
 
-#[derive(Clone, Serialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct VoicePrompts {
     pub analysis: String,
     pub compile: String,
@@ -132,7 +132,7 @@ where
     for attempt in 0..2 {
         let raw = call(format!("compile-{attempt}"), prompts.compile.clone(), user).await?;
         calls += 1;
-        let spec = raw.trim();
+        let spec = crate::spec_quality::execution_markdown(&raw);
         match validate(spec, &sources) {
             Ok(()) => {
                 let mut warnings = vec![

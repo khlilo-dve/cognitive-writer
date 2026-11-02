@@ -1,6 +1,7 @@
 //! Source-grounded scope revision; a model review never promotes a draft automatically.
 use crate::{
     error::AppError,
+    spec_quality::execution_markdown,
     voice_learning::{VoiceDraft, sha256, sources, validate},
 };
 use serde::{Deserialize, Serialize};
@@ -8,19 +9,6 @@ use serde_json::json;
 use std::future::Future;
 
 pub const METHOD: &str = "voice-reviewed-v2";
-
-fn execution_markdown(raw: &str) -> &str {
-    let trimmed = raw.trim();
-    for opening in ["```markdown\n", "```md\n"] {
-        if let Some(inner) = trimmed
-            .strip_prefix(opening)
-            .and_then(|s| s.strip_suffix("\n```"))
-        {
-            return inner.trim();
-        }
-    }
-    trimmed
-}
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct RevisionPrompts {

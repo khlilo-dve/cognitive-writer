@@ -1,0 +1,26 @@
+{
+  "attempts": [
+    {
+      "kind": "compiler",
+      "status": "corrected",
+      "reason": "追加入口先移动了旧正文再借用版本引用；改为先取得不可变基准引用，不改变所有权或覆盖规则。"
+    },
+    {
+      "kind": "setup",
+      "status": "preserved_as_live_01",
+      "reason": "两作者开发链共用工作区触发预期写锁；0模型请求，改用每作者独立工作区。"
+    },
+    {
+      "kind": "local_workspace_audit",
+      "status": "requires_serial_rerun",
+      "reason": "误与真实付费run并行运行账本SHA不变检查，功能检查通过但账本被真实run合法更新；待真实消费结束后串行复核，不放宽断言。"
+    }
+  ],
+  "final_followup": {
+    "date": "2026-11-02",
+    "local_http_audit": "passed",
+    "workspace_audit_after_paid_run": "passed",
+    "real_artifact_audit": "passed",
+    "zero_request_replay": "passed"
+  }
+}

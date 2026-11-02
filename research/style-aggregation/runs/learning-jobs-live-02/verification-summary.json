@@ -1,0 +1,20 @@
+{
+  "verified_on": "2026-11-02",
+  "cargo_test_lib": {
+    "passed": 278,
+    "failed": 0,
+    "ignored": 10
+  },
+  "binary_build": "passed",
+  "rustfmt_target_modules": "passed",
+  "terminal_regression": "passed",
+  "terminal_evidence": "terminal-regression.log",
+  "live_jobs": 4,
+  "live_responses": 16,
+  "live_received_usage_cny_estimate": 0.352719,
+  "zero_request_replay": "replay-audit.json",
+  "workspace_cli_audit": "workspace-audit-final.json",
+  "local_http_audit": "local-http-audit-final.json",
+  "credentials_scan_changed_paths": "passed",
+  "production_env_and_styles_changed": false
+}

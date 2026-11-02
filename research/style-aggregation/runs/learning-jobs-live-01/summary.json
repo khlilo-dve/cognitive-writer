@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "stage": "learning_jobs_setup",
+  "rows": [
+    {
+      "id": "shared_workspace_setup",
+      "status": "failed",
+      "error": "Two author chains competed for a fail-fast workspace write lock before any model request."
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0,
+    "occupied_cny": 21.755316
+  },
+  "new_model_requests": 0
+}

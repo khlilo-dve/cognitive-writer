@@ -1,5 +1,13 @@
 # 当前任务状态
 
+## 2026-11-02 正文学习任务完成核对
+
+style-draft新增learn/append/jobs/job/resume，已接完整正文到待审候选与显式保存版本。learning-jobs-live-02两作者各1→2篇四任务全部完成、16个Pro响应、无未知请求；四候选/版本/来源身份核对及无密钥产品CLI恢复通过，研究入口整轮复跑0新请求、账本SHA及保存版本不变。278库测试通过/10忽略，17既有终端回归及本地HTTP/工作区回归通过。live-01锁竞争0请求失败与验证并发账本误报均保留，未放宽产品保护。run0.352719元，累计22.108035元含未知预留，100元内余额77.891965元，无活模型任务。报告research/style-aggregation/reports/learning-jobs-2026-11-02.md；semantic-review有具体身份泛化/段落禁令/固定自检缺口，未宣布质量或Writer事实通过。下一步有限语义改进和少量跨题材执行，文件URL与旧learn/REPL默认替换继续后置。 飞书报告https://www.feishu.cn/docx/UnXOd4a4Kozd14x92MfcHL8fngc已回读，Base两run及E0067–E0069同步回读完成。
+
+## 2026-10-31 正文任务接入执行
+
+当前开发链新增style-draft learn/append/jobs/job/resume，固定Pro学习，阶段请求与响应可恢复，未知请求显式最多三次。verify_learning_jobs.py的本地HTTP完整链通过（10本地请求、0付费），同时保留冻结输入、配置/缓存损坏拒绝和Ctrl-C行为。首次learning-jobs-live-01因开发适配器共用工作区的写锁竞争而启动失败，账本0/0模型请求，原记录保留；改为每作者独立工作区后，真实小试run learning-jobs-live-02：两作者各1→2篇四任务，上限3元计入总额100元；必须核对实际进程/summary/usage，不能把running当完整。现有学风格与Writer质量缺口保留，文件URL采集仍后置。
+
 ## 2026-10-31 当前断点
 
 新增LearningWorkspace与style-draft离线开发入口：import/preview/candidates/list/diff/save/versions/show/export，正文快照和候选身份核对、不可覆盖版本、追加保留来源、过期/并发保护与纯spec导出。两作者六份真实历史候选各1→3→10的CLI链通过，含坏记录、重复超限、来源减少、同名/旧基准、并发和写入失败；初次夹具共享列表误报已隔离修复。275库测试通过/10忽略，构建和17项既有终端回归通过（本地模拟HTTP）；所有可变测试工作区已清理，run为learning-workspace-local-01。0新增付费请求，累计账本21.755316元含未知预留，SHA不变。飞书报告已回读：https://www.feishu.cn/docx/VHFrdk9HYol2urxefHscBpOQnqR ，Base运行与E0066已同步；下一步把工作区接到正式多篇学习和来源交互。此入口接核心产出的候选包，不负责文件/URL抓取，不宣称学习质量或Writer事实已通过。

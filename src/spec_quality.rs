@@ -17,6 +17,20 @@ pub fn conciseness_score(count: usize) -> f64 {
 pub const DETAILED_MIN: usize = 1500;
 pub const DETAILED_POLICY: &str = "detailed-v1";
 
+/// Normalize only a complete, explicitly labelled Markdown outer wrapper.
+pub(crate) fn execution_markdown(raw: &str) -> &str {
+    let trimmed = raw.trim();
+    for opening in ["```markdown\n", "```md\n"] {
+        if let Some(inner) = trimmed
+            .strip_prefix(opening)
+            .and_then(|s| s.strip_suffix("\n```"))
+        {
+            return inner.trim();
+        }
+    }
+    trimmed
+}
+
 /// Length sufficiency only; redundancy and usefulness require separate review.
 pub fn detailed_length_score(count: usize) -> f64 {
     match count {

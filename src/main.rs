@@ -32,7 +32,7 @@ fn run_cli_mode(args: Vec<String>) {
     rt.block_on(async {
         match subcommand {
             Some("style-draft") => {
-                if let Err(e) = cognitive_writer::learning_workspace_cli::run(&remaining) {
+                if let Err(e) = cognitive_writer::learning_workspace_cli::run(&remaining).await {
                     eprintln!("[error] {e}");
                     std::process::exit(1);
                 }

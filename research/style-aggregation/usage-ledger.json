@@ -252,6 +252,118 @@
       "actual_micro": 1286,
       "state": "settled"
     },
+    "learning-jobs-live-02/wxb-k1-learn-analysis": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 123642,
+      "actual_micro": 12894,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k1-learn-compile-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 122265,
+      "actual_micro": 15849,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k1-scope-review": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 145488,
+      "actual_micro": 18786,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k1-scope-revise-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 146226,
+      "actual_micro": 24834,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k2-learn-analysis": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 153126,
+      "actual_micro": 26292,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k2-learn-compile-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 136617,
+      "actual_micro": 16995,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k2-scope-review": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 171414,
+      "actual_micro": 28746,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wxb-k2-scope-revise-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 151974,
+      "actual_micro": 22614,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k1-learn-analysis": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 124110,
+      "actual_micro": 22971,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k1-learn-compile-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 141621,
+      "actual_micro": 21567,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k1-scope-review": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 147816,
+      "actual_micro": 28395,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k1-scope-revise-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 165477,
+      "actual_micro": 32523,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k2-learn-analysis": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 144114,
+      "actual_micro": 16152,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k2-learn-compile-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 117378,
+      "actual_micro": 17385,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k2-scope-review": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 171774,
+      "actual_micro": 21300,
+      "state": "settled"
+    },
+    "learning-jobs-live-02/wzq-k2-scope-revise-0": {
+      "run_id": "learning-jobs-live-02",
+      "phase": "full",
+      "reserved_micro": 141729,
+      "actual_micro": 25416,
+      "state": "settled"
+    },
     "p1-detailed-pilot-01/wxb-01-direct_0": {
       "run_id": "p1-detailed-pilot-01",
       "phase": "pilot",

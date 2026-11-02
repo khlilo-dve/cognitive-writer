@@ -83,6 +83,7 @@ pub(crate) async fn run(run_id: &str) -> Result<(), AppError> {
     store.limit_run(4_000_000).await?;
     store.freeze(
         &json!({"suite":"voice_core_v1_live","jobs":jobs,"prompts":prompts,
+        "learning_method":crate::voice_learning::METHOD,
         "model":Role::Structured.model(),"run_cap_micro_cny":4_000_000,
         "method_sha256":sha256(&std::fs::read(format!("{ROOT}/method-revision-25.md"))?)}),
     )?;
