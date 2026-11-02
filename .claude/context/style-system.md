@@ -37,3 +37,5 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 2026-11-02方法28后续真实恢复：原冻结四任务16份Pro响应及10篇Flash用稿已完整，来源/版本和纯spec输入审计与零请求复跑通过。说明部分条件化改善，但单篇第一人称功能/身体细节范围误判仍在；10稿有具体事实越界且中性也有，不能据此宣布Writer就绪。见research/style-aggregation/reports/learning-quality-recovered-2026-11-02.md；不把前一条TLS失败当当前结果，也不改写历史失败。
 
 2026-11-02方法29：voice-core-v6分析内部使用原生JSON承载analysis和evidence（article/quote），逐条验证来源/连续原字及逐篇覆盖。最多一次analysis-repair，附具体错误与真实原文候选片段；提示不放宽逐字门槛，失败不编译/保存。编译仅接analysis正文与篇数，证据/原文不进入Writer，详见docs/2026-11-02-grounded-style-analysis.md。四任务17Pro响应和四Flash边界稿已完成、来源/版本/纯spec与零请求恢复已核验，282库测试/10忽略；目标表达边界能执行，但四稿仍有事实/推理问题，候选仍待审。原文直入编译、错文缓存和两双篇失败分支完整保留。后续不追加方法分支，围绕style-draft接文件/URL输入与1–10篇澄清，Writer事实独立修正；未替换旧默认入口。
+
+2026-11-03产品设计更新（未实现）：当前PRD为docs/PRD.md，行动计划为docs/plans/2026-11-03-style-learning-agent-plan.md。主Agent仅在学习／追加意图分派风格学习子Agent，子Agent处理输入、工具与有边界澄清；已有风格的使用另走写作。默认澄清1轮／最多2轮和决策预算为待P1走查的设计值，不能描述为当前代码。正文核心、候选与版本继续复用；先更新产品与技术设计再按授权编码，本轮仅文档。
