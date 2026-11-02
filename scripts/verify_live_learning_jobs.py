@@ -52,7 +52,7 @@ def main(run_id="learning-jobs-live-02"):
             assert candidate["input"]["articles"] == plan["articles"]
             assert candidate["input"]["draft"]["status"] == "draft_pending_semantic_review"
             received = list((job_dir / "requests").glob("*.response.json"))
-            assert 4 <= len(received) <= 6
+            assert 4 <= len(received) <= 7
             for path in received:
                 stage = path.name.removesuffix(".response.json")
                 saved = json.loads(path.read_text())
@@ -60,8 +60,33 @@ def main(run_id="learning-jobs-live-02"):
                     ensure_ascii=False, separators=(",", ":")).encode())
                 origin = json.loads((RUN / "requests" / f"{code}-k{count}-{stage}.json").read_text())
                 assert saved["request"] == origin["request"]
+                if stage == "learn-compile-0" and plan["learning_method"] == "voice-core-v3":
+                    payload = json.loads(saved["request"]["body"]["messages"][1]["content"])
+                    assert [a["text"] for a in payload["articles"]] == plan["articles"]
+                    assert payload["analysis"] == candidate["input"]["draft"]["analysis"]
+                if stage == "learn-compile-0" and plan["learning_method"] in ("voice-core-v4", "voice-core-v5", "voice-core-v6"):
+                    payload = json.loads(saved["request"]["body"]["messages"][1]["content"])
+                    assert set(payload)=={"article_count","analysis"}
+                    assert payload["analysis"] == candidate["input"]["draft"]["analysis"]
                 assert saved["response"] == origin["receipt"]
                 assert saved["response"]["model"] == "mimo-v2.6-pro"
+            if plan["learning_method"] in ("voice-core-v5", "voice-core-v6"):
+                paths = sorted((job_dir/"requests").glob("learn-analysis*.response.json"))
+                valid = []
+                for p in paths:
+                    record=json.loads(p.read_text())
+                    try:
+                        report=json.loads(record["response"]["content"])
+                        source_user=json.loads(record["request"]["body"]["messages"][1]["content"])
+                        articles=source_user.get("articles",source_user.get("original_input",{}).get("articles"))
+                        lookup={a["article"]:a["text"] for a in articles}
+                        assert report["analysis"] == candidate["input"]["draft"]["analysis"]
+                        assert set(lookup) <= {e["article"] for e in report["evidence"]}
+                        assert all(e["quote"] and e["quote"] in lookup[e["article"]] for e in report["evidence"])
+                        valid.append(p.name)
+                    except (ValueError,KeyError,AssertionError):
+                        pass
+                assert valid, "No source-grounded analysis supports candidate"
             assert candidate["input"]["draft"]["calls"] == len(received)
             version = next(p for p in ws.glob(f"versions/*/v{item['version']:06}.json"))
             record = json.loads(version.read_text())

@@ -97,7 +97,7 @@ pub(crate) async fn run(run_id: &str) -> Result<(), AppError> {
             let id=job.id.clone();
             let result=learn_voice_with(&job.texts,&prompts,|stage,system,user|{
                 let store=Arc::clone(&store);let name=format!("{id}-{stage}");
-                async move {store.call(&name,Role::Structured,&system,&user,false).await}
+                async move {store.call(&name,Role::Structured,&system,&user,matches!(stage.as_str(),"analysis"|"analysis-repair")).await}
             }).await;
             match result {
                 Ok(draft)=>{

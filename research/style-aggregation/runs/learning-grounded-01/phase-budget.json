@@ -1,0 +1,8 @@
+{
+  "prior_runs": [
+    "learning-qualifier-01",
+    "learning-qualifier-isolated-01"
+  ],
+  "phase_pro_limit_micro_cny": 3000000,
+  "reason": "all qualifier experiments together retain the original 3 CNY Pro cap"
+}

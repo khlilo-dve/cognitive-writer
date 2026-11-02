@@ -1,0 +1,5 @@
+{
+  "decision": "reject_source_content_isolation",
+  "reviewer": "implementer",
+  "note": "四任务虽完整，错文分析与编译源文故事泄漏，不能采用；不能把因果全归给编译看原文。"
+}

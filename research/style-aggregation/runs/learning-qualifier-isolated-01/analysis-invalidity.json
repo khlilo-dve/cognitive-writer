@@ -1,0 +1,8 @@
+{
+  "decision": "reject_cached_source_analysis",
+  "reason": "wzq-k1 analysis claims and quotes describe unrelated bone-sorting/history material, absent from the requested source. Request/receipt identity passed but semantic source attribution did not.",
+  "source_request_correct": true,
+  "cached_analysis_semantically_valid": false,
+  "production_adopted": false,
+  "action": "stop further use; validate structured source excerpts before compilation and permit one repair only"
+}

@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "author_chain": "wxb",
+      "sources": 1,
+      "job_id": "bbb06efaff1410d0feddd40f4e09a1f3b1765c3fda7cab209566587258c5f492",
+      "candidate_id": "2ff9f19b27ab7dcc3831a1ec7906c23056811fcbc10253a3242bf4a4fe03afe9",
+      "version_id": "b2393e5b44da7bce3bfae6c1b1a56fef5480ec0a41c1edf18c26a51b6f17069d",
+      "received_requests": 4,
+      "spec_sha256": "987e68311101a79c72dceb7f14ca7ec5a6f04aed6e551205a23601f3b586c91e",
+      "completed_cli_resume_without_credentials": true
+    },
+    {
+      "author_chain": "wxb",
+      "sources": 2,
+      "job_id": "d3f9bac613aab8d8bee2dce6d86d360b4e69a3b7804bc3ba92740e48d367339c",
+      "candidate_id": "47dc52bf7f19ee16d86327c323e47a270715622771c23e4ba57f42bc2723a8a1",
+      "version_id": "e4bf78fe7892c7dbccd35b3c3188887134814b31f484810294065c444c24a34d",
+      "received_requests": 5,
+      "spec_sha256": "174b7b979a0adea6bf5a612d8f90011205844d34ce8a41f28fff821d49f934d3",
+      "completed_cli_resume_without_credentials": true
+    },
+    {
+      "author_chain": "wzq",
+      "sources": 1,
+      "job_id": "35dd95bbca29938bbac28e10140bb8eb2facbee08eee70396988c65e1bad357a",
+      "candidate_id": "a5eab9464d94898d5e0eb1b8ec5ab4989d076dcb7bc6bd1cdd04ba9732915bc2",
+      "version_id": "3f106b2248ef4a975ae5b056295ca3f34f36a19a4219ceda0e1f8744eebdef67",
+      "received_requests": 4,
+      "spec_sha256": "7c658275021d8fe5a701299027b6cfa8a95cf2343f456d40a1c73585bb182806",
+      "completed_cli_resume_without_credentials": true
+    },
+    {
+      "author_chain": "wzq",
+      "sources": 2,
+      "job_id": "fdec5f7a6bc4742590e8c472844605ecb0501543cdb4eeaa6a0df26a242fa85e",
+      "candidate_id": "23c1288a595648cfdaf00b975da45ef0aa2ce3a54b53b51e19c85782270e5506",
+      "version_id": "23c66cc425059e6a00127a195254d568bacabb72d31bb66075bc6fe6f5f54beb",
+      "received_requests": 4,
+      "spec_sha256": "cfb860916ce155b7002521e4256ae52b1bd85cf3e8bacd9706d4459bc937c3b6",
+      "completed_cli_resume_without_credentials": true
+    }
+  ],
+  "new_model_requests_during_audit": 0,
+  "saved_versions_unchanged": true,
+  "ledger_before_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "ledger_after_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "quality": "separate_semantic_and_writer_validation_required"
+}

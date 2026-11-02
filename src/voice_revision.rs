@@ -161,13 +161,11 @@ mod tests {
                 analysis: "分析".into(),
                 compile: "编译".into(),
             },
-            |stage, _, _| async move {
+            |stage, _, user| async move {
                 Ok(if stage == "analysis" {
-                    "不应传给复读者的内部分析"
-                } else {
-                    "先说明有据的细节，再表达判断。"
-                }
-                .into())
+                    let input:serde_json::Value=serde_json::from_str(&user).unwrap();
+                    json!({"analysis":"不应传给复读者的内部分析","evidence":input["articles"].as_array().unwrap().iter().map(|a|json!({"article":a["article"],"quote":a["text"]})).collect::<Vec<_>>()}).to_string()
+                } else {"先说明有据的细节，再表达判断。".into()})
             },
         )
         .await

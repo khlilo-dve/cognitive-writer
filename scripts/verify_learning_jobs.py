@@ -22,7 +22,7 @@ def main():
     ledger = ROOT / "research/style-aggregation/usage-ledger.json"
     before = hashlib.sha256(ledger.read_bytes()).hexdigest()
     requests = []
-    control = {"fail_compile_once": True, "hold": False}
+    control = {"fail_compile_once": True, "hold": False, "bad_analysis": 0}
     received = threading.Event()
     release = threading.Event()
 
@@ -36,14 +36,24 @@ def main():
             assert body["model"] == "mimo-v2.6-pro"
             assert body["thinking"] == {"type": "disabled"}
             assert body["max_completion_tokens"] == 16384
-            assert "response_format" not in body
             system = body["messages"][0]["content"]
             if control["hold"]:
                 received.set()
                 release.wait(10)
             if "完整阅读输入的" in system:
-                text = "内部分析专用标记：判断与材料按内容条件相接。"
+                assert body["response_format"] == {"type":"json_object"}
+                user = json.loads(body["messages"][1]["content"])
+                articles = user.get("articles",user.get("original_input",{}).get("articles"))
+                text = json.dumps({"analysis":"内部分析专用标记：判断与材料按内容条件相接。","evidence":[{"article":a["article"],"quote":a["text"]} for a in articles]},ensure_ascii=False)
+                if control["bad_analysis"] > 0:
+                    control["bad_analysis"] -= 1
+                    text = json.dumps({"analysis":"内部分析专用标记：错误引用的分析","evidence":[{"article":"a01","quote":"绝不属于原文的伪造引用"}]},ensure_ascii=False)
             elif "把内部声音分析编译" in system:
+                assert "response_format" not in body
+                user = json.loads(body["messages"][1]["content"])
+                assert set(user) == {"article_count", "analysis"}
+                assert "SOURCE_A" not in body["messages"][1]["content"] and "SOURCE_B" not in body["messages"][1]["content"]
+                assert "内部分析专用标记" in user["analysis"]
                 if control["fail_compile_once"]:
                     control["fail_compile_once"] = False
                     self.send_response(503)
@@ -57,7 +67,7 @@ def main():
                 assert "内部分析专用标记" not in body["messages"][1]["content"]
                 text = "内部复读专用标记：说明只描述可见机制，不给手法设配额。"
             else:
-                assert "完整原文" in system and "复读意见" in system
+                assert "完整原文" in system and "复读" in system
                 user = json.loads(body["messages"][1]["content"])
                 assert set(user) == {"article_count", "articles", "candidate", "source_review"}
                 assert len(user["articles"]) == user["article_count"]
@@ -161,6 +171,23 @@ def main():
             response.write_bytes(saved)
             assert len(requests) == 9
             checks.append("endpoint_drift_and_corrupted_response_block_before_network")
+
+            # Wrong-article evidence is repaired once, or fails before compilation/candidate/version.
+            control["bad_analysis"] = 1
+            source.write_text(json.dumps({"articles":[a],"note":"引文修复验证"},ensure_ascii=False))
+            count = len(requests)
+            repaired = call("learn", source, root=temp/"repair-workspace")
+            assert "candidate_id:" in repaired.stdout and len(requests) == count + 5
+            control["bad_analysis"] = 2
+            count = len(requests)
+            invalid_root = temp/"invalid-evidence-workspace"
+            failed = call("learn", source, root=invalid_root, ok=False)
+            invalid_job = field(failed,"job_id")
+            assert len(requests) == count + 2
+            assert not (invalid_root/"candidates").exists() and not (invalid_root/"versions").exists()
+            call("resume", invalid_job, root=invalid_root, ok=False)
+            assert len(requests) == count + 2
+            checks.append("wrong_source_evidence_gets_one_repair_then_blocks_compilation_and_save")
 
             # Ctrl-C leaves a recoverable task and an uncertain request, without auto-retry.
             cancel_root = temp / "cancel-workspace"

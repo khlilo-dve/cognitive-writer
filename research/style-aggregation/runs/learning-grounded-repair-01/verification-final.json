@@ -1,0 +1,43 @@
+{
+  "lib_tests": {
+    "passed": 282,
+    "failed": 0,
+    "ignored": 10,
+    "command": "cargo test --lib --quiet"
+  },
+  "local_http_requests": 17,
+  "local_http_paid_requests": 0,
+  "terminal_regression_cases": 17,
+  "changed_rustfmt": "passed",
+  "repository_rustfmt": {
+    "status": "baseline_differences_in_unchanged_files",
+    "files": [
+      "src/clipboard.rs",
+      "src/lib.rs",
+      "src/research_compare.rs",
+      "src/research_convergence.rs",
+      "src/research_generation.rs",
+      "src/research_judgment.rs",
+      "src/research_profile.rs",
+      "src/research_route_pilot.rs",
+      "src/research_store.rs",
+      "src/research_validation.rs",
+      "src/style_compare.rs"
+    ]
+  },
+  "anchors": "unicode_offsets_verified",
+  "all_five_run_json": "parsed",
+  "production_env_and_styles": "unchanged",
+  "lark_projection": {
+    "status": "readback_verified",
+    "record_count": 175,
+    "runs": 5,
+    "journal_from": "E0076",
+    "journal_through": "E0081"
+  },
+  "documents": {
+    "learning-grounded-stage-20261102": "https://www.feishu.cn/docx/Myt4dXQiMopyCcxV8FFcMaZ0nMf",
+    "learning-grounded-styles-20261102": "https://www.feishu.cn/docx/OWUqdBWeLox2URxH4cecgOl4nBh",
+    "learning-grounded-drafts-20261102": "https://www.feishu.cn/docx/ElwTdciWKoV5lXxJxZacCscNn8d"
+  }
+}

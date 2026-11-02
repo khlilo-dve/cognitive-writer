@@ -1,0 +1,9 @@
+{
+  "original_sha256": "e4a5792dd7d869e37a5efd8b13e7f40dcabdeaa984f02488488fed8f0f0b0f10",
+  "original_file": "interpretation-plan-original.md",
+  "current_sha256": "6053535b78561be4c64f101af5e9c11a61a3e11a15da2c5650086433a1fadf44",
+  "current_file": "interpretation-plan.md",
+  "change": "Writer请求前只将来源名从被拒绝分支改为最终自动来源；读稿标准和四稿任务不变。原登记保留供核验。",
+  "correction_saved_at": "2026-11-02T11:06:11.270479+00:00",
+  "before_writer_request_by_execution_order": true
+}

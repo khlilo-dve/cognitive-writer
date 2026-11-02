@@ -15,6 +15,12 @@ use std::{path::Path, sync::Arc};
 const ROOT: &str = "research/style-aggregation";
 
 pub(crate) async fn run(run_id: &str, source_id: &str) -> Result<(), AppError> {
+    run_suite(run_id, source_id, false).await
+}
+pub(crate) async fn boundary(run_id: &str, source_id: &str) -> Result<(), AppError> {
+    run_suite(run_id, source_id, true).await
+}
+async fn run_suite(run_id: &str, source_id: &str, boundary: bool) -> Result<(), AppError> {
     if !valid_id(source_id) {
         return Err(AppError::Parse("来源run无效".into()));
     }
@@ -24,7 +30,12 @@ pub(crate) async fn run(run_id: &str, source_id: &str) -> Result<(), AppError> {
     if summary["status"] != "complete" || summary["rows"].as_array().is_none_or(|r| r.len() != 2) {
         return Err(AppError::Parse("四任务来源尚未完整".into()));
     }
-    let bytes = std::fs::read(format!("{ROOT}/datasets/learning-quality-tasks-v1.json"))?;
+    let task_file = if boundary {
+        "learning-boundary-tasks-v1.json"
+    } else {
+        "learning-quality-tasks-v1.json"
+    };
+    let bytes = std::fs::read(format!("{ROOT}/datasets/{task_file}"))?;
     let suite: Value =
         serde_json::from_slice(&bytes).map_err(|e| AppError::Parse(e.to_string()))?;
     let topics = suite["tasks"]
@@ -60,7 +71,9 @@ pub(crate) async fn run(run_id: &str, source_id: &str) -> Result<(), AppError> {
             variants.push(json!({"id":format!("{code}-k{count}"),"source_run":source_id,"job_id":id,"candidate_id":candidate.id,"fingerprint":candidate.input.draft.fingerprint,"spec":candidate.input.draft.spec}));
         }
     }
-    variants.push(json!({"id":"neutral","source_run":null,"spec":""}));
+    if !boundary {
+        variants.push(json!({"id":"neutral","source_run":null,"spec":""}));
+    }
     let mut jobs = Vec::new();
     for variant in variants {
         let spec = variant["spec"]
@@ -71,6 +84,16 @@ pub(crate) async fn run(run_id: &str, source_id: &str) -> Result<(), AppError> {
                 .as_str()
                 .filter(|s| valid_id(s))
                 .ok_or_else(|| AppError::Parse("题目ID无效".into()))?;
+            if boundary {
+                let expected = if variant["id"].as_str().unwrap_or("").starts_with("wxb-") {
+                    "abstract_choices"
+                } else {
+                    "given_feeling"
+                };
+                if topic_id != expected {
+                    continue;
+                }
+            }
             let user = format!(
                 "{}\n素材：{}\n要求：{}",
                 suite["instruction"].as_str().unwrap_or(""),
@@ -81,9 +104,15 @@ pub(crate) async fn run(run_id: &str, source_id: &str) -> Result<(), AppError> {
         }
     }
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run_id, false)?);
-    store.limit_run(1_000_000).await?;
-    let method = std::fs::read(format!("{ROOT}/method-revision-28.md"))?;
-    store.freeze(&json!({"suite":"learning_quality_probe_v1","jobs":jobs,"tasks_sha256":sha256(&bytes),"method_sha256":sha256(&method),"model":Role::Writer.model(),"run_cap_micro_cny":1_000_000}))?;
+    let cap = if boundary { 500_000 } else { 1_000_000 };
+    store.limit_run(cap).await?;
+    let method_file = if boundary {
+        "method-revision-29.md"
+    } else {
+        "method-revision-28.md"
+    };
+    let method = std::fs::read(format!("{ROOT}/{method_file}"))?;
+    store.freeze(&json!({"suite":if boundary {"learning_boundary_probe_v1"}else{"learning_quality_probe_v1"},"jobs":jobs,"tasks_sha256":sha256(&bytes),"method_sha256":sha256(&method),"model":Role::Writer.model(),"run_cap_micro_cny":cap}))?;
     std::fs::create_dir_all(store.root.join("articles"))?;
     let mut tasks = tokio::task::JoinSet::new();
     for job in jobs {
@@ -114,5 +143,14 @@ pub(crate) async fn run(run_id: &str, source_id: &str) -> Result<(), AppError> {
             }
         });
     }
-    finish_tasks(&store, &mut tasks, "learning_quality_writer_probe").await
+    finish_tasks(
+        &store,
+        &mut tasks,
+        if boundary {
+            "learning_boundary_writer_probe"
+        } else {
+            "learning_quality_writer_probe"
+        },
+    )
+    .await
 }

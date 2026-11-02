@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "new_requests": 0,
+  "ledger_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "stdout": "[research resume] wzq-k1-given_feeling\n[research resume] wxb-k1-abstract_choices\n[research resume] wxb-k2-abstract_choices\n[research resume] wzq-k2-given_feeling\n",
+  "stderr": ""
+}

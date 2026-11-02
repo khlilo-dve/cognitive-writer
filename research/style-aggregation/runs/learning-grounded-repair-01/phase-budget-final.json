@@ -1,0 +1,42 @@
+{
+  "baseline_micro_cny": 22736098,
+  "rows": [
+    {
+      "run": "learning-qualifier-01",
+      "occupied_micro_cny": 472953,
+      "known_micro_cny": 472953,
+      "unknown_reserved_micro_cny": 0
+    },
+    {
+      "run": "learning-qualifier-isolated-01",
+      "occupied_micro_cny": 585867,
+      "known_micro_cny": 198906,
+      "unknown_reserved_micro_cny": 386961
+    },
+    {
+      "run": "learning-grounded-01",
+      "occupied_micro_cny": 327081,
+      "known_micro_cny": 327081,
+      "unknown_reserved_micro_cny": 0
+    },
+    {
+      "run": "learning-grounded-repair-01",
+      "occupied_micro_cny": 420195,
+      "known_micro_cny": 420195,
+      "unknown_reserved_micro_cny": 0
+    },
+    {
+      "run": "learning-boundary-probe-01",
+      "occupied_micro_cny": 13941,
+      "known_micro_cny": 13941,
+      "unknown_reserved_micro_cny": 0
+    }
+  ],
+  "phase_occupied_micro_cny": 1820037,
+  "global_occupied_micro_cny": 24556135,
+  "global_unknown_reserved_micro_cny": 6032614,
+  "remaining_of_100_micro_cny": 75443865,
+  "pro_total_cap_micro_cny": 3000000,
+  "flash_total_cap_micro_cny": 500000,
+  "note": "按已记录usage估算加未知预留，不是供应商实付；缓存引用不重复记费。"
+}

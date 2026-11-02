@@ -1,0 +1,49 @@
+{
+  "status": "interrupted",
+  "stage": "product_learning_jobs_source_invalid",
+  "rows": [
+    {
+      "id": "wxb",
+      "status": "interrupted",
+      "jobs": [
+        {
+          "job_id": "dcf09805b6b608fe28dbae0fa0770391225ff9f8afd415a7a173069ce5a39106",
+          "sources": 2,
+          "status": "running",
+          "candidate_id": null
+        },
+        {
+          "job_id": "755013b5f0debd5e3e2bafb85fd26225240c2907fb6e969ee20cfbb2199e9b0f",
+          "sources": 1,
+          "status": "complete",
+          "candidate_id": "95421274a13cd889e69aadc0cedb9a2456f0fcd942f3aa5114392559e69d7897"
+        }
+      ],
+      "reason": "invalid cached source analysis detected; preserve unknown requests"
+    },
+    {
+      "id": "wzq",
+      "status": "interrupted",
+      "jobs": [
+        {
+          "job_id": "ef667b05adf8777cc10317635e73c8713c347e7cb6208d585ff7cc38eee821d9",
+          "sources": 2,
+          "status": "running",
+          "candidate_id": null
+        },
+        {
+          "job_id": "4505ad9035372052fd1ac6793c17a17582bfd00734b2fcbb5b0dd33a4b433482",
+          "sources": 1,
+          "status": "complete",
+          "candidate_id": "a5cfef9370a45e6632aeb877167e8fff176c12f9c590acfc5bb63b4241a4a0a8"
+        }
+      ],
+      "reason": "invalid cached source analysis detected; preserve unknown requests"
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0.585867,
+    "occupied_cny": 23.794918
+  },
+  "reason": "request identity is not semantic evidence attribution"
+}

@@ -1,0 +1,7 @@
+{
+  "source_checkpoint": "learning-qualifier-01/wzq-k1-learn-analysis",
+  "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21",
+  "quoted_line": "> “把这庞大的知识体系挤压进我的脑子。我的老天爷。……1968 年，我才 23 岁，身强力壮，不缺睡眠，这活我居然胜任愉快。我分拣、挑选、搬运了大半辈子的骨头，我不是这个领域的专家，但我比谁都更了解骨头。”",
+  "present_in_requested_text": false,
+  "decision": "do_not_reuse_as_grounded_analysis"
+}

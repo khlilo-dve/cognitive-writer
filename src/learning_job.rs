@@ -307,15 +307,12 @@ mod tests {
             prompts(),
         )
         .unwrap();
-        let candidate = run_with(&ws, &job.id, |stage, _, _| async move {
+        let candidate = run_with(&ws, &job.id, |stage, _, user| async move {
             Ok(if stage == "learn-analysis" {
-                "内部分析"
-            } else if stage == "scope-review" {
-                "内部复读"
-            } else {
-                "在事实之内组织细节，按需要给出判断。"
-            }
-            .into())
+                let input:serde_json::Value=serde_json::from_str(&user).unwrap();
+                serde_json::json!({"analysis":"内部分析","evidence":input["articles"].as_array().unwrap().iter().map(|a|serde_json::json!({"article":a["article"],"quote":a["text"]})).collect::<Vec<_>>()}).to_string()
+            } else if stage == "scope-review" {"内部复读".into()}
+            else {"在事实之内组织细节，按需要给出判断。".into()})
         })
         .await
         .unwrap();
@@ -366,8 +363,11 @@ mod tests {
             prompts(),
         )
         .unwrap();
-        let candidate = run_with(&ws, &job.id, |_, _, _| async {
-            Ok("依照有据材料组织细节和判断。".into())
+        let candidate = run_with(&ws, &job.id, |stage, _, user| async move {
+            if stage=="learn-analysis" {
+                let input:serde_json::Value=serde_json::from_str(&user).unwrap();
+                Ok(serde_json::json!({"analysis":"内部分析","evidence":input["articles"].as_array().unwrap().iter().map(|a|serde_json::json!({"article":a["article"],"quote":a["text"]})).collect::<Vec<_>>()}).to_string())
+            } else {Ok("依照有据材料组织细节和判断。".into())}
         })
         .await
         .unwrap();

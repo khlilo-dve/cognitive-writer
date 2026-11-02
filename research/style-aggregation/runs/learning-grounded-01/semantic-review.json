@@ -1,0 +1,5 @@
+{
+  "decision": "reject_incomplete_double_article_validation",
+  "reviewer": "implementer",
+  "note": "两单篇完成、两双篇失败；引用逐字差异及JSON length原响应保留。"
+}

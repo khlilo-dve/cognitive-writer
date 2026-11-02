@@ -1,0 +1,4 @@
+{
+  "summary_file_existed": false,
+  "reason": "No complete two-job author chain had reached finish_tasks before interruption; inspect persisted job states."
+}

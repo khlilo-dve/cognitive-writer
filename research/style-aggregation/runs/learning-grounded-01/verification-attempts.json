@@ -1,0 +1,14 @@
+{
+  "attempts": [
+    {
+      "kind": "fixture_contract",
+      "result": "fixed",
+      "detail": "Six workspace tests used old plain-text analysis fixture; changed it to source-grounded JSON without weakening validation."
+    },
+    {
+      "kind": "bookkeeping",
+      "result": "fixed",
+      "detail": "Metadata script initially lacked json import and then assumed a summary existed. Updated to preserve absence when no chain finished; raw model data untouched."
+    }
+  ]
+}

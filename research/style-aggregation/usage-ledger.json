@@ -252,6 +252,237 @@
       "actual_micro": 1286,
       "state": "settled"
     },
+    "learning-boundary-probe-01/wxb-k1-abstract_choices": {
+      "run_id": "learning-boundary-probe-01",
+      "phase": "full",
+      "reserved_micro": 21547,
+      "actual_micro": 4650,
+      "state": "settled"
+    },
+    "learning-boundary-probe-01/wxb-k2-abstract_choices": {
+      "run_id": "learning-boundary-probe-01",
+      "phase": "full",
+      "reserved_micro": 18701,
+      "actual_micro": 3997,
+      "state": "settled"
+    },
+    "learning-boundary-probe-01/wzq-k1-given_feeling": {
+      "run_id": "learning-boundary-probe-01",
+      "phase": "full",
+      "reserved_micro": 18825,
+      "actual_micro": 2822,
+      "state": "settled"
+    },
+    "learning-boundary-probe-01/wzq-k2-given_feeling": {
+      "run_id": "learning-boundary-probe-01",
+      "phase": "full",
+      "reserved_micro": 16102,
+      "actual_micro": 2472,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k1-learn-analysis": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 128904,
+      "actual_micro": 14595,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k1-learn-compile-0": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 125508,
+      "actual_micro": 12516,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k1-learn-compile-1": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 140928,
+      "actual_micro": 15732,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k1-scope-review": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 140925,
+      "actual_micro": 17991,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k1-scope-revise-0": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 161244,
+      "actual_micro": 22086,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k2-learn-analysis": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 158388,
+      "actual_micro": 27519,
+      "state": "settled"
+    },
+    "learning-grounded-01/wxb-k2-learn-analysis-repair": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 191838,
+      "actual_micro": 35697,
+      "state": "settled"
+    },
+    "learning-grounded-01/wzq-k1-learn-analysis": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 129372,
+      "actual_micro": 15858,
+      "state": "settled"
+    },
+    "learning-grounded-01/wzq-k1-learn-compile-0": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 124764,
+      "actual_micro": 12495,
+      "state": "settled"
+    },
+    "learning-grounded-01/wzq-k1-scope-review": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 142266,
+      "actual_micro": 18756,
+      "state": "settled"
+    },
+    "learning-grounded-01/wzq-k1-scope-revise-0": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 162228,
+      "actual_micro": 23697,
+      "state": "settled"
+    },
+    "learning-grounded-01/wzq-k2-learn-analysis": {
+      "run_id": "learning-grounded-01",
+      "phase": "full",
+      "reserved_micro": 149376,
+      "actual_micro": 110139,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k1-learn-analysis": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 130491,
+      "actual_micro": 13473,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k1-learn-compile-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 123588,
+      "actual_micro": 16785,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k1-scope-review": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 152541,
+      "actual_micro": 25473,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k1-scope-revise-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 182838,
+      "actual_micro": 32682,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k2-learn-analysis": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 159975,
+      "actual_micro": 30801,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k2-learn-analysis-repair": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 200046,
+      "actual_micro": 40050,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k2-learn-compile-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 141651,
+      "actual_micro": 17514,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k2-scope-review": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 173712,
+      "actual_micro": 29478,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wxb-k2-scope-revise-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 203106,
+      "actual_micro": 33066,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k1-learn-analysis": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 130959,
+      "actual_micro": 18240,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k1-learn-compile-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 132192,
+      "actual_micro": 14010,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k1-scope-review": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 142158,
+      "actual_micro": 25167,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k1-scope-revise-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 175641,
+      "actual_micro": 27486,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k2-learn-analysis": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 150963,
+      "actual_micro": 23439,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k2-learn-compile-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 131283,
+      "actual_micro": 12639,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k2-scope-review": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 159216,
+      "actual_micro": 30885,
+      "state": "settled"
+    },
+    "learning-grounded-repair-01/wzq-k2-scope-revise-0": {
+      "run_id": "learning-grounded-repair-01",
+      "phase": "full",
+      "reserved_micro": 194496,
+      "actual_micro": 29007,
+      "state": "settled"
+    },
     "learning-jobs-live-02/wxb-k1-learn-analysis": {
       "run_id": "learning-jobs-live-02",
       "phase": "full",
@@ -489,6 +720,202 @@
       "reserved_micro": 189777,
       "actual_micro": 28815,
       "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k1-learn-analysis": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 127059,
+      "actual_micro": 13326,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k1-learn-compile-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 145176,
+      "actual_micro": 18330,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k1-scope-review": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 145164,
+      "actual_micro": 31677,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k1-scope-revise-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 193482,
+      "actual_micro": 29784,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k2-learn-analysis": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 156543,
+      "actual_micro": 39180,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k2-learn-compile-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 211524,
+      "actual_micro": 38040,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k2-scope-review": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 181227,
+      "actual_micro": 36729,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wxb-k2-scope-revise-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 219810,
+      "actual_micro": 40905,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k1-learn-analysis": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 127527,
+      "actual_micro": 14709,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k1-learn-compile-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 145977,
+      "actual_micro": 21399,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k1-learn-compile-1": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 167088,
+      "actual_micro": 25500,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k1-scope-review": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 146346,
+      "actual_micro": 12111,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k1-scope-revise-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 149781,
+      "actual_micro": 29247,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k2-learn-analysis": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 147531,
+      "actual_micro": 29898,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k2-learn-compile-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 185760,
+      "actual_micro": 31875,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k2-scope-review": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 169149,
+      "actual_micro": 28134,
+      "state": "settled"
+    },
+    "learning-qualifier-01/wzq-k2-scope-revise-0": {
+      "run_id": "learning-qualifier-01",
+      "phase": "full",
+      "reserved_micro": 193770,
+      "actual_micro": 32109,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wxb-k1-learn-compile-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 128064,
+      "actual_micro": 12600,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wxb-k1-scope-review": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 141678,
+      "actual_micro": 24660,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wxb-k1-scope-revise-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 175776,
+      "actual_micro": 28296,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wxb-k2-learn-compile-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 164928,
+      "actual_micro": 28050,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wxb-k2-scope-review": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 183348,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
+    },
+    "learning-qualifier-isolated-01/wzq-k1-learn-compile-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 128397,
+      "actual_micro": 15618,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wzq-k1-scope-review": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 147018,
+      "actual_micro": 14016,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wzq-k1-scope-revise-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 154902,
+      "actual_micro": 20040,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wzq-k2-learn-compile-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 148176,
+      "actual_micro": 23205,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wzq-k2-scope-review": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 171393,
+      "actual_micro": 32421,
+      "state": "settled"
+    },
+    "learning-qualifier-isolated-01/wzq-k2-scope-revise-0": {
+      "run_id": "learning-qualifier-isolated-01",
+      "phase": "full",
+      "reserved_micro": 203613,
+      "actual_micro": null,
+      "state": "reserved_or_uncertain"
     },
     "learning-quality-probe-01/neutral-photo_numbers": {
       "run_id": "learning-quality-probe-01",

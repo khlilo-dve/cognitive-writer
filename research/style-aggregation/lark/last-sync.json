@@ -4,9 +4,12 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/learning-jobs-quality-01",
-    "research/style-aggregation/runs/learning-quality-probe-01"
+    "research/style-aggregation/runs/learning-qualifier-01",
+    "research/style-aggregation/runs/learning-qualifier-isolated-01",
+    "research/style-aggregation/runs/learning-grounded-01",
+    "research/style-aggregation/runs/learning-grounded-repair-01",
+    "research/style-aggregation/runs/learning-boundary-probe-01"
   ],
-  "journal_from": "E0073",
-  "record_count": 164
+  "journal_from": "E0076",
+  "record_count": 175
 }

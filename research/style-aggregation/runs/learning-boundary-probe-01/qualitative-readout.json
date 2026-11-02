@@ -1,0 +1,133 @@
+{
+  "reviewer": "implementer",
+  "not_blind": true,
+  "decision": "boundary_executable_but_writer_facts_not_ready",
+  "scope": "四道明确要求边界的定点稿，不能外推通用稳定性或作者保真。没有重抽或修改模型原稿。",
+  "rows": [
+    {
+      "id": "wxb-k1-abstract_choices",
+      "boundary_observation": "能用条件、比较与限定展开抽象材料，没有编现场或身体感觉。",
+      "boundary_executable_in_this_prompt": true,
+      "factual_or_reasoning_issues_remain": true,
+      "overall_voice_note": "可见组织与语气机制，但解释材料边界的元话语较多；不是独立作者保真人评。",
+      "anchors": [
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wxb-k1-abstract_choices.md",
+          "quote": "可变性被压缩到截止之前——填错了、改主意了，都必须在截止前完成",
+          "start_char": 286,
+          "end_char": 317,
+          "reason": "两案只给定截止前填写一次；截止前是否有修改机制并未提供。固定名单也不等于已提供更正机制。",
+          "kind": "unsupported_rule"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wxb-k1-abstract_choices.md",
+          "quote": "方案A是\"晚确定、少变动\"，方案B是\"早开口、多变动\"",
+          "start_char": 469,
+          "end_char": 496,
+          "reason": "前文已说明截止前操作一致，早晚开口并非给定区别；该概括偏离其自身分析。",
+          "kind": "reasoning_inconsistency"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wxb-k1-abstract_choices.md",
+          "quote": "那么方案B的可变性是净收益",
+          "start_char": 1206,
+          "end_char": 1219,
+          "reason": "列举部分有利条件仍不能保证净收益，语气强于现有条件能支持的程度。",
+          "kind": "overstrong_inference"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k2-abstract_choices",
+      "boundary_observation": "按共同点→截止后差别→通知未定→条件判断推进，不依赖现场叙事。",
+      "boundary_executable_in_this_prompt": true,
+      "factual_or_reasoning_issues_remain": true,
+      "overall_voice_note": "可见组织与语气机制，但解释材料边界的元话语较多；不是独立作者保真人评。",
+      "anchors": [
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wxb-k2-abstract_choices.md",
+          "quote": "谁在场、谁负责、按谁准备，都以那一刻为准",
+          "start_char": 332,
+          "end_char": 352,
+          "reason": "固定报名名单不说明到场、责任和准备安排；把未给定机制作为方案内容。",
+          "kind": "unsupported_mechanism"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wxb-k2-abstract_choices.md",
+          "quote": "方案A的固定名单直接满足这一需求，无需等待任何通知机制",
+          "start_char": 1142,
+          "end_char": 1169,
+          "reason": "A没有给定通知安排，不能据未说明就断言无需通知；偏好需求也不保证被完全满足。",
+          "kind": "overstrong_inference"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k1-given_feeling",
+      "boundary_observation": "直接用第一人称并置舍不得与松口气，没有因声音规则删掉任一感受。",
+      "boundary_executable_in_this_prompt": true,
+      "factual_or_reasoning_issues_remain": true,
+      "overall_voice_note": "可见组织与语气机制，但解释材料边界的元话语较多；不是独立作者保真人评。",
+      "anchors": [
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wzq-k1-given_feeling.md",
+          "quote": "舍不得，是因为每一条都是一次写下来的痕迹",
+          "start_char": 63,
+          "end_char": 83,
+          "reason": "题目仅给定感受，明确未提供删除原因；此处替叙述者补情绪动因。",
+          "kind": "invented_motive"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wzq-k1-given_feeling.md",
+          "quote": "留下的那三条之所以留，是因为标题我一个字都没动",
+          "start_char": 199,
+          "end_char": 222,
+          "reason": "标题未改与保留原因没有给定因果关系。",
+          "kind": "invented_cause"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wzq-k1-given_feeling.md",
+          "quote": "两种感受放在一起并不打架",
+          "start_char": 315,
+          "end_char": 327,
+          "reason": "该组织方式保留两种给定感受，是表达边界的正面证据；不抵消事实问题。",
+          "kind": "boundary_evidence"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k2-given_feeling",
+      "boundary_observation": "保留第一人称两种感受与未来未定，未虚构地点、对白和感官场面。",
+      "boundary_executable_in_this_prompt": true,
+      "factual_or_reasoning_issues_remain": true,
+      "overall_voice_note": "可见组织与语气机制，但解释材料边界的元话语较多；不是独立作者保真人评。",
+      "anchors": [
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wzq-k2-given_feeling.md",
+          "quote": "沒有哪條被特別對待，九條一起出局",
+          "start_char": 169,
+          "end_char": 185,
+          "reason": "没有任何筛选过程或是否特殊对待的信息；不能补成一并处理。",
+          "kind": "invented_process"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wzq-k2-given_feeling.md",
+          "quote": "我刪掉的九條才構成這次的放棄",
+          "start_char": 511,
+          "end_char": 525,
+          "reason": "删除行为不直接证明作者对这九条的永久态度；词义超出给定行为。",
+          "kind": "overstrong_inference"
+        },
+        {
+          "file": "research/style-aggregation/runs/learning-boundary-probe-01/articles/wzq-k2-given_feeling.md",
+          "quote": "如果哪天寫了，那是新的一次整理，不是這一次的補救",
+          "start_char": 556,
+          "end_char": 580,
+          "reason": "未来未定，不能预先替未来写作赋予这种意义。",
+          "kind": "invented_future_meaning"
+        }
+      ]
+    }
+  ],
+  "additional_observation": "汪双篇稿转成繁体；保留原样，没有人为转简体美化。"
+}

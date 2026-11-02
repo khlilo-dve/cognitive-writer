@@ -175,6 +175,9 @@ def main():
             report_file = ROOT / "lark/learning-quality-stage-20261102.json"
         if rid in ("learning-jobs-quality-01", "learning-quality-probe-01"):
             report_file = ROOT / "lark/learning-quality-recovery-stage-20261102.json"
+        grounded_prefixes = ("learning-qualifier-", "learning-grounded-", "learning-boundary-")
+        if rid.startswith(grounded_prefixes):
+            report_file = ROOT / "lark/learning-grounded-stage-20261102.json"
         report = json.loads(report_file.read_text()) if report_file and report_file.exists() else {}
         report_url = report.get("response", report).get("data", {}).get("doc_url")
         stage = "P1 单篇试跑" if rid.startswith("p1-") else "P2 单篇重复提取" if "repeat" in rid else "P2 单篇提取"
@@ -223,6 +226,14 @@ def main():
             if marker in rid:
                 stage = label
                 break
+        grounded_labels = {
+            "learning-qualifier-01": "限定语修订｜内容隔离失败",
+            "learning-qualifier-isolated-01": "分析复用｜因错文引用中断",
+            "learning-grounded-01": "引文归属｜两完成两失败",
+            "learning-grounded-repair-01": "引文归属｜定位修复确认",
+            "learning-boundary-probe-01": "定点执行｜感受与抽象材料四稿",
+        }
+        stage = grounded_labels.get(rid, stage)
         rows = summary.get("rows", [])
         checks = ""
         control_file = run / "controls.json"
@@ -245,16 +256,16 @@ def main():
                 checks += " 核心流程与来源/复跑已验证，Style仍是待审草稿，语义与Writer事实未全部通过。"
             elif review.get("decision"):
                 checks += " 仅开发候选或探索性诊断，尚未产品采用；具体边界见阶段报告。"
-        if rid.startswith("learning-jobs") and rows and all("jobs" in r for r in rows):
+        if rid.startswith(("learning-jobs", "learning-qualifier", "learning-grounded")) and rows and all("jobs" in r for r in rows):
             jobs = [job for row in rows for job in row["jobs"]]
-            checks += f" {len(rows)}条作者链内共{len(jobs)}个已产出结果的学习任务，完成{sum(j.get('status') == 'complete' for j in jobs)}个；保存仅在研究工作区，Style仍待审。"
+            checks += f" {len(rows)}条作者链内共{len(jobs)}个已记录的学习任务，完成{sum(j.get('status') == 'complete' for j in jobs)}个；保存仅在研究工作区，Style仍待审。"
         if rid.startswith("learning-quality-reviewed"):
             checks += " 四份是旧模型稿上的21处实现者派生修改，0模型请求，不代表新自动方法产物或Writer验收。"
         if rid == "learning-quality-probe-01" and (run / "qualitative-readout.json").exists():
             checks += " 已逐稿读10篇并记录具体事实问题，中性稿也有越界；不是可发布成稿或质量通过。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
-            "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项。" + checks + summary.get("error", ""),
+            "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项，中断 {sum(r['status'] == 'interrupted' for r in rows)} 项。" + checks + summary.get("error", ""),
             "caveat": "这是最近一次同步快照，running不保证进程仍存活。费用含未知预留；完成数量和字数都不是质量评分。",
             "spent_cny": summary["usage"]["run_occupied_cny"], "report_url": report_url})
         for row in rows if (run / "single").is_dir() else []:

@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "id": "wxb-k1-abstract_choices",
+      "body_sha256": "926828c2fe3465e224027a4f8c0e0ad761ed9810461a06ac49e63e215e0359bd",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wxb-k2-abstract_choices",
+      "body_sha256": "b56218795dca8272f24a8f63d48ee7e76464127cd35d8bd33142e7593fc5eb90",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wzq-k1-given_feeling",
+      "body_sha256": "e2e357fd135d6e5a1197dbb09268e6ee4843c9ddac36e1747d97689aab98a361",
+      "model": "mimo-v2.6-flash"
+    },
+    {
+      "id": "wzq-k2-given_feeling",
+      "body_sha256": "1cd0b187234d0de3df9959dbe133c0e2122239789de41c66e79f2ebd5fe540ac",
+      "model": "mimo-v2.6-flash"
+    }
+  ],
+  "new_model_requests": 0,
+  "same_tasks_and_fact_policy": true,
+  "new_automatic_candidate_identity_verified": true,
+  "analysis_and_review_excluded_from_writer": true,
+  "ledger_before_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "ledger_after_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "semantic_and_factual_quality": "separate_implementer_readout_required"
+}

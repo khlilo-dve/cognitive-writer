@@ -49,11 +49,82 @@ pub(crate) async fn run(run_id: &str, retry: bool) -> Result<(), AppError> {
     let profile = client.profile();
     let prompts = JobPrompts::load()?;
     let store = Arc::new(ResearchStore::open(Path::new(ROOT), run_id, false)?);
-    store.limit_run(3_000_000).await?;
-    store.freeze(&json!({"suite":"product_learning_jobs_live_v1","pairs":pairs,"profile":profile,"prompts":prompts,
+    let cache_path = store.root.join("analysis-cache.json");
+    let mut cap = 3_000_000u64;
+    let cache = if cache_path.exists() {
+        let cache: Value = local::read(&cache_path)?;
+        let source = cache["source_run"]
+            .as_str()
+            .ok_or_else(|| AppError::Parse("缓存来源无效".into()))?;
+        if !crate::research_dataset::valid_id(source) || source == run_id {
+            return Err(AppError::Parse("缓存来源无效".into()));
+        }
+        let usage = store.usage().await;
+        let used = usage["entries"]
+            .as_object()
+            .ok_or_else(|| AppError::Parse("账本缺条目".into()))?
+            .values()
+            .filter(|e| e["run_id"] == source)
+            .map(|e| {
+                e["actual_micro"]
+                    .as_u64()
+                    .or_else(|| e["reserved_micro"].as_u64())
+                    .unwrap_or(u64::MAX)
+            })
+            .fold(0u64, u64::saturating_add);
+        cap = cap.saturating_sub(used);
+        Some(cache)
+    } else {
+        None
+    };
+    let phase_path = store.root.join("phase-budget.json");
+    let phase = if phase_path.exists() {
+        let phase: Value = local::read(&phase_path)?;
+        let priors = phase["prior_runs"]
+            .as_array()
+            .ok_or_else(|| AppError::Parse("阶段预算来源无效".into()))?;
+        let usage = store.usage().await;
+        let mut used = 0u64;
+        let mut seen = std::collections::HashSet::new();
+        for prior in priors {
+            let prior = prior
+                .as_str()
+                .filter(|id| crate::research_dataset::valid_id(id) && *id != run_id)
+                .ok_or_else(|| AppError::Parse("阶段预算来源无效".into()))?;
+            if !seen.insert(prior) {
+                return Err(AppError::Parse("阶段预算来源重复".into()));
+            }
+            for e in usage["entries"]
+                .as_object()
+                .ok_or_else(|| AppError::Parse("缺预算条目".into()))?
+                .values()
+                .filter(|e| e["run_id"] == prior)
+            {
+                used = used.saturating_add(
+                    e["actual_micro"]
+                        .as_u64()
+                        .or_else(|| e["reserved_micro"].as_u64())
+                        .unwrap_or(u64::MAX),
+                );
+            }
+        }
+        cap = cap.min(3_000_000u64.saturating_sub(used));
+        Some(phase)
+    } else {
+        None
+    };
+    store.limit_run(cap).await?;
+    let mut frozen = json!({"suite":"product_learning_jobs_live_v1","pairs":pairs,"profile":profile,"prompts":prompts,
         "workspace_layout":"per-author-v1",
         "source_inputs_sha256":sha256(&bytes),"learning_method":crate::voice_learning::METHOD,
-        "revision_method":crate::voice_revision::METHOD,"run_cap_micro_cny":3_000_000}))?;
+        "revision_method":crate::voice_revision::METHOD,"run_cap_micro_cny":cap,"analysis_cache":cache});
+    if cache.is_none() {
+        frozen.as_object_mut().unwrap().remove("analysis_cache");
+    }
+    if let Some(phase) = phase {
+        frozen["phase_budget"] = phase;
+    }
+    store.freeze(&frozen)?;
     std::fs::create_dir_all(store.root.join("links"))?;
     let mut tasks = tokio::task::JoinSet::new();
     for pair in pairs {
@@ -81,12 +152,14 @@ pub(crate) async fn run(run_id: &str, retry: bool) -> Result<(), AppError> {
                     let store=Arc::clone(&store);let root=job_root.clone();let profile=profile.clone();
                     let name=format!("{code}-k{count}-{stage}");
                     async move {
-                        let mut body=request_body(&profile.model,&system,&user,None)?;
+                        let json_mode=matches!(stage.as_str(),"learn-analysis"|"learn-analysis-repair");
+                        let format=json_mode.then(||json!({"type":"json_object"}));
+                        let mut body=request_body(&profile.model,&system,&user,format.as_ref())?;
                         body["max_completion_tokens"]=json!(16384);body["thinking"]=json!({"type":"disabled"});
                         let request=json!({"schema":1,"endpoint_sha256":profile.endpoint_sha256,"body":body});
                         let expected=request.clone();
                         learning_transport::call_with(&root,&stage,request,retry,||async {Ok(())},||async {
-                            store.call(&name,Role::Structured,&system,&user,false).await?;
+                            store.call(&name,Role::Structured,&system,&user,json_mode).await?;
                             let saved:Checkpoint=local::read(&store.root.join(format!("requests/{name}.json")))?;
                             verify(&saved)?;
                             if saved.request!=expected {return Err(AppError::Parse("研究与产品请求身份不一致".into()));}

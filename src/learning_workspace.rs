@@ -264,13 +264,11 @@ mod tests {
                 analysis: "分析".into(),
                 compile: "编译".into(),
             },
-            |stage, _, _| async move {
+            |stage, _, user| async move {
                 Ok(if stage == "analysis" {
-                    "AUDIT_ONLY_ANALYSIS"
-                } else {
-                    "由已知材料支撑判断，根据表达责任调整叙述与推理。"
-                }
-                .into())
+                    let input:serde_json::Value=serde_json::from_str(&user).unwrap();
+                    serde_json::json!({"analysis":"AUDIT_ONLY_ANALYSIS","evidence":input["articles"].as_array().unwrap().iter().map(|a|serde_json::json!({"article":a["article"],"quote":a["text"]})).collect::<Vec<_>>()}).to_string()
+                } else {"由已知材料支撑判断，根据表达责任调整叙述与推理。".into()})
             },
         )
         .await

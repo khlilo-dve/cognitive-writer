@@ -1,0 +1,35 @@
+{
+  "observed_chain": "qualified analysis -> stronger compiler assertion -> reviewer endorsement",
+  "mechanism": "loss of qualifiers and promotion of source-specific choices to necessities",
+  "causal_limit": "Prompt wording may contribute; this trace alone does not prove a unique model-internal cause.",
+  "evidence": [
+    {
+      "checkpoint": "research/style-aggregation/runs/learning-jobs-quality-01/requests/wzq-k1-learn-analysis.json",
+      "content_sha256": "840a76f06036e0375e091ffc55ca0c5d963a9a549cec636e3a717b82fd6209cf",
+      "quote": "不是单纯的抒情工具",
+      "start_codepoint": 3171,
+      "end_codepoint": 3180
+    },
+    {
+      "checkpoint": "research/style-aggregation/runs/learning-jobs-quality-01/requests/wzq-k1-learn-compile-0.json",
+      "content_sha256": "c286803a59a6ea4f1fa735bb89ccbb43b819895a0304ae3f854bd09a6261aa6e",
+      "quote": "第一人称是可信度工具，不是抒情工具",
+      "start_codepoint": 1890,
+      "end_codepoint": 1907
+    },
+    {
+      "checkpoint": "research/style-aggregation/runs/learning-jobs-quality-01/requests/wzq-k1-scope-review.json",
+      "content_sha256": "8299006b42a3a64bcd75d0bcfc70aac64cb976f4d42bfe9c9a840d3fa060bfed",
+      "quote": "第一人称作为可信度标记，不是抒情工具",
+      "start_codepoint": 2608,
+      "end_codepoint": 2626
+    },
+    {
+      "checkpoint": "research/style-aggregation/runs/learning-jobs-quality-01/requests/wxb-k1-learn-analysis.json",
+      "content_sha256": "cb877511cccd480b2720ea4d0ff64a6d0347dc84185576a077980fada0047fa8",
+      "quote": "撑住道理的事件必须写长、写到身体细节",
+      "start_codepoint": 2614,
+      "end_codepoint": 2632
+    }
+  ]
+}

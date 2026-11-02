@@ -1,0 +1,5 @@
+{
+  "decision": "boundary_executable_but_writer_facts_not_ready",
+  "reviewer": "implementer",
+  "note": "四稿目标边界可执行，四稿仍有具体事实或推理越界；不是全部质量验收。"
+}

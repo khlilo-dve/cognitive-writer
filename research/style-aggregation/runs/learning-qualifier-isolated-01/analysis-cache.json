@@ -1,0 +1,30 @@
+{
+  "source_run": "learning-qualifier-01",
+  "checkpoints": [
+    {
+      "name": "wxb-k1-learn-analysis",
+      "source_checkpoint_sha256": "43bfaec9fc52936436e70a55349dfa286d5f0933e1901e3359a23c0e53a4410a",
+      "receipt_sha256": "cd33238b304c8548fc141911ab859aae02afe3f6d611e89722ec992f17ed94f5",
+      "charged_origin": "learning-qualifier-01/wxb-k1-learn-analysis"
+    },
+    {
+      "name": "wxb-k2-learn-analysis",
+      "source_checkpoint_sha256": "3a197571ac14ddc3fba0630b1ef9dc4ae8401a46b2238e4cdb9ab20a172cb552",
+      "receipt_sha256": "175b781e32f2cd790780f5c64f258251f933f5c325497b053803542cfd4f6b28",
+      "charged_origin": "learning-qualifier-01/wxb-k2-learn-analysis"
+    },
+    {
+      "name": "wzq-k1-learn-analysis",
+      "source_checkpoint_sha256": "0e684ececa4f69da5bcbc3f403c143c90f9d95c61e11890b73eaf223298f856f",
+      "receipt_sha256": "94ed4571eb533643d7d11cfb6eb0e97a2ff9c5a33146c745d05a5043041e1011",
+      "charged_origin": "learning-qualifier-01/wzq-k1-learn-analysis"
+    },
+    {
+      "name": "wzq-k2-learn-analysis",
+      "source_checkpoint_sha256": "36ada5c95ab088c6ef080ab071b8e0678805adda3809b68510aed3f364c45f0a",
+      "receipt_sha256": "145d404fe755827ca8dd8eb1c6a622a5e2327042d20724092f30778f120b381f",
+      "charged_origin": "learning-qualifier-01/wzq-k2-learn-analysis"
+    }
+  ],
+  "policy": "request equality and receipt hash verified again by ResearchStore; charge remains at source identity"
+}

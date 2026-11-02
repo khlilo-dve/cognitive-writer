@@ -1,0 +1,6 @@
+{
+  "decision": "reject_raw_source_compiler_for_current_adoption",
+  "reason": "wzq-k1 final output returns to source analysis with names, objects and event chains despite successful bounded long-quote repair; targeted qualifier improved but content isolation regressed.",
+  "quality": "not_adopted",
+  "next": "reuse identical completed analyses in isolated compilation; preserve failed draft and source-aware branch"
+}

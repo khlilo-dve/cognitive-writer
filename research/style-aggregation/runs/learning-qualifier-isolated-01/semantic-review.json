@@ -1,0 +1,5 @@
+{
+  "decision": "reject_invalid_cached_source_analysis",
+  "reviewer": "implementer",
+  "note": "请求哈希相同不证明分析引用真实；发现后主动中断，未知预留保留，旧durable running不是活进程。"
+}

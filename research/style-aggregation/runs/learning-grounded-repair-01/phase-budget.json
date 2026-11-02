@@ -1,0 +1,8 @@
+{
+  "prior_runs": [
+    "learning-qualifier-01",
+    "learning-qualifier-isolated-01",
+    "learning-grounded-01"
+  ],
+  "phase_pro_limit_micro_cny": 3000000
+}

@@ -86,7 +86,9 @@ impl LearningClient {
         if job.profile != self.profile() {
             return Err(error("端点或模型配置变化，未复用任务也未发送请求"));
         }
-        let mut body = request_body(&job.profile.model, &system, &user, None)?;
+        let format = matches!(stage.as_str(), "learn-analysis" | "learn-analysis-repair")
+            .then(|| json!({"type":"json_object"}));
+        let mut body = request_body(&job.profile.model, &system, &user, format.as_ref())?;
         body["max_completion_tokens"] = json!(16384);
         body["thinking"] = json!({"type":"disabled"});
         let request = json!({"schema":1,"endpoint_sha256":job.profile.endpoint_sha256,"body":body});

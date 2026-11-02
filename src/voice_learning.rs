@@ -5,7 +5,7 @@ use serde_json::json;
 use sha2::{Digest, Sha256};
 use std::{collections::HashSet, future::Future};
 
-pub const METHOD: &str = "voice-core-v2";
+pub const METHOD: &str = "voice-core-v6";
 
 pub(crate) fn sha256(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
@@ -104,7 +104,75 @@ pub(crate) fn validate(spec: &str, sources: &[Source]) -> Result<(), AppError> {
     Ok(())
 }
 
-/// The caller routes both stages to its configured analysis model and persists requests.
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct SourceAnalysis {
+    analysis: String,
+    evidence: Vec<AnalysisEvidence>,
+}
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct AnalysisEvidence {
+    article: String,
+    quote: String,
+}
+fn grounded_analysis(raw: &str, sources: &[Source]) -> Result<String, AppError> {
+    let report: SourceAnalysis = serde_json::from_str(raw.trim())
+        .map_err(|_| AppError::Parse("分析需要包含analysis与evidence的JSON对象".into()))?;
+    if report.analysis.trim().is_empty() {
+        return Err(AppError::Parse("声音分析为空".into()));
+    }
+    let mut covered = HashSet::new();
+    for (index, evidence) in report.evidence.into_iter().enumerate() {
+        let source = sources
+            .iter()
+            .find(|s| s.identity.article == evidence.article)
+            .ok_or_else(|| {
+                AppError::Parse(format!(
+                    "第{}条分析引用了未知来源{}",
+                    index + 1,
+                    evidence.article
+                ))
+            })?;
+        if evidence.quote.trim().is_empty() || !source.text.contains(&evidence.quote) {
+            return Err(AppError::Parse(format!(
+                "第{}条分析引文不在来源{}原文中，不能继续编译",
+                index + 1,
+                evidence.article
+            )));
+        }
+        covered.insert(evidence.article);
+    }
+    if sources
+        .iter()
+        .any(|s| !covered.contains(&s.identity.article))
+    {
+        return Err(AppError::Parse("分析缺少某篇来源的可定位原文依据".into()));
+    }
+    Ok(report.analysis)
+}
+
+fn repair_context(raw: &str, sources: &[Source]) -> Vec<serde_json::Value> {
+    let Ok(report) = serde_json::from_str::<SourceAnalysis>(raw.trim()) else {
+        return vec![];
+    };
+    report.evidence.into_iter().enumerate().filter_map(|(index,e)|{
+        let source=sources.iter().find(|s|s.identity.article==e.article)?;
+        if !e.quote.trim().is_empty() && source.text.contains(&e.quote){return None;}
+        let query=e.quote.chars().collect::<Vec<_>>();
+        let mut excerpt=String::new();
+        for (qstart,window) in query.windows(8).enumerate(){
+            let part=window.iter().collect::<String>();
+            if let Some(byte)=source.text.find(&part){
+                let at=source.text[..byte].chars().count();let start=at.saturating_sub(qstart+16);
+                excerpt=source.text.chars().skip(start).take(query.len().min(240)+32).collect();break;
+            }
+        }
+        Some(json!({"evidence_index":index+1,"article":e.article,"invalid_quote":e.quote,"source_excerpt_candidate":excerpt}))
+    }).collect()
+}
+
+/// The caller persists requests; analysis/analysis-repair return source-grounded JSON, compilation returns Markdown.
 /// No input acquisition, provider credentials or style-library writes occur here.
 pub async fn learn_voice_with<F, Fut>(
     articles: &[String],
@@ -122,13 +190,19 @@ where
     let input = json!({"articles":sources.iter().map(|source|
         json!({"article":source.identity.article,"text":source.text})).collect::<Vec<_>>()})
     .to_string();
-    let analysis = call("analysis".into(), prompts.analysis.clone(), input).await?;
-    if analysis.trim().is_empty() {
-        return Err(AppError::Parse("声音分析为空".into()));
-    }
+    let raw = call("analysis".into(), prompts.analysis.clone(), input.clone()).await?;
+    let (analysis, analysis_calls) = match grounded_analysis(&raw, &sources) {
+        Ok(analysis) => (analysis, 1),
+        Err(error) => {
+            let repair=json!({"original_input":serde_json::from_str::<serde_json::Value>(&input).map_err(|e|AppError::Parse(e.to_string()))?,
+                "repair_context":repair_context(&raw,&sources),"invalid_analysis":raw,"diagnosis":error.to_string(),"instruction":"逐项修复错误引用。候选原文片段只帮助定位，必须核对原文；可改选较短的连续真实摘引，并同步调整不成立的分析。输出完整analysis和evidence，不重复旧错误，不编造证据。"}).to_string();
+            let fixed = call("analysis-repair".into(), prompts.analysis.clone(), repair).await?;
+            (grounded_analysis(&fixed, &sources)?, 2)
+        }
+    };
     let original = json!({"article_count":sources.len(),"analysis":analysis}).to_string();
     let mut user = original.clone();
-    let mut calls = 1;
+    let mut calls = analysis_calls;
     for attempt in 0..2 {
         let raw = call(format!("compile-{attempt}"), prompts.compile.clone(), user).await?;
         calls += 1;
@@ -211,9 +285,17 @@ mod tests {
         let inputs = (0..10)
             .map(|i| format!("文章{i}，各自不同的正文。"))
             .collect::<Vec<_>>();
-        let result = learn_voice_with(&inputs, &prompts, |stage, _, _| async move {
+        let result = learn_voice_with(&inputs, &prompts, |stage, _, user| async move {
+            let input: serde_json::Value = serde_json::from_str(&user).unwrap();
+            if stage == "analysis" {
+                assert_eq!(input["articles"].as_array().unwrap().len(), 10);
+            } else {
+                assert_eq!(input["analysis"], "内部分析");
+                assert!(input.get("articles").is_none());
+                assert_eq!(input["article_count"], 10);
+            }
             Ok(if stage == "analysis" {
-                "内部分析".into()
+                json!({"analysis":"内部分析","evidence":input["articles"].as_array().unwrap().iter().map(|a|json!({"article":a["article"],"quote":a["text"]})).collect::<Vec<_>>()}).to_string()
             } else {
                 "依据材料选择叙述或判断，保持亲近而有分寸的语气。".into()
             })
@@ -253,7 +335,8 @@ mod tests {
                 let copied = copied.clone();
                 async move {
                     Ok(if stage == "analysis" {
-                        "分析".into()
+                        json!({"analysis":"分析","evidence":[{"article":"a01","quote":copied}]})
+                            .to_string()
                     } else {
                         copied
                     })
@@ -263,5 +346,65 @@ mod tests {
             .is_err()
         );
         assert_eq!(calls.load(Ordering::SeqCst), 3);
+    }
+    #[tokio::test]
+    async fn unrelated_source_quotes_get_one_repair_and_never_reach_compilation() {
+        let articles = vec!["我想念旧时的声音，也承认记忆模糊。".into()];
+        let prompts = VoicePrompts {
+            analysis: "证据分析".into(),
+            compile: "编译".into(),
+        };
+        let mut stages = Vec::new();
+        let failed=learn_voice_with(&articles,&prompts,|stage,_,_|{
+            stages.push(stage.clone());async move{Ok(json!({"analysis":"无关的骨骼史料分析","evidence":[{"article":"a01","quote":"这里从事骨骼分拣工作"}]}).to_string())}
+        }).await;
+        assert!(failed.is_err());
+        assert_eq!(stages, vec!["analysis", "analysis-repair"]);
+        let sources = sources(&articles).unwrap();
+        assert!(
+            grounded_analysis(
+                &json!({"analysis":"内容","evidence":[]}).to_string(),
+                &sources
+            )
+            .is_err()
+        );
+        assert!(
+            grounded_analysis(
+                &json!({"analysis":"内容","evidence":[{"article":"a99","quote":"声音"}]})
+                    .to_string(),
+                &sources
+            )
+            .is_err()
+        );
+        assert_eq!(grounded_analysis(&json!({"analysis":"第一人称承载情绪与限定","evidence":[{"article":"a01","quote":"我想念旧时的声音"}]}).to_string(),&sources).unwrap(),"第一人称承载情绪与限定");
+    }
+    #[tokio::test]
+    async fn a_valid_source_repair_continues_without_exposing_evidence_to_compiler() {
+        let mut stages = Vec::new();
+        let result=learn_voice_with(&["这段原文含有明确的感受与判断。".into()],&VoicePrompts{analysis:"来源分析".into(),compile:"编译".into()},|stage,_,user|{
+            stages.push(stage.clone());async move{
+                if stage=="analysis" {Ok(json!({"analysis":"错文","evidence":[{"article":"a01","quote":"别的文章"}]}).to_string())}
+                else if stage=="analysis-repair" {Ok(json!({"analysis":"原文感受与判断并存","evidence":[{"article":"a01","quote":"明确的感受与判断"}]}).to_string())}
+                else {let input:serde_json::Value=serde_json::from_str(&user).unwrap();assert_eq!(input["analysis"],"原文感受与判断并存");assert!(input.get("evidence").is_none());assert!(input.get("articles").is_none());Ok("依据当前材料兼顾感受和判断，保留必要的限定。".into())}
+            }
+        }).await.unwrap();
+        assert_eq!(stages, vec!["analysis", "analysis-repair", "compile-0"]);
+        assert_eq!(result.calls, 3);
+    }
+    #[test]
+    fn repair_context_uses_actual_source_without_accepting_approximate_quotes() {
+        let articles = vec!["引言。现在的年轻人可能不知道，这句话另有语境。结尾。".into()];
+        let sources = sources(&articles).unwrap();
+        let raw=json!({"analysis":"描述","evidence":[{"article":"a01","quote":"现在的人可能不知道，这句话另有语境。"}]}).to_string();
+        assert!(grounded_analysis(&raw, &sources).is_err());
+        let hints = repair_context(&raw, &sources);
+        assert_eq!(hints.len(), 1);
+        assert!(
+            hints[0]["source_excerpt_candidate"]
+                .as_str()
+                .unwrap()
+                .contains("现在的年轻人")
+        );
+        assert!(grounded_analysis(&raw, &sources).is_err());
     }
 }

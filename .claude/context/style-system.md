@@ -35,3 +35,5 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 2026-11-02方法28：`voice-reviewed-v3`将规范排序完整原文加入修订输入，仍隔离旧analysis；四份学习提示词增强当篇缘由/表达关系/自检一致性。完整旧任务先找回不可变候选，未完成旧方法仍拒绝静默切换。279库测试通过/10忽略，本地HTTP与17终端回归通过。真实新任务因TLS失败0响应，10稿依赖暂缓；四份旧稿的21处实现者有据派生不冒充自动质量验证。新研究入口`research learning-quality-probe <run> <source-run>`来源未完整则拒绝发请求；资料与恢复顺序见docs/2026-11-02-source-grounded-revision.md。
 
 2026-11-02方法28后续真实恢复：原冻结四任务16份Pro响应及10篇Flash用稿已完整，来源/版本和纯spec输入审计与零请求复跑通过。说明部分条件化改善，但单篇第一人称功能/身体细节范围误判仍在；10稿有具体事实越界且中性也有，不能据此宣布Writer就绪。见research/style-aggregation/reports/learning-quality-recovered-2026-11-02.md；不把前一条TLS失败当当前结果，也不改写历史失败。
+
+2026-11-02方法29：voice-core-v6分析内部使用原生JSON承载analysis和evidence（article/quote），逐条验证来源/连续原字及逐篇覆盖。最多一次analysis-repair，附具体错误与真实原文候选片段；提示不放宽逐字门槛，失败不编译/保存。编译仅接analysis正文与篇数，证据/原文不进入Writer，详见docs/2026-11-02-grounded-style-analysis.md。四任务17Pro响应和四Flash边界稿已完成、来源/版本/纯spec与零请求恢复已核验，282库测试/10忽略；目标表达边界能执行，但四稿仍有事实/推理问题，候选仍待审。原文直入编译、错文缓存和两双篇失败分支完整保留。后续不追加方法分支，围绕style-draft接文件/URL输入与1–10篇澄清，Writer事实独立修正；未替换旧默认入口。
