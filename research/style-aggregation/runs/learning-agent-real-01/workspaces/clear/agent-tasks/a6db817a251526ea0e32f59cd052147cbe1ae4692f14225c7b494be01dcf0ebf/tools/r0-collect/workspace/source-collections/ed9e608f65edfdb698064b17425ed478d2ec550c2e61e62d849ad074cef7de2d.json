@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "ed9e608f65edfdb698064b17425ed478d2ec550c2e61e62d849ad074cef7de2d",
+  "collected_at": "2026-11-03T08:52:10.916155639+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "request": {
+    "sources": [
+      {
+        "kind": "text",
+        "label": "候车",
+        "text": "我把车票夹进书里。等车时先读两页，站名响了再合上。"
+      },
+      {
+        "kind": "text",
+        "label": "读书",
+        "text": "书架最下面的一册落了灰。我把它取出来，发现旧书签还停在去年读过的地方。"
+      }
+    ],
+    "note": "固定清楚来源，正常零额外决策",
+    "expected_articles": 2,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "候车",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "provided_text",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "provided_text",
+          "content_type": "text/plain",
+          "resolved_locator": "候车",
+          "body": "我把车票夹进书里。等车时先读两页，站名响了再合上。",
+          "raw_sha256": "206ad3a29968f6c6f26ed86220dc33b734a5cb70f53641a44e4058b533633414"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "候车",
+          "text": "我把车票夹进书里。等车时先读两页，站名响了再合上。",
+          "text_sha256": "206ad3a29968f6c6f26ed86220dc33b734a5cb70f53641a44e4058b533633414",
+          "normalized_sha256": "206ad3a29968f6c6f26ed86220dc33b734a5cb70f53641a44e4058b533633414",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "s002",
+      "resolved_locator": "读书",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "provided_text",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "provided_text",
+          "content_type": "text/plain",
+          "resolved_locator": "读书",
+          "body": "书架最下面的一册落了灰。我把它取出来，发现旧书签还停在去年读过的地方。",
+          "raw_sha256": "891225946277fd4546e604909c964f8991b1c65b6c1417f576f1dd6c5afe9655"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s002-a001",
+          "source_id": "s002",
+          "title": "读书",
+          "text": "书架最下面的一册落了灰。我把它取出来，发现旧书签还停在去年读过的地方。",
+          "text_sha256": "891225946277fd4546e604909c964f8991b1c65b6c1417f576f1dd6c5afe9655",
+          "normalized_sha256": "891225946277fd4546e604909c964f8991b1c65b6c1417f576f1dd6c5afe9655",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

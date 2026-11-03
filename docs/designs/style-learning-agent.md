@@ -1,6 +1,6 @@
 # 风格学习子Agent技术设计
 
-2026-11-03 · v0.1 · 需求依据：[PRD](../PRD.md) SL-01至SL-16；[行动计划](../plans/2026-11-03-style-learning-agent-plan.md) P1–P8。本设计先于新增实现落盘。用户已指示“按照计划开始开发”，原P0仅文档限制已由该指令结束；不需要重复确认已批准方向。
+2026-11-03 · v0.3 · 需求依据：[PRD](../PRD.md) SL-01至SL-16；[行动计划](../plans/2026-11-03-style-learning-agent-plan.md) P1–P8。本设计先于新增实现落盘。用户已指示“按照计划开始开发”，原P0仅文档限制已由该指令结束；不需要重复确认已批准方向。
 
 ## 1. 复用边界与架构决定
 
@@ -11,6 +11,8 @@
 网页解析新增scraper 0.29（以Cargo.lock实际解析版本为准），用于HTML DOM与CSS选择；不复用旧strip_html_tags作为新输入链的文章判断。官方API依据：[scraper](https://docs.rs/scraper/0.29.0/scraper/)。网络沿用reqwest 0.12。
 
 ## 2. 主子Agent交接合同（P3/P4实施）
+
+本节为主子Agent产品级概念合同；P3具体序列化字段与命令以第8/9节及learning_agent_types.rs为准，P4尚未接入。
 
 Delegate携带task_id、revision、original_request、source_request引用、base_version、known_answers、save_intent、followup_writing_request和budget。TaskEvent由工具／子Agent产生，包含相同task_id/revision、工具身份和结果引用。Parent收到NeedsInput、CandidateReady、Saved、Blocked、Failed或Cancelled事件，不靠自然语言猜状态。
 
@@ -38,7 +40,7 @@ SourceRequest包含sources、note、expected_articles（可选独立篇数）、
 
 每来源最多两次不同路径：先直接HTTP获取；网络／服务端故障或正文边界仍未知时允许一次Jina Reader备用。401/403、明确登录／非文章页、已识别多文或摘要卡片不反复抓取。已有文本候选先领域检查，不为语义确认重复调用Reader。客户端超时20秒、最多5次重定向；测试通过注入备用前缀使用本地HTTP，不访问真实Reader。
 
-结构化HTML先看独立article／articleBody／微信公众号正文容器，再看main／明确标题与正文段落。提取排除script/style/nav/站点header/footer/aside/form等非正文，保留article内部标题头部、隐藏节点，保留段落与行内连接；没有明确正文边界时返回needs_inspection，而不是接受整页去标签结果。article嵌套只保留外层，多个同级article产生多个候选，不默认全选。
+结构化HTML先看独立article／articleBody／微信公众号正文容器，再看main／明确标题与正文段落。提取排除script/style/nav/站点header/footer/aside/form等非正文，排除隐藏节点，保留article内部标题头部、段落与行内连接；没有明确正文边界时返回needs_inspection，而不是接受整页去标签结果。article嵌套只保留外层，多个同级article产生多个候选，不默认全选。
 
 Markdown／纯文本按提供的完整正文处理；多个一级标题形成多个候选，这只是需确认的边界信号，不声称每个一级标题必然是一篇。Reader元信息与正文分开，保留原响应快照。HTML目录链接作为PageLink候选留存，用于P3/P6沿用户已选标题读取，P2不自行遍历。
 
@@ -103,8 +105,82 @@ Writer使用指定候选／版本的spec内存值，保留已有styles/*.md读�
 
 走查结论：保留默认1轮／最多2轮、12决策步等首版值；批量工具可避免10篇正常输入挤爆决策数。所有值仍需P3运行检查，当前不声称用户体验或模型语义已验收。
 
-## 7. 实施与验证范围
+## 7. P1/P2实施与验证范围（历史阶段）
 
 本轮按P1→P2顺序实施：先设计，后新增输入模块与开发命令；不改变旧learn/REPL、原学习提示词、生产配置或styles。单元测试内嵌各模块，I/O及HTTP夹具用临时目录和本地端口，检查正文边界、失败不丢、去重、数量、冻结恢复与不可覆盖；模块各≤500行。完成后cargo test --lib、构建及相称CLI回归、git diff与本地提交，实际状态回写PRD／行动计划。
 
 P3–P8的合同是后续实现依据，不记为本轮已实现。新增解析依赖只为P2所需，不引入付费抓取服务、图框架或新的生产配置。
+
+## 8. P3实施合同（2026-11-03，先于代码）
+
+### 8.1 本阶段终点与入口
+
+P3实现持久化的材料决策Agent，终点为ready_for_learning（已明确可交给学习工具的正文集合），不冒充candidate_ready。实际Pro学习／保存／Writer交接留在P5，主会话唯一stdin接入留在P4。开发命令为agent-start <delegate.json>、agent <task-id>、agent-resume <task-id> [--retry-uncertain]、agent-answer <task-id> <reply.json>、agent-cancel <task-id>。
+
+Delegate携带user_request、request（P2 SourceRequest）、target_titles、all_articles（用户明确整页全部的授权，默认false）、base、save_name、followup_request、budget_micro_cny。可选字段默认空；任务预算默认0.25元、最大1元，实际按调用前预留约束。基准版从现有工作区校验并保留，追加总数1–10的硬规则不会交给模型自行放宽。
+
+明确材料先批量采集；范围清楚且没有内部待检查项时按已给目标直接准备正文，0决策模型请求。这是少打断和节省调用的快速路径。复杂情况由Flash动态选择inspect、resolve、select、clarify、escalate或stop；不是每个固定动作都再问一次模型。
+
+### 8.2 决策与工具边界
+
+inspect读取冻结来源候选和页面信息；默认观察只含摘要，返回内容注明是否片段，不伪称完整阅读。resolve要求先检查并给出可定位证据，可将一项来源判为可学文章或非文章；提供的TXT/MD按多个一级标题分段时，可依据内容恢复为该文件的一篇完整文章。HTML多篇不能借此合并成一篇。
+
+select只能引用真实候选ID，去重后1–10篇；普通清楚集合可全部采用。多文来源的子集选择须来自用户明确ID选择或Delegate.target_titles的唯一匹配，模型不能无依据挑第一篇。失败来源不能因resolve或select自动忽略；allow_partial和expected_articles仅由原请求或用户回复修改。篇数约束、追加保留旧文及十篇上限均由程序核对。
+
+正文标为needs_inspection时先由Agent检查，不直接问用户。没有可用正文时明确blocked；未知材料不强行宣称可学。第二轮clarify须在用户已回答后才能发生，同一准确问题不重复；全任务最多两轮主动追问。连续两次无进展、12次决策或已用过的一次Pro升级都由程序限制。
+
+### 8.3 状态、回答与恢复
+
+AgentPlan冻结方法、原委派、提示词和端点身份。AgentState保存当前输入修订、来源集合引用、内部检查结果、选择、用户回答、提问次数、决策次数、无进展计数及Pro升级标记。状态新增ready_for_learning，并区分waiting_input、blocked、failed、cancelled。
+
+以带父身份的不可覆盖状态快照为权威日志，发布快照前持短状态锁并比较预期身份。执行锁阻止两个run并发，但不阻止用户取消。模型与工具等待期间不持状态锁；迟到结果保留回执，只有仍匹配task/revision/待执行步骤才应用。
+
+每步先保存pending，再调用模型或工具。决策请求使用既有learning_transport的意图／响应日志，恢复复用同请求回执；未知付费请求不自动重发。批量collect使用该步骤独享工具工作区，已发布来源集合可在重启时找回，避免仅因主状态未推进就再次抓取。
+
+用户回复携带expected_revision、question_id（主动补充可为空）、text与可选scope变更。scope可明确选文、改变期望篇数／部分许可或补充／替换来源。输入变动增加修订并清除过期内部判断／选择，旧集合和回执保留；提问及决策预算不重置。同一回复重复提交幂等，旧问题或旧修订的新回复不能串入当前任务。
+
+达到澄清边界后保存blocked原因，不输出第三个问题；用户主动补充仍可更新同一任务。等待和已完成恢复不调用模型。保存名和后续写作要求始终保留，不因未命名增加追问。
+
+### 8.4 模型与费用
+
+简单决策固定mimo-v2.6-flash，必要时最多升级一次mimo-v2.6-pro；JSON动作最大2048输出tokens，thinking disabled。复用已有客户端的官方／本地端点校验、请求体、回执与未知重试合同，不存API凭证。
+
+普通开发命令的任务账本独立位于该任务目录，调用前按现有核价费率保守预留，收到回执后结算；缺usage保留预留并停止。研究验证通过注入同一决策合同接ResearchStore，统一计入原100元账本，P3全部验证合计≤1元，不把任务本地估算再重复记进总账。真实调用前复核官方费率及端点。
+
+### 8.5 验证范围
+
+先以可注入决策器和本地HTTP验证：正常0模型／0追问、未知材料内部识别、多文明确选择、部分失败与明确篇数不能被模型改掉、两轮上限、问题／回答恢复、输入修订、取消后的迟到结果、无进展及Pro升级上限、请求身份和未知费用。随后只做少量Flash真实复杂决策检查；不重跑风格质量矩阵，不改旧learn/REPL默认。
+
+P3真实小试固定四个合成材料任务：两篇清楚来源直接就绪、两篇独立文章需选一篇后用户指定第二篇、同一连续文章的两个章节内部恢复、不明确选择经有限澄清收束。每任务最多0.25元，合计最多1元；付费请求统一留在ResearchStore账本。未收回执但已有费用预留时不隐式重发；任务链接、冻结输入、原始动作和所有状态留存。复跑只检查已有状态／回执，不重新抽样；报告区分协议通过、实际模型行为与未接入的P4/P5。
+
+2026-11-03 P3首次真实小试留证：四个合成材料场景中3个符合预期，章节恢复因重复inspect及漏tool动作名而受阻，7个Flash响应占用0.011247元。修正先于后续代码：观察显式列已检查来源／窗口；动作JSON保留严格校验，同时反馈具体缺失字段；提示词展示完整动作对象。首轮不改写通过，保留原始回执与failure-review.json。相同来源／用户目标只复验一次，合计1元预算扣除首轮占用，不以放宽工具／篇数校验换通过。
+
+2026-11-03 P3合同修正：real-02仍为3/4，章节场景两次合法resolve被“必须先另行inspect”拒绝；实际观察已包含全部短文正文，额外读取门槛与已提供材料不一致。替换先inspect的机械前置条件：resolve可依据完整呈现在当前观察的来源候选，否则必须先inspect。完整性由程序按实际摘要限额与excerpted=false核对；长文片段、空候选仍不能绕过读取。逐字引文、用户选文、HTML不合并和数量硬边界不变。real-01/02失败均保留；仅最后针对相同章节材料做一个真实复验，不重抽其他三场景；1元合计扣除两个旧run占用。
+
+## 9. P3实际接口与验证入口
+
+P3已完成材料任务层，源代码入口为learning_agent（编排）、learning_agent_types（合同）、store（不可变状态链）、scope（选择及范围门槛）、tools（采集／观察／回答）、model（回执与费用）、cli（开发命令）。每模块少于500行；复用LearningWorkspace和learning_transport，不新增图框架或独立stdin。当前合同以第8节及两次有据修正记录为准：完整显示的来源候选可直接判断，片段先读取。ready_texts返回原始完整正文，不能把预览片段当学习输入。
+
+启动样例（仅开发入口，文件路径相对委派JSON目录）：
+
+```json
+{"user_request":"学习这两篇文章的综合写法","request":{"sources":[{"kind":"file","path":"甲.md"},{"kind":"file","path":"乙.md"}],"expected_articles":2,"note":"保留两篇范围"},"save_name":"阅读笔记的写法","followup_request":"之后按这个写法写一篇新文章","budget_micro_cny":250000}
+```
+
+```sh
+cargo run -- style-draft --root /tmp/cw-agent-demo agent-start /path/to/delegate.json
+cargo run -- style-draft --root /tmp/cw-agent-demo agent TASK_ID
+cargo run -- style-draft --root /tmp/cw-agent-demo agent-answer TASK_ID /path/to/reply.json
+cargo run -- style-draft --root /tmp/cw-agent-demo agent-resume TASK_ID
+cargo run -- style-draft --root /tmp/cw-agent-demo agent-cancel TASK_ID
+```
+
+回复结构：
+
+```json
+{"expected_revision":0,"question_id":"当前问题ID","text":"选择乙这一篇","scope":{"article_ids":["s001-a002"],"expected_articles":1}}
+```
+
+显式未收回执请求重试须加--retry-uncertain，最多三次，旧预留保留；普通恢复不自动重发。已blocked且用户主动补充时question_id可为空。P3无自然语言回复解析，此JSON边界由P4接主会话；save_name／followup_request目前只保留，P5才执行相应交接。
+
+验证：cargo test --lib；scripts/verify_learning_agent.py；旧scripts/verify_learning_jobs.py与verify_repl_terminal.py。research learning-agent <run>是受统一100元账本及额外阶段限额约束的付费验证入口，不属于常规自测。真实证据为learning-agent-real-01/02/03，前两个partial保留；全库309通过／10忽略、本地9场景通过、最后章节有界复验通过。下一阶段P4及P5尚未实现，完整产品／风格语义不在此宣称通过。

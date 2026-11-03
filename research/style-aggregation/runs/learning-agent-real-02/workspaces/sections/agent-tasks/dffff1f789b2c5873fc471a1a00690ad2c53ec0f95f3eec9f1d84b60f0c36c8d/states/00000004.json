@@ -1,0 +1,58 @@
+{
+  "id": "74c8009ded66a0c4ef9fd7d52a3ad36313c9327f6ba15ee81088e8ebc4467f55",
+  "previous": "6600dd67203d2bb2e5aef2a34ebc76b3b34fad08bb5ffda7e5724451c1ce3d15",
+  "sequence": 4,
+  "state": {
+    "task_id": "dffff1f789b2c5873fc471a1a00690ad2c53ec0f95f3eec9f1d84b60f0c36c8d",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "桌面笔记全文",
+          "text": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\n\n# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+        }
+      ],
+      "note": "内部判断章节边界，无需用户确认明显信息",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "学习这同一篇连续文章的写法；一级标题只是早晨与午后的章节，都属于同一天的桌面笔记，不是让我二选一。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "874e2aec53b168ccfd0a1341a848fe982e651e2f0b39bc62f24cada353f234d2",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "tool",
+      "step": "r0-d1",
+      "decision": {
+        "tool": "resolve",
+        "source_id": "s001",
+        "classification": "article",
+        "evidence": [
+          "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。",
+          "# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+        ],
+        "reason": "两个一级标题内容连续，均属于同一天的桌面笔记整理过程，符合用户明确说明的同一篇连续文章边界，应恢复为一篇完整原文。"
+      }
+    },
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

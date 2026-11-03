@@ -177,6 +177,8 @@ def main():
             report_file = ROOT / "lark/learning-quality-recovery-stage-20261102.json"
         if rid.startswith("learning-input-"):
             report_file = ROOT / "lark/learning-input-20261103.json"
+        if rid.startswith("learning-agent-"):
+            report_file = ROOT / "lark/learning-agent-20261103.json"
         grounded_prefixes = ("learning-qualifier-", "learning-grounded-", "learning-boundary-")
         if rid.startswith(grounded_prefixes):
             report_file = ROOT / "lark/learning-grounded-stage-20261102.json"
@@ -238,6 +240,8 @@ def main():
         stage = grounded_labels.get(rid, stage)
         if rid.startswith("learning-input-"):
             stage = "产品输入工具｜采集、冻结与导出本地验证"
+        if rid.startswith("learning-agent-"):
+            stage = "P3材料领域Agent｜有限决策与恢复"
         rows = summary.get("rows", [])
         checks = ""
         control_file = run / "controls.json"
@@ -267,9 +271,14 @@ def main():
             checks += " 四份是旧模型稿上的21处实现者派生修改，0模型请求，不代表新自动方法产物或Writer验收。"
         if rid == "learning-quality-probe-01" and (run / "qualitative-readout.json").exists():
             checks += " 已逐稿读10篇并记录具体事实问题，中性稿也有越界；不是可发布成稿或质量通过。"
+        conclusion = f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项，中断 {sum(r['status'] == 'interrupted' for r in rows)} 项。" + checks + summary.get("error", "")
+        if rid.startswith("learning-agent-"):
+            conclusion = f"材料就绪 {sum(r['status'] == 'ready_for_learning' for r in rows)}，明确受阻 {sum(r['status'] == 'blocked' for r in rows)}，执行失败 {sum(r['status'] == 'failed' for r in rows)}。" + checks
+            if rid.endswith("local-01"):
+                conclusion = f"本地协议场景 {len(rows)} 组通过；14次本地模拟请求、0付费请求。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
-            "conclusion": f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项，中断 {sum(r['status'] == 'interrupted' for r in rows)} 项。" + checks + summary.get("error", ""),
+            "conclusion": conclusion,
             "caveat": "这是最近一次同步快照，running不保证进程仍存活。费用含未知预留；完成数量和字数都不是质量评分。",
             "spent_cny": summary["usage"]["run_occupied_cny"], "report_url": report_url})
         for row in rows if (run / "single").is_dir() else []:

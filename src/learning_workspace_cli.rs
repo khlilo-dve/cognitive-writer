@@ -11,6 +11,10 @@ use std::path::{Path, PathBuf};
 use std::{io::Write, sync::Arc};
 
 const HELP: &str = "用法：cognitive-writer style-draft [--root <工作区>] <命令>\n\
+  agent-start <委派.json>                      启动材料决策Agent，复杂情况调用Flash\n\
+  agent <任务ID> / agent-cancel <任务ID>         查看／取消领域任务，不读取stdin\n\
+  agent-resume <任务ID> [--retry-uncertain]      恢复任务，保留已完成决策与材料\n\
+  agent-answer <任务ID> <回复.json>              回答当前范围问题并继续\n\
   collect <来源清单.json>                      采集TXT/MD/正文/URL并保存来源快照\n\
   collection <来源集合ID>                      查看快照与选文／完整性状态\n\
   export-texts <来源集合ID> <新正文包.json>      仅在范围满足时导出，不调用模型\n\
@@ -153,6 +157,16 @@ pub async fn run(args: &[&str]) -> Result<(), AppError> {
     let ws = LearningWorkspace::open(&root)?;
     match args {
         ["--help"] => println!("{HELP}"),
+        ["agent-start", file] => crate::learning_agent_cli::start(&ws, Path::new(file)).await?,
+        ["agent", id] => crate::learning_agent_cli::inspect(&ws, id)?,
+        ["agent-resume", id] => crate::learning_agent_cli::resume(&ws, id, false).await?,
+        ["agent-resume", id, "--retry-uncertain"] => {
+            crate::learning_agent_cli::resume(&ws, id, true).await?
+        }
+        ["agent-answer", id, file] => {
+            crate::learning_agent_cli::answer(&ws, id, Path::new(file)).await?
+        }
+        ["agent-cancel", id] => crate::learning_agent_cli::cancel(&ws, id)?,
         ["collect", file] => crate::learning_source_cli::collect(&ws, Path::new(file)).await?,
         ["collection", id] => crate::learning_source_cli::show(&ws, id)?,
         ["export-texts", id, target] => {

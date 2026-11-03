@@ -199,7 +199,14 @@
     "Runs/learning-grounded-repair-01": "reczz28Umwh5Dbpo",
     "Runs/learning-boundary-probe-01": "reczz28UmwmJWAiv",
     "Journal/E0082": "reczz28V0EylyLiv",
-    "Runs/learning-input-local-01": "reczz28V0F5NXYLF"
+    "Runs/learning-input-local-01": "reczz28V0F5NXYLF",
+    "Journal/E0083": "reczz28V9MDwVBin",
+    "Journal/E0084": "reczz28V9MKVGV54",
+    "Journal/E0085": "reczz28V9MQEupvP",
+    "Runs/learning-agent-local-01": "reczz28V9MWAXiAW",
+    "Runs/learning-agent-real-01": "reczz28V9MdsSz5R",
+    "Runs/learning-agent-real-02": "reczz28V9MpSjgEE",
+    "Runs/learning-agent-real-03": "reczz28V9Mubmc8G"
   },
   "blocks": {
     "samples": "chtcnVAsHWRrhqiURhIlWIMnumf",

@@ -1,0 +1,50 @@
+{
+  "id": "fa81606cd40dfff49170d02c3cd53fc7553656dc64716c25a47025da53ceeab0",
+  "previous": "e5bb467f7e21405475282fd8ccb555564dcc56c761e329d865cebd3a00465272",
+  "sequence": 3,
+  "state": {
+    "task_id": "a16cdd2c99776c80b728948db4fe10365ed86a78e3c0ea40fe2e1c4da0ac4142",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "两篇独立文章",
+          "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。"
+        }
+      ],
+      "note": "有限追问，不擅自代选",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "学习其中一篇独立文章，暂未决定哪篇，不能随便选，也不要把两篇合并。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "35f650cb57264137c43b1eb6e4be60545fe5522615e4370692f9a26408b0d0cb",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "decision",
+      "step": "r0-d1",
+      "tier": "flash",
+      "user": "{\"all_articles\":false,\"allow_partial\":false,\"answers\":[],\"authorized_selection\":null,\"base\":null,\"clarifications_used\":0,\"expected_articles\":1,\"last_reason\":\"\",\"last_tool_result\":{\"collected\":true},\"pro_used\":false,\"questions\":[],\"revision\":0,\"source_summary\":{\"current_pool\":[{\"id\":\"s001-a001\",\"source_id\":\"s001\",\"title\":\"纸上候车\",\"verified\":true},{\"id\":\"s001-a002\",\"source_id\":\"s001\",\"title\":\"给团队的项目备忘\",\"verified\":true}],\"source_collection_id\":\"35f650cb57264137c43b1eb6e4be60545fe5522615e4370692f9a26408b0d0cb\",\"sources\":[{\"candidates\":[{\"body\":{\"end_chars\":50,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 纸上候车\\n\\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\"},\"duplicate_of\":null,\"id\":\"s001-a001\",\"title\":\"纸上候车\"},{\"body\":{\"end_chars\":58,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 给团队的项目备忘\\n\\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。\"},\"duplicate_of\":null,\"id\":\"s001-a002\",\"title\":\"给团队的项目备忘\"}],\"id\":\"s001\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"多个一级标题，文章边界需选择确认\",\"resolution\":null,\"status\":\"extracted\"}]},\"steps_used\":0,\"target_titles\":[],\"task_id\":\"a16cdd2c99776c80b728948db4fe10365ed86a78e3c0ea40fe2e1c4da0ac4142\",\"user_request\":\"学习其中一篇独立文章，暂未决定哪篇，不能随便选，也不要把两篇合并。\"}"
+    },
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "b2d7940dc60a735f711e31084e3d8c1f777394dd656c5ea847878f6173e49d4a",
+  "previous": "3a85fab22583caf76574487f6a75aed861a6934a163fd5430a86b8d6e2b52e15",
+  "sequence": 5,
+  "state": {
+    "task_id": "eb2e8926ef06047f1983e4fe795b3c80b35dde63bc14715556147eb844d4c155",
+    "revision": 0,
+    "status": "waiting_input",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "两篇独立文章",
+          "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。"
+        }
+      ],
+      "note": "用户未选择前不能擅自选文",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "这里只想学习其中一篇文章的写法，目前没有选定具体哪篇。两篇是独立文章，不能合并。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "8cbe371ffbac5ad9d6efb957ec94d7e361b71bfc61b443cfb0b1c189ea9a50dd",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [
+      {
+        "id": "33c5f7a174e44ad3356d75b15e45be5c726349f1811e3d36717909def12b59bf",
+        "revision": 0,
+        "topic": "选择要学习的文章",
+        "text": "s001 中有两篇独立候选文章：《纸上候车》和《给团队的项目备忘》，目前没有选定要学习哪一篇。请告诉我要学习其中哪一篇（或提供标题）。",
+        "reason": "用户目标明确要求学习一篇文章的写法，但未指定具体篇目；两篇是独立文章不能合并，现有信息不足以做出唯一选择，必须由用户作关键范围决定。"
+      }
+    ],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": {
+      "collected": true
+    },
+    "reason": "需要用户决定关键范围；等待期间不调用模型"
+  }
+}

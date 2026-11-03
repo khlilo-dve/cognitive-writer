@@ -28,3 +28,5 @@
 源码入口：`src/repl.rs`、`src/repl_input.rs`、`src/intent.rs`、`src/io.rs::write_file_atomic`。
 
 2026-11-03 P1/P2：docs/PRD.md v0.2及docs/designs/style-learning-agent.md先定主子Agent与工具合同。新增learning_sources（不可变集合／范围判定／导出）、learning_source_fetch（有界读取）、learning_source_parse（结构正文候选）、learning_source_cli（collect／collection／export-texts），挂在style-draft开发入口。没有新增stdin、没有接新Agent模型或更改旧learn/REPL；needs_inspection是内部领域检查，不自动追问用户。来源保存于工作区source-collections，恢复读快照不抓取；只有范围满足才导出articles/note。P3动态Agent及主会话交接仍待做。294库测试／10忽略、构建、本地HTTP和17终端回归通过；真实网页质量未验收。
+
+2026-11-03 P3：独立材料域任务learning_agent及types/store/scope/tools/model/cli已接style-draft agent-*开发命令，主会话仍旧REPL。短状态CAS锁与执行锁分离，模型等待不阻止取消；父身份状态链、输入修订、冻结决策、collection步骤缓存及既有请求日志可恢复。明确材料0模型，复杂Flash／单次Pro、12决策／2无进展／2主动澄清；完整候选已在观察可判断，片段先inspect。终点ready_for_learning而非候选／保存，ready_texts才返回完整正文。309库测试／10忽略、本地协议与少量真实Flash决策留证，P4/P5和质量P7待做。入口和失败说明见docs/designs/style-learning-agent.md第8/9节及研究reports/learning-agent-2026-11-03.md。

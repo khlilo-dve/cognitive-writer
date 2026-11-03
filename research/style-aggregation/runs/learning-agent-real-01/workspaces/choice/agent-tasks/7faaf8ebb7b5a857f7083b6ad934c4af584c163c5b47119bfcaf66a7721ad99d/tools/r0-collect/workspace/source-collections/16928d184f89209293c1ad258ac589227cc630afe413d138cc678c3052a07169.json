@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "16928d184f89209293c1ad258ac589227cc630afe413d138cc678c3052a07169",
+  "collected_at": "2026-11-03T08:52:10.955924921+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "request": {
+    "sources": [
+      {
+        "kind": "text",
+        "label": "两篇独立文章",
+        "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。"
+      }
+    ],
+    "note": "用户未选择前不能擅自选文",
+    "expected_articles": 1,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "两篇独立文章",
+      "status": "extracted",
+      "reason": "多个一级标题，文章边界需选择确认",
+      "attempts": [
+        {
+          "method": "provided_text",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "provided_text",
+          "content_type": "text/plain",
+          "resolved_locator": "两篇独立文章",
+          "body": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。",
+          "raw_sha256": "8382c89be29b6a096dc33c56f05559e0a36432409c22be49c1c01200d93fcea8"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "纸上候车",
+          "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。",
+          "text_sha256": "6c1d922adf2770e22af4445570ee50ee0cd169506b5ca2d10798957a7daeb164",
+          "normalized_sha256": "00d6b3feb4af729c529734141c443aec2098f0cecc23cccdedc7f1bbfd3fddf6",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        },
+        {
+          "id": "s001-a002",
+          "source_id": "s001",
+          "title": "给团队的项目备忘",
+          "text": "# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。",
+          "text_sha256": "c798511740453e70050c998bb58b0a97ce2e67312a43b3ee9acaa35bd968d9b7",
+          "normalized_sha256": "de3fc3e570b8243f6b50138c1e7c9a5ad5ab5a8a7ffdcff41cdb770178da9b3f",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

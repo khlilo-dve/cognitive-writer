@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "research_run_replay": "final focused run only; prior run prompts intentionally frozen to old revisions",
+  "task_resumes": [
+    {
+      "run": "learning-agent-real-01",
+      "case": "bounded",
+      "task_id": "a16cdd2c99776c80b728948db4fe10365ed86a78e3c0ea40fe2e1c4da0ac4142",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-01",
+      "case": "choice",
+      "task_id": "7faaf8ebb7b5a857f7083b6ad934c4af584c163c5b47119bfcaf66a7721ad99d",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-01",
+      "case": "clear",
+      "task_id": "a6db817a251526ea0e32f59cd052147cbe1ae4692f14225c7b494be01dcf0ebf",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-01",
+      "case": "sections",
+      "task_id": "71a2dbbaaea6c8dff2e38c035fa565fa8df52d1b2ac84b43945e5e48b775e599",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-02",
+      "case": "bounded",
+      "task_id": "560f24b345031544817a611bcff3f6f7b3c4835aa3c677d785c65c5badf93cdb",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-02",
+      "case": "choice",
+      "task_id": "eb2e8926ef06047f1983e4fe795b3c80b35dde63bc14715556147eb844d4c155",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-02",
+      "case": "clear",
+      "task_id": "da136f35e88703d381dfcc61a68dc087b1eba25c112176de82cc5c34ba733b51",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-02",
+      "case": "sections",
+      "task_id": "dffff1f789b2c5873fc471a1a00690ad2c53ec0f95f3eec9f1d84b60f0c36c8d",
+      "status": "passed"
+    },
+    {
+      "run": "learning-agent-real-03",
+      "case": "sections",
+      "task_id": "1963c8fedd0275b315b1acb70c9aa8a40e5d80aa40d3d63da32af4168cd0226f",
+      "status": "passed"
+    }
+  ],
+  "new_paid_requests": 0,
+  "ledger_before_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc",
+  "ledger_after_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc"
+}

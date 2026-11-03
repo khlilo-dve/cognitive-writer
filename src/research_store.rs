@@ -20,19 +20,22 @@ pub(crate) enum Role {
     Structured,
     FlashAnalysis,
     CandidateAnalysis,
+    AgentFlash,
+    AgentPro,
     Writer,
 }
 impl Role {
     pub(crate) fn model(self) -> &'static str {
         match self {
-            Self::Analysis | Self::Structured | Self::CandidateAnalysis => "mimo-v2.6-pro",
-            Self::Writer | Self::FlashAnalysis => "mimo-v2.6-flash",
+            Self::Analysis | Self::Structured | Self::CandidateAnalysis | Self::AgentPro => "mimo-v2.6-pro",
+            Self::Writer | Self::FlashAnalysis | Self::AgentFlash => "mimo-v2.6-flash",
         }
     }
     fn max_output(self) -> u64 {
         match self {
             Self::Analysis | Self::Structured | Self::FlashAnalysis => 16384,
             Self::Writer => 4096,
+            Self::AgentFlash | Self::AgentPro => 2048,
             Self::CandidateAnalysis => 32768,
         }
     }

@@ -1,0 +1,103 @@
+{
+  "id": "6f4f9252ccd9c822cceac642db27a3ed25f29ccf28a666d270680c1c32e8fb96",
+  "previous": "8659b7dd2150eacab6771f1bb593b67d0db7e0ea7a88e9066dade411818c6079",
+  "sequence": 9,
+  "state": {
+    "task_id": "71a2dbbaaea6c8dff2e38c035fa565fa8df52d1b2ac84b43945e5e48b775e599",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "桌面笔记全文",
+          "text": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\n\n# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+        }
+      ],
+      "note": "内部判断章节边界，无需用户确认明显信息",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "学习这同一篇连续文章的写法；一级标题只是早晨与午后的章节，都属于同一天的桌面笔记，不是让我二选一。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "99560a1e8f7645e56e033dcd3bcb5cfa463fe22a44196fd77858c70db094bbda",
+      "step": "r0-collect"
+    },
+    "inspected": [
+      "s001"
+    ],
+    "inspected_windows": [
+      "s001@0"
+    ],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 3,
+    "no_progress": 1,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "decision",
+      "step": "r0-d3",
+      "tier": "flash",
+      "user": "{\"all_articles\":false,\"allow_partial\":false,\"answers\":[],\"authorized_selection\":null,\"base\":null,\"clarifications_used\":0,\"expected_articles\":1,\"last_reason\":\"\",\"last_tool_result\":{\"current_pool\":[{\"id\":\"s001-a001\",\"source_id\":\"s001\",\"title\":\"早晨的桌面\",\"verified\":true},{\"id\":\"s001-a002\",\"source_id\":\"s001\",\"title\":\"午后的桌面\",\"verified\":true}],\"source_collection_id\":\"99560a1e8f7645e56e033dcd3bcb5cfa463fe22a44196fd77858c70db094bbda\",\"sources\":[{\"candidates\":[{\"body\":{\"end_chars\":58,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 早晨的桌面\\n\\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\"},\"duplicate_of\":null,\"id\":\"s001-a001\",\"title\":\"早晨的桌面\"},{\"body\":{\"end_chars\":60,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 午后的桌面\\n\\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。\"},\"duplicate_of\":null,\"id\":\"s001-a002\",\"title\":\"午后的桌面\"}],\"id\":\"s001\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"多个一级标题，文章边界需选择确认\",\"resolution\":null,\"status\":\"extracted\"}]},\"pro_used\":false,\"questions\":[],\"revision\":0,\"source_summary\":{\"current_pool\":[{\"id\":\"s001-a001\",\"source_id\":\"s001\",\"title\":\"早晨的桌面\",\"verified\":true},{\"id\":\"s001-a002\",\"source_id\":\"s001\",\"title\":\"午后的桌面\",\"verified\":true}],\"source_collection_id\":\"99560a1e8f7645e56e033dcd3bcb5cfa463fe22a44196fd77858c70db094bbda\",\"sources\":[{\"candidates\":[{\"body\":{\"end_chars\":58,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 早晨的桌面\\n\\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\"},\"duplicate_of\":null,\"id\":\"s001-a001\",\"title\":\"早晨的桌面\"},{\"body\":{\"end_chars\":60,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 午后的桌面\\n\\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。\"},\"duplicate_of\":null,\"id\":\"s001-a002\",\"title\":\"午后的桌面\"}],\"id\":\"s001\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"多个一级标题，文章边界需选择确认\",\"resolution\":null,\"status\":\"extracted\"}]},\"steps_used\":2,\"target_titles\":[],\"task_id\":\"71a2dbbaaea6c8dff2e38c035fa565fa8df52d1b2ac84b43945e5e48b775e599\",\"user_request\":\"学习这同一篇连续文章的写法；一级标题只是早晨与午后的章节，都属于同一天的桌面笔记，不是让我二选一。\"}"
+    },
+    "observation": {
+      "current_pool": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "早晨的桌面",
+          "verified": true
+        },
+        {
+          "id": "s001-a002",
+          "source_id": "s001",
+          "title": "午后的桌面",
+          "verified": true
+        }
+      ],
+      "source_collection_id": "99560a1e8f7645e56e033dcd3bcb5cfa463fe22a44196fd77858c70db094bbda",
+      "sources": [
+        {
+          "candidates": [
+            {
+              "body": {
+                "end_chars": 58,
+                "excerpted": false,
+                "offset_chars": 0,
+                "text": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。"
+              },
+              "duplicate_of": null,
+              "id": "s001-a001",
+              "title": "早晨的桌面"
+            },
+            {
+              "body": {
+                "end_chars": 60,
+                "excerpted": false,
+                "offset_chars": 0,
+                "text": "# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+              },
+              "duplicate_of": null,
+              "id": "s001-a002",
+              "title": "午后的桌面"
+            }
+          ],
+          "id": "s001",
+          "links": [],
+          "links_omitted": false,
+          "raw_page_excerpt": null,
+          "reason": "多个一级标题，文章边界需选择确认",
+          "resolution": null,
+          "status": "extracted"
+        }
+      ]
+    },
+    "reason": ""
+  }
+}

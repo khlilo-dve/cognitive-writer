@@ -1,0 +1,56 @@
+{
+  "id": "eeca36e75327b6606ffeaabf5878fef94686242799c418c0e2df5329705a627e",
+  "previous": "2d0e48d81dffd9da6371a5d86d0740ad60f451770ed23c0489f46068af108c56",
+  "sequence": 5,
+  "state": {
+    "task_id": "1963c8fedd0275b315b1acb70c9aa8a40e5d80aa40d3d63da32af4168cd0226f",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "桌面笔记全文",
+          "text": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\n\n# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+        }
+      ],
+      "note": "内部判断章节边界，无需用户确认明显信息",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "学习这同一篇连续文章的写法；一级标题只是早晨与午后的章节，都属于同一天的桌面笔记，不是让我二选一。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "7581a62c2f266dc53d385d5aaf41f696ea24c8af8d6ec2262a2ad6419cca55ea",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {
+      "s001": {
+        "classification": "article",
+        "evidence": [
+          "# 早晨的桌面",
+          "我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。",
+          "# 午后的桌面",
+          "同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+        ],
+        "reason": "用户已确认两个一级标题是同一篇连续文章的早、午章节，两段正文互相衔接（早晨的车票在午后被翻回、笔记继续），属同一天同一份桌面笔记的完整原文，应恢复为一篇完整文章。"
+      }
+    },
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

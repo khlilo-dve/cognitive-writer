@@ -252,6 +252,97 @@
       "actual_micro": 1286,
       "state": "settled"
     },
+    "learning-agent-real-01/bounded-r0-d1": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 10279,
+      "actual_micro": 1489,
+      "state": "settled"
+    },
+    "learning-agent-real-01/bounded-r1-d2": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 11357,
+      "actual_micro": 1793,
+      "state": "settled"
+    },
+    "learning-agent-real-01/choice-r0-d1": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 10300,
+      "actual_micro": 1421,
+      "state": "settled"
+    },
+    "learning-agent-real-01/choice-r0-d2": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 10453,
+      "actual_micro": 1605,
+      "state": "settled"
+    },
+    "learning-agent-real-01/sections-r0-d1": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 10345,
+      "actual_micro": 1355,
+      "state": "settled"
+    },
+    "learning-agent-real-01/sections-r0-d2": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 11506,
+      "actual_micro": 1701,
+      "state": "settled"
+    },
+    "learning-agent-real-01/sections-r0-d3": {
+      "run_id": "learning-agent-real-01",
+      "phase": "full",
+      "reserved_micro": 11506,
+      "actual_micro": 1883,
+      "state": "settled"
+    },
+    "learning-agent-real-02/bounded-r0-d1": {
+      "run_id": "learning-agent-real-02",
+      "phase": "full",
+      "reserved_micro": 11581,
+      "actual_micro": 1706,
+      "state": "settled"
+    },
+    "learning-agent-real-02/bounded-r1-d2": {
+      "run_id": "learning-agent-real-02",
+      "phase": "full",
+      "reserved_micro": 12481,
+      "actual_micro": 2009,
+      "state": "settled"
+    },
+    "learning-agent-real-02/choice-r0-d1": {
+      "run_id": "learning-agent-real-02",
+      "phase": "full",
+      "reserved_micro": 11602,
+      "actual_micro": 1702,
+      "state": "settled"
+    },
+    "learning-agent-real-02/sections-r0-d1": {
+      "run_id": "learning-agent-real-02",
+      "phase": "full",
+      "reserved_micro": 11647,
+      "actual_micro": 1802,
+      "state": "settled"
+    },
+    "learning-agent-real-02/sections-r0-d2": {
+      "run_id": "learning-agent-real-02",
+      "phase": "full",
+      "reserved_micro": 11780,
+      "actual_micro": 1878,
+      "state": "settled"
+    },
+    "learning-agent-real-03/sections-r0-d1": {
+      "run_id": "learning-agent-real-03",
+      "phase": "full",
+      "reserved_micro": 11789,
+      "actual_micro": 1864,
+      "state": "settled"
+    },
     "learning-boundary-probe-01/wxb-k1-abstract_choices": {
       "run_id": "learning-boundary-probe-01",
       "phase": "full",

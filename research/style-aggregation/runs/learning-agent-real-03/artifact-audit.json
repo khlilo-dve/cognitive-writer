@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "new_requests": 13,
+  "new_usage_micro_cny": 22208,
+  "old_ledger_entries_unchanged": true,
+  "sources_and_goals_identical_across_revisions": true,
+  "final_focused_case": "sections only",
+  "production_config_styles_and_old_learning_prompts_unchanged": true,
+  "modules_below_500_lines": true,
+  "lark_report_url": "https://www.feishu.cn/docx/Ms3wdbKYkozIxSx47omcDYAHnCh",
+  "lark_base_record_count": 184,
+  "ledger_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc"
+}

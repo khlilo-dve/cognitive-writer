@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "library_tests": {
+    "passed": 309,
+    "failed": 0,
+    "ignored": 10,
+    "command": "cargo test --lib --quiet"
+  },
+  "build": "cargo build --bin cognitive-writer --quiet passed",
+  "scripts": {
+    "verify_learning_agent.py": {
+      "status": "passed",
+      "stdout": "Verified 9 domain-agent scenarios, 14 local model requests, 0 paid calls\n",
+      "stderr": ""
+    },
+    "verify_learning_jobs.py": {
+      "status": "passed",
+      "stdout": "{\n  \"status\": \"passed\",\n  \"checks\": [\n    \"fresh_pro_learning_bounded_explicit_retry_frozen_inputs_and_keyless_completed_resume\",\n    \"append_reads_parent_sources_relearns_without_old_style_and_saves_only_explicitly\",\n    \"endpoint_drift_and_corrupted_response_block_before_network\",\n    \"wrong_source_evidence_gets_one_repair_then_blocks_compilation_and_save\",\n    \"ctrl_c_retains_task_and_unknown_intent_without_changing_saved_versions\"\n  ],\n  \"local_http_requests\": 17,\n  \"paid_model_requests\": 0,\n  \"ledger_before_sha256\": \"06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc\",\n  \"ledger_after_sha256\": \"06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc\",\n  \"temporary_workspaces_cleaned\": true\n}\n",
+      "stderr": ""
+    },
+    "verify_repl_terminal.py": {
+      "status": "passed",
+      "stdout": "{\"case\": \"failed_write_is_atomic\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"idle_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"naming_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"delete_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"restore_prompt_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"naming_eof\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"delete_eof\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"restored_naming_is_local\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"classification_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 1}\n{\"case\": \"rendering_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 1}\n{\"case\": \"old_outline_render\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 1}\n{\"case\": \"restore_corrupt_preserves_original\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"restore_invalid_utf8_preserves_original\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"restore_unreadable_preserves_original\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"draft_local_failure_preserves_and_restores\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"draft_html_failure_preserves_and_restores\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"draft_website_failure_preserves_and_restores\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n",
+      "stderr": ""
+    }
+  },
+  "ledger_before_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc",
+  "ledger_after_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc"
+}

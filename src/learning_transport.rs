@@ -74,6 +74,44 @@ impl LearningClient {
             endpoint_sha256: sha256(self.base.as_bytes()),
         }
     }
+    pub(crate) fn preflight(&self) -> Result<(), AppError> {
+        let key = self
+            .key
+            .as_ref()
+            .filter(|k| !k.trim().is_empty())
+            .ok_or_else(|| AppError::EnvVar("API_KEY".into()))?;
+        if key.starts_with("tp-") || key.starts_with("ttp-") {
+            return Err(error("学习需要普通按量API凭证"));
+        }
+        Ok(())
+    }
+    pub(crate) async fn response(&self, body: &Value) -> Result<LearningResponse, AppError> {
+        self.preflight()?;
+        let raw = post_chat(
+            &self.client,
+            &self.base,
+            self.key.as_deref().unwrap_or(""),
+            body,
+        )
+        .await
+        .map_err(|_| error("模型请求未完成，响应不确定；已保留请求记录且没有自动重试"))?;
+        let value: Value = serde_json::from_str(&raw)
+            .map_err(|_| error("模型响应无法解析，用量未知，保留请求记录"))?;
+        Ok(LearningResponse {
+            content: value
+                .pointer("/choices/0/message/content")
+                .and_then(Value::as_str)
+                .unwrap_or("")
+                .into(),
+            model: value["model"].as_str().unwrap_or("").into(),
+            finish_reason: value
+                .pointer("/choices/0/finish_reason")
+                .and_then(Value::as_str)
+                .unwrap_or("")
+                .into(),
+            usage: value.get("usage").filter(|u| !u.is_null()).cloned(),
+        })
+    }
     pub(crate) async fn call(
         &self,
         root: &Path,
@@ -97,43 +135,8 @@ impl LearningClient {
             &stage,
             request,
             retry,
-            || async {
-                let key = self
-                    .key
-                    .as_ref()
-                    .filter(|k| !k.trim().is_empty())
-                    .ok_or_else(|| AppError::EnvVar("API_KEY".into()))?;
-                if key.starts_with("tp-") || key.starts_with("ttp-") {
-                    return Err(error("学习需要普通按量API凭证"));
-                }
-                Ok(())
-            },
-            || async {
-                let raw = post_chat(
-                    &self.client,
-                    &self.base,
-                    self.key.as_deref().unwrap_or(""),
-                    &body,
-                )
-                .await
-                .map_err(|_| error("模型请求未完成，响应不确定；已保留请求记录且没有自动重试"))?;
-                let value: Value = serde_json::from_str(&raw)
-                    .map_err(|_| error("模型响应无法解析，用量未知，保留请求记录"))?;
-                Ok(LearningResponse {
-                    content: value
-                        .pointer("/choices/0/message/content")
-                        .and_then(Value::as_str)
-                        .unwrap_or("")
-                        .into(),
-                    model: value["model"].as_str().unwrap_or("").into(),
-                    finish_reason: value
-                        .pointer("/choices/0/finish_reason")
-                        .and_then(Value::as_str)
-                        .unwrap_or("")
-                        .into(),
-                    usage: value.get("usage").filter(|u| !u.is_null()).cloned(),
-                })
-            },
+            || async { self.preflight() },
+            || self.response(&body),
         )
         .await
     }

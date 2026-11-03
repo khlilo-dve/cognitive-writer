@@ -1,0 +1,46 @@
+{
+  "id": "c459585b7f2264ba37e21c0ff6e16e2d2663facc2f2ed3aed37dde300721b4f6",
+  "previous": "38e6a12f9ff1ccbce5c3c3a53e5079c3a4fd3b10e6c01b3a3cc6be722d4d7e7f",
+  "sequence": 1,
+  "state": {
+    "task_id": "a16cdd2c99776c80b728948db4fe10365ed86a78e3c0ea40fe2e1c4da0ac4142",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "两篇独立文章",
+          "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。"
+        }
+      ],
+      "note": "有限追问，不擅自代选",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "学习其中一篇独立文章，暂未决定哪篇，不能随便选，也不要把两篇合并。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "tool",
+      "step": "r0-collect",
+      "decision": {
+        "tool": "collect"
+      }
+    },
+    "observation": null,
+    "reason": ""
+  }
+}

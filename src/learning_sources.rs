@@ -119,7 +119,7 @@ fn normalized(text: &str) -> String {
             .as_bytes(),
     )
 }
-fn validate_request(request: &SourceRequest) -> Result<(), AppError> {
+pub(crate) fn validate_request(request: &SourceRequest) -> Result<(), AppError> {
     if request.sources.is_empty()
         || request.sources.len() > 32
         || request.note.trim().is_empty()

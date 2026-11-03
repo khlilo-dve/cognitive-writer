@@ -1,0 +1,11 @@
+{
+  "status": "reviewed_failure",
+  "cause": [
+    "choice first response and sections resolve omitted required tool field; strict parser rejected them",
+    "observation omitted inspected source/window history, encouraging duplicate inspect"
+  ],
+  "scope": "3 of 4 synthetic tasks met expectations; sections blocked; no style candidate generated",
+  "cost_cny": 0.011247,
+  "change": "expose inspected history, include exact parse error, show complete JSON examples; preserve strict action schema and existing bounds",
+  "next": "one revision on the same four frozen source/goal cases; combined P3 cap remains 1 CNY"
+}

@@ -2,10 +2,13 @@
   "status": "complete",
   "base": "Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
   "manifest": "None",
-  "run": "research/style-aggregation/runs/learning-input-local-01",
+  "run": "None",
   "runs": [
-    "research/style-aggregation/runs/learning-input-local-01"
+    "research/style-aggregation/runs/learning-agent-local-01",
+    "research/style-aggregation/runs/learning-agent-real-01",
+    "research/style-aggregation/runs/learning-agent-real-02",
+    "research/style-aggregation/runs/learning-agent-real-03"
   ],
-  "journal_from": "E0082",
-  "record_count": 177
+  "journal_from": "E0083",
+  "record_count": 184
 }

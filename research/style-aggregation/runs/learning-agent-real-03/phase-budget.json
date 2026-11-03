@@ -1,0 +1,10 @@
+{
+  "prior_runs": [
+    "learning-agent-real-01",
+    "learning-agent-real-02"
+  ],
+  "phase_cap_micro_cny": 1000000,
+  "selected_case_ids": [
+    "sections"
+  ]
+}

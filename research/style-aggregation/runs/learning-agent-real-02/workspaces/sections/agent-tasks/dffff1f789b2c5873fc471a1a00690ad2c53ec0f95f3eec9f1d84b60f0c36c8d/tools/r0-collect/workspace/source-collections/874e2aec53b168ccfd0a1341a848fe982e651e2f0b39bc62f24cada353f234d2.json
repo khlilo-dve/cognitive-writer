@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "874e2aec53b168ccfd0a1341a848fe982e651e2f0b39bc62f24cada353f234d2",
+  "collected_at": "2026-11-03T09:00:02.195013848+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "request": {
+    "sources": [
+      {
+        "kind": "text",
+        "label": "桌面笔记全文",
+        "text": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\n\n# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。"
+      }
+    ],
+    "note": "内部判断章节边界，无需用户确认明显信息",
+    "expected_articles": 1,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "桌面笔记全文",
+      "status": "extracted",
+      "reason": "多个一级标题，文章边界需选择确认",
+      "attempts": [
+        {
+          "method": "provided_text",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "provided_text",
+          "content_type": "text/plain",
+          "resolved_locator": "桌面笔记全文",
+          "body": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。\n\n# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。",
+          "raw_sha256": "8e0b47cb8e874d350d04dfc54639b67e6b99a951ec4c5df8a2f30c42756b8666"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "早晨的桌面",
+          "text": "# 早晨的桌面\n\n我先把散在桌面的纸片排好。半张车票夹在书里，另一张纸记着今天要找的书名。这是同一天整理笔记的开始。",
+          "text_sha256": "50e2aec3994c96a6172deb9045f8f6aa8f7d7d9c88ce690b343ee9e16b8eab7a",
+          "normalized_sha256": "1707881d99976286baf4ab258025dc29a99c150505024f021b8ab88ae2074695",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        },
+        {
+          "id": "s001-a002",
+          "source_id": "s001",
+          "title": "午后的桌面",
+          "text": "# 午后的桌面\n\n同一份笔记还在整理。我把早晨那张车票翻过来，接着写下刚找到的页码。下午的光移走，桌面才总算空出一小块。",
+          "text_sha256": "6e468c9ce99984277294419a98832a9305e1efb1527ce583cf2db491c857f8a8",
+          "normalized_sha256": "cc6ca9588567b13111582e537edb1f374b713d735a73089fac48a2cebf356f2b",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "status": "reviewed_failure",
+  "cause": "the complete short candidate bodies were already in source_summary, but the program required a separate inspect even after reading them; both explicit valid resolve actions were blocked",
+  "result": "3/4 synthetic cases met expectations; sections blocked after 2 no-progress actions",
+  "cost_cny": 0.009097,
+  "change": "recognize fully visible candidate bodies as sufficient material exposure; partial previews still require inspect; no relaxation of quotes, user scope, article count or HTML merge guards",
+  "next": "one final focused sections case only; keep prior failures and total P3 cap"
+}

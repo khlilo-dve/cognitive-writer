@@ -1,0 +1,51 @@
+{
+  "id": "25ecccc456d9eada51b7d13ddad9acd00573cf46307b7c1a41da81cff9ecac71",
+  "previous": "af263f345dc45c42fa37615eb53e2554633a27722e4c26846fd4093c4b76bc9e",
+  "sequence": 1,
+  "state": {
+    "task_id": "da136f35e88703d381dfcc61a68dc087b1eba25c112176de82cc5c34ba733b51",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "候车",
+          "text": "我把车票夹进书里。等车时先读两页，站名响了再合上。"
+        },
+        {
+          "kind": "text",
+          "label": "读书",
+          "text": "书架最下面的一册落了灰。我把它取出来，发现旧书签还停在去年读过的地方。"
+        }
+      ],
+      "note": "固定清楚来源，正常零额外决策",
+      "expected_articles": 2,
+      "allow_partial": false
+    },
+    "user_request": "学习我分别提供的这两篇文章的综合写法。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "tool",
+      "step": "r0-collect",
+      "decision": {
+        "tool": "collect"
+      }
+    },
+    "observation": null,
+    "reason": ""
+  }
+}

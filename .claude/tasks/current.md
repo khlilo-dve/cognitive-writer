@@ -1,5 +1,15 @@
 # 当前任务状态
 
+## 2026-11-03 当前开发状态：P3材料领域Agent完成，下一项P4
+
+已文档先行实现P3任务、观察与动态工具决策、最多两轮主动澄清、12决策／两次无进展收束、一次Pro升级、输入修订、取消及迟到回执隔离、费用和恢复。终点ready_for_learning，未接P4主会话或P5学习／保存／Writer；原始保存名及后续写作需求仅保留。正文核心和正式styles/.env不变。PRD及计划v0.3。
+
+15新增测试；全库309通过、0失败、10忽略；9组新CLI／14次本地模拟请求、旧学习17次本地模拟请求、17终端回归通过。真实小试13个Flash响应：real-01与02各3/4，缺动作名／重复读取门槛导致章节受阻，失败原样留证；按实际完整可见正文修正读取前置条件，real-03只复验同一章节1/1通过，0追问。不得把跨修订案例拼成同版全量重测或风格质量通过。9任务与最后run恢复0新请求／账本SHA不变。
+
+新增0.022208元、0新增未知，累计24.578343元（历史未知6.032614），100元尚余75.421657元。无活付费模型进程。报告research/style-aggregation/reports/learning-agent-2026-11-03.md，数据runs/learning-agent-local-01及real-01/02/03；下一项P4先补会话调度合同，再编码学习／使用／组合意图及唯一stdin交接，后续P5–P8不变。下方P1/P2为历史阶段。
+
+P3飞书阶段报告已user身份发布并回读：https://www.feishu.cn/docx/Ms3wdbKYkozIxSx47omcDYAHnCh；Base本地验证与三个真实run、E0083–E0085均回读，共184记录。实现提交可用git log -- src/learning_agent.rs定位；本次工作区与费用审计见runs/learning-agent-real-03/artifact-audit.json。
+
 ## 2026-11-03 当前开发状态：P1／P2已完成
 
 用户已明确“按照计划开始开发”，覆盖下方P0当时的仅文档限制。先完成docs/designs/style-learning-agent.md及A01–A24设计走查，再实现P2来源工具和style-draft collect／collection／export-texts。支持TXT/MD／直接正文／结构化文章URL，保留原快照与候选，去重、篇数、部分失败和多文范围未解决时阻断导出；needs_inspection先交领域Agent检查，不直接等同用户追问。主子Agent运行及自然语言交接还没有实现，P3为下一项。

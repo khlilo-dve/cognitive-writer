@@ -1,0 +1,46 @@
+{
+  "id": "51ca1103796ad77bb1dfa3e164b9a88aa8a3fdd3c2be71f61d27133669ef0e46",
+  "previous": "3b1d67a3a31ddff403ef100e7dabca7dfbc1e7a4b673767562992a2c3e1471f4",
+  "sequence": 1,
+  "state": {
+    "task_id": "7faaf8ebb7b5a857f7083b6ad934c4af584c163c5b47119bfcaf66a7721ad99d",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "两篇独立文章",
+          "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。"
+        }
+      ],
+      "note": "用户未选择前不能擅自选文",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "这里只想学习其中一篇文章的写法，目前没有选定具体哪篇。两篇是独立文章，不能合并。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "tool",
+      "step": "r0-collect",
+      "decision": {
+        "tool": "collect"
+      }
+    },
+    "observation": null,
+    "reason": ""
+  }
+}

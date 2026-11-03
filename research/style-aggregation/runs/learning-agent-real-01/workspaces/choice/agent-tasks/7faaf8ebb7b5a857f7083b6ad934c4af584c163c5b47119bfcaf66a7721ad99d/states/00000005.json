@@ -1,0 +1,50 @@
+{
+  "id": "4c2f1e7d6eb4295b1595c939291005af4b033fb38482c7b9525dfbae89e4860a",
+  "previous": "03c8622297fcdb6abe5b17679d401c400ba421ffd2649e10fe98d4ff7caa54d7",
+  "sequence": 5,
+  "state": {
+    "task_id": "7faaf8ebb7b5a857f7083b6ad934c4af584c163c5b47119bfcaf66a7721ad99d",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "两篇独立文章",
+          "text": "# 纸上候车\n\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\n\n# 给团队的项目备忘\n\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。"
+        }
+      ],
+      "note": "用户未选择前不能擅自选文",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "这里只想学习其中一篇文章的写法，目前没有选定具体哪篇。两篇是独立文章，不能合并。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "16928d184f89209293c1ad258ac589227cc630afe413d138cc678c3052a07169",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 2,
+    "no_progress": 1,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "decision",
+      "step": "r0-d2",
+      "tier": "flash",
+      "user": "{\"all_articles\":false,\"allow_partial\":false,\"answers\":[],\"authorized_selection\":null,\"base\":null,\"clarifications_used\":0,\"expected_articles\":1,\"last_reason\":\"模型动作JSON无效；原响应由调用适配器保留，未当作成功\",\"last_tool_result\":{\"tool_error\":\"模型动作JSON无效；原响应由调用适配器保留，未当作成功\"},\"pro_used\":false,\"questions\":[],\"revision\":0,\"source_summary\":{\"current_pool\":[{\"id\":\"s001-a001\",\"source_id\":\"s001\",\"title\":\"纸上候车\",\"verified\":true},{\"id\":\"s001-a002\",\"source_id\":\"s001\",\"title\":\"给团队的项目备忘\",\"verified\":true}],\"source_collection_id\":\"16928d184f89209293c1ad258ac589227cc630afe413d138cc678c3052a07169\",\"sources\":[{\"candidates\":[{\"body\":{\"end_chars\":50,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 纸上候车\\n\\n我在车站捡起一张旧车票。列车还没到，纸角却早已软了。我把它夹进笔记里，等下一个站名。\"},\"duplicate_of\":null,\"id\":\"s001-a001\",\"title\":\"纸上候车\"},{\"body\":{\"end_chars\":58,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 给团队的项目备忘\\n\\n本周上线前先检查错误日志，再核对数据回写。任何一项失败都保留回执，不以请求成功替代产品验收。\"},\"duplicate_of\":null,\"id\":\"s001-a002\",\"title\":\"给团队的项目备忘\"}],\"id\":\"s001\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"多个一级标题，文章边界需选择确认\",\"resolution\":null,\"status\":\"extracted\"}]},\"steps_used\":1,\"target_titles\":[],\"task_id\":\"7faaf8ebb7b5a857f7083b6ad934c4af584c163c5b47119bfcaf66a7721ad99d\",\"user_request\":\"这里只想学习其中一篇文章的写法，目前没有选定具体哪篇。两篇是独立文章，不能合并。\"}"
+    },
+    "observation": {
+      "tool_error": "模型动作JSON无效；原响应由调用适配器保留，未当作成功"
+    },
+    "reason": "模型动作JSON无效；原响应由调用适配器保留，未当作成功"
+  }
+}
