@@ -1,5 +1,15 @@
 # 当前任务状态
 
+## 2026-11-03 当前开发状态：P1／P2已完成
+
+用户已明确“按照计划开始开发”，覆盖下方P0当时的仅文档限制。先完成docs/designs/style-learning-agent.md及A01–A24设计走查，再实现P2来源工具和style-draft collect／collection／export-texts。支持TXT/MD／直接正文／结构化文章URL，保留原快照与候选，去重、篇数、部分失败和多文范围未解决时阻断导出；needs_inspection先交领域Agent检查，不直接等同用户追问。主子Agent运行及自然语言交接还没有实现，P3为下一项。
+
+12项新测试通过；全库294通过、0失败、10忽略；构建、5组新CLI场景／8次本地GET、旧学习链17次本地模拟请求及17项终端回归通过。真实网站与新Agent质量尚未验收；新增付费模型调用0，累计账本24.556135元不变。证据research/style-aggregation/runs/learning-input-local-01，通俗报告research/style-aggregation/reports/learning-input-2026-11-03.md。旧learn/REPL、学习提示词、.env和正式styles未改。
+
+阶段报告已按user身份创建并回读：https://www.feishu.cn/docx/LFUhdy11FodnJvxQAiOcCVJznGg；Base新增run与E0082已回读，共177记录。
+
+当前PRD为v0.2，行动计划P1/P2标记完成；P3–P8保持待办。下方旧“只做文档／待新指令”属于历史P0，不能再次拿来阻止已授权开发。
+
 ## 2026-11-03 当前任务：只交付产品文档与行动计划
 
 用户确认把风格学习设计为主Agent调度的领域子Agent，并要求有限追问、合理自主判断、产品文档先行。本轮仅编写docs/PRD.md与docs/plans/2026-11-03-style-learning-agent-plan.md，更新项目规则及文档入口；未改代码、提示词、脚本、配置或模型账本，未实现新输入链或子Agent。

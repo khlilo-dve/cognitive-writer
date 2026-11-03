@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "checks": [
+    "fresh_pro_learning_bounded_explicit_retry_frozen_inputs_and_keyless_completed_resume",
+    "append_reads_parent_sources_relearns_without_old_style_and_saves_only_explicitly",
+    "endpoint_drift_and_corrupted_response_block_before_network",
+    "wrong_source_evidence_gets_one_repair_then_blocks_compilation_and_save",
+    "ctrl_c_retains_task_and_unknown_intent_without_changing_saved_versions"
+  ],
+  "local_http_requests": 17,
+  "paid_model_requests": 0,
+  "ledger_before_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "ledger_after_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "temporary_workspaces_cleaned": true
+}

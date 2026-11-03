@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "LFUhdy11FodnJvxQAiOcCVJznGg",
+    "length": 4123,
+    "log_id": "202611030813052A861E06B61C4B910C25",
+    "markdown": "2026-11-03。用户授权按计划开发后，先完成主子Agent技术设计与24个案例走查，再实现P2采集工具。文档先于代码；本轮没有重开风格研究或付费模型实验。\n## 已经做成什么\n新增style-draft collect、collection、export-texts三个开发命令。输入支持UTF-8 TXT/MD文件、直接正文和文章URL，文件相对路径按来源JSON所在目录解析。HTTP成功不会自动算文章成功：结构化提取排除脚本、导航等页面噪声，多篇文章保留为独立候选，目录与登录页明确标识。文章内部标题头部保留，行内文字与段落边界不会因去标签而拼坏。\n每个来源保留实际取得的快照、尝试路径、状态、正文哈希及是否重复。集合不可覆盖，重新查看不读取已变化的原文件、不访问网络。独立正文数满足1–10、明确数量和材料范围时才能导出与已有learn兼容的正文包；导出同样拒绝覆盖。\n开发审查还发现仅凭article标签会把标题／摘要卡片当全文，已先补设计约束，再修为内部待检查；保留候选，不自动合并或重复抓取。对应新增测试已通过。\n有一个重要的产品区分：needs_inspection表示先交给领域Agent自行检查，不自动意味着需要问用户。解析器不够确定时不能把技术疑问全部推给用户；而多文未选、独立篇数不符和未获准的部分失败也不能悄悄放行。P3会接领域判断，P4会接主会话。\n## 可以怎样试用\n仓库提供两篇自写格式示例，不是研究作者样本。命令只采集，不学习、不收费：\n```bash\ntarget/debug/cognitive-writer style-draft --root /tmp/cw-input-demo collect research/style-aggregation/runs/learning-input-local-01/examples/sources.json\n# 把输出的collection_id代入以下命令\ntarget/debug/cognitive-writer style-draft --root /tmp/cw-input-demo collection <collection-id>\ntarget/debug/cognitive-writer style-draft --root /tmp/cw-input-demo export-texts <collection-id> /tmp/cw-input-demo/texts.json\n\n```\n\n现有style-draft learn可以显式接这个正文包，那一步会调用Pro；本阶段不会自动开始学习或保存正式风格。默认learn和REPL没有切换，.env及正式styles不变。\n## 验证与边界\n12项新增测试覆盖正文提取、多文边界、短文、Reader结果待识别、登录不重试、一次备用、大小／编码错误、去重、部分失败、明确篇数、10／11篇、快照恢复和损坏拒绝。\n五组CLI场景使用8次本地HTTP GET，验证相对路径、HTML正文／快照分离、导出不覆盖、原文件删除后的查看、多文阻断、登录／目录／403、部分失败许可、重复与篡改。没有真实外网抓取，也没有模型调用。已有学习链另外用17次本地模型HTTP夹具验证恢复／追加；这些不是付费API请求。\n全库294通过、0失败、10忽略；构建通过；17项既有真实终端回归通过。修改模块格式与git diff检查通过，模块各在500行内。新增依赖为HTML解析所需scraper 0.29，锁定版本见Cargo.lock。\n收尾时历史保护检查发现批量更新测试计数误触了旧任务文字，已按原提交恢复历史段落，仅保留新阶段的实际计数；旧实验与费用没有改写。\nP1设计走查不是运行验收，P2的结构ready也不是风格语义通过。真实网站多样性、自然语言子Agent、同会话追问、DOCX／PDF、选文产品交互、当前方法10篇真实质量及Writer事实核对仍在后续计划中。\n## 费用与下一步\n新增付费API费用0元，账本逐字节未变；累计占用24.556135元含未知预留，100元预算余75.443865元。来源集合属于用户学习工作区，不混入研究训练样本；本地验证记录放在runs/learning-input-local-01。\n下一步P3实现风格学习子Agent：基于材料与工具结果动态决定继续、检查、澄清或收束，并保存任务／回答／决策预算；随后P4接主Agent与唯一用户会话。不会把当前三个采集命令称为已经完成的多Agent产品。\n",
+    "message": "Document fetched successfully",
+    "offset": 0,
+    "title": "Cognitive Writer｜P1／P2：来源采集工具开发完成，子Agent接入待做",
+    "total_length": 1897
+  }
+}

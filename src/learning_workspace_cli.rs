@@ -11,6 +11,9 @@ use std::path::{Path, PathBuf};
 use std::{io::Write, sync::Arc};
 
 const HELP: &str = "用法：cognitive-writer style-draft [--root <工作区>] <命令>\n\
+  collect <来源清单.json>                      采集TXT/MD/正文/URL并保存来源快照\n\
+  collection <来源集合ID>                      查看快照与选文／完整性状态\n\
+  export-texts <来源集合ID> <新正文包.json>      仅在范围满足时导出，不调用模型\n\
   learn <正文包.json>                          从1–10篇正文开始学习\n\
   append <风格名> <版本> <新正文包.json>         保留旧正文、追加并重新学习\n\
   jobs / job <任务ID>                          查看保留任务与阶段用量\n\
@@ -25,7 +28,7 @@ const HELP: &str = "用法：cognitive-writer style-draft [--root <工作区>] <
   show <风格名> <版本>                         查看指定版本\n\
   export <风格名> <版本> <新文件.md>            仅导出执行说明，拒绝覆盖\n\
 候选包包含articles正文数组、draft、origin、note，可选review/base。\n\
-文件/URL采集仍在后续入口；保存与导出均不表示质量已验收。";
+来源清单为sources/note，可选expected_articles/allow_partial；多文选文和子Agent对话在后续阶段。保存与导出均不表示质量已验收。";
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -150,6 +153,11 @@ pub async fn run(args: &[&str]) -> Result<(), AppError> {
     let ws = LearningWorkspace::open(&root)?;
     match args {
         ["--help"] => println!("{HELP}"),
+        ["collect", file] => crate::learning_source_cli::collect(&ws, Path::new(file)).await?,
+        ["collection", id] => crate::learning_source_cli::show(&ws, id)?,
+        ["export-texts", id, target] => {
+            crate::learning_source_cli::export(&ws, id, Path::new(target))?
+        }
         ["learn", file] => {
             let set = text_set(file)?;
             let client = LearningClient::from_env()?;

@@ -26,3 +26,5 @@
 局部修改请求始终包含完整文章；替换只发生在允许的原文范围。多块响应须全部校验通过才更新正文与必要的标题元数据；错误或中断保留旧稿。待定位指令和候选编号、上次成功修改前的正文均随会话保存；/undo 只在正文仍等于该次修改结果时可用。
 
 源码入口：`src/repl.rs`、`src/repl_input.rs`、`src/intent.rs`、`src/io.rs::write_file_atomic`。
+
+2026-11-03 P1/P2：docs/PRD.md v0.2及docs/designs/style-learning-agent.md先定主子Agent与工具合同。新增learning_sources（不可变集合／范围判定／导出）、learning_source_fetch（有界读取）、learning_source_parse（结构正文候选）、learning_source_cli（collect／collection／export-texts），挂在style-draft开发入口。没有新增stdin、没有接新Agent模型或更改旧learn/REPL；needs_inspection是内部领域检查，不自动追问用户。来源保存于工作区source-collections，恢复读快照不抓取；只有范围满足才导出articles/note。P3动态Agent及主会话交接仍待做。294库测试／10忽略、构建、本地HTTP和17终端回归通过；真实网页质量未验收。

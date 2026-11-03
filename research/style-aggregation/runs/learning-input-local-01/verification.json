@@ -1,0 +1,27 @@
+{
+  "library": {
+    "passed": 294,
+    "failed": 0,
+    "ignored": 10
+  },
+  "targeted_new_tests": 12,
+  "build": "passed",
+  "existing_terminal_cases": 17,
+  "existing_learning_local_model_http_requests": 17,
+  "new_source_cli_local_http_gets": 8,
+  "paid_model_requests": 0,
+  "ledger_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "binary_sha256": "7b815912f2395a0d2d2067e3515423b28b3ed5441c3348fca424cf306d8ce1bd",
+  "source_modules_max_lines": 496,
+  "rustfmt_changed_modules": "passed",
+  "diff_check": "passed",
+  "scope": "P1 design and P2 input tools; P3/P4 domain Agent and natural-language handoff not implemented; real website quality not validated",
+  "review_fix": "title-only and read-more cards remain needs_inspection; no redundant Reader retry",
+  "historical_sections": "verified byte-for-byte text after restoring unintended historical test-count changes",
+  "lark": {
+    "report_url": "https://www.feishu.cn/docx/LFUhdy11FodnJvxQAiOcCVJznGg",
+    "report_readback": "passed",
+    "base_record_count": 177,
+    "journal": "E0082"
+  }
+}

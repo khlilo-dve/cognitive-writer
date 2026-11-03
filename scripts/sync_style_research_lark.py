@@ -175,6 +175,8 @@ def main():
             report_file = ROOT / "lark/learning-quality-stage-20261102.json"
         if rid in ("learning-jobs-quality-01", "learning-quality-probe-01"):
             report_file = ROOT / "lark/learning-quality-recovery-stage-20261102.json"
+        if rid.startswith("learning-input-"):
+            report_file = ROOT / "lark/learning-input-20261103.json"
         grounded_prefixes = ("learning-qualifier-", "learning-grounded-", "learning-boundary-")
         if rid.startswith(grounded_prefixes):
             report_file = ROOT / "lark/learning-grounded-stage-20261102.json"
@@ -234,6 +236,8 @@ def main():
             "learning-boundary-probe-01": "定点执行｜感受与抽象材料四稿",
         }
         stage = grounded_labels.get(rid, stage)
+        if rid.startswith("learning-input-"):
+            stage = "产品输入工具｜采集、冻结与导出本地验证"
         rows = summary.get("rows", [])
         checks = ""
         control_file = run / "controls.json"

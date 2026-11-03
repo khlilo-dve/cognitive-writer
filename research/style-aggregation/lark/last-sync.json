@@ -2,14 +2,10 @@
   "status": "complete",
   "base": "Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
   "manifest": "None",
-  "run": "None",
+  "run": "research/style-aggregation/runs/learning-input-local-01",
   "runs": [
-    "research/style-aggregation/runs/learning-qualifier-01",
-    "research/style-aggregation/runs/learning-qualifier-isolated-01",
-    "research/style-aggregation/runs/learning-grounded-01",
-    "research/style-aggregation/runs/learning-grounded-repair-01",
-    "research/style-aggregation/runs/learning-boundary-probe-01"
+    "research/style-aggregation/runs/learning-input-local-01"
   ],
-  "journal_from": "E0076",
-  "record_count": 175
+  "journal_from": "E0082",
+  "record_count": 177
 }

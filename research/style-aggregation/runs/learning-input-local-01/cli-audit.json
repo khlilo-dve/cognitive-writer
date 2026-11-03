@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checks": [
+    "file_manifest_relative_path_html_body_snapshot_export_and_keyless_restart_without_network",
+    "multiple_articles_not_silently_merged_or_exported",
+    "login_navigation_and_forbidden_sources_preserved_without_retry_or_fake_article",
+    "partial_permission_does_not_override_explicit_independent_article_count",
+    "normalized_deduplication_and_tampered_snapshot_rejection"
+  ],
+  "local_http_gets": 8,
+  "model_requests": 0,
+  "ledger_before_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "ledger_after_sha256": "a0ef261fa851a7b1d6808daa8720449beb26509539f169f7ef1999bcef322136",
+  "temporary_workspace_cleaned": true,
+  "scope": "P2 acquisition CLI; domain Agent, natural-language clarification and real web quality remain unverified"
+}

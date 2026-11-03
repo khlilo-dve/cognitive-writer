@@ -1,0 +1,24 @@
+{
+  "stage": "product_source_input_local",
+  "status": "complete",
+  "expected": 2,
+  "rows": [
+    {
+      "id": "P1_design_walkthrough",
+      "status": "complete"
+    },
+    {
+      "id": "P2_source_acquisition_tools",
+      "status": "complete"
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0,
+    "occupied_cny": 24.556135
+  },
+  "limitations": [
+    "P3–P8 remain",
+    "No live website quality claim",
+    "Source readiness is structural, not semantic style approval"
+  ]
+}
