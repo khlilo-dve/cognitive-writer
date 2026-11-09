@@ -41,6 +41,7 @@ const UPDATE_SYSTEM_PROMPT: &str = r#"你是严苛的文本编辑。用户会给
 fn state_label(state: &SessionState) -> &'static str {
     match state {
         SessionState::Idle => "空闲",
+        SessionState::WaitingForLearningAgent => "风格学习任务",
         SessionState::WaitingForEditTarget => "等待选择修改位置",
         SessionState::WaitingForGenerationStyle => "等待选择风格",
         SessionState::WaitingForStyleName => "等待风格命名",
@@ -97,6 +98,7 @@ const HELP_TEXT: &str = concat!(
   /blocks      显示原文内容块编号，便于指定修改位置
   /undo        撤销上一次成功的局部修改
   /state       显示当前状态（调试用）
+  [style-draft chat开发入口] /learning 查看学习进度；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
 
 独立操作 (Idle 状态可用):
   输入 URL     → 学习该文章的写作风格
@@ -163,6 +165,8 @@ pub struct Repl {
     pending_style_content: Option<String>,
     #[serde(default)]
     pending_delete_name: Option<String>,
+    #[serde(default)]
+    learning_chat: Option<crate::learning_chat::ChatRef>,
     #[serde(skip, default = "default_styles_dir")]
     styles_dir: String,
     // 配置（不持久化，从环境变量恢复）
@@ -188,9 +192,38 @@ fn default_styles_dir() -> String {
 
 /// 恢复提示与 REPL 共用同一个 stdin 读取器；Ctrl+C/EOF 保留旧会话。
 pub async fn run_session(session_dir: &std::path::Path) -> Result<(), AppError> {
+    run_session_mode(session_dir, None).await
+}
+/// P4 development entry, using the same input reader and existing generation flow.
+pub async fn run_learning_session(root: &std::path::Path) -> Result<(), AppError> {
+    run_session_mode(&root.join("chat-session"), Some(root)).await
+}
+fn new_session_mode(
+    dir: &std::path::Path,
+    root: Option<&std::path::Path>,
+) -> Result<Repl, AppError> {
+    let mut repl = Repl::new_with_session_dir(dir)?;
+    if let Some(root) = root {
+        repl.learning_chat = Some(crate::learning_chat::create(root)?);
+    }
+    Ok(repl)
+}
+async fn run_session_mode(
+    session_dir: &std::path::Path,
+    root: Option<&std::path::Path>,
+) -> Result<(), AppError> {
     let saved = Repl::restore(session_dir)?;
     let mut input = repl_input::stdin_input();
     let mut repl = if let Some(saved) = saved {
+        if let Some(root) = root {
+            if saved
+                .learning_chat
+                .as_ref()
+                .is_none_or(|r| std::fs::canonicalize(root).map_or(true, |p| p != r.workspace))
+            {
+                return Err(AppError::Intent("开发会话工作区不匹配，原会话保留".into()));
+            }
+        }
         println!(
             "检测到未完成会话（{}）。Enter 恢复，n 放弃。",
             state_label(saved.current_state())
@@ -206,7 +239,10 @@ pub async fn run_session(session_dir: &std::path::Path) -> Result<(), AppError> 
                 Some(Ok(answer)) => match answer.trim().to_lowercase().as_str() {
                     "" | "y" | "yes" => break saved,
                     "n" | "no" => {
-                        let fresh = Repl::new_with_session_dir(session_dir)?;
+                        if let Some(r) = &saved.learning_chat {
+                            crate::learning_chat::cancel(r)?;
+                        }
+                        let fresh = new_session_mode(session_dir, root)?;
                         saved.clear_session()?;
                         break fresh;
                     }
@@ -215,7 +251,7 @@ pub async fn run_session(session_dir: &std::path::Path) -> Result<(), AppError> 
             }
         }
     } else {
-        Repl::new_with_session_dir(session_dir)?
+        new_session_mode(session_dir, root)?
     };
     repl.run_with_input(input).await;
     Ok(())
@@ -255,6 +291,7 @@ impl Repl {
             current_slug: None,
             pending_style_content: None,
             pending_delete_name: None,
+            learning_chat: None,
             styles_dir: default_styles_dir(),
             api_key,
             base_url,
@@ -294,6 +331,12 @@ impl Repl {
         repl.website_path = std::env::var("WEBSITE_PATH").unwrap_or_default();
         repl.client = Client::new();
         repl.session_dir = Some(session_dir.to_path_buf());
+        if repl.state == SessionState::WaitingForLearningAgent && repl.learning_chat.is_none() {
+            return Err(AppError::Intent("学习会话缺少任务引用，原会话保留".into()));
+        }
+        if let Some(r) = &repl.learning_chat {
+            crate::learning_chat_store::binding(r)?;
+        }
         Ok(Some(repl))
     }
 
@@ -353,6 +396,11 @@ impl Repl {
         }
         if self.state == SessionState::WaitingForEditTarget {
             self.print_edit_choices();
+        }
+        if self.state == SessionState::WaitingForLearningAgent {
+            if let Some(r) = &self.learning_chat {
+                if let Err(e) = crate::learning_chat::display(r, true) { eprintln!("[error] {e}"); }
+            }
         }
         loop {
             repl_input::prompt(&format!("[{}] > ", state_label(&self.state)));
@@ -418,6 +466,11 @@ impl Repl {
 
     async fn process_input(&mut self, input: &str) -> Result<bool, AppError> {
         let input = input.trim();
+        if self.learning_chat.is_some()
+            && matches!(self.state, SessionState::Idle | SessionState::WaitingForLearningAgent)
+        {
+            if let Some(done) = self.process_learning_input(input).await? { return Ok(done); }
+        }
         if self.state == SessionState::WaitingForEditTarget
             && (!input.starts_with('/') || matches!(input, "/cancel" | "/blocks"))
         {
@@ -490,6 +543,101 @@ impl Repl {
         Ok(false)
     }
 
+    async fn process_learning_input(&mut self, input: &str) -> Result<Option<bool>, AppError> {
+        let r = self
+            .learning_chat
+            .clone()
+            .ok_or_else(|| AppError::Intent("缺主会话引用".into()))?;
+        if matches!(input, "/quit" | "/help" | "/styles" | "/state") {
+            return Ok(None);
+        }
+        if matches!(input, "/cancel" | "取消学习" | "取消当前学习" | "不学了") || is_cancel(input)
+        {
+            crate::learning_chat::cancel(&r)?;
+            self.reset_state();
+            println!("已取消学习，材料与原请求记录保留。");
+            return Ok(Some(false));
+        }
+        if matches!(
+            input,
+            "/learning" | "学习进度" | "查看学习进度" | "现在到哪了"
+        ) {
+            crate::learning_chat::display(&r, false)?;
+            return Ok(Some(false));
+        }
+        if matches!(input, "/pause-learning" | "暂停学习" | "先暂停学习") {
+            crate::learning_chat::pause(&r)?;
+            self.state = SessionState::WaitingForLearningAgent;
+            self.save()?;
+            crate::learning_chat::display(&r, false)?;
+            return Ok(Some(false));
+        }
+        let continuing = matches!(
+            input,
+            "继续" | "恢复学习" | "/resume-learning" | "/retry-learning"
+        );
+        let cancel_then_use = ["取消学习，", "取消当前学习，", "不学了，", "先不学了，"]
+            .iter()
+            .any(|p| input.starts_with(p));
+        if cancel_then_use {
+            crate::learning_chat::cancel(&r)?;
+        }
+        let replacement = input
+            .strip_prefix("/replace-learning ")
+            .or_else(|| input.strip_prefix("替换当前学习："))
+            .or_else(|| input.strip_prefix("替换当前学习:"));
+        let content = if let Some(new) = replacement {
+            crate::learning_chat::cancel(&r)?;
+            new.trim()
+        } else {
+            input
+        };
+        if content.is_empty() {
+            return Ok(Some(false));
+        }
+        if input.starts_with('/')
+            && !continuing
+            && replacement.is_none()
+            && crate::learning_chat_parse::sources(input).is_empty()
+        {
+            return Ok(None);
+        }
+        if !continuing {
+            crate::learning_chat::submit(&r, content)?;
+        }
+        self.state = SessionState::WaitingForLearningAgent;
+        self.save()?;
+        let event = crate::learning_chat::resume(&r, input == "/retry-learning").await?;
+        if matches!(event, crate::learning_chat::Event::Idle) {
+            self.state = SessionState::Idle;
+            return Ok(if continuing { Some(false) } else { None });
+        }
+        self.apply_learning_event(&r, event).await?;
+        Ok(Some(false))
+    }
+    async fn apply_learning_event(
+        &mut self,
+        r: &crate::learning_chat::ChatRef,
+        event: crate::learning_chat::Event,
+    ) -> Result<(), AppError> {
+        match event {
+            crate::learning_chat::Event::Use {
+                style_name,
+                original,
+            } => {
+                self.begin_generation(&original, &style_name, &original)
+                    .await?
+            }
+            crate::learning_chat::Event::Message { text } => println!("{text}"),
+            crate::learning_chat::Event::Learning { .. } => {
+                self.state = SessionState::WaitingForLearningAgent;
+                crate::learning_chat::display(r, true)?;
+            }
+            crate::learning_chat::Event::Idle => self.state = SessionState::Idle,
+        }
+        Ok(())
+    }
+
     // ── Special-command handler ────────────────────────────────────
 
     /// Process a `/`-prefixed command. Returns `true` if the REPL should
@@ -525,6 +673,9 @@ impl Repl {
             }
             "/state" => {
                 self.print_state();
+                if let Some(r) = &self.learning_chat {
+                    if let Err(e) = crate::learning_chat::display(r, false) { eprintln!("[error] {e}"); }
+                }
                 false
             }
             other => {
@@ -597,6 +748,7 @@ impl Repl {
             SessionState::WaitingForEditTarget => {
                 "回复内容块编号（如 B2 或 B2,B4）；/blocks 查看候选；/cancel 只取消本次修改。"
             }
+            SessionState::WaitingForLearningAgent => "回复当前材料问题；/learning查看进度，继续恢复，暂停学习，/cancel取消，/quit保存退出。",
             SessionState::WaitingForGenerationStyle => {
                 "回复风格名称或编号；/styles 查看候选；/cancel 取消；/quit 保存需求退出。"
             }
@@ -631,6 +783,14 @@ impl Repl {
             }
             (SessionState::Idle, Intent::Learn { url }) => {
                 println!("[info] 开始学习风格: {}", url);
+                if let Some(r) = self.learning_chat.clone() {
+                    crate::learning_chat::submit_url(&r, input, &url)?;
+                    self.state = SessionState::WaitingForLearningAgent;
+                    self.save()?;
+                    let event = crate::learning_chat::resume(&r, false).await?;
+                    self.apply_learning_event(&r, event).await?;
+                    return Ok(());
+                }
                 self.pending_style_content = Some(crate::learn::extract_style(&url).await?);
                 self.state = SessionState::WaitingForStyleName;
                 println!("风格已提取，请输入名称保存，或 /cancel 取消。");

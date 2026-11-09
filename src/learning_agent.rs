@@ -26,6 +26,9 @@ pub fn load(ws: &LearningWorkspace, id: &str) -> Result<StateRecord, AppError> {
 pub fn answer(ws: &LearningWorkspace, id: &str, reply: Reply) -> Result<StateRecord, AppError> {
     tools::reply(ws, id, reply)
 }
+pub fn revise(ws: &LearningWorkspace, id: &str, reply: Reply) -> Result<StateRecord, AppError> {
+    tools::revise(ws, id, reply)
+}
 pub fn cancel(ws: &LearningWorkspace, id: &str) -> Result<StateRecord, AppError> {
     let r = load(ws, id)?;
     if r.state.status == Status::Cancelled {
@@ -182,6 +185,12 @@ where
         }
         if r.state.pending.is_none() {
             let mut s = r.state.clone();
+            if s.request.sources.is_empty() {
+                s.status = Status::Blocked;
+                s.reason =
+                    "回答已保留，但尚未取得文章材料；主动补充文件、网址或正文即可继续".into();
+                return Ok(journal::advance(ws, &r, s)?.0);
+            }
             if s.collection.is_none() && s.no_progress >= 2 {
                 s.status = Status::Blocked;
                 s.reason = "采集连续两次没有进展，保留失败原因并停止".into();
@@ -207,9 +216,13 @@ where
                             && !s.resolutions.contains_key(&v.id)
                     })
                 {
-                    s.status = Status::Blocked;
-                    s.reason =
-                        "未取得可学习正文；来源失败与已完成材料保留，需补充有效文章才能继续".into();
+                    let question = "当前材料未读到可学习的文章正文。请提供可读的文章文件、可访问的文章网址或完整正文。";
+                    if s.questions.len() < 2 && !s.questions.iter().any(|q| q.text == question) {
+                        apply(ws,&p,&mut s,Decision::Clarify {topic:"补充可用文章材料".into(),question:question.into(),reason:"采集结果没有可学习正文，现有材料不足；已保留失败来源，不能假装已学".into()})?;
+                    } else {
+                        s.status = Status::Blocked;
+                        s.reason = "未取得可学习正文，材料修正问题已问过或已到澄清上限；失败来源保留，主动补充可继续".into();
+                    }
                     return Ok(journal::advance(ws, &r, s)?.0);
                 }
                 if s.decision_steps >= 12 || s.no_progress >= 2 {

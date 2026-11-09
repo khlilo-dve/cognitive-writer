@@ -1,6 +1,6 @@
 # Cognitive Writer v3.3.2
 
-**产品文档入口（2026-11-03）：** [产品需求PRD](docs/PRD.md)与[风格学习子Agent行动计划](docs/plans/2026-11-03-style-learning-agent-plan.md)。现已完成P1设计、P2来源工具和P3材料领域Agent开发链；style-draft agent-*可处理有限决策／澄清与恢复，终点为材料就绪。P4主会话、P5学习／版本／Writer交接与P6–P8仍待做。参见[设计与开发命令](docs/designs/style-learning-agent.md)和[通俗阶段报告](research/style-aggregation/reports/learning-agent-2026-11-03.md)，不把开发入口当正式产品或风格质量通过。
+**产品文档入口（2026-11-09）：** [产品需求PRD](docs/PRD.md)与[行动计划](docs/plans/2026-11-03-style-learning-agent-plan.md)。P1–P4开发链已完成：`cargo run -- style-draft --root /tmp/cw-p4-demo chat`可在同会话委派材料学习任务、回答、改目标、暂停与恢复，当前到材料就绪。P5再接实际学习／候选／保存／Writer，P6–P8与质量缺口继续保留。参见[设计](docs/designs/style-learning-agent.md)及[通俗阶段报告](research/style-aggregation/reports/learning-chat-2026-11-09.md)。
 
 > 一个想法进去，两边文章出来。用 Rust 写的 AI 写作 Agent。
 
@@ -47,7 +47,7 @@ Agent:  git push → Vercel 自动部署
 
 说明围绕输入文章实际展示的视角、材料组织、叙述与判断、句段节奏、情绪及落点展开，保留适用条件和未知。学习分析、原文与证据独立保存；进入Writer的是执行说明。质量以原文依据和新题材执行判断，不以字数或模型总分替代。
 
-多篇正文核心、候选／版本、来源采集及材料领域Agent开发入口已实现，主会话调度与材料→学习交接尚未交付。最新状态见[PRD中的能力与缺口](docs/PRD.md)。
+多篇正文核心、候选／版本、来源采集与主会话材料Agent开发入口已实现；材料→学习／版本／写作交接待P5。最新状态见[PRD中的能力与缺口](docs/PRD.md)。
 
 ### 2. URL 一键风格逆向提取（Learn Pipeline）
 看到优质好文想沉淀其写作风格？只需提供文章链接，系统自动完成提取：

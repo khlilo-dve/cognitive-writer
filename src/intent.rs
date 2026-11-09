@@ -13,6 +13,8 @@ pub enum SessionState {
     Idle,
     /// 已接收写作需求，等待用户明确选择风格。
     WaitingForGenerationStyle,
+    /// Development conversation delegates material decisions to the learning Agent.
+    WaitingForLearningAgent,
     /// 等待用户对大纲骨架的反馈。
     WaitingForOutline,
     /// 已保留局部修改指令，等待用户明确目标内容块。

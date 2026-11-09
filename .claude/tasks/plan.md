@@ -1,5 +1,15 @@
 # 实施计划与完成记录
 
+## 2026-11-09 当前状态：P4主会话开发链完成，下一项P5
+
+style-draft chat已把P3领域任务接到既有Repl与唯一stdin；学习／已有风格使用／组合原话保留，支持同任务问答、缺材料／不可读来源补充、暂停／继续、取消／明确替换／目标修订、身份及未知费用恢复。父会话不另设追问预算，终点仍为材料就绪；实际学习、候选、保存与新学风格交Writer待P5。旧默认与styles/.env未切换。PRD和计划v0.4。
+
+新增12测试；全库321通过、0失败、10忽略；9新终端场景／15本地请求、17旧终端、11风格选择、P3协议及学习回归通过。真实learning-chat-real-01四固定场景4/4，3个Flash响应，原话／保存名／选文正确；复跑0新请求、账本SHA不变。收尾审查纠正否定指代、多选及多风格提及，review-findings.json留证。
+
+新增0.003682元、0新增未知；累计24.582025元，历史未知6.032614元，100元余额75.417975元。无活付费请求。数据runs/learning-chat-local-01及real-01，通俗报告research/style-aggregation/reports/learning-chat-2026-11-09.md。P5下一步先更新交接设计再接已有学习／版本，不重开风格质量矩阵；P6–P8继续按计划。下方为历史阶段。
+
+P4阶段报告已user身份创建并回读：https://www.feishu.cn/docx/I6q4djdZhobU9Mx3KeSclJyJnlg；Base新增两个run及E0086–E0088均回读，共189记录。实现／过程／费用见同次P4提交（git log -- src/learning_chat.rs）；最终审计在runs/learning-chat-real-01/artifact-audit.json。
+
 ## 2026-11-03 当前开发状态：P3材料领域Agent完成，下一项P4
 
 已文档先行实现P3任务、观察与动态工具决策、最多两轮主动澄清、12决策／两次无进展收束、一次Pro升级、输入修订、取消及迟到回执隔离、费用和恢复。终点ready_for_learning，未接P4主会话或P5学习／保存／Writer；原始保存名及后续写作需求仅保留。正文核心和正式styles/.env不变。PRD及计划v0.3。

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "checked_date": "2026-11-09",
+  "new_paid_requests": 3,
+  "new_usage_micro_cny": 3682,
+  "new_unknown_micro_cny": 0,
+  "old_ledger_entries_unchanged": true,
+  "new_modules_below_500_lines": true,
+  "production_config_styles_and_old_learning_prompts_unchanged": true,
+  "single_stdin_module_unchanged": true,
+  "lark_report_url": "https://www.feishu.cn/docx/I6q4djdZhobU9Mx3KeSclJyJnlg",
+  "ledger_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+  "lark_base_record_count": 189,
+  "final_binary_replay_verified": true,
+  "body_locator_scope_checked": true,
+  "full_numeric_token_boundary_checked": true,
+  "prior_base_record_ids_unchanged": true
+}

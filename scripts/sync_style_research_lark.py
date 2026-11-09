@@ -179,6 +179,8 @@ def main():
             report_file = ROOT / "lark/learning-input-20261103.json"
         if rid.startswith("learning-agent-"):
             report_file = ROOT / "lark/learning-agent-20261103.json"
+        if rid.startswith("learning-chat-"):
+            report_file = ROOT / "lark/learning-chat-20261109.json"
         grounded_prefixes = ("learning-qualifier-", "learning-grounded-", "learning-boundary-")
         if rid.startswith(grounded_prefixes):
             report_file = ROOT / "lark/learning-grounded-stage-20261102.json"
@@ -242,6 +244,8 @@ def main():
             stage = "产品输入工具｜采集、冻结与导出本地验证"
         if rid.startswith("learning-agent-"):
             stage = "P3材料领域Agent｜有限决策与恢复"
+        if rid.startswith("learning-chat-"):
+            stage = "P4主会话｜学习路由、问答与恢复"
         rows = summary.get("rows", [])
         checks = ""
         control_file = run / "controls.json"
@@ -276,6 +280,12 @@ def main():
             conclusion = f"材料就绪 {sum(r['status'] == 'ready_for_learning' for r in rows)}，明确受阻 {sum(r['status'] == 'blocked' for r in rows)}，执行失败 {sum(r['status'] == 'failed' for r in rows)}。" + checks
             if rid.endswith("local-01"):
                 conclusion = f"本地协议场景 {len(rows)} 组通过；14次本地模拟请求、0付费请求。"
+        if rid.startswith("learning-chat-"):
+            conclusion = f"主会话场景完成 {sum(r['status']=='complete' for r in rows)}/{len(rows)}。" + checks
+            if rid.endswith("local-01"):
+                conclusion += " 9组真实终端、15次本地模拟请求、0付费。"
+            else:
+                conclusion += " 3个真实Flash响应；合成来源与固定回复，P5学习／保存／Writer未接。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": conclusion,

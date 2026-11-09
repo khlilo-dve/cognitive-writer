@@ -1,0 +1,43 @@
+{
+  "id": "fd393ee880e4e2533518590c5e68fb95d20edf32748c5065bceb5324d0165cf6",
+  "previous": null,
+  "sequence": 0,
+  "state": {
+    "task_id": "e1ecff93053ded20783da14425de275e55e88c5e89596e4ccdf76acc2b521c80",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md"
+        },
+        {
+          "kind": "file",
+          "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md"
+        }
+      ],
+      "note": "学习这两篇 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\" \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md\"，保存为“笔记声音”，再写一篇图书馆文章，800字，给学生看",
+      "expected_articles": 2,
+      "allow_partial": false
+    },
+    "user_request": "学习这两篇 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\" \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md\"，保存为“笔记声音”，再写一篇图书馆文章，800字，给学生看",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": null,
+    "reason": ""
+  }
+}

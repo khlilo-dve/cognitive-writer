@@ -11,6 +11,7 @@ use std::path::{Path, PathBuf};
 use std::{io::Write, sync::Arc};
 
 const HELP: &str = "用法：cognitive-writer style-draft [--root <工作区>] <命令>\n\
+  chat                                       P4主会话开发入口，共用唯一stdin\n\
   agent-start <委派.json>                      启动材料决策Agent，复杂情况调用Flash\n\
   agent <任务ID> / agent-cancel <任务ID>         查看／取消领域任务，不读取stdin\n\
   agent-resume <任务ID> [--retry-uncertain]      恢复任务，保留已完成决策与材料\n\
@@ -157,6 +158,7 @@ pub async fn run(args: &[&str]) -> Result<(), AppError> {
     let ws = LearningWorkspace::open(&root)?;
     match args {
         ["--help"] => println!("{HELP}"),
+        ["chat"] => crate::repl::run_learning_session(ws.root()).await?,
         ["agent-start", file] => crate::learning_agent_cli::start(&ws, Path::new(file)).await?,
         ["agent", id] => crate::learning_agent_cli::inspect(&ws, id)?,
         ["agent-resume", id] => crate::learning_agent_cli::resume(&ws, id, false).await?,

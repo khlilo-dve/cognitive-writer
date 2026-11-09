@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "61288c4ea1d3778d010e711bcd942931e1653a29b2d252ce4f1c3d9f80f522c0",
+  "collected_at": "2026-11-05T15:44:29.556218983+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "request": {
+    "sources": [
+      {
+        "kind": "file",
+        "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md"
+      },
+      {
+        "kind": "file",
+        "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md"
+      }
+    ],
+    "note": "学习这两篇 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\" \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md\"，保存为“笔记声音”，再写一篇图书馆文章，800字，给学生看",
+    "expected_articles": 2,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "file_utf8",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "file_utf8",
+          "content_type": "text/plain",
+          "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md",
+          "body": "我把书签夹进昨天翻过的页码。今天读到同一处，纸角还微微翘着。",
+          "raw_sha256": "3f4c8ad6f7afdc6027c3d14bd97684df726e7595720ccfd856f53a4c77f05727"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md",
+          "text": "我把书签夹进昨天翻过的页码。今天读到同一处，纸角还微微翘着。",
+          "text_sha256": "3f4c8ad6f7afdc6027c3d14bd97684df726e7595720ccfd856f53a4c77f05727",
+          "normalized_sha256": "3f4c8ad6f7afdc6027c3d14bd97684df726e7595720ccfd856f53a4c77f05727",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "s002",
+      "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "file_utf8",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "file_utf8",
+          "content_type": "text/plain",
+          "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md",
+          "body": "窗边的书架空出一格。我把借来的书放进去，桌面才有了写字的地方。",
+          "raw_sha256": "970c370d3804d2308cddeb947cb2863b89f0d77b9555688d9ed7d6567ce58e1e"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s002-a001",
+          "source_id": "s002",
+          "title": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md",
+          "text": "窗边的书架空出一格。我把借来的书放进去，桌面才有了写字的地方。",
+          "text_sha256": "970c370d3804d2308cddeb947cb2863b89f0d77b9555688d9ed7d6567ce58e1e",
+          "normalized_sha256": "970c370d3804d2308cddeb947cb2863b89f0d77b9555688d9ed7d6567ce58e1e",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "checked_date": "2026-11-05",
+  "currency": "CNY",
+  "cache_miss_per_million_tokens": {
+    "mimo-v2.6-flash": {
+      "input": 1,
+      "output": 2
+    },
+    "mimo-v2.6-pro": {
+      "input": 3,
+      "output": 6
+    }
+  },
+  "sources": [
+    "https://mimo.mi.com/models/en-US/mimo-v2.6-flash",
+    "https://mimo.mi.com/models/en-US/mimo-v2.6-pro"
+  ],
+  "phase_cap_micro_cny": 500000
+}

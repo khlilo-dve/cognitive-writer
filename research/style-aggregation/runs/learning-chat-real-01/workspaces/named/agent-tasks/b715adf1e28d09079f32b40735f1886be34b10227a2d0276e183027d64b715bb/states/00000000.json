@@ -1,0 +1,39 @@
+{
+  "id": "fa54d97c76cb2c77282bb10af4d5d9e144af5bd0a88a4d2d994224f91b026e26",
+  "previous": null,
+  "sequence": 0,
+  "state": {
+    "task_id": "b715adf1e28d09079f32b40735f1886be34b10227a2d0276e183027d64b715bb",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md"
+        }
+      ],
+      "note": "学习这个材料 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\"，命名为随笔研究；接着写一篇读书文章，700字，给学生看",
+      "expected_articles": null,
+      "allow_partial": false
+    },
+    "user_request": "学习这个材料 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\"，命名为随笔研究；接着写一篇读书文章，700字，给学生看",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": null,
+    "reason": ""
+  }
+}

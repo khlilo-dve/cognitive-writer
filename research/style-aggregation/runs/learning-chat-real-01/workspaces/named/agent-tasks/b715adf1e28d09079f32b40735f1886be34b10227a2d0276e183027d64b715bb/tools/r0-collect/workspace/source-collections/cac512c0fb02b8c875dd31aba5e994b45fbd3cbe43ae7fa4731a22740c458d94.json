@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "cac512c0fb02b8c875dd31aba5e994b45fbd3cbe43ae7fa4731a22740c458d94",
+  "collected_at": "2026-11-05T15:44:32.693343334+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "request": {
+    "sources": [
+      {
+        "kind": "file",
+        "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md"
+      }
+    ],
+    "note": "学习这个材料 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\"，命名为随笔研究；接着写一篇读书文章，700字，给学生看",
+    "expected_articles": null,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "file_utf8",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "file_utf8",
+          "content_type": "text/plain",
+          "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md",
+          "body": "我把书签夹进昨天翻过的页码。今天读到同一处，纸角还微微翘着。",
+          "raw_sha256": "3f4c8ad6f7afdc6027c3d14bd97684df726e7595720ccfd856f53a4c77f05727"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md",
+          "text": "我把书签夹进昨天翻过的页码。今天读到同一处，纸角还微微翘着。",
+          "text_sha256": "3f4c8ad6f7afdc6027c3d14bd97684df726e7595720ccfd856f53a4c77f05727",
+          "normalized_sha256": "3f4c8ad6f7afdc6027c3d14bd97684df726e7595720ccfd856f53a4c77f05727",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

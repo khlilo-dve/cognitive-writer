@@ -1,0 +1,49 @@
+{
+  "id": "1e0f78e186095d6385cc2d6c04779bc03a91421b090922e0a3f5a7c9e5155260",
+  "previous": "0fed1f7a7bfc0802784dfb3e0862cb16b1682edadf56205a5769070f0278e457",
+  "sequence": 3,
+  "state": {
+    "task_id": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md"
+        }
+      ],
+      "note": "学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md\"，只学一篇；这两篇是独立文章，不能合并",
+      "expected_articles": 1,
+      "allow_partial": false
+    },
+    "user_request": "学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md\"，只学一篇；这两篇是独立文章，不能合并",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "489a440975b4f921a7a1ed9f6497ecd12a84f5aa634f7f1e01c53160beb87c85",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "decision",
+      "step": "r0-d1",
+      "tier": "flash",
+      "user": "{\"all_articles\":false,\"allow_partial\":false,\"answers\":[],\"authorized_selection\":null,\"base\":null,\"clarifications_used\":0,\"expected_articles\":1,\"fully_visible_sources\":[\"s001\"],\"inspected_sources\":[],\"inspected_windows\":[],\"last_reason\":\"\",\"last_tool_result\":{\"collected\":true},\"pro_used\":false,\"questions\":[],\"revision\":0,\"source_summary\":{\"current_pool\":[{\"id\":\"s001-a001\",\"source_id\":\"s001\",\"title\":\"纸上候车\",\"verified\":true},{\"id\":\"s001-a002\",\"source_id\":\"s001\",\"title\":\"给团队的项目备忘\",\"verified\":true}],\"source_collection_id\":\"489a440975b4f921a7a1ed9f6497ecd12a84f5aa634f7f1e01c53160beb87c85\",\"sources\":[{\"candidates\":[{\"body\":{\"end_chars\":30,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 纸上候车\\n\\n我在车站把旧车票夹进书里，等下一个站名响起。\"},\"duplicate_of\":null,\"id\":\"s001-a001\",\"title\":\"纸上候车\"},{\"body\":{\"end_chars\":51,\"excerpted\":false,\"offset_chars\":0,\"text\":\"# 给团队的项目备忘\\n\\n上线前先检查错误日志，再核对数据回写。每次失败保留回执，不把请求成功当作验收。\"},\"duplicate_of\":null,\"id\":\"s001-a002\",\"title\":\"给团队的项目备忘\"}],\"id\":\"s001\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"多个一级标题，文章边界需选择确认\",\"resolution\":null,\"status\":\"extracted\"}]},\"steps_used\":0,\"target_titles\":[],\"task_id\":\"7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67\",\"user_request\":\"学习 \\\"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md\\\"，只学一篇；这两篇是独立文章，不能合并\"}"
+    },
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

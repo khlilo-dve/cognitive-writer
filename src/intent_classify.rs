@@ -63,6 +63,7 @@ fn state_valid_intents(state: &SessionState) -> &'static str {
         SessionState::WaitingForPublish => {
             "有效意图：Publish（发布）、PublishWebsiteOnly（只发网站）、Hold（暂缓）、Cancel。"
         }
+        SessionState::WaitingForLearningAgent => "由主会话转交风格学习子任务，不使用旧分类器。",
         SessionState::WaitingForEditTarget => "由 REPL 本地处理局部修改目标选择。",
         SessionState::WaitingForGenerationStyle => "由 REPL 本地处理风格选择输入。",
         SessionState::WaitingForStyleName => "由 REPL 本地处理风格名称输入。",
@@ -87,7 +88,8 @@ pub async fn classify_intent(
         SessionState::WaitingForOutline => "等待用户确认大纲",
         SessionState::WaitingForFulltext => "等待用户确认全文",
         SessionState::WaitingForPublish => "等待用户确认发布",
-        SessionState::WaitingForEditTarget
+        SessionState::WaitingForLearningAgent
+        | SessionState::WaitingForEditTarget
         | SessionState::WaitingForGenerationStyle
         | SessionState::WaitingForStyleName
         | SessionState::WaitingForDeleteStyleConfirmation => {

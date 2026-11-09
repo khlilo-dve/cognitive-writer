@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "489a440975b4f921a7a1ed9f6497ecd12a84f5aa634f7f1e01c53160beb87c85",
+  "collected_at": "2026-11-05T15:44:32.745890199+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "request": {
+    "sources": [
+      {
+        "kind": "file",
+        "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md"
+      }
+    ],
+    "note": "学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md\"，只学一篇；这两篇是独立文章，不能合并",
+    "expected_articles": 1,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md",
+      "status": "extracted",
+      "reason": "多个一级标题，文章边界需选择确认",
+      "attempts": [
+        {
+          "method": "file_utf8",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "file_utf8",
+          "content_type": "text/plain",
+          "resolved_locator": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/双文.md",
+          "body": "# 纸上候车\n\n我在车站把旧车票夹进书里，等下一个站名响起。\n\n# 给团队的项目备忘\n\n上线前先检查错误日志，再核对数据回写。每次失败保留回执，不把请求成功当作验收。",
+          "raw_sha256": "994e18b3c38f46c07b735dab0e2c7ac7dfa8703b6a7d76a8a126dc93db825dbd"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "纸上候车",
+          "text": "# 纸上候车\n\n我在车站把旧车票夹进书里，等下一个站名响起。",
+          "text_sha256": "6f142e81ba8917a4b269c1150acaa79ba2e8be0c933a68190f68b74613c7d24d",
+          "normalized_sha256": "3d7cc761bd1ee746bdfdd9b7f0bf4588767094412d63d5bee5591f3ea894cee5",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        },
+        {
+          "id": "s001-a002",
+          "source_id": "s001",
+          "title": "给团队的项目备忘",
+          "text": "# 给团队的项目备忘\n\n上线前先检查错误日志，再核对数据回写。每次失败保留回执，不把请求成功当作验收。",
+          "text_sha256": "f973648b209d0f04dc8a979a3aefd79db0a2912275ee9a77043501d8be1bc391",
+          "normalized_sha256": "cf39b89f5dd1803ce6937a16a66887c40f754dfdc76482d8398c489a8905370c",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

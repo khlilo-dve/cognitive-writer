@@ -21,7 +21,15 @@ pub(crate) fn prepare(
     profile: crate::learning_job::CallProfile,
     prompt: String,
 ) -> Result<AgentPlan, AppError> {
-    crate::learning_sources::validate_request(&delegate.request)?;
+    if !delegate.request.sources.is_empty() {
+        crate::learning_sources::validate_request(&delegate.request)?;
+    } else if delegate
+        .request
+        .expected_articles
+        .is_some_and(|n| !(1..=10).contains(&n))
+    {
+        return Err(error("期望文章数须为1至10"));
+    }
     if delegate.user_request.trim().is_empty()
         || prompt.trim().is_empty()
         || !(1..=1_000_000).contains(&delegate.budget_micro_cny)
@@ -51,10 +59,15 @@ pub(crate) fn prepare(
         prompt,
     };
     plan.id = identity(&plan)?;
+    let missing = delegate_missing(&plan);
     let state = AgentState {
         task_id: plan.id.clone(),
         revision: 0,
-        status: Status::Active,
+        status: if missing {
+            Status::WaitingInput
+        } else {
+            Status::Active
+        },
         request: plan.delegate.request.clone(),
         user_request: plan.delegate.user_request.clone(),
         target_titles: plan.delegate.target_titles.clone(),
@@ -65,7 +78,17 @@ pub(crate) fn prepare(
         resolutions: Default::default(),
         authorized_selection: None,
         selected: vec![],
-        questions: vec![],
+        questions: if missing {
+            vec![Question {
+                id: crate::voice_learning::sha256(format!("{}:missing-source", plan.id).as_bytes()),
+                revision: 0,
+                topic: "文章材料".into(),
+                text: "请提供要学习的文章文件、文章网址或完整正文；多篇可以一起提供。".into(),
+                reason: "已有学习目标，但尚无文章材料，无法开始学习".into(),
+            }]
+        } else {
+            vec![]
+        },
         answers: vec![],
         decision_steps: 0,
         no_progress: 0,
@@ -73,13 +96,20 @@ pub(crate) fn prepare(
         next_tier: Tier::Flash,
         pending: None,
         observation: serde_json::Value::Null,
-        reason: String::new(),
+        reason: if missing {
+            "需要文章材料；本问题计入同一任务的两轮澄清上限".into()
+        } else {
+            String::new()
+        },
     };
     let root = directory(ws, &plan.id)?;
     let _lock = store::lock(&root.join("state-lock"))?;
     store::publish_json(&root.join("plan.json"), &plan)?;
     publish(&root, None, 0, state)?;
     Ok(plan)
+}
+fn delegate_missing(p: &AgentPlan) -> bool {
+    p.delegate.request.sources.is_empty()
 }
 pub(crate) fn plan(ws: &LearningWorkspace, id: &str) -> Result<AgentPlan, AppError> {
     let plan: AgentPlan = store::read(&directory(ws, id)?.join("plan.json"))?;

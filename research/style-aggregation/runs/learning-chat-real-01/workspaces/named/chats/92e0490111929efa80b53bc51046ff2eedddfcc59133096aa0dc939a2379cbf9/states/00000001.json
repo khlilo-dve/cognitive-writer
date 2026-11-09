@@ -1,0 +1,19 @@
+{
+  "id": "453ca5e3224e30acf4dbc17babfb9180b28c012f71773a1dbe7ef6093d507335",
+  "previous": "f370ce607cfbf2c2ef138155ef7f92e7884d524cf85dd441961da54c07746d52",
+  "sequence": 1,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": {
+      "number": 1,
+      "input": "学习这个材料 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\"，命名为随笔研究；接着写一篇读书文章，700字，给学生看",
+      "binding": null,
+      "action": null
+    },
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

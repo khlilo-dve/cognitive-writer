@@ -1,0 +1,24 @@
+{
+  "id": "7d9fafb35bdf4eba33016d87d214687cd1b305fbaa8695463c02bd0ab72c4b69",
+  "previous": "e991ac55f649c9dabe9ac0d66a7b64a316792018a1f890ad075f9c9bf8ef30b3",
+  "sequence": 5,
+  "state": {
+    "active": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67",
+    "paused": false,
+    "turn": 2,
+    "pending": {
+      "number": 2,
+      "input": "我更想保留项目备忘那一篇",
+      "binding": {
+        "task_id": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67",
+        "revision": 0,
+        "question_id": "861eb6000e2f4856eb46aa7861191d7de237e0b15d0a8afdc0bd5cd34210d903"
+      },
+      "action": null
+    },
+    "event": {
+      "kind": "learning",
+      "task_id": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67"
+    }
+  }
+}

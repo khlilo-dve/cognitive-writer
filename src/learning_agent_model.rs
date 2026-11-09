@@ -18,11 +18,19 @@ pub(crate) async fn call(
     call: DecisionCall,
     retry: bool,
 ) -> Result<String, AppError> {
+    call_at(&directory(ws, id)?, id, call, retry).await
+}
+pub(crate) async fn call_at(
+    root: &std::path::Path,
+    id: &str,
+    call: DecisionCall,
+    retry: bool,
+) -> Result<String, AppError> {
     let client = LearningClient::from_env()?;
     if client.profile().endpoint_sha256 != call.endpoint_sha256 {
         return Err(error("Agent端点身份变化，未发送或复用决策"));
     }
-    let root = directory(ws, id)?;
+    let root = root.to_path_buf();
     let _lock = store::lock(&root.join("billing-lock"))?;
     let billing = Mutex::new(Budget::open(
         root.join("usage-ledger.json"),

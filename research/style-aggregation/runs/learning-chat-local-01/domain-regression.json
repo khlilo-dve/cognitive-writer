@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "checks": [
+    "normal_source_zero_models_zero_questions_and_keyless_ready_resume",
+    "flash_inspect_and_resolve_sections_without_user_question",
+    "waiting_resume_no_request_and_explicit_user_selection_without_extra_question",
+    "at_most_two_questions_with_persisted_answers",
+    "unknown_request_not_resent_implicitly_explicit_retry_preserves_reserve_and_frozen_prompt",
+    "insufficient_budget_fails_before_request_intent",
+    "missing_usage_wrong_model_and_over_output_stop_with_receipt_and_no_new_sampling",
+    "single_pro_escalation_uses_same_durable_protocol",
+    "cancel_during_http_retains_late_receipt_without_adopting_question"
+  ],
+  "local_model_requests": 14,
+  "paid_model_requests": 0,
+  "ledger_before_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc",
+  "ledger_after_sha256": "06c9cd5ee263318237fa1f2a7272749d75f764792f7bee80d69a7f21502dbddc",
+  "temporary_workspaces_cleaned": true,
+  "scope": "P3 domain-agent development CLI; P4/P5 product conversation and style generation not implemented"
+}

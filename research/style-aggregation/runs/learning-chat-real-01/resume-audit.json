@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "checked_date": "2026-11-09",
+  "new_paid_requests": 0,
+  "ledger_before_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+  "ledger_after_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+  "stdout": "",
+  "scope": "same frozen four cases; finished parent and domain state reused",
+  "final_binary_replay_verified": true
+}

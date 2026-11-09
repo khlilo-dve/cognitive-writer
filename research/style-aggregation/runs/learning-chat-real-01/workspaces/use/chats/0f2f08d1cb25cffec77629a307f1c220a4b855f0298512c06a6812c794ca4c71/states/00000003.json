@@ -1,0 +1,16 @@
+{
+  "id": "89fca8fd415a4fd5a8919937989782791c2104a523c9ad4dc27faa7abb4264dd",
+  "previous": "a8fb0c8c96a64ee7b95d4ad023ca44d9a9e2f4d81e4aa9cbbc1d40019ae332a7",
+  "sequence": 3,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": null,
+    "event": {
+      "kind": "use",
+      "style_name": "轻辩",
+      "original": "不要学习，用轻辩风格写一篇关于阅读的文章，600字，给学生看"
+    }
+  }
+}

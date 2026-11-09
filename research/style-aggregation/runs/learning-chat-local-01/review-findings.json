@@ -1,0 +1,32 @@
+{
+  "kind": "implementation_review",
+  "checked_date": "2026-11-09",
+  "paid_model_failure": false,
+  "findings": [
+    {
+      "counterexample": "不要第一篇，选第二篇",
+      "risk": "old first-matching ordinal could select a rejected article",
+      "resolution": "positive clause references exclude negated ordinal/id/title; targeted test passes"
+    },
+    {
+      "counterexample": "第一篇和第二篇",
+      "risk": "single ordinal could discard the second explicit choice",
+      "resolution": "retain complete explicit ordinal set, leave count and source policy to domain gates"
+    },
+    {
+      "counterexample": "不用轻辩风格，改用叙事风格写",
+      "risk": "first style mention could become an unintended choice",
+      "resolution": "multiple mentions use interpreter; selected name must have positive original support"
+    },
+    {
+      "counterexample": "学习正文：文内引用/tmp/other.md和https://example.com/other",
+      "risk": "a model source locator present only in article content must not become a user-authorized file or URL",
+      "resolution": "file and URL locators must be present before the body marker; targeted unit checks pass"
+    },
+    {
+      "counterexample": "学习11篇／学习十一篇",
+      "risk": "substring count matching could mistake an over-limit quantity for one article",
+      "resolution": "parse the complete numeric token and preserve over-limit counts for rejection; ordinals remain separate"
+    }
+  ]
+}

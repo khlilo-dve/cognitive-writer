@@ -1,0 +1,56 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "id": "clear_combined_brief_save_name_zero_calls_restore_and_same_task_revision",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "question_binding_pause_restore_free_reply_and_no_duplicate_decision",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "missing_source_one_domain_question_then_block_and_proactive_material_without_new_budget",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "use_existing_style_stays_generation_and_preserves_original_requirements",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "unreadable_source_one_question_direct_replacement_and_cancel_then_use_existing_style",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "domain_failure_restore_no_implicit_resend_explicit_retry_keeps_unknown_fee",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "goal_revision_preserves_two_question_cap_and_only_explicit_replacement_creates_task",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "unsupported_model_scope_change_rejected_and_cached_invalid_action_not_resampled",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "ctrl_c_during_parent_interpretation_keeps_pending_ref_and_explicit_retry",
+      "status": "complete",
+      "passed": true
+    }
+  ],
+  "local_http_requests": 15,
+  "paid_model_requests": 0,
+  "usage": {
+    "run_occupied_cny": 0
+  },
+  "scope": "P4 real PTY with local HTTP; no style learning or Writer handoff from learned material"
+}

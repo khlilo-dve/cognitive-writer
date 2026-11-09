@@ -99,3 +99,11 @@ mod research_evaluation;
 pub mod research_run;
 
 mod research_learning_agent;
+
+pub mod learning_chat;
+mod learning_chat_types;
+mod learning_chat_store;
+mod learning_chat_parse;
+mod learning_chat_reply;
+
+mod research_learning_chat;

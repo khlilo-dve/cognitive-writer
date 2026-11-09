@@ -1,0 +1,39 @@
+{
+  "id": "fcc10e257663e210d37b782adea3ebbc0a4b7dd8024e8f15904e0649bf5050d2",
+  "previous": "7d9fafb35bdf4eba33016d87d214687cd1b305fbaa8695463c02bd0ab72c4b69",
+  "sequence": 6,
+  "state": {
+    "active": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67",
+    "paused": false,
+    "turn": 2,
+    "pending": {
+      "number": 2,
+      "input": "我更想保留项目备忘那一篇",
+      "binding": {
+        "task_id": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67",
+        "revision": 0,
+        "question_id": "861eb6000e2f4856eb46aa7861191d7de237e0b15d0a8afdc0bd5cd34210d903"
+      },
+      "action": {
+        "kind": "reply",
+        "scope": {
+          "article_ids": [
+            "s001-a002"
+          ],
+          "target_titles": null,
+          "all_articles": null,
+          "allow_partial": null,
+          "expected_articles": null,
+          "clear_expected_articles": false,
+          "replacements": [],
+          "additions": []
+        },
+        "goal": null
+      }
+    },
+    "event": {
+      "kind": "learning",
+      "task_id": "7e71580c24e2443caaaa8427c1162c440a085b08ef873607f9312580ddb62e67"
+    }
+  }
+}

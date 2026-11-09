@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "checks": [
+    "clear_combined_brief_save_name_zero_calls_restore_and_same_task_revision",
+    "question_binding_pause_restore_free_reply_and_no_duplicate_decision",
+    "missing_source_one_domain_question_then_block_and_proactive_material_without_new_budget",
+    "use_existing_style_stays_generation_and_preserves_original_requirements",
+    "unreadable_source_one_question_direct_replacement_and_cancel_then_use_existing_style",
+    "domain_failure_restore_no_implicit_resend_explicit_retry_keeps_unknown_fee",
+    "goal_revision_preserves_two_question_cap_and_only_explicit_replacement_creates_task",
+    "unsupported_model_scope_change_rejected_and_cached_invalid_action_not_resampled",
+    "ctrl_c_during_parent_interpretation_keeps_pending_ref_and_explicit_retry"
+  ],
+  "local_http_requests": 15,
+  "paid_model_requests": 0,
+  "ledger_before_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+  "ledger_after_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+  "scope": "P4 real PTY with local HTTP; no style learning or Writer handoff from learned material",
+  "temporary_workspaces_cleaned": true
+}

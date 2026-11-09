@@ -371,6 +371,27 @@
       "actual_micro": 2472,
       "state": "settled"
     },
+    "learning-chat-real-01/named-parent-92e04901-t0001-interpret": {
+      "run_id": "learning-chat-real-01",
+      "phase": "full",
+      "reserved_micro": 8356,
+      "actual_micro": 860,
+      "state": "settled"
+    },
+    "learning-chat-real-01/reply-domain-7e71580c-r0-d1": {
+      "run_id": "learning-chat-real-01",
+      "phase": "full",
+      "reserved_micro": 11717,
+      "actual_micro": 1720,
+      "state": "settled"
+    },
+    "learning-chat-real-01/reply-parent-dbbd46ec-t0002-interpret": {
+      "run_id": "learning-chat-real-01",
+      "phase": "full",
+      "reserved_micro": 9494,
+      "actual_micro": 1102,
+      "state": "settled"
+    },
     "learning-grounded-01/wxb-k1-learn-analysis": {
       "run_id": "learning-grounded-01",
       "phase": "full",

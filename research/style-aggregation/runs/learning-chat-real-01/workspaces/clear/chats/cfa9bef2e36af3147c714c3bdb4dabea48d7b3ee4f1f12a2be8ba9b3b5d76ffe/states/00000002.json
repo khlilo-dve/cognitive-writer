@@ -1,0 +1,39 @@
+{
+  "id": "dd2b22f4fbd406094e07438843b7a2d8404970ab4ecf924bdce34f4cd42a363b",
+  "previous": "02951baadcce35821d3bb5234794f814cb7678897bf5c7d2213778966476c7f7",
+  "sequence": 2,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": {
+      "number": 1,
+      "input": "学习这两篇 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md\" \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md\"，保存为“笔记声音”，再写一篇图书馆文章，800字，给学生看",
+      "binding": null,
+      "action": {
+        "kind": "learn",
+        "sources": [
+          {
+            "kind": "file",
+            "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/甲.md"
+          },
+          {
+            "kind": "file",
+            "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-chat-real-01/fixtures/乙.md"
+          }
+        ],
+        "expected_articles": 2,
+        "target_titles": [],
+        "all_articles": false,
+        "allow_partial": false,
+        "save_name": "笔记声音",
+        "base_name": null,
+        "base_number": null,
+        "write_after": true
+      }
+    },
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

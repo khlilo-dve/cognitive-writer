@@ -4,11 +4,9 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/learning-agent-local-01",
-    "research/style-aggregation/runs/learning-agent-real-01",
-    "research/style-aggregation/runs/learning-agent-real-02",
-    "research/style-aggregation/runs/learning-agent-real-03"
+    "research/style-aggregation/runs/learning-chat-local-01",
+    "research/style-aggregation/runs/learning-chat-real-01"
   ],
-  "journal_from": "E0083",
-  "record_count": 184
+  "journal_from": "E0086",
+  "record_count": 189
 }

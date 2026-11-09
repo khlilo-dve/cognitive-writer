@@ -178,6 +178,21 @@ pub(crate) fn reply(
     id: &str,
     reply: Reply,
 ) -> Result<StateRecord, AppError> {
+    apply_reply(ws, id, reply, false)
+}
+pub(crate) fn revise(
+    ws: &LearningWorkspace,
+    id: &str,
+    reply: Reply,
+) -> Result<StateRecord, AppError> {
+    apply_reply(ws, id, reply, true)
+}
+fn apply_reply(
+    ws: &LearningWorkspace,
+    id: &str,
+    reply: Reply,
+    revise: bool,
+) -> Result<StateRecord, AppError> {
     let plan = crate::learning_agent_store::plan(ws, id)?;
     let current = crate::learning_agent_store::load(ws, id)?;
     let mut s = current.state.clone();
@@ -186,7 +201,15 @@ pub(crate) fn reply(
         return Ok(current);
     }
     if s.revision != reply.expected_revision
-        || !matches!(s.status, Status::WaitingInput | Status::Blocked)
+        || !(matches!(s.status, Status::WaitingInput | Status::Blocked)
+            || revise
+                && s.status != Status::Cancelled
+                && reply.question_id.is_none()
+                && (reply.user_request.is_some()
+                    || !reply.scope.replacements.is_empty()
+                    || !reply.scope.additions.is_empty()
+                    || reply.scope.article_ids.is_some()
+                    || reply.scope.target_titles.is_some()))
         || reply.text.trim().is_empty()
     {
         return Err(error("回复不是当前等待修订，或没有补充内容"));
@@ -201,7 +224,9 @@ pub(crate) fn reply(
                 return Err(error("该问题已回答或不是当前问题"));
             }
         }
-        None if s.status != Status::Blocked => return Err(error("等待回答时需要当前question_id")),
+        None if s.status != Status::Blocked && !revise => {
+            return Err(error("等待回答时需要当前question_id"));
+        }
         None => {}
     }
     let patch = &reply.scope;
@@ -237,7 +262,9 @@ pub(crate) fn reply(
         s.request.sources[index] = r.input.clone();
     }
     s.request.sources.extend(patch.additions.clone());
-    crate::learning_sources::validate_request(&s.request)?;
+    if !s.request.sources.is_empty() {
+        crate::learning_sources::validate_request(&s.request)?;
+    }
     if let Some(goal) = &reply.user_request {
         if goal.trim().is_empty() {
             return Err(error("新目标不能为空"));
