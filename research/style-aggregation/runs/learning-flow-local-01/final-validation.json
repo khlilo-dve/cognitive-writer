@@ -1,0 +1,21 @@
+{
+  "cargo_test_lib": {
+    "passed": 327,
+    "failed": 0,
+    "ignored": 10
+  },
+  "binary_build": "passed",
+  "terminal_scenarios": 5,
+  "local_requests": 39,
+  "legacy_terminal": 17,
+  "style_selection": 11,
+  "legacy_learning_http_requests": 17,
+  "frozen_p4_compatibility": "passed, zero requests",
+  "frozen_p5_replay": "passed, zero requests",
+  "paid_validation_requests": 11,
+  "paid_validation_models": {
+    "pro": 8,
+    "flash": 3
+  },
+  "final_ledger_sha256": "cc5de2be4402eafe181ebbbb8feb54f7e1fd4a384a86453252594c40eb360923"
+}

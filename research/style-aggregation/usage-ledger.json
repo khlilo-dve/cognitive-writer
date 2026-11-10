@@ -392,6 +392,83 @@
       "actual_micro": 1102,
       "state": "settled"
     },
+    "learning-flow-real-01/append-parent-3bc98225-t0002-interpret": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 8312,
+      "actual_micro": 864,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-0f506a26bbd2-writer-fulltext": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 43104,
+      "actual_micro": 2871,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-0f506a26bbd2-writer-outline": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 41297,
+      "actual_micro": 2465,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-28b60700322b-learn-analysis": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 159957,
+      "actual_micro": 22953,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-28b60700322b-learn-compile-0": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 129288,
+      "actual_micro": 12669,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-28b60700322b-scope-review": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 169788,
+      "actual_micro": 22410,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-28b60700322b-scope-revise-0": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 185781,
+      "actual_micro": 25935,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-b2256e14a9ad-learn-analysis": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 130482,
+      "actual_micro": 12210,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-b2256e14a9ad-learn-compile-0": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 121416,
+      "actual_micro": 12375,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-b2256e14a9ad-scope-review": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 144510,
+      "actual_micro": 20880,
+      "state": "settled"
+    },
+    "learning-flow-real-01/flow-b2256e14a9ad-scope-revise-0": {
+      "run_id": "learning-flow-real-01",
+      "phase": "full",
+      "reserved_micro": 169182,
+      "actual_micro": 24534,
+      "state": "settled"
+    },
     "learning-grounded-01/wxb-k1-learn-analysis": {
       "run_id": "learning-grounded-01",
       "phase": "full",

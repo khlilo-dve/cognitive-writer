@@ -1,0 +1,215 @@
+{
+  "entries": [
+    {
+      "entry": {
+        "actual_micro": 864,
+        "phase": "full",
+        "reserved_micro": 8312,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/append-parent-3bc98225-t0002-interpret"
+    },
+    {
+      "entry": {
+        "actual_micro": 2871,
+        "phase": "full",
+        "reserved_micro": 43104,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-0f506a26bbd2-writer-fulltext"
+    },
+    {
+      "entry": {
+        "actual_micro": 2465,
+        "phase": "full",
+        "reserved_micro": 41297,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-0f506a26bbd2-writer-outline"
+    },
+    {
+      "entry": {
+        "actual_micro": 22953,
+        "phase": "full",
+        "reserved_micro": 159957,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-28b60700322b-learn-analysis"
+    },
+    {
+      "entry": {
+        "actual_micro": 12669,
+        "phase": "full",
+        "reserved_micro": 129288,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-28b60700322b-learn-compile-0"
+    },
+    {
+      "entry": {
+        "actual_micro": 22410,
+        "phase": "full",
+        "reserved_micro": 169788,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-28b60700322b-scope-review"
+    },
+    {
+      "entry": {
+        "actual_micro": 25935,
+        "phase": "full",
+        "reserved_micro": 185781,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-28b60700322b-scope-revise-0"
+    },
+    {
+      "entry": {
+        "actual_micro": 12210,
+        "phase": "full",
+        "reserved_micro": 130482,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-b2256e14a9ad-learn-analysis"
+    },
+    {
+      "entry": {
+        "actual_micro": 12375,
+        "phase": "full",
+        "reserved_micro": 121416,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-b2256e14a9ad-learn-compile-0"
+    },
+    {
+      "entry": {
+        "actual_micro": 20880,
+        "phase": "full",
+        "reserved_micro": 144510,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-b2256e14a9ad-scope-review"
+    },
+    {
+      "entry": {
+        "actual_micro": 24534,
+        "phase": "full",
+        "reserved_micro": 169182,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "id": "learning-flow-real-01/flow-b2256e14a9ad-scope-revise-0"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-10T16:55:26.610498778+00:00",
+  "scope": "P5 engine with ResearchStore adapter; single file, append two articles, explicit old version Writer; not quality certification or human feedback",
+  "status": "complete",
+  "usage": {
+    "entries": {
+      "learning-flow-real-01/append-parent-3bc98225-t0002-interpret": {
+        "actual_micro": 864,
+        "phase": "full",
+        "reserved_micro": 8312,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-0f506a26bbd2-writer-fulltext": {
+        "actual_micro": 2871,
+        "phase": "full",
+        "reserved_micro": 43104,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-0f506a26bbd2-writer-outline": {
+        "actual_micro": 2465,
+        "phase": "full",
+        "reserved_micro": 41297,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-28b60700322b-learn-analysis": {
+        "actual_micro": 22953,
+        "phase": "full",
+        "reserved_micro": 159957,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-28b60700322b-learn-compile-0": {
+        "actual_micro": 12669,
+        "phase": "full",
+        "reserved_micro": 129288,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-28b60700322b-scope-review": {
+        "actual_micro": 22410,
+        "phase": "full",
+        "reserved_micro": 169788,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-28b60700322b-scope-revise-0": {
+        "actual_micro": 25935,
+        "phase": "full",
+        "reserved_micro": 185781,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-b2256e14a9ad-learn-analysis": {
+        "actual_micro": 12210,
+        "phase": "full",
+        "reserved_micro": 130482,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-b2256e14a9ad-learn-compile-0": {
+        "actual_micro": 12375,
+        "phase": "full",
+        "reserved_micro": 121416,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-b2256e14a9ad-scope-review": {
+        "actual_micro": 20880,
+        "phase": "full",
+        "reserved_micro": 144510,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      },
+      "learning-flow-real-01/flow-b2256e14a9ad-scope-revise-0": {
+        "actual_micro": 24534,
+        "phase": "full",
+        "reserved_micro": 169182,
+        "run_id": "learning-flow-real-01",
+        "state": "settled"
+      }
+    },
+    "occupied_cny": 24.742191,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.160166
+  },
+  "verified_receipts": 11,
+  "versions": [
+    {
+      "id": "870970db44f9ef502888970dbe6f376aeb69a39ce27424b10cd836b3c0b50d7f",
+      "name": "P5夜读",
+      "number": 1
+    },
+    {
+      "id": "158208fb72008949cc51879806b5fc46b66a625b5e80a3f83b8237e3ebc85ac3",
+      "name": "P5夜读",
+      "number": 2
+    }
+  ]
+}

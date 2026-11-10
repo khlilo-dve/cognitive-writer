@@ -45,7 +45,7 @@
 - 用户限定“只做文档”时，文档交付不自动授权进入实现；当前实现阶段与入口以PRD、行动计划及任务状态的最新记录为准，不把历史设计状态当成持续禁止实现的指令。
 
 ## 当前实现与后续观察
-- P3材料领域Agent及P4主会话已接`style-draft chat`开发入口，终点为材料就绪；学习／候选／保存与Writer交接按P5继续，正式采用按P8验收。主会话仍使用唯一stdin，任务／回执与费用可恢复；事实与证据见PRD、设计第10节及`.claude/tasks/current.md`。
+- P3材料领域Agent、P4主会话和P5学习／候选／显式版本／Writer已接`style-draft chat`开发入口；P6补格式，P7补语义与Writer事实，正式采用按P8验收。主会话仍使用唯一stdin，任务／回执与费用可恢复；事实与证据见PRD、设计第10节及`.claude/tasks/current.md`。
 - REPL 单一 stdin 读取器位于 `repl_input.rs`；学习命名、删除确认由主循环处理，等待态支持取消/保存恢复。
 - CLI/REPL 生成已统一；公开 I/O/解析/环境错误已迁移为 AppError，intent/styles 职责已拆分。
 - 三组人评与确定性字数分档见 `eval/human_calibration.json`、`eval/AGENTS.md`；新提示词仍需以实际评测结果判断效果，不能把模型分数当人评。

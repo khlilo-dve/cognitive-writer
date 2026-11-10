@@ -1,0 +1,27 @@
+{
+  "status": "facts_not_passed",
+  "scope": "implementer reading; not human blind feedback or semantic style certification",
+  "given_facts": [
+    "图书馆晚上十点闭馆",
+    "我希望留半小时收拾与回宿舍"
+  ],
+  "findings": [
+    {
+      "quote": "把借的书还掉，可能还要排队等机器确认",
+      "issue": "未给定借书、还书或机器排队，未整体标记为假设"
+    },
+    {
+      "quote": "刷卡，下台阶",
+      "issue": "未给定出馆设施与路线"
+    },
+    {
+      "quote": "闭馆铃一响，所有人都在同时动",
+      "issue": "未提供铃声、人流与同一时刻行为"
+    },
+    {
+      "quote": "每天晚上都会敲一次的钟",
+      "issue": "以确定叙述补充了未提供的每日钟声"
+    }
+  ],
+  "next_phase": "P7 independent Writer factual check; preserve original outline and fulltext"
+}

@@ -187,7 +187,7 @@ pub(crate) async fn run(run: &str) -> Result<(), AppError> {
         Err(error("部分P4真实用例未达预期，状态及回执已保存"))
     }
 }
-async fn drive(store: &Arc<ResearchStore>, r: &ChatRef, code: &str) -> Result<Event, AppError> {
+pub(crate) async fn drive(store: &Arc<ResearchStore>, r: &ChatRef, code: &str) -> Result<Event, AppError> {
     let store = Arc::clone(store);
     let code = code.to_string();
     learning_chat::run_with(r, move |request: ModelCall| {

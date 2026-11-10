@@ -123,8 +123,11 @@ impl LearningWorkspace {
         let style_name = name(style_name)?;
         let _lock = store::lock(&self.root)?;
         let candidate = self.preview(candidate_id)?;
-        self.check_base(&candidate.input)?;
         let history = self.versions(&style_name)?;
+        if let Some(saved) = history.iter().find(|v| v.candidate.id == candidate_id) {
+            return Ok(saved.clone());
+        }
+        self.check_base(&candidate.input)?;
         let latest = history.last();
         match (&candidate.input.base, latest) {
             (None, None) => {}
@@ -338,7 +341,7 @@ mod tests {
         assert!(ws.save(&initial.id, "../越界").is_err());
         assert!(ws.preview("../candidate").is_err());
         let first = ws.save(&initial.id, "同名").unwrap();
-        assert!(ws.save(&initial.id, "同名").is_err());
+        assert_eq!(ws.save(&initial.id, "同名").unwrap().id, first.id);
         let mut a = input(2).await;
         a.base = Some(first.reference());
         a.note = "更新甲".into();

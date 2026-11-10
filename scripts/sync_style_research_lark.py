@@ -181,6 +181,8 @@ def main():
             report_file = ROOT / "lark/learning-agent-20261103.json"
         if rid.startswith("learning-chat-"):
             report_file = ROOT / "lark/learning-chat-20261109.json"
+        if rid.startswith("learning-flow-"):
+            report_file = ROOT / "lark/learning-flow-20261111.json"
         grounded_prefixes = ("learning-qualifier-", "learning-grounded-", "learning-boundary-")
         if rid.startswith(grounded_prefixes):
             report_file = ROOT / "lark/learning-grounded-stage-20261102.json"
@@ -246,6 +248,8 @@ def main():
             stage = "P3材料领域Agent｜有限决策与恢复"
         if rid.startswith("learning-chat-"):
             stage = "P4主会话｜学习路由、问答与恢复"
+        if rid.startswith("learning-flow-"):
+            stage = "P5学习交接｜候选、版本与Writer"
         rows = summary.get("rows", [])
         checks = ""
         control_file = run / "controls.json"
@@ -275,7 +279,7 @@ def main():
             checks += " 四份是旧模型稿上的21处实现者派生修改，0模型请求，不代表新自动方法产物或Writer验收。"
         if rid == "learning-quality-probe-01" and (run / "qualitative-readout.json").exists():
             checks += " 已逐稿读10篇并记录具体事实问题，中性稿也有越界；不是可发布成稿或质量通过。"
-        conclusion = f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项，中断 {sum(r['status'] == 'interrupted' for r in rows)} 项。" + checks + summary.get("error", "")
+        conclusion = f"请求/产物状态：完成 {sum(r['status'] == 'complete' for r in rows)} 项，失败 {sum(r['status'] == 'failed' for r in rows)} 项，暂缓 {sum(r['status'] == 'deferred' for r in rows)} 项，中断 {sum(r['status'] == 'interrupted' for r in rows)} 项。" + checks + (summary.get("error") or "")
         if rid.startswith("learning-agent-"):
             conclusion = f"材料就绪 {sum(r['status'] == 'ready_for_learning' for r in rows)}，明确受阻 {sum(r['status'] == 'blocked' for r in rows)}，执行失败 {sum(r['status'] == 'failed' for r in rows)}。" + checks
             if rid.endswith("local-01"):
@@ -286,6 +290,11 @@ def main():
                 conclusion += " 9组真实终端、15次本地模拟请求、0付费。"
             else:
                 conclusion += " 3个真实Flash响应；合成来源与固定回复，P5学习／保存／Writer未接。"
+        if rid.startswith("learning-flow-"):
+            if rid.endswith("local-01"):
+                conclusion = "5组真实终端场景、39次本地模拟请求通过；0付费。覆盖候选、保存、追加、旧版本写作与未知请求恢复。"
+            else:
+                conclusion = f"状态：{summary['status']}；{summary.get('verified_receipts',0)}个真实回执。单篇文件→保存v1→追加双篇v2→指定v1新题材写作；不是风格语义或成稿事实质量认证。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": conclusion,

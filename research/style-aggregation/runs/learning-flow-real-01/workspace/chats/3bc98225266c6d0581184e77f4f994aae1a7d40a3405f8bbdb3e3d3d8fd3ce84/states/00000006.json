@@ -1,0 +1,24 @@
+{
+  "id": "c12398e92141b83a50f8eaa574dab2a44b81d1a11c6d1708f8e9e368119a9156",
+  "previous": "c0fe2275fde5aa9fa9d396e1afddb6e1aa587c043b449d67aaf738ab5a66c0b1",
+  "sequence": 6,
+  "state": {
+    "delivery": {
+      "task_id": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c",
+      "revision": 0,
+      "job_id": "44b3a61b8c202406c31d629927870dde916151d46f62802217ecf27931d8bd47",
+      "candidate_id": "67c26f65396bcfab3684e553ee0cb9646f7c340fed76df043b3ec411fd652ea7",
+      "save_name": "P5夜读",
+      "saved": null,
+      "writer": null
+    },
+    "active": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c",
+    "paused": false,
+    "turn": 1,
+    "pending": null,
+    "event": {
+      "kind": "learning",
+      "task_id": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c"
+    }
+  }
+}

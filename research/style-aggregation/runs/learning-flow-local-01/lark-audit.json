@@ -1,0 +1,15 @@
+{
+  "report_url": "https://www.feishu.cn/docx/L1dmdHgC8o0x4Fxh6GOcXyafngf",
+  "report_identity": "user",
+  "report_readback": true,
+  "base_url": "https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
+  "new_keys": [
+    "Runs/learning-flow-local-01",
+    "Runs/learning-flow-real-01",
+    "Journal/E0089",
+    "Journal/E0090"
+  ],
+  "record_count": 193,
+  "previous_record_ids_preserved": true,
+  "upsert_semantic_readback": "each write checked by sync_style_research_lark.py"
+}

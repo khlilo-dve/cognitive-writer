@@ -30,6 +30,21 @@ pub fn submit(r: &ChatRef, input: &str) -> Result<(), AppError> {
     if s.paused {
         return Err(store::error("学习已暂停；输入继续恢复，或取消当前学习"));
     }
+    // A delivered candidate closes the materials phase. A new explicit learning request
+    // starts a fresh domain task, while revisions still address the existing one.
+    if s.delivery
+        .as_ref()
+        .is_some_and(|d| d.candidate_id.is_some())
+        && (parse::learning(parse::control(input).0)
+            || matches!(parse::fast_start(input), Some(Action::Use { .. })))
+        && !["目标改为", "改学", "改成学习", "再加", "改用"]
+            .iter()
+            .any(|w| input.contains(w))
+    {
+        s.active = None;
+        s.delivery = None;
+        s.selected_writer = None;
+    }
     if s.active.is_some()
         && reply::fast(input, &reply::view(r)?).is_none()
         && parse::learning(parse::control(input).0)
@@ -47,11 +62,17 @@ pub fn submit(r: &ChatRef, input: &str) -> Result<(), AppError> {
             "已有学习任务；新需求已记录，明确替换或先取消才能新建",
         ));
     }
+    // A new user turn supersedes a previous explicit Writer selection; receipts remain immutable.
+    s.selected_writer = None;
     s.turn += 1;
     s.pending = Some(Turn {
         number: s.turn,
         input: input.into(),
-        binding: store::binding(r)?,
+        binding: if s.active == old.state.active {
+            store::binding(r)?
+        } else {
+            None
+        },
         action: None,
     });
     store::advance(r, &old, s)?;
@@ -86,6 +107,8 @@ pub fn cancel(r: &ChatRef) -> Result<(), AppError> {
     }
     let mut s = old.state.clone();
     s.active = None;
+    s.delivery = None;
+    s.selected_writer = None;
     s.pending = None;
     s.paused = false;
     s.event = Event::Idle;

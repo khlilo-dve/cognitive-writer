@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "new_requests": 0,
+  "stderr": "",
+  "ledger_unchanged": true,
+  "scope": "P4 frozen parent state chain remains readable after P5 optional fields"
+}

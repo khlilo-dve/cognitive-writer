@@ -61,6 +61,8 @@ pub(crate) fn create_with(
         None,
         0,
         State {
+            delivery: None,
+            selected_writer: None,
             active: None,
             paused: false,
             turn: 0,

@@ -81,6 +81,10 @@ pub enum Event {
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub(crate) struct State {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub selected_writer: Option<crate::learning_flow::WriterInput>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delivery: Option<crate::learning_flow::Delivery>,
     pub active: Option<String>,
     pub paused: bool,
     pub turn: u32,

@@ -1,0 +1,36 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "id": "file_candidate_preview_save_idempotence_restore_append_v2_and_old_v1_writer",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "combined_auto_save_then_flash_writer_with_isolated_brief",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "natural_trailing_learning_instruction_and_unnamed_candidate_writer",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "unknown_learning_no_implicit_resend_restore_then_explicit_retry",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "writer_interrupt_preserves_version_and_requires_explicit_retry",
+      "status": "complete",
+      "passed": true
+    }
+  ],
+  "local_model_requests": 39,
+  "paid_requests": 0,
+  "usage": {
+    "run_occupied_cny": 0
+  },
+  "scope": "P5 PTY and localhost protocol, not semantic certification"
+}

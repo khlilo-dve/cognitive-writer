@@ -11,7 +11,7 @@ use std::path::{Path, PathBuf};
 use std::{io::Write, sync::Arc};
 
 const HELP: &str = "用法：cognitive-writer style-draft [--root <工作区>] <命令>\n\
-  chat                                       P4主会话开发入口，共用唯一stdin\n\
+  chat                                       P5学习/候选/版本/写作开发入口，共用唯一stdin\n\
   agent-start <委派.json>                      启动材料决策Agent，复杂情况调用Flash\n\
   agent <任务ID> / agent-cancel <任务ID>         查看／取消领域任务，不读取stdin\n\
   agent-resume <任务ID> [--retry-uncertain]      恢复任务，保留已完成决策与材料\n\
@@ -33,7 +33,7 @@ const HELP: &str = "用法：cognitive-writer style-draft [--root <工作区>] <
   show <风格名> <版本>                         查看指定版本\n\
   export <风格名> <版本> <新文件.md>            仅导出执行说明，拒绝覆盖\n\
 候选包包含articles正文数组、draft、origin、note，可选review/base。\n\
-来源清单为sources/note，可选expected_articles/allow_partial；多文选文和子Agent对话在后续阶段。保存与导出均不表示质量已验收。";
+来源清单为sources/note，可选expected_articles/allow_partial；多文选文与子Agent对话请用chat；DOCX/PDF仍待P6。保存与导出均不表示质量已验收。";
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]

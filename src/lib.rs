@@ -107,3 +107,8 @@ mod learning_chat_parse;
 mod learning_chat_reply;
 
 mod research_learning_chat;
+
+pub mod learning_flow;
+mod learning_flow_writer;
+mod learning_flow_commands;
+mod research_learning_flow;

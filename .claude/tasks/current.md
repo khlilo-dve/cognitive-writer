@@ -1,5 +1,15 @@
 # 当前任务状态
 
+## 2026-11-11 当前状态：P5开发链完成，下一项P6
+
+style-draft chat已接材料→Pro学习→候选→显式保存/版本→按明确要求Flash写作。支持首尾自然粘贴、候选未命名、预览/差异、追加保留旧正文、指定旧版、重复保存幂等和未知请求恢复；旧P4哈希链可读，默认旧REPL未切换。PRD/计划v0.5，设计第11节，入口learning_flow及commands/writer。
+
+327库测试通过/10忽略，新增6；5组真实PTY/39本地请求，17旧终端、11风格选择、17旧学习HTTP通过。真实learning-flow-real-01共8Pro+3Flash响应，单篇文件保存v1→追加双篇v2→指定v1新题材写作完整；最终恢复0请求/账本SHA不变。真实小试共用产品引擎及ResearchStore，真实终端另由本地HTTP验证，不混称一次付费终端全链。
+
+新增0.160166元、0新未知；累计24.742191元含历史未知6.032614，100元余额75.257809元。无活付费请求。新稿补写还书排队、刷卡/台阶、闭馆人流，原稿与writer-readout留证，事实未通过。报告research/style-aggregation/reports/learning-flow-2026-11-11.md；数据runs/learning-flow-local-01及real-01。下一项P6 DOCX/文字PDF与输入边界；P7语义/10篇/Writer事实和P8正式采用仍待办。下方为历史阶段。
+
+P5飞书报告已user身份发布并回读：https://www.feishu.cn/docx/L1dmdHgC8o0x4Fxh6GOcXyafngf；Base两个run及E0089/E0090均回读，共193条记录，旧189条ID保留。实现和证据见同次P5提交（git log -- src/learning_flow.rs）。
+
 ## 2026-11-09 当前状态：P4主会话开发链完成，下一项P5
 
 style-draft chat已把P3领域任务接到既有Repl与唯一stdin；学习／已有风格使用／组合原话保留，支持同任务问答、缺材料／不可读来源补充、暂停／继续、取消／明确替换／目标修订、身份及未知费用恢复。父会话不另设追问预算，终点仍为材料就绪；实际学习、候选、保存与新学风格交Writer待P5。旧默认与styles/.env未切换。PRD和计划v0.4。

@@ -98,7 +98,7 @@ const HELP_TEXT: &str = concat!(
   /blocks      显示原文内容块编号，便于指定修改位置
   /undo        撤销上一次成功的局部修改
   /state       显示当前状态（调试用）
-  [style-draft chat开发入口] /learning 查看学习进度；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
+  [style-draft chat开发入口] /learning 查看进度；/preview 看候选；/diff 看变化；保存为X；/versions X；/show X 1；/use-version X 1 <写作要求>；/use-candidate <写作要求>；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
 
 独立操作 (Idle 状态可用):
   输入 URL     → 学习该文章的写作风格
@@ -399,7 +399,17 @@ impl Repl {
         }
         if self.state == SessionState::WaitingForLearningAgent {
             if let Some(r) = &self.learning_chat {
-                if let Err(e) = crate::learning_chat::display(r, true) { eprintln!("[error] {e}"); }
+                let result = if crate::learning_chat_store::load(r)
+                    .map(|s| s.state.delivery.is_some())
+                    .unwrap_or(false)
+                {
+                    crate::learning_flow::display(r)
+                } else {
+                    crate::learning_chat::display(r, true)
+                };
+                if let Err(e) = result {
+                    eprintln!("[error] {e}");
+                }
             }
         }
         loop {
@@ -562,7 +572,7 @@ impl Repl {
             input,
             "/learning" | "学习进度" | "查看学习进度" | "现在到哪了"
         ) {
-            crate::learning_chat::display(&r, false)?;
+            crate::learning_flow::display(&r)?;
             return Ok(Some(false));
         }
         if matches!(input, "/pause-learning" | "暂停学习" | "先暂停学习") {
@@ -570,6 +580,14 @@ impl Repl {
             self.state = SessionState::WaitingForLearningAgent;
             self.save()?;
             crate::learning_chat::display(&r, false)?;
+            return Ok(Some(false));
+        }
+        if crate::learning_flow::command(&r, input)? {
+            if input.starts_with("/use-version ") || input.starts_with("/use-candidate ") {
+                self.state = SessionState::WaitingForLearningAgent;
+                self.save()?;
+                self.finish_learning(&r, false).await?;
+            }
             return Ok(Some(false));
         }
         let continuing = matches!(
@@ -602,6 +620,17 @@ impl Repl {
         {
             return Ok(None);
         }
+        if continuing
+            && crate::learning_chat_store::load(&r)?
+                .state
+                .selected_writer
+                .is_some()
+        {
+            self.state = SessionState::WaitingForLearningAgent;
+            self.save()?;
+            self.finish_learning(&r, input == "/retry-learning").await?;
+            return Ok(Some(false));
+        }
         if !continuing {
             crate::learning_chat::submit(&r, content)?;
         }
@@ -612,8 +641,40 @@ impl Repl {
             self.state = SessionState::Idle;
             return Ok(if continuing { Some(false) } else { None });
         }
+        let is_learning = matches!(event, crate::learning_chat::Event::Learning { .. });
         self.apply_learning_event(&r, event).await?;
+        if is_learning {
+            self.finish_learning(&r, input == "/retry-learning").await?;
+        }
         Ok(Some(false))
+    }
+    async fn finish_learning(
+        &mut self,
+        r: &crate::learning_chat::ChatRef,
+        retry: bool,
+    ) -> Result<(), AppError> {
+        let written = crate::learning_flow::run_with(r, |call| async move {
+            crate::learning_flow_writer::send(call, retry).await
+        })
+        .await?;
+        if let Some(w) = written {
+            self.current_style_name = Some(w.label);
+            self.current_style_content = Some(w.spec);
+            self.current_topic = Some(w.request.clone());
+            self.generation_request = Some(w.request);
+            self.current_outline = Some(w.outline);
+            self.current_fulltext = Some(w.fulltext.clone());
+            self.pending_style_choices.clear();
+            self.pending_edit = None;
+            self.edit_undo = None;
+            self.state = SessionState::WaitingForFulltext;
+            self.save()?;
+            println!("{}\n{}\n{}", sep(), w.fulltext, sep());
+            println!("全文已生成，可继续修改或确认。候选、版本与学习回执保留。");
+        } else {
+            crate::learning_flow::display(r)?;
+        }
+        Ok(())
     }
     async fn apply_learning_event(
         &mut self,
@@ -625,8 +686,27 @@ impl Repl {
                 style_name,
                 original,
             } => {
-                self.begin_generation(&original, &style_name, &original)
-                    .await?
+                let versions = if style_name.is_empty() {
+                    Vec::new()
+                } else {
+                    crate::learning_chat_store::ws(r)?.versions(&style_name)?
+                };
+                if let Some(v) = versions.last() {
+                    if named_matches(&read_options(&self.styles_dir)?, &style_name).is_empty() {
+                        crate::learning_flow::command(
+                            r,
+                            &format!("/use-version \"{}\" {} {}", style_name, v.number, original),
+                        )?;
+                        self.finish_learning(r, false).await?;
+                    } else {
+                        println!(
+                            "同名存在旧风格文件与工作区版本；请用 /use-version <名称> <版本> <写作要求> 明确选择，或 /cancel 后用旧入口写作。"
+                        );
+                    }
+                } else {
+                    self.begin_generation(&original, &style_name, &original)
+                        .await?;
+                }
             }
             crate::learning_chat::Event::Message { text } => println!("{text}"),
             crate::learning_chat::Event::Learning { .. } => {

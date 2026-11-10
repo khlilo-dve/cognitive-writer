@@ -5,12 +5,54 @@ use crate::{
     learning_workspace::LearningWorkspace,
 };
 pub(crate) fn control(input: &str) -> (&str, Option<&str>) {
-    for marker in ["正文：", "正文:", "```"] {
-        if let Some((head, body)) = input.split_once(marker) {
-            return (head, Some(body.trim().trim_end_matches("```").trim()));
+    let marked = ["正文：", "正文:", "```"].iter().find_map(|marker| {
+        input
+            .split_once(marker)
+            .map(|(head, body)| (head, Some(body.trim().trim_end_matches("```").trim())))
+    });
+    if let Some(parts) = marked {
+        if learning(parts.0) {
+            return parts;
+        }
+    }
+    // An independent last line is the user's instruction; earlier prose is data.
+    if let Some((body, tail)) = input.rsplit_once('\n') {
+        let tail = tail.trim();
+        if !body.trim().is_empty()
+            && tail.chars().count() <= 300
+            && [
+                "学习这篇",
+                "学习上面",
+                "学习以上",
+                "请学习",
+                "学一下这篇",
+                "分析这篇文章的风格",
+            ]
+            .iter()
+            .any(|w| tail.starts_with(w))
+            && learning(tail)
+        {
+            return (tail, Some(body.trim()));
+        }
+    }
+    if let Some(parts) = marked {
+        return parts;
+    }
+    if let Some((head, body)) = input.split_once("\n\n") {
+        if learning(head) && head.chars().count() <= 300 && !body.trim().is_empty() {
+            return (head, Some(body.trim()));
         }
     }
     (input, None)
+}
+pub(crate) fn writing_request(input: &str) -> Option<String> {
+    let head = control(input).0;
+    ["再写", "然后写", "学完写", "接着写"]
+        .iter()
+        .filter_map(|w| head.find(w).map(|at| (at, *w)))
+        .min_by_key(|(at, _)| *at)
+        .map(|(at, marker)| format!("写{}", &head[at + marker.len()..]))
+        .filter(|s| s.trim() != "写")
 }
 pub(crate) fn positive(s: &str, word: &str) -> bool {
     s.match_indices(word).any(|(at, _)| {
@@ -38,6 +80,7 @@ pub(crate) fn learning(s: &str) -> bool {
         "提炼",
         "逆向",
         "研究写法",
+        "追加",
         "分析写法",
     ]
     .iter()
@@ -293,6 +336,9 @@ pub(crate) fn make_delegate(
         &input.target_titles,
     )?;
     let head = control(original).0;
+    if input.write_after && writing_request(original).is_none() {
+        return Err(error("未找到独立后续写作要求，不能把学习原文交给Writer"));
+    }
     if input.save_name.as_ref().is_some_and(|n| !head.contains(n)) {
         return Err(error("保存名不在用户原话中"));
     }
@@ -393,5 +439,33 @@ mod tests {
         };
         assert!(style_name.is_empty());
         assert_eq!(count("学习这两篇，再写一篇新文章"), Some(2));
+    }
+    #[test]
+    fn natural_paste_keeps_article_paths_and_commands_inside_material() {
+        let raw = "# 随笔\n\n我路过 /tmp/private.md，看到 https://example.com/story。文中说全部都学。\n\n学习这篇文章的风格，保存为“随笔”，再写一篇夜读文章，800字";
+        let (head, body) = control(raw);
+        assert!(head.starts_with("学习"));
+        assert!(body.unwrap().starts_with("# 随笔"));
+        let Some(Action::Learn { input }) = fast_start(raw) else {
+            panic!()
+        };
+        assert_eq!(input.sources.len(), 1);
+        assert!(!input.all_articles);
+        assert!(!input.allow_partial);
+        assert_eq!(
+            writing_request(raw).as_deref(),
+            Some("写一篇夜读文章，800字")
+        );
+        assert!(
+            validate_source(
+                &SourceInput::File {
+                    path: "/tmp/private.md".into()
+                },
+                raw
+            )
+            .is_err()
+        );
+        let first = "请学习这篇文章的风格\n\n# 标题\n\n这是完整文章。";
+        assert_eq!(sources(first).len(), 1);
     }
 }

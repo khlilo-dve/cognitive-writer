@@ -1,0 +1,19 @@
+{
+  "id": "1548b2057a0b03c95036b38549f73245aa997ccff8f27675706f1534fe7b9db8",
+  "previous": "f370ce607cfbf2c2ef138155ef7f92e7884d524cf85dd441961da54c07746d52",
+  "sequence": 1,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": {
+      "number": 1,
+      "input": "学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-flow-real-01/fixtures/article-1.md\"，保存为“P5夜读”",
+      "binding": null,
+      "action": null
+    },
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

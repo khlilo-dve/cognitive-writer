@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "new_requests": 0,
+  "ledger_before_sha256": "cc5de2be4402eafe181ebbbb8feb54f7e1fd4a384a86453252594c40eb360923",
+  "ledger_after_sha256": "cc5de2be4402eafe181ebbbb8feb54f7e1fd4a384a86453252594c40eb360923",
+  "ledger_unchanged": true,
+  "verification": "final binary replay"
+}

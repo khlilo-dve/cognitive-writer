@@ -39,3 +39,5 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 2026-11-02方法29：voice-core-v6分析内部使用原生JSON承载analysis和evidence（article/quote），逐条验证来源/连续原字及逐篇覆盖。最多一次analysis-repair，附具体错误与真实原文候选片段；提示不放宽逐字门槛，失败不编译/保存。编译仅接analysis正文与篇数，证据/原文不进入Writer，详见docs/2026-11-02-grounded-style-analysis.md。四任务17Pro响应和四Flash边界稿已完成、来源/版本/纯spec与零请求恢复已核验，282库测试/10忽略；目标表达边界能执行，但四稿仍有事实/推理问题，候选仍待审。原文直入编译、错文缓存和两双篇失败分支完整保留。后续不追加方法分支，围绕style-draft接文件/URL输入与1–10篇澄清，Writer事实独立修正；未替换旧默认入口。
 
 2026-11-03产品设计更新（未实现）：当前PRD为docs/PRD.md，行动计划为docs/plans/2026-11-03-style-learning-agent-plan.md。主Agent仅在学习／追加意图分派风格学习子Agent，子Agent处理输入、工具与有边界澄清；已有风格的使用另走写作。默认澄清1轮／最多2轮和决策预算为待P1走查的设计值，不能描述为当前代码。正文核心、候选与版本继续复用；先更新产品与技术设计再按授权编码，本轮仅文档。
+
+2026-11-11 P5开发入口：style-draft chat在P4材料Agent之后调用learning_flow，绑定task/revision→冻结learning_job→候选/版本，复用原Pro学习核心。保存同候选幂等；无名先交候选，明确组合需求可直接Flash写作；/preview、/diff、/save、/versions、/show、/use-version、/use-candidate支持复看与控制。Writer只接纯spec与独立新写作要求，逐阶段回执与未知请求显式重试共用learning_transport，输出进入旧全文审阅态。首尾粘贴可界定正文；DOCX/PDF仍P6。327库测试/10忽略及11真实响应/零请求恢复通过，但新稿有事实补写，P7/P8未完成；见PRD、设计第11节与learning-flow-2026-11-11报告。旧默认入口及styles/.env未切换。

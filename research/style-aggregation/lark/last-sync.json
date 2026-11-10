@@ -4,9 +4,9 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/learning-chat-local-01",
-    "research/style-aggregation/runs/learning-chat-real-01"
+    "research/style-aggregation/runs/learning-flow-local-01",
+    "research/style-aggregation/runs/learning-flow-real-01"
   ],
-  "journal_from": "E0086",
-  "record_count": 189
+  "journal_from": "E0089",
+  "record_count": 193
 }

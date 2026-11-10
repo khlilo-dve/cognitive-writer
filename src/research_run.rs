@@ -12,6 +12,7 @@ const ROOT: &str = "research/style-aggregation";
 
 pub async fn run(args: &[&str]) -> Result<(), AppError> {
     match args {
+        ["learning-flow",run]=>crate::research_learning_flow::run(run).await,
         ["learning-chat",run]=>crate::research_learning_chat::run(run).await,
         ["learning-agent",run]=>crate::research_learning_agent::run(run).await,
         ["learning-boundary-probe",run,source]=>crate::research_learning_quality::boundary(run,source).await,

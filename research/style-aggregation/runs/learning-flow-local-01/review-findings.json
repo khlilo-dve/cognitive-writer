@@ -1,0 +1,31 @@
+{
+  "status": "fixed",
+  "paid_failures": 0,
+  "findings": [
+    {
+      "problem": "追加到X被视为普通输入/旧任务回复",
+      "resolution": "追加识别为学习，候选完成后新委派准确基准",
+      "test": "append_preserves_old_text_and_version_and_stale_candidate_never_overwrites"
+    },
+    {
+      "problem": "重复保存原先报重名冲突",
+      "resolution": "同名同候选返回已保存版本，其余冲突保持阻断",
+      "test": "save_conflict_preserves_candidate_and_never_dispatches_writer"
+    },
+    {
+      "problem": "取消后后续学习阶段仍可被编排",
+      "resolution": "每次下一阶段调用前检查父状态及材料修订身份",
+      "test": "cancelled_late_model_output_never_saves_or_writes"
+    },
+    {
+      "problem": "明确选版写作中断后普通继续可能落回旧材料事件",
+      "resolution": "恢复优先保留的选版Writer输入，未知请求显式重试",
+      "test": "writer_interrupt_preserves_version_and_requires_explicit_retry"
+    },
+    {
+      "problem": "先贴文章最后要求学习缺材料边界",
+      "resolution": "独立末行学习指令界定前文，文内路径/URL只作材料",
+      "test": "natural_trailing_learning_instruction_and_unnamed_candidate_writer"
+    }
+  ]
+}

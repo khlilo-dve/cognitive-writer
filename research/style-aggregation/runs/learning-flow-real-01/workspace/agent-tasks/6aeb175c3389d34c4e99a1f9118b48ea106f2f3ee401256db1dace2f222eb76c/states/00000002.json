@@ -1,0 +1,44 @@
+{
+  "id": "79ad6150cd2d5fc9f19639e409b5162b2f2b74d184e0b378f2d3162ec0d11702",
+  "previous": "d35de9d9ec33b72b51e5c7f4c4fddd3be3c4a859039a6dcd5ea334179ae9648f",
+  "sequence": 2,
+  "state": {
+    "task_id": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-flow-real-01/fixtures/article-1.md"
+        }
+      ],
+      "note": "学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-flow-real-01/fixtures/article-1.md\"，保存为“P5夜读”",
+      "expected_articles": null,
+      "allow_partial": false
+    },
+    "user_request": "学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-flow-real-01/fixtures/article-1.md\"，保存为“P5夜读”",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "e208762ce27e44e5f4b7ffc796bb11aac3d08f32c25e7d42baca4b52b6fcd44e",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

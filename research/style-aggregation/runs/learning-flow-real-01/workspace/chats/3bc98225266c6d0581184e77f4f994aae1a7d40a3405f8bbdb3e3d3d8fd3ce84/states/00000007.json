@@ -1,0 +1,28 @@
+{
+  "id": "df6436ab37aa61ffb3510450c2fa3fe376eaf1288e16a99108fcb61a7e323ce4",
+  "previous": "c12398e92141b83a50f8eaa574dab2a44b81d1a11c6d1708f8e9e368119a9156",
+  "sequence": 7,
+  "state": {
+    "delivery": {
+      "task_id": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c",
+      "revision": 0,
+      "job_id": "44b3a61b8c202406c31d629927870dde916151d46f62802217ecf27931d8bd47",
+      "candidate_id": "67c26f65396bcfab3684e553ee0cb9646f7c340fed76df043b3ec411fd652ea7",
+      "save_name": "P5夜读",
+      "saved": {
+        "name": "P5夜读",
+        "number": 1,
+        "id": "870970db44f9ef502888970dbe6f376aeb69a39ce27424b10cd836b3c0b50d7f"
+      },
+      "writer": null
+    },
+    "active": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c",
+    "paused": false,
+    "turn": 1,
+    "pending": null,
+    "event": {
+      "kind": "learning",
+      "task_id": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c"
+    }
+  }
+}

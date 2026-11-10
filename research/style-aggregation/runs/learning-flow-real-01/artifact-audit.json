@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "previous_ledger_entries_preserved": 879,
+  "new_entries": 11,
+  "production_styles_env_and_learning_prompts_unchanged": true,
+  "module_lines": {
+    "src/learning_flow.rs": 445,
+    "src/learning_flow_writer.rs": 96,
+    "src/learning_flow_commands.rs": 144,
+    "src/research_learning_flow.rs": 202,
+    "src/learning_chat.rs": 452,
+    "src/learning_chat_parse.rs": 471
+  },
+  "saved_versions": 2,
+  "writer_version": 1,
+  "writer_only_fields": [
+    "label",
+    "spec",
+    "request"
+  ],
+  "ledger_sha256": "cc5de2be4402eafe181ebbbb8feb54f7e1fd4a384a86453252594c40eb360923",
+  "legacy_p4_artifacts_unchanged": true
+}

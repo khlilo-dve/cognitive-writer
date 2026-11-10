@@ -1,0 +1,36 @@
+{
+  "id": "021dc53bcabf948ba55849521005f56d5904e9578b7ac48fe684086d1497d33b",
+  "previous": "6fea3f16c6b3699f0fc22b583720e08065bb950693e7062810fd9e5c150f5c8f",
+  "sequence": 9,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 2,
+    "pending": {
+      "number": 2,
+      "input": "追加到P5夜读，保存为P5夜读；学习 \"/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-flow-real-01/fixtures/article-2.md\"",
+      "binding": null,
+      "action": {
+        "kind": "learn",
+        "sources": [
+          {
+            "kind": "file",
+            "path": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/learning-flow-real-01/fixtures/article-2.md"
+          }
+        ],
+        "expected_articles": null,
+        "target_titles": [],
+        "all_articles": false,
+        "allow_partial": false,
+        "save_name": "P5夜读",
+        "base_name": "P5夜读",
+        "base_number": null,
+        "write_after": false
+      }
+    },
+    "event": {
+      "kind": "learning",
+      "task_id": "6aeb175c3389d34c4e99a1f9118b48ea106f2f3ee401256db1dace2f222eb76c"
+    }
+  }
+}
