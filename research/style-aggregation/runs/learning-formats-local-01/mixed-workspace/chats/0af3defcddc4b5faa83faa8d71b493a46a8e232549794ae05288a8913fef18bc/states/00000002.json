@@ -1,0 +1,43 @@
+{
+  "id": "6e03a71ae1f7654cf5d6b51c046e85caa3fdefc3470053b6c0ad291866ef029a",
+  "previous": "92075d9e00d156fd2033c237da40b6c562cc73870c8fd6ede1782046dd2efb24",
+  "sequence": 2,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": {
+      "number": 1,
+      "input": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:35021/article，保存为“混合来源”",
+      "binding": null,
+      "action": {
+        "kind": "learn",
+        "sources": [
+          {
+            "kind": "file",
+            "path": "fixtures/中文文章.docx"
+          },
+          {
+            "kind": "file",
+            "path": "fixtures/中文文字.pdf"
+          },
+          {
+            "kind": "url",
+            "url": "http://127.0.0.1:35021/article"
+          }
+        ],
+        "expected_articles": 3,
+        "target_titles": [],
+        "all_articles": false,
+        "allow_partial": false,
+        "save_name": "混合来源",
+        "base_name": null,
+        "base_number": null,
+        "write_after": false
+      }
+    },
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

@@ -14,6 +14,7 @@ pub(crate) struct Fetched {
     pub attempts: Vec<Attempt>,
     pub snapshots: Vec<Snapshot>,
     pub extraction: Option<Extraction>,
+    pub binary: Option<Vec<u8>>,
 }
 fn empty(locator: String, status: SourceStatus, reason: &str) -> Fetched {
     Fetched {
@@ -23,6 +24,7 @@ fn empty(locator: String, status: SourceStatus, reason: &str) -> Fetched {
         attempts: vec![],
         snapshots: vec![],
         extraction: None,
+        binary: None,
     }
 }
 pub(crate) fn read_limited(path: &Path) -> Result<Vec<u8>, AppError> {
@@ -86,18 +88,19 @@ fn local(input: &SourceInput, base: &Path) -> Fetched {
             } else {
                 base.join(path)
             };
-            if !matches!(
-                target
-                    .extension()
-                    .and_then(|s| s.to_str())
-                    .map(str::to_ascii_lowercase)
-                    .as_deref(),
-                Some("txt" | "md" | "markdown")
-            ) {
+            let extension = target
+                .extension()
+                .and_then(|s| s.to_str())
+                .unwrap_or("")
+                .to_ascii_lowercase();
+            if matches!(extension.as_str(), "docx" | "pdf") {
+                return crate::learning_document::read(&target, &extension);
+            }
+            if !matches!(extension.as_str(), "txt" | "md" | "markdown") {
                 return empty(
                     target.display().to_string(),
                     SourceStatus::Unsupported,
-                    "当前采集入口支持UTF-8 TXT/MD；可提供文本文件或可读文章链接",
+                    "支持UTF-8 TXT/MD、普通DOCX和文字PDF；旧.doc/扫描件请另存为可读文字版",
                 );
             }
             (
@@ -194,7 +197,16 @@ pub(crate) async fn fetch(
     reader_prefix: Option<&str>,
 ) -> Fetched {
     let SourceInput::Url { url } = input else {
-        return local(input, base);
+        let input = input.clone();
+        let base = base.to_path_buf();
+        return match tokio::task::spawn_blocking(move || local(&input, &base)).await {
+            Ok(v) => v,
+            Err(_) => empty(
+                String::new(),
+                SourceStatus::Failed,
+                "文件解析任务未完成，未交付部分正文",
+            ),
+        };
     };
     let parsed = match reqwest::Url::parse(url) {
         Ok(u)
@@ -404,7 +416,7 @@ mod tests {
         assert_eq!(
             local(
                 &SourceInput::File {
-                    path: "input.pdf".into()
+                    path: "input.doc".into()
                 },
                 dir.path()
             )

@@ -41,3 +41,5 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 2026-11-03产品设计更新（未实现）：当前PRD为docs/PRD.md，行动计划为docs/plans/2026-11-03-style-learning-agent-plan.md。主Agent仅在学习／追加意图分派风格学习子Agent，子Agent处理输入、工具与有边界澄清；已有风格的使用另走写作。默认澄清1轮／最多2轮和决策预算为待P1走查的设计值，不能描述为当前代码。正文核心、候选与版本继续复用；先更新产品与技术设计再按授权编码，本轮仅文档。
 
 2026-11-11 P5开发入口：style-draft chat在P4材料Agent之后调用learning_flow，绑定task/revision→冻结learning_job→候选/版本，复用原Pro学习核心。保存同候选幂等；无名先交候选，明确组合需求可直接Flash写作；/preview、/diff、/save、/versions、/show、/use-version、/use-candidate支持复看与控制。Writer只接纯spec与独立新写作要求，逐阶段回执与未知请求显式重试共用learning_transport，输出进入旧全文审阅态。首尾粘贴可界定正文；DOCX/PDF仍P6。327库测试/10忽略及11真实响应/零请求恢复通过，但新稿有事实补写，P7/P8未完成；见PRD、设计第11节与learning-flow-2026-11-11报告。旧默认入口及styles/.env未切换。
+
+2026-11-12 P6开发入口：learning_document分流DOCX/文字PDF，learning_docx保留可见正文与标题，learning_pdf逐页提取并适配明确UCS2编码；扫描/缺字映射/混合扫描不交部分正文。source_binary保留原文件blob与哈希，派生纯文本仍由P3处理；旧集合可缺省新字段，恢复仍可核验。learning_input_limits在选文和job准备时约束总正文256KiB，采集仍保存完整8MiB内来源；不是输出长度或质量指标。10本地场景/333库测试通过，0新增API费用；详见PRD/设计12及learning-formats报告，P7语义/事实、P8正式采用仍待办。

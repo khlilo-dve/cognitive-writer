@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "checks": [
+    "word_visible_runs_table_hidden_text_dedup_and_frozen_binary_integrity",
+    "chinese_ucs2_pdf_all_pages_one_article_and_blank_page",
+    "scan_mixed_scan_encrypted_corrupt_embedded_and_zip_limits_never_return_partial_text",
+    "docx_pdf_url_mixed_sources_to_saved_candidate_without_user_clarification_and_zero_call_resume",
+    "multi_article_docx_one_bounded_question_then_exact_selected_article",
+    "missing_source_does_not_shrink_scope_until_explicit_partial_permission",
+    "eleven_unique_articles_require_scope_then_ten_selected_without_truncation",
+    "append_nine_plus_two_blocks_then_one_explicit_addition_fits_ten_without_dropping_old",
+    "long_complete_article_retained_but_over_budget_never_sent_to_learning",
+    "direct_learning_job_obeys_same_total_input_budget"
+  ],
+  "local_model_requests": 32,
+  "source_http_requests": 1,
+  "paid_requests": 0,
+  "ledger_before_sha256": "cc5de2be4402eafe181ebbbb8feb54f7e1fd4a384a86453252594c40eb360923",
+  "ledger_after_sha256": "cc5de2be4402eafe181ebbbb8feb54f7e1fd4a384a86453252594c40eb360923",
+  "errors": [],
+  "fixture_generator": "independent python-docx and ReportLab; product runtime Rust only"
+}

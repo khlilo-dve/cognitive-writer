@@ -1,4 +1,6 @@
 //! Immutable input collections. Structural readiness is not semantic style approval.
+pub(crate) use crate::learning_input_limits::validate_request;
+pub use crate::learning_source_binary::BinarySnapshot;
 use crate::{
     error::AppError,
     learning_candidate::{identity, valid_id},
@@ -73,6 +75,8 @@ pub struct ArticleCandidate {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceRecord {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub binary: Option<BinarySnapshot>,
     pub id: String,
     pub resolved_locator: String,
     pub status: SourceStatus,
@@ -119,29 +123,7 @@ fn normalized(text: &str) -> String {
             .as_bytes(),
     )
 }
-pub(crate) fn validate_request(request: &SourceRequest) -> Result<(), AppError> {
-    if request.sources.is_empty()
-        || request.sources.len() > 32
-        || request.note.trim().is_empty()
-        || request
-            .expected_articles
-            .is_some_and(|n| !(1..=10).contains(&n))
-    {
-        return Err(error(
-            "需要1–32项来源、学习目标note，明确独立篇数须为1–10；不会静默截取来源",
-        ));
-    }
-    for input in &request.sources {
-        if let SourceInput::Url { url } = input {
-            if let Ok(u) = reqwest::Url::parse(url) {
-                if !u.username().is_empty() || u.password().is_some() {
-                    return Err(error("来源URL不能含内嵌认证信息，未保存该请求"));
-                }
-            }
-        }
-    }
-    Ok(())
-}
+
 impl SourceCollection {
     pub fn assessment(&self) -> Result<Assessment, AppError> {
         self.verify()?;
@@ -222,6 +204,9 @@ impl SourceCollection {
             if record.id != format!("s{:03}", i + 1) {
                 return Err(error("来源记录顺序身份不一致"));
             }
+            if let Some(blob) = &record.binary {
+                crate::learning_source_binary::reference(blob)?;
+            }
             for snapshot in &record.snapshots {
                 if sha256(snapshot.body.as_bytes()) != snapshot.raw_sha256 {
                     return Err(error("原始来源快照损坏"));
@@ -266,6 +251,11 @@ pub(crate) async fn collect_with_reader(
     let mut seen = HashMap::new();
     for (i, input) in request.sources.iter().enumerate() {
         let fetched = fetch::fetch(input, &base_dir, reader_prefix).await;
+        let binary = fetched
+            .binary
+            .as_deref()
+            .map(|bytes| crate::learning_source_binary::retain(ws, bytes))
+            .transpose()?;
         let source_id = format!("s{:03}", i + 1);
         let mut candidates = Vec::new();
         let mut links = Vec::new();
@@ -290,6 +280,7 @@ pub(crate) async fn collect_with_reader(
             }
         }
         records.push(SourceRecord {
+            binary,
             id: source_id,
             resolved_locator: fetched.resolved_locator,
             status: fetched.status,
@@ -325,6 +316,7 @@ fn collection_path(ws: &LearningWorkspace, id: &str) -> Result<PathBuf, AppError
 pub fn load(ws: &LearningWorkspace, id: &str) -> Result<SourceCollection, AppError> {
     let collection: SourceCollection = store::read(&collection_path(ws, id)?)?;
     collection.verify()?;
+    crate::learning_source_binary::verify(ws, &collection.records)?;
     if collection.id != id {
         return Err(error("来源集合文件名与身份不符"));
     }

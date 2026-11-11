@@ -1,6 +1,6 @@
 # 风格学习子Agent技术设计
 
-2026-11-11 · v0.5 · 需求依据：[PRD](../PRD.md) SL-01至SL-16；[行动计划](../plans/2026-11-03-style-learning-agent-plan.md) P1–P8。本设计先于新增实现落盘。用户已指示“按照计划开始开发”，原P0仅文档限制已由该指令结束；不需要重复确认已批准方向。
+2026-11-12 · v0.6 · 需求依据：[PRD](../PRD.md) SL-01至SL-16；[行动计划](../plans/2026-11-03-style-learning-agent-plan.md) P1–P8。本设计先于新增实现落盘。用户已指示“按照计划开始开发”，原P0仅文档限制已由该指令结束；不需要重复确认已批准方向。
 
 ## 1. 复用边界与架构决定
 
@@ -249,3 +249,26 @@ P5实现补充：候选完成后，明确新学习/追加请求建立新的材�
 ### 11.1 P5实际验证与范围
 
 2026-11-11完成，入口learning_flow.rs、learning_flow_commands.rs、learning_flow_writer.rs及REPL桥接；底层save幂等修正。6新测试/327通过/10忽略；5真实PTY/39本地请求及旧相关回归通过。固定真实单篇→追加双篇→指定旧版写作11回执，最终重放0请求；8Pro/3Flash新增0.160166元。候选/版本/来源和Writer原稿、事实问题均留研究目录；P5不证明说明语义/10篇或Writer事实质量。细节见P5阶段报告，同次实现提交由git log -- src/learning_flow.rs定位。
+
+
+## 12. P6格式与输入边界（2026-11-11，先于代码）
+
+复用SourceInput::File与SourceRecord，新增learning_document负责格式分流/二进制快照，learning_docx与learning_pdf分别解析，均无LLM或交互。采用zip仅启用deflate、roxmltree禁DTD/限制节点、pdf-extract文字层；依赖随Cargo.lock冻结，不依赖Python/Office/系统pdftotext。解析在spawn_blocking执行，输入8MiB；DOCX仅读必需XML且每项8MiB/节点200000，ZIP条目上限2048；PDF最多200页，逐页内容流预算及总输出8MiB，失败不返回已截断正文。
+
+SourceRecord新增可缺省binary快照引用（sha256、size、工作区相对路径），skip_serializing_if保证旧集合身份不变。二进制放来源工作区blobs/<sha256>，集合verify核验引用结构，load回读验证字节；DOCX/PDF候选的snapshots.body仍为纯提取文本以兼容现有inspect/whole工具，不能把base64或XML送入决策上下文。字段/资源规范用于P6新集合，旧不可变快照照常恢复。
+
+DOCX读取word/document.xml和可选styles.xml，使用w命名空间识别可见段落与样式标题级别；XML实体解码后按顺序写文本，run拆分不丢空格，表格按段落/单元格次序。删除/隐藏文字和域指令不作为正文；图片/对象/非正文嵌入提示替代正文而非默认完整。多一级标题沿现有scope门槛，不默认第一篇或全部。
+
+PDF先读取Document、检查加密和页数；逐页调用文字提取输出器，检查图片页无文字等缺口。连续页组成一个候选并保留页级审计，不在每页人为添加H1。扫描全文/混合扫描页Unsupported且无可学习候选；普通文字PDFNeedsInspection，交现有领域resolve/clarify判断，不因HTTP/解析成功就认定单篇文章。带完整文字层的图片页按文字PDF处理，不擅自OCR。复杂多栏阅读次序限制如实声明。
+
+P6总量门槛在learning_job::prepare与选定材料交学习的接口统一检查：最多10篇、每篇/集合正文总UTF-8字节不超256KiB，限制模型请求体可控；原采集仍保留完整快照。超量先说明需要缩小范围或提供较短完整文章，不截取前N字作为完整学习。不修改旧已完成job的load/replay规则或核心质量字数政策。
+
+P6格式纠错：pdf-extract对UniGB-UCS2-H等明确UCS2字符码不支持，先对已知Adobe Unicode编码名（UniGB/UniCNS/UniJIS/UniKS的UCS2 H/V）在内存派生等价Identity字符码及ToUnicode映射；已有ToUnicode不覆盖，原二进制保持不变。非Unicode命名CMap不猜映射。空白页检查实际文字/绘制操作，不能按内容流非空判断；第三方解析panic转为明确失败，不产出前缀文本。失败夹具和stderr在initial-pdf-failure.json。
+
+P6数量控制补充：count先从指令视图排除真实来源路径及URL，避免文件名/URL中的“2篇”“两篇”参与数量解释；序号仍不当作数量。SourceInput提取不依赖count，因此不会形成递归。
+
+### 12.1 P6实际结果
+
+learning_document/docx/pdf/source_binary及learning_input_limits已落地，SourceRecord二进制可缺省引用保持旧集合哈希可读。中文UCS2兼容与空白页修正、源路径不计数量、总量预算在学习前阻断已验。333库测试/10忽略、10本地场景/32模拟请求/1GET和旧相关回归通过，5份旧集合可读；0新增费用。阶段报告及失败原件在learning-formats-local-01与2026-11-12报告，同次P6提交追溯。普通字面格式链验收不代表复杂排版或语义/事实认证。
+
+P6证据存储：PDF交叉引用行的空白属于文件字节，禁止按文本去尾空白；对本阶段PDF夹具和二进制blob设置Git二进制属性，保留字节/哈希，源码和文档继续常规diff检查。

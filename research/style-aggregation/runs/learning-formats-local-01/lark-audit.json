@@ -1,0 +1,14 @@
+{
+  "report_url": "https://www.feishu.cn/docx/DAIkdExLCoP5AuxBwawcMxmOnxc",
+  "identity": "user",
+  "report_readback": true,
+  "base_url": "https://my.feishu.cn/base/Jkvpbe5DUaBDZSsQJ7KcRuSSnXe",
+  "record_count": 196,
+  "new_keys": [
+    "Journal/E0091",
+    "Journal/E0092",
+    "Runs/learning-formats-local-01"
+  ],
+  "previous_ids_preserved": true,
+  "record_semantic_readback": "checked by sync_style_research_lark.py"
+}

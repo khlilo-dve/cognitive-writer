@@ -1,0 +1,30 @@
+{
+  "rows": [
+    {
+      "status": "needs_inspection",
+      "reason": "PDF共2页；空白页[]；仅文字层，图片含义与多栏阅读顺序未认证；待领域确认文章边界，不按页数计篇数",
+      "texts": [
+        "月色与书页。\n\n同一篇文章的第二页，读完后我关了灯。"
+      ]
+    },
+    {
+      "status": "needs_inspection",
+      "reason": "PDF共2页；空白页[1]；仅文字层，图片含义与多栏阅读顺序未认证；待领域确认文章边界，不按页数计篇数",
+      "texts": [
+        "空白页后面仍是完整正文。"
+      ]
+    },
+    {
+      "status": "unsupported",
+      "reason": "API 响应解析失败: PDF第1页含绘制内容但没有可提取文字，可能为扫描页；不支持OCR，未遗漏该页继续学习",
+      "texts": []
+    },
+    {
+      "status": "unsupported",
+      "reason": "API 响应解析失败: PDF第2页含绘制内容但没有可提取文字，可能为扫描页；不支持OCR，未遗漏该页继续学习",
+      "texts": []
+    }
+  ],
+  "stderr": "",
+  "paid_requests": 0
+}

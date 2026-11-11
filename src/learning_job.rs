@@ -94,6 +94,7 @@ pub fn prepare(
     profile: CallProfile,
     prompts: JobPrompts,
 ) -> Result<LearningJob, AppError> {
+    crate::learning_input_limits::validate(&articles)?;
     let sources = voice_learning::sources(&articles)?;
     valid_id(&profile.endpoint_sha256)?;
     if note.trim().is_empty()

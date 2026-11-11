@@ -1,0 +1,18 @@
+{
+  "status": "failed",
+  "scope": "initial independent PDF fixtures before UCS2 and blank-page correction",
+  "rows": [
+    {
+      "status": "failed",
+      "reason": "API 响应解析失败: PDF结构或字体不受支持，未交付部分正文",
+      "candidate_count": 0
+    },
+    {
+      "status": "unsupported",
+      "reason": "API 响应解析失败: PDF第1页含绘制内容但没有可提取文字，可能为扫描页；不支持OCR，未遗漏该页继续学习",
+      "candidate_count": 0
+    }
+  ],
+  "stderr": "\nthread 'tokio-rt-worker' (4642) panicked at /home/khlilo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pdf-extract-0.12.1/src/lib.rs:986:21:\nunsupported encoding UniGB-UCS2-H\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "paid_requests": 0
+}

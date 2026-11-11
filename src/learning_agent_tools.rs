@@ -105,11 +105,11 @@ pub(crate) fn describe(
     let mut budget = 16000usize;
     let records:Vec<_>=c.records.iter().map(|r|{
         let full=detailed.contains(&r.id);let limit=if full{8000}else{160};
-        let candidates:Vec<_>=r.candidates.iter().map(|a|{let take=limit.min(budget);let value=excerpt(&a.text,if full{offset}else{0},take);budget=budget.saturating_sub(value["text"].as_str().unwrap_or("").chars().count());json!({"id":a.id,"title":a.title,"body":value,"duplicate_of":a.duplicate_of})}).collect();
+        let candidates:Vec<_>=r.candidates.iter().map(|a|{let take=limit.min(budget);let value=excerpt(&a.text,if full{offset}else{0},take);budget=budget.saturating_sub(value["text"].as_str().unwrap_or("").chars().count());json!({"id":a.id,"title":a.title,"body":value,"utf8_bytes":a.text.len(),"duplicate_of":a.duplicate_of})}).collect();
         let raw=if full && r.candidates.is_empty(){r.snapshots.first().map(|a|{let value=excerpt(&a.body,offset,4000.min(budget));budget=budget.saturating_sub(value["text"].as_str().unwrap_or("").chars().count());value})}else{None};
         json!({"id":r.id,"status":r.status,"reason":r.reason,"candidates":candidates,"raw_page_excerpt":raw,"links":r.links.iter().take(32).collect::<Vec<_>>(),"links_omitted":r.links.len()>32,"resolution":s.resolutions.get(&r.id)})
     }).collect();
-    json!({"source_collection_id":c.id,"sources":records,"current_pool":scope::pool(c,s).iter().map(|e|json!({"id":e.id,"source_id":e.source_id,"title":e.title,"verified":e.verified})).collect::<Vec<_>>()})
+    json!({"source_collection_id":c.id,"learning_input_budget_bytes":crate::learning_input_limits::MAX_TEXT_BYTES,"sources":records,"current_pool":scope::pool(c,s).iter().map(|e|json!({"id":e.id,"source_id":e.source_id,"title":e.title,"verified":e.verified})).collect::<Vec<_>>()})
 }
 /// A short source already fully present in the observation needs no second read call.
 pub(crate) fn complete_preview_ids(c: &SourceCollection, s: &AgentState) -> Vec<String> {

@@ -1,0 +1,47 @@
+{
+  "id": "f709bcb093bda0698da559f2449b80db19a1b23a5d584bbd283a482445d7500e",
+  "previous": null,
+  "sequence": 0,
+  "state": {
+    "task_id": "6f13359f9a5b23f6bcfeb68cbfce4f8310647c2f2c9328792b5c226cb3d695f1",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "fixtures/中文文章.docx"
+        },
+        {
+          "kind": "file",
+          "path": "fixtures/中文文字.pdf"
+        },
+        {
+          "kind": "url",
+          "url": "http://127.0.0.1:35021/article"
+        }
+      ],
+      "note": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:35021/article，保存为“混合来源”",
+      "expected_articles": 3,
+      "allow_partial": false
+    },
+    "user_request": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:35021/article，保存为“混合来源”",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": null,
+    "reason": ""
+  }
+}

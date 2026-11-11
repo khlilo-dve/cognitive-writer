@@ -1,0 +1,73 @@
+{
+  "generators": {
+    "python-docx": "1.2.0",
+    "reportlab": "5.1.0"
+  },
+  "expected_docx": "雨夜读书\n\n我合上书，窗外的雨还没有停。\n\n甲 & 乙之间留一个空格。\n\n左格\n\n右格",
+  "expected_pdf_pages": [
+    "月色与书页。",
+    "同一篇文章的第二页，读完后我关了灯。"
+  ],
+  "files": {
+    "混合扫描.pdf": {
+      "bytes": 4048,
+      "sha256": "455ec21e00720d54c81d1cf07ae56f17851a1464f4a7fca89ea4532539141945"
+    },
+    "两篇文章.docx": {
+      "bytes": 36759,
+      "sha256": "bdb446ef279582400ba7ab1748d45974e6ed13d1a72fc64177776638af496899"
+    },
+    "解压超限.docx": {
+      "bytes": 8289,
+      "sha256": "780098fb852d2aa1d5800f20abcbc46bcba2ecde6fe3451c1a60392dba730c9c"
+    },
+    "损坏.pdf": {
+      "bytes": 20,
+      "sha256": "5292e01e0dbf20d2a30a6e965d728895e0ab8595a7912e2737f5bba664c178d6"
+    },
+    "scan.png": {
+      "bytes": 974,
+      "sha256": "f6730f01e5768d77284e63a19e976508a284710a22fa0e8cf782e0355e7555a2"
+    },
+    "中文文章.docx": {
+      "bytes": 36918,
+      "sha256": "f207e4d0ff89234e48357d48905e2fffaf2dc14405dec99d0426d5e379b6c628"
+    },
+    "原始.doc": {
+      "bytes": 23,
+      "sha256": "0e1755f47921437cd2f2e05f19e4c8e4b14828bbe0bf2effb0dca872fd5a7042"
+    },
+    "扫描.pdf": {
+      "bytes": 2604,
+      "sha256": "1ab84b87838d296ba9f3f0a48841267e07b903914e5263317836bd8f1d013aad"
+    },
+    "重复.md": {
+      "bytes": 108,
+      "sha256": "3aa2a74caa8924f800d98feaa051103b7ab0d64204259abbf3b6a17f691bac0a"
+    },
+    "加密.pdf": {
+      "bytes": 2793,
+      "sha256": "75e4df008eaf8609d658d0efaf709439f3332384c3744cf9ed4d7b78d559e88a"
+    },
+    "长文章.docx": {
+      "bytes": 37574,
+      "sha256": "256676fe8b86f0bfe74ae904f1002b27620f92b80d645ec5d185e4ce986d5c7a"
+    },
+    "损坏.docx": {
+      "bytes": 18,
+      "sha256": "37c7eaf19e2ba4972780d7ce218adf86e2366ba7d2113fc190d0b5017d89cbab"
+    },
+    "中文文字.pdf": {
+      "bytes": 2856,
+      "sha256": "1847c7a2f4748edea61845bca27fec624eb43a38b9d6e97985dc711d282f00e5"
+    },
+    "含图文章.docx": {
+      "bytes": 38017,
+      "sha256": "1c4cbe23367872093702f45b35b350a10e14a3e97f7bd0536d2b836eaed4eed1"
+    },
+    "空白加正文.pdf": {
+      "bytes": 2761,
+      "sha256": "fd968702d5115f759ea4106880c8d4d1194e55550f31734d91f3d1088a5a1b95"
+    }
+  }
+}

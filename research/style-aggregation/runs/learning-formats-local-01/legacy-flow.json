@@ -1,0 +1,20 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"status\": \"complete\", \"checks\": [\"file_candidate_preview_save_idempotence_restore_append_v2_and_old_v1_writer\", \"combined_auto_save_then_flash_writer_with_isolated_brief\", \"natural_trailing_learning_instruction_and_unnamed_candidate_writer\", \"unknown_learning_no_implicit_resend_restore_then_explicit_retry\", \"writer_interrupt_preserves_version_and_requires_explicit_retry\"], \"scenario_count\": 5, \"local_model_requests\": 39, \"paid_requests\": 0, \"ledger_unchanged\": true, \"errors\": []}\n",
+  "stderr": "",
+  "audit": {
+    "status": "complete",
+    "checks": [
+      "file_candidate_preview_save_idempotence_restore_append_v2_and_old_v1_writer",
+      "combined_auto_save_then_flash_writer_with_isolated_brief",
+      "natural_trailing_learning_instruction_and_unnamed_candidate_writer",
+      "unknown_learning_no_implicit_resend_restore_then_explicit_retry",
+      "writer_interrupt_preserves_version_and_requires_explicit_retry"
+    ],
+    "scenario_count": 5,
+    "local_model_requests": 39,
+    "paid_requests": 0,
+    "ledger_unchanged": true,
+    "errors": []
+  }
+}

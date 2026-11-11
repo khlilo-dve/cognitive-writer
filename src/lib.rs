@@ -112,3 +112,9 @@ pub mod learning_flow;
 mod learning_flow_writer;
 mod learning_flow_commands;
 mod research_learning_flow;
+
+mod learning_document;
+mod learning_docx;
+mod learning_pdf;
+mod learning_source_binary;
+mod learning_input_limits;

@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "rows": [
+    {
+      "run": "learning-chat-real-01",
+      "collection_id": "cac512c0fb02b8c875dd31aba5e994b45fbd3cbe43ae7fa4731a22740c458d94",
+      "exit_code": 0
+    },
+    {
+      "run": "learning-chat-real-01",
+      "collection_id": "61288c4ea1d3778d010e711bcd942931e1653a29b2d252ce4f1c3d9f80f522c0",
+      "exit_code": 0
+    },
+    {
+      "run": "learning-chat-real-01",
+      "collection_id": "489a440975b4f921a7a1ed9f6497ecd12a84f5aa634f7f1e01c53160beb87c85",
+      "exit_code": 0
+    },
+    {
+      "run": "learning-flow-real-01",
+      "collection_id": "e208762ce27e44e5f4b7ffc796bb11aac3d08f32c25e7d42baca4b52b6fcd44e",
+      "exit_code": 0
+    },
+    {
+      "run": "learning-flow-real-01",
+      "collection_id": "8530ae0d7a874616a4778eded367d9d36a8ed3f799edfcfa1318b212646f4b7b",
+      "exit_code": 0
+    }
+  ],
+  "paid_requests": 0
+}

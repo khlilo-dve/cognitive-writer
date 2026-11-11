@@ -223,6 +223,7 @@ pub(crate) fn selected_texts(
         return Err(error("追加后的完整来源超过10篇，旧来源不能删除"));
     }
     texts.extend(fresh.into_iter().map(|e| e.text.clone()));
+    crate::learning_input_limits::validate(&texts)?;
     Ok(texts)
 }
 pub(crate) fn automatic(

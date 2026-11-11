@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "id": "word_visible_runs_table_hidden_text_dedup_and_frozen_binary_integrity",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "chinese_ucs2_pdf_all_pages_one_article_and_blank_page",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "scan_mixed_scan_encrypted_corrupt_embedded_and_zip_limits_never_return_partial_text",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "docx_pdf_url_mixed_sources_to_saved_candidate_without_user_clarification_and_zero_call_resume",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "multi_article_docx_one_bounded_question_then_exact_selected_article",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "missing_source_does_not_shrink_scope_until_explicit_partial_permission",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "eleven_unique_articles_require_scope_then_ten_selected_without_truncation",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "append_nine_plus_two_blocks_then_one_explicit_addition_fits_ten_without_dropping_old",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "long_complete_article_retained_but_over_budget_never_sent_to_learning",
+      "status": "complete",
+      "passed": true
+    },
+    {
+      "id": "direct_learning_job_obeys_same_total_input_budget",
+      "status": "complete",
+      "passed": true
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0
+  },
+  "local_model_requests": 32,
+  "source_http_requests": 1,
+  "paid_requests": 0,
+  "scope": "P6 extraction, protocol and local integration; not real model semantic or Writer factual certification"
+}

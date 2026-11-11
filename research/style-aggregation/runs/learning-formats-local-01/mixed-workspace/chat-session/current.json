@@ -1,0 +1,19 @@
+{
+  "state": "WaitingForLearningAgent",
+  "current_topic": null,
+  "generation_request": null,
+  "pending_style_choices": [],
+  "current_outline": null,
+  "current_fulltext": null,
+  "pending_edit": null,
+  "edit_undo": null,
+  "current_style_name": null,
+  "current_style_content": null,
+  "current_slug": null,
+  "pending_style_content": null,
+  "pending_delete_name": null,
+  "learning_chat": {
+    "workspace": "/tmp/cw-p6-m2uiccvs/mixed-chat",
+    "id": "0af3defcddc4b5faa83faa8d71b493a46a8e232549794ae05288a8913fef18bc"
+  }
+}

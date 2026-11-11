@@ -1,0 +1,14 @@
+{
+  "status": "failed_before_fix",
+  "observed_on": "2026-11-11",
+  "evidence": "captured from verify_learning_formats.py assertion output",
+  "input": "学习 \"fixtures/两篇文章.docx\"，只学一篇",
+  "reply": "选第二篇",
+  "observed_expected_articles": 2,
+  "observed_selected_ids": [
+    "s001-a002"
+  ],
+  "observed_status": "blocked",
+  "reason": "filename quantity was interpreted as the explicit article count, preventing the selected single article from reaching learning",
+  "paid_requests": 0
+}

@@ -1,0 +1,28 @@
+{
+  "id": "d5e32eec60c4b4e39d099e02ac431443ade4b2459c8ecb560a12e020fd39869a",
+  "previous": "64c2ae328535ea9f664f7eea485674e4ad1c73deda2d9b4574d9e8c9dab36859",
+  "sequence": 7,
+  "state": {
+    "delivery": {
+      "task_id": "6f13359f9a5b23f6bcfeb68cbfce4f8310647c2f2c9328792b5c226cb3d695f1",
+      "revision": 0,
+      "job_id": "40bfe567794bb97eee84e7771173cac73cd29afe4b4ae28cf7ccc60f088795db",
+      "candidate_id": "290cbde75dd77f7bd4445622ac07e40ae34658e93067f4af92c33920c06130f0",
+      "save_name": "混合来源",
+      "saved": {
+        "name": "混合来源",
+        "number": 1,
+        "id": "1923e1aacf3648118faa1353b6459c9e6dbd0765d2d5b19c16b34d972b11eb10"
+      },
+      "writer": null
+    },
+    "active": "6f13359f9a5b23f6bcfeb68cbfce4f8310647c2f2c9328792b5c226cb3d695f1",
+    "paused": false,
+    "turn": 1,
+    "pending": null,
+    "event": {
+      "kind": "learning",
+      "task_id": "6f13359f9a5b23f6bcfeb68cbfce4f8310647c2f2c9328792b5c226cb3d695f1"
+    }
+  }
+}

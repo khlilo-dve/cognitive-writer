@@ -1,0 +1,21 @@
+{
+  "cargo_test_lib": {
+    "passed": 333,
+    "failed": 0,
+    "ignored": 10
+  },
+  "new_unit_tests": 6,
+  "p6_scenarios": 10,
+  "p6_local_model_requests": 32,
+  "source_http_requests": 1,
+  "legacy_terminal": 17,
+  "style_selection": 11,
+  "legacy_learning_agent_scenarios": 9,
+  "legacy_learning_agent_requests": 14,
+  "legacy_learning_flow_scenarios": 5,
+  "legacy_learning_flow_requests": 39,
+  "legacy_learning_jobs_requests": 17,
+  "frozen_legacy_collections_readable": 5,
+  "paid_requests": 0,
+  "ledger_unchanged": true
+}

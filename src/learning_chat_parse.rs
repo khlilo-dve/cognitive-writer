@@ -134,7 +134,7 @@ pub(crate) fn sources(input: &str) -> Vec<SourceInput> {
             .map(|n| token[n..].to_string());
         if let Some(url) = url {
             out.push(SourceInput::Url { url });
-        } else if [".md", ".txt", ".docx", ".pdf"]
+        } else if [".md", ".markdown", ".txt", ".docx", ".doc", ".pdf"]
             .iter()
             .any(|ext| token.to_lowercase().ends_with(ext))
             && !token.is_empty()
@@ -151,6 +151,16 @@ pub(crate) fn sources(input: &str) -> Vec<SourceInput> {
     out
 }
 pub(crate) fn count(s: &str) -> Option<usize> {
+    let mut wording = s.to_string();
+    for source in sources(s) {
+        let locator = match source {
+            SourceInput::File { path } => path,
+            SourceInput::Url { url } => url,
+            _ => continue,
+        };
+        wording = wording.replace(&locator, " ");
+    }
+    let s = wording.as_str();
     let end = ["再写", "然后写", "学完写", "接着写"]
         .iter()
         .filter_map(|w| s.find(w))
@@ -407,6 +417,8 @@ mod tests {
             Some(Action::Use { .. })
         ));
         assert_eq!(count("选第二篇"), None);
+        assert_eq!(count("学习 \"fixtures/两篇文章.docx\"，只学一篇"), Some(1));
+        assert_eq!(count("学习 https://example.org/11篇，只学两篇"), Some(2));
         assert_eq!(count("只学两篇"), Some(2));
         assert_eq!(count("学习11篇"), Some(11));
         assert_eq!(count("学习12篇"), Some(12));
