@@ -1,0 +1,25 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "id": "clear",
+      "status": "complete"
+    },
+    {
+      "id": "repair-fail",
+      "status": "complete"
+    },
+    {
+      "id": "badquote",
+      "status": "complete"
+    },
+    {
+      "id": "unknown",
+      "status": "complete"
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0
+  },
+  "scope": "4 local fact terminal cases,35 mock requests; not semantic quality"
+}

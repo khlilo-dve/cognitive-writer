@@ -1,0 +1,14 @@
+{
+  "status": "complete",
+  "replayed_run": "quality-p7-real-04",
+  "expected_quality_status": "partial",
+  "zero_new_requests": true,
+  "ledger_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f",
+  "historical_entries_preserved": 890,
+  "new_phase_receipts": 24,
+  "code_files": {
+    "src/writer_facts.rs": 372,
+    "src/research_quality_p7.rs": 415,
+    "src/learning_flow.rs": 457
+  }
+}

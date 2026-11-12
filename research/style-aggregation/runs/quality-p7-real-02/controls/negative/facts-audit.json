@@ -1,0 +1,61 @@
+{
+  "original_sha256": "e8cd3a4f277001159e67ab533178be0ef7fcd510fa9f57b9cb279515d47805ef",
+  "final_sha256": "ba108c0997e4fbf820617f469ef4473c97af94b643af053d3cb020261ddc3f04",
+  "first": {
+    "issues": [
+      {
+        "kind": "unsupported_fact",
+        "quote": "是每天晚上都会敲一次的钟",
+        "reason": "任务只给了图书馆晚上十点闭馆，未提供每天晚上有钟或敲钟的设施/机制，比喻已写成具体设施事实。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "把借的书还掉，可能还要排队等机器确认",
+        "reason": "任务未给还书、排队或机器确认流程，属新引入的设施与流程；“可能”仍把它当作馆内既定设施，未标明为假设。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "刷卡，下台阶，再走一段回宿舍的路",
+        "reason": "任务未给闸机刷卡、台阶及具体回程路况等设施与行为，超出“回宿舍”这一材料。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "闭馆铃一响，所有人都在同时动",
+        "reason": "任务未提供闭馆铃、集中离场或人流挤出的场景，“所有人”属无据泛化。"
+      }
+    ],
+    "missing": []
+  },
+  "final_review": {
+    "issues": [
+      {
+        "kind": "unsupported_fact",
+        "quote": "把摊开的书合上，塞回书包；站起来，走出馆门，回到宿舍",
+        "reason": "任务只给了“收拾与回宿舍”的时间安排，未提供收拾的具体内容、书包、馆门等设施或具体动作流程，属于自行补写的行为细节。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "到点的那一刻，你收拾、你找出口、你赶着往外走",
+        "reason": "引入了未提供的“出口”这一设施和闭馆瞬间的群体性慌乱场面，任务未提供闭馆时的实际流程或情景。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "十点的铃是提醒",
+        "reason": "暗示图书馆存在闭馆铃或提示音这一设施，材料只说十点闭馆，未提到铃。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "回到宿舍时脑子里剩下的不是刚才读的内容，是刚才有多赶",
+        "reason": "把一种特定的心理后果当作必然结果，任务未提供该因果或感受。"
+      },
+      {
+        "kind": "uncertain",
+        "quote": "你收拾、你找出口、你赶着往外走",
+        "reason": "任务材料只说“留半小时收拾与回宿舍”，未说明走离图书馆的具体过程，无法确认这段描写对应的实际情形。"
+      }
+    ],
+    "missing": []
+  },
+  "repaired": true,
+  "status": "needs_review_after_one_repair"
+}

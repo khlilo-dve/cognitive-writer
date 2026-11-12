@@ -1,0 +1,130 @@
+{
+  "finished_at": "2026-11-12T09:35:52.362778497+00:00",
+  "rows": [
+    {
+      "error": "IO 错误: No such file or directory (os error 2)",
+      "id": "wxb-k10",
+      "status": "failed"
+    },
+    {
+      "error": "IO 错误: No such file or directory (os error 2)",
+      "id": "wzq-k10",
+      "status": "failed"
+    },
+    {
+      "id": "positive-control",
+      "model_found_no_issue": true,
+      "status": "complete"
+    },
+    {
+      "error": "学习草稿错误: 事实核对引用不属于本稿/本任务或结构无效，未当作已通过",
+      "id": "negative-control",
+      "initial_issues_detected": false,
+      "status": "failed"
+    },
+    {
+      "error": "学习草稿错误: 十篇候选未完成，未用旧候选代替",
+      "id": "wxb",
+      "status": "failed"
+    },
+    {
+      "error": "学习草稿错误: 十篇候选未完成，未用旧候选代替",
+      "id": "wzq",
+      "status": "failed"
+    }
+  ],
+  "scope": "bounded P7 model study, pending implementer source/claim and draft review; not human feedback or release certification",
+  "status": "partial",
+  "usage": {
+    "entries": {
+      "quality-p7-real-01/p7-2975097c73cd-writer-fact-review": {
+        "actual_micro": 1500,
+        "phase": "full",
+        "reserved_micro": 108384,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-42e99b4bcd19-learn-analysis": {
+        "actual_micro": 60714,
+        "phase": "full",
+        "reserved_micro": 310626,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-42e99b4bcd19-learn-analysis-repair": {
+        "actual_micro": 68841,
+        "phase": "full",
+        "reserved_micro": 343635,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-42e99b4bcd19-learn-compile-0": {
+        "actual_micro": 16692,
+        "phase": "full",
+        "reserved_micro": 132315,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-42e99b4bcd19-scope-review": {
+        "actual_micro": 65451,
+        "phase": "full",
+        "reserved_micro": 327171,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-42e99b4bcd19-scope-revise-0": {
+        "actual_micro": 70437,
+        "phase": "full",
+        "reserved_micro": 359988,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-46cc05a6027f-learn-analysis": {
+        "actual_micro": 79707,
+        "phase": "full",
+        "reserved_micro": 363876,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-46cc05a6027f-learn-analysis-repair": {
+        "actual_micro": 88116,
+        "phase": "full",
+        "reserved_micro": 400632,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-46cc05a6027f-learn-compile-0": {
+        "actual_micro": 15885,
+        "phase": "full",
+        "reserved_micro": 131496,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-46cc05a6027f-scope-review": {
+        "actual_micro": 83922,
+        "phase": "full",
+        "reserved_micro": 379173,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-46cc05a6027f-scope-revise-0": {
+        "actual_micro": 87597,
+        "phase": "full",
+        "reserved_micro": 417702,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      },
+      "quality-p7-real-01/p7-97050cd0c663-writer-fact-review": {
+        "actual_micro": 4338,
+        "phase": "full",
+        "reserved_micro": 112974,
+        "run_id": "quality-p7-real-01",
+        "state": "settled"
+      }
+    },
+    "occupied_cny": 25.385391,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.6432
+  },
+  "verified_receipts": 12
+}

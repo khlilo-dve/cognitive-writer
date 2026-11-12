@@ -185,6 +185,8 @@ def main():
             report_file = ROOT / "lark/learning-flow-20261111.json"
         if rid.startswith("learning-formats-"):
             report_file = ROOT / "lark/learning-formats-20261112.json"
+        if rid.startswith("quality-p7-"):
+            report_file = ROOT / "lark/learning-quality-p7-20261112.json"
         grounded_prefixes = ("learning-qualifier-", "learning-grounded-", "learning-boundary-")
         if rid.startswith(grounded_prefixes):
             report_file = ROOT / "lark/learning-grounded-stage-20261102.json"
@@ -254,6 +256,8 @@ def main():
             stage = "P5学习交接｜候选、版本与Writer"
         if rid.startswith("learning-formats-"):
             stage = "P6输入格式｜DOCX、文字PDF与来源边界"
+        if rid.startswith("quality-p7-"):
+            stage = "P7 有限质量补验与独立事实核对"
         rows = summary.get("rows", [])
         checks = ""
         control_file = run / "controls.json"
@@ -301,6 +305,10 @@ def main():
                 conclusion = f"状态：{summary['status']}；{summary.get('verified_receipts',0)}个真实回执。单篇文件→保存v1→追加双篇v2→指定v1新题材写作；不是风格语义或成稿事实质量认证。"
         if rid.startswith("learning-formats-"):
             conclusion = "10组本地格式/终端场景通过，32模拟模型请求/1本地GET/0付费；333库测试与旧链回归通过。普通DOCX/文字PDF、混合/部分失败/11选10/追加和长文资源门槛；不是语义或Writer事实认证。"
+        if rid.startswith("quality-p7-"):
+            conclusion = f"执行状态：{summary['status']}；本run新增{summary.get('verified_receipts',0)}个真实回执；复用来源/续跑见冻结phase。P7工程与有限检查完成，Style语义/用稿质量分项未全通过，不能按完成项数认证。"
+            if rid.endswith("local-01"):
+                conclusion = "4组真实终端/35本地模拟请求通过，0付费；不等于真实语义质量通过。"
         upsert("Runs", rid, {"run_id": rid, "stage": stage, "status": summary["status"],
             "question": f"{stage}：当前步骤是否形成完整可追溯结果？",
             "conclusion": conclusion,

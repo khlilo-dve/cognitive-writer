@@ -1,0 +1,107 @@
+{
+  "finished_at": "2026-11-12T09:40:05.498681944+00:00",
+  "rows": [
+    {
+      "article_count": 10,
+      "candidate_id": "ec8b5d3e2626d51c9a4ced5b83d075887a8ba986c556a1f81b4583727e30fd50",
+      "id": "wxb-k10",
+      "job_id": "c7a58fba20395d9a0fa669927579a0c59059df1636f0894b6d98788bacf81e20",
+      "status": "complete"
+    },
+    {
+      "article_count": 10,
+      "candidate_id": "510e7f73da86afe4e5260794a0c5bab12a41bace59d9e6b0004ccf015f88943b",
+      "id": "wzq-k10",
+      "job_id": "eb213404eac64c5937fca9b6e4969696ecdf827da8a918a6f188a041554b4c73",
+      "status": "complete"
+    },
+    {
+      "id": "positive-control",
+      "model_found_no_issue": true,
+      "status": "complete"
+    },
+    {
+      "error": "学习草稿错误: 事实核对JSON无效，原稿和回执保留，未当作已通过",
+      "id": "negative-control",
+      "initial_issues_detected": false,
+      "status": "failed"
+    },
+    {
+      "error": "学习草稿错误: 事实核对JSON无效，原稿和回执保留，未当作已通过",
+      "id": "wxb",
+      "status": "failed"
+    },
+    {
+      "fact_checked": true,
+      "id": "wzq",
+      "status": "complete",
+      "writer_root": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/quality-p7-real-02/writers/wzq/chats/d9a958b1b2147bb58bb2ec6eaf5d65830e885f9bc65721333ef644bdeb366f52/writers/5d7290e1e2c63f62449edf34838f9a69bd5bef1d10bc5416836b3a49738c61c6"
+    }
+  ],
+  "scope": "bounded P7 model study, pending implementer source/claim and draft review; not human feedback or release certification",
+  "status": "partial",
+  "usage": {
+    "entries": {
+      "quality-p7-real-02/p7-40da590bedc5-writer-fact-review": {
+        "actual_micro": 3135,
+        "phase": "full",
+        "reserved_micro": 115347,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-40da590bedc5-writer-fulltext": {
+        "actual_micro": 3197,
+        "phase": "full",
+        "reserved_micro": 45179,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-40da590bedc5-writer-outline": {
+        "actual_micro": 3121,
+        "phase": "full",
+        "reserved_micro": 43699,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-76a601c37ea9-writer-fact-review": {
+        "actual_micro": 2250,
+        "phase": "full",
+        "reserved_micro": 111531,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-9a8b5722cb28-writer-fact-review": {
+        "actual_micro": 4560,
+        "phase": "full",
+        "reserved_micro": 116121,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-bec1b634ac42-writer-fact-review": {
+        "actual_micro": 4758,
+        "phase": "full",
+        "reserved_micro": 117054,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-bec1b634ac42-writer-fulltext": {
+        "actual_micro": 3519,
+        "phase": "full",
+        "reserved_micro": 45762,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      },
+      "quality-p7-real-02/p7-bec1b634ac42-writer-outline": {
+        "actual_micro": 3182,
+        "phase": "full",
+        "reserved_micro": 44063,
+        "run_id": "quality-p7-real-02",
+        "state": "settled"
+      }
+    },
+    "occupied_cny": 25.413113,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.027722
+  },
+  "verified_receipts": 8
+}

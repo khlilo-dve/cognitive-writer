@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "id": "d9a958b1b2147bb58bb2ec6eaf5d65830e885f9bc65721333ef644bdeb366f52",
+  "created_at": "2026-11-12T09:39:32.960336096+00:00",
+  "base_dir": "/home/khlilo/cognitive-writer",
+  "profile": {
+    "model": "mimo-v2.6-flash",
+    "endpoint_sha256": "e99838876bb26ca91f37912c95970fde424b18e0cbd63789a54b8826cf7d3aa2"
+  },
+  "prompt": "P7固定写作，不做意图解释",
+  "agent_prompt": "P7固定范围，不做材料解释"
+}

@@ -22,12 +22,15 @@ pub struct Delivery {
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WriterInput {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub method: Option<String>,
     pub label: String,
     pub spec: String,
     pub request: String,
 }
 #[derive(Debug, Clone)]
 pub struct Written {
+    pub fact_checked: bool,
     pub label: String,
     pub spec: String,
     pub request: String,
@@ -189,6 +192,7 @@ where
                     store::error("后续写作要求不明确，候选已保留，请直接提供写作要求")
                 })?;
             d.writer = Some(WriterInput {
+                method: Some(crate::writer_facts::METHOD.into()),
                 label: d
                     .saved
                     .as_ref()
@@ -265,6 +269,7 @@ mod tests {
                 json!({"analysis":"INTERNAL_ANALYSIS", "evidence":v["articles"].as_array().unwrap().iter().map(|a|json!({"article":a["article"],"quote":a["text"]})).collect::<Vec<_>>()}).to_string()
             }
             "scope-review" => "INTERNAL_REVIEW".into(),
+            "writer-fact-review" | "writer-fact-verify" => "{\"issues\":[],\"missing\":[]}".into(),
             "writer-outline" => "- 新主题的大纲".into(),
             "writer-fulltext" => "# 新文章\n只按给定新材料写。".into(),
             _ => "从具体感受进入判断，推理要有已知材料，不把偶见手法变成每段必须动作。".into(),
@@ -303,7 +308,14 @@ mod tests {
         )
         .unwrap();
         let result = run_with(&r, |c| async move {
-            assert_eq!(c.profile.model, "mimo-v2.6-flash");
+            assert_eq!(
+                c.profile.model,
+                if c.stage.starts_with("writer-fact-") {
+                    "mimo-v2.6-pro"
+                } else {
+                    "mimo-v2.6-flash"
+                }
+            );
             assert!(!format!("{}{}", c.system, c.user).contains("SOURCE_SENTINEL"));
             assert!(!format!("{}{}", c.system, c.user).contains("INTERNAL_"));
             assert!(c.user.contains("800字"));

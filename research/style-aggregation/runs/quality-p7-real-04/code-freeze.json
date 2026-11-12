@@ -1,0 +1,14 @@
+{
+  "source_sha256": {
+    "src/research_quality_p7.rs": "df7ab7635cb3af82cd5eef41604a8b949502c27006d6a9607dc93d9173a5b5ed",
+    "src/writer_facts.rs": "ce3b43ca9f6b6fe5d8b3d8b6bb22708e1103008b1b290753989ad775e4070bf6",
+    "src/learning_flow_writer.rs": "85fd84734a84b1797d82d4300d7aba51536aaf3b75d2f00595e5b3896c4192be",
+    "prompts/writer_fact_review.md": "1ee074518bbb3eebf90d4bac210f3320f93deb85b527cb8853bbff2ceb26ff94",
+    "prompts/writer_fact_repair.md": "f0a593343953ab14b903b13232cc9173a5de02c61ebcecce07c5e456d1aede9c"
+  },
+  "validated": {
+    "lib_passed": 336,
+    "ignored": 10
+  },
+  "purpose": "Zero-new-request replay with unchanged flagged-paragraph gate; model audits and failed summaries preserved."
+}

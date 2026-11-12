@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "src/research_quality_p7.rs": "905fbeb34cf4987af03074277595a3b284ead58f9595e1dd856a2689232796bc",
+    "src/writer_facts.rs": "bc5f5372588b85f13d7c773623ca96ebdc3fbc4b92efbe0647402a852bd41b7f",
+    "src/learning_flow_writer.rs": "85fd84734a84b1797d82d4300d7aba51536aaf3b75d2f00595e5b3896c4192be",
+    "prompts/writer_fact_review.md": "1ee074518bbb3eebf90d4bac210f3320f93deb85b527cb8853bbff2ceb26ff94",
+    "prompts/writer_fact_repair.md": "f0a593343953ab14b903b13232cc9173a5de02c61ebcecce07c5e456d1aede9c"
+  },
+  "binary_sha256": "648ef2ed355b7f10945986d6705f80597c6c6dd2bd044b6bdb9327ee2fe3a216",
+  "validated": {
+    "lib_passed": 335,
+    "ignored": 10
+  },
+  "reason": "Export directory fix; explicit verified reuse of completed learning; bounded fact-review prompt correction. Original failures unchanged."
+}

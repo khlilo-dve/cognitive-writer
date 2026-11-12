@@ -1,0 +1,346 @@
+{
+  "reviewer": "implementer source reading; not human blind testing",
+  "scope": "20 frozen articles read; targeted important claims in four historical single/two-article specs and two current ten-article specs; not every sentence certified",
+  "claims": [
+    {
+      "id": "wxb-k1-irony",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wxb/candidates/2ff9f19b27ab7dcc3831a1ec7906c23056811fcbc10253a3242bf4a4fe03afe9.json",
+      "claim": "成立条件是材料确实存在\"部分合理但整体有问题\"或\"局部可取但大局难圆\"的真实关系",
+      "claim_start_char": 1740,
+      "status": "needs_qualification",
+      "implementer_reason": "原文的有限赞许可只肯定最低底线而非确有合理优点；不能把反讽前提收窄成真正赞许。",
+      "evidence": [
+        {
+          "source_id": "wxb-02",
+          "quote": "但所有的刀口都开在了肚子上，这实属难能可贵。",
+          "start_char": 918,
+          "end_char": 940,
+          "source_sha256": "29d3b409cb8d668de6ad424909defcdc4676ffd29dd9b5ee9d0225db518be239"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k1-abstract-limit",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wxb/candidates/2ff9f19b27ab7dcc3831a1ec7906c23056811fcbc10253a3242bf4a4fe03afe9.json",
+      "claim": "若任务只给抽象道理而无场景，幽默、自我解嘲、叙事回扣这些机制就失去依托",
+      "claim_start_char": 3056,
+      "status": "unsupported_extension",
+      "implementer_reason": "无场景的叙事回扣无依托成立；不能连带断言幽默/自嘲均无依托。单篇未覆盖的任务条件应标未知。十篇中概念换算可生幽默。",
+      "evidence": [
+        {
+          "source_id": "wxb-03",
+          "quote": "一份礼大致等于一百份色。",
+          "start_char": 1276,
+          "end_char": 1288,
+          "source_sha256": "d8772f9eff9dae70ba1de98c25288b5db71b5aa7cd3b778accf29f734a226f74"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k2-necessary",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wxb/candidates/47dc52bf7f19ee16d86327c323e47a270715622771c23e4ba57f42bc2723a8a1.json",
+      "claim": "材料多、论点复杂时，长段推演、分类框架、多重限定和假设句是必要的",
+      "claim_start_char": 340,
+      "status": "unsupported_necessity",
+      "implementer_reason": "两篇展示可用路径，不证明复杂论点必须同时用四种手法。应改为可选择/可并用。",
+      "evidence": [
+        {
+          "source_id": "wxb-03",
+          "quote": "以上的分类恰恰就是科学上说的定类（nominal）、定序（ordinal）、定距（interval）和定比（ratio）这四种尺度",
+          "start_char": 999,
+          "end_char": 1064,
+          "source_sha256": "d8772f9eff9dae70ba1de98c25288b5db71b5aa7cd3b778accf29f734a226f74"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k1-emotion-denial",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wzq/candidates/a5eab9464d94898d5e0eb1b8ec5ab4989d076dcb7bc6bd1cdd04ba9732915bc2.json",
+      "claim": "先否认某种常见的笼统情绪归类，再在具体的感受里落实那种复杂情绪",
+      "claim_start_char": 1587,
+      "status": "meaning_needs_correction",
+      "implementer_reason": "若后半指重新落实已否认的怀人/思乡，便逆转限定。这里只能说留下未归类的心软；另段乡愁另有对象，不能回填同一感受。",
+      "evidence": [
+        {
+          "source_id": "wzq-02",
+          "quote": "带着雨珠的缅桂花使我的心软软的，不是怀人，不是思乡。",
+          "start_char": 1533,
+          "end_char": 1559,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        },
+        {
+          "source_id": "wzq-02",
+          "quote": "雨，有时是会引起人一点淡淡的乡愁的。",
+          "start_char": 1561,
+          "end_char": 1579,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k1-first-person",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wzq/candidates/a5eab9464d94898d5e0eb1b8ec5ab4989d076dcb7bc6bd1cdd04ba9732915bc2.json",
+      "claim": "第一人称在这类文本中可以承担多种作用",
+      "claim_start_char": 256,
+      "status": "supported",
+      "implementer_reason": "亲历、感受、判断和知识限界均出现；保留多功能兼容且无需每篇凑齐。",
+      "evidence": [
+        {
+          "source_id": "wzq-02",
+          "quote": "我想念昆明的雨。",
+          "start_char": 164,
+          "end_char": 172,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        },
+        {
+          "source_id": "wzq-02",
+          "quote": "我不记得昆明的雨季有多长",
+          "start_char": 208,
+          "end_char": 220,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k2-ending",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wzq/candidates/23c1288a595648cfdaf00b975da45ef0aa2ce3a54b53b51e19c85782270e5506.json",
+      "claim": "任选其一，不必兼备；素材无明显可回收的起始意象时，走倡议或开放问句路线即可。",
+      "claim_start_char": 1282,
+      "status": "unsupported_exhaustive_choices",
+      "implementer_reason": "从两篇概括两种可用结尾有依据，把两种当穷尽选项无依据。未知形态需开放。",
+      "evidence": [
+        {
+          "source_id": "wzq-02",
+          "quote": "我想念昆明的雨。",
+          "start_char": 164,
+          "end_char": 172,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        },
+        {
+          "source_id": "wzq-04",
+          "quote": "然而有什么出版社会出呢？吁。",
+          "start_char": 2187,
+          "end_char": 2201,
+          "source_sha256": "2764050f13fc60ca60d15daa29823e29a571b5a5bda3d11e3674e284f1ce3ab5"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k2-long-short",
+      "spec_path": "research/style-aggregation/runs/learning-grounded-repair-01/workspaces/wzq/candidates/23c1288a595648cfdaf00b975da45ef0aa2ce3a54b53b51e19c85782270e5506.json",
+      "claim": "短句是节奏的一端，不是全部",
+      "claim_start_char": 831,
+      "status": "supported",
+      "implementer_reason": "序中有密集原因长段；昆明的雨既有长段也有独立短句，不应压成短句禁令。",
+      "evidence": [
+        {
+          "source_id": "wzq-04",
+          "quote": "这是什么原因呢？一是大菜、名菜很不好写。",
+          "start_char": 857,
+          "end_char": 877,
+          "source_sha256": "2764050f13fc60ca60d15daa29823e29a571b5a5bda3d11e3674e284f1ce3ab5"
+        },
+        {
+          "source_id": "wzq-02",
+          "quote": "我想念昆明的雨。",
+          "start_char": 164,
+          "end_char": 172,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k10-two-directions",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wxb.md",
+      "claim": "先给出抽象定义或理论框架，再套入具体情境反推",
+      "claim_start_char": 540,
+      "status": "supported",
+      "implementer_reason": "第一篇理论命题开场、手术篇亲历开场，两条并存，未把开头统一。",
+      "evidence": [
+        {
+          "source_id": "wxb-01",
+          "quote": "从一个假的前提出发，什么都能够推论出来",
+          "start_char": 7,
+          "end_char": 26,
+          "source_sha256": "e7a60be9a2694c812a925d780ee1ee90d5fae7ea93fe5e96a5d64e9185a71e34"
+        },
+        {
+          "source_id": "wxb-02",
+          "quote": "我年轻时，有一回得了病，住进了医院。",
+          "start_char": 0,
+          "end_char": 18,
+          "source_sha256": "29d3b409cb8d668de6ad424909defcdc4676ffd29dd9b5ee9d0225db518be239"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k10-conjecture",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wxb.md",
+      "claim": "接受转述框架，只对推测部分",
+      "claim_start_char": 1093,
+      "status": "supported",
+      "implementer_reason": "天鹅湖篇明确说描写是猜测，怀疑框架不是每次必做；来源可信与推测权限仍让位新任务。",
+      "evidence": [
+        {
+          "source_id": "wxb-05",
+          "quote": "该外交官看《天鹅湖》的情形都是我的猜测",
+          "start_char": 481,
+          "end_char": 500,
+          "source_sha256": "93ab11bf4fd9d7fd74b957beddea16077a458970f7a71674813e6fd4f4dcefdd"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k10-reader",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wxb.md",
+      "claim": "也愿意被冒犯的人",
+      "claim_start_char": 1465,
+      "status": "cannot_verify_reader_mind",
+      "implementer_reason": "文本口吻有锋芒，并不能证明真实读者愿意被冒犯。只宜作为预设读者关系，需限定，不能当读者心理事实。",
+      "evidence": [
+        {
+          "source_id": "wxb-09",
+          "quote": "这种论点吓不倒我。",
+          "start_char": 2507,
+          "end_char": 2516,
+          "source_sha256": "c16f66f331e03b92c24d73bfb927ce3491a13c4c6848dfdd7643079e1b39d6a9"
+        }
+      ]
+    },
+    {
+      "id": "wxb-k10-long-form",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wxb.md",
+      "claim": "长段密论证是这套声音的重要组成部分",
+      "claim_start_char": 1803,
+      "status": "supported",
+      "implementer_reason": "格调/崇高长链论证与文体篇短判断并存，说明保留长短可选并拒绝统一数量。",
+      "evidence": [
+        {
+          "source_id": "wxb-03",
+          "quote": "这样我们就有了一个换算关系",
+          "start_char": 738,
+          "end_char": 751,
+          "source_sha256": "d8772f9eff9dae70ba1de98c25288b5db71b5aa7cd3b778accf29f734a226f74"
+        },
+        {
+          "source_id": "wxb-09",
+          "quote": "我要说出我的结论",
+          "start_char": 4147,
+          "end_char": 4155,
+          "source_sha256": "c16f66f331e03b92c24d73bfb927ce3491a13c4c6848dfdd7643079e1b39d6a9"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k10-source-role",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wzq.md",
+      "claim": "这些是当篇的写作缘由，不是采用这种声音的先决条件",
+      "claim_start_char": 1217,
+      "status": "supported",
+      "implementer_reason": "自选集、讲课、回忆来源不同，未将身份或完成编选变成新任务门槛。",
+      "evidence": [
+        {
+          "source_id": "wzq-01",
+          "quote": "约我出一个自选集",
+          "start_char": 10,
+          "end_char": 18,
+          "source_sha256": "50a0b4baa098daab98c08550307adbc320ddd5c30efdcb24493eda33b4bd9878"
+        },
+        {
+          "source_id": "wzq-05b",
+          "quote": "有的作家、评论家问我",
+          "start_char": 0,
+          "end_char": 10,
+          "source_sha256": "03ddf10215634bbeedc04f07c7988ffa35438ae7bd227a548cba6d5c0ad7a248"
+        },
+        {
+          "source_id": "wzq-10",
+          "quote": "西南联大有许多很有趣的教授",
+          "start_char": 0,
+          "end_char": 13,
+          "source_sha256": "0d94f0c070e534fae600ccb36d9c5b01e68eec27103cbeb85461771bde2b815f"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k10-direct-emotion",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wzq.md",
+      "claim": "不能改写成所有情绪都必须间接的规则",
+      "claim_start_char": 2333,
+      "status": "supported",
+      "implementer_reason": "自述克制与原作直接想念、强烈批评共存，不能删去给定感受。",
+      "evidence": [
+        {
+          "source_id": "wzq-01",
+          "quote": "我觉得散文的感情要适当克制。",
+          "start_char": 408,
+          "end_char": 422,
+          "source_sha256": "50a0b4baa098daab98c08550307adbc320ddd5c30efdcb24493eda33b4bd9878"
+        },
+        {
+          "source_id": "wzq-02",
+          "quote": "我想念昆明的雨。",
+          "start_char": 164,
+          "end_char": 172,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        },
+        {
+          "source_id": "wzq-04",
+          "quote": "这简直是：胡闹！",
+          "start_char": 2079,
+          "end_char": 2087,
+          "source_sha256": "2764050f13fc60ca60d15daa29823e29a571b5a5bda3d11e3674e284f1ce3ab5"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k10-negative-limit",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wzq.md",
+      "claim": "也可以是否定排除某些情感来源",
+      "claim_start_char": 2095,
+      "status": "supported_with_boundary",
+      "implementer_reason": "较旧单篇未把否定的思乡重新装回心软；不得将限界泛化到整篇不允许乡愁。",
+      "evidence": [
+        {
+          "source_id": "wzq-02",
+          "quote": "不是怀人，不是思乡。",
+          "start_char": 1549,
+          "end_char": 1559,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        },
+        {
+          "source_id": "wzq-02",
+          "quote": "雨，有时是会引起人一点淡淡的乡愁的。",
+          "start_char": 1561,
+          "end_char": 1579,
+          "source_sha256": "7734803027139932023f793a4a224422b1c2fcd12214053130c4179983426e21"
+        }
+      ]
+    },
+    {
+      "id": "wzq-k10-imagination",
+      "spec_path": "research/style-aggregation/runs/quality-p7-real-03/styles/wzq.md",
+      "claim": "在已有材料基础上引入类比、旁证和想象来帮助理解，是允许且常见的",
+      "claim_start_char": 354,
+      "status": "needs_task_permission",
+      "implementer_reason": "所述写法在文章中存在，但新任务只用给定事实时，旁证不能扩为新事实。说明其他段落已写事实优先，Writer仍需单独核对。",
+      "evidence": [
+        {
+          "source_id": "wzq-01",
+          "quote": "倒有点像老太太择菜。",
+          "start_char": 2646,
+          "end_char": 2656,
+          "source_sha256": "50a0b4baa098daab98c08550307adbc320ddd5c30efdcb24493eda33b4bd9878"
+        },
+        {
+          "source_id": "wzq-06",
+          "quote": "梨花的瓣子是月亮做的。",
+          "start_char": 1470,
+          "end_char": 1481,
+          "source_sha256": "a1e02fb650c0436848680a8b405029039081276971318bfc31ec5cc77c943ab0"
+        }
+      ]
+    }
+  ],
+  "release_boundary": "Historical samples with hardening/negation defects are not adopted. Current ten-article candidates remain reviewable, not universal automatic fidelity certification. P8 adoption must retain this boundary."
+}

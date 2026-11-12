@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "src/research_quality_p7.rs": "ea917bee80428d0473e5bcb251c3b1aa11ef4ccb382ea5f371d8792adc0aab8a",
+    "src/writer_facts.rs": "0ebc4f2f70c3ca37d2a4a19473fedc2fba49c3b7c1b8a5f9fd383ccfdfd99a62",
+    "src/learning_flow_writer.rs": "85fd84734a84b1797d82d4300d7aba51536aaf3b75d2f00595e5b3896c4192be",
+    "prompts/writer_fact_review.md": "1ee074518bbb3eebf90d4bac210f3320f93deb85b527cb8853bbff2ceb26ff94",
+    "prompts/writer_fact_repair.md": "f0a593343953ab14b903b13232cc9173a5de02c61ebcecce07c5e456d1aede9c"
+  },
+  "binary_sha256": "f4fe0a34259c6769d0c09fca5faf8109491844b54d6fe8c1225ce6adeca93a18",
+  "validated": {
+    "lib_passed": 335,
+    "ignored": 10
+  },
+  "reason": "Optional empty missing field; exact quote validation retained; continue verified frozen response stages in run 02, do not resample."
+}

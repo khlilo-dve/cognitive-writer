@@ -1,0 +1,15 @@
+{
+  "verified_on": "2026-11-12",
+  "sources": [
+    "https://mimo.mi.com/models/en-US/mimo-v2.6-pro",
+    "https://mimo.mi.com/models/en-US/mimo-v2.6-flash"
+  ],
+  "cache_miss_cny_per_million_tokens": {
+    "pro_input": 3,
+    "pro_output": 6,
+    "flash_input": 1,
+    "flash_output": 2
+  },
+  "phase_cap_cny": 5,
+  "scope": "conservative usage estimate including uncertain reserves, not provider invoice"
+}

@@ -118,3 +118,6 @@ mod learning_docx;
 mod learning_pdf;
 mod learning_source_binary;
 mod learning_input_limits;
+
+mod research_quality_p7;
+mod writer_facts;

@@ -1,0 +1,30 @@
+{
+  "original_sha256": "6d66acbd61cebd6acf4c04adfafa4c64e57a8c52d01a777cc56c0ba6076a080c",
+  "final_sha256": "e2b50f084442b5f3adb008dbe16b5ca8392620ef9953f6692920353f29798857",
+  "first": {
+    "issues": [
+      {
+        "kind": "unsupported_fact",
+        "quote": "前一个小时里别人已经把手上的书换出去了一部分，你的选择范围随之减少，而不是你的诚意减少",
+        "reason": "任务只给出时间和规则，未提供任何关于参与人数、他人交换行为或选择范围的安排；这不是一般建议，而是对现场交换过程的具体断言，属于超出授权范围的虚构场景。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "上限一旦放开，很多人会把家里成摞的旧书全搬来，交换就退化成清库存",
+        "reason": "任务未提供任何人是否会搬运大量旧书、交换是否会退化成清库存的事实；这是对人群行为和活动结果的具体断言，不是已标明的假设。"
+      },
+      {
+        "kind": "unsupported_fact",
+        "quote": "你愿意带着3本书走进那个两小时的窗口，说明你已经默认接受这套边界",
+        "reason": "把带书到场的人的主观接受状态当作既定事实，并从该状态推导其必然认同四条边界，任务未提供此类参与意愿或因果依据。"
+      }
+    ],
+    "missing": []
+  },
+  "final_review": {
+    "issues": [],
+    "missing": []
+  },
+  "repaired": true,
+  "status": "model_found_no_issue_after_one_repair"
+}

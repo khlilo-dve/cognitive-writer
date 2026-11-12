@@ -5495,6 +5495,174 @@
       "actual_micro": 30720,
       "state": "settled"
     },
+    "quality-p7-real-01/p7-2975097c73cd-writer-fact-review": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 108384,
+      "actual_micro": 1500,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-42e99b4bcd19-learn-analysis": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 310626,
+      "actual_micro": 60714,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-42e99b4bcd19-learn-analysis-repair": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 343635,
+      "actual_micro": 68841,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-42e99b4bcd19-learn-compile-0": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 132315,
+      "actual_micro": 16692,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-42e99b4bcd19-scope-review": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 327171,
+      "actual_micro": 65451,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-42e99b4bcd19-scope-revise-0": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 359988,
+      "actual_micro": 70437,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-46cc05a6027f-learn-analysis": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 363876,
+      "actual_micro": 79707,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-46cc05a6027f-learn-analysis-repair": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 400632,
+      "actual_micro": 88116,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-46cc05a6027f-learn-compile-0": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 131496,
+      "actual_micro": 15885,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-46cc05a6027f-scope-review": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 379173,
+      "actual_micro": 83922,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-46cc05a6027f-scope-revise-0": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 417702,
+      "actual_micro": 87597,
+      "state": "settled"
+    },
+    "quality-p7-real-01/p7-97050cd0c663-writer-fact-review": {
+      "run_id": "quality-p7-real-01",
+      "phase": "full",
+      "reserved_micro": 112974,
+      "actual_micro": 4338,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-40da590bedc5-writer-fact-review": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 115347,
+      "actual_micro": 3135,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-40da590bedc5-writer-fulltext": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 45179,
+      "actual_micro": 3197,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-40da590bedc5-writer-outline": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 43699,
+      "actual_micro": 3121,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-76a601c37ea9-writer-fact-review": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 111531,
+      "actual_micro": 2250,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-9a8b5722cb28-writer-fact-review": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 116121,
+      "actual_micro": 4560,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-bec1b634ac42-writer-fact-review": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 117054,
+      "actual_micro": 4758,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-bec1b634ac42-writer-fulltext": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 45762,
+      "actual_micro": 3519,
+      "state": "settled"
+    },
+    "quality-p7-real-02/p7-bec1b634ac42-writer-outline": {
+      "run_id": "quality-p7-real-02",
+      "phase": "full",
+      "reserved_micro": 44063,
+      "actual_micro": 3182,
+      "state": "settled"
+    },
+    "quality-p7-real-03/p7-9a8b5722cb28-writer-fact-repair": {
+      "run_id": "quality-p7-real-03",
+      "phase": "full",
+      "reserved_micro": 44261,
+      "actual_micro": 3079,
+      "state": "settled"
+    },
+    "quality-p7-real-03/p7-9a8b5722cb28-writer-fact-verify": {
+      "run_id": "quality-p7-real-03",
+      "phase": "full",
+      "reserved_micro": 115743,
+      "actual_micro": 4827,
+      "state": "settled"
+    },
+    "quality-p7-real-03/p7-bec1b634ac42-writer-fact-repair": {
+      "run_id": "quality-p7-real-03",
+      "phase": "full",
+      "reserved_micro": 47172,
+      "actual_micro": 3774,
+      "state": "settled"
+    },
+    "quality-p7-real-03/p7-bec1b634ac42-writer-fact-verify": {
+      "run_id": "quality-p7-real-03",
+      "phase": "full",
+      "reserved_micro": 116955,
+      "actual_micro": 3495,
+      "state": "settled"
+    },
     "voice-learning-clean-01/wxb-k1-0": {
       "run_id": "voice-learning-clean-01",
       "phase": "full",

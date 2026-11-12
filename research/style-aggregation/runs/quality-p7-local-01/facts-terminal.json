@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "cases": [
+    "clear",
+    "repair-fail",
+    "badquote",
+    "unknown"
+  ],
+  "local_model_requests": 35,
+  "paid_requests": 0,
+  "ledger_unchanged": true,
+  "errors": []
+}

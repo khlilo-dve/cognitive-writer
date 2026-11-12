@@ -1,0 +1,16 @@
+{
+  "model_found_no_issue": true,
+  "status": "needs_review_after_one_repair",
+  "unchanged_issue_paragraphs": [
+    {
+      "kind": "unsupported_fact",
+      "quote": "上限一旦放开，很多人会把家里成摞的旧书全搬来，交换就退化成清库存",
+      "reason": "任务未提供任何人是否会搬运大量旧书、交换是否会退化成清库存的事实；这是对人群行为和活动结果的具体断言，不是已标明的假设。"
+    },
+    {
+      "kind": "unsupported_fact",
+      "quote": "你愿意带着3本书走进那个两小时的窗口，说明你已经默认接受这套边界",
+      "reason": "把带书到场的人的主观接受状态当作既定事实，并从该状态推导其必然认同四条边界，任务未提供此类参与意愿或因果依据。"
+    }
+  ]
+}

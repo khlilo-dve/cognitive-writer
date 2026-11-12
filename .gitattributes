@@ -4,3 +4,5 @@
 # P6 document fixtures and frozen binary sources retain exact bytes (PDF xref whitespace included).
 /research/style-aggregation/runs/learning-formats-local-01/fixtures/*.pdf -text -diff
 /research/style-aggregation/runs/learning-formats-local-01/mixed-workspace/**/blobs/* -text -diff
+# Unified diff artifacts contain a literal space as the unchanged blank-line marker.
+/research/style-aggregation/runs/quality-p7-*/**/draft-diff.md whitespace=-blank-at-eol

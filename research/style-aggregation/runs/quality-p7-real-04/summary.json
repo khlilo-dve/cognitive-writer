@@ -1,0 +1,50 @@
+{
+  "finished_at": "2026-11-12T09:44:58.712386376+00:00",
+  "rows": [
+    {
+      "article_count": 10,
+      "candidate_id": "ec8b5d3e2626d51c9a4ced5b83d075887a8ba986c556a1f81b4583727e30fd50",
+      "id": "wxb-k10",
+      "job_id": "c7a58fba20395d9a0fa669927579a0c59059df1636f0894b6d98788bacf81e20",
+      "status": "complete"
+    },
+    {
+      "article_count": 10,
+      "candidate_id": "510e7f73da86afe4e5260794a0c5bab12a41bace59d9e6b0004ccf015f88943b",
+      "id": "wzq-k10",
+      "job_id": "eb213404eac64c5937fca9b6e4969696ecdf827da8a918a6f188a041554b4c73",
+      "status": "complete"
+    },
+    {
+      "id": "positive-control",
+      "model_found_no_issue": true,
+      "status": "complete"
+    },
+    {
+      "error": "学习草稿错误: 一次修订后事实核对仍有问题，草稿与问题保留；输入 /writer-review 查看，未交付为已核对成稿",
+      "id": "negative-control",
+      "initial_issues_detected": true,
+      "status": "failed"
+    },
+    {
+      "error": "学习草稿错误: 一次修订后事实核对仍有问题，草稿与问题保留；输入 /writer-review 查看，未交付为已核对成稿",
+      "id": "wxb",
+      "status": "failed"
+    },
+    {
+      "fact_checked": true,
+      "id": "wzq",
+      "status": "complete",
+      "writer_root": "/home/khlilo/cognitive-writer/research/style-aggregation/runs/quality-p7-real-02/writers/wzq/chats/d9a958b1b2147bb58bb2ec6eaf5d65830e885f9bc65721333ef644bdeb366f52/writers/5d7290e1e2c63f62449edf34838f9a69bd5bef1d10bc5416836b3a49738c61c6"
+    }
+  ],
+  "scope": "bounded P7 model study, pending implementer source/claim and draft review; not human feedback or release certification",
+  "status": "partial",
+  "usage": {
+    "entries": {},
+    "occupied_cny": 25.428288,
+    "pricing": "official domestic cache-miss upper estimate",
+    "run_occupied_cny": 0.0
+  },
+  "verified_receipts": 0
+}

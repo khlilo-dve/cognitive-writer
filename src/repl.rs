@@ -98,7 +98,7 @@ const HELP_TEXT: &str = concat!(
   /blocks      显示原文内容块编号，便于指定修改位置
   /undo        撤销上一次成功的局部修改
   /state       显示当前状态（调试用）
-  [style-draft chat开发入口] /learning 查看进度；/preview 看候选；/diff 看变化；保存为X；/versions X；/show X 1；/use-version X 1 <写作要求>；/use-candidate <写作要求>；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
+  [style-draft chat开发入口] /learning 查看进度；/writer-review 查看稿件核对；/preview 看候选；/diff 看变化；保存为X；/versions X；/show X 1；/use-version X 1 <写作要求>；/use-candidate <写作要求>；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
 
 独立操作 (Idle 状态可用):
   输入 URL     → 学习该文章的写作风格
@@ -477,9 +477,14 @@ impl Repl {
     async fn process_input(&mut self, input: &str) -> Result<bool, AppError> {
         let input = input.trim();
         if self.learning_chat.is_some()
-            && matches!(self.state, SessionState::Idle | SessionState::WaitingForLearningAgent)
+            && matches!(
+                self.state,
+                SessionState::Idle | SessionState::WaitingForLearningAgent
+            )
         {
-            if let Some(done) = self.process_learning_input(input).await? { return Ok(done); }
+            if let Some(done) = self.process_learning_input(input).await? {
+                return Ok(done);
+            }
         }
         if self.state == SessionState::WaitingForEditTarget
             && (!input.starts_with('/') || matches!(input, "/cancel" | "/blocks"))
@@ -670,7 +675,12 @@ impl Repl {
             self.state = SessionState::WaitingForFulltext;
             self.save()?;
             println!("{}\n{}\n{}", sep(), w.fulltext, sep());
-            println!("全文已生成，可继续修改或确认。候选、版本与学习回执保留。");
+            if w.fact_checked {
+                println!("本轮模型事实核对未发现待处理问题；全文可继续审阅、修改或确认。");
+            } else {
+                println!("历史全文已恢复，未运行本轮事实核对；请审阅后再使用。");
+            }
+            println!("候选、版本与学习回执保留。");
         } else {
             crate::learning_flow::display(r)?;
         }
@@ -754,7 +764,9 @@ impl Repl {
             "/state" => {
                 self.print_state();
                 if let Some(r) = &self.learning_chat {
-                    if let Err(e) = crate::learning_chat::display(r, false) { eprintln!("[error] {e}"); }
+                    if let Err(e) = crate::learning_chat::display(r, false) {
+                        eprintln!("[error] {e}");
+                    }
                 }
                 false
             }
@@ -828,7 +840,9 @@ impl Repl {
             SessionState::WaitingForEditTarget => {
                 "回复内容块编号（如 B2 或 B2,B4）；/blocks 查看候选；/cancel 只取消本次修改。"
             }
-            SessionState::WaitingForLearningAgent => "回复当前材料问题；/learning查看进度，继续恢复，暂停学习，/cancel取消，/quit保存退出。",
+            SessionState::WaitingForLearningAgent => {
+                "回复当前材料问题；/learning查看进度，继续恢复，暂停学习，/cancel取消，/quit保存退出。"
+            }
             SessionState::WaitingForGenerationStyle => {
                 "回复风格名称或编号；/styles 查看候选；/cancel 取消；/quit 保存需求退出。"
             }

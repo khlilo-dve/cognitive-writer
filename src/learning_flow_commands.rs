@@ -11,6 +11,10 @@ pub(crate) fn command(r: &ChatRef, input: &str) -> Result<bool, AppError> {
         learning_flow::display(r)?;
         return Ok(true);
     }
+    if input == "/writer-review" || input == "查看写作核对" {
+        crate::writer_facts::display(r)?;
+        return Ok(true);
+    }
     let ws = store::ws(r)?;
     if let Some(name) = input.strip_prefix("/versions ") {
         for v in ws.versions(name.trim())? {
@@ -63,6 +67,7 @@ pub(crate) fn command(r: &ChatRef, input: &str) -> Result<bool, AppError> {
         }
         let mut state = old.state.clone();
         state.selected_writer = Some(WriterInput {
+            method: Some(crate::writer_facts::METHOD.into()),
             label: format!("{} v{}", v.name, v.number),
             spec: v.candidate.input.draft.spec,
             request: request.into(),
@@ -134,6 +139,7 @@ pub(crate) fn command(r: &ChatRef, input: &str) -> Result<bool, AppError> {
             return Err(store::error("需要本次写作要求"));
         }
         state.selected_writer = Some(WriterInput {
+            method: Some(crate::writer_facts::METHOD.into()),
             label: "本次候选".into(),
             spec: ws.preview(&id)?.input.draft.spec,
             request: request.into(),

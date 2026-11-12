@@ -26,6 +26,8 @@ def main():
                     assert '追加到' in raw
                     text=raw.split('正文：',1)[1]
                     answer={'kind':'learn','sources':[{'kind':'text','label':'正文','text':text}], 'base_name':'夜读','save_name':'夜读'}
+                elif '独立的文章事实与任务核对者' in system:
+                    assert b['model']=='mimo-v2.6-pro';answer={'issues':[],'missing':[]}
                 elif b.get('response_format')=={'type':'json_object'}:
                     data=json.loads(user)
                     answer={'analysis':'INTERNAL_ANALYSIS','evidence':[{'article':a['article'],'quote':a['text']} for a in data['articles']]}

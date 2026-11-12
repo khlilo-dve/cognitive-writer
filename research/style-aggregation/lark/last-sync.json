@@ -4,8 +4,12 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/learning-formats-local-01"
+    "research/style-aggregation/runs/quality-p7-local-01",
+    "research/style-aggregation/runs/quality-p7-real-01",
+    "research/style-aggregation/runs/quality-p7-real-02",
+    "research/style-aggregation/runs/quality-p7-real-03",
+    "research/style-aggregation/runs/quality-p7-real-04"
   ],
-  "journal_from": "E0091",
-  "record_count": 196
+  "journal_from": "E0093",
+  "record_count": 205
 }

@@ -1,0 +1,43 @@
+{
+  "reviewer": "implementation source and draft reading; not external blind testing",
+  "claim_audit": "../quality-p7-real-03/claim-audit.json",
+  "drafts": [
+    {
+      "id": "old-negative",
+      "fact_result": "blocked_after_one_repair",
+      "expression_result": "not_adopted",
+      "evidence": [
+        "闭馆铃/十点的铃未全删",
+        "读到闭馆必然慌乱和特定心理后果仍无据"
+      ],
+      "model_limits": [
+        "将普通馆门/合书动作一概判设施越界过严",
+        "将钟的比喻当实体的判断可争议"
+      ],
+      "root": "../quality-p7-real-02/controls/negative"
+    },
+    {
+      "id": "wxb",
+      "fact_result": "blocked_by_unchanged_flagged_paragraph_guard",
+      "expression_result": "conditional_reasoning_voice_partly_visible",
+      "evidence": [
+        "首审上限放开必然清库存原句及所在段未改",
+        "参与即接受全部规则的心理推断原句及所在段未改",
+        "没有中间人/无需为换亏负责也无任务依据，模型未完整指出"
+      ],
+      "important": "模型复核空issues不能覆盖首审/实现者证据，原facts-audit保留，facts-decision阻断"
+    },
+    {
+      "id": "wzq",
+      "fact_result": "model_no_issue_implementer_finds_minor_unjustified_specificity",
+      "expression_result": "not_ready_for_publish",
+      "evidence": [
+        "“四张留在原处”未由“留下4张”必然推出",
+        "舍不得特指8张属合理但未给定的解释，不应冒充唯一含义",
+        "“因为材料没有给”“不总结出道理”是任务执行说明进入正文；数字/判断套语压过原作者具体生活感"
+      ],
+      "important": "不增加字数或多抽样美化；事实与风格分开报告"
+    }
+  ],
+  "decision": "P7 engineering and bounded examination complete; automatic style fidelity and publishable Writer adoption not passed. P8 may accept explicit reviewable development entry and recovery evidence, not default replacement or automatic publication."
+}

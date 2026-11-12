@@ -1,0 +1,9 @@
+{
+  "prior_runs": [
+    "quality-p7-real-01",
+    "quality-p7-real-02",
+    "quality-p7-real-03"
+  ],
+  "reuse_learning_run": "quality-p7-real-01",
+  "resume_writer_run": "quality-p7-real-02"
+}

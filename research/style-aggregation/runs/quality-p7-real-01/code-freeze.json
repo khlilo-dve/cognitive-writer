@@ -1,0 +1,21 @@
+{
+  "source_hashes": {
+    "src/writer_facts.rs": "bc5f5372588b85f13d7c773623ca96ebdc3fbc4b92efbe0647402a852bd41b7f",
+    "src/learning_flow_writer.rs": "85fd84734a84b1797d82d4300d7aba51536aaf3b75d2f00595e5b3896c4192be",
+    "src/research_quality_p7.rs": "4e4091845631dfaf97219fb5fb255945b2dbd1a44e0dd8798c7a5eeeddf6ad15",
+    "src/learning_flow.rs": "123d191d5694a18be8ea34dc622322f86beb03a5fad4cef161ba4c47b25f7261",
+    "src/learning_flow_commands.rs": "deb49175de7d31a98689ee3ce25ec6fd97012885164d3b11af6a95f89d945782",
+    "prompts/writer_fact_review.md": "cea72f91316deb326e9e2b41cdabc52cdcb38c404ea65c6f46464441055b0e81",
+    "prompts/writer_fact_repair.md": "f0a593343953ab14b903b13232cc9173a5de02c61ebcecce07c5e456d1aede9c"
+  },
+  "binary_sha256": "0cc045710f74286cba3d23546185e5c52a5e2cc5d6f8232fb0435c065479cb52",
+  "validation": {
+    "library_passed": 335,
+    "ignored": 10,
+    "fact_terminal_cases": 4,
+    "fact_terminal_local_requests": 35,
+    "p5_terminal_cases": 5,
+    "p5_terminal_local_requests": 45,
+    "legacy_writer_replay_new_requests": 0
+  }
+}
