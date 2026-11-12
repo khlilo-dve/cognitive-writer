@@ -598,3 +598,5 @@ P7提交53206d2。P8分四步：
 显式`style-draft chat`工作区已通过真实终端+本地模型的混合DOCX/PDF→零澄清候选→v1明确保存/重复幂等→重启零重发→追加v2→指定v1写作→事实首审/一次修订/复核→全文审阅态`/writer-review`→再次重启/相同任务零重发；首审问题段原样保留且模型复核报空时阻断，旧版本不变。新增2综合场景24本地模拟请求、0付费；默认17、风格选择11、局部修改14、P3九、P4九、P5五、P6十组相称回归已通过。P4/P6旧测试假设失效的首次失败与修正有原始记录；最终九/十组完整通过。
 
 采用决定D08：可审阅的显式学习工作区、候选/版本/恢复与有限事实阻断机制可在已验证输入范围内使用；默认旧REPL入口不切换、研究候选不批量写正式styles、自动风格保真与可发布成稿不宣称通过。A01–A33逐项证据见runs/product-acceptance-local-01/acceptance-matrix.json：25项工程相关行为有隔离运行证据，4项仅有限证据，4项质量门槛未满足。全量自动结果限于有限样本，P7已知反例保留。P8新增模型API费用0，累计预算占用25.428288元含历史未知6.032614，余额74.571712元。用户使用说明docs/style-learning-workspace-guide.md，通俗报告research/style-aggregation/reports/product-acceptance-p8-2026-11-12.md。下一阶段是对具体质量缺陷做限定修复，再用同一反例决定默认采用，不扩大矩阵凑通过数。
+
+P7实现/证据提交：`53206d2`；P8全链验证、使用说明与限定范围采用提交：`2a54efc`。A01–A33逐项结果在`research/style-aggregation/runs/product-acceptance-local-01/acceptance-matrix.json`，质量缺口仍以P7原始run为准。

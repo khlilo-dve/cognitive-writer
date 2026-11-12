@@ -381,3 +381,5 @@ P7飞书报告已user身份发布并回读：https://www.feishu.cn/docx/EmWBdKxw
 
 
 P8飞书报告已user身份发布并回读：https://www.feishu.cn/docx/NnUsd1lFko47lox72LTcvOQ1nGb；Base新增product-acceptance-local-01与E0097–E0099，现209条，旧205条ID保留。P8费用账本与P7提交逐字节一致。
+
+P7实现/证据提交：`53206d2`；P8全链验证、使用说明与限定范围采用提交：`2a54efc`。A01–A33逐项结果在`research/style-aggregation/runs/product-acceptance-local-01/acceptance-matrix.json`，质量缺口仍以P7原始run为准。
