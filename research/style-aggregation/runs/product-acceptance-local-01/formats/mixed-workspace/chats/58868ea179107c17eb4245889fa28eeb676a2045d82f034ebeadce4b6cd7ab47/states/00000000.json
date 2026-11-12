@@ -1,0 +1,14 @@
+{
+  "id": "f370ce607cfbf2c2ef138155ef7f92e7884d524cf85dd441961da54c07746d52",
+  "previous": null,
+  "sequence": 0,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 0,
+    "pending": null,
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

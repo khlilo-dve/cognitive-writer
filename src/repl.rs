@@ -476,6 +476,12 @@ impl Repl {
 
     async fn process_input(&mut self, input: &str) -> Result<bool, AppError> {
         let input = input.trim();
+        if matches!(input, "/writer-review" | "查看写作核对") {
+            if let Some(r) = &self.learning_chat {
+                crate::writer_facts::display(r)?;
+                return Ok(false);
+            }
+        }
         if self.learning_chat.is_some()
             && matches!(
                 self.state,

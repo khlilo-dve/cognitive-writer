@@ -1,0 +1,60 @@
+{
+  "id": "5fe711dd908a3a1821ebc1bd325c84b1a01aea802bf8b716382585f4c5985d08",
+  "previous": "f150f05d802900c224ba61cab6a2bd5aef6f09eec1fcbb8257d06aa4f721be9f",
+  "sequence": 5,
+  "state": {
+    "task_id": "d08813fd17f394bb34e4260823e5134b7528fb6b0c5cc18da64980f125ae98b2",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "fixtures/中文文章.docx"
+        },
+        {
+          "kind": "file",
+          "path": "fixtures/中文文字.pdf"
+        },
+        {
+          "kind": "url",
+          "url": "http://127.0.0.1:43715/article"
+        }
+      ],
+      "note": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:43715/article，保存为“混合来源”",
+      "expected_articles": 3,
+      "allow_partial": false
+    },
+    "user_request": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:43715/article，保存为“混合来源”",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "9ea4053c9069d70e78767d2badded7d2a46dc17937e49ef714365dae6f83a7f2",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {
+      "s002": {
+        "classification": "article",
+        "evidence": [
+          "月色与书页。\n\n同一"
+        ],
+        "reason": "完整文字层为连续文章，不按页分篇"
+      }
+    },
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

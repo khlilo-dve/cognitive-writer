@@ -1,0 +1,17 @@
+{
+  "source_sha256": "0a17d3a2edd96ddf7317f0d6b62bcad22541a4f31fca2d2ed95d27521c9a8cec",
+  "response": {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "NnUsd1lFko47lox72LTcvOQ1nGb",
+      "doc_url": "https://www.feishu.cn/docx/NnUsd1lFko47lox72LTcvOQ1nGb",
+      "log_id": "20261112230207FA67ED350B145A0F0975",
+      "message": "文档创建成功",
+      "warnings": [
+        "[WARNING:LINK_INVALID_URL] markdown link has invalid URL (skipped link style): [前一阶段](learning-quality-p7-2026-11-12.md)\n💡 Suggestion: Link URL must be a valid http:// or https:// URL, or an anchor link starting with #. The text will be displayed as plain text without hyperlink",
+        "[WARNING:LINK_INVALID_URL] markdown link has invalid URL (skipped link style): [使用说明](../../docs/style-learning-workspace-guide.md)\n💡 Suggestion: Link URL must be a valid http:// or https:// URL, or an anchor link starting with #. The text will be displayed as plain text without hyperlink"
+      ]
+    }
+  }
+}

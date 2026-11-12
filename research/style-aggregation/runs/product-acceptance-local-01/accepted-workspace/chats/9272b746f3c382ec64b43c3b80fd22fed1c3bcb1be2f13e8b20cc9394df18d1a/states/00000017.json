@@ -1,0 +1,34 @@
+{
+  "id": "8d1b5a055f24bab7b1e07ceafa301ffb435a66852e57bb7fa7a784a8c514ebce",
+  "previous": "0100996971602fa300abe5b5f41f873ecac30a49ff5abd3501545aa94b269aa4",
+  "sequence": 17,
+  "state": {
+    "selected_writer": {
+      "method": "writer-facts-v1",
+      "label": "研读 v1",
+      "spec": "从具体材料进入判断，保留感受、限定与句段变化，不编造来源。",
+      "request": "写一段夜读建议。图书馆十点闭馆，我希望留半小时收拾与回宿舍，不补设施或流程。"
+    },
+    "delivery": {
+      "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+      "revision": 0,
+      "job_id": "d519a0b7f9470e988020ccecbc0073deb88ae3a2a94a9c45b2a334fccade7a2c",
+      "candidate_id": "769f4118968829aeb5bed034c1b2b39b70793fa03abe5cfd6dcc64f3891c83b5",
+      "save_name": "研读",
+      "saved": {
+        "name": "研读",
+        "number": 2,
+        "id": "8bfa7d2db158a60a0803361ef185ee4aa591a1cfe33422d58e23a7ccd8741b85"
+      },
+      "writer": null
+    },
+    "active": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+    "paused": false,
+    "turn": 2,
+    "pending": null,
+    "event": {
+      "kind": "learning",
+      "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8"
+    }
+  }
+}

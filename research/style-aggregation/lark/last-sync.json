@@ -4,12 +4,8 @@
   "manifest": "None",
   "run": "None",
   "runs": [
-    "research/style-aggregation/runs/quality-p7-local-01",
-    "research/style-aggregation/runs/quality-p7-real-01",
-    "research/style-aggregation/runs/quality-p7-real-02",
-    "research/style-aggregation/runs/quality-p7-real-03",
-    "research/style-aggregation/runs/quality-p7-real-04"
+    "research/style-aggregation/runs/product-acceptance-local-01"
   ],
-  "journal_from": "E0093",
-  "record_count": 205
+  "journal_from": "E0097",
+  "record_count": 209
 }

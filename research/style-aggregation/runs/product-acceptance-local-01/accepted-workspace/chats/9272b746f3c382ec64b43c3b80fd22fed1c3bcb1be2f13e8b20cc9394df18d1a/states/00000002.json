@@ -1,0 +1,39 @@
+{
+  "id": "31805c19ece15a17f7de32e93c645cd593ebd2a8ff4d4dd375978c902b125335",
+  "previous": "d55be1bdd6ed42191a9d51836800b05de81101bc5899247de3c090d548a63913",
+  "sequence": 2,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": {
+      "number": 1,
+      "input": "学习这2篇 \"中文文章.docx\" \"中文文字.pdf\"，保存为“研读”",
+      "binding": null,
+      "action": {
+        "kind": "learn",
+        "sources": [
+          {
+            "kind": "file",
+            "path": "中文文章.docx"
+          },
+          {
+            "kind": "file",
+            "path": "中文文字.pdf"
+          }
+        ],
+        "expected_articles": 2,
+        "target_titles": [],
+        "all_articles": false,
+        "allow_partial": false,
+        "save_name": "研读",
+        "base_name": null,
+        "base_number": null,
+        "write_after": false
+      }
+    },
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

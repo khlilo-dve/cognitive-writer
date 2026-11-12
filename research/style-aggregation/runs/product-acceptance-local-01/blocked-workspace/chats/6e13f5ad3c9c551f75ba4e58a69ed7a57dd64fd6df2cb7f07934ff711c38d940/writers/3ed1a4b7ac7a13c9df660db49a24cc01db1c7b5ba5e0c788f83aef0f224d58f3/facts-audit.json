@@ -1,0 +1,20 @@
+{
+  "original_sha256": "c244399212fa48be977117dc6d7043339a0a211396c8eeb49f5d1d58932b434e",
+  "final_sha256": "c244399212fa48be977117dc6d7043339a0a211396c8eeb49f5d1d58932b434e",
+  "first": {
+    "issues": [
+      {
+        "kind": "unsupported_fact",
+        "quote": "所有人都要排队刷卡。",
+        "reason": "任务没有提供设施或流程"
+      }
+    ],
+    "missing": []
+  },
+  "final_review": {
+    "issues": [],
+    "missing": []
+  },
+  "repaired": true,
+  "status": "model_found_no_issue_after_one_repair"
+}

@@ -43,3 +43,6 @@ MiMo适配：已知MiMo v2.5/v2.6系列的direct_free/two_stage结构化学习�
 2026-11-11 P5开发入口：style-draft chat在P4材料Agent之后调用learning_flow，绑定task/revision→冻结learning_job→候选/版本，复用原Pro学习核心。保存同候选幂等；无名先交候选，明确组合需求可直接Flash写作；/preview、/diff、/save、/versions、/show、/use-version、/use-candidate支持复看与控制。Writer只接纯spec与独立新写作要求，逐阶段回执与未知请求显式重试共用learning_transport，输出进入旧全文审阅态。首尾粘贴可界定正文；DOCX/PDF仍P6。327库测试/10忽略及11真实响应/零请求恢复通过，但新稿有事实补写，P7/P8未完成；见PRD、设计第11节与learning-flow-2026-11-11报告。旧默认入口及styles/.env未切换。
 
 2026-11-12 P6开发入口：learning_document分流DOCX/文字PDF，learning_docx保留可见正文与标题，learning_pdf逐页提取并适配明确UCS2编码；扫描/缺字映射/混合扫描不交部分正文。source_binary保留原文件blob与哈希，派生纯文本仍由P3处理；旧集合可缺省新字段，恢复仍可核验。learning_input_limits在选文和job准备时约束总正文256KiB，采集仍保存完整8MiB内来源；不是输出长度或质量指标。10本地场景/333库测试通过，0新增API费用；详见PRD/设计12及learning-formats报告，P7语义/事实、P8正式采用仍待办。
+
+
+2026-11-12 P7/P8现行状态：显式`style-draft chat`已从混合TXT/MD/DOCX/文字PDF/正文/URL接到1–10篇学习、待审候选、显式保存/追加版本、指定旧版Writer和中断恢复。新Writer用Flash大纲/正文、Pro独立事实首审，最多一次Flash修订后Pro复核；首审有问题且原段不变时额外阻断。`/writer-review`在学习等待态和全文审阅态只读查看，不发模型请求。历史已完成Writer原回执可读但未经新事实核对；未完成旧Writer不静默升级。P7两作者10篇真实候选和15条重要概括核对完成，旧单/双篇有必要化/否定反转/穷尽结尾问题，Writer用稿仍有事实漏检与任务检查口吻。P8全链工程已验收，当前仅限定范围采用显式工作区；默认旧`learn`/REPL及`styles/`不自动切换。需求/采用决定见`docs/PRD.md`的D08，使用见`docs/style-learning-workspace-guide.md`，证据见`research/style-aggregation/reports/product-acceptance-p8-2026-11-12.md`。本段为现行事实，上方历史段保留原阶段语境。

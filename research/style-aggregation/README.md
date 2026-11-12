@@ -1,5 +1,8 @@
 # 多文章作者风格研究
 
+P8（2026-11-12）显式工作区全链工程验收已完成，限定范围采用；质量缺口待修。见[阶段报告](reports/product-acceptance-p8-2026-11-12.md)及[runs/product-acceptance-local-01/acceptance-matrix.json](runs/product-acceptance-local-01/acceptance-matrix.json)。
+
+
 当前产品阶段（2026-11-12）：P7有限检查及事实核对开发完成，语义/用稿质量分项未全通过。见[通俗报告](reports/learning-quality-p7-2026-11-12.md)。下一项P8已授权，全链验收与采用范围单独记录。
 
 

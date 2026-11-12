@@ -1,0 +1,27 @@
+{
+  "status": "complete",
+  "stdout": "{\n  \"status\": \"passed\",\n  \"checks\": [\n    \"clear_materials_save_name_zero_control_calls_restore_and_same_task_revision\",\n    \"question_binding_pause_restore_free_reply_and_no_duplicate_decision\",\n    \"missing_source_one_domain_question_then_block_and_proactive_material_without_new_budget\",\n    \"use_existing_style_stays_generation_and_preserves_original_requirements\",\n    \"unreadable_source_one_question_direct_replacement_and_cancel_then_use_existing_style\",\n    \"domain_failure_restore_no_implicit_resend_explicit_retry_keeps_unknown_fee\",\n    \"goal_revision_preserves_two_question_cap_and_only_explicit_replacement_creates_task\",\n    \"unsupported_model_scope_change_rejected_and_cached_invalid_action_not_resampled\",\n    \"ctrl_c_during_parent_interpretation_keeps_pending_ref_and_explicit_retry\"\n  ],\n  \"local_http_requests\": 43,\n  \"parent_domain_and_legacy_writer_requests\": 15,\n  \"learning_fact_requests\": 28,\n  \"paid_model_requests\": 0,\n  \"ledger_before_sha256\": \"3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f\",\n  \"ledger_after_sha256\": \"3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f\",\n  \"scope\": \"P4 conversation controls on current P5/P7 runtime; downstream Pro calls counted separately; combined learned Writer is covered by P5/P8 suites\",\n  \"temporary_workspaces_cleaned\": true\n}\n",
+  "stderr": "",
+  "audit": {
+    "status": "passed",
+    "checks": [
+      "clear_materials_save_name_zero_control_calls_restore_and_same_task_revision",
+      "question_binding_pause_restore_free_reply_and_no_duplicate_decision",
+      "missing_source_one_domain_question_then_block_and_proactive_material_without_new_budget",
+      "use_existing_style_stays_generation_and_preserves_original_requirements",
+      "unreadable_source_one_question_direct_replacement_and_cancel_then_use_existing_style",
+      "domain_failure_restore_no_implicit_resend_explicit_retry_keeps_unknown_fee",
+      "goal_revision_preserves_two_question_cap_and_only_explicit_replacement_creates_task",
+      "unsupported_model_scope_change_rejected_and_cached_invalid_action_not_resampled",
+      "ctrl_c_during_parent_interpretation_keeps_pending_ref_and_explicit_retry"
+    ],
+    "local_http_requests": 43,
+    "parent_domain_and_legacy_writer_requests": 15,
+    "learning_fact_requests": 28,
+    "paid_model_requests": 0,
+    "ledger_before_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f",
+    "ledger_after_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f",
+    "scope": "P4 conversation controls on current P5/P7 runtime; downstream Pro calls counted separately; combined learned Writer is covered by P5/P8 suites",
+    "temporary_workspaces_cleaned": true
+  }
+}

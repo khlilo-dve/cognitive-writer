@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "id": "8bfa7d2db158a60a0803361ef185ee4aa591a1cfe33422d58e23a7ccd8741b85",
+  "name": "研读",
+  "number": 2,
+  "previous": "ed7c5d0ae154016861101fc1ae2ae0c816aca63b73bccb4e881e52543bdd529c",
+  "saved_at": "2026-11-12T14:59:31.477172550+00:00",
+  "status": "saved_draft_not_quality_certified",
+  "candidate": {
+    "schema": 1,
+    "id": "769f4118968829aeb5bed034c1b2b39b70793fa03abe5cfd6dcc64f3891c83b5",
+    "input": {
+      "articles": [
+        "雨夜读书\n\n我合上书，窗外的雨还没有停。\n\n甲 & 乙之间留一个空格。\n\n左格\n\n右格",
+        "SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+        "月色与书页。\n\n同一篇文章的第二页，读完后我关了灯。"
+      ],
+      "draft": {
+        "status": "draft_pending_semantic_review",
+        "method": "voice-reviewed-v3",
+        "spec": "从具体材料进入判断，保留感受、限定与句段变化，不编造来源。",
+        "analysis": "INTERNAL_ANALYSIS",
+        "sources": [
+          {
+            "article": "a01",
+            "text_sha256": "08c2c198fd8e1c9148f27f2a57dbacfc4d458b16414821528c8f9e478d5dbd7c",
+            "normalized_sha256": "73b22da5663ab01e5b6d22e54b3bae8d9633e744594c650248e9a67eb5d57793"
+          },
+          {
+            "article": "a02",
+            "text_sha256": "eb249bc9ef0ef838c121ee3caac04ca5dd7733e95b88cbeef5b4c90bb78844ca",
+            "normalized_sha256": "eb249bc9ef0ef838c121ee3caac04ca5dd7733e95b88cbeef5b4c90bb78844ca"
+          },
+          {
+            "article": "a03",
+            "text_sha256": "67ab328c6c495ffc98eac2ed7062df0b27d834ed2b7ed3d96acb2b2587ce1d7f",
+            "normalized_sha256": "efb00bb560f0f9a16891eb8bec3cc1ee3365292f4a864c00d74e4a612ad7816f"
+          }
+        ],
+        "fingerprint": "62c1762b50855914f7bdde258881914cfabce024b168c3d1f7be743258cbf492",
+        "warnings": [
+          "已经模型原文复读和范围修订，仍是待审草稿；没有独立人评或自动采用结论。",
+          "模型审阅中的引文、反例及修订是否恰当仍需核对。"
+        ],
+        "calls": 4
+      },
+      "origin": "model_output",
+      "note": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。\n学习目标：追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。\n材料任务：abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8 修订0",
+      "review": "INTERNAL_REVIEW",
+      "base": {
+        "name": "研读",
+        "number": 1,
+        "id": "ed7c5d0ae154016861101fc1ae2ae0c816aca63b73bccb4e881e52543bdd529c"
+      }
+    }
+  }
+}

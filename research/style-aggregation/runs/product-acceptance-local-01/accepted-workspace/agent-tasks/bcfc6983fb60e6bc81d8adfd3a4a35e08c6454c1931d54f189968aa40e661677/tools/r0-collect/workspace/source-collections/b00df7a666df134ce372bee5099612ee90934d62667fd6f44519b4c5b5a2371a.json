@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "b00df7a666df134ce372bee5099612ee90934d62667fd6f44519b4c5b5a2371a",
+  "collected_at": "2026-11-12T14:59:31.124454349+00:00",
+  "base_dir": "/tmp/cw-p8-lcmq4fc7",
+  "request": {
+    "sources": [
+      {
+        "kind": "file",
+        "path": "中文文章.docx"
+      },
+      {
+        "kind": "file",
+        "path": "中文文字.pdf"
+      }
+    ],
+    "note": "学习这2篇 \"中文文章.docx\" \"中文文字.pdf\"，保存为“研读”",
+    "expected_articles": 2,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "binary": {
+        "sha256": "f207e4d0ff89234e48357d48905e2fffaf2dc14405dec99d0426d5e379b6c628",
+        "size": 36918,
+        "path": "blobs/f207e4d0ff89234e48357d48905e2fffaf2dc14405dec99d0426d5e379b6c628"
+      },
+      "id": "s001",
+      "resolved_locator": "/tmp/cw-p8-lcmq4fc7/中文文章.docx",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "file_docx",
+          "http_status": null,
+          "outcome": ""
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "docx_visible_body_v1",
+          "content_type": "text/markdown",
+          "resolved_locator": "/tmp/cw-p8-lcmq4fc7/中文文章.docx",
+          "body": "雨夜读书\n\n我合上书，窗外的雨还没有停。\n\n甲 & 乙之间留一个空格。\n\n左格\n\n右格",
+          "raw_sha256": "08c2c198fd8e1c9148f27f2a57dbacfc4d458b16414821528c8f9e478d5dbd7c"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "中文文章",
+          "text": "雨夜读书\n\n我合上书，窗外的雨还没有停。\n\n甲 & 乙之间留一个空格。\n\n左格\n\n右格",
+          "text_sha256": "08c2c198fd8e1c9148f27f2a57dbacfc4d458b16414821528c8f9e478d5dbd7c",
+          "normalized_sha256": "73b22da5663ab01e5b6d22e54b3bae8d9633e744594c650248e9a67eb5d57793",
+          "boundary_method": "docx_visible_body_v1",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    },
+    {
+      "binary": {
+        "sha256": "1847c7a2f4748edea61845bca27fec624eb43a38b9d6e97985dc711d282f00e5",
+        "size": 2856,
+        "path": "blobs/1847c7a2f4748edea61845bca27fec624eb43a38b9d6e97985dc711d282f00e5"
+      },
+      "id": "s002",
+      "resolved_locator": "/tmp/cw-p8-lcmq4fc7/中文文字.pdf",
+      "status": "needs_inspection",
+      "reason": "PDF共2页；空白页[]；仅文字层，图片含义与多栏阅读顺序未认证；待领域确认文章边界，不按页数计篇数",
+      "attempts": [
+        {
+          "method": "file_pdf",
+          "http_status": null,
+          "outcome": "PDF共2页；空白页[]；仅文字层，图片含义与多栏阅读顺序未认证；待领域确认文章边界，不按页数计篇数"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "pdf_text_layer_v1",
+          "content_type": "text/markdown",
+          "resolved_locator": "/tmp/cw-p8-lcmq4fc7/中文文字.pdf",
+          "body": "月色与书页。\n\n同一篇文章的第二页，读完后我关了灯。",
+          "raw_sha256": "67ab328c6c495ffc98eac2ed7062df0b27d834ed2b7ed3d96acb2b2587ce1d7f"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s002-a001",
+          "source_id": "s002",
+          "title": "中文文字",
+          "text": "月色与书页。\n\n同一篇文章的第二页，读完后我关了灯。",
+          "text_sha256": "67ab328c6c495ffc98eac2ed7062df0b27d834ed2b7ed3d96acb2b2587ce1d7f",
+          "normalized_sha256": "efb00bb560f0f9a16891eb8bec3cc1ee3365292f4a864c00d74e4a612ad7816f",
+          "boundary_method": "pdf_text_layer_v1",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

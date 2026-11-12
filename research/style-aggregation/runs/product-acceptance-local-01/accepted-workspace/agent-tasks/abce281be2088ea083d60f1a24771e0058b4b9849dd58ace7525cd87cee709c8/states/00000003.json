@@ -1,0 +1,47 @@
+{
+  "id": "01e5c20c3f6f3d265efdf4ea654b970a9b276a3d25bd93b14becf3b54cb260db",
+  "previous": "fe7cb2e5c663987f0df21f9741bb375e3186658a830c148df56cbc2c30393ab9",
+  "sequence": 3,
+  "state": {
+    "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+    "revision": 0,
+    "status": "ready_for_learning",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "追加正文",
+          "text": "SOURCE_SENTINEL，第三篇独立文字，我把窗关上。"
+        }
+      ],
+      "note": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+      "expected_articles": null,
+      "allow_partial": false
+    },
+    "user_request": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "fdae652d315bacc917405b4383a15494d9319552fa7256086cd8d60cdbaa25af",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [
+      "s001-a001"
+    ],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": {
+      "collected": true
+    },
+    "reason": "来源和范围已满足，正文已准备好；本步骤未追加追问或决策模型调用"
+  }
+}

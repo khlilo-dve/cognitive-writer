@@ -1,0 +1,37 @@
+{
+  "id": "19b760a0dcb1add01716467d87e6607cbec2a3fb7563bf00ba1351b9da280424",
+  "previous": "dd9e4c63e88e7cced2d61fa09ec65a467b06b4db09c5912bf1c5c903b2041e97",
+  "sequence": 11,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 2,
+    "pending": {
+      "number": 2,
+      "input": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+      "binding": null,
+      "action": {
+        "kind": "learn",
+        "sources": [
+          {
+            "kind": "text",
+            "label": "追加正文",
+            "text": "SOURCE_SENTINEL，第三篇独立文字，我把窗关上。"
+          }
+        ],
+        "expected_articles": null,
+        "target_titles": [],
+        "all_articles": false,
+        "allow_partial": false,
+        "save_name": "研读",
+        "base_name": "研读",
+        "base_number": null,
+        "write_after": false
+      }
+    },
+    "event": {
+      "kind": "learning",
+      "task_id": "bcfc6983fb60e6bc81d8adfd3a4a35e08c6454c1931d54f189968aa40e661677"
+    }
+  }
+}

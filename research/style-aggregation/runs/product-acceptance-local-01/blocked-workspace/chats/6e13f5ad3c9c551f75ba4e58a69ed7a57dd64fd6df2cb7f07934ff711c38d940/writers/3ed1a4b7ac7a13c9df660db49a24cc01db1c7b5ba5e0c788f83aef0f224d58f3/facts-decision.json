@@ -1,0 +1,11 @@
+{
+  "model_found_no_issue": true,
+  "status": "needs_review_after_one_repair",
+  "unchanged_issue_paragraphs": [
+    {
+      "kind": "unsupported_fact",
+      "quote": "所有人都要排队刷卡。",
+      "reason": "任务没有提供设施或流程"
+    }
+  ]
+}

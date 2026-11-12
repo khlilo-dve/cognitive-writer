@@ -1,0 +1,35 @@
+{
+  "id": "eb8399291fd43445dd54c0e34abc7389598c5ea013f3a9901d7c2f1632b81c6a",
+  "previous": "80b9ae67c5497992227bda4cbf8ba362e9a1be324b919f40ba3007362762be3b",
+  "sequence": 2,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 1,
+    "pending": {
+      "number": 1,
+      "input": "学习 \"one.md\"，保存为“研读”",
+      "binding": null,
+      "action": {
+        "kind": "learn",
+        "sources": [
+          {
+            "kind": "file",
+            "path": "one.md"
+          }
+        ],
+        "expected_articles": null,
+        "target_titles": [],
+        "all_articles": false,
+        "allow_partial": false,
+        "save_name": "研读",
+        "base_name": null,
+        "base_number": null,
+        "write_after": false
+      }
+    },
+    "event": {
+      "kind": "idle"
+    }
+  }
+}

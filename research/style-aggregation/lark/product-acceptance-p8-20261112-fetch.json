@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "NnUsd1lFko47lox72LTcvOQ1nGb",
+    "length": 4935,
+    "log_id": "20261112230209FAC5C7F98F9D9C0FC138",
+    "markdown": "# P8阶段报告：工作区全链可以用，正式默认采用仍受质量门槛约束\n2026-11-12。P8工程验收已完成。现在可以在明确的`style-draft chat`工作区，从文件/正文/URL进入学习、得到候选、命名版本、追加、指定旧版写作，并在中断后恢复。真实终端的混合DOCX+文字PDF流程已贯通到事实审核、一次修订和全文审阅。根据P7的真实质量证据，本阶段的采用决定为**限定范围使用可审阅工作区**；自动风格保真和默认旧入口替换尚不能宣称通过。\n## 用户实际能走到的路径\n在新建的隔离工作区中，给普通DOCX和中文文字PDF，两篇均被识别，零用户追问，形成候选并明确保存v1。重复保存没有新增版本或请求；重启后`继续`没有重发请求；追加第三篇产生v2，v1仍可`/show`查看。指定v1写新题材时，Flash给出原稿，Pro指出未给的“所有人排队刷卡”，Flash删除后Pro复核，全文等待用户确认；全文审阅态使用`/writer-review`能只读查看核对，0新请求。重启后已有全文保留，再次提出相同旧版任务复用回执，0新请求。另一个场景让修订稿原样保留问题段、第二模型却报空问题，程序闸门让任务保持待审，原版本不变，重启/继续也不重发。两组共24次本地模拟模型请求，0付费。\n## 故障和旧功能检查\n第一次回归暴露的是两份旧测试脚本的假设失效：P4脚本仍假定材料就绪后不会自动学习，P6隔离输出缺少只读fixture-manifest。原失败在regressions.json；P4脚本随后保留九个会话/追问/恢复场景，补当前学习与事实模型合同，15次原会话/旧Writer请求、28次下游Pro请求均经本地模拟，九场景通过。P6清单复制到隔离输出后，同批10格式/数量场景32次本地模型请求及1本地网页GET通过。没有改产品代码绕开旧检查。\n旧行为核查还包括：P3九个领域任务场景14次本地请求；P5五个候选/版本/未知响应/Writer场景45次本地请求；默认终端17场景、风格选择11场景、局部修改14场景。所有场景都使用隔离工作区和本地模拟；本次最终的全库测试336通过/10忽略、构建通过。P8所有检查0新付费、账本SHA不变；历史远程记录与回执身份保留。\n## 采用决定和未通过项\n\n<lark-table rows=\"5\" cols=\"3\" header-row=\"true\" column-widths=\"244,244,244\">\n\n  <lark-tr>\n    <lark-td>\n      对象\n    </lark-td>\n    <lark-td>\n      本阶段决定\n    </lark-td>\n    <lark-td>\n      依据和边界\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      明确打开的`style-draft chat`工作区\n    </lark-td>\n    <lark-td>\n      限定范围采用\n    </lark-td>\n    <lark-td>\n      混合格式→候选→版本→写作→恢复有真实终端证据；保存结果标待审，用户明确选来源/版本\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      独立事实审核与一次修订\n    </lark-td>\n    <lark-td>\n      采用为阻断闸门和审阅记录\n    </lark-td>\n    <lark-td>\n      可拦住部分越界；模型可能漏检或误判，修一次失败则停待审，不宣称真值保证\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      两作者10篇研究候选\n    </lark-td>\n    <lark-td>\n      保留可审阅，不批量写正式styles\n    </lark-td>\n    <lark-td>\n      20篇原文和15条重要概括检查有具体结论，但不足以证明普遍稳定；旧单/双篇有失真\n    </lark-td>\n  </lark-tr>\n  <lark-tr>\n    <lark-td>\n      自动可发布成稿及默认旧REPL替换\n    </lark-td>\n    <lark-td>\n      暂不采用\n    </lark-td>\n    <lark-td>\n      P7旧负例、交换稿和便签稿仍有事实/表达缺口，A21–A23未满足完整质量门槛\n    </lark-td>\n  </lark-tr>\n</lark-table>\n\n下轮质量改进的明确问题是：单/双篇说明不能把局部做法说成必要或穷尽；第一人称感受的否定和限定不能被反转；Writer修订须解决每个原问题，且不要把“材料没给”写进正文。修后用同一已知反例验收，再决定默认入口和质量采用。不要重开大样本矩阵或以字数补材料。\nA01–A33逐项追溯见`runs/product-acceptance-local-01/acceptance-matrix.json`：25项工程相关行为有隔离运行证据，4项仅有限证据，4项质量门槛未满足。工程证据列不代表每项均经过真实模型语义验收。\n## 费用、来源与使用\nP8新增API费用¥0、未知预留0。累计预算占用沿用P7末的¥25.428288，含历史未知¥6.032614；¥100预算剩余¥74.571712。P7真实质量报告见前一阶段。本次隔离运行资料在`runs/product-acceptance-local-01/`：terminal-audit.json、regressions.json、conversation-rerun.json、formats/terminal-audit.json及两个工作区快照。具体命令和限制见使用说明。\n",
+    "message": "Document fetched successfully",
+    "offset": 0,
+    "title": "Cognitive Writer｜P8：全链验收与限定范围采用决定",
+    "total_length": 2498
+  }
+}

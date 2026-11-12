@@ -1,0 +1,46 @@
+{
+  "id": "77b87441a2806d229db424db0ffd03faeb45ce078643b712a27074b96ee214ba",
+  "previous": "1ab1e45bc6603a2ada591a2afeba727cdf9ab519addc18c2c5968ea929461b37",
+  "sequence": 1,
+  "state": {
+    "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "text",
+          "label": "追加正文",
+          "text": "SOURCE_SENTINEL，第三篇独立文字，我把窗关上。"
+        }
+      ],
+      "note": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+      "expected_articles": null,
+      "allow_partial": false
+    },
+    "user_request": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "tool",
+      "step": "r0-collect",
+      "decision": {
+        "tool": "collect"
+      }
+    },
+    "observation": null,
+    "reason": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "40c42f47a54b71ab7f0d50e7bc7a7cb39909ba84f28d5dede45fa82bc086812f",
+  "previous": "19b760a0dcb1add01716467d87e6607cbec2a3fb7563bf00ba1351b9da280424",
+  "sequence": 12,
+  "state": {
+    "active": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+    "paused": false,
+    "turn": 2,
+    "pending": null,
+    "event": {
+      "kind": "learning",
+      "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8"
+    }
+  }
+}

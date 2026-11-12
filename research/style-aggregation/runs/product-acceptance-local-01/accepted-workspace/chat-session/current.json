@@ -1,0 +1,19 @@
+{
+  "state": "WaitingForFulltext",
+  "current_topic": "写一段夜读建议。图书馆十点闭馆，我希望留半小时收拾与回宿舍，不补设施或流程。",
+  "generation_request": "写一段夜读建议。图书馆十点闭馆，我希望留半小时收拾与回宿舍，不补设施或流程。",
+  "pending_style_choices": [],
+  "current_outline": "- 按十点闭馆及半小时收尾组织",
+  "current_fulltext": "图书馆十点闭馆。我希望留半小时收拾与回宿舍，所以建议九点半停读。",
+  "pending_edit": null,
+  "edit_undo": null,
+  "current_style_name": "研读 v1",
+  "current_style_content": "从具体材料进入判断，保留感受、限定与句段变化，不编造来源。",
+  "current_slug": null,
+  "pending_style_content": null,
+  "pending_delete_name": null,
+  "learning_chat": {
+    "workspace": "/tmp/cw-p8-lcmq4fc7/mixed",
+    "id": "9272b746f3c382ec64b43c3b80fd22fed1c3bcb1be2f13e8b20cc9394df18d1a"
+  }
+}

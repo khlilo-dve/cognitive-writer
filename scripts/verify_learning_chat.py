@@ -14,12 +14,12 @@ class ChatTerminal(Terminal):
 
 def main():
     ledger=ROOT/'research/style-aggregation/usage-ledger.json';before=hashlib.sha256(ledger.read_bytes()).hexdigest()
-    requests=[];errors=[];mode={'kind':'question'};arrived=threading.Event();release=threading.Event()
+    requests=[];downstream=[];errors=[];mode={'kind':'question'};arrived=threading.Event();release=threading.Event()
     class Handler(http.server.BaseHTTPRequestHandler):
         def log_message(self,*args):pass
         def do_POST(self):
             try:
-                body=json.loads(self.rfile.read(int(self.headers['Content-Length'])));requests.append(body)
+                body=json.loads(self.rfile.read(int(self.headers['Content-Length'])));(downstream if body['model']=='mimo-v2.6-pro' else requests).append(body)
                 system=body['messages'][0]['content'];kind=mode['kind']
                 if kind=='failure':self.send_response(503);self.end_headers();return
                 if kind=='hold':arrived.set();release.wait(10)
@@ -32,6 +32,13 @@ def main():
                 elif '风格学习领域Agent' in system:
                     user=json.loads(body['messages'][1]['content']);n=user['clarifications_used']+1
                     answer={'tool':'clarify','topic':'选文','question':f'第{n}轮：请选择纸上候车或给团队的项目备忘？','reason':'两篇独立文章尚未选择'}
+                elif '独立的文章事实与任务核对者' in system:
+                    answer={'issues':[],'missing':[]}
+                elif body.get('response_format')=={'type':'json_object'}:
+                    v=json.loads(body['messages'][1]['content'])
+                    answer={'analysis':'内部分析','evidence':[{'article':a['article'],'quote':a['text']} for a in v['articles']]}
+                elif body['model']=='mimo-v2.6-pro':
+                    answer='从具体材料组织声音，保留感受、推理和原文边界，不虚构亲历。'
                 else:
                     answer='# 新文章\n材料按要求展开。' if '生成大纲' not in system else '## 主题\n展开主题。'
                 text=answer if isinstance(answer,str) else json.dumps(answer,ensure_ascii=False)
@@ -61,16 +68,16 @@ def main():
         def quit(t):t.send('/quit\n');t.exited();t.close()
         def send(t,text,needle='[风格学习任务] > '):t.send(text+'\n');t.until(needle)
 
-        count=len(requests);root,t=start('clear');original='学习这两篇 "甲.md" "乙.md"，保存为“笔记声音”，再写一篇图书馆文章，800字，给学生看'
+        count=len(requests);root,t=start('clear');original='学习这两篇 "甲.md" "乙.md"，保存为“笔记声音”'
         try:
             send(t,original);ident,s,p=task(root);assert s['status']=='ready_for_learning' and not s['questions'] and len(requests)==count
-            assert p['delegate']['followup_request']==original and p['delegate']['save_name']=='笔记声音' and p['delegate']['request']['expected_articles']==2
+            assert p['delegate']['followup_request'] is None and p['delegate']['save_name']=='笔记声音' and p['delegate']['request']['expected_articles']==2
             quit(t);root,t=start('clear',True);send(t,'/learning');send(t,'继续');assert len(requests)==count
             send(t,'目标改为学习段落推进');assert task(root)[0]==ident and task(root)[1]['revision']==1
             send(t,'/cancel','[空闲] > ');assert not (root/'chat-session/current.json').exists();quit(t)
         finally:
             if not t.reaped:t.close()
-        checks.append('clear_combined_brief_save_name_zero_calls_restore_and_same_task_revision')
+        checks.append('clear_materials_save_name_zero_control_calls_restore_and_same_task_revision')
 
         root,t=start('choice');count=len(requests)
         try:
@@ -166,7 +173,7 @@ def main():
         release.set();server.shutdown();server.server_close();thread.join(timeout=5)
     assert not errors,errors
     after=hashlib.sha256(ledger.read_bytes()).hexdigest();assert before==after
-    audit={'status':'passed','checks':checks,'local_http_requests':len(requests),'paid_model_requests':0,'ledger_before_sha256':before,'ledger_after_sha256':after,'scope':'P4 real PTY with local HTTP; no style learning or Writer handoff from learned material','temporary_workspaces_cleaned':True}
+    audit={'status':'passed','checks':checks,'local_http_requests':len(requests)+len(downstream),'parent_domain_and_legacy_writer_requests':len(requests),'learning_fact_requests':len(downstream),'paid_model_requests':0,'ledger_before_sha256':before,'ledger_after_sha256':after,'scope':'P4 conversation controls on current P5/P7 runtime; downstream Pro calls counted separately; combined learned Writer is covered by P5/P8 suites','temporary_workspaces_cleaned':True}
     path=ROOT/'research/style-aggregation/runs/learning-chat-local-01';path.mkdir(exist_ok=True)
     (path/'cli-audit.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(audit,ensure_ascii=False,indent=2))

@@ -1,0 +1,20 @@
+{
+  "id": "dd9e4c63e88e7cced2d61fa09ec65a467b06b4db09c5912bf1c5c903b2041e97",
+  "previous": "ff2f85e8142da68076792d735ff18f79613e4860e5ff69f1d6b48798504ad26a",
+  "sequence": 10,
+  "state": {
+    "active": null,
+    "paused": false,
+    "turn": 2,
+    "pending": {
+      "number": 2,
+      "input": "追加到研读，保存为研读；正文：SOURCE_SENTINEL，第三篇独立文字，我把窗关上。",
+      "binding": null,
+      "action": null
+    },
+    "event": {
+      "kind": "learning",
+      "task_id": "bcfc6983fb60e6bc81d8adfd3a4a35e08c6454c1931d54f189968aa40e661677"
+    }
+  }
+}

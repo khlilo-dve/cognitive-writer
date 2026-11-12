@@ -1,0 +1,24 @@
+{
+  "id": "5bd5ad1fa68eabf8a0393718efb56ac3d4ca0b5f1f18d227e3be8fad8921d974",
+  "previous": "d5a0e6aee9cd42c4d70c2956e2a6d81cab6c07d2e6abf0880cdba14da11f30bb",
+  "sequence": 15,
+  "state": {
+    "delivery": {
+      "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+      "revision": 0,
+      "job_id": "d519a0b7f9470e988020ccecbc0073deb88ae3a2a94a9c45b2a334fccade7a2c",
+      "candidate_id": "769f4118968829aeb5bed034c1b2b39b70793fa03abe5cfd6dcc64f3891c83b5",
+      "save_name": "研读",
+      "saved": null,
+      "writer": null
+    },
+    "active": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8",
+    "paused": false,
+    "turn": 2,
+    "pending": null,
+    "event": {
+      "kind": "learning",
+      "task_id": "abce281be2088ea083d60f1a24771e0058b4b9849dd58ace7525cd87cee709c8"
+    }
+  }
+}

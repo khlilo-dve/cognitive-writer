@@ -1,0 +1,10 @@
+{
+  "issues": [
+    {
+      "kind": "unsupported_fact",
+      "quote": "所有人都要排队刷卡。",
+      "reason": "任务没有提供设施或流程"
+    }
+  ],
+  "missing": []
+}

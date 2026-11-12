@@ -1,0 +1,100 @@
+{
+  "domain": {
+    "status": "complete",
+    "exit_code": 0,
+    "stdout": "Verified 9 domain-agent scenarios, 14 local model requests, 0 paid calls\n",
+    "stderr": "",
+    "audit": {
+      "status": "passed",
+      "checks": [
+        "normal_source_zero_models_zero_questions_and_keyless_ready_resume",
+        "flash_inspect_and_resolve_sections_without_user_question",
+        "waiting_resume_no_request_and_explicit_user_selection_without_extra_question",
+        "at_most_two_questions_with_persisted_answers",
+        "unknown_request_not_resent_implicitly_explicit_retry_preserves_reserve_and_frozen_prompt",
+        "insufficient_budget_fails_before_request_intent",
+        "missing_usage_wrong_model_and_over_output_stop_with_receipt_and_no_new_sampling",
+        "single_pro_escalation_uses_same_durable_protocol",
+        "cancel_during_http_retains_late_receipt_without_adopting_question"
+      ],
+      "local_model_requests": 14,
+      "paid_model_requests": 0,
+      "ledger_before_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f",
+      "ledger_after_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f",
+      "temporary_workspaces_cleaned": true,
+      "scope": "P3 domain-agent development CLI; P4/P5 product conversation and style generation not implemented"
+    }
+  },
+  "conversation": {
+    "status": "failed",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/home/khlilo/cognitive-writer/scripts/verify_learning_chat.py\", line 173, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/khlilo/cognitive-writer/scripts/verify_learning_chat.py\", line 66, in main\n    send(t,original);ident,s,p=task(root);assert s['status']=='ready_for_learning' and not s['questions'] and len(requests)==count\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+    "audit": {
+      "status": "passed",
+      "checks": [
+        "clear_combined_brief_save_name_zero_calls_restore_and_same_task_revision",
+        "question_binding_pause_restore_free_reply_and_no_duplicate_decision",
+        "missing_source_one_domain_question_then_block_and_proactive_material_without_new_budget",
+        "use_existing_style_stays_generation_and_preserves_original_requirements",
+        "unreadable_source_one_question_direct_replacement_and_cancel_then_use_existing_style",
+        "domain_failure_restore_no_implicit_resend_explicit_retry_keeps_unknown_fee",
+        "goal_revision_preserves_two_question_cap_and_only_explicit_replacement_creates_task",
+        "unsupported_model_scope_change_rejected_and_cached_invalid_action_not_resampled",
+        "ctrl_c_during_parent_interpretation_keeps_pending_ref_and_explicit_retry"
+      ],
+      "local_http_requests": 15,
+      "paid_model_requests": 0,
+      "ledger_before_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+      "ledger_after_sha256": "e0fdc0dca8664b3ac51cc89058839c64b7e2e78bec836f14c1f25e614f0fdb65",
+      "scope": "P4 real PTY with local HTTP; no style learning or Writer handoff from learned material",
+      "temporary_workspaces_cleaned": true
+    }
+  },
+  "learning_flow": {
+    "status": "complete",
+    "exit_code": 0,
+    "stdout": "{\"status\": \"complete\", \"checks\": [\"file_candidate_preview_save_idempotence_restore_append_v2_and_old_v1_writer\", \"combined_auto_save_then_flash_writer_with_isolated_brief\", \"natural_trailing_learning_instruction_and_unnamed_candidate_writer\", \"unknown_learning_no_implicit_resend_restore_then_explicit_retry\", \"writer_interrupt_preserves_version_and_requires_explicit_retry\"], \"scenario_count\": 5, \"local_model_requests\": 45, \"paid_requests\": 0, \"ledger_unchanged\": true, \"errors\": []}\n",
+    "stderr": "",
+    "audit": {
+      "status": "complete",
+      "checks": [
+        "file_candidate_preview_save_idempotence_restore_append_v2_and_old_v1_writer",
+        "combined_auto_save_then_flash_writer_with_isolated_brief",
+        "natural_trailing_learning_instruction_and_unnamed_candidate_writer",
+        "unknown_learning_no_implicit_resend_restore_then_explicit_retry",
+        "writer_interrupt_preserves_version_and_requires_explicit_retry"
+      ],
+      "scenario_count": 5,
+      "local_model_requests": 45,
+      "paid_requests": 0,
+      "ledger_unchanged": true,
+      "errors": []
+    }
+  },
+  "default_terminal": {
+    "status": "complete",
+    "exit_code": 0,
+    "stdout": "{\"case\": \"failed_write_is_atomic\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"idle_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"naming_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"delete_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"restore_prompt_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"naming_eof\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"delete_eof\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"restored_naming_is_local\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 0}\n{\"case\": \"classification_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 1}\n{\"case\": \"rendering_ctrl_c\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 1}\n{\"case\": \"old_outline_render\", \"status\": \"passed\", \"exit_seconds\": 0.02, \"api_calls\": 1}\n{\"case\": \"restore_corrupt_preserves_original\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"restore_invalid_utf8_preserves_original\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"restore_unreadable_preserves_original\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"draft_local_failure_preserves_and_restores\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"draft_html_failure_preserves_and_restores\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n{\"case\": \"draft_website_failure_preserves_and_restores\", \"status\": \"passed\", \"exit_seconds\": 0.02}\n",
+    "stderr": ""
+  },
+  "style_selection": {
+    "status": "complete",
+    "exit_code": 0,
+    "stdout": "{\"case\": \"missing\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"single\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"unknown\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"ambiguous\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"descriptive\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"invented\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"direct\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"cancel\", \"status\": \"passed\", \"api_calls\": 1}\n{\"case\": \"interrupt\", \"status\": \"passed\", \"api_calls\": 1}\n{\"case\": \"eof\", \"status\": \"passed\", \"api_calls\": 1}\n{\"case\": \"restore\", \"status\": \"passed\", \"api_calls\": 3}\n",
+    "stderr": ""
+  },
+  "local_edit": {
+    "status": "complete",
+    "exit_code": 0,
+    "stdout": "{\"case\": \"single\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"multi\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"ambiguity\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"restore\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"cancel\", \"status\": \"passed\", \"api_calls\": 1}\n{\"case\": \"undo\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"undo_natural\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"undo_llm\", \"status\": \"passed\", \"api_calls\": 3}\n{\"case\": \"outside_id\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"missing_id\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"empty\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"unclosed\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"invalid_json\", \"status\": \"passed\", \"api_calls\": 2}\n{\"case\": \"interrupt\", \"status\": \"passed\", \"api_calls\": 2}\n",
+    "stderr": ""
+  },
+  "formats": {
+    "status": "failed",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/home/khlilo/cognitive-writer/scripts/verify_learning_formats.py\", line 57, in main\n    manifest=json.loads((OUT/'fixture-manifest.json').read_text())\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1029, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'research/style-aggregation/runs/product-acceptance-local-01/formats/fixture-manifest.json'\n"
+  },
+  "ledger_unchanged": true
+}

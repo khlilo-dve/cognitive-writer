@@ -1,0 +1,9 @@
+{
+  "status": "test_harness_fixed",
+  "attempts": 3,
+  "observation": "mixed DOCX/PDF did not reach saved version",
+  "root_cause": "new localhost responder omitted domain-agent inspect/resolve branch for PDF; error response had no articles array",
+  "change": "mock actual domain tools before voice-analysis response; no product gate bypassed",
+  "paid_requests": 0,
+  "additional_harness_issue": "domain state JSON wrapper was indexed without its state field; corrected to the existing storage contract"
+}

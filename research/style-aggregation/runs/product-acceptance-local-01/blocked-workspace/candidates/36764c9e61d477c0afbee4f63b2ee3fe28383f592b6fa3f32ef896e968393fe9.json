@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "36764c9e61d477c0afbee4f63b2ee3fe28383f592b6fa3f32ef896e968393fe9",
+  "input": {
+    "articles": [
+      "SOURCE_SENTINEL，灯光落在纸上，短句停住。"
+    ],
+    "draft": {
+      "status": "draft_pending_semantic_review",
+      "method": "voice-reviewed-v3",
+      "spec": "从具体材料进入判断，保留感受、限定与句段变化，不编造来源。",
+      "analysis": "INTERNAL_ANALYSIS",
+      "sources": [
+        {
+          "article": "a01",
+          "text_sha256": "4e744ea62956b33690cf9fb47a57002a4d11bc4fbed3dce3cce100fea6dccc39",
+          "normalized_sha256": "4e744ea62956b33690cf9fb47a57002a4d11bc4fbed3dce3cce100fea6dccc39"
+        }
+      ],
+      "fingerprint": "fff59c055518442b6d0986ca607972212f03565f8569ac2f50e0b08ca7e1ffb8",
+      "warnings": [
+        "已经模型原文复读和范围修订，仍是待审草稿；没有独立人评或自动采用结论。",
+        "模型审阅中的引文、反例及修订是否恰当仍需核对。",
+        "单篇仅说明本篇可见写法，不代表长期习惯。"
+      ],
+      "calls": 4
+    },
+    "origin": "model_output",
+    "note": "学习 \"one.md\"，保存为“研读”\n学习目标：学习 \"one.md\"，保存为“研读”\n材料任务：123b954309477789d68ff6246fbeffe0495f8b79d51c0d360d96eee72f71bddf 修订0",
+    "review": "INTERNAL_REVIEW",
+    "base": null
+  }
+}

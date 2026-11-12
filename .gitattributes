@@ -6,3 +6,6 @@
 /research/style-aggregation/runs/learning-formats-local-01/mixed-workspace/**/blobs/* -text -diff
 # Unified diff artifacts contain a literal space as the unchanged blank-line marker.
 /research/style-aggregation/runs/quality-p7-*/**/draft-diff.md whitespace=-blank-at-eol
+# P8 frozen source snapshots keep binary PDF xref bytes and generated diff markers intact.
+/research/style-aggregation/runs/product-acceptance-local-01/**/blobs/* -text -diff
+/research/style-aggregation/runs/product-acceptance-local-01/**/draft-diff.md whitespace=-blank-at-eol

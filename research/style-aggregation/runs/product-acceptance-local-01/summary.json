@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "scope": "P8 engineering acceptance of explicit style-draft entry; formal default and automatic quality adoption are deferred by P7 evidence",
+  "rows": [
+    {
+      "id": "mixed_docx_pdf_to_versioned_writer",
+      "status": "complete"
+    },
+    {
+      "id": "unchanged_flagged_paragraph_blocks",
+      "status": "complete"
+    },
+    {
+      "id": "domain_9",
+      "status": "complete"
+    },
+    {
+      "id": "conversation_9",
+      "status": "complete"
+    },
+    {
+      "id": "learning_flow_5",
+      "status": "complete"
+    },
+    {
+      "id": "formats_10",
+      "status": "complete"
+    },
+    {
+      "id": "default_terminal_17",
+      "status": "complete"
+    },
+    {
+      "id": "style_selection_11",
+      "status": "complete"
+    },
+    {
+      "id": "local_edit_14",
+      "status": "complete"
+    },
+    {
+      "id": "semantic_release_gate",
+      "status": "deferred"
+    }
+  ],
+  "usage": {
+    "run_occupied_cny": 0
+  },
+  "quality_adoption": "not_approved",
+  "adopted_scope": "explicit reviewable style-draft chat, candidates/versions and bounded Writer fact gate",
+  "model_requests_paid": 0,
+  "local_integrated_requests": 24,
+  "ledger_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f"
+}

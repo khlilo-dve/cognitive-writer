@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "method": "source-collection-v1",
+  "id": "707f00f88752c0b437049ead4c4db4b3074b35bb7647016a0e418c50e97159de",
+  "collected_at": "2026-11-12T14:59:31.740101469+00:00",
+  "base_dir": "/tmp/cw-p8-lcmq4fc7",
+  "request": {
+    "sources": [
+      {
+        "kind": "file",
+        "path": "one.md"
+      }
+    ],
+    "note": "学习 \"one.md\"，保存为“研读”",
+    "expected_articles": null,
+    "allow_partial": false
+  },
+  "records": [
+    {
+      "id": "s001",
+      "resolved_locator": "/tmp/cw-p8-lcmq4fc7/one.md",
+      "status": "extracted",
+      "reason": "",
+      "attempts": [
+        {
+          "method": "file_utf8",
+          "http_status": null,
+          "outcome": "received"
+        }
+      ],
+      "snapshots": [
+        {
+          "method": "file_utf8",
+          "content_type": "text/plain",
+          "resolved_locator": "/tmp/cw-p8-lcmq4fc7/one.md",
+          "body": "SOURCE_SENTINEL，灯光落在纸上，短句停住。",
+          "raw_sha256": "4e744ea62956b33690cf9fb47a57002a4d11bc4fbed3dce3cce100fea6dccc39"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "s001-a001",
+          "source_id": "s001",
+          "title": "/tmp/cw-p8-lcmq4fc7/one.md",
+          "text": "SOURCE_SENTINEL，灯光落在纸上，短句停住。",
+          "text_sha256": "4e744ea62956b33690cf9fb47a57002a4d11bc4fbed3dce3cce100fea6dccc39",
+          "normalized_sha256": "4e744ea62956b33690cf9fb47a57002a4d11bc4fbed3dce3cce100fea6dccc39",
+          "boundary_method": "provided_text_or_markdown",
+          "duplicate_of": null
+        }
+      ],
+      "links": []
+    }
+  ]
+}

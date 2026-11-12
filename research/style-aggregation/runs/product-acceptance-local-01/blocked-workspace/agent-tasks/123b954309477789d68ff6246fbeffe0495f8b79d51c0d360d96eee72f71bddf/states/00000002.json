@@ -1,0 +1,44 @@
+{
+  "id": "36731ccef09d16bc7f7e780ba90110fb2691c561beb5439a750884920f010d5b",
+  "previous": "a7fc2cee33bb72f4994691b214b20257d16ab884b7e74e6830aa0125413ccb7f",
+  "sequence": 2,
+  "state": {
+    "task_id": "123b954309477789d68ff6246fbeffe0495f8b79d51c0d360d96eee72f71bddf",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "one.md"
+        }
+      ],
+      "note": "学习 \"one.md\"，保存为“研读”",
+      "expected_articles": null,
+      "allow_partial": false
+    },
+    "user_request": "学习 \"one.md\"，保存为“研读”",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "707f00f88752c0b437049ead4c4db4b3074b35bb7647016a0e418c50e97159de",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}

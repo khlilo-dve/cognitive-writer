@@ -1,0 +1,39 @@
+{
+  "id": "8ce31d0cee3622c978ae56078c2e665808232d5789cb984d55bd57bb9549004b",
+  "previous": null,
+  "sequence": 0,
+  "state": {
+    "task_id": "123b954309477789d68ff6246fbeffe0495f8b79d51c0d360d96eee72f71bddf",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "one.md"
+        }
+      ],
+      "note": "学习 \"one.md\"，保存为“研读”",
+      "expected_articles": null,
+      "allow_partial": false
+    },
+    "user_request": "学习 \"one.md\"，保存为“研读”",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": null,
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 0,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": null,
+    "observation": null,
+    "reason": ""
+  }
+}

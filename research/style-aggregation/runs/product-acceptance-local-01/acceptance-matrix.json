@@ -1,0 +1,282 @@
+{
+  "scope": "A01-A33 P8 engineering evidence map. tested means relevant isolated engineering behavior observed, never automatic style fidelity or publication approval.",
+  "counts": {
+    "tested": 25,
+    "limited": 4,
+    "quality_not_met": 4
+  },
+  "cases": [
+    {
+      "id": "A01",
+      "status": "limited",
+      "reason": "单篇URL尚无同一P8终端全链证据；P6混合URL已验",
+      "evidence": [
+        "formats/terminal-audit.json",
+        "conversation-rerun.json"
+      ]
+    },
+    {
+      "id": "A02",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A03",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "conversation-rerun.json"
+      ]
+    },
+    {
+      "id": "A04",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "../quality-p7-local-01/learning-flow-regression.json"
+      ]
+    },
+    {
+      "id": "A05",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A06",
+      "status": "limited",
+      "reason": "目录/导航页工具能力有局部证据，未在P8完整链单独重现",
+      "evidence": [
+        "formats/terminal-audit.json",
+        "conversation-rerun.json"
+      ]
+    },
+    {
+      "id": "A07",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A08",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A09",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A10",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A11",
+      "status": "limited",
+      "reason": "综合多声音的范围决策有局部证据，不足以证明综合声音质量",
+      "evidence": [
+        "formats/terminal-audit.json",
+        "conversation-rerun.json"
+      ]
+    },
+    {
+      "id": "A12",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "regressions.json"
+      ]
+    },
+    {
+      "id": "A13",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "conversation-rerun.json"
+      ]
+    },
+    {
+      "id": "A14",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "../quality-p7-local-01/learning-flow-regression.json"
+      ]
+    },
+    {
+      "id": "A15",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A16",
+      "status": "limited",
+      "reason": "材料指令隔离有设计/局部测试，P8未对全部来源独立复跑",
+      "evidence": [
+        "formats/terminal-audit.json",
+        "conversation-rerun.json"
+      ]
+    },
+    {
+      "id": "A17",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "../quality-p7-local-01/learning-flow-regression.json"
+      ]
+    },
+    {
+      "id": "A18",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "../quality-p7-local-01/learning-flow-regression.json"
+      ]
+    },
+    {
+      "id": "A19",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A20",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "regressions.json"
+      ]
+    },
+    {
+      "id": "A21",
+      "status": "quality_not_met",
+      "reason": "旧单/双篇有必要化、否定反转、穷尽结尾等原文反例",
+      "evidence": [
+        "../quality-p7-real-03/claim-audit.json",
+        "../quality-p7-real-04/draft-readout.json"
+      ]
+    },
+    {
+      "id": "A22",
+      "status": "quality_not_met",
+      "reason": "两作者10篇候选完成且有15条重要概括复核；未证明普遍稳定",
+      "evidence": [
+        "../quality-p7-real-03/claim-audit.json",
+        "../quality-p7-real-04/draft-readout.json"
+      ]
+    },
+    {
+      "id": "A23",
+      "status": "quality_not_met",
+      "reason": "事实核对能阻断且有一次修订；旧负例仍失败，WX复核漏检需程序闸门",
+      "evidence": [
+        "../quality-p7-real-03/claim-audit.json",
+        "../quality-p7-real-04/draft-readout.json"
+      ]
+    },
+    {
+      "id": "A24",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "regressions.json"
+      ]
+    },
+    {
+      "id": "A25",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "../quality-p7-local-01/learning-flow-regression.json"
+      ]
+    },
+    {
+      "id": "A26",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "../quality-p7-local-01/learning-flow-regression.json"
+      ]
+    },
+    {
+      "id": "A27",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A28",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A29",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A30",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "formats/terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A31",
+      "status": "quality_not_met",
+      "reason": "15条原文核对中同时有支持、需限定和未可证结论",
+      "evidence": [
+        "../quality-p7-real-03/claim-audit.json",
+        "../quality-p7-real-04/draft-readout.json"
+      ]
+    },
+    {
+      "id": "A32",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "terminal-audit.json"
+      ]
+    },
+    {
+      "id": "A33",
+      "status": "tested",
+      "reason": "当前工程场景有隔离运行证据；真实模型语义质量另看P7报告",
+      "evidence": [
+        "terminal-audit.json"
+      ]
+    }
+  ]
+}

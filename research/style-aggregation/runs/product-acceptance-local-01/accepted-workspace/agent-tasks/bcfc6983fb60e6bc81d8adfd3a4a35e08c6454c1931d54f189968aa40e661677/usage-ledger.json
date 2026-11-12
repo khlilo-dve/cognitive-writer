@@ -1,0 +1,11 @@
+{
+  "entries": {
+    "bcfc6983fb60e6bc81d8adfd3a4a35e08c6454c1931d54f189968aa40e661677/r0-d1/attempt-1": {
+      "run_id": "bcfc6983fb60e6bc81d8adfd3a4a35e08c6454c1931d54f189968aa40e661677",
+      "phase": "full",
+      "reserved_micro": 11915,
+      "actual_micro": 260,
+      "state": "settled"
+    }
+  }
+}

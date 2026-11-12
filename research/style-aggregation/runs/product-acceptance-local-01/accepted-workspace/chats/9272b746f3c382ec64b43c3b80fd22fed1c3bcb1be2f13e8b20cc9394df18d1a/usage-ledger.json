@@ -1,0 +1,11 @@
+{
+  "entries": {
+    "9272b746f3c382ec64b43c3b80fd22fed1c3bcb1be2f13e8b20cc9394df18d1a/t0002-interpret/attempt-1": {
+      "run_id": "9272b746f3c382ec64b43c3b80fd22fed1c3bcb1be2f13e8b20cc9394df18d1a",
+      "phase": "full",
+      "reserved_micro": 8257,
+      "actual_micro": 260,
+      "state": "settled"
+    }
+  }
+}

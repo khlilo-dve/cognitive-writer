@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "checks": [
+    "mixed_docx_pdf_zero_clarification_save_append_old_v1_fact_repair_and_restart_zero_resend",
+    "unchanged_flagged_paragraph_overrides_model_clear_and_restore_preserves_version_without_resend"
+  ],
+  "local_model_requests": 24,
+  "paid_requests": 0,
+  "ledger_sha256": "3899d23fee02f1671a68c109ce3fa197a53f431808fac9e0400e4fd29baf925f",
+  "ledger_unchanged": true,
+  "temporary_workspaces_cleaned": true,
+  "scope": "real PTY with localhost model responses; no real style fidelity or publishing claim"
+}

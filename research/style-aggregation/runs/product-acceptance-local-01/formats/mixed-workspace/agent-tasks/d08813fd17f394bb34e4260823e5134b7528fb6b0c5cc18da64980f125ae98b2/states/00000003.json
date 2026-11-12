@@ -1,0 +1,57 @@
+{
+  "id": "5ff66a3275c8698a925ccf2632e51a1d9cfc32e1d6cebec42c0d6a75b0869753",
+  "previous": "50b73aa875df3f4fcf941ccbd12d9837c7a449bdb85a21dd65e586eebc82da5b",
+  "sequence": 3,
+  "state": {
+    "task_id": "d08813fd17f394bb34e4260823e5134b7528fb6b0c5cc18da64980f125ae98b2",
+    "revision": 0,
+    "status": "active",
+    "request": {
+      "sources": [
+        {
+          "kind": "file",
+          "path": "fixtures/中文文章.docx"
+        },
+        {
+          "kind": "file",
+          "path": "fixtures/中文文字.pdf"
+        },
+        {
+          "kind": "url",
+          "url": "http://127.0.0.1:43715/article"
+        }
+      ],
+      "note": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:43715/article，保存为“混合来源”",
+      "expected_articles": 3,
+      "allow_partial": false
+    },
+    "user_request": "学习这3篇 \"fixtures/中文文章.docx\" \"fixtures/中文文字.pdf\" http://127.0.0.1:43715/article，保存为“混合来源”",
+    "target_titles": [],
+    "all_articles": false,
+    "collection": {
+      "id": "9ea4053c9069d70e78767d2badded7d2a46dc17937e49ef714365dae6f83a7f2",
+      "step": "r0-collect"
+    },
+    "inspected": [],
+    "inspected_windows": [],
+    "resolutions": {},
+    "authorized_selection": null,
+    "selected": [],
+    "questions": [],
+    "answers": [],
+    "decision_steps": 1,
+    "no_progress": 0,
+    "pro_used": false,
+    "next_tier": "flash",
+    "pending": {
+      "kind": "decision",
+      "step": "r0-d1",
+      "tier": "flash",
+      "user": "{\"all_articles\":false,\"allow_partial\":false,\"answers\":[],\"authorized_selection\":null,\"base\":null,\"clarifications_used\":0,\"expected_articles\":3,\"fully_visible_sources\":[\"s001\",\"s002\",\"s003\"],\"inspected_sources\":[],\"inspected_windows\":[],\"last_reason\":\"\",\"last_tool_result\":{\"collected\":true},\"pro_used\":false,\"questions\":[],\"revision\":0,\"source_summary\":{\"current_pool\":[{\"id\":\"s001-a001\",\"source_id\":\"s001\",\"title\":\"中文文章\",\"verified\":true},{\"id\":\"s002-a001\",\"source_id\":\"s002\",\"title\":\"中文文字\",\"verified\":false},{\"id\":\"s003-a001\",\"source_id\":\"s003\",\"title\":\"河边漫步\",\"verified\":true}],\"learning_input_budget_bytes\":262144,\"source_collection_id\":\"9ea4053c9069d70e78767d2badded7d2a46dc17937e49ef714365dae6f83a7f2\",\"sources\":[{\"candidates\":[{\"body\":{\"end_chars\":43,\"excerpted\":false,\"offset_chars\":0,\"text\":\"雨夜读书\\n\\n我合上书，窗外的雨还没有停。\\n\\n甲 & 乙之间留一个空格。\\n\\n左格\\n\\n右格\"},\"duplicate_of\":null,\"id\":\"s001-a001\",\"title\":\"中文文章\",\"utf8_bytes\":107}],\"id\":\"s001\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"\",\"resolution\":null,\"status\":\"extracted\"},{\"candidates\":[{\"body\":{\"end_chars\":26,\"excerpted\":false,\"offset_chars\":0,\"text\":\"月色与书页。\\n\\n同一篇文章的第二页，读完后我关了灯。\"},\"duplicate_of\":null,\"id\":\"s002-a001\",\"title\":\"中文文字\",\"utf8_bytes\":74}],\"id\":\"s002\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"PDF共2页；空白页[]；仅文字层，图片含义与多栏阅读顺序未认证；待领域确认文章边界，不按页数计篇数\",\"resolution\":null,\"status\":\"needs_inspection\"},{\"candidates\":[{\"body\":{\"end_chars\":19,\"excerpted\":false,\"offset_chars\":0,\"text\":\"河边漫步\\n散步回来，我把湿鞋放在门边。\"},\"duplicate_of\":null,\"id\":\"s003-a001\",\"title\":\"河边漫步\",\"utf8_bytes\":55}],\"id\":\"s003\",\"links\":[],\"links_omitted\":false,\"raw_page_excerpt\":null,\"reason\":\"\",\"resolution\":null,\"status\":\"extracted\"}]},\"steps_used\":0,\"target_titles\":[],\"task_id\":\"d08813fd17f394bb34e4260823e5134b7528fb6b0c5cc18da64980f125ae98b2\",\"user_request\":\"学习这3篇 \\\"fixtures/中文文章.docx\\\" \\\"fixtures/中文文字.pdf\\\" http://127.0.0.1:43715/article，保存为“混合来源”\"}"
+    },
+    "observation": {
+      "collected": true
+    },
+    "reason": ""
+  }
+}
