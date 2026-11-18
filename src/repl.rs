@@ -18,9 +18,7 @@ use crate::io::extract_idea_slug;
 use crate::llm::{call_llm, with_retry};
 use crate::refine::REFINE_SYSTEM_PROMPT;
 use crate::style_selection::{self, named_matches, read_options, selection_query};
-use crate::styles::{
-    delete_style, fuzzy_match_style, list_styles_with_desc, save_new_style, show_style_detail,
-};
+use crate::styles::{delete_style, fuzzy_match_style, save_new_style, show_style_detail};
 use crate::utils::md_to_wechat_html;
 use crate::website::{publish_to_website, write_mdx_draft};
 use crate::{edit_blocks, local_edit};
@@ -98,10 +96,10 @@ const HELP_TEXT: &str = concat!(
   /blocks      显示原文内容块编号，便于指定修改位置
   /undo        撤销上一次成功的局部修改
   /state       显示当前状态（调试用）
-  [style-draft chat开发入口] /learning 查看进度；/writer-review 查看稿件核对；/preview 看候选；/diff 看变化；保存为X；/versions X；/show X 1；/use-version X 1 <写作要求>；/use-candidate <写作要求>；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
+  [风格学习] /learning 查看进度；/writer-review 查看稿件核对；/preview 看候选；/diff 看变化；保存为X；/versions X；/show X 1；/use-version X 1 <写作要求>；/use-candidate <写作要求>；继续恢复；暂停学习；/retry-learning 显式重试未知请求；/replace-learning <新需求> 明确替换
 
 独立操作 (Idle 状态可用):
-  输入 URL     → 学习该文章的写作风格
+  学习 "<文件路径>" / 输入文章链接 / 粘贴正文后注明学习风格 → 生成风格候选
   列出风格     → 列出所有可用风格文件
   看看<名称>   → 查看风格详情
   删掉<名称>   → 删除指定风格
@@ -184,6 +182,83 @@ pub struct Repl {
     // session 持久化目录（不持久化）
     #[serde(skip)]
     session_dir: Option<std::path::PathBuf>,
+    #[serde(skip)]
+    default_learning_root: Option<std::path::PathBuf>,
+}
+
+// Only intercept requests that address learning. Ordinary writing and editing
+// continue through the main intent router, even when their topic mentions learning.
+fn default_learning_input(input: &str) -> bool {
+    if matches!(
+        input,
+        "/learning"
+            | "/preview"
+            | "/diff"
+            | "预览候选"
+            | "看看候选"
+            | "查看差异"
+            | "看看变化"
+            | "学习进度"
+            | "查看学习进度"
+            | "恢复学习"
+            | "/resume-learning"
+            | "/retry-learning"
+            | "/pause-learning"
+            | "暂停学习"
+            | "先暂停学习"
+            | "取消学习"
+            | "取消当前学习"
+            | "不学了"
+    ) || [
+        "/versions ",
+        "/show ",
+        "/use-version ",
+        "/use-candidate ",
+        "/save ",
+        "/replace-learning ",
+        "保存为",
+        "命名为",
+        "替换当前学习：",
+        "替换当前学习:",
+        "取消学习，",
+        "取消当前学习，",
+        "不学了，",
+        "先不学了，",
+    ]
+    .iter()
+    .any(|prefix| input.starts_with(prefix))
+    {
+        return true;
+    }
+    let (head, body) = crate::learning_chat_parse::control(input);
+    let head = head.trim();
+    if (head.starts_with("https://") || head.starts_with("http://"))
+        && head.split_whitespace().count() == 1
+        && body.is_none()
+    {
+        return true;
+    }
+    let instruction = ["麻烦你", "请帮我", "帮我", "请", "麻烦", "我想", "我希望"]
+        .iter()
+        .find_map(|prefix| head.strip_prefix(prefix))
+        .unwrap_or(head)
+        .trim();
+    [
+        "学习",
+        "学风格",
+        "学一下",
+        "学学",
+        "学这",
+        "先学",
+        "提炼",
+        "逆向",
+        "研究写法",
+        "追加",
+        "分析写法",
+        "分析这篇文章的风格",
+    ]
+    .iter()
+    .any(|prefix| instruction.starts_with(prefix))
 }
 
 fn default_styles_dir() -> String {
@@ -194,7 +269,7 @@ fn default_styles_dir() -> String {
 pub async fn run_session(session_dir: &std::path::Path) -> Result<(), AppError> {
     run_session_mode(session_dir, None).await
 }
-/// P4 development entry, using the same input reader and existing generation flow.
+/// Open an isolated conversation for an explicit learning workspace.
 pub async fn run_learning_session(root: &std::path::Path) -> Result<(), AppError> {
     run_session_mode(&root.join("chat-session"), Some(root)).await
 }
@@ -253,6 +328,7 @@ async fn run_session_mode(
     } else {
         new_session_mode(session_dir, root)?
     };
+    repl.default_learning_root = root.is_none().then(|| session_dir.join("learning"));
     repl.run_with_input(input).await;
     Ok(())
 }
@@ -299,6 +375,7 @@ impl Repl {
             website_path,
             client,
             session_dir: Some(session_dir.to_path_buf()),
+            default_learning_root: None,
         })
     }
 
@@ -482,11 +559,21 @@ impl Repl {
                 return Ok(false);
             }
         }
-        if self.learning_chat.is_some()
-            && matches!(
-                self.state,
-                SessionState::Idle | SessionState::WaitingForLearningAgent
-            )
+        let explicit_workspace =
+            self.default_learning_root.is_none() && self.learning_chat.is_some();
+        let learning_command = self.state == SessionState::Idle
+            && self.default_learning_root.is_some()
+            && default_learning_input(input);
+        let version_choice = self.state == SessionState::WaitingForGenerationStyle
+            && self.default_learning_root.is_some()
+            && input.starts_with("/use-version ");
+        if learning_command || version_choice {
+            self.ensure_learning_chat()?;
+        }
+        if learning_command
+            || version_choice
+            || self.state == SessionState::WaitingForLearningAgent
+            || explicit_workspace && self.state == SessionState::Idle
         {
             if let Some(done) = self.process_learning_input(input).await? {
                 return Ok(done);
@@ -562,6 +649,17 @@ impl Repl {
         };
         self.dispatch(intent, input).await?;
         Ok(false)
+    }
+
+    fn ensure_learning_chat(&mut self) -> Result<(), AppError> {
+        if self.learning_chat.is_none() {
+            let root = self
+                .default_learning_root
+                .as_deref()
+                .ok_or_else(|| AppError::Intent("缺风格学习工作区".into()))?;
+            self.learning_chat = Some(crate::learning_chat::create(root)?);
+        }
+        Ok(())
     }
 
     async fn process_learning_input(&mut self, input: &str) -> Result<Option<bool>, AppError> {
@@ -879,16 +977,25 @@ impl Repl {
         match (&self.state, intent) {
             // ── Idle 状态 ──
             (SessionState::Idle, Intent::Generate { topic, style_name }) => {
-                self.begin_generation(&topic, &style_name, input).await?;
+                if !self.use_default_workspace_style(&style_name, input).await? {
+                    self.begin_generation(&topic, &style_name, input).await?;
+                }
             }
             (SessionState::Idle, Intent::Learn { url }) => {
                 println!("[info] 开始学习风格: {}", url);
+                if self.default_learning_root.is_some() {
+                    self.ensure_learning_chat()?;
+                }
                 if let Some(r) = self.learning_chat.clone() {
                     crate::learning_chat::submit_url(&r, input, &url)?;
                     self.state = SessionState::WaitingForLearningAgent;
                     self.save()?;
                     let event = crate::learning_chat::resume(&r, false).await?;
+                    let is_learning = matches!(event, crate::learning_chat::Event::Learning { .. });
                     self.apply_learning_event(&r, event).await?;
+                    if is_learning {
+                        self.finish_learning(&r, false).await?;
+                    }
                     return Ok(());
                 }
                 self.pending_style_content = Some(crate::learn::extract_style(&url).await?);
@@ -971,6 +1078,44 @@ impl Repl {
     }
 
     // ── First-generation style clarification ──────────────────────
+
+    async fn use_default_workspace_style(
+        &mut self,
+        name: &str,
+        request: &str,
+    ) -> Result<bool, AppError> {
+        let Some(root) = self.default_learning_root.as_deref() else {
+            return Ok(false);
+        };
+        let Ok(name) = crate::learning_candidate::name(name) else {
+            return Ok(false);
+        };
+        let workspace = crate::learning_workspace::LearningWorkspace::open(root)?;
+        let Some(version) = workspace.versions(&name)?.pop() else {
+            return Ok(false);
+        };
+        if !named_matches(&read_options(&self.styles_dir)?, &name).is_empty() {
+            self.current_topic = Some(request.to_string());
+            self.generation_request = Some(request.to_string());
+            self.state = SessionState::WaitingForGenerationStyle;
+            println!(
+                r#"「{name}」同时存在于旧风格库和学习工作区。可从下方选择风格文件，或输入 /use-version "{name}" {} <写作要求> 使用学习版本。"#,
+                version.number
+            );
+            self.show_generation_choices(&name, true)?;
+            return Ok(true);
+        }
+        self.ensure_learning_chat()?;
+        let r = self
+            .learning_chat
+            .clone()
+            .ok_or_else(|| AppError::Intent("缺主会话引用".into()))?;
+        crate::learning_flow_commands::select_version(&r, &name, version.number, request)?;
+        self.state = SessionState::WaitingForLearningAgent;
+        self.save()?;
+        self.finish_learning(&r, false).await?;
+        Ok(true)
+    }
 
     async fn begin_generation(
         &mut self,
@@ -1538,17 +1683,29 @@ impl Repl {
     // ── handle: List styles ───────────────────────────────────────
 
     fn handle_list_styles(&self) -> Result<(), AppError> {
-        let summaries = list_styles_with_desc(&self.styles_dir)?;
-        if summaries.is_empty() {
-            println!("风格库为空。试试说「学一下这个风格 https://...」来创建第一个风格。");
-            return Ok(());
+        let summaries = read_options(&self.styles_dir)?;
+        let versions = if let Some(root) = self.default_learning_root.as_deref() {
+            crate::learning_workspace::LearningWorkspace::open(root)?.catalog()?
+        } else {
+            Vec::new()
+        };
+        if summaries.is_empty() && versions.is_empty() {
+            return Err(AppError::NoStyles(
+                "风格库为空，可以输入文章链接或文件学习第一个风格".into(),
+            ));
         }
 
         println!("{}", sep());
-        println!("风格库 ({} 个):", summaries.len());
+        println!("风格库 ({} 个):", summaries.len() + versions.len());
         println!();
         for s in &summaries {
-            println!("  [{}] {}", s.display_name, s.description);
+            println!("  [{}] {}", s.name, s.description);
+        }
+        for version in &versions {
+            println!(
+                "  [{} v{}] 学习版本，可用 /versions 查看历史",
+                version.name, version.number
+            );
         }
         println!("{}", sep());
         Ok(())

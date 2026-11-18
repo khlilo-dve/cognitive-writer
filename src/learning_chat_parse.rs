@@ -72,6 +72,8 @@ pub(crate) fn positive(s: &str, word: &str) -> bool {
 pub(crate) fn learning(s: &str) -> bool {
     [
         "学习",
+        "学风格",
+        "分析这篇文章的风格",
         "学一下",
         "学学",
         "学这",

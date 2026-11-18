@@ -1,16 +1,10 @@
-# 风格学习工作区使用说明（P8限定范围）
+# 风格学习使用说明
 
-这是当前可审阅的开发入口。工作区里的候选和版本由你明确查看、命名、保存；学到的风格不会自动覆盖旧风格库。事实审核可拦住已经发现的越界，不能保证稿件达到可发布质量。完整验收与限制见[PRD](PRD.md)和[阶段报告](../research/style-aggregation/reports/product-acceptance-p8-2026-11-12.md)。
+风格学习已接入默认主会话。工作区保存文章来源、风格候选和命名版本。你可以在写作前预览候选，也可以指定已保存的版本。
 
-## 开始
+在 WSL 的项目目录运行 `cognitive-writer`，或用 `cargo run` 从源码启动。主会话继续从 `~/.cognitive-writer/current.json` 恢复，学习数据默认存放在 `~/.cognitive-writer/learning`。
 
-在项目根目录的终端运行：
-
-```bash
-cargo run -- style-draft chat
-```
-
-默认工作区是用户主目录的 `.cognitive-writer/learning`。若想给实验单独保存：`cargo run -- style-draft --root /home/khlilo/cognitive-writer/outputs/my-learning chat`。这里的 `outputs/my-learning` 只是一个例子，可换成自己选定的路径；同一个工作区下次运行会接着使用。官方学习端点使用现有 `API_KEY`，困难学习/核对为 `mimo-v2.6-pro`，写作/修订为 `mimo-v2.6-flash`；这个入口的模型路线与旧默认 `MODEL` 用途不同。
+要另开实验会话，运行 `cargo run -- style-draft --root <工作区路径> chat`。指定原路径可恢复该实验。MiMo 学习链使用项目现有的官方按量配置，难度较高的学习与核对用 `mimo-v2.6-pro`，写作和修订用 `mimo-v2.6-flash`。
 
 ## 学一篇或多篇
 
@@ -18,7 +12,7 @@ cargo run -- style-draft chat
 
 支持 `.txt`、`.md`、普通 `.docx`、有文字层的 `.pdf`、直接粘贴正文和文章URL。旧 `.doc`、扫描PDF与OCR暂不支持。如果网页不可读、是导航页、含多篇且目标不明，系统会说明缺口并集中询问；明确数量不足时不会偷偷减少篇数。已授权仅用可访问来源才会在范围内继续。
 
-学习完成先给候选。`/preview` 看说明，`/diff` 看追加后的变化；`保存为我的风格` 明确命名为一个版本。`/versions 我的风格` 看版本，`/show 我的风格 1` 看旧版。你可以说“追加到我的风格，保存为我的风格；正文：……”形成下一版。`/use-version 我的风格 1 写一篇关于……的文章` 可明确使用旧版；`/use-candidate 写一篇关于……的文章` 则用当前候选。
+学习完成先给候选。`/preview` 看说明，`/diff` 看追加后的变化；`保存为我的风格` 明确命名为一个版本。`/versions 我的风格` 看版本，`/show 我的风格 1` 看旧版。你可以说“追加到我的风格，保存为我的风格；正文：……”形成下一版。`/use-version 我的风格 1 写一篇关于……的文章` 可明确使用旧版；`/use-candidate 写一篇关于……的文章` 则用当前候选。 回到空闲状态后，`/styles` 可以查看已保存版本。同名风格文件与学习版本并存时，主会话会请你明确选择。
 
 ## 审阅与中断
 

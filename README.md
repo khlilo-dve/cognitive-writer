@@ -1,6 +1,6 @@
 # Cognitive Writer v3.3.2
 
-**产品文档入口（2026-11-12）：** [PRD](docs/PRD.md)、[行动计划](docs/plans/2026-11-03-style-learning-agent-plan.md)、[工作区使用说明](docs/style-learning-workspace-guide.md)。P1–P8的风格学习工作区开发与全链工程验收已完成，显式`style-draft chat`在限定范围内可审阅使用；当前默认`cargo run`仍为旧入口。P7真实质量检查发现单/双篇概括失真和Writer事实/自然表达问题，自动风格保真及直接发布质量尚未通过。[P8阶段报告](research/style-aggregation/reports/product-acceptance-p8-2026-11-12.md)记录采用范围。
+**产品文档入口（2026-11-18）** 默认主会话已接入风格学习。运行 `cargo run` 后可以用文件、文章链接或粘贴正文学习，查看候选并保存版本。P7 发现的风格概括和成稿质量问题纳入后续迭代。[产品需求](docs/PRD.md) · [行动计划](docs/plans/2026-11-03-style-learning-agent-plan.md) · [风格学习使用说明](docs/style-learning-workspace-guide.md)
 
 > 一个想法进去，两边文章出来。用 Rust 写的 AI 写作 Agent。
 
@@ -47,19 +47,19 @@ Agent:  git push → Vercel 自动部署
 
 说明围绕输入文章实际展示的视角、材料组织、叙述与判断、句段节奏、情绪及落点展开，保留适用条件和未知。学习分析、原文与证据独立保存；进入Writer的是执行说明。质量以原文依据和新题材执行判断，不以字数或模型总分替代。
 
-多篇正文核心、候选／版本、来源采集、主会话材料Agent与材料→学习／版本／写作交接已在显式工作区实现；当前采用范围与质量限制见P8报告。最新状态见[PRD中的能力与缺口](docs/PRD.md)。
+默认主会话支持学习 1–10 篇、候选预览、命名与追加版本，以及用指定版本写作。可另开工作区保存实验。最新状态见[PRD中的能力与缺口](docs/PRD.md)。
 
-### 2. URL 一键风格逆向提取（Learn Pipeline）
+### 2. 从链接学习写作风格
 看到优质好文想沉淀其写作风格？只需提供文章链接，系统自动完成提取：
 ```bash
 # REPL 中直接输入：
 > https://mp.weixin.qq.com/s/xxxxxx 学一下这个风格
 
-# 或 CLI 模式：
+# 兼容旧单篇提取流程：
 cargo run -- learn https://mp.weixin.qq.com/s/xxxxxx
 ```
-- **智能抓取**：基于 Jina Reader API（`r.jina.ai`）深度解析 SPA、反爬与微信公众号排版，自动降级纯文本清洗
-- **详细学习**：默认`direct_free`使用`prompts/learn_style_direct.md`形成详细Markdown，候选经命名保存；历史400–600字与十维模板不作为当前产品目标。
+- 主会话把正文提取、选文和澄清交给学习子 Agent。候选可预览、命名、保存和追加。
+- 旧 `learn <URL>` 快捷命令保留单篇提取兼容行为。
 
 ### 3. 智能风格选择与双向匹配
 - **拼音归一化精确匹配**：基于 `pinyin` 库支持中文名与拼音文件名的双向智能互通（如 `轻辩` ↔ `qingbian`），避免同音异字或大小写错位导致的匹配混乱

@@ -2,30 +2,51 @@
 """P8 actual terminal: mixed formats, versions, Writer review and recoverable pending work.
 All model calls go to localhost; sources and state use a temporary workspace.
 """
-import hashlib, http.server, json, os, shutil, sys, tempfile, threading
+import argparse, hashlib, http.server, json, os, shutil, sys, tempfile, threading
 from pathlib import Path
 sys.dont_write_bytecode = True
 from verify_learning_chat import ChatTerminal
-from verify_repl_terminal import ROOT
+import verify_repl_terminal
+from verify_repl_terminal import ROOT, Terminal
 OUT = ROOT / 'research/style-aggregation/runs/product-acceptance-local-01'
 FIXTURES = ROOT / 'research/style-aggregation/runs/learning-formats-local-01/fixtures'
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--default-entry', type=Path, metavar='BINARY')
+    args = parser.parse_args()
+    if args.default_entry:
+        verify_repl_terminal.BINARY = args.default_entry.resolve(strict=True)
     ledger = ROOT / 'research/style-aggregation/usage-ledger.json'
     before = hashlib.sha256(ledger.read_bytes()).hexdigest()
     requests, errors, checks = [], [], []
+    source_requests = []
     mode = {'kind': 'repair'}
     original = '图书馆十点闭馆。\n\n所有人都要排队刷卡。'
     revised = '图书馆十点闭馆。我希望留半小时收拾与回宿舍，所以建议九点半停读。'
     class Handler(http.server.BaseHTTPRequestHandler):
         def log_message(self, *args): pass
+        def do_GET(self):
+            source_requests.append(self.path)
+            article = '<article><h1>河边漫步</h1><p>散步回来，我把湿鞋放在门边。</p></article>'.encode()
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html')
+            self.send_header('Content-Length', str(len(article)))
+            self.end_headers()
+            self.wfile.write(article)
+
         def do_POST(self):
             try:
                 body = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
                 requests.append(body)
                 system, user = [m['content'] for m in body['messages']]
-                assert body['thinking'] == {'type': 'disabled'}
-                if '主会话输入解释器' in system:
+                is_main_intent = '有效意图' in system
+                if not is_main_intent:
+                    assert body['thinking'] == {'type': 'disabled'}
+                if is_main_intent:
+                    assert '用研读风格' in user
+                    answer = {'intent_type': 'Generate', 'topic': user, 'style_name': '研读'}
+                elif '主会话输入解释器' in system:
                     raw = json.loads(user)['input']
                     assert '追加到' in raw
                     answer = {'kind': 'learn', 'sources': [{'kind': 'text', 'label': '追加正文', 'text': raw.split('正文：', 1)[1]}], 'base_name': '研读', 'save_name': '研读'}
@@ -77,8 +98,14 @@ def main():
             (work/'one.md').write_text('SOURCE_SENTINEL，灯光落在纸上，短句停住。')
             env = {**os.environ, 'HOME': str(work/'home'), 'API_KEY': 'local-only', 'MODEL': 'mimo-v2.6-flash', 'BASE_URL': f'http://127.0.0.1:{server.server_port}/v1', 'WEBSITE_PATH': ''}
             def start(name, restore=False, prompt='[风格学习任务] > '):
-                root = work/name
-                t = ChatTerminal(work, env, root)
+                if args.default_entry:
+                    user_dir = work/name
+                    user_dir.mkdir(exist_ok=True)
+                    root = user_dir/'.cognitive-writer/learning'
+                    t = Terminal(work, {**env, 'HOME': str(user_dir)})
+                else:
+                    root = work/name
+                    t = ChatTerminal(work, env, root)
                 if restore:
                     t.until('Enter 恢复，n 放弃'); t.send('\n'); t.until(prompt)
                 else: t.until('[空闲] > ')
@@ -87,12 +114,15 @@ def main():
                 t.send(text+'\n'); t.until(prompt, timeout=15)
             def quit(t):
                 t.send('/quit\n'); t.exited(); t.close()
-            def saved(root): return json.loads((root/'chat-session/current.json').read_text())
+            def saved(root):
+                session = root.parent if args.default_entry else root/'chat-session'
+                return json.loads((session/'current.json').read_text())
             def parent(root):
                 ref = saved(root)['learning_chat']
                 return json.loads(sorted((root/'chats'/ref['id']/'states').glob('*.json'))[-1].read_text())['state']
             def versions(root): return sorted((root/'versions').rglob('v*.json'))
             def snapshot(root, name):
+                if args.default_entry: return
                 target = OUT/name
                 assert target.resolve().parent == OUT.resolve()
                 if target.exists(): shutil.rmtree(target)
@@ -121,6 +151,21 @@ def main():
                 send(t, '/cancel', '[空闲] > ')
                 send(t, '/use-version 研读 1 '+brief, '[等待确认全文] > ')
                 assert len(requests) == n and len(versions(root)) == 2
+                if args.default_entry:
+                    send(t, '/cancel', '[空闲] > ')
+                    t.send('/styles\n'); t.until('研读 v2'); t.until('[空闲] > ')
+                    n = len(requests)
+                    send(t, '用研读风格'+brief, '[等待确认全文] > ')
+                    assert saved(root)['current_style_name'] == '研读 v2'
+                    assert len(requests) > n
+                    send(t, '/cancel', '[空闲] > ')
+                    (work/'styles/研读.md').write_text('旧库中的同名风格。')
+                    n = len(requests)
+                    send(t, '用研读风格'+brief, '[等待选择风格] > ')
+                    assert len(requests) == n + 1
+                    send(t, '/use-version 研读 1 '+brief, '[等待确认全文] > ')
+                    assert saved(root)['current_style_name'] == '研读 v1' and len(requests) == n + 1
+                    checks.append('natural_workspace_style_selection_and_explicit_same_name_choice')
                 snapshot(root, 'accepted-workspace'); quit(t)
                 checks.append('mixed_docx_pdf_zero_clarification_save_append_old_v1_fact_repair_and_restart_zero_resend')
             finally:
@@ -141,11 +186,32 @@ def main():
                 checks.append('unchanged_flagged_paragraph_overrides_model_clear_and_restore_preserves_version_without_resend')
             finally:
                 if not t.reaped: t.close()
+            if args.default_entry:
+                root, t = start('inline-and-url')
+                try:
+                    send(t, f'http://127.0.0.1:{server.server_port}/article')
+                    assert source_requests == ['/article']
+                    assert parent(root)['delivery']['candidate_id']
+                    send(t, '/cancel', '[空闲] > ')
+                    text = '我把湿鞋放在门边，又望了一眼积水。'
+                    continuation = chr(92) + chr(10)
+                    send(t, continuation.join((text, '', '学习这篇文章的风格')))
+                    job = parent(root)['delivery']['job_id']
+                    plan = json.loads((root/'jobs'/job/'plan.json').read_text())
+                    assert plan['articles'] == [text]
+                    checks.append('bare_article_url_and_pasted_text_enter_learning_from_default_session')
+                    quit(t)
+                finally:
+                    if not t.reaped: t.close()
         assert not errors, errors
         assert hashlib.sha256(ledger.read_bytes()).hexdigest() == before
         report = {'status': 'complete', 'checks': checks, 'local_model_requests': len(requests), 'paid_requests': 0, 'ledger_sha256': before, 'ledger_unchanged': True, 'temporary_workspaces_cleaned': True, 'scope': 'real PTY with localhost model responses; no real style fidelity or publishing claim'}
-        OUT.mkdir(parents=True, exist_ok=True)
-        (OUT/'terminal-audit.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+        if args.default_entry:
+            report['entry'] = 'no arguments'
+            report['local_source_requests'] = len(source_requests)
+        else:
+            OUT.mkdir(parents=True, exist_ok=True)
+            (OUT/'terminal-audit.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
         print(json.dumps(report, ensure_ascii=False))
     finally:
         server.shutdown(); server.server_close()

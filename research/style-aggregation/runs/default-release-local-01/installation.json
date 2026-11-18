@@ -1,0 +1,9 @@
+{
+  "target": "WSL Ubuntu local command",
+  "installed": "/home/khlilo/.cargo/bin/cognitive-writer",
+  "backup": "/home/khlilo/.cognitive-writer/bin-backups/cognitive-writer-before-default-learning-2026-11-18",
+  "previous_sha256": "cde175d8332355c5ca511cbf832d0c38cdc2b1bf9abcc6bf29a7d8558031b628",
+  "release_sha256": "b602efa239229a11fccab8a8fc45e380af07a4f20dbc2486982f7a38c818bebf",
+  "installed_binary_matches_tested_release": true,
+  "installed_default_entry_smoke": true
+}

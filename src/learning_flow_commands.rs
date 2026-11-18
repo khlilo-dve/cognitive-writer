@@ -53,26 +53,7 @@ pub(crate) fn command(r: &ChatRef, input: &str) -> Result<bool, AppError> {
         if request.trim().is_empty() {
             return Err(store::error("需要本次写作要求"));
         }
-        let v = ws.version(name, n)?;
-        let old = store::load(r)?;
-        if old.state.pending.is_some() || old.state.paused {
-            return Err(store::error("请先恢复或取消当前未完成输入"));
-        }
-        if let Some(id) = &old.state.active {
-            if crate::learning_agent::load(&ws, id)?.state.status
-                != crate::learning_agent::Status::ReadyForLearning
-            {
-                return Err(store::error("请先完成或取消当前材料任务"));
-            }
-        }
-        let mut state = old.state.clone();
-        state.selected_writer = Some(WriterInput {
-            method: Some(crate::writer_facts::METHOD.into()),
-            label: format!("{} v{}", v.name, v.number),
-            spec: v.candidate.input.draft.spec,
-            request: request.into(),
-        });
-        store::advance(r, &old, state)?;
+        select_version(r, name, n, request)?;
         return Ok(true);
     }
     let saving = input
@@ -147,4 +128,34 @@ pub(crate) fn command(r: &ChatRef, input: &str) -> Result<bool, AppError> {
     }
     store::advance(r, &old, state)?;
     Ok(true)
+}
+
+pub(crate) fn select_version(
+    r: &ChatRef,
+    name: &str,
+    n: u32,
+    request: &str,
+) -> Result<(), AppError> {
+    let ws = store::ws(r)?;
+    let v = ws.version(name, n)?;
+    let old = store::load(r)?;
+    if old.state.pending.is_some() || old.state.paused {
+        return Err(store::error("请先恢复或取消当前未完成输入"));
+    }
+    if let Some(id) = &old.state.active {
+        if crate::learning_agent::load(&ws, id)?.state.status
+            != crate::learning_agent::Status::ReadyForLearning
+        {
+            return Err(store::error("请先完成或取消当前材料任务"));
+        }
+    }
+    let mut state = old.state.clone();
+    state.selected_writer = Some(WriterInput {
+        method: Some(crate::writer_facts::METHOD.into()),
+        label: format!("{} v{}", v.name, v.number),
+        spec: v.candidate.input.draft.spec,
+        request: request.into(),
+    });
+    store::advance(r, &old, state)?;
+    Ok(())
 }

@@ -45,7 +45,7 @@
 - 用户限定“只做文档”时，文档交付不自动授权进入实现；当前实现阶段与入口以PRD、行动计划及任务状态的最新记录为准，不把历史设计状态当成持续禁止实现的指令。
 
 ## 当前实现与后续观察
-- P3材料领域Agent、P4主会话、P5学习／候选／显式版本／Writer、P6普通DOCX/文字PDF与输入边界均已接`style-draft chat`显式工作区；P7独立事实核对和10篇有限补验完成，仍有原文语义与Writer自然表达缺口；P8已做全链工程验收并作限定范围采用决定，默认旧入口未切。主会话保持唯一stdin，任务／回执可恢复；具体通过/未通过项见PRD D08、P7/P8报告、`.claude/tasks/current.md`。
+- P3材料领域Agent、P4主会话、P5学习／候选／显式版本／Writer、P6普通DOCX/文字PDF与输入边界均已接`style-draft chat`显式工作区；P7独立事实核对和10篇有限补验完成，仍有原文语义与Writer自然表达缺口；P8已做全链工程验收。2026-11-18 用户批准向默认主会话开放风格学习。主会话保持唯一 stdin，任务和回执可恢复。采用决定见 PRD D09，质量证据见 P7/P8 报告和 `.claude/tasks/current.md`。
 - REPL 单一 stdin 读取器位于 `repl_input.rs`；学习命名、删除确认由主循环处理，等待态支持取消/保存恢复。
 - CLI/REPL 生成已统一；公开 I/O/解析/环境错误已迁移为 AppError，intent/styles 职责已拆分。
 - 三组人评与确定性字数分档见 `eval/human_calibration.json`、`eval/AGENTS.md`；新提示词仍需以实际评测结果判断效果，不能把模型分数当人评。

@@ -32,3 +32,5 @@
 2026-11-03 P3：独立材料域任务learning_agent及types/store/scope/tools/model/cli已接style-draft agent-*开发命令，主会话仍旧REPL。短状态CAS锁与执行锁分离，模型等待不阻止取消；父身份状态链、输入修订、冻结决策、collection步骤缓存及既有请求日志可恢复。明确材料0模型，复杂Flash／单次Pro、12决策／2无进展／2主动澄清；完整候选已在观察可判断，片段先inspect。终点ready_for_learning而非候选／保存，ready_texts才返回完整正文。309库测试／10忽略、本地协议与少量真实Flash决策留证，P4/P5和质量P7待做。入口和失败说明见docs/designs/style-learning-agent.md第8/9节及研究reports/learning-agent-2026-11-03.md。
 
 2026-11-09 P4：style-draft chat复用Repl与唯一stdin；WaitingForLearningAgent只保存ChatRef，父会话learning_chat及parse/reply/store/types拥有不可变输入／状态链及任务引用，P3仍拥有材料／问题与预算。复杂解释Flash经既有请求／费用适配，简单输入不加模型；缺材料及失败材料的问题均计入原领域两轮。支持原话、保存／写作要求保留、同任务回答／修订、暂停／继续／取消／明确替换，恢复不重新问或隐式重发未知请求。321库测试／10忽略、真实四小例与终端回归留证，P5下游交接未接，旧默认未切换。详见技术设计第10节及研究reports/learning-chat-2026-11-09.md。
+
+2026-11-18 默认入口开放。无参数启动继续读取原 `current.json`，明确学习请求才在同一个主会话创建 `ChatRef`。学习数据与 `style-draft chat` 共用默认工作区，两个入口各有独立的会话文件。普通写作仍走主意图与已有生成流程。已命名工作区风格可在主会话选用，同名时显式选择。旧命名态和未完成稿件可恢复。采用决定见 `docs/PRD.md` D09。
