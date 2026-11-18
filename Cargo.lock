@@ -164,7 +164,7 @@ dependencies = [
 
 [[package]]
 name = "cognitive-writer"
-version = "3.3.2"
+version = "3.4.0"
 dependencies = [
  "chrono",
  "dialoguer",
