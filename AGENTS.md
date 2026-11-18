@@ -72,6 +72,10 @@
    - 检查 `git diff` 确保无临时文件、误修改或无关代码
    - 执行 `git add` 与 `git commit`（严禁添加 `Co-Authored-By` 等 AI 协同签名）
    - 不能以“代码已修改但未提交”作为任务终态。
-4. **自主红线（不可擅自操作）**:
-   - 严禁执行 `git reset --hard`、`git push`、强制推送、删除分支或改写 git 历史
+4. **主分支与云端推送**:
+   - 本地仓库和 GitHub 仓库只保留 `master` 主分支。项目改动直接在本地 `master` 开发和提交，不创建其他工作分支。
+   - 用户授权云端推送时，只从本地 `master` 推送到 GitHub 的 `origin/master`，使用普通推送 `git push origin master:refs/heads/master`。推送后核对 GitHub 的 `master` 提交与本地一致。
+   - 云端推送不得创建或更新其他分支。未获用户授权时，只做本地提交。
+5. **自主红线（不可擅自操作）**:
+   - 删除分支须经用户明确授权。严禁执行 `git reset --hard`、强制推送或改写 git 历史。
    - 严禁擅自修改 `.env`、密钥、以及生产配置文件
